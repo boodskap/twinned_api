@@ -1,0 +1,8972 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'twinned.swagger.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+BaseResponse _$BaseResponseFromJson(Map<String, dynamic> json) => BaseResponse(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$BaseResponseToJson(BaseResponse instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  return val;
+}
+
+BaseEntity _$BaseEntityFromJson(Map<String, dynamic> json) => BaseEntity(
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$BaseEntityToJson(BaseEntity instance) {
+  final val = <String, dynamic>{
+    'domainKey': instance.domainKey,
+    'id': instance.id,
+    'name': instance.name,
+    'rtype': instance.rtype,
+    'createdStamp': instance.createdStamp,
+    'createdBy': instance.createdBy,
+    'updatedBy': instance.updatedBy,
+    'updatedStamp': instance.updatedStamp,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('tags', instance.tags);
+  return val;
+}
+
+DisplayableEntity _$DisplayableEntityFromJson(Map<String, dynamic> json) =>
+    DisplayableEntity(
+      description: json['description'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      selectedImage: json['selectedImage'] as int?,
+      selectedBanner: json['selectedBanner'] as int?,
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      banners: (json['banners'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DisplayableEntityToJson(DisplayableEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('icon', instance.icon);
+  writeNotNull('selectedImage', instance.selectedImage);
+  writeNotNull('selectedBanner', instance.selectedBanner);
+  writeNotNull('images', instance.images);
+  writeNotNull('banners', instance.banners);
+  return val;
+}
+
+FireReq _$FireReqFromJson(Map<String, dynamic> json) => FireReq(
+      deviceId: json['deviceId'] as String? ?? '',
+      controlId: json['controlId'] as String? ?? '',
+      controlState: json['controlState'] as int,
+      arguments: json['arguments'],
+    );
+
+Map<String, dynamic> _$FireReqToJson(FireReq instance) {
+  final val = <String, dynamic>{
+    'deviceId': instance.deviceId,
+    'controlId': instance.controlId,
+    'controlState': instance.controlState,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('arguments', instance.arguments);
+  return val;
+}
+
+GetReq _$GetReqFromJson(Map<String, dynamic> json) => GetReq(
+      ids: (json['ids'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$GetReqToJson(GetReq instance) => <String, dynamic>{
+      'ids': instance.ids,
+    };
+
+ListReq _$ListReqFromJson(Map<String, dynamic> json) => ListReq(
+      page: json['page'] as int,
+      size: json['size'] as int,
+    );
+
+Map<String, dynamic> _$ListReqToJson(ListReq instance) => <String, dynamic>{
+      'page': instance.page,
+      'size': instance.size,
+    };
+
+ListRes _$ListResFromJson(Map<String, dynamic> json) => ListRes(
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+    );
+
+Map<String, dynamic> _$ListResToJson(ListRes instance) => <String, dynamic>{
+      'page': instance.page,
+      'size': instance.size,
+      'total': instance.total,
+    };
+
+SearchReqBase _$SearchReqBaseFromJson(Map<String, dynamic> json) =>
+    SearchReqBase(
+      search: json['search'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$SearchReqBaseToJson(SearchReqBase instance) =>
+    <String, dynamic>{
+      'search': instance.search,
+    };
+
+SearchReq _$SearchReqFromJson(Map<String, dynamic> json) => SearchReq(
+      search: json['search'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+    );
+
+Map<String, dynamic> _$SearchReqToJson(SearchReq instance) => <String, dynamic>{
+      'search': instance.search,
+      'page': instance.page,
+      'size': instance.size,
+    };
+
+RangeFilter _$RangeFilterFromJson(Map<String, dynamic> json) => RangeFilter(
+      tz: json['tz'] as String? ?? '',
+      filter: rangeFilterFilterNullableFromJson(json['filter']),
+      beginStamp: json['beginStamp'] as int?,
+      endStamp: json['endStamp'] as int?,
+    );
+
+Map<String, dynamic> _$RangeFilterToJson(RangeFilter instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('tz', instance.tz);
+  writeNotNull('filter', rangeFilterFilterNullableToJson(instance.filter));
+  writeNotNull('beginStamp', instance.beginStamp);
+  writeNotNull('endStamp', instance.endStamp);
+  return val;
+}
+
+FilterReqBase _$FilterReqBaseFromJson(Map<String, dynamic> json) =>
+    FilterReqBase(
+      filter: json['filter'] == null
+          ? null
+          : RangeFilter.fromJson(json['filter'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FilterReqBaseToJson(FilterReqBase instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('filter', instance.filter?.toJson());
+  return val;
+}
+
+FilterSearchReq _$FilterSearchReqFromJson(Map<String, dynamic> json) =>
+    FilterSearchReq(
+      search: json['search'] as String? ?? '',
+      filter: json['filter'] == null
+          ? null
+          : RangeFilter.fromJson(json['filter'] as Map<String, dynamic>),
+      page: json['page'] as int,
+      size: json['size'] as int,
+    );
+
+Map<String, dynamic> _$FilterSearchReqToJson(FilterSearchReq instance) {
+  final val = <String, dynamic>{
+    'search': instance.search,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('filter', instance.filter?.toJson());
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  return val;
+}
+
+CleanReq _$CleanReqFromJson(Map<String, dynamic> json) => CleanReq(
+      type: CleanReq.cleanReqTypeTypeNullableFromJson(json['type']),
+      modelId: json['modelId'] as String? ?? '',
+      deviceId: json['deviceId'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$CleanReqToJson(CleanReq instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('type', cleanReqTypeNullableToJson(instance.type));
+  writeNotNull('modelId', instance.modelId);
+  writeNotNull('deviceId', instance.deviceId);
+  return val;
+}
+
+Parameter _$ParameterFromJson(Map<String, dynamic> json) => Parameter(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      label: json['label'] as String? ?? '',
+      parameterType: parameterParameterTypeFromJson(json['parameterType']),
+      required: json['required'] as bool? ?? false,
+      defaultValue: json['defaultValue'] as String? ?? '',
+      enableTrend: json['enableTrend'] as bool? ?? false,
+      enableTimeSeries: json['enableTimeSeries'] as bool? ?? false,
+      unit: json['unit'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      sensorWidget: json['sensorWidget'] == null
+          ? null
+          : SensorWidget.fromJson(json['sensorWidget'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ParameterToJson(Parameter instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('label', instance.label);
+  writeNotNull(
+      'parameterType', parameterParameterTypeToJson(instance.parameterType));
+  val['required'] = instance.required;
+  writeNotNull('defaultValue', instance.defaultValue);
+  writeNotNull('enableTrend', instance.enableTrend);
+  writeNotNull('enableTimeSeries', instance.enableTimeSeries);
+  writeNotNull('unit', instance.unit);
+  writeNotNull('icon', instance.icon);
+  writeNotNull('sensorWidget', instance.sensorWidget?.toJson());
+  return val;
+}
+
+DeviceModelInfo _$DeviceModelInfoFromJson(Map<String, dynamic> json) =>
+    DeviceModelInfo(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      make: json['make'] as String? ?? '',
+      model: json['model'] as String? ?? '',
+      version: json['version'] as String? ?? '',
+      parameters: (json['parameters'] as List<dynamic>?)
+              ?.map((e) => Parameter.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      icon: json['icon'] as String? ?? '',
+      selectedImage: json['selectedImage'] as int?,
+      selectedBanner: json['selectedBanner'] as int?,
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      banners: (json['banners'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      metadata: json['metadata'],
+      defaultView: json['defaultView'] as String? ?? '',
+      preprocessorId: json['preprocessorId'] as String? ?? '',
+      hasGeoLocation: json['hasGeoLocation'] as bool?,
+      movable: json['movable'] as bool?,
+      settings: (json['settings'] as List<dynamic>?)
+              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      customWidget: json['customWidget'] == null
+          ? null
+          : CustomWidget.fromJson(json['customWidget'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DeviceModelInfoToJson(DeviceModelInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  val['make'] = instance.make;
+  val['model'] = instance.model;
+  val['version'] = instance.version;
+  val['parameters'] = instance.parameters.map((e) => e.toJson()).toList();
+  writeNotNull('icon', instance.icon);
+  writeNotNull('selectedImage', instance.selectedImage);
+  writeNotNull('selectedBanner', instance.selectedBanner);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('banners', instance.banners);
+  writeNotNull('images', instance.images);
+  writeNotNull('metadata', instance.metadata);
+  writeNotNull('defaultView', instance.defaultView);
+  writeNotNull('preprocessorId', instance.preprocessorId);
+  writeNotNull('hasGeoLocation', instance.hasGeoLocation);
+  writeNotNull('movable', instance.movable);
+  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
+  writeNotNull('customWidget', instance.customWidget?.toJson());
+  return val;
+}
+
+DeviceModel _$DeviceModelFromJson(Map<String, dynamic> json) => DeviceModel(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      make: json['make'] as String? ?? '',
+      model: json['model'] as String? ?? '',
+      version: json['version'] as String? ?? '',
+      parameters: (json['parameters'] as List<dynamic>?)
+              ?.map((e) => Parameter.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      icon: json['icon'] as String? ?? '',
+      selectedImage: json['selectedImage'] as int?,
+      selectedBanner: json['selectedBanner'] as int?,
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      banners: (json['banners'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      metadata: json['metadata'],
+      defaultView: json['defaultView'] as String? ?? '',
+      preprocessorId: json['preprocessorId'] as String? ?? '',
+      hasGeoLocation: json['hasGeoLocation'] as bool?,
+      movable: json['movable'] as bool?,
+      settings: (json['settings'] as List<dynamic>?)
+              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      customWidget: json['customWidget'] == null
+          ? null
+          : CustomWidget.fromJson(json['customWidget'] as Map<String, dynamic>),
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$DeviceModelToJson(DeviceModel instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  val['make'] = instance.make;
+  val['model'] = instance.model;
+  val['version'] = instance.version;
+  val['parameters'] = instance.parameters.map((e) => e.toJson()).toList();
+  writeNotNull('icon', instance.icon);
+  writeNotNull('selectedImage', instance.selectedImage);
+  writeNotNull('selectedBanner', instance.selectedBanner);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('banners', instance.banners);
+  writeNotNull('images', instance.images);
+  writeNotNull('metadata', instance.metadata);
+  writeNotNull('defaultView', instance.defaultView);
+  writeNotNull('preprocessorId', instance.preprocessorId);
+  writeNotNull('hasGeoLocation', instance.hasGeoLocation);
+  writeNotNull('movable', instance.movable);
+  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
+  writeNotNull('customWidget', instance.customWidget?.toJson());
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+DeviceModelEntity _$DeviceModelEntityFromJson(Map<String, dynamic> json) =>
+    DeviceModelEntity(
+      entity: json['entity'] == null
+          ? null
+          : DeviceModel.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DeviceModelEntityToJson(DeviceModelEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+DeviceModelEntityRes _$DeviceModelEntityResFromJson(
+        Map<String, dynamic> json) =>
+    DeviceModelEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : DeviceModel.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DeviceModelEntityResToJson(
+    DeviceModelEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+DeviceModelArray _$DeviceModelArrayFromJson(Map<String, dynamic> json) =>
+    DeviceModelArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => DeviceModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DeviceModelArrayToJson(DeviceModelArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+DeviceModelArrayRes _$DeviceModelArrayResFromJson(Map<String, dynamic> json) =>
+    DeviceModelArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => DeviceModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DeviceModelArrayResToJson(DeviceModelArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+DeviceInfo _$DeviceInfoFromJson(Map<String, dynamic> json) => DeviceInfo(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      modelId: json['modelId'] as String? ?? '',
+      deviceId: json['deviceId'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      icon: json['icon'] as String? ?? '',
+      selectedImage: json['selectedImage'] as int?,
+      selectedBanner: json['selectedBanner'] as int?,
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      banners: (json['banners'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      metadata: json['metadata'],
+      defaultView: json['defaultView'] as String? ?? '',
+      hasGeoLocation: json['hasGeoLocation'] as bool?,
+      movable: json['movable'] as bool?,
+      geolocation: json['geolocation'] == null
+          ? null
+          : GeoLocation.fromJson(json['geolocation'] as Map<String, dynamic>),
+      preprocessorId: json['preprocessorId'] as String? ?? '',
+      settings: (json['settings'] as List<dynamic>?)
+              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      customWidget: json['customWidget'] == null
+          ? null
+          : CustomWidget.fromJson(json['customWidget'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DeviceInfoToJson(DeviceInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  val['modelId'] = instance.modelId;
+  val['deviceId'] = instance.deviceId;
+  writeNotNull('tags', instance.tags);
+  writeNotNull('icon', instance.icon);
+  writeNotNull('selectedImage', instance.selectedImage);
+  writeNotNull('selectedBanner', instance.selectedBanner);
+  writeNotNull('images', instance.images);
+  writeNotNull('banners', instance.banners);
+  writeNotNull('metadata', instance.metadata);
+  writeNotNull('defaultView', instance.defaultView);
+  writeNotNull('hasGeoLocation', instance.hasGeoLocation);
+  writeNotNull('movable', instance.movable);
+  writeNotNull('geolocation', instance.geolocation?.toJson());
+  writeNotNull('preprocessorId', instance.preprocessorId);
+  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
+  writeNotNull('customWidget', instance.customWidget?.toJson());
+  return val;
+}
+
+DeviceBase _$DeviceBaseFromJson(Map<String, dynamic> json) => DeviceBase(
+      apiKey: json['apiKey'] as String? ?? '',
+      reportedStamp: json['reportedStamp'] as int,
+      premiseId: json['premiseId'] as String? ?? '',
+      facilityId: json['facilityId'] as String? ?? '',
+      floorId: json['floorId'] as String? ?? '',
+      assetId: json['assetId'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$DeviceBaseToJson(DeviceBase instance) {
+  final val = <String, dynamic>{
+    'apiKey': instance.apiKey,
+    'reportedStamp': instance.reportedStamp,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('premiseId', instance.premiseId);
+  writeNotNull('facilityId', instance.facilityId);
+  writeNotNull('floorId', instance.floorId);
+  writeNotNull('assetId', instance.assetId);
+  return val;
+}
+
+Device _$DeviceFromJson(Map<String, dynamic> json) => Device(
+      apiKey: json['apiKey'] as String? ?? '',
+      reportedStamp: json['reportedStamp'] as int,
+      premiseId: json['premiseId'] as String? ?? '',
+      facilityId: json['facilityId'] as String? ?? '',
+      floorId: json['floorId'] as String? ?? '',
+      assetId: json['assetId'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      modelId: json['modelId'] as String? ?? '',
+      deviceId: json['deviceId'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      icon: json['icon'] as String? ?? '',
+      selectedImage: json['selectedImage'] as int?,
+      selectedBanner: json['selectedBanner'] as int?,
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      banners: (json['banners'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      metadata: json['metadata'],
+      defaultView: json['defaultView'] as String? ?? '',
+      hasGeoLocation: json['hasGeoLocation'] as bool?,
+      movable: json['movable'] as bool?,
+      geolocation: json['geolocation'] == null
+          ? null
+          : GeoLocation.fromJson(json['geolocation'] as Map<String, dynamic>),
+      preprocessorId: json['preprocessorId'] as String? ?? '',
+      settings: (json['settings'] as List<dynamic>?)
+              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      customWidget: json['customWidget'] == null
+          ? null
+          : CustomWidget.fromJson(json['customWidget'] as Map<String, dynamic>),
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$DeviceToJson(Device instance) {
+  final val = <String, dynamic>{
+    'apiKey': instance.apiKey,
+    'reportedStamp': instance.reportedStamp,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('premiseId', instance.premiseId);
+  writeNotNull('facilityId', instance.facilityId);
+  writeNotNull('floorId', instance.floorId);
+  writeNotNull('assetId', instance.assetId);
+  val['name'] = instance.name;
+  writeNotNull('description', instance.description);
+  val['modelId'] = instance.modelId;
+  val['deviceId'] = instance.deviceId;
+  writeNotNull('tags', instance.tags);
+  writeNotNull('icon', instance.icon);
+  writeNotNull('selectedImage', instance.selectedImage);
+  writeNotNull('selectedBanner', instance.selectedBanner);
+  writeNotNull('images', instance.images);
+  writeNotNull('banners', instance.banners);
+  writeNotNull('metadata', instance.metadata);
+  writeNotNull('defaultView', instance.defaultView);
+  writeNotNull('hasGeoLocation', instance.hasGeoLocation);
+  writeNotNull('movable', instance.movable);
+  writeNotNull('geolocation', instance.geolocation?.toJson());
+  writeNotNull('preprocessorId', instance.preprocessorId);
+  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
+  writeNotNull('customWidget', instance.customWidget?.toJson());
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+DeviceEntity _$DeviceEntityFromJson(Map<String, dynamic> json) => DeviceEntity(
+      entity: json['entity'] == null
+          ? null
+          : Device.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DeviceEntityToJson(DeviceEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+DeviceEntityRes _$DeviceEntityResFromJson(Map<String, dynamic> json) =>
+    DeviceEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : Device.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DeviceEntityResToJson(DeviceEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+DeviceArray _$DeviceArrayFromJson(Map<String, dynamic> json) => DeviceArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Device.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DeviceArrayToJson(DeviceArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+DeviceArrayRes _$DeviceArrayResFromJson(Map<String, dynamic> json) =>
+    DeviceArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Device.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DeviceArrayResToJson(DeviceArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+ConditionInfo _$ConditionInfoFromJson(Map<String, dynamic> json) =>
+    ConditionInfo(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      modelId: json['modelId'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      field: json['field'] as String? ?? '',
+      condition: conditionInfoConditionFromJson(json['condition']),
+      value: json['value'] as String? ?? '',
+      leftValue: json['leftValue'] as String? ?? '',
+      rightValue: json['rightValue'] as String? ?? '',
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$ConditionInfoToJson(ConditionInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  val['modelId'] = instance.modelId;
+  writeNotNull('icon', instance.icon);
+  val['field'] = instance.field;
+  writeNotNull('condition', conditionInfoConditionToJson(instance.condition));
+  writeNotNull('value', instance.value);
+  writeNotNull('leftValue', instance.leftValue);
+  writeNotNull('rightValue', instance.rightValue);
+  writeNotNull('values', instance.values);
+  writeNotNull('tags', instance.tags);
+  return val;
+}
+
+Condition _$ConditionFromJson(Map<String, dynamic> json) => Condition(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      modelId: json['modelId'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      field: json['field'] as String? ?? '',
+      condition: conditionConditionFromJson(json['condition']),
+      value: json['value'] as String? ?? '',
+      leftValue: json['leftValue'] as String? ?? '',
+      rightValue: json['rightValue'] as String? ?? '',
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$ConditionToJson(Condition instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  val['modelId'] = instance.modelId;
+  writeNotNull('icon', instance.icon);
+  val['field'] = instance.field;
+  writeNotNull('condition', conditionConditionToJson(instance.condition));
+  writeNotNull('value', instance.value);
+  writeNotNull('leftValue', instance.leftValue);
+  writeNotNull('rightValue', instance.rightValue);
+  writeNotNull('values', instance.values);
+  writeNotNull('tags', instance.tags);
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+ConditionEntity _$ConditionEntityFromJson(Map<String, dynamic> json) =>
+    ConditionEntity(
+      entity: json['entity'] == null
+          ? null
+          : Condition.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ConditionEntityToJson(ConditionEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+ConditionEntityRes _$ConditionEntityResFromJson(Map<String, dynamic> json) =>
+    ConditionEntityRes(
+      entity: json['entity'] == null
+          ? null
+          : Condition.fromJson(json['entity'] as Map<String, dynamic>),
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$ConditionEntityResToJson(ConditionEntityRes instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  val['ok'] = instance.ok;
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  return val;
+}
+
+ConditionArray _$ConditionArrayFromJson(Map<String, dynamic> json) =>
+    ConditionArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Condition.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ConditionArrayToJson(ConditionArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+ConditionArrayRes _$ConditionArrayResFromJson(Map<String, dynamic> json) =>
+    ConditionArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Condition.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ConditionArrayResToJson(ConditionArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+MatchGroup _$MatchGroupFromJson(Map<String, dynamic> json) => MatchGroup(
+      matchType: matchGroupMatchTypeFromJson(json['matchType']),
+      conditions: (json['conditions'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$MatchGroupToJson(MatchGroup instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('matchType', matchGroupMatchTypeToJson(instance.matchType));
+  val['conditions'] = instance.conditions;
+  return val;
+}
+
+AlarmMatchGroup _$AlarmMatchGroupFromJson(Map<String, dynamic> json) =>
+    AlarmMatchGroup(
+      matchType: alarmMatchGroupMatchTypeFromJson(json['matchType']),
+      conditions: (json['conditions'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      alarmState: json['alarmState'] as int,
+      deviceState: json['deviceState'] as int?,
+      tooltip: json['tooltip'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$AlarmMatchGroupToJson(AlarmMatchGroup instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('matchType', alarmMatchGroupMatchTypeToJson(instance.matchType));
+  val['conditions'] = instance.conditions;
+  val['alarmState'] = instance.alarmState;
+  writeNotNull('deviceState', instance.deviceState);
+  writeNotNull('tooltip', instance.tooltip);
+  return val;
+}
+
+AlarmInfo _$AlarmInfoFromJson(Map<String, dynamic> json) => AlarmInfo(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      label: json['label'] as String? ?? '',
+      modelId: json['modelId'] as String? ?? '',
+      state: json['state'] as int,
+      stateIcons: (json['stateIcons'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      conditions: (json['conditions'] as List<dynamic>?)
+              ?.map((e) => AlarmMatchGroup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      showOnlyIfMatched: json['showOnlyIfMatched'] as bool?,
+    );
+
+Map<String, dynamic> _$AlarmInfoToJson(AlarmInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('label', instance.label);
+  val['modelId'] = instance.modelId;
+  val['state'] = instance.state;
+  writeNotNull('stateIcons', instance.stateIcons);
+  val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
+  writeNotNull('tags', instance.tags);
+  writeNotNull('showOnlyIfMatched', instance.showOnlyIfMatched);
+  return val;
+}
+
+Alarm _$AlarmFromJson(Map<String, dynamic> json) => Alarm(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      label: json['label'] as String? ?? '',
+      modelId: json['modelId'] as String? ?? '',
+      state: json['state'] as int,
+      stateIcons: (json['stateIcons'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      conditions: (json['conditions'] as List<dynamic>?)
+              ?.map((e) => AlarmMatchGroup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      showOnlyIfMatched: json['showOnlyIfMatched'] as bool?,
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$AlarmToJson(Alarm instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('label', instance.label);
+  val['modelId'] = instance.modelId;
+  val['state'] = instance.state;
+  writeNotNull('stateIcons', instance.stateIcons);
+  val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
+  writeNotNull('tags', instance.tags);
+  writeNotNull('showOnlyIfMatched', instance.showOnlyIfMatched);
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+AlarmEntity _$AlarmEntityFromJson(Map<String, dynamic> json) => AlarmEntity(
+      entity: json['entity'] == null
+          ? null
+          : Alarm.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AlarmEntityToJson(AlarmEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+AlarmEntityRes _$AlarmEntityResFromJson(Map<String, dynamic> json) =>
+    AlarmEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : Alarm.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AlarmEntityResToJson(AlarmEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+AlarmArray _$AlarmArrayFromJson(Map<String, dynamic> json) => AlarmArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Alarm.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$AlarmArrayToJson(AlarmArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+AlarmArrayRes _$AlarmArrayResFromJson(Map<String, dynamic> json) =>
+    AlarmArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Alarm.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$AlarmArrayResToJson(AlarmArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+ControlCommand _$ControlCommandFromJson(Map<String, dynamic> json) =>
+    ControlCommand(
+      type: controlCommandTypeFromJson(json['type']),
+      fixedType: controlCommandFixedTypeNullableFromJson(json['fixedType']),
+      jsonValue: json['jsonValue'],
+      textValue: json['textValue'] as String? ?? '',
+      binaryValue: json['binaryValue'] as String? ?? '',
+      parameters: (json['parameters'] as List<dynamic>?)
+              ?.map((e) => Parameter.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ControlCommandToJson(ControlCommand instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('type', controlCommandTypeToJson(instance.type));
+  writeNotNull(
+      'fixedType', controlCommandFixedTypeNullableToJson(instance.fixedType));
+  writeNotNull('jsonValue', instance.jsonValue);
+  writeNotNull('textValue', instance.textValue);
+  writeNotNull('binaryValue', instance.binaryValue);
+  writeNotNull(
+      'parameters', instance.parameters?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+ControlInfo _$ControlInfoFromJson(Map<String, dynamic> json) => ControlInfo(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      modelId: json['modelId'] as String? ?? '',
+      state: json['state'] as int,
+      stateIcons: (json['stateIcons'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      commands: (json['commands'] as List<dynamic>?)
+              ?.map((e) => ControlCommand.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ControlInfoToJson(ControlInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  val['modelId'] = instance.modelId;
+  val['state'] = instance.state;
+  writeNotNull('stateIcons', instance.stateIcons);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('commands', instance.commands?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+Control _$ControlFromJson(Map<String, dynamic> json) => Control(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      modelId: json['modelId'] as String? ?? '',
+      state: json['state'] as int,
+      stateIcons: (json['stateIcons'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      commands: (json['commands'] as List<dynamic>?)
+              ?.map((e) => ControlCommand.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$ControlToJson(Control instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  val['modelId'] = instance.modelId;
+  val['state'] = instance.state;
+  writeNotNull('stateIcons', instance.stateIcons);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('commands', instance.commands?.map((e) => e.toJson()).toList());
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+ControlEntity _$ControlEntityFromJson(Map<String, dynamic> json) =>
+    ControlEntity(
+      entity: json['entity'] == null
+          ? null
+          : Control.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ControlEntityToJson(ControlEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+ControlEntityRes _$ControlEntityResFromJson(Map<String, dynamic> json) =>
+    ControlEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : Control.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ControlEntityResToJson(ControlEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+ControlArray _$ControlArrayFromJson(Map<String, dynamic> json) => ControlArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Control.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ControlArrayToJson(ControlArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+ControlArrayRes _$ControlArrayResFromJson(Map<String, dynamic> json) =>
+    ControlArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Control.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ControlArrayResToJson(ControlArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+EventInfo _$EventInfoFromJson(Map<String, dynamic> json) => EventInfo(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      modelId: json['modelId'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      conditions: (json['conditions'] as List<dynamic>?)
+              ?.map((e) => MatchGroup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      notificationTemplate: json['notificationTemplate'] == null
+          ? null
+          : NotificationTemplate.fromJson(
+              json['notificationTemplate'] as Map<String, dynamic>),
+      emailTemplate: json['emailTemplate'] == null
+          ? null
+          : EmailTemplate.fromJson(
+              json['emailTemplate'] as Map<String, dynamic>),
+      smsTemplate: json['smsTemplate'] == null
+          ? null
+          : SMSTemplate.fromJson(json['smsTemplate'] as Map<String, dynamic>),
+      fcmTemplate: json['fcmTemplate'] == null
+          ? null
+          : FCMTemplate.fromJson(json['fcmTemplate'] as Map<String, dynamic>),
+      voiceTemplate: json['voiceTemplate'] == null
+          ? null
+          : VoiceTemplate.fromJson(
+              json['voiceTemplate'] as Map<String, dynamic>),
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$EventInfoToJson(EventInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  val['modelId'] = instance.modelId;
+  writeNotNull('icon', instance.icon);
+  val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
+  writeNotNull('notificationTemplate', instance.notificationTemplate?.toJson());
+  writeNotNull('emailTemplate', instance.emailTemplate?.toJson());
+  writeNotNull('smsTemplate', instance.smsTemplate?.toJson());
+  writeNotNull('fcmTemplate', instance.fcmTemplate?.toJson());
+  writeNotNull('voiceTemplate', instance.voiceTemplate?.toJson());
+  writeNotNull('tags', instance.tags);
+  writeNotNull('roles', instance.roles);
+  return val;
+}
+
+Event _$EventFromJson(Map<String, dynamic> json) => Event(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      modelId: json['modelId'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      conditions: (json['conditions'] as List<dynamic>?)
+              ?.map((e) => MatchGroup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      notificationTemplate: json['notificationTemplate'] == null
+          ? null
+          : NotificationTemplate.fromJson(
+              json['notificationTemplate'] as Map<String, dynamic>),
+      emailTemplate: json['emailTemplate'] == null
+          ? null
+          : EmailTemplate.fromJson(
+              json['emailTemplate'] as Map<String, dynamic>),
+      smsTemplate: json['smsTemplate'] == null
+          ? null
+          : SMSTemplate.fromJson(json['smsTemplate'] as Map<String, dynamic>),
+      fcmTemplate: json['fcmTemplate'] == null
+          ? null
+          : FCMTemplate.fromJson(json['fcmTemplate'] as Map<String, dynamic>),
+      voiceTemplate: json['voiceTemplate'] == null
+          ? null
+          : VoiceTemplate.fromJson(
+              json['voiceTemplate'] as Map<String, dynamic>),
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$EventToJson(Event instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  val['modelId'] = instance.modelId;
+  writeNotNull('icon', instance.icon);
+  val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
+  writeNotNull('notificationTemplate', instance.notificationTemplate?.toJson());
+  writeNotNull('emailTemplate', instance.emailTemplate?.toJson());
+  writeNotNull('smsTemplate', instance.smsTemplate?.toJson());
+  writeNotNull('fcmTemplate', instance.fcmTemplate?.toJson());
+  writeNotNull('voiceTemplate', instance.voiceTemplate?.toJson());
+  writeNotNull('tags', instance.tags);
+  writeNotNull('roles', instance.roles);
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+EventEntity _$EventEntityFromJson(Map<String, dynamic> json) => EventEntity(
+      entity: json['entity'] == null
+          ? null
+          : Event.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$EventEntityToJson(EventEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+EventEntityRes _$EventEntityResFromJson(Map<String, dynamic> json) =>
+    EventEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : Event.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$EventEntityResToJson(EventEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+EventArray _$EventArrayFromJson(Map<String, dynamic> json) => EventArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Event.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$EventArrayToJson(EventArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+EventArrayRes _$EventArrayResFromJson(Map<String, dynamic> json) =>
+    EventArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Event.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$EventArrayResToJson(EventArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+HttpParam _$HttpParamFromJson(Map<String, dynamic> json) => HttpParam(
+      name: json['name'] as String? ?? '',
+      value: json['value'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$HttpParamToJson(HttpParam instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('value', instance.value);
+  return val;
+}
+
+HttpConfig _$HttpConfigFromJson(Map<String, dynamic> json) => HttpConfig(
+      url: json['url'] as String? ?? '',
+      protocol: httpConfigProtocolFromJson(json['protocol']),
+      headers: (json['headers'] as List<dynamic>?)
+              ?.map((e) => HttpParam.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      queryParameters: (json['queryParameters'] as List<dynamic>?)
+              ?.map((e) => HttpParam.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$HttpConfigToJson(HttpConfig instance) {
+  final val = <String, dynamic>{
+    'url': instance.url,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('protocol', httpConfigProtocolToJson(instance.protocol));
+  writeNotNull('headers', instance.headers?.map((e) => e.toJson()).toList());
+  writeNotNull('queryParameters',
+      instance.queryParameters?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+UdpConfig _$UdpConfigFromJson(Map<String, dynamic> json) => UdpConfig(
+      host: json['host'] as String? ?? '',
+      port: json['port'] as int,
+    );
+
+Map<String, dynamic> _$UdpConfigToJson(UdpConfig instance) => <String, dynamic>{
+      'host': instance.host,
+      'port': instance.port,
+    };
+
+MqttConfig _$MqttConfigFromJson(Map<String, dynamic> json) => MqttConfig(
+      host: json['host'] as String? ?? '',
+      port: json['port'] as int,
+      topic: json['topic'] as String? ?? '',
+      qos: json['qos'] as int?,
+    );
+
+Map<String, dynamic> _$MqttConfigToJson(MqttConfig instance) {
+  final val = <String, dynamic>{
+    'host': instance.host,
+    'port': instance.port,
+    'topic': instance.topic,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('qos', instance.qos);
+  return val;
+}
+
+TriggerControl _$TriggerControlFromJson(Map<String, dynamic> json) =>
+    TriggerControl(
+      controlState: json['controlState'] as int,
+      triggerTarget:
+          TriggerControl.triggerControlTriggerTargetTriggerTargetFromJson(
+              json['triggerTarget']),
+      triggerType:
+          TriggerControl.triggerControlTriggerTypeTriggerTypeNullableFromJson(
+              json['triggerType']),
+      deliveryTarget: TriggerControl
+          .triggerControlDeliveryTargetDeliveryTargetNullableFromJson(
+              json['deliveryTarget']),
+      controlId: json['controlId'] as String? ?? '',
+      otherDeviceId: json['otherDeviceId'] as String? ?? '',
+      otherControlId: json['otherControlId'] as String? ?? '',
+      httpConfig: json['httpConfig'] == null
+          ? null
+          : HttpConfig.fromJson(json['httpConfig'] as Map<String, dynamic>),
+      mqttConfig: json['mqttConfig'] == null
+          ? null
+          : MqttConfig.fromJson(json['mqttConfig'] as Map<String, dynamic>),
+      udpConfig: json['udpConfig'] == null
+          ? null
+          : UdpConfig.fromJson(json['udpConfig'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$TriggerControlToJson(TriggerControl instance) {
+  final val = <String, dynamic>{
+    'controlState': instance.controlState,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('triggerTarget',
+      triggerControlTriggerTargetToJson(instance.triggerTarget));
+  writeNotNull('triggerType',
+      triggerControlTriggerTypeNullableToJson(instance.triggerType));
+  writeNotNull('deliveryTarget',
+      triggerControlDeliveryTargetNullableToJson(instance.deliveryTarget));
+  writeNotNull('controlId', instance.controlId);
+  writeNotNull('otherDeviceId', instance.otherDeviceId);
+  writeNotNull('otherControlId', instance.otherControlId);
+  writeNotNull('httpConfig', instance.httpConfig?.toJson());
+  writeNotNull('mqttConfig', instance.mqttConfig?.toJson());
+  writeNotNull('udpConfig', instance.udpConfig?.toJson());
+  return val;
+}
+
+TriggerInfo _$TriggerInfoFromJson(Map<String, dynamic> json) => TriggerInfo(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      modelId: json['modelId'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      conditions: (json['conditions'] as List<dynamic>?)
+              ?.map((e) => MatchGroup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      controls: (json['controls'] as List<dynamic>?)
+              ?.map((e) => TriggerControl.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$TriggerInfoToJson(TriggerInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  val['modelId'] = instance.modelId;
+  writeNotNull('icon', instance.icon);
+  val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
+  val['controls'] = instance.controls.map((e) => e.toJson()).toList();
+  writeNotNull('tags', instance.tags);
+  return val;
+}
+
+Trigger _$TriggerFromJson(Map<String, dynamic> json) => Trigger(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      modelId: json['modelId'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      conditions: (json['conditions'] as List<dynamic>?)
+              ?.map((e) => MatchGroup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      controls: (json['controls'] as List<dynamic>?)
+              ?.map((e) => TriggerControl.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$TriggerToJson(Trigger instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  val['modelId'] = instance.modelId;
+  writeNotNull('icon', instance.icon);
+  val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
+  val['controls'] = instance.controls.map((e) => e.toJson()).toList();
+  writeNotNull('tags', instance.tags);
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+TriggerEntity _$TriggerEntityFromJson(Map<String, dynamic> json) =>
+    TriggerEntity(
+      entity: json['entity'] == null
+          ? null
+          : Trigger.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$TriggerEntityToJson(TriggerEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+TriggerEntityRes _$TriggerEntityResFromJson(Map<String, dynamic> json) =>
+    TriggerEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : Trigger.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$TriggerEntityResToJson(TriggerEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+TriggerArray _$TriggerArrayFromJson(Map<String, dynamic> json) => TriggerArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Trigger.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$TriggerArrayToJson(TriggerArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+TriggerArrayRes _$TriggerArrayResFromJson(Map<String, dynamic> json) =>
+    TriggerArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Trigger.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$TriggerArrayResToJson(TriggerArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+NotificationTemplate _$NotificationTemplateFromJson(
+        Map<String, dynamic> json) =>
+    NotificationTemplate(
+      title: json['title'] as String? ?? '',
+      content: json['content'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$NotificationTemplateToJson(
+        NotificationTemplate instance) =>
+    <String, dynamic>{
+      'title': instance.title,
+      'content': instance.content,
+    };
+
+EmailTemplate _$EmailTemplateFromJson(Map<String, dynamic> json) =>
+    EmailTemplate(
+      subject: json['subject'] as String? ?? '',
+      content: json['content'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$EmailTemplateToJson(EmailTemplate instance) =>
+    <String, dynamic>{
+      'subject': instance.subject,
+      'content': instance.content,
+    };
+
+FCMTemplate _$FCMTemplateFromJson(Map<String, dynamic> json) => FCMTemplate(
+      title: json['title'] as String? ?? '',
+      content: json['content'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$FCMTemplateToJson(FCMTemplate instance) =>
+    <String, dynamic>{
+      'title': instance.title,
+      'content': instance.content,
+    };
+
+SMSTemplate _$SMSTemplateFromJson(Map<String, dynamic> json) => SMSTemplate(
+      message: json['message'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$SMSTemplateToJson(SMSTemplate instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+    };
+
+VoiceTemplate _$VoiceTemplateFromJson(Map<String, dynamic> json) =>
+    VoiceTemplate(
+      message: json['message'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$VoiceTemplateToJson(VoiceTemplate instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+    };
+
+ImageFileInfo _$ImageFileInfoFromJson(Map<String, dynamic> json) =>
+    ImageFileInfo(
+      imageType: imageFileInfoImageTypeFromJson(json['imageType']),
+      imageTarget: imageFileInfoImageTargetFromJson(json['imageTarget']),
+      name: json['name'] as String? ?? '',
+      modelId: json['modelId'] as String? ?? '',
+      deviceId: json['deviceId'] as String? ?? '',
+      conditionId: json['conditionId'] as String? ?? '',
+      alarmId: json['alarmId'] as String? ?? '',
+      controlId: json['controlId'] as String? ?? '',
+      eventId: json['eventId'] as String? ?? '',
+      triggerId: json['triggerId'] as String? ?? '',
+      menuGroupId: json['menuGroupId'] as String? ?? '',
+      menuIndex: json['menuIndex'] as int?,
+      screenId: json['screenId'] as String? ?? '',
+      displayId: json['displayId'] as String? ?? '',
+      assetId: json['assetId'] as String? ?? '',
+      facilityId: json['facilityId'] as String? ?? '',
+      floorId: json['floorId'] as String? ?? '',
+      userId: json['userId'] as String? ?? '',
+      premiseId: json['premiseId'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$ImageFileInfoToJson(ImageFileInfo instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('imageType', imageFileInfoImageTypeToJson(instance.imageType));
+  writeNotNull(
+      'imageTarget', imageFileInfoImageTargetToJson(instance.imageTarget));
+  val['name'] = instance.name;
+  val['modelId'] = instance.modelId;
+  writeNotNull('deviceId', instance.deviceId);
+  writeNotNull('conditionId', instance.conditionId);
+  writeNotNull('alarmId', instance.alarmId);
+  writeNotNull('controlId', instance.controlId);
+  writeNotNull('eventId', instance.eventId);
+  writeNotNull('triggerId', instance.triggerId);
+  writeNotNull('menuGroupId', instance.menuGroupId);
+  writeNotNull('menuIndex', instance.menuIndex);
+  writeNotNull('screenId', instance.screenId);
+  writeNotNull('displayId', instance.displayId);
+  writeNotNull('assetId', instance.assetId);
+  writeNotNull('facilityId', instance.facilityId);
+  writeNotNull('floorId', instance.floorId);
+  writeNotNull('userId', instance.userId);
+  writeNotNull('premiseId', instance.premiseId);
+  return val;
+}
+
+ImageFileBase _$ImageFileBaseFromJson(Map<String, dynamic> json) =>
+    ImageFileBase(
+      contentType: json['contentType'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$ImageFileBaseToJson(ImageFileBase instance) =>
+    <String, dynamic>{
+      'contentType': instance.contentType,
+    };
+
+ImageFile _$ImageFileFromJson(Map<String, dynamic> json) => ImageFile(
+      imageType: imageFileImageTypeFromJson(json['imageType']),
+      imageTarget: imageFileImageTargetFromJson(json['imageTarget']),
+      name: json['name'] as String? ?? '',
+      modelId: json['modelId'] as String? ?? '',
+      deviceId: json['deviceId'] as String? ?? '',
+      conditionId: json['conditionId'] as String? ?? '',
+      alarmId: json['alarmId'] as String? ?? '',
+      controlId: json['controlId'] as String? ?? '',
+      eventId: json['eventId'] as String? ?? '',
+      triggerId: json['triggerId'] as String? ?? '',
+      menuGroupId: json['menuGroupId'] as String? ?? '',
+      menuIndex: json['menuIndex'] as int?,
+      screenId: json['screenId'] as String? ?? '',
+      displayId: json['displayId'] as String? ?? '',
+      assetId: json['assetId'] as String? ?? '',
+      facilityId: json['facilityId'] as String? ?? '',
+      floorId: json['floorId'] as String? ?? '',
+      userId: json['userId'] as String? ?? '',
+      premiseId: json['premiseId'] as String? ?? '',
+      contentType: json['contentType'] as String? ?? '',
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$ImageFileToJson(ImageFile instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('imageType', imageFileImageTypeToJson(instance.imageType));
+  writeNotNull('imageTarget', imageFileImageTargetToJson(instance.imageTarget));
+  val['name'] = instance.name;
+  val['modelId'] = instance.modelId;
+  writeNotNull('deviceId', instance.deviceId);
+  writeNotNull('conditionId', instance.conditionId);
+  writeNotNull('alarmId', instance.alarmId);
+  writeNotNull('controlId', instance.controlId);
+  writeNotNull('eventId', instance.eventId);
+  writeNotNull('triggerId', instance.triggerId);
+  writeNotNull('menuGroupId', instance.menuGroupId);
+  writeNotNull('menuIndex', instance.menuIndex);
+  writeNotNull('screenId', instance.screenId);
+  writeNotNull('displayId', instance.displayId);
+  writeNotNull('assetId', instance.assetId);
+  writeNotNull('facilityId', instance.facilityId);
+  writeNotNull('floorId', instance.floorId);
+  writeNotNull('userId', instance.userId);
+  writeNotNull('premiseId', instance.premiseId);
+  val['contentType'] = instance.contentType;
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  writeNotNull('tags', instance.tags);
+  return val;
+}
+
+ImageFileEntity _$ImageFileEntityFromJson(Map<String, dynamic> json) =>
+    ImageFileEntity(
+      entity: json['entity'] == null
+          ? null
+          : ImageFile.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ImageFileEntityToJson(ImageFileEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+ImageFileEntityRes _$ImageFileEntityResFromJson(Map<String, dynamic> json) =>
+    ImageFileEntityRes(
+      entity: json['entity'] == null
+          ? null
+          : ImageFile.fromJson(json['entity'] as Map<String, dynamic>),
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$ImageFileEntityResToJson(ImageFileEntityRes instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  val['ok'] = instance.ok;
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  return val;
+}
+
+ImageFileArray _$ImageFileArrayFromJson(Map<String, dynamic> json) =>
+    ImageFileArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => ImageFile.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ImageFileArrayToJson(ImageFileArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+ImageFileArrayRes _$ImageFileArrayResFromJson(Map<String, dynamic> json) =>
+    ImageFileArrayRes(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => ImageFile.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$ImageFileArrayResToJson(ImageFileArrayRes instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  val['ok'] = instance.ok;
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  return val;
+}
+
+DisplayMatchGroup _$DisplayMatchGroupFromJson(Map<String, dynamic> json) =>
+    DisplayMatchGroup(
+      matchType: displayMatchGroupMatchTypeFromJson(json['matchType']),
+      conditions: (json['conditions'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      font: json['font'] as String? ?? '',
+      fontSize: (json['fontSize'] as num).toDouble(),
+      fontColor: json['fontColor'] as int,
+      fontStyle: json['fontStyle'] as String? ?? '',
+      fontWeight: json['fontWeight'] as int?,
+      bordorColor: json['bordorColor'] as int?,
+      borderType:
+          displayMatchGroupBorderTypeNullableFromJson(json['borderType']),
+      value: json['value'] as String? ?? '',
+      bgColor: json['bgColor'] as int?,
+      prefixText: json['prefixText'] as String? ?? '',
+      prefixFont: json['prefixFont'] as String? ?? '',
+      prefixFontSize: (json['prefixFontSize'] as num?)?.toDouble(),
+      prefixFontColor: json['prefixFontColor'] as int?,
+      prefixFontStyle: json['prefixFontStyle'] as String? ?? '',
+      prefixFontWeight: json['prefixFontWeight'] as int?,
+      prefixPadding: (json['prefixPadding'] as num?)?.toDouble(),
+      suffixText: json['suffixText'] as String? ?? '',
+      suffixFont: json['suffixFont'] as String? ?? '',
+      suffixFontSize: (json['suffixFontSize'] as num?)?.toDouble(),
+      suffixFontColor: json['suffixFontColor'] as int?,
+      suffixFontStyle: json['suffixFontStyle'] as String? ?? '',
+      suffixFontWeight: json['suffixFontWeight'] as int?,
+      suffixPadding: (json['suffixPadding'] as num?)?.toDouble(),
+      topText: json['topText'] as String? ?? '',
+      topFont: json['topFont'] as String? ?? '',
+      topFontSize: (json['topFontSize'] as num?)?.toDouble(),
+      topFontColor: json['topFontColor'] as int?,
+      topFontStyle: json['topFontStyle'] as String? ?? '',
+      topFontWeight: json['topFontWeight'] as int?,
+      topPadding: (json['topPadding'] as num?)?.toDouble(),
+      bottomText: json['bottomText'] as String? ?? '',
+      bottomFont: json['bottomFont'] as String? ?? '',
+      bottomFontSize: (json['bottomFontSize'] as num?)?.toDouble(),
+      bottomFontColor: json['bottomFontColor'] as int?,
+      bottomFontStyle: json['bottomFontStyle'] as String? ?? '',
+      bottomFontWeight: json['bottomFontWeight'] as int?,
+      bottomPadding: (json['bottomPadding'] as num?)?.toDouble(),
+      width: (json['width'] as num).toDouble(),
+      height: (json['height'] as num).toDouble(),
+      field: json['field'] as String? ?? '',
+      tooltip: json['tooltip'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$DisplayMatchGroupToJson(DisplayMatchGroup instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'matchType', displayMatchGroupMatchTypeToJson(instance.matchType));
+  val['conditions'] = instance.conditions;
+  val['font'] = instance.font;
+  val['fontSize'] = instance.fontSize;
+  val['fontColor'] = instance.fontColor;
+  writeNotNull('fontStyle', instance.fontStyle);
+  writeNotNull('fontWeight', instance.fontWeight);
+  writeNotNull('bordorColor', instance.bordorColor);
+  writeNotNull('borderType',
+      displayMatchGroupBorderTypeNullableToJson(instance.borderType));
+  writeNotNull('value', instance.value);
+  writeNotNull('bgColor', instance.bgColor);
+  writeNotNull('prefixText', instance.prefixText);
+  writeNotNull('prefixFont', instance.prefixFont);
+  writeNotNull('prefixFontSize', instance.prefixFontSize);
+  writeNotNull('prefixFontColor', instance.prefixFontColor);
+  writeNotNull('prefixFontStyle', instance.prefixFontStyle);
+  writeNotNull('prefixFontWeight', instance.prefixFontWeight);
+  writeNotNull('prefixPadding', instance.prefixPadding);
+  writeNotNull('suffixText', instance.suffixText);
+  writeNotNull('suffixFont', instance.suffixFont);
+  writeNotNull('suffixFontSize', instance.suffixFontSize);
+  writeNotNull('suffixFontColor', instance.suffixFontColor);
+  writeNotNull('suffixFontStyle', instance.suffixFontStyle);
+  writeNotNull('suffixFontWeight', instance.suffixFontWeight);
+  writeNotNull('suffixPadding', instance.suffixPadding);
+  writeNotNull('topText', instance.topText);
+  writeNotNull('topFont', instance.topFont);
+  writeNotNull('topFontSize', instance.topFontSize);
+  writeNotNull('topFontColor', instance.topFontColor);
+  writeNotNull('topFontStyle', instance.topFontStyle);
+  writeNotNull('topFontWeight', instance.topFontWeight);
+  writeNotNull('topPadding', instance.topPadding);
+  writeNotNull('bottomText', instance.bottomText);
+  writeNotNull('bottomFont', instance.bottomFont);
+  writeNotNull('bottomFontSize', instance.bottomFontSize);
+  writeNotNull('bottomFontColor', instance.bottomFontColor);
+  writeNotNull('bottomFontStyle', instance.bottomFontStyle);
+  writeNotNull('bottomFontWeight', instance.bottomFontWeight);
+  writeNotNull('bottomPadding', instance.bottomPadding);
+  val['width'] = instance.width;
+  val['height'] = instance.height;
+  writeNotNull('field', instance.field);
+  writeNotNull('tooltip', instance.tooltip);
+  return val;
+}
+
+DisplayInfo _$DisplayInfoFromJson(Map<String, dynamic> json) => DisplayInfo(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      label: json['label'] as String? ?? '',
+      modelId: json['modelId'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      conditions: (json['conditions'] as List<dynamic>?)
+              ?.map(
+                  (e) => DisplayMatchGroup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$DisplayInfoToJson(DisplayInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('label', instance.label);
+  val['modelId'] = instance.modelId;
+  writeNotNull('icon', instance.icon);
+  val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
+  writeNotNull('tags', instance.tags);
+  return val;
+}
+
+Display _$DisplayFromJson(Map<String, dynamic> json) => Display(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      label: json['label'] as String? ?? '',
+      modelId: json['modelId'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      conditions: (json['conditions'] as List<dynamic>?)
+              ?.map(
+                  (e) => DisplayMatchGroup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$DisplayToJson(Display instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('label', instance.label);
+  val['modelId'] = instance.modelId;
+  writeNotNull('icon', instance.icon);
+  val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
+  writeNotNull('tags', instance.tags);
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+DisplayEntity _$DisplayEntityFromJson(Map<String, dynamic> json) =>
+    DisplayEntity(
+      entity: json['entity'] == null
+          ? null
+          : Display.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DisplayEntityToJson(DisplayEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+DisplayEntityRes _$DisplayEntityResFromJson(Map<String, dynamic> json) =>
+    DisplayEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : Display.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DisplayEntityResToJson(DisplayEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+DisplayArray _$DisplayArrayFromJson(Map<String, dynamic> json) => DisplayArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Display.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DisplayArrayToJson(DisplayArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+DisplayArrayRes _$DisplayArrayResFromJson(Map<String, dynamic> json) =>
+    DisplayArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Display.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DisplayArrayResToJson(DisplayArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+Displayable _$DisplayableFromJson(Map<String, dynamic> json) => Displayable(
+      type: displayableTypeFromJson(json['type']),
+      id: json['id'] as String? ?? '',
+      width: json['width'] as int,
+      height: json['height'] as int,
+    );
+
+Map<String, dynamic> _$DisplayableToJson(Displayable instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('type', displayableTypeToJson(instance.type));
+  val['id'] = instance.id;
+  val['width'] = instance.width;
+  val['height'] = instance.height;
+  return val;
+}
+
+Positionable _$PositionableFromJson(Map<String, dynamic> json) => Positionable(
+      view: Displayable.fromJson(json['view'] as Map<String, dynamic>),
+      top: json['top'] as int?,
+      bottom: json['bottom'] as int?,
+      left: json['left'] as int?,
+      right: json['right'] as int?,
+    );
+
+Map<String, dynamic> _$PositionableToJson(Positionable instance) {
+  final val = <String, dynamic>{
+    'view': instance.view.toJson(),
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('top', instance.top);
+  writeNotNull('bottom', instance.bottom);
+  writeNotNull('left', instance.left);
+  writeNotNull('right', instance.right);
+  return val;
+}
+
+DeviceViewInfo _$DeviceViewInfoFromJson(Map<String, dynamic> json) =>
+    DeviceViewInfo(
+      modelId: json['modelId'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      top: (json['top'] as List<dynamic>?)
+              ?.map((e) => Displayable.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      bottom: (json['bottom'] as List<dynamic>?)
+              ?.map((e) => Displayable.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      left: (json['left'] as List<dynamic>?)
+              ?.map((e) => Displayable.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      right: (json['right'] as List<dynamic>?)
+              ?.map((e) => Displayable.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      positioned: (json['positioned'] as List<dynamic>?)
+              ?.map((e) => Positionable.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      width: json['width'] as int?,
+      height: json['height'] as int?,
+      topHeight: json['topHeight'] as int?,
+      bottomHeight: json['bottomHeight'] as int?,
+      leftWidth: json['leftWidth'] as int?,
+      rightWidth: json['rightWidth'] as int?,
+      showInfo: json['showInfo'] as bool? ?? true,
+      infoPosition:
+          DeviceViewInfo.deviceViewInfoInfoPositionInfoPositionNullableFromJson(
+              json['infoPosition']),
+      border: DeviceViewInfo.deviceViewInfoBorderBorderNullableFromJson(
+          json['border']),
+    );
+
+Map<String, dynamic> _$DeviceViewInfoToJson(DeviceViewInfo instance) {
+  final val = <String, dynamic>{
+    'modelId': instance.modelId,
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('top', instance.top?.map((e) => e.toJson()).toList());
+  writeNotNull('bottom', instance.bottom?.map((e) => e.toJson()).toList());
+  writeNotNull('left', instance.left?.map((e) => e.toJson()).toList());
+  writeNotNull('right', instance.right?.map((e) => e.toJson()).toList());
+  writeNotNull(
+      'positioned', instance.positioned?.map((e) => e.toJson()).toList());
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('width', instance.width);
+  writeNotNull('height', instance.height);
+  writeNotNull('topHeight', instance.topHeight);
+  writeNotNull('bottomHeight', instance.bottomHeight);
+  writeNotNull('leftWidth', instance.leftWidth);
+  writeNotNull('rightWidth', instance.rightWidth);
+  writeNotNull('showInfo', instance.showInfo);
+  writeNotNull('infoPosition',
+      deviceViewInfoInfoPositionNullableToJson(instance.infoPosition));
+  writeNotNull('border', deviceViewInfoBorderNullableToJson(instance.border));
+  return val;
+}
+
+DeviceView _$DeviceViewFromJson(Map<String, dynamic> json) => DeviceView(
+      modelId: json['modelId'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      top: (json['top'] as List<dynamic>?)
+              ?.map((e) => Displayable.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      bottom: (json['bottom'] as List<dynamic>?)
+              ?.map((e) => Displayable.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      left: (json['left'] as List<dynamic>?)
+              ?.map((e) => Displayable.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      right: (json['right'] as List<dynamic>?)
+              ?.map((e) => Displayable.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      positioned: (json['positioned'] as List<dynamic>?)
+              ?.map((e) => Positionable.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      width: json['width'] as int?,
+      height: json['height'] as int?,
+      topHeight: json['topHeight'] as int?,
+      bottomHeight: json['bottomHeight'] as int?,
+      leftWidth: json['leftWidth'] as int?,
+      rightWidth: json['rightWidth'] as int?,
+      showInfo: json['showInfo'] as bool? ?? true,
+      infoPosition:
+          DeviceView.deviceViewInfoPositionInfoPositionNullableFromJson(
+              json['infoPosition']),
+      border: DeviceView.deviceViewBorderBorderNullableFromJson(json['border']),
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$DeviceViewToJson(DeviceView instance) {
+  final val = <String, dynamic>{
+    'modelId': instance.modelId,
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('top', instance.top?.map((e) => e.toJson()).toList());
+  writeNotNull('bottom', instance.bottom?.map((e) => e.toJson()).toList());
+  writeNotNull('left', instance.left?.map((e) => e.toJson()).toList());
+  writeNotNull('right', instance.right?.map((e) => e.toJson()).toList());
+  writeNotNull(
+      'positioned', instance.positioned?.map((e) => e.toJson()).toList());
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('width', instance.width);
+  writeNotNull('height', instance.height);
+  writeNotNull('topHeight', instance.topHeight);
+  writeNotNull('bottomHeight', instance.bottomHeight);
+  writeNotNull('leftWidth', instance.leftWidth);
+  writeNotNull('rightWidth', instance.rightWidth);
+  writeNotNull('showInfo', instance.showInfo);
+  writeNotNull('infoPosition',
+      deviceViewInfoPositionNullableToJson(instance.infoPosition));
+  writeNotNull('border', deviceViewBorderNullableToJson(instance.border));
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+DeviceViewEntity _$DeviceViewEntityFromJson(Map<String, dynamic> json) =>
+    DeviceViewEntity(
+      entity: json['entity'] == null
+          ? null
+          : DeviceView.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DeviceViewEntityToJson(DeviceViewEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+DeviceViewEntityRes _$DeviceViewEntityResFromJson(Map<String, dynamic> json) =>
+    DeviceViewEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : DeviceView.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DeviceViewEntityResToJson(DeviceViewEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+DeviceViewArray _$DeviceViewArrayFromJson(Map<String, dynamic> json) =>
+    DeviceViewArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => DeviceView.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DeviceViewArrayToJson(DeviceViewArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+DeviceViewArrayRes _$DeviceViewArrayResFromJson(Map<String, dynamic> json) =>
+    DeviceViewArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => DeviceView.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DeviceViewArrayResToJson(DeviceViewArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+EvaluatedAlarm _$EvaluatedAlarmFromJson(Map<String, dynamic> json) =>
+    EvaluatedAlarm(
+      alarmId: json['alarmId'] as String? ?? '',
+      state: json['state'] as int,
+      stateIcon: json['stateIcon'] as String? ?? '',
+      tooltip: json['tooltip'] as String? ?? '',
+      deviceState: json['deviceState'] as int?,
+    );
+
+Map<String, dynamic> _$EvaluatedAlarmToJson(EvaluatedAlarm instance) {
+  final val = <String, dynamic>{
+    'alarmId': instance.alarmId,
+    'state': instance.state,
+    'stateIcon': instance.stateIcon,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('tooltip', instance.tooltip);
+  writeNotNull('deviceState', instance.deviceState);
+  return val;
+}
+
+EvaluatedDisplay _$EvaluatedDisplayFromJson(Map<String, dynamic> json) =>
+    EvaluatedDisplay(
+      displayId: json['displayId'] as String? ?? '',
+      prefix: json['prefix'] as String? ?? '',
+      suffix: json['suffix'] as String? ?? '',
+      value: json['value'] as String? ?? '',
+      conditionIndex: json['conditionIndex'] as int,
+      tooltip: json['tooltip'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$EvaluatedDisplayToJson(EvaluatedDisplay instance) {
+  final val = <String, dynamic>{
+    'displayId': instance.displayId,
+    'prefix': instance.prefix,
+    'suffix': instance.suffix,
+    'value': instance.value,
+    'conditionIndex': instance.conditionIndex,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('tooltip', instance.tooltip);
+  return val;
+}
+
+DeviceControl _$DeviceControlFromJson(Map<String, dynamic> json) =>
+    DeviceControl(
+      controlId: json['controlId'] as String? ?? '',
+      deviceId: json['deviceId'] as String? ?? '',
+      hardwareDeviceId: json['hardwareDeviceId'] as String? ?? '',
+      state: json['state'] as int,
+      stateIcon: json['stateIcon'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int?,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int?,
+    );
+
+Map<String, dynamic> _$DeviceControlToJson(DeviceControl instance) {
+  final val = <String, dynamic>{
+    'controlId': instance.controlId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('deviceId', instance.deviceId);
+  writeNotNull('hardwareDeviceId', instance.hardwareDeviceId);
+  val['state'] = instance.state;
+  val['stateIcon'] = instance.stateIcon;
+  writeNotNull('rtype', instance.rtype);
+  writeNotNull('id', instance.id);
+  writeNotNull('name', instance.name);
+  writeNotNull('createdStamp', instance.createdStamp);
+  writeNotNull('createdBy', instance.createdBy);
+  writeNotNull('updatedBy', instance.updatedBy);
+  writeNotNull('updatedStamp', instance.updatedStamp);
+  return val;
+}
+
+EvaluatedEvent _$EvaluatedEventFromJson(Map<String, dynamic> json) =>
+    EvaluatedEvent(
+      eventId: json['eventId'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$EvaluatedEventToJson(EvaluatedEvent instance) =>
+    <String, dynamic>{
+      'eventId': instance.eventId,
+      'icon': instance.icon,
+      'name': instance.name,
+      'description': instance.description,
+    };
+
+TriggeredControl _$TriggeredControlFromJson(Map<String, dynamic> json) =>
+    TriggeredControl(
+      id: json['id'] as String? ?? '',
+      controlId: json['controlId'] as String? ?? '',
+      modelId: json['modelId'] as String? ?? '',
+      deviceId: json['deviceId'] as String? ?? '',
+      triggerId: json['triggerId'] as String? ?? '',
+      triggerIcon: json['triggerIcon'] as String? ?? '',
+      hardwareDeviceId: json['hardwareDeviceId'] as String? ?? '',
+      state: json['state'] as int?,
+      stateIcon: json['stateIcon'] as String? ?? '',
+      data: json['data'],
+      rtype: json['rtype'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int?,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int?,
+      deliveryStatus: triggeredControlDeliveryStatusNullableFromJson(
+          json['deliveryStatus']),
+      deliveryErrors: (json['deliveryErrors'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      deviceIcon: json['deviceIcon'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$TriggeredControlToJson(TriggeredControl instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'controlId': instance.controlId,
+    'modelId': instance.modelId,
+    'deviceId': instance.deviceId,
+    'triggerId': instance.triggerId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('triggerIcon', instance.triggerIcon);
+  writeNotNull('hardwareDeviceId', instance.hardwareDeviceId);
+  writeNotNull('state', instance.state);
+  writeNotNull('stateIcon', instance.stateIcon);
+  writeNotNull('data', instance.data);
+  writeNotNull('rtype', instance.rtype);
+  writeNotNull('name', instance.name);
+  writeNotNull('createdStamp', instance.createdStamp);
+  writeNotNull('createdBy', instance.createdBy);
+  writeNotNull('updatedBy', instance.updatedBy);
+  writeNotNull('updatedStamp', instance.updatedStamp);
+  writeNotNull('deliveryStatus',
+      triggeredControlDeliveryStatusNullableToJson(instance.deliveryStatus));
+  writeNotNull('deliveryErrors', instance.deliveryErrors);
+  writeNotNull('deviceIcon', instance.deviceIcon);
+  return val;
+}
+
+EvaluatedTrigger _$EvaluatedTriggerFromJson(Map<String, dynamic> json) =>
+    EvaluatedTrigger(
+      triggerId: json['triggerId'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$EvaluatedTriggerToJson(EvaluatedTrigger instance) {
+  final val = <String, dynamic>{
+    'triggerId': instance.triggerId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('icon', instance.icon);
+  return val;
+}
+
+DeviceData _$DeviceDataFromJson(Map<String, dynamic> json) => DeviceData(
+      domainKey: json['domainKey'] as String? ?? '',
+      deviceId: json['deviceId'] as String? ?? '',
+      subType: json['subType'] as String? ?? '',
+      modelId: json['modelId'] as String? ?? '',
+      hardwareDeviceId: json['hardwareDeviceId'] as String? ?? '',
+      reportedStamp: json['reportedStamp'] as int?,
+      processedStamp: json['processedStamp'] as int?,
+      data: json['data'] as Object,
+      deviceName: json['deviceName'] as String? ?? '',
+      modelName: json['modelName'] as String? ?? '',
+      deviceDescription: json['deviceDescription'] as String? ?? '',
+      modelDescription: json['modelDescription'] as String? ?? '',
+      deviceIcon: json['deviceIcon'] as String? ?? '',
+      modelIcon: json['modelIcon'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+      controls: (json['controls'] as List<dynamic>?)
+              ?.map((e) => DeviceControl.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      alarms: (json['alarms'] as List<dynamic>?)
+              ?.map((e) => EvaluatedAlarm.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      displays: (json['displays'] as List<dynamic>?)
+              ?.map((e) => EvaluatedDisplay.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      events: (json['events'] as List<dynamic>?)
+              ?.map((e) => EvaluatedEvent.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      triggers: (json['triggers'] as List<dynamic>?)
+              ?.map((e) => EvaluatedTrigger.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      evaluationErrors: (json['evaluationErrors'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      series: (json['series'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      trends: (json['trends'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      geolocation: json['geolocation'] == null
+          ? null
+          : GeoLocation.fromJson(json['geolocation'] as Map<String, dynamic>),
+      geocoded: json['geocoded'],
+      premise: json['premise'] as String? ?? '',
+      facility: json['facility'] as String? ?? '',
+      floor: json['floor'] as String? ?? '',
+      asset: json['asset'] as String? ?? '',
+      premiseId: json['premiseId'] as String? ?? '',
+      facilityId: json['facilityId'] as String? ?? '',
+      floorId: json['floorId'] as String? ?? '',
+      assetId: json['assetId'] as String? ?? '',
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$DeviceDataToJson(DeviceData instance) {
+  final val = <String, dynamic>{
+    'domainKey': instance.domainKey,
+    'deviceId': instance.deviceId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('subType', instance.subType);
+  val['modelId'] = instance.modelId;
+  val['hardwareDeviceId'] = instance.hardwareDeviceId;
+  writeNotNull('reportedStamp', instance.reportedStamp);
+  writeNotNull('processedStamp', instance.processedStamp);
+  val['data'] = instance.data;
+  writeNotNull('deviceName', instance.deviceName);
+  writeNotNull('modelName', instance.modelName);
+  writeNotNull('deviceDescription', instance.deviceDescription);
+  writeNotNull('modelDescription', instance.modelDescription);
+  writeNotNull('deviceIcon', instance.deviceIcon);
+  writeNotNull('modelIcon', instance.modelIcon);
+  writeNotNull('rtype', instance.rtype);
+  writeNotNull('name', instance.name);
+  writeNotNull('id', instance.id);
+  val['createdStamp'] = instance.createdStamp;
+  writeNotNull('createdBy', instance.createdBy);
+  writeNotNull('updatedBy', instance.updatedBy);
+  val['updatedStamp'] = instance.updatedStamp;
+  writeNotNull('controls', instance.controls?.map((e) => e.toJson()).toList());
+  val['alarms'] = instance.alarms.map((e) => e.toJson()).toList();
+  val['displays'] = instance.displays.map((e) => e.toJson()).toList();
+  val['events'] = instance.events.map((e) => e.toJson()).toList();
+  val['triggers'] = instance.triggers.map((e) => e.toJson()).toList();
+  writeNotNull('evaluationErrors', instance.evaluationErrors);
+  writeNotNull('series', instance.series);
+  writeNotNull('trends', instance.trends);
+  writeNotNull('geolocation', instance.geolocation?.toJson());
+  writeNotNull('geocoded', instance.geocoded);
+  writeNotNull('premise', instance.premise);
+  writeNotNull('facility', instance.facility);
+  writeNotNull('floor', instance.floor);
+  writeNotNull('asset', instance.asset);
+  writeNotNull('premiseId', instance.premiseId);
+  writeNotNull('facilityId', instance.facilityId);
+  writeNotNull('floorId', instance.floorId);
+  writeNotNull('assetId', instance.assetId);
+  writeNotNull('roles', instance.roles);
+  return val;
+}
+
+DeviceDataArray _$DeviceDataArrayFromJson(Map<String, dynamic> json) =>
+    DeviceDataArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => DeviceData.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DeviceDataArrayToJson(DeviceDataArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+DeviceDataArrayRes _$DeviceDataArrayResFromJson(Map<String, dynamic> json) =>
+    DeviceDataArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => DeviceData.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DeviceDataArrayResToJson(DeviceDataArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+DashboardMenu _$DashboardMenuFromJson(Map<String, dynamic> json) =>
+    DashboardMenu(
+      displayName: json['displayName'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      linkId: json['linkId'] as String? ?? '',
+      linkType: dashboardMenuLinkTypeFromJson(json['linkType']),
+    );
+
+Map<String, dynamic> _$DashboardMenuToJson(DashboardMenu instance) {
+  final val = <String, dynamic>{
+    'displayName': instance.displayName,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('icon', instance.icon);
+  writeNotNull('roles', instance.roles);
+  val['linkId'] = instance.linkId;
+  writeNotNull('linkType', dashboardMenuLinkTypeToJson(instance.linkType));
+  return val;
+}
+
+DashboardMenuGroupInfo _$DashboardMenuGroupInfoFromJson(
+        Map<String, dynamic> json) =>
+    DashboardMenuGroupInfo(
+      name: json['name'] as String? ?? '',
+      displayName: json['displayName'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      order: json['order'] as int?,
+      webSupported: json['webSupported'] as bool? ?? true,
+      tabletSupported: json['tabletSupported'] as bool? ?? true,
+      mobileSupported: json['mobileSupported'] as bool? ?? true,
+      menus: (json['menus'] as List<dynamic>?)
+              ?.map((e) => DashboardMenu.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$DashboardMenuGroupInfoToJson(
+    DashboardMenuGroupInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+    'displayName': instance.displayName,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('icon', instance.icon);
+  writeNotNull('order', instance.order);
+  val['webSupported'] = instance.webSupported;
+  val['tabletSupported'] = instance.tabletSupported;
+  val['mobileSupported'] = instance.mobileSupported;
+  val['menus'] = instance.menus.map((e) => e.toJson()).toList();
+  writeNotNull('tags', instance.tags);
+  return val;
+}
+
+DashboardMenuGroup _$DashboardMenuGroupFromJson(Map<String, dynamic> json) =>
+    DashboardMenuGroup(
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      displayName: json['displayName'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      order: json['order'] as int?,
+      webSupported: json['webSupported'] as bool? ?? true,
+      tabletSupported: json['tabletSupported'] as bool? ?? true,
+      mobileSupported: json['mobileSupported'] as bool? ?? true,
+      menus: (json['menus'] as List<dynamic>?)
+              ?.map((e) => DashboardMenu.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DashboardMenuGroupToJson(DashboardMenuGroup instance) {
+  final val = <String, dynamic>{
+    'domainKey': instance.domainKey,
+    'id': instance.id,
+    'name': instance.name,
+    'rtype': instance.rtype,
+    'createdStamp': instance.createdStamp,
+    'createdBy': instance.createdBy,
+    'updatedBy': instance.updatedBy,
+    'updatedStamp': instance.updatedStamp,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('tags', instance.tags);
+  val['displayName'] = instance.displayName;
+  writeNotNull('description', instance.description);
+  writeNotNull('icon', instance.icon);
+  writeNotNull('order', instance.order);
+  val['webSupported'] = instance.webSupported;
+  val['tabletSupported'] = instance.tabletSupported;
+  val['mobileSupported'] = instance.mobileSupported;
+  val['menus'] = instance.menus.map((e) => e.toJson()).toList();
+  return val;
+}
+
+DashboardMenuGroupEntity _$DashboardMenuGroupEntityFromJson(
+        Map<String, dynamic> json) =>
+    DashboardMenuGroupEntity(
+      entity: json['entity'] == null
+          ? null
+          : DashboardMenuGroup.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DashboardMenuGroupEntityToJson(
+    DashboardMenuGroupEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+DashboardMenuGroupEntityRes _$DashboardMenuGroupEntityResFromJson(
+        Map<String, dynamic> json) =>
+    DashboardMenuGroupEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : DashboardMenuGroup.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DashboardMenuGroupEntityResToJson(
+    DashboardMenuGroupEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+DashboardMenuGroupArray _$DashboardMenuGroupArrayFromJson(
+        Map<String, dynamic> json) =>
+    DashboardMenuGroupArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map(
+                  (e) => DashboardMenuGroup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DashboardMenuGroupArrayToJson(
+    DashboardMenuGroupArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+DashboardMenuGroupArrayRes _$DashboardMenuGroupArrayResFromJson(
+        Map<String, dynamic> json) =>
+    DashboardMenuGroupArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map(
+                  (e) => DashboardMenuGroup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DashboardMenuGroupArrayResToJson(
+    DashboardMenuGroupArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+ScreenChild _$ScreenChildFromJson(Map<String, dynamic> json) => ScreenChild(
+      deviceId: json['deviceId'] as String? ?? '',
+      viewId: json['viewId'] as String? ?? '',
+      viewType: screenChildViewTypeFromJson(json['viewType']),
+      width: json['width'] as int?,
+      height: json['height'] as int?,
+    );
+
+Map<String, dynamic> _$ScreenChildToJson(ScreenChild instance) {
+  final val = <String, dynamic>{
+    'deviceId': instance.deviceId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('viewId', instance.viewId);
+  writeNotNull('viewType', screenChildViewTypeToJson(instance.viewType));
+  writeNotNull('width', instance.width);
+  writeNotNull('height', instance.height);
+  return val;
+}
+
+ScreenRow _$ScreenRowFromJson(Map<String, dynamic> json) => ScreenRow(
+      children: (json['children'] as List<dynamic>?)
+              ?.map((e) => ScreenChild.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ScreenRowToJson(ScreenRow instance) => <String, dynamic>{
+      'children': instance.children.map((e) => e.toJson()).toList(),
+    };
+
+DashboardScreenInfo _$DashboardScreenInfoFromJson(Map<String, dynamic> json) =>
+    DashboardScreenInfo(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      title: json['title'] as String? ?? '',
+      banner: json['banner'] as String? ?? '',
+      webSupported: json['webSupported'] as bool? ?? true,
+      tabletSupported: json['tabletSupported'] as bool? ?? true,
+      mobileSupported: json['mobileSupported'] as bool? ?? true,
+      rows: (json['rows'] as List<dynamic>?)
+              ?.map((e) => ScreenRow.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$DashboardScreenInfoToJson(DashboardScreenInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  val['title'] = instance.title;
+  writeNotNull('banner', instance.banner);
+  val['webSupported'] = instance.webSupported;
+  val['tabletSupported'] = instance.tabletSupported;
+  val['mobileSupported'] = instance.mobileSupported;
+  val['rows'] = instance.rows.map((e) => e.toJson()).toList();
+  writeNotNull('tags', instance.tags);
+  return val;
+}
+
+DashboardScreen _$DashboardScreenFromJson(Map<String, dynamic> json) =>
+    DashboardScreen(
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      description: json['description'] as String? ?? '',
+      title: json['title'] as String? ?? '',
+      banner: json['banner'] as String? ?? '',
+      webSupported: json['webSupported'] as bool? ?? true,
+      tabletSupported: json['tabletSupported'] as bool? ?? true,
+      mobileSupported: json['mobileSupported'] as bool? ?? true,
+      rows: (json['rows'] as List<dynamic>?)
+              ?.map((e) => ScreenRow.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DashboardScreenToJson(DashboardScreen instance) {
+  final val = <String, dynamic>{
+    'domainKey': instance.domainKey,
+    'id': instance.id,
+    'name': instance.name,
+    'rtype': instance.rtype,
+    'createdStamp': instance.createdStamp,
+    'createdBy': instance.createdBy,
+    'updatedBy': instance.updatedBy,
+    'updatedStamp': instance.updatedStamp,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('tags', instance.tags);
+  writeNotNull('description', instance.description);
+  val['title'] = instance.title;
+  writeNotNull('banner', instance.banner);
+  val['webSupported'] = instance.webSupported;
+  val['tabletSupported'] = instance.tabletSupported;
+  val['mobileSupported'] = instance.mobileSupported;
+  val['rows'] = instance.rows.map((e) => e.toJson()).toList();
+  return val;
+}
+
+DashboardScreenEntity _$DashboardScreenEntityFromJson(
+        Map<String, dynamic> json) =>
+    DashboardScreenEntity(
+      entity: json['entity'] == null
+          ? null
+          : DashboardScreen.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DashboardScreenEntityToJson(
+    DashboardScreenEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+DashboardScreenEntityRes _$DashboardScreenEntityResFromJson(
+        Map<String, dynamic> json) =>
+    DashboardScreenEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : DashboardScreen.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DashboardScreenEntityResToJson(
+    DashboardScreenEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+DashboardScreenArray _$DashboardScreenArrayFromJson(
+        Map<String, dynamic> json) =>
+    DashboardScreenArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => DashboardScreen.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DashboardScreenArrayToJson(
+    DashboardScreenArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+DashboardScreenArrayRes _$DashboardScreenArrayResFromJson(
+        Map<String, dynamic> json) =>
+    DashboardScreenArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => DashboardScreen.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DashboardScreenArrayResToJson(
+    DashboardScreenArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+DeviceDataBase _$DeviceDataBaseFromJson(Map<String, dynamic> json) =>
+    DeviceDataBase(
+      data: json['data'] == null
+          ? null
+          : DeviceData.fromJson(json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DeviceDataBaseToJson(DeviceDataBase instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('data', instance.data?.toJson());
+  return val;
+}
+
+DeviceDataEntityRes _$DeviceDataEntityResFromJson(Map<String, dynamic> json) =>
+    DeviceDataEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      data: json['data'] == null
+          ? null
+          : DeviceData.fromJson(json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DeviceDataEntityResToJson(DeviceDataEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('data', instance.data?.toJson());
+  return val;
+}
+
+EventRegistrationInfo _$EventRegistrationInfoFromJson(
+        Map<String, dynamic> json) =>
+    EventRegistrationInfo(
+      eventId: json['eventId'] as String? ?? '',
+      notification: json['notification'] as bool?,
+      email: json['email'] as bool?,
+      sms: json['sms'] as bool?,
+      voice: json['voice'] as bool?,
+      fcm: json['fcm'] as bool?,
+      emailId: json['emailId'] as String? ?? '',
+      phoneNumber: json['phoneNumber'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      targetDeviceIds: (json['targetDeviceIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$EventRegistrationInfoToJson(
+    EventRegistrationInfo instance) {
+  final val = <String, dynamic>{
+    'eventId': instance.eventId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('notification', instance.notification);
+  writeNotNull('email', instance.email);
+  writeNotNull('sms', instance.sms);
+  writeNotNull('voice', instance.voice);
+  writeNotNull('fcm', instance.fcm);
+  writeNotNull('emailId', instance.emailId);
+  writeNotNull('phoneNumber', instance.phoneNumber);
+  writeNotNull('name', instance.name);
+  writeNotNull('targetDeviceIds', instance.targetDeviceIds);
+  writeNotNull('tags', instance.tags);
+  return val;
+}
+
+EventRegistrationBase _$EventRegistrationBaseFromJson(
+        Map<String, dynamic> json) =>
+    EventRegistrationBase(
+      userId: json['userId'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$EventRegistrationBaseToJson(
+        EventRegistrationBase instance) =>
+    <String, dynamic>{
+      'userId': instance.userId,
+    };
+
+EventRegistration _$EventRegistrationFromJson(Map<String, dynamic> json) =>
+    EventRegistration(
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      eventId: json['eventId'] as String? ?? '',
+      notification: json['notification'] as bool?,
+      email: json['email'] as bool?,
+      sms: json['sms'] as bool?,
+      voice: json['voice'] as bool?,
+      fcm: json['fcm'] as bool?,
+      emailId: json['emailId'] as String? ?? '',
+      phoneNumber: json['phoneNumber'] as String? ?? '',
+      targetDeviceIds: (json['targetDeviceIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      userId: json['userId'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$EventRegistrationToJson(EventRegistration instance) {
+  final val = <String, dynamic>{
+    'domainKey': instance.domainKey,
+    'id': instance.id,
+    'name': instance.name,
+    'rtype': instance.rtype,
+    'createdStamp': instance.createdStamp,
+    'createdBy': instance.createdBy,
+    'updatedBy': instance.updatedBy,
+    'updatedStamp': instance.updatedStamp,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('tags', instance.tags);
+  val['eventId'] = instance.eventId;
+  writeNotNull('notification', instance.notification);
+  writeNotNull('email', instance.email);
+  writeNotNull('sms', instance.sms);
+  writeNotNull('voice', instance.voice);
+  writeNotNull('fcm', instance.fcm);
+  writeNotNull('emailId', instance.emailId);
+  writeNotNull('phoneNumber', instance.phoneNumber);
+  writeNotNull('targetDeviceIds', instance.targetDeviceIds);
+  val['userId'] = instance.userId;
+  return val;
+}
+
+EventRegistrationEntity _$EventRegistrationEntityFromJson(
+        Map<String, dynamic> json) =>
+    EventRegistrationEntity(
+      entity: json['entity'] == null
+          ? null
+          : EventRegistration.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$EventRegistrationEntityToJson(
+    EventRegistrationEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+EventRegistrationEntityRes _$EventRegistrationEntityResFromJson(
+        Map<String, dynamic> json) =>
+    EventRegistrationEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : EventRegistration.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$EventRegistrationEntityResToJson(
+    EventRegistrationEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+EventRegistrationArray _$EventRegistrationArrayFromJson(
+        Map<String, dynamic> json) =>
+    EventRegistrationArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map(
+                  (e) => EventRegistration.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$EventRegistrationArrayToJson(
+    EventRegistrationArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+EventRegistrationArrayRes _$EventRegistrationArrayResFromJson(
+        Map<String, dynamic> json) =>
+    EventRegistrationArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map(
+                  (e) => EventRegistration.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$EventRegistrationArrayResToJson(
+    EventRegistrationArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+TriggeredEvent _$TriggeredEventFromJson(Map<String, dynamic> json) =>
+    TriggeredEvent(
+      eventId: json['eventId'] as String? ?? '',
+      modelId: json['modelId'] as String? ?? '',
+      deviceId: json['deviceId'] as String? ?? '',
+      hardwareDeviceId: json['hardwareDeviceId'] as String? ?? '',
+      notificationTitle: json['notificationTitle'] as String? ?? '',
+      notificationContent: json['notificationContent'] as String? ?? '',
+      emailSubject: json['emailSubject'] as String? ?? '',
+      emailContent: json['emailContent'] as String? ?? '',
+      smsMessage: json['smsMessage'] as String? ?? '',
+      fcmTitle: json['fcmTitle'] as String? ?? '',
+      fcmContent: json['fcmContent'] as String? ?? '',
+      voiceMessage: json['voiceMessage'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      userId: json['userId'] as String? ?? '',
+      eventType: triggeredEventEventTypeFromJson(json['eventType']),
+      deliveryStatus:
+          triggeredEventDeliveryStatusFromJson(json['deliveryStatus']),
+      deliveryErrors: (json['deliveryErrors'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      deviceIcon: json['deviceIcon'] as String? ?? '',
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$TriggeredEventToJson(TriggeredEvent instance) {
+  final val = <String, dynamic>{
+    'eventId': instance.eventId,
+    'modelId': instance.modelId,
+    'deviceId': instance.deviceId,
+    'hardwareDeviceId': instance.hardwareDeviceId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('notificationTitle', instance.notificationTitle);
+  writeNotNull('notificationContent', instance.notificationContent);
+  writeNotNull('emailSubject', instance.emailSubject);
+  writeNotNull('emailContent', instance.emailContent);
+  writeNotNull('smsMessage', instance.smsMessage);
+  writeNotNull('fcmTitle', instance.fcmTitle);
+  writeNotNull('fcmContent', instance.fcmContent);
+  writeNotNull('voiceMessage', instance.voiceMessage);
+  writeNotNull('icon', instance.icon);
+  val['userId'] = instance.userId;
+  writeNotNull('eventType', triggeredEventEventTypeToJson(instance.eventType));
+  writeNotNull('deliveryStatus',
+      triggeredEventDeliveryStatusToJson(instance.deliveryStatus));
+  writeNotNull('deliveryErrors', instance.deliveryErrors);
+  writeNotNull('deviceIcon', instance.deviceIcon);
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['name'] = instance.name;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  writeNotNull('tags', instance.tags);
+  return val;
+}
+
+TriggeredEventArray _$TriggeredEventArrayFromJson(Map<String, dynamic> json) =>
+    TriggeredEventArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => TriggeredEvent.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$TriggeredEventArrayToJson(TriggeredEventArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+TriggeredEventArrayRes _$TriggeredEventArrayResFromJson(
+        Map<String, dynamic> json) =>
+    TriggeredEventArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => TriggeredEvent.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$TriggeredEventArrayResToJson(
+    TriggeredEventArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+TriggeredControlArray _$TriggeredControlArrayFromJson(
+        Map<String, dynamic> json) =>
+    TriggeredControlArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => TriggeredControl.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$TriggeredControlArrayToJson(
+    TriggeredControlArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+TriggeredControlArrayRes _$TriggeredControlArrayResFromJson(
+        Map<String, dynamic> json) =>
+    TriggeredControlArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => TriggeredControl.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$TriggeredControlArrayResToJson(
+    TriggeredControlArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+NoCodeInfo _$NoCodeInfoFromJson(Map<String, dynamic> json) => NoCodeInfo(
+      orgId: json['orgId'] as String? ?? '',
+      stripeCustomerId: json['stripeCustomerId'] as String? ?? '',
+      production: json['production'] as bool,
+    );
+
+Map<String, dynamic> _$NoCodeInfoToJson(NoCodeInfo instance) =>
+    <String, dynamic>{
+      'orgId': instance.orgId,
+      'stripeCustomerId': instance.stripeCustomerId,
+      'production': instance.production,
+    };
+
+TwinInfo _$TwinInfoFromJson(Map<String, dynamic> json) => TwinInfo(
+      twinDomainKey: json['twinDomainKey'] as String? ?? '',
+      twinApiKey: json['twinApiKey'] as String? ?? '',
+      twinAccountId: json['twinAccountId'] as String? ?? '',
+      twinPlanId: json['twinPlanId'] as String? ?? '',
+      stripeUserSubscriptionId:
+          json['stripeUserSubscriptionId'] as String? ?? '',
+      stripeDeviceSubscriptionId:
+          json['stripeDeviceSubscriptionId'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$TwinInfoToJson(TwinInfo instance) {
+  final val = <String, dynamic>{
+    'twinDomainKey': instance.twinDomainKey,
+    'twinApiKey': instance.twinApiKey,
+    'twinAccountId': instance.twinAccountId,
+    'twinPlanId': instance.twinPlanId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('stripeUserSubscriptionId', instance.stripeUserSubscriptionId);
+  writeNotNull(
+      'stripeDeviceSubscriptionId', instance.stripeDeviceSubscriptionId);
+  return val;
+}
+
+TwinInfoRes _$TwinInfoResFromJson(Map<String, dynamic> json) => TwinInfoRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      twinDomainKey: json['twinDomainKey'] as String? ?? '',
+      twinApiKey: json['twinApiKey'] as String? ?? '',
+      twinAccountId: json['twinAccountId'] as String? ?? '',
+      twinPlanId: json['twinPlanId'] as String? ?? '',
+      stripeUserSubscriptionId:
+          json['stripeUserSubscriptionId'] as String? ?? '',
+      stripeDeviceSubscriptionId:
+          json['stripeDeviceSubscriptionId'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$TwinInfoResToJson(TwinInfoRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['twinDomainKey'] = instance.twinDomainKey;
+  val['twinApiKey'] = instance.twinApiKey;
+  val['twinAccountId'] = instance.twinAccountId;
+  val['twinPlanId'] = instance.twinPlanId;
+  writeNotNull('stripeUserSubscriptionId', instance.stripeUserSubscriptionId);
+  writeNotNull(
+      'stripeDeviceSubscriptionId', instance.stripeDeviceSubscriptionId);
+  return val;
+}
+
+DisplayWidgetInfo _$DisplayWidgetInfoFromJson(Map<String, dynamic> json) =>
+    DisplayWidgetInfo(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      label: json['label'] as String? ?? '',
+      modelId: json['modelId'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      tooltip: json['tooltip'] as String? ?? '',
+      widgetType: json['widgetType'] as String? ?? '',
+      attributes: json['attributes'] as Object,
+    );
+
+Map<String, dynamic> _$DisplayWidgetInfoToJson(DisplayWidgetInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('label', instance.label);
+  val['modelId'] = instance.modelId;
+  writeNotNull('tags', instance.tags);
+  writeNotNull('tooltip', instance.tooltip);
+  val['widgetType'] = instance.widgetType;
+  val['attributes'] = instance.attributes;
+  return val;
+}
+
+DisplayWidget _$DisplayWidgetFromJson(Map<String, dynamic> json) =>
+    DisplayWidget(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      label: json['label'] as String? ?? '',
+      modelId: json['modelId'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      tooltip: json['tooltip'] as String? ?? '',
+      widgetType: json['widgetType'] as String? ?? '',
+      attributes: json['attributes'] as Object,
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$DisplayWidgetToJson(DisplayWidget instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('label', instance.label);
+  val['modelId'] = instance.modelId;
+  writeNotNull('tags', instance.tags);
+  writeNotNull('tooltip', instance.tooltip);
+  val['widgetType'] = instance.widgetType;
+  val['attributes'] = instance.attributes;
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+DisplayWidgetEntity _$DisplayWidgetEntityFromJson(Map<String, dynamic> json) =>
+    DisplayWidgetEntity(
+      entity: json['entity'] == null
+          ? null
+          : DisplayWidget.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DisplayWidgetEntityToJson(DisplayWidgetEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+DisplayWidgetEntityRes _$DisplayWidgetEntityResFromJson(
+        Map<String, dynamic> json) =>
+    DisplayWidgetEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : DisplayWidget.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DisplayWidgetEntityResToJson(
+    DisplayWidgetEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+DisplayWidgetArray _$DisplayWidgetArrayFromJson(Map<String, dynamic> json) =>
+    DisplayWidgetArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => DisplayWidget.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DisplayWidgetArrayToJson(DisplayWidgetArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+DisplayWidgetArrayRes _$DisplayWidgetArrayResFromJson(
+        Map<String, dynamic> json) =>
+    DisplayWidgetArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => DisplayWidget.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DisplayWidgetArrayResToJson(
+    DisplayWidgetArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+ScreenWidgetInfo _$ScreenWidgetInfoFromJson(Map<String, dynamic> json) =>
+    ScreenWidgetInfo(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      label: json['label'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      tooltip: json['tooltip'] as String? ?? '',
+      widgetType: json['widgetType'] as String? ?? '',
+      attributes: json['attributes'] as Object,
+      target: screenWidgetInfoTargetNullableFromJson(json['target']),
+    );
+
+Map<String, dynamic> _$ScreenWidgetInfoToJson(ScreenWidgetInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('label', instance.label);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('tooltip', instance.tooltip);
+  val['widgetType'] = instance.widgetType;
+  val['attributes'] = instance.attributes;
+  writeNotNull('target', screenWidgetInfoTargetNullableToJson(instance.target));
+  return val;
+}
+
+ScreenWidget _$ScreenWidgetFromJson(Map<String, dynamic> json) => ScreenWidget(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      label: json['label'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      tooltip: json['tooltip'] as String? ?? '',
+      widgetType: json['widgetType'] as String? ?? '',
+      attributes: json['attributes'] as Object,
+      target: screenWidgetTargetNullableFromJson(json['target']),
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$ScreenWidgetToJson(ScreenWidget instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('label', instance.label);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('tooltip', instance.tooltip);
+  val['widgetType'] = instance.widgetType;
+  val['attributes'] = instance.attributes;
+  writeNotNull('target', screenWidgetTargetNullableToJson(instance.target));
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+ScreenWidgetEntity _$ScreenWidgetEntityFromJson(Map<String, dynamic> json) =>
+    ScreenWidgetEntity(
+      entity: json['entity'] == null
+          ? null
+          : ScreenWidget.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ScreenWidgetEntityToJson(ScreenWidgetEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+ScreenWidgetEntityRes _$ScreenWidgetEntityResFromJson(
+        Map<String, dynamic> json) =>
+    ScreenWidgetEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : ScreenWidget.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ScreenWidgetEntityResToJson(
+    ScreenWidgetEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+ScreenWidgetArray _$ScreenWidgetArrayFromJson(Map<String, dynamic> json) =>
+    ScreenWidgetArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => ScreenWidget.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ScreenWidgetArrayToJson(ScreenWidgetArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+ScreenWidgetArrayRes _$ScreenWidgetArrayResFromJson(
+        Map<String, dynamic> json) =>
+    ScreenWidgetArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => ScreenWidget.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ScreenWidgetArrayResToJson(
+    ScreenWidgetArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+GeoLocation _$GeoLocationFromJson(Map<String, dynamic> json) => GeoLocation(
+      type: json['type'] as String? ?? '',
+      coordinates: (json['coordinates'] as List<dynamic>?)
+              ?.map((e) => (e as num).toDouble())
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$GeoLocationToJson(GeoLocation instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('type', instance.type);
+  val['coordinates'] = instance.coordinates;
+  return val;
+}
+
+GeoLine _$GeoLineFromJson(Map<String, dynamic> json) => GeoLine(
+      begin: GeoLocation.fromJson(json['begin'] as Map<String, dynamic>),
+      end: GeoLocation.fromJson(json['end'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$GeoLineToJson(GeoLine instance) => <String, dynamic>{
+      'begin': instance.begin.toJson(),
+      'end': instance.end.toJson(),
+    };
+
+GeoEnvelope _$GeoEnvelopeFromJson(Map<String, dynamic> json) => GeoEnvelope(
+      leftTop: GeoLocation.fromJson(json['leftTop'] as Map<String, dynamic>),
+      rightBottom:
+          GeoLocation.fromJson(json['rightBottom'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$GeoEnvelopeToJson(GeoEnvelope instance) =>
+    <String, dynamic>{
+      'leftTop': instance.leftTop.toJson(),
+      'rightBottom': instance.rightBottom.toJson(),
+    };
+
+GeoPolygon _$GeoPolygonFromJson(Map<String, dynamic> json) => GeoPolygon(
+      points: (json['points'] as List<dynamic>?)
+              ?.map((e) => GeoLocation.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$GeoPolygonToJson(GeoPolygon instance) =>
+    <String, dynamic>{
+      'points': instance.points.map((e) => e.toJson()).toList(),
+    };
+
+GeoMultiPoint _$GeoMultiPointFromJson(Map<String, dynamic> json) =>
+    GeoMultiPoint(
+      first: GeoLocation.fromJson(json['first'] as Map<String, dynamic>),
+      second: GeoLocation.fromJson(json['second'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$GeoMultiPointToJson(GeoMultiPoint instance) =>
+    <String, dynamic>{
+      'first': instance.first.toJson(),
+      'second': instance.second.toJson(),
+    };
+
+GeoMultiLine _$GeoMultiLineFromJson(Map<String, dynamic> json) => GeoMultiLine(
+      points: (json['points'] as List<dynamic>?)
+              ?.map((e) => GeoLine.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$GeoMultiLineToJson(GeoMultiLine instance) =>
+    <String, dynamic>{
+      'points': instance.points.map((e) => e.toJson()).toList(),
+    };
+
+GeoMultiPolygon _$GeoMultiPolygonFromJson(Map<String, dynamic> json) =>
+    GeoMultiPolygon(
+      points: (json['points'] as List<dynamic>?)
+              ?.map((e) => GeoPolygon.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$GeoMultiPolygonToJson(GeoMultiPolygon instance) =>
+    <String, dynamic>{
+      'points': instance.points.map((e) => e.toJson()).toList(),
+    };
+
+GeoCircle _$GeoCircleFromJson(Map<String, dynamic> json) => GeoCircle(
+      center: GeoLocation.fromJson(json['center'] as Map<String, dynamic>),
+      radius: json['radius'] as int,
+    );
+
+Map<String, dynamic> _$GeoCircleToJson(GeoCircle instance) => <String, dynamic>{
+      'center': instance.center.toJson(),
+      'radius': instance.radius,
+    };
+
+PreprocessorInfo _$PreprocessorInfoFromJson(Map<String, dynamic> json) =>
+    PreprocessorInfo(
+      name: json['name'] as String? ?? '',
+      className: json['className'] as String? ?? '',
+      code: json['code'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$PreprocessorInfoToJson(PreprocessorInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+    'className': instance.className,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('code', instance.code);
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  return val;
+}
+
+Preprocessor _$PreprocessorFromJson(Map<String, dynamic> json) => Preprocessor(
+      name: json['name'] as String? ?? '',
+      className: json['className'] as String? ?? '',
+      code: json['code'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$PreprocessorToJson(Preprocessor instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+    'className': instance.className,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('code', instance.code);
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+PreprocessorEntity _$PreprocessorEntityFromJson(Map<String, dynamic> json) =>
+    PreprocessorEntity(
+      entity: json['entity'] == null
+          ? null
+          : Preprocessor.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PreprocessorEntityToJson(PreprocessorEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+PreprocessorEntityRes _$PreprocessorEntityResFromJson(
+        Map<String, dynamic> json) =>
+    PreprocessorEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : Preprocessor.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PreprocessorEntityResToJson(
+    PreprocessorEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+PreprocessorArray _$PreprocessorArrayFromJson(Map<String, dynamic> json) =>
+    PreprocessorArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Preprocessor.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$PreprocessorArrayToJson(PreprocessorArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+PreprocessorArrayRes _$PreprocessorArrayResFromJson(
+        Map<String, dynamic> json) =>
+    PreprocessorArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Preprocessor.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$PreprocessorArrayResToJson(
+    PreprocessorArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+FilterCondition _$FilterConditionFromJson(Map<String, dynamic> json) =>
+    FilterCondition(
+      field: json['field'] as String? ?? '',
+      condition: filterConditionConditionFromJson(json['condition']),
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$FilterConditionToJson(FilterCondition instance) {
+  final val = <String, dynamic>{
+    'field': instance.field,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('condition', filterConditionConditionToJson(instance.condition));
+  val['values'] = instance.values;
+  return val;
+}
+
+FilterMatchGroup _$FilterMatchGroupFromJson(Map<String, dynamic> json) =>
+    FilterMatchGroup(
+      matchType: filterMatchGroupMatchTypeFromJson(json['matchType']),
+      conditionIds: (json['conditionIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$FilterMatchGroupToJson(FilterMatchGroup instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'matchType', filterMatchGroupMatchTypeToJson(instance.matchType));
+  writeNotNull('conditionIds', instance.conditionIds);
+  return val;
+}
+
+DataFilterInfo _$DataFilterInfoFromJson(Map<String, dynamic> json) =>
+    DataFilterInfo(
+      modelId: json['modelId'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      label: json['label'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      matchGroups: (json['matchGroups'] as List<dynamic>?)
+              ?.map((e) => FilterMatchGroup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DataFilterInfoToJson(DataFilterInfo instance) {
+  final val = <String, dynamic>{
+    'modelId': instance.modelId,
+    'name': instance.name,
+    'label': instance.label,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('icon', instance.icon);
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  val['matchGroups'] = instance.matchGroups.map((e) => e.toJson()).toList();
+  return val;
+}
+
+DataFilter _$DataFilterFromJson(Map<String, dynamic> json) => DataFilter(
+      modelId: json['modelId'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      label: json['label'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      matchGroups: (json['matchGroups'] as List<dynamic>?)
+              ?.map((e) => FilterMatchGroup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$DataFilterToJson(DataFilter instance) {
+  final val = <String, dynamic>{
+    'modelId': instance.modelId,
+    'name': instance.name,
+    'label': instance.label,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('icon', instance.icon);
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  val['matchGroups'] = instance.matchGroups.map((e) => e.toJson()).toList();
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+DataFilterEntity _$DataFilterEntityFromJson(Map<String, dynamic> json) =>
+    DataFilterEntity(
+      entity: json['entity'] == null
+          ? null
+          : DataFilter.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DataFilterEntityToJson(DataFilterEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+DataFilterEntityRes _$DataFilterEntityResFromJson(Map<String, dynamic> json) =>
+    DataFilterEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : DataFilter.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DataFilterEntityResToJson(DataFilterEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+DataFilterArray _$DataFilterArrayFromJson(Map<String, dynamic> json) =>
+    DataFilterArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => DataFilter.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DataFilterArrayToJson(DataFilterArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+DataFilterArrayRes _$DataFilterArrayResFromJson(Map<String, dynamic> json) =>
+    DataFilterArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => DataFilter.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$DataFilterArrayResToJson(DataFilterArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+GeoFenceInfo _$GeoFenceInfoFromJson(Map<String, dynamic> json) => GeoFenceInfo(
+      name: json['name'] as String? ?? '',
+      label: json['label'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      fenceType: geoFenceInfoFenceTypeFromJson(json['fenceType']),
+      point: json['point'] == null
+          ? null
+          : GeoLocation.fromJson(json['point'] as Map<String, dynamic>),
+      line: json['line'] == null
+          ? null
+          : GeoLine.fromJson(json['line'] as Map<String, dynamic>),
+      envelope: json['envelope'] == null
+          ? null
+          : GeoEnvelope.fromJson(json['envelope'] as Map<String, dynamic>),
+      polygon: json['polygon'] == null
+          ? null
+          : GeoPolygon.fromJson(json['polygon'] as Map<String, dynamic>),
+      multipoint: json['multipoint'] == null
+          ? null
+          : GeoMultiPoint.fromJson(json['multipoint'] as Map<String, dynamic>),
+      multiline: json['multiline'] == null
+          ? null
+          : GeoMultiLine.fromJson(json['multiline'] as Map<String, dynamic>),
+      multipolygon: json['multipolygon'] == null
+          ? null
+          : GeoMultiPolygon.fromJson(
+              json['multipolygon'] as Map<String, dynamic>),
+      circle: json['circle'] == null
+          ? null
+          : GeoCircle.fromJson(json['circle'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$GeoFenceInfoToJson(GeoFenceInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+    'label': instance.label,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('fenceType', geoFenceInfoFenceTypeToJson(instance.fenceType));
+  writeNotNull('point', instance.point?.toJson());
+  writeNotNull('line', instance.line?.toJson());
+  writeNotNull('envelope', instance.envelope?.toJson());
+  writeNotNull('polygon', instance.polygon?.toJson());
+  writeNotNull('multipoint', instance.multipoint?.toJson());
+  writeNotNull('multiline', instance.multiline?.toJson());
+  writeNotNull('multipolygon', instance.multipolygon?.toJson());
+  writeNotNull('circle', instance.circle?.toJson());
+  return val;
+}
+
+GeoFenceBase _$GeoFenceBaseFromJson(Map<String, dynamic> json) => GeoFenceBase(
+      fence: json['fence'] as Object,
+    );
+
+Map<String, dynamic> _$GeoFenceBaseToJson(GeoFenceBase instance) =>
+    <String, dynamic>{
+      'fence': instance.fence,
+    };
+
+GeoFence _$GeoFenceFromJson(Map<String, dynamic> json) => GeoFence(
+      name: json['name'] as String? ?? '',
+      label: json['label'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      fenceType: geoFenceFenceTypeFromJson(json['fenceType']),
+      point: json['point'] == null
+          ? null
+          : GeoLocation.fromJson(json['point'] as Map<String, dynamic>),
+      line: json['line'] == null
+          ? null
+          : GeoLine.fromJson(json['line'] as Map<String, dynamic>),
+      envelope: json['envelope'] == null
+          ? null
+          : GeoEnvelope.fromJson(json['envelope'] as Map<String, dynamic>),
+      polygon: json['polygon'] == null
+          ? null
+          : GeoPolygon.fromJson(json['polygon'] as Map<String, dynamic>),
+      multipoint: json['multipoint'] == null
+          ? null
+          : GeoMultiPoint.fromJson(json['multipoint'] as Map<String, dynamic>),
+      multiline: json['multiline'] == null
+          ? null
+          : GeoMultiLine.fromJson(json['multiline'] as Map<String, dynamic>),
+      multipolygon: json['multipolygon'] == null
+          ? null
+          : GeoMultiPolygon.fromJson(
+              json['multipolygon'] as Map<String, dynamic>),
+      circle: json['circle'] == null
+          ? null
+          : GeoCircle.fromJson(json['circle'] as Map<String, dynamic>),
+      fence: json['fence'] as Object,
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$GeoFenceToJson(GeoFence instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+    'label': instance.label,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('fenceType', geoFenceFenceTypeToJson(instance.fenceType));
+  writeNotNull('point', instance.point?.toJson());
+  writeNotNull('line', instance.line?.toJson());
+  writeNotNull('envelope', instance.envelope?.toJson());
+  writeNotNull('polygon', instance.polygon?.toJson());
+  writeNotNull('multipoint', instance.multipoint?.toJson());
+  writeNotNull('multiline', instance.multiline?.toJson());
+  writeNotNull('multipolygon', instance.multipolygon?.toJson());
+  writeNotNull('circle', instance.circle?.toJson());
+  val['fence'] = instance.fence;
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+GeoFenceEntity _$GeoFenceEntityFromJson(Map<String, dynamic> json) =>
+    GeoFenceEntity(
+      entity: json['entity'] == null
+          ? null
+          : GeoFence.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$GeoFenceEntityToJson(GeoFenceEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+GeoFenceEntityRes _$GeoFenceEntityResFromJson(Map<String, dynamic> json) =>
+    GeoFenceEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : GeoFence.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$GeoFenceEntityResToJson(GeoFenceEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+GeoFenceArray _$GeoFenceArrayFromJson(Map<String, dynamic> json) =>
+    GeoFenceArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => GeoFence.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$GeoFenceArrayToJson(GeoFenceArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+GeoFenceArrayRes _$GeoFenceArrayResFromJson(Map<String, dynamic> json) =>
+    GeoFenceArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => GeoFence.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$GeoFenceArrayResToJson(GeoFenceArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+AnalyticsRow _$AnalyticsRowFromJson(Map<String, dynamic> json) => AnalyticsRow(
+      height: json['height'] as int,
+      flex: json['flex'] as int,
+      widgetIds: (json['widgetIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      label: json['label'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$AnalyticsRowToJson(AnalyticsRow instance) {
+  final val = <String, dynamic>{
+    'height': instance.height,
+    'flex': instance.flex,
+    'widgetIds': instance.widgetIds,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('label', instance.label);
+  writeNotNull('description', instance.description);
+  return val;
+}
+
+AnalyticsScreenInfo _$AnalyticsScreenInfoFromJson(Map<String, dynamic> json) =>
+    AnalyticsScreenInfo(
+      name: json['name'] as String? ?? '',
+      label: json['label'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      showDefault: json['showDefault'] as bool? ?? false,
+      rows: (json['rows'] as List<dynamic>?)
+              ?.map((e) => AnalyticsRow.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$AnalyticsScreenInfoToJson(AnalyticsScreenInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('label', instance.label);
+  writeNotNull('description', instance.description);
+  writeNotNull('icon', instance.icon);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('showDefault', instance.showDefault);
+  val['rows'] = instance.rows.map((e) => e.toJson()).toList();
+  return val;
+}
+
+AnalyticsScreen _$AnalyticsScreenFromJson(Map<String, dynamic> json) =>
+    AnalyticsScreen(
+      name: json['name'] as String? ?? '',
+      label: json['label'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      showDefault: json['showDefault'] as bool? ?? false,
+      rows: (json['rows'] as List<dynamic>?)
+              ?.map((e) => AnalyticsRow.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$AnalyticsScreenToJson(AnalyticsScreen instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('label', instance.label);
+  writeNotNull('description', instance.description);
+  writeNotNull('icon', instance.icon);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('showDefault', instance.showDefault);
+  val['rows'] = instance.rows.map((e) => e.toJson()).toList();
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+AnalyticsScreenEntity _$AnalyticsScreenEntityFromJson(
+        Map<String, dynamic> json) =>
+    AnalyticsScreenEntity(
+      entity: json['entity'] == null
+          ? null
+          : AnalyticsScreen.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AnalyticsScreenEntityToJson(
+    AnalyticsScreenEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+AnalyticsScreenEntityRes _$AnalyticsScreenEntityResFromJson(
+        Map<String, dynamic> json) =>
+    AnalyticsScreenEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : AnalyticsScreen.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AnalyticsScreenEntityResToJson(
+    AnalyticsScreenEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+AnalyticsScreenArray _$AnalyticsScreenArrayFromJson(
+        Map<String, dynamic> json) =>
+    AnalyticsScreenArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => AnalyticsScreen.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$AnalyticsScreenArrayToJson(
+    AnalyticsScreenArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+AnalyticsScreenArrayRes _$AnalyticsScreenArrayResFromJson(
+        Map<String, dynamic> json) =>
+    AnalyticsScreenArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => AnalyticsScreen.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$AnalyticsScreenArrayResToJson(
+    AnalyticsScreenArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+TrendValue _$TrendValueFromJson(Map<String, dynamic> json) => TrendValue(
+      stamp: json['stamp'] as int,
+      count: json['count'] as int?,
+      min: (json['min'] as num?)?.toDouble(),
+      max: (json['max'] as num?)?.toDouble(),
+      avg: (json['avg'] as num?)?.toDouble(),
+    );
+
+Map<String, dynamic> _$TrendValueToJson(TrendValue instance) {
+  final val = <String, dynamic>{
+    'stamp': instance.stamp,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('count', instance.count);
+  writeNotNull('min', instance.min);
+  writeNotNull('max', instance.max);
+  writeNotNull('avg', instance.avg);
+  return val;
+}
+
+TrendValueArray _$TrendValueArrayFromJson(Map<String, dynamic> json) =>
+    TrendValueArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => TrendValue.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$TrendValueArrayToJson(TrendValueArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+TrendValueArrayRes _$TrendValueArrayResFromJson(Map<String, dynamic> json) =>
+    TrendValueArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => TrendValue.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$TrendValueArrayResToJson(TrendValueArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+TimeSeriesValue _$TimeSeriesValueFromJson(Map<String, dynamic> json) =>
+    TimeSeriesValue(
+      updatedStamp: json['updatedStamp'] as int,
+      data: json['data'],
+    );
+
+Map<String, dynamic> _$TimeSeriesValueToJson(TimeSeriesValue instance) {
+  final val = <String, dynamic>{
+    'updatedStamp': instance.updatedStamp,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('data', instance.data);
+  return val;
+}
+
+TimeSeriesValueArray _$TimeSeriesValueArrayFromJson(
+        Map<String, dynamic> json) =>
+    TimeSeriesValueArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => TimeSeriesValue.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$TimeSeriesValueArrayToJson(
+    TimeSeriesValueArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+TimeSeriesValueArrayRes _$TimeSeriesValueArrayResFromJson(
+        Map<String, dynamic> json) =>
+    TimeSeriesValueArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => TimeSeriesValue.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$TimeSeriesValueArrayResToJson(
+    TimeSeriesValueArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+LandingPage _$LandingPageFromJson(Map<String, dynamic> json) => LandingPage(
+      logoImage: json['logoImage'] as String? ?? '',
+      heading: json['heading'] as String? ?? '',
+      subHeading: json['subHeading'] as String? ?? '',
+      line1: json['line1'] as String? ?? '',
+      line2: json['line2'] as String? ?? '',
+      line3: json['line3'] as String? ?? '',
+      line4: json['line4'] as String? ?? '',
+      line5: json['line5'] as String? ?? '',
+      bgColor: json['bgColor'] as int?,
+      imageFlex: json['imageFlex'] as int?,
+      contentFlex: json['contentFlex'] as int?,
+      imageWidth: json['imageWidth'] as int?,
+    );
+
+Map<String, dynamic> _$LandingPageToJson(LandingPage instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('logoImage', instance.logoImage);
+  writeNotNull('heading', instance.heading);
+  writeNotNull('subHeading', instance.subHeading);
+  writeNotNull('line1', instance.line1);
+  writeNotNull('line2', instance.line2);
+  writeNotNull('line3', instance.line3);
+  writeNotNull('line4', instance.line4);
+  writeNotNull('line5', instance.line5);
+  writeNotNull('bgColor', instance.bgColor);
+  writeNotNull('imageFlex', instance.imageFlex);
+  writeNotNull('contentFlex', instance.contentFlex);
+  writeNotNull('imageWidth', instance.imageWidth);
+  return val;
+}
+
+ElasticEmailConfig _$ElasticEmailConfigFromJson(Map<String, dynamic> json) =>
+    ElasticEmailConfig(
+      apiKey: json['apiKey'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$ElasticEmailConfigToJson(ElasticEmailConfig instance) =>
+    <String, dynamic>{
+      'apiKey': instance.apiKey,
+    };
+
+TwilioConfig _$TwilioConfigFromJson(Map<String, dynamic> json) => TwilioConfig(
+      apiKey: json['apiKey'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$TwilioConfigToJson(TwilioConfig instance) =>
+    <String, dynamic>{
+      'apiKey': instance.apiKey,
+    };
+
+TextLocalConfig _$TextLocalConfigFromJson(Map<String, dynamic> json) =>
+    TextLocalConfig(
+      apiKey: json['apiKey'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$TextLocalConfigToJson(TextLocalConfig instance) =>
+    <String, dynamic>{
+      'apiKey': instance.apiKey,
+    };
+
+GeoapifyConfig _$GeoapifyConfigFromJson(Map<String, dynamic> json) =>
+    GeoapifyConfig(
+      apiKey: json['apiKey'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$GeoapifyConfigToJson(GeoapifyConfig instance) =>
+    <String, dynamic>{
+      'apiKey': instance.apiKey,
+    };
+
+TwinSysInfo _$TwinSysInfoFromJson(Map<String, dynamic> json) => TwinSysInfo(
+      logoImage: json['logoImage'] as String? ?? '',
+      bannerImage: json['bannerImage'] as String? ?? '',
+      font: json['font'] as String? ?? '',
+      fontSize: (json['fontSize'] as num?)?.toDouble(),
+      fontColor: json['fontColor'] as int?,
+      headerFont: json['headerFont'] as String? ?? '',
+      headerFontSize: (json['headerFontSize'] as num?)?.toDouble(),
+      headerFontColor: json['headerFontColor'] as int?,
+      subHeaderFont: json['subHeaderFont'] as String? ?? '',
+      subHeaderFontSize: (json['subHeaderFontSize'] as num?)?.toDouble(),
+      subHeaderFontColor: json['subHeaderFontColor'] as int?,
+      menuFont: json['menuFont'] as String? ?? '',
+      menuFontSize: (json['menuFontSize'] as num?)?.toDouble(),
+      menuFontColor: json['menuFontColor'] as int?,
+      toolFont: json['toolFont'] as String? ?? '',
+      toolFontSize: (json['toolFontSize'] as num?)?.toDouble(),
+      toolFontColor: json['toolFontColor'] as int?,
+      toolIconColor: json['toolIconColor'] as int?,
+      labelFont: json['labelFont'] as String? ?? '',
+      labelFontSize: (json['labelFontSize'] as num?)?.toDouble(),
+      labelFontColor: json['labelFontColor'] as int?,
+      labelIconColor: json['labelIconColor'] as int?,
+      enableSelfRegistration: json['enableSelfRegistration'] as bool? ?? true,
+      selfRegistrationDomain: json['selfRegistrationDomain'] as String? ?? '',
+      autoApproveSelfRegistration:
+          json['autoApproveSelfRegistration'] as bool? ?? true,
+      landingPages: (json['landingPages'] as List<dynamic>?)
+              ?.map((e) => LandingPage.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      emailProvider:
+          twinSysInfoEmailProviderNullableFromJson(json['emailProvider']),
+      smsProvider: twinSysInfoSmsProviderNullableFromJson(json['smsProvider']),
+      voiceProvider:
+          twinSysInfoVoiceProviderNullableFromJson(json['voiceProvider']),
+      elasticEmailConfig: json['elasticEmailConfig'] == null
+          ? null
+          : ElasticEmailConfig.fromJson(
+              json['elasticEmailConfig'] as Map<String, dynamic>),
+      twilioConfig: json['twilioConfig'] == null
+          ? null
+          : TwilioConfig.fromJson(json['twilioConfig'] as Map<String, dynamic>),
+      textLocalConfig: json['textLocalConfig'] == null
+          ? null
+          : TextLocalConfig.fromJson(
+              json['textLocalConfig'] as Map<String, dynamic>),
+      geoapifyConfig: json['geoapifyConfig'] == null
+          ? null
+          : GeoapifyConfig.fromJson(
+              json['geoapifyConfig'] as Map<String, dynamic>),
+      enforceRoles: json['enforceRoles'] as bool? ?? false,
+      headerBgColor: json['headerBgColor'] as int?,
+      pageBgColor: json['pageBgColor'] as int?,
+      appName: json['appName'] as String? ?? '',
+      logoText: json['logoText'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$TwinSysInfoToJson(TwinSysInfo instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('logoImage', instance.logoImage);
+  writeNotNull('bannerImage', instance.bannerImage);
+  writeNotNull('font', instance.font);
+  writeNotNull('fontSize', instance.fontSize);
+  writeNotNull('fontColor', instance.fontColor);
+  writeNotNull('headerFont', instance.headerFont);
+  writeNotNull('headerFontSize', instance.headerFontSize);
+  writeNotNull('headerFontColor', instance.headerFontColor);
+  writeNotNull('subHeaderFont', instance.subHeaderFont);
+  writeNotNull('subHeaderFontSize', instance.subHeaderFontSize);
+  writeNotNull('subHeaderFontColor', instance.subHeaderFontColor);
+  writeNotNull('menuFont', instance.menuFont);
+  writeNotNull('menuFontSize', instance.menuFontSize);
+  writeNotNull('menuFontColor', instance.menuFontColor);
+  writeNotNull('toolFont', instance.toolFont);
+  writeNotNull('toolFontSize', instance.toolFontSize);
+  writeNotNull('toolFontColor', instance.toolFontColor);
+  writeNotNull('toolIconColor', instance.toolIconColor);
+  writeNotNull('labelFont', instance.labelFont);
+  writeNotNull('labelFontSize', instance.labelFontSize);
+  writeNotNull('labelFontColor', instance.labelFontColor);
+  writeNotNull('labelIconColor', instance.labelIconColor);
+  writeNotNull('enableSelfRegistration', instance.enableSelfRegistration);
+  writeNotNull('selfRegistrationDomain', instance.selfRegistrationDomain);
+  writeNotNull(
+      'autoApproveSelfRegistration', instance.autoApproveSelfRegistration);
+  writeNotNull(
+      'landingPages', instance.landingPages?.map((e) => e.toJson()).toList());
+  writeNotNull('emailProvider',
+      twinSysInfoEmailProviderNullableToJson(instance.emailProvider));
+  writeNotNull('smsProvider',
+      twinSysInfoSmsProviderNullableToJson(instance.smsProvider));
+  writeNotNull('voiceProvider',
+      twinSysInfoVoiceProviderNullableToJson(instance.voiceProvider));
+  writeNotNull('elasticEmailConfig', instance.elasticEmailConfig?.toJson());
+  writeNotNull('twilioConfig', instance.twilioConfig?.toJson());
+  writeNotNull('textLocalConfig', instance.textLocalConfig?.toJson());
+  writeNotNull('geoapifyConfig', instance.geoapifyConfig?.toJson());
+  writeNotNull('enforceRoles', instance.enforceRoles);
+  writeNotNull('headerBgColor', instance.headerBgColor);
+  writeNotNull('pageBgColor', instance.pageBgColor);
+  writeNotNull('appName', instance.appName);
+  writeNotNull('logoText', instance.logoText);
+  return val;
+}
+
+TwinSysInfoEntity _$TwinSysInfoEntityFromJson(Map<String, dynamic> json) =>
+    TwinSysInfoEntity(
+      entity: json['entity'] == null
+          ? null
+          : TwinSysInfo.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$TwinSysInfoEntityToJson(TwinSysInfoEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+TwinSysInfoEntityRes _$TwinSysInfoEntityResFromJson(
+        Map<String, dynamic> json) =>
+    TwinSysInfoEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : TwinSysInfo.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$TwinSysInfoEntityResToJson(
+    TwinSysInfoEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+TwinSysConfigInfo _$TwinSysConfigInfoFromJson(Map<String, dynamic> json) =>
+    TwinSysConfigInfo(
+      info: json['info'] == null
+          ? null
+          : TwinSysInfo.fromJson(json['info'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$TwinSysConfigInfoToJson(TwinSysConfigInfo instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('info', instance.info?.toJson());
+  return val;
+}
+
+TwinSysConfig _$TwinSysConfigFromJson(Map<String, dynamic> json) =>
+    TwinSysConfig(
+      info: json['info'] == null
+          ? null
+          : TwinSysInfo.fromJson(json['info'] as Map<String, dynamic>),
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$TwinSysConfigToJson(TwinSysConfig instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('info', instance.info?.toJson());
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['name'] = instance.name;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  writeNotNull('tags', instance.tags);
+  return val;
+}
+
+TwinSysConfigEntity _$TwinSysConfigEntityFromJson(Map<String, dynamic> json) =>
+    TwinSysConfigEntity(
+      entity: json['entity'] == null
+          ? null
+          : TwinSysConfig.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$TwinSysConfigEntityToJson(TwinSysConfigEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+TwinSysConfigEntityRes _$TwinSysConfigEntityResFromJson(
+        Map<String, dynamic> json) =>
+    TwinSysConfigEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : TwinSysConfig.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$TwinSysConfigEntityResToJson(
+    TwinSysConfigEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+FloorInfo _$FloorInfoFromJson(Map<String, dynamic> json) => FloorInfo(
+      premiseId: json['premiseId'] as String? ?? '',
+      facilityId: json['facilityId'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      floorPlan: json['floorPlan'] as String? ?? '',
+      assets: (json['assets'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      location: json['location'] == null
+          ? null
+          : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
+      settings: (json['settings'] as List<dynamic>?)
+              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      floorLevel: json['floorLevel'] as int,
+      floorType:
+          FloorInfo.floorInfoFloorTypeFloorTypeFromJson(json['floorType']),
+    );
+
+Map<String, dynamic> _$FloorInfoToJson(FloorInfo instance) {
+  final val = <String, dynamic>{
+    'premiseId': instance.premiseId,
+    'facilityId': instance.facilityId,
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('floorPlan', instance.floorPlan);
+  writeNotNull('assets', instance.assets);
+  writeNotNull('roles', instance.roles);
+  writeNotNull('location', instance.location?.toJson());
+  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
+  val['floorLevel'] = instance.floorLevel;
+  writeNotNull('floorType', floorInfoFloorTypeToJson(instance.floorType));
+  return val;
+}
+
+Floor _$FloorFromJson(Map<String, dynamic> json) => Floor(
+      premiseId: json['premiseId'] as String? ?? '',
+      facilityId: json['facilityId'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      floorPlan: json['floorPlan'] as String? ?? '',
+      assets: (json['assets'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      location: json['location'] == null
+          ? null
+          : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
+      settings: (json['settings'] as List<dynamic>?)
+              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      floorLevel: json['floorLevel'] as int,
+      floorType: Floor.floorFloorTypeFloorTypeFromJson(json['floorType']),
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$FloorToJson(Floor instance) {
+  final val = <String, dynamic>{
+    'premiseId': instance.premiseId,
+    'facilityId': instance.facilityId,
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('floorPlan', instance.floorPlan);
+  writeNotNull('assets', instance.assets);
+  writeNotNull('roles', instance.roles);
+  writeNotNull('location', instance.location?.toJson());
+  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
+  val['floorLevel'] = instance.floorLevel;
+  writeNotNull('floorType', floorFloorTypeToJson(instance.floorType));
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+FloorEntity _$FloorEntityFromJson(Map<String, dynamic> json) => FloorEntity(
+      entity: json['entity'] == null
+          ? null
+          : Floor.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FloorEntityToJson(FloorEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+FloorEntityRes _$FloorEntityResFromJson(Map<String, dynamic> json) =>
+    FloorEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : Floor.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FloorEntityResToJson(FloorEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+FloorArray _$FloorArrayFromJson(Map<String, dynamic> json) => FloorArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Floor.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$FloorArrayToJson(FloorArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+FloorArrayRes _$FloorArrayResFromJson(Map<String, dynamic> json) =>
+    FloorArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Floor.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$FloorArrayResToJson(FloorArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+AssetInfo _$AssetInfoFromJson(Map<String, dynamic> json) => AssetInfo(
+      premiseId: json['premiseId'] as String? ?? '',
+      facilityId: json['facilityId'] as String? ?? '',
+      floorId: json['floorId'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      selectedImage: json['selectedImage'] as int?,
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      devices: (json['devices'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      location: json['location'] == null
+          ? null
+          : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
+      position: json['position'] == null
+          ? null
+          : ScreenPosition.fromJson(json['position'] as Map<String, dynamic>),
+      settings: (json['settings'] as List<dynamic>?)
+              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      assetModelId: json['assetModelId'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$AssetInfoToJson(AssetInfo instance) {
+  final val = <String, dynamic>{
+    'premiseId': instance.premiseId,
+    'facilityId': instance.facilityId,
+    'floorId': instance.floorId,
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('selectedImage', instance.selectedImage);
+  writeNotNull('images', instance.images);
+  writeNotNull('devices', instance.devices);
+  writeNotNull('roles', instance.roles);
+  writeNotNull('location', instance.location?.toJson());
+  writeNotNull('position', instance.position?.toJson());
+  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
+  val['assetModelId'] = instance.assetModelId;
+  return val;
+}
+
+Asset _$AssetFromJson(Map<String, dynamic> json) => Asset(
+      premiseId: json['premiseId'] as String? ?? '',
+      facilityId: json['facilityId'] as String? ?? '',
+      floorId: json['floorId'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      selectedImage: json['selectedImage'] as int?,
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      devices: (json['devices'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      location: json['location'] == null
+          ? null
+          : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
+      position: json['position'] == null
+          ? null
+          : ScreenPosition.fromJson(json['position'] as Map<String, dynamic>),
+      settings: (json['settings'] as List<dynamic>?)
+              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      assetModelId: json['assetModelId'] as String? ?? '',
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$AssetToJson(Asset instance) {
+  final val = <String, dynamic>{
+    'premiseId': instance.premiseId,
+    'facilityId': instance.facilityId,
+    'floorId': instance.floorId,
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('selectedImage', instance.selectedImage);
+  writeNotNull('images', instance.images);
+  writeNotNull('devices', instance.devices);
+  writeNotNull('roles', instance.roles);
+  writeNotNull('location', instance.location?.toJson());
+  writeNotNull('position', instance.position?.toJson());
+  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
+  val['assetModelId'] = instance.assetModelId;
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+AssetEntity _$AssetEntityFromJson(Map<String, dynamic> json) => AssetEntity(
+      entity: json['entity'] == null
+          ? null
+          : Asset.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AssetEntityToJson(AssetEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+AssetEntityRes _$AssetEntityResFromJson(Map<String, dynamic> json) =>
+    AssetEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : Asset.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AssetEntityResToJson(AssetEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+AssetArray _$AssetArrayFromJson(Map<String, dynamic> json) => AssetArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Asset.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$AssetArrayToJson(AssetArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+AssetArrayRes _$AssetArrayResFromJson(Map<String, dynamic> json) =>
+    AssetArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Asset.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$AssetArrayResToJson(AssetArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+FacilityInfo _$FacilityInfoFromJson(Map<String, dynamic> json) => FacilityInfo(
+      premiseId: json['premiseId'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      selectedImage: json['selectedImage'] as int?,
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      location: json['location'] == null
+          ? null
+          : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
+      settings: (json['settings'] as List<dynamic>?)
+              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$FacilityInfoToJson(FacilityInfo instance) {
+  final val = <String, dynamic>{
+    'premiseId': instance.premiseId,
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('selectedImage', instance.selectedImage);
+  writeNotNull('images', instance.images);
+  writeNotNull('roles', instance.roles);
+  writeNotNull('location', instance.location?.toJson());
+  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+Facility _$FacilityFromJson(Map<String, dynamic> json) => Facility(
+      premiseId: json['premiseId'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      selectedImage: json['selectedImage'] as int?,
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      location: json['location'] == null
+          ? null
+          : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
+      settings: (json['settings'] as List<dynamic>?)
+              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$FacilityToJson(Facility instance) {
+  final val = <String, dynamic>{
+    'premiseId': instance.premiseId,
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('selectedImage', instance.selectedImage);
+  writeNotNull('images', instance.images);
+  writeNotNull('roles', instance.roles);
+  writeNotNull('location', instance.location?.toJson());
+  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+FacilityEntity _$FacilityEntityFromJson(Map<String, dynamic> json) =>
+    FacilityEntity(
+      entity: json['entity'] == null
+          ? null
+          : Facility.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FacilityEntityToJson(FacilityEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+FacilityEntityRes _$FacilityEntityResFromJson(Map<String, dynamic> json) =>
+    FacilityEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : Facility.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FacilityEntityResToJson(FacilityEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+FacilityArray _$FacilityArrayFromJson(Map<String, dynamic> json) =>
+    FacilityArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Facility.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$FacilityArrayToJson(FacilityArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+FacilityArrayRes _$FacilityArrayResFromJson(Map<String, dynamic> json) =>
+    FacilityArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Facility.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$FacilityArrayResToJson(FacilityArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+TwinUserInfo _$TwinUserInfoFromJson(Map<String, dynamic> json) => TwinUserInfo(
+      name: json['name'] as String? ?? '',
+      email: json['email'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      phone: json['phone'] as String? ?? '',
+      address: json['address'] as String? ?? '',
+      selectedImage: json['selectedImage'] as int?,
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      userState: json['userState'] as int?,
+    );
+
+Map<String, dynamic> _$TwinUserInfoToJson(TwinUserInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+    'email': instance.email,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('phone', instance.phone);
+  writeNotNull('address', instance.address);
+  writeNotNull('selectedImage', instance.selectedImage);
+  writeNotNull('images', instance.images);
+  writeNotNull('roles', instance.roles);
+  writeNotNull('userState', instance.userState);
+  return val;
+}
+
+TwinUserBase _$TwinUserBaseFromJson(Map<String, dynamic> json) => TwinUserBase(
+      stripeCustomerId: json['stripeCustomerId'] as String? ?? '',
+      stripeSubscriptionId: json['stripeSubscriptionId'] as String? ?? '',
+      platformRoles: (json['platformRoles'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$TwinUserBaseToJson(TwinUserBase instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('stripeCustomerId', instance.stripeCustomerId);
+  writeNotNull('stripeSubscriptionId', instance.stripeSubscriptionId);
+  writeNotNull('platformRoles', instance.platformRoles);
+  return val;
+}
+
+TwinUser _$TwinUserFromJson(Map<String, dynamic> json) => TwinUser(
+      name: json['name'] as String? ?? '',
+      email: json['email'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      phone: json['phone'] as String? ?? '',
+      address: json['address'] as String? ?? '',
+      selectedImage: json['selectedImage'] as int?,
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      userState: json['userState'] as int?,
+      stripeCustomerId: json['stripeCustomerId'] as String? ?? '',
+      stripeSubscriptionId: json['stripeSubscriptionId'] as String? ?? '',
+      platformRoles: (json['platformRoles'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$TwinUserToJson(TwinUser instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+    'email': instance.email,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('phone', instance.phone);
+  writeNotNull('address', instance.address);
+  writeNotNull('selectedImage', instance.selectedImage);
+  writeNotNull('images', instance.images);
+  writeNotNull('roles', instance.roles);
+  writeNotNull('userState', instance.userState);
+  writeNotNull('stripeCustomerId', instance.stripeCustomerId);
+  writeNotNull('stripeSubscriptionId', instance.stripeSubscriptionId);
+  writeNotNull('platformRoles', instance.platformRoles);
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+TwinUserEntity _$TwinUserEntityFromJson(Map<String, dynamic> json) =>
+    TwinUserEntity(
+      entity: json['entity'] == null
+          ? null
+          : TwinUser.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$TwinUserEntityToJson(TwinUserEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+TwinUserEntityRes _$TwinUserEntityResFromJson(Map<String, dynamic> json) =>
+    TwinUserEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : TwinUser.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$TwinUserEntityResToJson(TwinUserEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+TwinUserArray _$TwinUserArrayFromJson(Map<String, dynamic> json) =>
+    TwinUserArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => TwinUser.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$TwinUserArrayToJson(TwinUserArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+TwinUserArrayRes _$TwinUserArrayResFromJson(Map<String, dynamic> json) =>
+    TwinUserArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => TwinUser.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$TwinUserArrayResToJson(TwinUserArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+RoleInfo _$RoleInfoFromJson(Map<String, dynamic> json) => RoleInfo(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$RoleInfoToJson(RoleInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  return val;
+}
+
+Role _$RoleFromJson(Map<String, dynamic> json) => Role(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$RoleToJson(Role instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+RoleEntity _$RoleEntityFromJson(Map<String, dynamic> json) => RoleEntity(
+      entity: json['entity'] == null
+          ? null
+          : Role.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$RoleEntityToJson(RoleEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+RoleEntityRes _$RoleEntityResFromJson(Map<String, dynamic> json) =>
+    RoleEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : Role.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$RoleEntityResToJson(RoleEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+RoleArray _$RoleArrayFromJson(Map<String, dynamic> json) => RoleArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Role.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$RoleArrayToJson(RoleArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+RoleArrayRes _$RoleArrayResFromJson(Map<String, dynamic> json) => RoleArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Role.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$RoleArrayResToJson(RoleArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+PremiseInfo _$PremiseInfoFromJson(Map<String, dynamic> json) => PremiseInfo(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      settings: (json['settings'] as List<dynamic>?)
+              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      selectedImage: json['selectedImage'] as int?,
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      location: json['location'] == null
+          ? null
+          : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$PremiseInfoToJson(PremiseInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
+  writeNotNull('selectedImage', instance.selectedImage);
+  writeNotNull('images', instance.images);
+  writeNotNull('location', instance.location?.toJson());
+  writeNotNull('roles', instance.roles);
+  return val;
+}
+
+Premise _$PremiseFromJson(Map<String, dynamic> json) => Premise(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      settings: (json['settings'] as List<dynamic>?)
+              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      selectedImage: json['selectedImage'] as int?,
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      location: json['location'] == null
+          ? null
+          : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$PremiseToJson(Premise instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
+  writeNotNull('selectedImage', instance.selectedImage);
+  writeNotNull('images', instance.images);
+  writeNotNull('location', instance.location?.toJson());
+  writeNotNull('roles', instance.roles);
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+PremiseEntity _$PremiseEntityFromJson(Map<String, dynamic> json) =>
+    PremiseEntity(
+      entity: json['entity'] == null
+          ? null
+          : Premise.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PremiseEntityToJson(PremiseEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+PremiseEntityRes _$PremiseEntityResFromJson(Map<String, dynamic> json) =>
+    PremiseEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : Premise.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PremiseEntityResToJson(PremiseEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+PremiseArray _$PremiseArrayFromJson(Map<String, dynamic> json) => PremiseArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Premise.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$PremiseArrayToJson(PremiseArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+PremiseArrayRes _$PremiseArrayResFromJson(Map<String, dynamic> json) =>
+    PremiseArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Premise.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$PremiseArrayResToJson(PremiseArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+ScreenPosition _$ScreenPositionFromJson(Map<String, dynamic> json) =>
+    ScreenPosition(
+      topX: json['topX'] as int,
+      topY: json['topY'] as int,
+      bottomX: json['bottomX'] as int?,
+      bottomY: json['bottomY'] as int?,
+    );
+
+Map<String, dynamic> _$ScreenPositionToJson(ScreenPosition instance) {
+  final val = <String, dynamic>{
+    'topX': instance.topX,
+    'topY': instance.topY,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('bottomX', instance.bottomX);
+  writeNotNull('bottomY', instance.bottomY);
+  return val;
+}
+
+Attribute _$AttributeFromJson(Map<String, dynamic> json) => Attribute(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      label: json['label'] as String? ?? '',
+      attributeType: attributeAttributeTypeFromJson(json['attributeType']),
+      value: json['value'] as String? ?? '',
+      editable: json['editable'] as bool? ?? true,
+      validator: attributeValidatorNullableFromJson(json['validator']),
+      allowedValues: (json['allowedValues'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      allowedNumbers: (json['allowedNumbers'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList() ??
+          [],
+      allowedDecimals: (json['allowedDecimals'] as List<dynamic>?)
+              ?.map((e) => (e as num).toDouble())
+              .toList() ??
+          [],
+      minNumber: json['minNumber'] as int?,
+      maxNumber: json['maxNumber'] as int?,
+      minDecimal: (json['minDecimal'] as num?)?.toDouble(),
+      maxDecimal: (json['maxDecimal'] as num?)?.toDouble(),
+    );
+
+Map<String, dynamic> _$AttributeToJson(Attribute instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('label', instance.label);
+  writeNotNull(
+      'attributeType', attributeAttributeTypeToJson(instance.attributeType));
+  val['value'] = instance.value;
+  writeNotNull('editable', instance.editable);
+  writeNotNull(
+      'validator', attributeValidatorNullableToJson(instance.validator));
+  writeNotNull('allowedValues', instance.allowedValues);
+  writeNotNull('allowedNumbers', instance.allowedNumbers);
+  writeNotNull('allowedDecimals', instance.allowedDecimals);
+  writeNotNull('minNumber', instance.minNumber);
+  writeNotNull('maxNumber', instance.maxNumber);
+  writeNotNull('minDecimal', instance.minDecimal);
+  writeNotNull('maxDecimal', instance.maxDecimal);
+  return val;
+}
+
+Lookup _$LookupFromJson(Map<String, dynamic> json) => Lookup(
+      name: json['name'] as String? ?? '',
+      settings: json['settings'] == null
+          ? null
+          : SettingsInfo.fromJson(json['settings'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$LookupToJson(Lookup instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('settings', instance.settings?.toJson());
+  return val;
+}
+
+SettingsInfo _$SettingsInfoFromJson(Map<String, dynamic> json) => SettingsInfo(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      attributes: (json['attributes'] as List<dynamic>?)
+              ?.map((e) => Attribute.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$SettingsInfoToJson(SettingsInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull(
+      'attributes', instance.attributes?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+Settings _$SettingsFromJson(Map<String, dynamic> json) => Settings(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      attributes: (json['attributes'] as List<dynamic>?)
+              ?.map((e) => Attribute.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$SettingsToJson(Settings instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull(
+      'attributes', instance.attributes?.map((e) => e.toJson()).toList());
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+SettingsEntity _$SettingsEntityFromJson(Map<String, dynamic> json) =>
+    SettingsEntity(
+      entity: json['entity'] == null
+          ? null
+          : Settings.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$SettingsEntityToJson(SettingsEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+SettingsEntityRes _$SettingsEntityResFromJson(Map<String, dynamic> json) =>
+    SettingsEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : Settings.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$SettingsEntityResToJson(SettingsEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+SettingsArray _$SettingsArrayFromJson(Map<String, dynamic> json) =>
+    SettingsArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Settings.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$SettingsArrayToJson(SettingsArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+SettingsArrayRes _$SettingsArrayResFromJson(Map<String, dynamic> json) =>
+    SettingsArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Settings.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$SettingsArrayResToJson(SettingsArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+Tags _$TagsFromJson(Map<String, dynamic> json) => Tags(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$TagsToJson(Tags instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values);
+  return val;
+}
+
+FloorStats _$FloorStatsFromJson(Map<String, dynamic> json) => FloorStats(
+      assets: json['assets'] as int?,
+      devices: json['devices'] as int?,
+    );
+
+Map<String, dynamic> _$FloorStatsToJson(FloorStats instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('assets', instance.assets);
+  writeNotNull('devices', instance.devices);
+  return val;
+}
+
+FloorStatsEntity _$FloorStatsEntityFromJson(Map<String, dynamic> json) =>
+    FloorStatsEntity(
+      entity: json['entity'] == null
+          ? null
+          : FloorStats.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FloorStatsEntityToJson(FloorStatsEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+FloorStatsEntityRes _$FloorStatsEntityResFromJson(Map<String, dynamic> json) =>
+    FloorStatsEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : FloorStats.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FloorStatsEntityResToJson(FloorStatsEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+FacilityStats _$FacilityStatsFromJson(Map<String, dynamic> json) =>
+    FacilityStats(
+      floors: json['floors'] as int?,
+      assets: json['assets'] as int?,
+      devices: json['devices'] as int?,
+    );
+
+Map<String, dynamic> _$FacilityStatsToJson(FacilityStats instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('floors', instance.floors);
+  writeNotNull('assets', instance.assets);
+  writeNotNull('devices', instance.devices);
+  return val;
+}
+
+FacilityStatsEntity _$FacilityStatsEntityFromJson(Map<String, dynamic> json) =>
+    FacilityStatsEntity(
+      entity: json['entity'] == null
+          ? null
+          : FacilityStats.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FacilityStatsEntityToJson(FacilityStatsEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+FacilityStatsEntityRes _$FacilityStatsEntityResFromJson(
+        Map<String, dynamic> json) =>
+    FacilityStatsEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : FacilityStats.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FacilityStatsEntityResToJson(
+    FacilityStatsEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+PremiseStats _$PremiseStatsFromJson(Map<String, dynamic> json) => PremiseStats(
+      facilities: json['facilities'] as int?,
+      floors: json['floors'] as int?,
+      assets: json['assets'] as int?,
+      devices: json['devices'] as int?,
+    );
+
+Map<String, dynamic> _$PremiseStatsToJson(PremiseStats instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('facilities', instance.facilities);
+  writeNotNull('floors', instance.floors);
+  writeNotNull('assets', instance.assets);
+  writeNotNull('devices', instance.devices);
+  return val;
+}
+
+PremiseStatsEntity _$PremiseStatsEntityFromJson(Map<String, dynamic> json) =>
+    PremiseStatsEntity(
+      entity: json['entity'] == null
+          ? null
+          : PremiseStats.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PremiseStatsEntityToJson(PremiseStatsEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+PremiseStatsEntityRes _$PremiseStatsEntityResFromJson(
+        Map<String, dynamic> json) =>
+    PremiseStatsEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : PremiseStats.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PremiseStatsEntityResToJson(
+    PremiseStatsEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+TagsRes _$TagsResFromJson(Map<String, dynamic> json) => TagsRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$TagsResToJson(TagsRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('values', instance.values);
+  return val;
+}
+
+CustomWidget _$CustomWidgetFromJson(Map<String, dynamic> json) => CustomWidget(
+      id: json['id'] as String? ?? '',
+      attributes: json['attributes'] as Object,
+    );
+
+Map<String, dynamic> _$CustomWidgetToJson(CustomWidget instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'attributes': instance.attributes,
+    };
+
+SensorWidget _$SensorWidgetFromJson(Map<String, dynamic> json) => SensorWidget(
+      widgetId: json['widgetId'] as String? ?? '',
+      attributes: json['attributes'] as Object,
+    );
+
+Map<String, dynamic> _$SensorWidgetToJson(SensorWidget instance) =>
+    <String, dynamic>{
+      'widgetId': instance.widgetId,
+      'attributes': instance.attributes,
+    };
+
+AssetGroupInfo _$AssetGroupInfoFromJson(Map<String, dynamic> json) =>
+    AssetGroupInfo(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      target: assetGroupInfoTargetFromJson(json['target']),
+      assetIds: (json['assetIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      icon: json['icon'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$AssetGroupInfoToJson(AssetGroupInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('target', assetGroupInfoTargetToJson(instance.target));
+  val['assetIds'] = instance.assetIds;
+  writeNotNull('icon', instance.icon);
+  return val;
+}
+
+AssetGroup _$AssetGroupFromJson(Map<String, dynamic> json) => AssetGroup(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      target: assetGroupTargetFromJson(json['target']),
+      assetIds: (json['assetIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      icon: json['icon'] as String? ?? '',
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$AssetGroupToJson(AssetGroup instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('target', assetGroupTargetToJson(instance.target));
+  val['assetIds'] = instance.assetIds;
+  writeNotNull('icon', instance.icon);
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+AssetGroupEntity _$AssetGroupEntityFromJson(Map<String, dynamic> json) =>
+    AssetGroupEntity(
+      entity: json['entity'] == null
+          ? null
+          : AssetGroup.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AssetGroupEntityToJson(AssetGroupEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+AssetGroupEntityRes _$AssetGroupEntityResFromJson(Map<String, dynamic> json) =>
+    AssetGroupEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : AssetGroup.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AssetGroupEntityResToJson(AssetGroupEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+AssetGroupArray _$AssetGroupArrayFromJson(Map<String, dynamic> json) =>
+    AssetGroupArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => AssetGroup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$AssetGroupArrayToJson(AssetGroupArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+AssetGroupArrayRes _$AssetGroupArrayResFromJson(Map<String, dynamic> json) =>
+    AssetGroupArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => AssetGroup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$AssetGroupArrayResToJson(AssetGroupArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+ReportInfo _$ReportInfoFromJson(Map<String, dynamic> json) => ReportInfo(
+      modelId: json['modelId'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      includePremise: json['includePremise'] as bool?,
+      includeFacility: json['includeFacility'] as bool?,
+      includeFloor: json['includeFloor'] as bool?,
+      includeAsset: json['includeAsset'] as bool?,
+      includeDevice: json['includeDevice'] as bool?,
+      humanDateFormat: json['humanDateFormat'] as bool?,
+      dateFormat: json['dateFormat'] as String? ?? '',
+      tz: json['tz'] as String? ?? '',
+      fields: (json['fields'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ReportInfoToJson(ReportInfo instance) {
+  final val = <String, dynamic>{
+    'modelId': instance.modelId,
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('icon', instance.icon);
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('includePremise', instance.includePremise);
+  writeNotNull('includeFacility', instance.includeFacility);
+  writeNotNull('includeFloor', instance.includeFloor);
+  writeNotNull('includeAsset', instance.includeAsset);
+  writeNotNull('includeDevice', instance.includeDevice);
+  writeNotNull('humanDateFormat', instance.humanDateFormat);
+  writeNotNull('dateFormat', instance.dateFormat);
+  writeNotNull('tz', instance.tz);
+  val['fields'] = instance.fields;
+  return val;
+}
+
+Report _$ReportFromJson(Map<String, dynamic> json) => Report(
+      modelId: json['modelId'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      includePremise: json['includePremise'] as bool?,
+      includeFacility: json['includeFacility'] as bool?,
+      includeFloor: json['includeFloor'] as bool?,
+      includeAsset: json['includeAsset'] as bool?,
+      includeDevice: json['includeDevice'] as bool?,
+      humanDateFormat: json['humanDateFormat'] as bool?,
+      dateFormat: json['dateFormat'] as String? ?? '',
+      tz: json['tz'] as String? ?? '',
+      fields: (json['fields'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$ReportToJson(Report instance) {
+  final val = <String, dynamic>{
+    'modelId': instance.modelId,
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('icon', instance.icon);
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('includePremise', instance.includePremise);
+  writeNotNull('includeFacility', instance.includeFacility);
+  writeNotNull('includeFloor', instance.includeFloor);
+  writeNotNull('includeAsset', instance.includeAsset);
+  writeNotNull('includeDevice', instance.includeDevice);
+  writeNotNull('humanDateFormat', instance.humanDateFormat);
+  writeNotNull('dateFormat', instance.dateFormat);
+  writeNotNull('tz', instance.tz);
+  val['fields'] = instance.fields;
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+ReportEntity _$ReportEntityFromJson(Map<String, dynamic> json) => ReportEntity(
+      entity: json['entity'] == null
+          ? null
+          : Report.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ReportEntityToJson(ReportEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+ReportEntityRes _$ReportEntityResFromJson(Map<String, dynamic> json) =>
+    ReportEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : Report.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ReportEntityResToJson(ReportEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+ReportArray _$ReportArrayFromJson(Map<String, dynamic> json) => ReportArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Report.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ReportArrayToJson(ReportArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+ReportArrayRes _$ReportArrayResFromJson(Map<String, dynamic> json) =>
+    ReportArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Report.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ReportArrayResToJson(ReportArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+AssetModelInfo _$AssetModelInfoFromJson(Map<String, dynamic> json) =>
+    AssetModelInfo(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      icon: json['icon'] as String? ?? '',
+      selectedImage: json['selectedImage'] as int?,
+      selectedBanner: json['selectedBanner'] as int?,
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      banners: (json['banners'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      metadata: json['metadata'],
+      hasGeoLocation: json['hasGeoLocation'] as bool?,
+      movable: json['movable'] as bool?,
+      geolocation: json['geolocation'] == null
+          ? null
+          : GeoLocation.fromJson(json['geolocation'] as Map<String, dynamic>),
+      settings: (json['settings'] as List<dynamic>?)
+              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$AssetModelInfoToJson(AssetModelInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('icon', instance.icon);
+  writeNotNull('selectedImage', instance.selectedImage);
+  writeNotNull('selectedBanner', instance.selectedBanner);
+  writeNotNull('images', instance.images);
+  writeNotNull('banners', instance.banners);
+  writeNotNull('metadata', instance.metadata);
+  writeNotNull('hasGeoLocation', instance.hasGeoLocation);
+  writeNotNull('movable', instance.movable);
+  writeNotNull('geolocation', instance.geolocation?.toJson());
+  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+AssetModel _$AssetModelFromJson(Map<String, dynamic> json) => AssetModel(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      icon: json['icon'] as String? ?? '',
+      selectedImage: json['selectedImage'] as int?,
+      selectedBanner: json['selectedBanner'] as int?,
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      banners: (json['banners'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      metadata: json['metadata'],
+      hasGeoLocation: json['hasGeoLocation'] as bool?,
+      movable: json['movable'] as bool?,
+      geolocation: json['geolocation'] == null
+          ? null
+          : GeoLocation.fromJson(json['geolocation'] as Map<String, dynamic>),
+      settings: (json['settings'] as List<dynamic>?)
+              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$AssetModelToJson(AssetModel instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('tags', instance.tags);
+  writeNotNull('icon', instance.icon);
+  writeNotNull('selectedImage', instance.selectedImage);
+  writeNotNull('selectedBanner', instance.selectedBanner);
+  writeNotNull('images', instance.images);
+  writeNotNull('banners', instance.banners);
+  writeNotNull('metadata', instance.metadata);
+  writeNotNull('hasGeoLocation', instance.hasGeoLocation);
+  writeNotNull('movable', instance.movable);
+  writeNotNull('geolocation', instance.geolocation?.toJson());
+  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+AssetModelEntity _$AssetModelEntityFromJson(Map<String, dynamic> json) =>
+    AssetModelEntity(
+      entity: json['entity'] == null
+          ? null
+          : AssetModel.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AssetModelEntityToJson(AssetModelEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+AssetModelEntityRes _$AssetModelEntityResFromJson(Map<String, dynamic> json) =>
+    AssetModelEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : AssetModel.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AssetModelEntityResToJson(AssetModelEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+AssetModelArray _$AssetModelArrayFromJson(Map<String, dynamic> json) =>
+    AssetModelArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => AssetModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$AssetModelArrayToJson(AssetModelArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+AssetModelArrayRes _$AssetModelArrayResFromJson(Map<String, dynamic> json) =>
+    AssetModelArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => AssetModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$AssetModelArrayResToJson(AssetModelArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+IDList _$IDListFromJson(Map<String, dynamic> json) => IDList(
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$IDListToJson(IDList instance) => <String, dynamic>{
+      'total': instance.total,
+      'values': instance.values,
+    };
+
+IDListEntityRes _$IDListEntityResFromJson(Map<String, dynamic> json) =>
+    IDListEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$IDListEntityResToJson(IDListEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['total'] = instance.total;
+  val['values'] = instance.values;
+  return val;
+}
+
+ExportData _$ExportDataFromJson(Map<String, dynamic> json) => ExportData(
+      model: DeviceModelInfo.fromJson(json['model'] as Map<String, dynamic>),
+      conditions: (json['conditions'] as List<dynamic>?)
+              ?.map((e) => ConditionInfo.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      alarms: (json['alarms'] as List<dynamic>?)
+              ?.map((e) => AlarmInfo.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      displays: (json['displays'] as List<dynamic>?)
+              ?.map((e) => DisplayInfo.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      controls: (json['controls'] as List<dynamic>?)
+              ?.map((e) => ControlInfo.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      events: (json['events'] as List<dynamic>?)
+              ?.map((e) => EventInfo.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      triggers: (json['triggers'] as List<dynamic>?)
+              ?.map((e) => TriggerInfo.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      displayWidgets: (json['displayWidgets'] as List<dynamic>?)
+              ?.map(
+                  (e) => DisplayWidgetInfo.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      preprocessors: (json['preprocessors'] as List<dynamic>?)
+              ?.map((e) => PreprocessorInfo.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ExportDataToJson(ExportData instance) {
+  final val = <String, dynamic>{
+    'model': instance.model.toJson(),
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'conditions', instance.conditions?.map((e) => e.toJson()).toList());
+  writeNotNull('alarms', instance.alarms?.map((e) => e.toJson()).toList());
+  writeNotNull('displays', instance.displays?.map((e) => e.toJson()).toList());
+  writeNotNull('controls', instance.controls?.map((e) => e.toJson()).toList());
+  writeNotNull('events', instance.events?.map((e) => e.toJson()).toList());
+  writeNotNull('triggers', instance.triggers?.map((e) => e.toJson()).toList());
+  writeNotNull('displayWidgets',
+      instance.displayWidgets?.map((e) => e.toJson()).toList());
+  writeNotNull(
+      'preprocessors', instance.preprocessors?.map((e) => e.toJson()).toList());
+  return val;
+}
