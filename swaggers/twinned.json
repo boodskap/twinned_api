@@ -17943,21 +17943,26 @@
     "Lookup": {
       "type": "object",
       "required": [
-        "name"
+        "name",
+        "attributes"
       ],
       "properties": {
         "name": {
           "type": "string"
         },
-        "settings": {
-          "$ref": "#/definitions/SettingsInfo"
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          }
         }
       }
     },
     "SettingsInfo": {
       "type": "object",
       "required": [
-        "name"
+        "name",
+        "attributes"
       ],
       "properties": {
         "name": {
@@ -18579,16 +18584,16 @@
       "type": "object",
       "required": [
         "name",
-        "settings"
+        "settingIds"
       ],
       "properties": {
         "name": {
           "type": "string"
         },
-        "lookup": {
+        "settingIds": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Lookup"
+            "type": "string"
           }
         }
       }

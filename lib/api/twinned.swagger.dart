@@ -31868,7 +31868,7 @@ extension $AttributeExtension on Attribute {
 class Lookup {
   const Lookup({
     required this.name,
-    this.settings,
+    required this.attributes,
   });
 
   factory Lookup.fromJson(Map<String, dynamic> json) => _$LookupFromJson(json);
@@ -31878,8 +31878,9 @@ class Lookup {
 
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
   final String name;
-  @JsonKey(name: 'settings', includeIfNull: false)
-  final SettingsInfo? settings;
+  @JsonKey(
+      name: 'attributes', includeIfNull: false, defaultValue: <Attribute>[])
+  final List<Attribute> attributes;
   static const fromJsonFactory = _$LookupFromJson;
 
   @override
@@ -31888,9 +31889,9 @@ class Lookup {
         (other is Lookup &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.settings, settings) ||
+            (identical(other.attributes, attributes) ||
                 const DeepCollectionEquality()
-                    .equals(other.settings, settings)));
+                    .equals(other.attributes, attributes)));
   }
 
   @override
@@ -31899,20 +31900,21 @@ class Lookup {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(settings) ^
+      const DeepCollectionEquality().hash(attributes) ^
       runtimeType.hashCode;
 }
 
 extension $LookupExtension on Lookup {
-  Lookup copyWith({String? name, SettingsInfo? settings}) {
-    return Lookup(name: name ?? this.name, settings: settings ?? this.settings);
+  Lookup copyWith({String? name, List<Attribute>? attributes}) {
+    return Lookup(
+        name: name ?? this.name, attributes: attributes ?? this.attributes);
   }
 
   Lookup copyWithWrapped(
-      {Wrapped<String>? name, Wrapped<SettingsInfo?>? settings}) {
+      {Wrapped<String>? name, Wrapped<List<Attribute>>? attributes}) {
     return Lookup(
         name: (name != null ? name.value : this.name),
-        settings: (settings != null ? settings.value : this.settings));
+        attributes: (attributes != null ? attributes.value : this.attributes));
   }
 }
 
@@ -31922,7 +31924,7 @@ class SettingsInfo {
     required this.name,
     this.description,
     this.tags,
-    this.attributes,
+    required this.attributes,
   });
 
   factory SettingsInfo.fromJson(Map<String, dynamic> json) =>
@@ -31939,7 +31941,7 @@ class SettingsInfo {
   final List<String>? tags;
   @JsonKey(
       name: 'attributes', includeIfNull: false, defaultValue: <Attribute>[])
-  final List<Attribute>? attributes;
+  final List<Attribute> attributes;
   static const fromJsonFactory = _$SettingsInfoFromJson;
 
   @override
@@ -31987,7 +31989,7 @@ extension $SettingsInfoExtension on SettingsInfo {
       {Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
-      Wrapped<List<Attribute>?>? attributes}) {
+      Wrapped<List<Attribute>>? attributes}) {
     return SettingsInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -32003,7 +32005,7 @@ class Settings {
     required this.name,
     this.description,
     this.tags,
-    this.attributes,
+    required this.attributes,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -32027,7 +32029,7 @@ class Settings {
   final List<String>? tags;
   @JsonKey(
       name: 'attributes', includeIfNull: false, defaultValue: <Attribute>[])
-  final List<Attribute>? attributes;
+  final List<Attribute> attributes;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -32129,7 +32131,7 @@ extension $SettingsExtension on Settings {
       {Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
-      Wrapped<List<Attribute>?>? attributes,
+      Wrapped<List<Attribute>>? attributes,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -35497,7 +35499,7 @@ extension $IDListEntityResExtension on IDListEntityRes {
 class CustomSetting {
   const CustomSetting({
     required this.name,
-    this.lookup,
+    required this.settingIds,
   });
 
   factory CustomSetting.fromJson(Map<String, dynamic> json) =>
@@ -35508,8 +35510,8 @@ class CustomSetting {
 
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
   final String name;
-  @JsonKey(name: 'lookup', includeIfNull: false, defaultValue: <Lookup>[])
-  final List<Lookup>? lookup;
+  @JsonKey(name: 'settingIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String> settingIds;
   static const fromJsonFactory = _$CustomSettingFromJson;
 
   @override
@@ -35518,8 +35520,9 @@ class CustomSetting {
         (other is CustomSetting &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.lookup, lookup) ||
-                const DeepCollectionEquality().equals(other.lookup, lookup)));
+            (identical(other.settingIds, settingIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.settingIds, settingIds)));
   }
 
   @override
@@ -35528,21 +35531,21 @@ class CustomSetting {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(lookup) ^
+      const DeepCollectionEquality().hash(settingIds) ^
       runtimeType.hashCode;
 }
 
 extension $CustomSettingExtension on CustomSetting {
-  CustomSetting copyWith({String? name, List<Lookup>? lookup}) {
+  CustomSetting copyWith({String? name, List<String>? settingIds}) {
     return CustomSetting(
-        name: name ?? this.name, lookup: lookup ?? this.lookup);
+        name: name ?? this.name, settingIds: settingIds ?? this.settingIds);
   }
 
   CustomSetting copyWithWrapped(
-      {Wrapped<String>? name, Wrapped<List<Lookup>?>? lookup}) {
+      {Wrapped<String>? name, Wrapped<List<String>>? settingIds}) {
     return CustomSetting(
         name: (name != null ? name.value : this.name),
-        lookup: (lookup != null ? lookup.value : this.lookup));
+        settingIds: (settingIds != null ? settingIds.value : this.settingIds));
   }
 }
 

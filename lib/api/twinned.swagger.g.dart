@@ -7706,25 +7706,16 @@ Map<String, dynamic> _$AttributeToJson(Attribute instance) {
 
 Lookup _$LookupFromJson(Map<String, dynamic> json) => Lookup(
       name: json['name'] as String? ?? '',
-      settings: json['settings'] == null
-          ? null
-          : SettingsInfo.fromJson(json['settings'] as Map<String, dynamic>),
+      attributes: (json['attributes'] as List<dynamic>?)
+              ?.map((e) => Attribute.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
-Map<String, dynamic> _$LookupToJson(Lookup instance) {
-  final val = <String, dynamic>{
-    'name': instance.name,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('settings', instance.settings?.toJson());
-  return val;
-}
+Map<String, dynamic> _$LookupToJson(Lookup instance) => <String, dynamic>{
+      'name': instance.name,
+      'attributes': instance.attributes.map((e) => e.toJson()).toList(),
+    };
 
 SettingsInfo _$SettingsInfoFromJson(Map<String, dynamic> json) => SettingsInfo(
       name: json['name'] as String? ?? '',
@@ -7751,8 +7742,7 @@ Map<String, dynamic> _$SettingsInfoToJson(SettingsInfo instance) {
 
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
-  writeNotNull(
-      'attributes', instance.attributes?.map((e) => e.toJson()).toList());
+  val['attributes'] = instance.attributes.map((e) => e.toJson()).toList();
   return val;
 }
 
@@ -7788,8 +7778,7 @@ Map<String, dynamic> _$SettingsToJson(Settings instance) {
 
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
-  writeNotNull(
-      'attributes', instance.attributes?.map((e) => e.toJson()).toList());
+  val['attributes'] = instance.attributes.map((e) => e.toJson()).toList();
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -8874,26 +8863,17 @@ Map<String, dynamic> _$IDListEntityResToJson(IDListEntityRes instance) {
 CustomSetting _$CustomSettingFromJson(Map<String, dynamic> json) =>
     CustomSetting(
       name: json['name'] as String? ?? '',
-      lookup: (json['lookup'] as List<dynamic>?)
-              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
+      settingIds: (json['settingIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
               .toList() ??
           [],
     );
 
-Map<String, dynamic> _$CustomSettingToJson(CustomSetting instance) {
-  final val = <String, dynamic>{
-    'name': instance.name,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('lookup', instance.lookup?.map((e) => e.toJson()).toList());
-  return val;
-}
+Map<String, dynamic> _$CustomSettingToJson(CustomSetting instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'settingIds': instance.settingIds,
+    };
 
 ExportData _$ExportDataFromJson(Map<String, dynamic> json) => ExportData(
       model: DeviceModelInfo.fromJson(json['model'] as Map<String, dynamic>),
