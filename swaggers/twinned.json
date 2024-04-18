@@ -14408,7 +14408,6 @@
         },
         "value": {
           "type": "string",
-          "default": "{{#}}",
           "description": "by default the actual field value will be rendered, set the **field** to render a different field value, or replace the default text into a custom value"
         },
         "bgColor": {
