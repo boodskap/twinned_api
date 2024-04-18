@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "1.7.7",
+    "version": "1.7.8",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -13071,14 +13071,18 @@
         "movable": {
           "type": "boolean"
         },
-        "settings": {
+        "customSettings": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Lookup"
+            "$ref": "#/definitions/CustomSetting"
           }
         },
         "customWidget": {
           "$ref": "#/definitions/CustomWidget"
+        },
+        "makePublic": {
+          "type": "boolean",
+          "default": false
         }
       }
     },
@@ -13210,15 +13214,6 @@
         },
         "geolocation": {
           "$ref": "#/definitions/GeoLocation"
-        },
-        "preprocessorId": {
-          "type": "string"
-        },
-        "settings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Lookup"
-          }
         },
         "customWidget": {
           "$ref": "#/definitions/CustomWidget"
@@ -17226,12 +17221,6 @@
         "location": {
           "$ref": "#/definitions/GeoLocation"
         },
-        "settings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Lookup"
-          }
-        },
         "floorLevel": {
           "type": "integer",
           "default": 0
@@ -17366,7 +17355,7 @@
         "position": {
           "$ref": "#/definitions/ScreenPosition"
         },
-        "settings": {
+        "lookups": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Lookup"
@@ -17477,12 +17466,6 @@
         },
         "location": {
           "$ref": "#/definitions/GeoLocation"
-        },
-        "settings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Lookup"
-          }
         }
       }
     },
@@ -17774,12 +17757,6 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
-        },
-        "settings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Lookup"
           }
         },
         "selectedImage": {
@@ -18495,10 +18472,10 @@
         "geolocation": {
           "$ref": "#/definitions/GeoLocation"
         },
-        "settings": {
+        "deviceModelsIds": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Lookup"
+            "type": "string"
           }
         }
       }
@@ -18598,6 +18575,24 @@
           "type": "object"
         }
       ]
+    },
+    "CustomSetting": {
+      "type": "object",
+      "required": [
+        "name",
+        "settings"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "lookup": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Lookup"
+          }
+        }
+      }
     },
     "ExportData": {
       "type": "object",

@@ -339,13 +339,14 @@ DeviceModelInfo _$DeviceModelInfoFromJson(Map<String, dynamic> json) =>
       preprocessorId: json['preprocessorId'] as String? ?? '',
       hasGeoLocation: json['hasGeoLocation'] as bool?,
       movable: json['movable'] as bool?,
-      settings: (json['settings'] as List<dynamic>?)
-              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
+      customSettings: (json['customSettings'] as List<dynamic>?)
+              ?.map((e) => CustomSetting.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
       customWidget: json['customWidget'] == null
           ? null
           : CustomWidget.fromJson(json['customWidget'] as Map<String, dynamic>),
+      makePublic: json['makePublic'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$DeviceModelInfoToJson(DeviceModelInfo instance) {
@@ -375,8 +376,10 @@ Map<String, dynamic> _$DeviceModelInfoToJson(DeviceModelInfo instance) {
   writeNotNull('preprocessorId', instance.preprocessorId);
   writeNotNull('hasGeoLocation', instance.hasGeoLocation);
   writeNotNull('movable', instance.movable);
-  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
+  writeNotNull('customSettings',
+      instance.customSettings?.map((e) => e.toJson()).toList());
   writeNotNull('customWidget', instance.customWidget?.toJson());
+  writeNotNull('makePublic', instance.makePublic);
   return val;
 }
 
@@ -409,13 +412,14 @@ DeviceModel _$DeviceModelFromJson(Map<String, dynamic> json) => DeviceModel(
       preprocessorId: json['preprocessorId'] as String? ?? '',
       hasGeoLocation: json['hasGeoLocation'] as bool?,
       movable: json['movable'] as bool?,
-      settings: (json['settings'] as List<dynamic>?)
-              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
+      customSettings: (json['customSettings'] as List<dynamic>?)
+              ?.map((e) => CustomSetting.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
       customWidget: json['customWidget'] == null
           ? null
           : CustomWidget.fromJson(json['customWidget'] as Map<String, dynamic>),
+      makePublic: json['makePublic'] as bool? ?? false,
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -452,8 +456,10 @@ Map<String, dynamic> _$DeviceModelToJson(DeviceModel instance) {
   writeNotNull('preprocessorId', instance.preprocessorId);
   writeNotNull('hasGeoLocation', instance.hasGeoLocation);
   writeNotNull('movable', instance.movable);
-  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
+  writeNotNull('customSettings',
+      instance.customSettings?.map((e) => e.toJson()).toList());
   writeNotNull('customWidget', instance.customWidget?.toJson());
+  writeNotNull('makePublic', instance.makePublic);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -598,11 +604,6 @@ DeviceInfo _$DeviceInfoFromJson(Map<String, dynamic> json) => DeviceInfo(
       geolocation: json['geolocation'] == null
           ? null
           : GeoLocation.fromJson(json['geolocation'] as Map<String, dynamic>),
-      preprocessorId: json['preprocessorId'] as String? ?? '',
-      settings: (json['settings'] as List<dynamic>?)
-              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
       customWidget: json['customWidget'] == null
           ? null
           : CustomWidget.fromJson(json['customWidget'] as Map<String, dynamic>),
@@ -633,8 +634,6 @@ Map<String, dynamic> _$DeviceInfoToJson(DeviceInfo instance) {
   writeNotNull('hasGeoLocation', instance.hasGeoLocation);
   writeNotNull('movable', instance.movable);
   writeNotNull('geolocation', instance.geolocation?.toJson());
-  writeNotNull('preprocessorId', instance.preprocessorId);
-  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
   writeNotNull('customWidget', instance.customWidget?.toJson());
   return val;
 }
@@ -699,11 +698,6 @@ Device _$DeviceFromJson(Map<String, dynamic> json) => Device(
       geolocation: json['geolocation'] == null
           ? null
           : GeoLocation.fromJson(json['geolocation'] as Map<String, dynamic>),
-      preprocessorId: json['preprocessorId'] as String? ?? '',
-      settings: (json['settings'] as List<dynamic>?)
-              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
       customWidget: json['customWidget'] == null
           ? null
           : CustomWidget.fromJson(json['customWidget'] as Map<String, dynamic>),
@@ -747,8 +741,6 @@ Map<String, dynamic> _$DeviceToJson(Device instance) {
   writeNotNull('hasGeoLocation', instance.hasGeoLocation);
   writeNotNull('movable', instance.movable);
   writeNotNull('geolocation', instance.geolocation?.toJson());
-  writeNotNull('preprocessorId', instance.preprocessorId);
-  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
   writeNotNull('customWidget', instance.customWidget?.toJson());
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
@@ -872,7 +864,7 @@ ConditionInfo _$ConditionInfoFromJson(Map<String, dynamic> json) =>
       icon: json['icon'] as String? ?? '',
       field: json['field'] as String? ?? '',
       condition: conditionInfoConditionFromJson(json['condition']),
-      value: json['value'] as String? ?? '',
+      $value: json['value'] as String? ?? '',
       leftValue: json['leftValue'] as String? ?? '',
       rightValue: json['rightValue'] as String? ?? '',
       values: (json['values'] as List<dynamic>?)
@@ -900,7 +892,7 @@ Map<String, dynamic> _$ConditionInfoToJson(ConditionInfo instance) {
   writeNotNull('icon', instance.icon);
   val['field'] = instance.field;
   writeNotNull('condition', conditionInfoConditionToJson(instance.condition));
-  writeNotNull('value', instance.value);
+  writeNotNull('value', instance.$value);
   writeNotNull('leftValue', instance.leftValue);
   writeNotNull('rightValue', instance.rightValue);
   writeNotNull('values', instance.values);
@@ -915,7 +907,7 @@ Condition _$ConditionFromJson(Map<String, dynamic> json) => Condition(
       icon: json['icon'] as String? ?? '',
       field: json['field'] as String? ?? '',
       condition: conditionConditionFromJson(json['condition']),
-      value: json['value'] as String? ?? '',
+      $value: json['value'] as String? ?? '',
       leftValue: json['leftValue'] as String? ?? '',
       rightValue: json['rightValue'] as String? ?? '',
       values: (json['values'] as List<dynamic>?)
@@ -950,7 +942,7 @@ Map<String, dynamic> _$ConditionToJson(Condition instance) {
   writeNotNull('icon', instance.icon);
   val['field'] = instance.field;
   writeNotNull('condition', conditionConditionToJson(instance.condition));
-  writeNotNull('value', instance.value);
+  writeNotNull('value', instance.$value);
   writeNotNull('leftValue', instance.leftValue);
   writeNotNull('rightValue', instance.rightValue);
   writeNotNull('values', instance.values);
@@ -1791,7 +1783,7 @@ Map<String, dynamic> _$EventArrayResToJson(EventArrayRes instance) {
 
 HttpParam _$HttpParamFromJson(Map<String, dynamic> json) => HttpParam(
       name: json['name'] as String? ?? '',
-      value: json['value'] as String? ?? '',
+      $value: json['value'] as String? ?? '',
     );
 
 Map<String, dynamic> _$HttpParamToJson(HttpParam instance) {
@@ -1805,7 +1797,7 @@ Map<String, dynamic> _$HttpParamToJson(HttpParam instance) {
     }
   }
 
-  writeNotNull('value', instance.value);
+  writeNotNull('value', instance.$value);
   return val;
 }
 
@@ -2434,7 +2426,7 @@ DisplayMatchGroup _$DisplayMatchGroupFromJson(Map<String, dynamic> json) =>
       bordorColor: json['bordorColor'] as int?,
       borderType:
           displayMatchGroupBorderTypeNullableFromJson(json['borderType']),
-      value: json['value'] as String? ?? '',
+      $value: json['value'] as String? ?? '',
       bgColor: json['bgColor'] as int?,
       prefixText: json['prefixText'] as String? ?? '',
       prefixFont: json['prefixFont'] as String? ?? '',
@@ -2490,7 +2482,7 @@ Map<String, dynamic> _$DisplayMatchGroupToJson(DisplayMatchGroup instance) {
   writeNotNull('bordorColor', instance.bordorColor);
   writeNotNull('borderType',
       displayMatchGroupBorderTypeNullableToJson(instance.borderType));
-  writeNotNull('value', instance.value);
+  writeNotNull('value', instance.$value);
   writeNotNull('bgColor', instance.bgColor);
   writeNotNull('prefixText', instance.prefixText);
   writeNotNull('prefixFont', instance.prefixFont);
@@ -3067,7 +3059,7 @@ EvaluatedDisplay _$EvaluatedDisplayFromJson(Map<String, dynamic> json) =>
       displayId: json['displayId'] as String? ?? '',
       prefix: json['prefix'] as String? ?? '',
       suffix: json['suffix'] as String? ?? '',
-      value: json['value'] as String? ?? '',
+      $value: json['value'] as String? ?? '',
       conditionIndex: json['conditionIndex'] as int,
       tooltip: json['tooltip'] as String? ?? '',
     );
@@ -3077,7 +3069,7 @@ Map<String, dynamic> _$EvaluatedDisplayToJson(EvaluatedDisplay instance) {
     'displayId': instance.displayId,
     'prefix': instance.prefix,
     'suffix': instance.suffix,
-    'value': instance.value,
+    'value': instance.$value,
     'conditionIndex': instance.conditionIndex,
   };
 
@@ -6395,10 +6387,6 @@ FloorInfo _$FloorInfoFromJson(Map<String, dynamic> json) => FloorInfo(
       location: json['location'] == null
           ? null
           : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
-      settings: (json['settings'] as List<dynamic>?)
-              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
       floorLevel: json['floorLevel'] as int,
       floorType:
           FloorInfo.floorInfoFloorTypeFloorTypeFromJson(json['floorType']),
@@ -6423,7 +6411,6 @@ Map<String, dynamic> _$FloorInfoToJson(FloorInfo instance) {
   writeNotNull('assets', instance.assets);
   writeNotNull('roles', instance.roles);
   writeNotNull('location', instance.location?.toJson());
-  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
   val['floorLevel'] = instance.floorLevel;
   writeNotNull('floorType', floorInfoFloorTypeToJson(instance.floorType));
   return val;
@@ -6448,10 +6435,6 @@ Floor _$FloorFromJson(Map<String, dynamic> json) => Floor(
       location: json['location'] == null
           ? null
           : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
-      settings: (json['settings'] as List<dynamic>?)
-              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
       floorLevel: json['floorLevel'] as int,
       floorType: Floor.floorFloorTypeFloorTypeFromJson(json['floorType']),
       domainKey: json['domainKey'] as String? ?? '',
@@ -6482,7 +6465,6 @@ Map<String, dynamic> _$FloorToJson(Floor instance) {
   writeNotNull('assets', instance.assets);
   writeNotNull('roles', instance.roles);
   writeNotNull('location', instance.location?.toJson());
-  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
   val['floorLevel'] = instance.floorLevel;
   writeNotNull('floorType', floorFloorTypeToJson(instance.floorType));
   val['domainKey'] = instance.domainKey;
@@ -6626,7 +6608,7 @@ AssetInfo _$AssetInfoFromJson(Map<String, dynamic> json) => AssetInfo(
       position: json['position'] == null
           ? null
           : ScreenPosition.fromJson(json['position'] as Map<String, dynamic>),
-      settings: (json['settings'] as List<dynamic>?)
+      lookups: (json['lookups'] as List<dynamic>?)
               ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
@@ -6655,7 +6637,7 @@ Map<String, dynamic> _$AssetInfoToJson(AssetInfo instance) {
   writeNotNull('roles', instance.roles);
   writeNotNull('location', instance.location?.toJson());
   writeNotNull('position', instance.position?.toJson());
-  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
+  writeNotNull('lookups', instance.lookups?.map((e) => e.toJson()).toList());
   val['assetModelId'] = instance.assetModelId;
   return val;
 }
@@ -6687,7 +6669,7 @@ Asset _$AssetFromJson(Map<String, dynamic> json) => Asset(
       position: json['position'] == null
           ? null
           : ScreenPosition.fromJson(json['position'] as Map<String, dynamic>),
-      settings: (json['settings'] as List<dynamic>?)
+      lookups: (json['lookups'] as List<dynamic>?)
               ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
@@ -6723,7 +6705,7 @@ Map<String, dynamic> _$AssetToJson(Asset instance) {
   writeNotNull('roles', instance.roles);
   writeNotNull('location', instance.location?.toJson());
   writeNotNull('position', instance.position?.toJson());
-  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
+  writeNotNull('lookups', instance.lookups?.map((e) => e.toJson()).toList());
   val['assetModelId'] = instance.assetModelId;
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
@@ -6857,10 +6839,6 @@ FacilityInfo _$FacilityInfoFromJson(Map<String, dynamic> json) => FacilityInfo(
       location: json['location'] == null
           ? null
           : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
-      settings: (json['settings'] as List<dynamic>?)
-              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
     );
 
 Map<String, dynamic> _$FacilityInfoToJson(FacilityInfo instance) {
@@ -6881,7 +6859,6 @@ Map<String, dynamic> _$FacilityInfoToJson(FacilityInfo instance) {
   writeNotNull('images', instance.images);
   writeNotNull('roles', instance.roles);
   writeNotNull('location', instance.location?.toJson());
-  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
   return val;
 }
 
@@ -6903,10 +6880,6 @@ Facility _$FacilityFromJson(Map<String, dynamic> json) => Facility(
       location: json['location'] == null
           ? null
           : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
-      settings: (json['settings'] as List<dynamic>?)
-              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -6934,7 +6907,6 @@ Map<String, dynamic> _$FacilityToJson(Facility instance) {
   writeNotNull('images', instance.images);
   writeNotNull('roles', instance.roles);
   writeNotNull('location', instance.location?.toJson());
-  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -7461,10 +7433,6 @@ PremiseInfo _$PremiseInfoFromJson(Map<String, dynamic> json) => PremiseInfo(
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
-      settings: (json['settings'] as List<dynamic>?)
-              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
       selectedImage: json['selectedImage'] as int?,
       images: (json['images'] as List<dynamic>?)
               ?.map((e) => e as String)
@@ -7491,7 +7459,6 @@ Map<String, dynamic> _$PremiseInfoToJson(PremiseInfo instance) {
 
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
-  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
   writeNotNull('selectedImage', instance.selectedImage);
   writeNotNull('images', instance.images);
   writeNotNull('location', instance.location?.toJson());
@@ -7505,10 +7472,6 @@ Premise _$PremiseFromJson(Map<String, dynamic> json) => Premise(
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
-      settings: (json['settings'] as List<dynamic>?)
-              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
       selectedImage: json['selectedImage'] as int?,
       images: (json['images'] as List<dynamic>?)
               ?.map((e) => e as String)
@@ -7542,7 +7505,6 @@ Map<String, dynamic> _$PremiseToJson(Premise instance) {
 
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
-  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
   writeNotNull('selectedImage', instance.selectedImage);
   writeNotNull('images', instance.images);
   writeNotNull('location', instance.location?.toJson());
@@ -7692,7 +7654,7 @@ Attribute _$AttributeFromJson(Map<String, dynamic> json) => Attribute(
       description: json['description'] as String? ?? '',
       label: json['label'] as String? ?? '',
       attributeType: attributeAttributeTypeFromJson(json['attributeType']),
-      value: json['value'] as String? ?? '',
+      $value: json['value'] as String? ?? '',
       editable: json['editable'] as bool? ?? true,
       validator: attributeValidatorNullableFromJson(json['validator']),
       allowedValues: (json['allowedValues'] as List<dynamic>?)
@@ -7728,7 +7690,7 @@ Map<String, dynamic> _$AttributeToJson(Attribute instance) {
   writeNotNull('label', instance.label);
   writeNotNull(
       'attributeType', attributeAttributeTypeToJson(instance.attributeType));
-  val['value'] = instance.value;
+  val['value'] = instance.$value;
   writeNotNull('editable', instance.editable);
   writeNotNull(
       'validator', attributeValidatorNullableToJson(instance.validator));
@@ -8657,8 +8619,8 @@ AssetModelInfo _$AssetModelInfoFromJson(Map<String, dynamic> json) =>
       geolocation: json['geolocation'] == null
           ? null
           : GeoLocation.fromJson(json['geolocation'] as Map<String, dynamic>),
-      settings: (json['settings'] as List<dynamic>?)
-              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
+      deviceModelsIds: (json['deviceModelsIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
               .toList() ??
           [],
     );
@@ -8685,7 +8647,7 @@ Map<String, dynamic> _$AssetModelInfoToJson(AssetModelInfo instance) {
   writeNotNull('hasGeoLocation', instance.hasGeoLocation);
   writeNotNull('movable', instance.movable);
   writeNotNull('geolocation', instance.geolocation?.toJson());
-  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
+  writeNotNull('deviceModelsIds', instance.deviceModelsIds);
   return val;
 }
 
@@ -8712,8 +8674,8 @@ AssetModel _$AssetModelFromJson(Map<String, dynamic> json) => AssetModel(
       geolocation: json['geolocation'] == null
           ? null
           : GeoLocation.fromJson(json['geolocation'] as Map<String, dynamic>),
-      settings: (json['settings'] as List<dynamic>?)
-              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
+      deviceModelsIds: (json['deviceModelsIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
               .toList() ??
           [],
       domainKey: json['domainKey'] as String? ?? '',
@@ -8747,7 +8709,7 @@ Map<String, dynamic> _$AssetModelToJson(AssetModel instance) {
   writeNotNull('hasGeoLocation', instance.hasGeoLocation);
   writeNotNull('movable', instance.movable);
   writeNotNull('geolocation', instance.geolocation?.toJson());
-  writeNotNull('settings', instance.settings?.map((e) => e.toJson()).toList());
+  writeNotNull('deviceModelsIds', instance.deviceModelsIds);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -8906,6 +8868,30 @@ Map<String, dynamic> _$IDListEntityResToJson(IDListEntityRes instance) {
   writeNotNull('errorCode', instance.errorCode);
   val['total'] = instance.total;
   val['values'] = instance.values;
+  return val;
+}
+
+CustomSetting _$CustomSettingFromJson(Map<String, dynamic> json) =>
+    CustomSetting(
+      name: json['name'] as String? ?? '',
+      lookup: (json['lookup'] as List<dynamic>?)
+              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$CustomSettingToJson(CustomSetting instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('lookup', instance.lookup?.map((e) => e.toJson()).toList());
   return val;
 }
 

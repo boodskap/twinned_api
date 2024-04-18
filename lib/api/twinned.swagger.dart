@@ -27,6 +27,7 @@ abstract class Twinned extends ChopperService {
     ChopperClient? client,
     http.Client? httpClient,
     Authenticator? authenticator,
+    ErrorConverter? errorConverter,
     Converter? converter,
     Uri? baseUrl,
     Iterable<dynamic>? interceptors,
@@ -41,6 +42,7 @@ abstract class Twinned extends ChopperService {
         interceptors: interceptors ?? [],
         client: httpClient,
         authenticator: authenticator,
+        errorConverter: errorConverter,
         baseUrl:
             baseUrl ?? Uri.parse('http://twinned.boodskap.io/rest/nocode'));
     return _$Twinned(newClient);
@@ -6520,7 +6522,7 @@ class BaseResponse {
   static const fromJsonFactory = _$BaseResponseFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is BaseResponse &&
             (identical(other.ok, ok) ||
@@ -6610,7 +6612,7 @@ class BaseEntity {
   static const fromJsonFactory = _$BaseEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is BaseEntity &&
             (identical(other.domainKey, domainKey) ||
@@ -6735,7 +6737,7 @@ class DisplayableEntity {
   static const fromJsonFactory = _$DisplayableEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DisplayableEntity &&
             (identical(other.description, description) ||
@@ -6833,7 +6835,7 @@ class FireReq {
   static const fromJsonFactory = _$FireReqFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FireReq &&
             (identical(other.deviceId, deviceId) ||
@@ -6905,7 +6907,7 @@ class GetReq {
   static const fromJsonFactory = _$GetReqFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is GetReq &&
             (identical(other.ids, ids) ||
@@ -6950,7 +6952,7 @@ class ListReq {
   static const fromJsonFactory = _$ListReqFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ListReq &&
             (identical(other.page, page) ||
@@ -7004,7 +7006,7 @@ class ListRes {
   static const fromJsonFactory = _$ListResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ListRes &&
             (identical(other.page, page) ||
@@ -7060,7 +7062,7 @@ class SearchReqBase {
   static const fromJsonFactory = _$SearchReqBaseFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is SearchReqBase &&
             (identical(other.search, search) ||
@@ -7108,7 +7110,7 @@ class SearchReq {
   static const fromJsonFactory = _$SearchReqFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is SearchReq &&
             (identical(other.search, search) ||
@@ -7178,7 +7180,7 @@ class RangeFilter {
   static const fromJsonFactory = _$RangeFilterFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is RangeFilter &&
             (identical(other.tz, tz) ||
@@ -7248,7 +7250,7 @@ class FilterReqBase {
   static const fromJsonFactory = _$FilterReqBaseFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FilterReqBase &&
             (identical(other.filter, filter) ||
@@ -7299,7 +7301,7 @@ class FilterSearchReq {
   static const fromJsonFactory = _$FilterSearchReqFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FilterSearchReq &&
             (identical(other.search, search) ||
@@ -7378,7 +7380,7 @@ class CleanReq {
   static const fromJsonFactory = _$CleanReqFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is CleanReq &&
             (identical(other.type, type) ||
@@ -7474,7 +7476,7 @@ class Parameter {
   static const fromJsonFactory = _$ParameterFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Parameter &&
             (identical(other.name, name) ||
@@ -7608,8 +7610,9 @@ class DeviceModelInfo {
     this.preprocessorId,
     this.hasGeoLocation,
     this.movable,
-    this.settings,
+    this.customSettings,
     this.customWidget,
+    this.makePublic,
   });
 
   factory DeviceModelInfo.fromJson(Map<String, dynamic> json) =>
@@ -7653,14 +7656,19 @@ class DeviceModelInfo {
   final bool? hasGeoLocation;
   @JsonKey(name: 'movable', includeIfNull: false)
   final bool? movable;
-  @JsonKey(name: 'settings', includeIfNull: false, defaultValue: <Lookup>[])
-  final List<Lookup>? settings;
+  @JsonKey(
+      name: 'customSettings',
+      includeIfNull: false,
+      defaultValue: <CustomSetting>[])
+  final List<CustomSetting>? customSettings;
   @JsonKey(name: 'customWidget', includeIfNull: false)
   final CustomWidget? customWidget;
+  @JsonKey(name: 'makePublic', includeIfNull: false, defaultValue: false)
+  final bool? makePublic;
   static const fromJsonFactory = _$DeviceModelInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceModelInfo &&
             (identical(other.name, name) ||
@@ -7708,12 +7716,15 @@ class DeviceModelInfo {
             (identical(other.movable, movable) ||
                 const DeepCollectionEquality()
                     .equals(other.movable, movable)) &&
-            (identical(other.settings, settings) ||
+            (identical(other.customSettings, customSettings) ||
                 const DeepCollectionEquality()
-                    .equals(other.settings, settings)) &&
+                    .equals(other.customSettings, customSettings)) &&
             (identical(other.customWidget, customWidget) ||
                 const DeepCollectionEquality()
-                    .equals(other.customWidget, customWidget)));
+                    .equals(other.customWidget, customWidget)) &&
+            (identical(other.makePublic, makePublic) ||
+                const DeepCollectionEquality()
+                    .equals(other.makePublic, makePublic)));
   }
 
   @override
@@ -7738,8 +7749,9 @@ class DeviceModelInfo {
       const DeepCollectionEquality().hash(preprocessorId) ^
       const DeepCollectionEquality().hash(hasGeoLocation) ^
       const DeepCollectionEquality().hash(movable) ^
-      const DeepCollectionEquality().hash(settings) ^
+      const DeepCollectionEquality().hash(customSettings) ^
       const DeepCollectionEquality().hash(customWidget) ^
+      const DeepCollectionEquality().hash(makePublic) ^
       runtimeType.hashCode;
 }
 
@@ -7762,8 +7774,9 @@ extension $DeviceModelInfoExtension on DeviceModelInfo {
       String? preprocessorId,
       bool? hasGeoLocation,
       bool? movable,
-      List<Lookup>? settings,
-      CustomWidget? customWidget}) {
+      List<CustomSetting>? customSettings,
+      CustomWidget? customWidget,
+      bool? makePublic}) {
     return DeviceModelInfo(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -7782,8 +7795,9 @@ extension $DeviceModelInfoExtension on DeviceModelInfo {
         preprocessorId: preprocessorId ?? this.preprocessorId,
         hasGeoLocation: hasGeoLocation ?? this.hasGeoLocation,
         movable: movable ?? this.movable,
-        settings: settings ?? this.settings,
-        customWidget: customWidget ?? this.customWidget);
+        customSettings: customSettings ?? this.customSettings,
+        customWidget: customWidget ?? this.customWidget,
+        makePublic: makePublic ?? this.makePublic);
   }
 
   DeviceModelInfo copyWithWrapped(
@@ -7804,8 +7818,9 @@ extension $DeviceModelInfoExtension on DeviceModelInfo {
       Wrapped<String?>? preprocessorId,
       Wrapped<bool?>? hasGeoLocation,
       Wrapped<bool?>? movable,
-      Wrapped<List<Lookup>?>? settings,
-      Wrapped<CustomWidget?>? customWidget}) {
+      Wrapped<List<CustomSetting>?>? customSettings,
+      Wrapped<CustomWidget?>? customWidget,
+      Wrapped<bool?>? makePublic}) {
     return DeviceModelInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -7833,9 +7848,12 @@ extension $DeviceModelInfoExtension on DeviceModelInfo {
             ? hasGeoLocation.value
             : this.hasGeoLocation),
         movable: (movable != null ? movable.value : this.movable),
-        settings: (settings != null ? settings.value : this.settings),
+        customSettings: (customSettings != null
+            ? customSettings.value
+            : this.customSettings),
         customWidget:
-            (customWidget != null ? customWidget.value : this.customWidget));
+            (customWidget != null ? customWidget.value : this.customWidget),
+        makePublic: (makePublic != null ? makePublic.value : this.makePublic));
   }
 }
 
@@ -7859,8 +7877,9 @@ class DeviceModel {
     this.preprocessorId,
     this.hasGeoLocation,
     this.movable,
-    this.settings,
+    this.customSettings,
     this.customWidget,
+    this.makePublic,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -7911,10 +7930,15 @@ class DeviceModel {
   final bool? hasGeoLocation;
   @JsonKey(name: 'movable', includeIfNull: false)
   final bool? movable;
-  @JsonKey(name: 'settings', includeIfNull: false, defaultValue: <Lookup>[])
-  final List<Lookup>? settings;
+  @JsonKey(
+      name: 'customSettings',
+      includeIfNull: false,
+      defaultValue: <CustomSetting>[])
+  final List<CustomSetting>? customSettings;
   @JsonKey(name: 'customWidget', includeIfNull: false)
   final CustomWidget? customWidget;
+  @JsonKey(name: 'makePublic', includeIfNull: false, defaultValue: false)
+  final bool? makePublic;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -7932,7 +7956,7 @@ class DeviceModel {
   static const fromJsonFactory = _$DeviceModelFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceModel &&
             (identical(other.name, name) ||
@@ -7980,12 +8004,15 @@ class DeviceModel {
             (identical(other.movable, movable) ||
                 const DeepCollectionEquality()
                     .equals(other.movable, movable)) &&
-            (identical(other.settings, settings) ||
+            (identical(other.customSettings, customSettings) ||
                 const DeepCollectionEquality()
-                    .equals(other.settings, settings)) &&
+                    .equals(other.customSettings, customSettings)) &&
             (identical(other.customWidget, customWidget) ||
                 const DeepCollectionEquality()
                     .equals(other.customWidget, customWidget)) &&
+            (identical(other.makePublic, makePublic) ||
+                const DeepCollectionEquality()
+                    .equals(other.makePublic, makePublic)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -8000,10 +8027,8 @@ class DeviceModel {
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)));
+                const DeepCollectionEquality().equals(other.updatedBy, updatedBy)) &&
+            (identical(other.updatedStamp, updatedStamp) || const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)));
   }
 
   @override
@@ -8028,8 +8053,9 @@ class DeviceModel {
       const DeepCollectionEquality().hash(preprocessorId) ^
       const DeepCollectionEquality().hash(hasGeoLocation) ^
       const DeepCollectionEquality().hash(movable) ^
-      const DeepCollectionEquality().hash(settings) ^
+      const DeepCollectionEquality().hash(customSettings) ^
       const DeepCollectionEquality().hash(customWidget) ^
+      const DeepCollectionEquality().hash(makePublic) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -8059,8 +8085,9 @@ extension $DeviceModelExtension on DeviceModel {
       String? preprocessorId,
       bool? hasGeoLocation,
       bool? movable,
-      List<Lookup>? settings,
+      List<CustomSetting>? customSettings,
       CustomWidget? customWidget,
+      bool? makePublic,
       String? domainKey,
       String? id,
       String? rtype,
@@ -8086,8 +8113,9 @@ extension $DeviceModelExtension on DeviceModel {
         preprocessorId: preprocessorId ?? this.preprocessorId,
         hasGeoLocation: hasGeoLocation ?? this.hasGeoLocation,
         movable: movable ?? this.movable,
-        settings: settings ?? this.settings,
+        customSettings: customSettings ?? this.customSettings,
         customWidget: customWidget ?? this.customWidget,
+        makePublic: makePublic ?? this.makePublic,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -8115,8 +8143,9 @@ extension $DeviceModelExtension on DeviceModel {
       Wrapped<String?>? preprocessorId,
       Wrapped<bool?>? hasGeoLocation,
       Wrapped<bool?>? movable,
-      Wrapped<List<Lookup>?>? settings,
+      Wrapped<List<CustomSetting>?>? customSettings,
       Wrapped<CustomWidget?>? customWidget,
+      Wrapped<bool?>? makePublic,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -8151,9 +8180,12 @@ extension $DeviceModelExtension on DeviceModel {
             ? hasGeoLocation.value
             : this.hasGeoLocation),
         movable: (movable != null ? movable.value : this.movable),
-        settings: (settings != null ? settings.value : this.settings),
+        customSettings: (customSettings != null
+            ? customSettings.value
+            : this.customSettings),
         customWidget:
             (customWidget != null ? customWidget.value : this.customWidget),
+        makePublic: (makePublic != null ? makePublic.value : this.makePublic),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -8183,7 +8215,7 @@ class DeviceModelEntity {
   static const fromJsonFactory = _$DeviceModelEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceModelEntity &&
             (identical(other.entity, entity) ||
@@ -8238,7 +8270,7 @@ class DeviceModelEntityRes {
   static const fromJsonFactory = _$DeviceModelEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceModelEntityRes &&
             (identical(other.ok, ok) ||
@@ -8314,7 +8346,7 @@ class DeviceModelArray {
   static const fromJsonFactory = _$DeviceModelArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceModelArray &&
             (identical(other.values, values) ||
@@ -8378,7 +8410,7 @@ class DeviceModelArrayRes {
   static const fromJsonFactory = _$DeviceModelArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceModelArrayRes &&
             (identical(other.ok, ok) ||
@@ -8476,8 +8508,6 @@ class DeviceInfo {
     this.hasGeoLocation,
     this.movable,
     this.geolocation,
-    this.preprocessorId,
-    this.settings,
     this.customWidget,
   });
 
@@ -8517,16 +8547,12 @@ class DeviceInfo {
   final bool? movable;
   @JsonKey(name: 'geolocation', includeIfNull: false)
   final GeoLocation? geolocation;
-  @JsonKey(name: 'preprocessorId', includeIfNull: false, defaultValue: '')
-  final String? preprocessorId;
-  @JsonKey(name: 'settings', includeIfNull: false, defaultValue: <Lookup>[])
-  final List<Lookup>? settings;
   @JsonKey(name: 'customWidget', includeIfNull: false)
   final CustomWidget? customWidget;
   static const fromJsonFactory = _$DeviceInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceInfo &&
             (identical(other.name, name) ||
@@ -8570,12 +8596,6 @@ class DeviceInfo {
             (identical(other.geolocation, geolocation) ||
                 const DeepCollectionEquality()
                     .equals(other.geolocation, geolocation)) &&
-            (identical(other.preprocessorId, preprocessorId) ||
-                const DeepCollectionEquality()
-                    .equals(other.preprocessorId, preprocessorId)) &&
-            (identical(other.settings, settings) ||
-                const DeepCollectionEquality()
-                    .equals(other.settings, settings)) &&
             (identical(other.customWidget, customWidget) ||
                 const DeepCollectionEquality()
                     .equals(other.customWidget, customWidget)));
@@ -8601,8 +8621,6 @@ class DeviceInfo {
       const DeepCollectionEquality().hash(hasGeoLocation) ^
       const DeepCollectionEquality().hash(movable) ^
       const DeepCollectionEquality().hash(geolocation) ^
-      const DeepCollectionEquality().hash(preprocessorId) ^
-      const DeepCollectionEquality().hash(settings) ^
       const DeepCollectionEquality().hash(customWidget) ^
       runtimeType.hashCode;
 }
@@ -8624,8 +8642,6 @@ extension $DeviceInfoExtension on DeviceInfo {
       bool? hasGeoLocation,
       bool? movable,
       GeoLocation? geolocation,
-      String? preprocessorId,
-      List<Lookup>? settings,
       CustomWidget? customWidget}) {
     return DeviceInfo(
         name: name ?? this.name,
@@ -8643,8 +8659,6 @@ extension $DeviceInfoExtension on DeviceInfo {
         hasGeoLocation: hasGeoLocation ?? this.hasGeoLocation,
         movable: movable ?? this.movable,
         geolocation: geolocation ?? this.geolocation,
-        preprocessorId: preprocessorId ?? this.preprocessorId,
-        settings: settings ?? this.settings,
         customWidget: customWidget ?? this.customWidget);
   }
 
@@ -8664,8 +8678,6 @@ extension $DeviceInfoExtension on DeviceInfo {
       Wrapped<bool?>? hasGeoLocation,
       Wrapped<bool?>? movable,
       Wrapped<GeoLocation?>? geolocation,
-      Wrapped<String?>? preprocessorId,
-      Wrapped<List<Lookup>?>? settings,
       Wrapped<CustomWidget?>? customWidget}) {
     return DeviceInfo(
         name: (name != null ? name.value : this.name),
@@ -8691,10 +8703,6 @@ extension $DeviceInfoExtension on DeviceInfo {
         movable: (movable != null ? movable.value : this.movable),
         geolocation:
             (geolocation != null ? geolocation.value : this.geolocation),
-        preprocessorId: (preprocessorId != null
-            ? preprocessorId.value
-            : this.preprocessorId),
-        settings: (settings != null ? settings.value : this.settings),
         customWidget:
             (customWidget != null ? customWidget.value : this.customWidget));
   }
@@ -8732,7 +8740,7 @@ class DeviceBase {
   static const fromJsonFactory = _$DeviceBaseFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceBase &&
             (identical(other.apiKey, apiKey) ||
@@ -8826,8 +8834,6 @@ class Device {
     this.hasGeoLocation,
     this.movable,
     this.geolocation,
-    this.preprocessorId,
-    this.settings,
     this.customWidget,
     required this.domainKey,
     required this.id,
@@ -8885,10 +8891,6 @@ class Device {
   final bool? movable;
   @JsonKey(name: 'geolocation', includeIfNull: false)
   final GeoLocation? geolocation;
-  @JsonKey(name: 'preprocessorId', includeIfNull: false, defaultValue: '')
-  final String? preprocessorId;
-  @JsonKey(name: 'settings', includeIfNull: false, defaultValue: <Lookup>[])
-  final List<Lookup>? settings;
   @JsonKey(name: 'customWidget', includeIfNull: false)
   final CustomWidget? customWidget;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
@@ -8908,7 +8910,7 @@ class Device {
   static const fromJsonFactory = _$DeviceFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Device &&
             (identical(other.apiKey, apiKey) ||
@@ -8969,18 +8971,16 @@ class Device {
             (identical(other.geolocation, geolocation) ||
                 const DeepCollectionEquality()
                     .equals(other.geolocation, geolocation)) &&
-            (identical(other.preprocessorId, preprocessorId) ||
-                const DeepCollectionEquality()
-                    .equals(other.preprocessorId, preprocessorId)) &&
-            (identical(other.settings, settings) ||
-                const DeepCollectionEquality()
-                    .equals(other.settings, settings)) &&
             (identical(other.customWidget, customWidget) ||
                 const DeepCollectionEquality()
                     .equals(other.customWidget, customWidget)) &&
-            (identical(other.domainKey, domainKey) || const DeepCollectionEquality().equals(other.domainKey, domainKey)) &&
-            (identical(other.id, id) || const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.rtype, rtype) || const DeepCollectionEquality().equals(other.rtype, rtype)) &&
+            (identical(other.domainKey, domainKey) ||
+                const DeepCollectionEquality()
+                    .equals(other.domainKey, domainKey)) &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.rtype, rtype) ||
+                const DeepCollectionEquality().equals(other.rtype, rtype)) &&
             (identical(other.createdStamp, createdStamp) || const DeepCollectionEquality().equals(other.createdStamp, createdStamp)) &&
             (identical(other.createdBy, createdBy) || const DeepCollectionEquality().equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) || const DeepCollectionEquality().equals(other.updatedBy, updatedBy)) &&
@@ -9013,8 +9013,6 @@ class Device {
       const DeepCollectionEquality().hash(hasGeoLocation) ^
       const DeepCollectionEquality().hash(movable) ^
       const DeepCollectionEquality().hash(geolocation) ^
-      const DeepCollectionEquality().hash(preprocessorId) ^
-      const DeepCollectionEquality().hash(settings) ^
       const DeepCollectionEquality().hash(customWidget) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
@@ -9049,8 +9047,6 @@ extension $DeviceExtension on Device {
       bool? hasGeoLocation,
       bool? movable,
       GeoLocation? geolocation,
-      String? preprocessorId,
-      List<Lookup>? settings,
       CustomWidget? customWidget,
       String? domainKey,
       String? id,
@@ -9081,8 +9077,6 @@ extension $DeviceExtension on Device {
         hasGeoLocation: hasGeoLocation ?? this.hasGeoLocation,
         movable: movable ?? this.movable,
         geolocation: geolocation ?? this.geolocation,
-        preprocessorId: preprocessorId ?? this.preprocessorId,
-        settings: settings ?? this.settings,
         customWidget: customWidget ?? this.customWidget,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
@@ -9115,8 +9109,6 @@ extension $DeviceExtension on Device {
       Wrapped<bool?>? hasGeoLocation,
       Wrapped<bool?>? movable,
       Wrapped<GeoLocation?>? geolocation,
-      Wrapped<String?>? preprocessorId,
-      Wrapped<List<Lookup>?>? settings,
       Wrapped<CustomWidget?>? customWidget,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
@@ -9156,10 +9148,6 @@ extension $DeviceExtension on Device {
         movable: (movable != null ? movable.value : this.movable),
         geolocation:
             (geolocation != null ? geolocation.value : this.geolocation),
-        preprocessorId: (preprocessorId != null
-            ? preprocessorId.value
-            : this.preprocessorId),
-        settings: (settings != null ? settings.value : this.settings),
         customWidget:
             (customWidget != null ? customWidget.value : this.customWidget),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
@@ -9191,7 +9179,7 @@ class DeviceEntity {
   static const fromJsonFactory = _$DeviceEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceEntity &&
             (identical(other.entity, entity) ||
@@ -9245,7 +9233,7 @@ class DeviceEntityRes {
   static const fromJsonFactory = _$DeviceEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceEntityRes &&
             (identical(other.ok, ok) ||
@@ -9321,7 +9309,7 @@ class DeviceArray {
   static const fromJsonFactory = _$DeviceArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceArray &&
             (identical(other.values, values) ||
@@ -9384,7 +9372,7 @@ class DeviceArrayRes {
   static const fromJsonFactory = _$DeviceArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceArrayRes &&
             (identical(other.ok, ok) ||
@@ -9473,7 +9461,7 @@ class ConditionInfo {
     this.icon,
     required this.field,
     required this.condition,
-    this.value,
+    this.$value,
     this.leftValue,
     this.rightValue,
     this.values,
@@ -9504,7 +9492,7 @@ class ConditionInfo {
   )
   final enums.ConditionInfoCondition condition;
   @JsonKey(name: 'value', includeIfNull: false, defaultValue: '')
-  final String? value;
+  final String? $value;
   @JsonKey(name: 'leftValue', includeIfNull: false, defaultValue: '')
   final String? leftValue;
   @JsonKey(name: 'rightValue', includeIfNull: false, defaultValue: '')
@@ -9516,7 +9504,7 @@ class ConditionInfo {
   static const fromJsonFactory = _$ConditionInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ConditionInfo &&
             (identical(other.name, name) ||
@@ -9534,8 +9522,8 @@ class ConditionInfo {
             (identical(other.condition, condition) ||
                 const DeepCollectionEquality()
                     .equals(other.condition, condition)) &&
-            (identical(other.value, value) ||
-                const DeepCollectionEquality().equals(other.value, value)) &&
+            (identical(other.$value, $value) ||
+                const DeepCollectionEquality().equals(other.$value, $value)) &&
             (identical(other.leftValue, leftValue) ||
                 const DeepCollectionEquality()
                     .equals(other.leftValue, leftValue)) &&
@@ -9559,7 +9547,7 @@ class ConditionInfo {
       const DeepCollectionEquality().hash(icon) ^
       const DeepCollectionEquality().hash(field) ^
       const DeepCollectionEquality().hash(condition) ^
-      const DeepCollectionEquality().hash(value) ^
+      const DeepCollectionEquality().hash($value) ^
       const DeepCollectionEquality().hash(leftValue) ^
       const DeepCollectionEquality().hash(rightValue) ^
       const DeepCollectionEquality().hash(values) ^
@@ -9575,7 +9563,7 @@ extension $ConditionInfoExtension on ConditionInfo {
       String? icon,
       String? field,
       enums.ConditionInfoCondition? condition,
-      String? value,
+      String? $value,
       String? leftValue,
       String? rightValue,
       List<String>? values,
@@ -9587,7 +9575,7 @@ extension $ConditionInfoExtension on ConditionInfo {
         icon: icon ?? this.icon,
         field: field ?? this.field,
         condition: condition ?? this.condition,
-        value: value ?? this.value,
+        $value: $value ?? this.$value,
         leftValue: leftValue ?? this.leftValue,
         rightValue: rightValue ?? this.rightValue,
         values: values ?? this.values,
@@ -9601,7 +9589,7 @@ extension $ConditionInfoExtension on ConditionInfo {
       Wrapped<String?>? icon,
       Wrapped<String>? field,
       Wrapped<enums.ConditionInfoCondition>? condition,
-      Wrapped<String?>? value,
+      Wrapped<String?>? $value,
       Wrapped<String?>? leftValue,
       Wrapped<String?>? rightValue,
       Wrapped<List<String>?>? values,
@@ -9614,7 +9602,7 @@ extension $ConditionInfoExtension on ConditionInfo {
         icon: (icon != null ? icon.value : this.icon),
         field: (field != null ? field.value : this.field),
         condition: (condition != null ? condition.value : this.condition),
-        value: (value != null ? value.value : this.value),
+        $value: ($value != null ? $value.value : this.$value),
         leftValue: (leftValue != null ? leftValue.value : this.leftValue),
         rightValue: (rightValue != null ? rightValue.value : this.rightValue),
         values: (values != null ? values.value : this.values),
@@ -9631,7 +9619,7 @@ class Condition {
     this.icon,
     required this.field,
     required this.condition,
-    this.value,
+    this.$value,
     this.leftValue,
     this.rightValue,
     this.values,
@@ -9669,7 +9657,7 @@ class Condition {
   )
   final enums.ConditionCondition condition;
   @JsonKey(name: 'value', includeIfNull: false, defaultValue: '')
-  final String? value;
+  final String? $value;
   @JsonKey(name: 'leftValue', includeIfNull: false, defaultValue: '')
   final String? leftValue;
   @JsonKey(name: 'rightValue', includeIfNull: false, defaultValue: '')
@@ -9695,7 +9683,7 @@ class Condition {
   static const fromJsonFactory = _$ConditionFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Condition &&
             (identical(other.name, name) ||
@@ -9713,8 +9701,8 @@ class Condition {
             (identical(other.condition, condition) ||
                 const DeepCollectionEquality()
                     .equals(other.condition, condition)) &&
-            (identical(other.value, value) ||
-                const DeepCollectionEquality().equals(other.value, value)) &&
+            (identical(other.$value, $value) ||
+                const DeepCollectionEquality().equals(other.$value, $value)) &&
             (identical(other.leftValue, leftValue) ||
                 const DeepCollectionEquality()
                     .equals(other.leftValue, leftValue)) &&
@@ -9757,7 +9745,7 @@ class Condition {
       const DeepCollectionEquality().hash(icon) ^
       const DeepCollectionEquality().hash(field) ^
       const DeepCollectionEquality().hash(condition) ^
-      const DeepCollectionEquality().hash(value) ^
+      const DeepCollectionEquality().hash($value) ^
       const DeepCollectionEquality().hash(leftValue) ^
       const DeepCollectionEquality().hash(rightValue) ^
       const DeepCollectionEquality().hash(values) ^
@@ -9780,7 +9768,7 @@ extension $ConditionExtension on Condition {
       String? icon,
       String? field,
       enums.ConditionCondition? condition,
-      String? value,
+      String? $value,
       String? leftValue,
       String? rightValue,
       List<String>? values,
@@ -9799,7 +9787,7 @@ extension $ConditionExtension on Condition {
         icon: icon ?? this.icon,
         field: field ?? this.field,
         condition: condition ?? this.condition,
-        value: value ?? this.value,
+        $value: $value ?? this.$value,
         leftValue: leftValue ?? this.leftValue,
         rightValue: rightValue ?? this.rightValue,
         values: values ?? this.values,
@@ -9820,7 +9808,7 @@ extension $ConditionExtension on Condition {
       Wrapped<String?>? icon,
       Wrapped<String>? field,
       Wrapped<enums.ConditionCondition>? condition,
-      Wrapped<String?>? value,
+      Wrapped<String?>? $value,
       Wrapped<String?>? leftValue,
       Wrapped<String?>? rightValue,
       Wrapped<List<String>?>? values,
@@ -9840,7 +9828,7 @@ extension $ConditionExtension on Condition {
         icon: (icon != null ? icon.value : this.icon),
         field: (field != null ? field.value : this.field),
         condition: (condition != null ? condition.value : this.condition),
-        value: (value != null ? value.value : this.value),
+        $value: ($value != null ? $value.value : this.$value),
         leftValue: (leftValue != null ? leftValue.value : this.leftValue),
         rightValue: (rightValue != null ? rightValue.value : this.rightValue),
         values: (values != null ? values.value : this.values),
@@ -9874,7 +9862,7 @@ class ConditionEntity {
   static const fromJsonFactory = _$ConditionEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ConditionEntity &&
             (identical(other.entity, entity) ||
@@ -9929,7 +9917,7 @@ class ConditionEntityRes {
   static const fromJsonFactory = _$ConditionEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ConditionEntityRes &&
             (identical(other.entity, entity) ||
@@ -10005,7 +9993,7 @@ class ConditionArray {
   static const fromJsonFactory = _$ConditionArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ConditionArray &&
             (identical(other.values, values) ||
@@ -10069,7 +10057,7 @@ class ConditionArrayRes {
   static const fromJsonFactory = _$ConditionArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ConditionArrayRes &&
             (identical(other.ok, ok) ||
@@ -10174,7 +10162,7 @@ class MatchGroup {
   static const fromJsonFactory = _$MatchGroupFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is MatchGroup &&
             (identical(other.matchType, matchType) ||
@@ -10246,7 +10234,7 @@ class AlarmMatchGroup {
   static const fromJsonFactory = _$AlarmMatchGroupFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AlarmMatchGroup &&
             (identical(other.matchType, matchType) ||
@@ -10353,7 +10341,7 @@ class AlarmInfo {
   static const fromJsonFactory = _$AlarmInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AlarmInfo &&
             (identical(other.name, name) ||
@@ -10511,7 +10499,7 @@ class Alarm {
   static const fromJsonFactory = _$AlarmFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Alarm &&
             (identical(other.name, name) ||
@@ -10678,7 +10666,7 @@ class AlarmEntity {
   static const fromJsonFactory = _$AlarmEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AlarmEntity &&
             (identical(other.entity, entity) ||
@@ -10732,7 +10720,7 @@ class AlarmEntityRes {
   static const fromJsonFactory = _$AlarmEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AlarmEntityRes &&
             (identical(other.ok, ok) ||
@@ -10808,7 +10796,7 @@ class AlarmArray {
   static const fromJsonFactory = _$AlarmArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AlarmArray &&
             (identical(other.values, values) ||
@@ -10871,7 +10859,7 @@ class AlarmArrayRes {
   static const fromJsonFactory = _$AlarmArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AlarmArrayRes &&
             (identical(other.ok, ok) ||
@@ -10994,7 +10982,7 @@ class ControlCommand {
   static const fromJsonFactory = _$ControlCommandFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ControlCommand &&
             (identical(other.type, type) ||
@@ -11101,7 +11089,7 @@ class ControlInfo {
   static const fromJsonFactory = _$ControlInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ControlInfo &&
             (identical(other.name, name) ||
@@ -11235,7 +11223,7 @@ class Control {
   static const fromJsonFactory = _$ControlFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Control &&
             (identical(other.name, name) ||
@@ -11385,7 +11373,7 @@ class ControlEntity {
   static const fromJsonFactory = _$ControlEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ControlEntity &&
             (identical(other.entity, entity) ||
@@ -11439,7 +11427,7 @@ class ControlEntityRes {
   static const fromJsonFactory = _$ControlEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ControlEntityRes &&
             (identical(other.ok, ok) ||
@@ -11515,7 +11503,7 @@ class ControlArray {
   static const fromJsonFactory = _$ControlArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ControlArray &&
             (identical(other.values, values) ||
@@ -11578,7 +11566,7 @@ class ControlArrayRes {
   static const fromJsonFactory = _$ControlArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ControlArrayRes &&
             (identical(other.ok, ok) ||
@@ -11709,7 +11697,7 @@ class EventInfo {
   static const fromJsonFactory = _$EventInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is EventInfo &&
             (identical(other.name, name) ||
@@ -11902,7 +11890,7 @@ class Event {
   static const fromJsonFactory = _$EventFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Event &&
             (identical(other.name, name) ||
@@ -12097,7 +12085,7 @@ class EventEntity {
   static const fromJsonFactory = _$EventEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is EventEntity &&
             (identical(other.entity, entity) ||
@@ -12151,7 +12139,7 @@ class EventEntityRes {
   static const fromJsonFactory = _$EventEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is EventEntityRes &&
             (identical(other.ok, ok) ||
@@ -12227,7 +12215,7 @@ class EventArray {
   static const fromJsonFactory = _$EventArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is EventArray &&
             (identical(other.values, values) ||
@@ -12290,7 +12278,7 @@ class EventArrayRes {
   static const fromJsonFactory = _$EventArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is EventArrayRes &&
             (identical(other.ok, ok) ||
@@ -12374,7 +12362,7 @@ extension $EventArrayResExtension on EventArrayRes {
 class HttpParam {
   const HttpParam({
     required this.name,
-    this.value,
+    this.$value,
   });
 
   factory HttpParam.fromJson(Map<String, dynamic> json) =>
@@ -12386,17 +12374,17 @@ class HttpParam {
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
   final String name;
   @JsonKey(name: 'value', includeIfNull: false, defaultValue: '')
-  final String? value;
+  final String? $value;
   static const fromJsonFactory = _$HttpParamFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is HttpParam &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.value, value) ||
-                const DeepCollectionEquality().equals(other.value, value)));
+            (identical(other.$value, $value) ||
+                const DeepCollectionEquality().equals(other.$value, $value)));
   }
 
   @override
@@ -12405,19 +12393,19 @@ class HttpParam {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(value) ^
+      const DeepCollectionEquality().hash($value) ^
       runtimeType.hashCode;
 }
 
 extension $HttpParamExtension on HttpParam {
-  HttpParam copyWith({String? name, String? value}) {
-    return HttpParam(name: name ?? this.name, value: value ?? this.value);
+  HttpParam copyWith({String? name, String? $value}) {
+    return HttpParam(name: name ?? this.name, $value: $value ?? this.$value);
   }
 
-  HttpParam copyWithWrapped({Wrapped<String>? name, Wrapped<String?>? value}) {
+  HttpParam copyWithWrapped({Wrapped<String>? name, Wrapped<String?>? $value}) {
     return HttpParam(
         name: (name != null ? name.value : this.name),
-        value: (value != null ? value.value : this.value));
+        $value: ($value != null ? $value.value : this.$value));
   }
 }
 
@@ -12455,7 +12443,7 @@ class HttpConfig {
   static const fromJsonFactory = _$HttpConfigFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is HttpConfig &&
             (identical(other.url, url) ||
@@ -12531,7 +12519,7 @@ class UdpConfig {
   static const fromJsonFactory = _$UdpConfigFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is UdpConfig &&
             (identical(other.host, host) ||
@@ -12588,7 +12576,7 @@ class MqttConfig {
   static const fromJsonFactory = _$MqttConfigFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is MqttConfig &&
             (identical(other.host, host) ||
@@ -12710,7 +12698,7 @@ class TriggerControl {
   static const fromJsonFactory = _$TriggerControlFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TriggerControl &&
             (identical(other.controlState, controlState) ||
@@ -12858,7 +12846,7 @@ class TriggerInfo {
   static const fromJsonFactory = _$TriggerInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TriggerInfo &&
             (identical(other.name, name) ||
@@ -12993,7 +12981,7 @@ class Trigger {
   static const fromJsonFactory = _$TriggerFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Trigger &&
             (identical(other.name, name) ||
@@ -13143,7 +13131,7 @@ class TriggerEntity {
   static const fromJsonFactory = _$TriggerEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TriggerEntity &&
             (identical(other.entity, entity) ||
@@ -13197,7 +13185,7 @@ class TriggerEntityRes {
   static const fromJsonFactory = _$TriggerEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TriggerEntityRes &&
             (identical(other.ok, ok) ||
@@ -13273,7 +13261,7 @@ class TriggerArray {
   static const fromJsonFactory = _$TriggerArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TriggerArray &&
             (identical(other.values, values) ||
@@ -13336,7 +13324,7 @@ class TriggerArrayRes {
   static const fromJsonFactory = _$TriggerArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TriggerArrayRes &&
             (identical(other.ok, ok) ||
@@ -13436,7 +13424,7 @@ class NotificationTemplate {
   static const fromJsonFactory = _$NotificationTemplateFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is NotificationTemplate &&
             (identical(other.title, title) ||
@@ -13489,7 +13477,7 @@ class EmailTemplate {
   static const fromJsonFactory = _$EmailTemplateFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is EmailTemplate &&
             (identical(other.subject, subject) ||
@@ -13543,7 +13531,7 @@ class FCMTemplate {
   static const fromJsonFactory = _$FCMTemplateFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FCMTemplate &&
             (identical(other.title, title) ||
@@ -13593,7 +13581,7 @@ class SMSTemplate {
   static const fromJsonFactory = _$SMSTemplateFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is SMSTemplate &&
             (identical(other.message, message) ||
@@ -13636,7 +13624,7 @@ class VoiceTemplate {
   static const fromJsonFactory = _$VoiceTemplateFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is VoiceTemplate &&
             (identical(other.message, message) ||
@@ -13743,7 +13731,7 @@ class ImageFileInfo {
   static const fromJsonFactory = _$ImageFileInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ImageFileInfo &&
             (identical(other.imageType, imageType) ||
@@ -13936,7 +13924,7 @@ class ImageFileBase {
   static const fromJsonFactory = _$ImageFileBaseFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ImageFileBase &&
             (identical(other.contentType, contentType) ||
@@ -14072,7 +14060,7 @@ class ImageFile {
   static const fromJsonFactory = _$ImageFileFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ImageFile &&
             (identical(other.imageType, imageType) ||
@@ -14329,7 +14317,7 @@ class ImageFileEntity {
   static const fromJsonFactory = _$ImageFileEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ImageFileEntity &&
             (identical(other.entity, entity) ||
@@ -14384,7 +14372,7 @@ class ImageFileEntityRes {
   static const fromJsonFactory = _$ImageFileEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ImageFileEntityRes &&
             (identical(other.entity, entity) ||
@@ -14460,7 +14448,7 @@ class ImageFileArray {
   static const fromJsonFactory = _$ImageFileArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ImageFileArray &&
             (identical(other.values, values) ||
@@ -14524,7 +14512,7 @@ class ImageFileArrayRes {
   static const fromJsonFactory = _$ImageFileArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ImageFileArrayRes &&
             (identical(other.values, values) ||
@@ -14616,7 +14604,7 @@ class DisplayMatchGroup {
     this.fontWeight,
     this.bordorColor,
     this.borderType,
-    this.value,
+    this.$value,
     this.bgColor,
     this.prefixText,
     this.prefixFont,
@@ -14687,7 +14675,7 @@ class DisplayMatchGroup {
   )
   final enums.DisplayMatchGroupBorderType? borderType;
   @JsonKey(name: 'value', includeIfNull: false, defaultValue: '')
-  final String? value;
+  final String? $value;
   @JsonKey(name: 'bgColor', includeIfNull: false)
   final int? bgColor;
   @JsonKey(name: 'prefixText', includeIfNull: false, defaultValue: '')
@@ -14757,7 +14745,7 @@ class DisplayMatchGroup {
   static const fromJsonFactory = _$DisplayMatchGroupFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DisplayMatchGroup &&
             (identical(other.matchType, matchType) ||
@@ -14786,8 +14774,8 @@ class DisplayMatchGroup {
             (identical(other.borderType, borderType) ||
                 const DeepCollectionEquality()
                     .equals(other.borderType, borderType)) &&
-            (identical(other.value, value) ||
-                const DeepCollectionEquality().equals(other.value, value)) &&
+            (identical(other.$value, $value) ||
+                const DeepCollectionEquality().equals(other.$value, $value)) &&
             (identical(other.bgColor, bgColor) ||
                 const DeepCollectionEquality()
                     .equals(other.bgColor, bgColor)) &&
@@ -14862,7 +14850,7 @@ class DisplayMatchGroup {
       const DeepCollectionEquality().hash(fontWeight) ^
       const DeepCollectionEquality().hash(bordorColor) ^
       const DeepCollectionEquality().hash(borderType) ^
-      const DeepCollectionEquality().hash(value) ^
+      const DeepCollectionEquality().hash($value) ^
       const DeepCollectionEquality().hash(bgColor) ^
       const DeepCollectionEquality().hash(prefixText) ^
       const DeepCollectionEquality().hash(prefixFont) ^
@@ -14910,7 +14898,7 @@ extension $DisplayMatchGroupExtension on DisplayMatchGroup {
       int? fontWeight,
       int? bordorColor,
       enums.DisplayMatchGroupBorderType? borderType,
-      String? value,
+      String? $value,
       int? bgColor,
       String? prefixText,
       String? prefixFont,
@@ -14954,7 +14942,7 @@ extension $DisplayMatchGroupExtension on DisplayMatchGroup {
         fontWeight: fontWeight ?? this.fontWeight,
         bordorColor: bordorColor ?? this.bordorColor,
         borderType: borderType ?? this.borderType,
-        value: value ?? this.value,
+        $value: $value ?? this.$value,
         bgColor: bgColor ?? this.bgColor,
         prefixText: prefixText ?? this.prefixText,
         prefixFont: prefixFont ?? this.prefixFont,
@@ -15000,7 +14988,7 @@ extension $DisplayMatchGroupExtension on DisplayMatchGroup {
       Wrapped<int?>? fontWeight,
       Wrapped<int?>? bordorColor,
       Wrapped<enums.DisplayMatchGroupBorderType?>? borderType,
-      Wrapped<String?>? value,
+      Wrapped<String?>? $value,
       Wrapped<int?>? bgColor,
       Wrapped<String?>? prefixText,
       Wrapped<String?>? prefixFont,
@@ -15045,7 +15033,7 @@ extension $DisplayMatchGroupExtension on DisplayMatchGroup {
         bordorColor:
             (bordorColor != null ? bordorColor.value : this.bordorColor),
         borderType: (borderType != null ? borderType.value : this.borderType),
-        value: (value != null ? value.value : this.value),
+        $value: ($value != null ? $value.value : this.$value),
         bgColor: (bgColor != null ? bgColor.value : this.bgColor),
         prefixText: (prefixText != null ? prefixText.value : this.prefixText),
         prefixFont: (prefixFont != null ? prefixFont.value : this.prefixFont),
@@ -15151,7 +15139,7 @@ class DisplayInfo {
   static const fromJsonFactory = _$DisplayInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DisplayInfo &&
             (identical(other.name, name) ||
@@ -15286,7 +15274,7 @@ class Display {
   static const fromJsonFactory = _$DisplayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Display &&
             (identical(other.name, name) ||
@@ -15435,7 +15423,7 @@ class DisplayEntity {
   static const fromJsonFactory = _$DisplayEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DisplayEntity &&
             (identical(other.entity, entity) ||
@@ -15489,7 +15477,7 @@ class DisplayEntityRes {
   static const fromJsonFactory = _$DisplayEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DisplayEntityRes &&
             (identical(other.ok, ok) ||
@@ -15565,7 +15553,7 @@ class DisplayArray {
   static const fromJsonFactory = _$DisplayArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DisplayArray &&
             (identical(other.values, values) ||
@@ -15628,7 +15616,7 @@ class DisplayArrayRes {
   static const fromJsonFactory = _$DisplayArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DisplayArrayRes &&
             (identical(other.ok, ok) ||
@@ -15739,7 +15727,7 @@ class Displayable {
   static const fromJsonFactory = _$DisplayableFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Displayable &&
             (identical(other.type, type) ||
@@ -15816,7 +15804,7 @@ class Positionable {
   static const fromJsonFactory = _$PositionableFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Positionable &&
             (identical(other.view, view) ||
@@ -15959,7 +15947,7 @@ class DeviceViewInfo {
   static const fromJsonFactory = _$DeviceViewInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceViewInfo &&
             (identical(other.modelId, modelId) ||
@@ -16229,7 +16217,7 @@ class DeviceView {
   static const fromJsonFactory = _$DeviceViewFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceView &&
             (identical(other.modelId, modelId) ||
@@ -16463,7 +16451,7 @@ class DeviceViewEntity {
   static const fromJsonFactory = _$DeviceViewEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceViewEntity &&
             (identical(other.entity, entity) ||
@@ -16518,7 +16506,7 @@ class DeviceViewEntityRes {
   static const fromJsonFactory = _$DeviceViewEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceViewEntityRes &&
             (identical(other.ok, ok) ||
@@ -16594,7 +16582,7 @@ class DeviceViewArray {
   static const fromJsonFactory = _$DeviceViewArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceViewArray &&
             (identical(other.values, values) ||
@@ -16658,7 +16646,7 @@ class DeviceViewArrayRes {
   static const fromJsonFactory = _$DeviceViewArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceViewArrayRes &&
             (identical(other.ok, ok) ||
@@ -16767,7 +16755,7 @@ class EvaluatedAlarm {
   static const fromJsonFactory = _$EvaluatedAlarmFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is EvaluatedAlarm &&
             (identical(other.alarmId, alarmId) ||
@@ -16836,7 +16824,7 @@ class EvaluatedDisplay {
     required this.displayId,
     required this.prefix,
     required this.suffix,
-    required this.value,
+    required this.$value,
     required this.conditionIndex,
     this.tooltip,
   });
@@ -16854,7 +16842,7 @@ class EvaluatedDisplay {
   @JsonKey(name: 'suffix', includeIfNull: false, defaultValue: '')
   final String suffix;
   @JsonKey(name: 'value', includeIfNull: false, defaultValue: '')
-  final String value;
+  final String $value;
   @JsonKey(name: 'conditionIndex', includeIfNull: false)
   final int conditionIndex;
   @JsonKey(name: 'tooltip', includeIfNull: false, defaultValue: '')
@@ -16862,7 +16850,7 @@ class EvaluatedDisplay {
   static const fromJsonFactory = _$EvaluatedDisplayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is EvaluatedDisplay &&
             (identical(other.displayId, displayId) ||
@@ -16872,8 +16860,8 @@ class EvaluatedDisplay {
                 const DeepCollectionEquality().equals(other.prefix, prefix)) &&
             (identical(other.suffix, suffix) ||
                 const DeepCollectionEquality().equals(other.suffix, suffix)) &&
-            (identical(other.value, value) ||
-                const DeepCollectionEquality().equals(other.value, value)) &&
+            (identical(other.$value, $value) ||
+                const DeepCollectionEquality().equals(other.$value, $value)) &&
             (identical(other.conditionIndex, conditionIndex) ||
                 const DeepCollectionEquality()
                     .equals(other.conditionIndex, conditionIndex)) &&
@@ -16889,7 +16877,7 @@ class EvaluatedDisplay {
       const DeepCollectionEquality().hash(displayId) ^
       const DeepCollectionEquality().hash(prefix) ^
       const DeepCollectionEquality().hash(suffix) ^
-      const DeepCollectionEquality().hash(value) ^
+      const DeepCollectionEquality().hash($value) ^
       const DeepCollectionEquality().hash(conditionIndex) ^
       const DeepCollectionEquality().hash(tooltip) ^
       runtimeType.hashCode;
@@ -16900,14 +16888,14 @@ extension $EvaluatedDisplayExtension on EvaluatedDisplay {
       {String? displayId,
       String? prefix,
       String? suffix,
-      String? value,
+      String? $value,
       int? conditionIndex,
       String? tooltip}) {
     return EvaluatedDisplay(
         displayId: displayId ?? this.displayId,
         prefix: prefix ?? this.prefix,
         suffix: suffix ?? this.suffix,
-        value: value ?? this.value,
+        $value: $value ?? this.$value,
         conditionIndex: conditionIndex ?? this.conditionIndex,
         tooltip: tooltip ?? this.tooltip);
   }
@@ -16916,14 +16904,14 @@ extension $EvaluatedDisplayExtension on EvaluatedDisplay {
       {Wrapped<String>? displayId,
       Wrapped<String>? prefix,
       Wrapped<String>? suffix,
-      Wrapped<String>? value,
+      Wrapped<String>? $value,
       Wrapped<int>? conditionIndex,
       Wrapped<String?>? tooltip}) {
     return EvaluatedDisplay(
         displayId: (displayId != null ? displayId.value : this.displayId),
         prefix: (prefix != null ? prefix.value : this.prefix),
         suffix: (suffix != null ? suffix.value : this.suffix),
-        value: (value != null ? value.value : this.value),
+        $value: ($value != null ? $value.value : this.$value),
         conditionIndex: (conditionIndex != null
             ? conditionIndex.value
             : this.conditionIndex),
@@ -16981,7 +16969,7 @@ class DeviceControl {
   static const fromJsonFactory = _$DeviceControlFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceControl &&
             (identical(other.controlId, controlId) ||
@@ -17126,7 +17114,7 @@ class EvaluatedEvent {
   static const fromJsonFactory = _$EvaluatedEventFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is EvaluatedEvent &&
             (identical(other.eventId, eventId) ||
@@ -17254,7 +17242,7 @@ class TriggeredControl {
   static const fromJsonFactory = _$TriggeredControlFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TriggeredControl &&
             (identical(other.id, id) ||
@@ -17453,7 +17441,7 @@ class EvaluatedTrigger {
   static const fromJsonFactory = _$EvaluatedTriggerFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is EvaluatedTrigger &&
             (identical(other.triggerId, triggerId) ||
@@ -17631,7 +17619,7 @@ class DeviceData {
   static const fromJsonFactory = _$DeviceDataFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceData &&
             (identical(other.domainKey, domainKey) ||
@@ -17968,7 +17956,7 @@ class DeviceDataArray {
   static const fromJsonFactory = _$DeviceDataArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceDataArray &&
             (identical(other.values, values) ||
@@ -18032,7 +18020,7 @@ class DeviceDataArrayRes {
   static const fromJsonFactory = _$DeviceDataArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceDataArrayRes &&
             (identical(other.ok, ok) ||
@@ -18146,7 +18134,7 @@ class DashboardMenu {
   static const fromJsonFactory = _$DashboardMenuFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DashboardMenu &&
             (identical(other.displayName, displayName) ||
@@ -18251,7 +18239,7 @@ class DashboardMenuGroupInfo {
   static const fromJsonFactory = _$DashboardMenuGroupInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DashboardMenuGroupInfo &&
             (identical(other.name, name) ||
@@ -18421,7 +18409,7 @@ class DashboardMenuGroup {
   static const fromJsonFactory = _$DashboardMenuGroupFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DashboardMenuGroup &&
             (identical(other.domainKey, domainKey) ||
@@ -18599,7 +18587,7 @@ class DashboardMenuGroupEntity {
   static const fromJsonFactory = _$DashboardMenuGroupEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DashboardMenuGroupEntity &&
             (identical(other.entity, entity) ||
@@ -18655,7 +18643,7 @@ class DashboardMenuGroupEntityRes {
   static const fromJsonFactory = _$DashboardMenuGroupEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DashboardMenuGroupEntityRes &&
             (identical(other.ok, ok) ||
@@ -18734,7 +18722,7 @@ class DashboardMenuGroupArray {
   static const fromJsonFactory = _$DashboardMenuGroupArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DashboardMenuGroupArray &&
             (identical(other.values, values) ||
@@ -18802,7 +18790,7 @@ class DashboardMenuGroupArrayRes {
   static const fromJsonFactory = _$DashboardMenuGroupArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DashboardMenuGroupArrayRes &&
             (identical(other.ok, ok) ||
@@ -18916,7 +18904,7 @@ class ScreenChild {
   static const fromJsonFactory = _$ScreenChildFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ScreenChild &&
             (identical(other.deviceId, deviceId) ||
@@ -18994,7 +18982,7 @@ class ScreenRow {
   static const fromJsonFactory = _$ScreenRowFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ScreenRow &&
             (identical(other.children, children) ||
@@ -19062,7 +19050,7 @@ class DashboardScreenInfo {
   static const fromJsonFactory = _$DashboardScreenInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DashboardScreenInfo &&
             (identical(other.name, name) ||
@@ -19220,7 +19208,7 @@ class DashboardScreen {
   static const fromJsonFactory = _$DashboardScreenFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DashboardScreen &&
             (identical(other.domainKey, domainKey) ||
@@ -19389,7 +19377,7 @@ class DashboardScreenEntity {
   static const fromJsonFactory = _$DashboardScreenEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DashboardScreenEntity &&
             (identical(other.entity, entity) ||
@@ -19444,7 +19432,7 @@ class DashboardScreenEntityRes {
   static const fromJsonFactory = _$DashboardScreenEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DashboardScreenEntityRes &&
             (identical(other.ok, ok) ||
@@ -19521,7 +19509,7 @@ class DashboardScreenArray {
   static const fromJsonFactory = _$DashboardScreenArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DashboardScreenArray &&
             (identical(other.values, values) ||
@@ -19587,7 +19575,7 @@ class DashboardScreenArrayRes {
   static const fromJsonFactory = _$DashboardScreenArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DashboardScreenArrayRes &&
             (identical(other.ok, ok) ||
@@ -19684,7 +19672,7 @@ class DeviceDataBase {
   static const fromJsonFactory = _$DeviceDataBaseFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceDataBase &&
             (identical(other.data, data) ||
@@ -19738,7 +19726,7 @@ class DeviceDataEntityRes {
   static const fromJsonFactory = _$DeviceDataEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DeviceDataEntityRes &&
             (identical(other.ok, ok) ||
@@ -19845,7 +19833,7 @@ class EventRegistrationInfo {
   static const fromJsonFactory = _$EventRegistrationInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is EventRegistrationInfo &&
             (identical(other.eventId, eventId) ||
@@ -19971,7 +19959,7 @@ class EventRegistrationBase {
   static const fromJsonFactory = _$EventRegistrationBaseFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is EventRegistrationBase &&
             (identical(other.userId, userId) ||
@@ -20069,7 +20057,7 @@ class EventRegistration {
   static const fromJsonFactory = _$EventRegistrationFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is EventRegistration &&
             (identical(other.domainKey, domainKey) ||
@@ -20258,7 +20246,7 @@ class EventRegistrationEntity {
   static const fromJsonFactory = _$EventRegistrationEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is EventRegistrationEntity &&
             (identical(other.entity, entity) ||
@@ -20314,7 +20302,7 @@ class EventRegistrationEntityRes {
   static const fromJsonFactory = _$EventRegistrationEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is EventRegistrationEntityRes &&
             (identical(other.ok, ok) ||
@@ -20391,7 +20379,7 @@ class EventRegistrationArray {
   static const fromJsonFactory = _$EventRegistrationArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is EventRegistrationArray &&
             (identical(other.values, values) ||
@@ -20457,7 +20445,7 @@ class EventRegistrationArrayRes {
   static const fromJsonFactory = _$EventRegistrationArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is EventRegistrationArrayRes &&
             (identical(other.ok, ok) ||
@@ -20643,7 +20631,7 @@ class TriggeredEvent {
   static const fromJsonFactory = _$TriggeredEventFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TriggeredEvent &&
             (identical(other.eventId, eventId) ||
@@ -20904,7 +20892,7 @@ class TriggeredEventArray {
   static const fromJsonFactory = _$TriggeredEventArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TriggeredEventArray &&
             (identical(other.values, values) ||
@@ -20970,7 +20958,7 @@ class TriggeredEventArrayRes {
   static const fromJsonFactory = _$TriggeredEventArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TriggeredEventArrayRes &&
             (identical(other.ok, ok) ||
@@ -21068,7 +21056,7 @@ class TriggeredControlArray {
   static const fromJsonFactory = _$TriggeredControlArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TriggeredControlArray &&
             (identical(other.values, values) ||
@@ -21134,7 +21122,7 @@ class TriggeredControlArrayRes {
   static const fromJsonFactory = _$TriggeredControlArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TriggeredControlArrayRes &&
             (identical(other.ok, ok) ||
@@ -21237,7 +21225,7 @@ class NoCodeInfo {
   static const fromJsonFactory = _$NoCodeInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is NoCodeInfo &&
             (identical(other.orgId, orgId) ||
@@ -21319,7 +21307,7 @@ class TwinInfo {
   static const fromJsonFactory = _$TwinInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TwinInfo &&
             (identical(other.twinDomainKey, twinDomainKey) ||
@@ -21450,7 +21438,7 @@ class TwinInfoRes {
   static const fromJsonFactory = _$TwinInfoResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TwinInfoRes &&
             (identical(other.ok, ok) ||
@@ -21600,7 +21588,7 @@ class DisplayWidgetInfo {
   static const fromJsonFactory = _$DisplayWidgetInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DisplayWidgetInfo &&
             (identical(other.name, name) ||
@@ -21744,7 +21732,7 @@ class DisplayWidget {
   static const fromJsonFactory = _$DisplayWidgetFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DisplayWidget &&
             (identical(other.name, name) ||
@@ -21902,7 +21890,7 @@ class DisplayWidgetEntity {
   static const fromJsonFactory = _$DisplayWidgetEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DisplayWidgetEntity &&
             (identical(other.entity, entity) ||
@@ -21957,7 +21945,7 @@ class DisplayWidgetEntityRes {
   static const fromJsonFactory = _$DisplayWidgetEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DisplayWidgetEntityRes &&
             (identical(other.ok, ok) ||
@@ -22034,7 +22022,7 @@ class DisplayWidgetArray {
   static const fromJsonFactory = _$DisplayWidgetArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DisplayWidgetArray &&
             (identical(other.values, values) ||
@@ -22099,7 +22087,7 @@ class DisplayWidgetArrayRes {
   static const fromJsonFactory = _$DisplayWidgetArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DisplayWidgetArrayRes &&
             (identical(other.ok, ok) ||
@@ -22222,7 +22210,7 @@ class ScreenWidgetInfo {
   static const fromJsonFactory = _$ScreenWidgetInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ScreenWidgetInfo &&
             (identical(other.name, name) ||
@@ -22370,7 +22358,7 @@ class ScreenWidget {
   static const fromJsonFactory = _$ScreenWidgetFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ScreenWidget &&
             (identical(other.name, name) ||
@@ -22527,7 +22515,7 @@ class ScreenWidgetEntity {
   static const fromJsonFactory = _$ScreenWidgetEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ScreenWidgetEntity &&
             (identical(other.entity, entity) ||
@@ -22582,7 +22570,7 @@ class ScreenWidgetEntityRes {
   static const fromJsonFactory = _$ScreenWidgetEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ScreenWidgetEntityRes &&
             (identical(other.ok, ok) ||
@@ -22658,7 +22646,7 @@ class ScreenWidgetArray {
   static const fromJsonFactory = _$ScreenWidgetArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ScreenWidgetArray &&
             (identical(other.values, values) ||
@@ -22722,7 +22710,7 @@ class ScreenWidgetArrayRes {
   static const fromJsonFactory = _$ScreenWidgetArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ScreenWidgetArrayRes &&
             (identical(other.ok, ok) ||
@@ -22822,7 +22810,7 @@ class GeoLocation {
   static const fromJsonFactory = _$GeoLocationFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is GeoLocation &&
             (identical(other.type, type) ||
@@ -22877,7 +22865,7 @@ class GeoLine {
   static const fromJsonFactory = _$GeoLineFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is GeoLine &&
             (identical(other.begin, begin) ||
@@ -22929,7 +22917,7 @@ class GeoEnvelope {
   static const fromJsonFactory = _$GeoEnvelopeFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is GeoEnvelope &&
             (identical(other.leftTop, leftTop) ||
@@ -22983,7 +22971,7 @@ class GeoPolygon {
   static const fromJsonFactory = _$GeoPolygonFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is GeoPolygon &&
             (identical(other.points, points) ||
@@ -23028,7 +23016,7 @@ class GeoMultiPoint {
   static const fromJsonFactory = _$GeoMultiPointFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is GeoMultiPoint &&
             (identical(other.first, first) ||
@@ -23078,7 +23066,7 @@ class GeoMultiLine {
   static const fromJsonFactory = _$GeoMultiLineFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is GeoMultiLine &&
             (identical(other.points, points) ||
@@ -23120,7 +23108,7 @@ class GeoMultiPolygon {
   static const fromJsonFactory = _$GeoMultiPolygonFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is GeoMultiPolygon &&
             (identical(other.points, points) ||
@@ -23166,7 +23154,7 @@ class GeoCircle {
   static const fromJsonFactory = _$GeoCircleFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is GeoCircle &&
             (identical(other.center, center) ||
@@ -23228,7 +23216,7 @@ class PreprocessorInfo {
   static const fromJsonFactory = _$PreprocessorInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is PreprocessorInfo &&
             (identical(other.name, name) ||
@@ -23339,7 +23327,7 @@ class Preprocessor {
   static const fromJsonFactory = _$PreprocessorFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Preprocessor &&
             (identical(other.name, name) ||
@@ -23473,7 +23461,7 @@ class PreprocessorEntity {
   static const fromJsonFactory = _$PreprocessorEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is PreprocessorEntity &&
             (identical(other.entity, entity) ||
@@ -23528,7 +23516,7 @@ class PreprocessorEntityRes {
   static const fromJsonFactory = _$PreprocessorEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is PreprocessorEntityRes &&
             (identical(other.ok, ok) ||
@@ -23604,7 +23592,7 @@ class PreprocessorArray {
   static const fromJsonFactory = _$PreprocessorArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is PreprocessorArray &&
             (identical(other.values, values) ||
@@ -23668,7 +23656,7 @@ class PreprocessorArrayRes {
   static const fromJsonFactory = _$PreprocessorArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is PreprocessorArrayRes &&
             (identical(other.ok, ok) ||
@@ -23776,7 +23764,7 @@ class FilterCondition {
   static const fromJsonFactory = _$FilterConditionFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FilterCondition &&
             (identical(other.field, field) ||
@@ -23846,7 +23834,7 @@ class FilterMatchGroup {
   static const fromJsonFactory = _$FilterMatchGroupFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FilterMatchGroup &&
             (identical(other.matchType, matchType) ||
@@ -23924,7 +23912,7 @@ class DataFilterInfo {
   static const fromJsonFactory = _$DataFilterInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DataFilterInfo &&
             (identical(other.modelId, modelId) ||
@@ -24060,7 +24048,7 @@ class DataFilter {
   static const fromJsonFactory = _$DataFilterFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DataFilter &&
             (identical(other.modelId, modelId) ||
@@ -24210,7 +24198,7 @@ class DataFilterEntity {
   static const fromJsonFactory = _$DataFilterEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DataFilterEntity &&
             (identical(other.entity, entity) ||
@@ -24265,7 +24253,7 @@ class DataFilterEntityRes {
   static const fromJsonFactory = _$DataFilterEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DataFilterEntityRes &&
             (identical(other.ok, ok) ||
@@ -24341,7 +24329,7 @@ class DataFilterArray {
   static const fromJsonFactory = _$DataFilterArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DataFilterArray &&
             (identical(other.values, values) ||
@@ -24405,7 +24393,7 @@ class DataFilterArrayRes {
   static const fromJsonFactory = _$DataFilterArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is DataFilterArrayRes &&
             (identical(other.ok, ok) ||
@@ -24543,7 +24531,7 @@ class GeoFenceInfo {
   static const fromJsonFactory = _$GeoFenceInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is GeoFenceInfo &&
             (identical(other.name, name) ||
@@ -24683,7 +24671,7 @@ class GeoFenceBase {
   static const fromJsonFactory = _$GeoFenceBaseFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is GeoFenceBase &&
             (identical(other.fence, fence) ||
@@ -24790,7 +24778,7 @@ class GeoFence {
   static const fromJsonFactory = _$GeoFenceFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is GeoFence &&
             (identical(other.name, name) ||
@@ -24993,7 +24981,7 @@ class GeoFenceEntity {
   static const fromJsonFactory = _$GeoFenceEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is GeoFenceEntity &&
             (identical(other.entity, entity) ||
@@ -25048,7 +25036,7 @@ class GeoFenceEntityRes {
   static const fromJsonFactory = _$GeoFenceEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is GeoFenceEntityRes &&
             (identical(other.ok, ok) ||
@@ -25124,7 +25112,7 @@ class GeoFenceArray {
   static const fromJsonFactory = _$GeoFenceArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is GeoFenceArray &&
             (identical(other.values, values) ||
@@ -25187,7 +25175,7 @@ class GeoFenceArrayRes {
   static const fromJsonFactory = _$GeoFenceArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is GeoFenceArrayRes &&
             (identical(other.ok, ok) ||
@@ -25296,7 +25284,7 @@ class AnalyticsRow {
   static const fromJsonFactory = _$AnalyticsRowFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AnalyticsRow &&
             (identical(other.height, height) ||
@@ -25392,7 +25380,7 @@ class AnalyticsScreenInfo {
   static const fromJsonFactory = _$AnalyticsScreenInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AnalyticsScreenInfo &&
             (identical(other.name, name) ||
@@ -25524,7 +25512,7 @@ class AnalyticsScreen {
   static const fromJsonFactory = _$AnalyticsScreenFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AnalyticsScreen &&
             (identical(other.name, name) ||
@@ -25673,7 +25661,7 @@ class AnalyticsScreenEntity {
   static const fromJsonFactory = _$AnalyticsScreenEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AnalyticsScreenEntity &&
             (identical(other.entity, entity) ||
@@ -25728,7 +25716,7 @@ class AnalyticsScreenEntityRes {
   static const fromJsonFactory = _$AnalyticsScreenEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AnalyticsScreenEntityRes &&
             (identical(other.ok, ok) ||
@@ -25805,7 +25793,7 @@ class AnalyticsScreenArray {
   static const fromJsonFactory = _$AnalyticsScreenArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AnalyticsScreenArray &&
             (identical(other.values, values) ||
@@ -25871,7 +25859,7 @@ class AnalyticsScreenArrayRes {
   static const fromJsonFactory = _$AnalyticsScreenArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AnalyticsScreenArrayRes &&
             (identical(other.ok, ok) ||
@@ -25980,7 +25968,7 @@ class TrendValue {
   static const fromJsonFactory = _$TrendValueFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TrendValue &&
             (identical(other.stamp, stamp) ||
@@ -26051,7 +26039,7 @@ class TrendValueArray {
   static const fromJsonFactory = _$TrendValueArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TrendValueArray &&
             (identical(other.values, values) ||
@@ -26115,7 +26103,7 @@ class TrendValueArrayRes {
   static const fromJsonFactory = _$TrendValueArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TrendValueArrayRes &&
             (identical(other.ok, ok) ||
@@ -26215,7 +26203,7 @@ class TimeSeriesValue {
   static const fromJsonFactory = _$TimeSeriesValueFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TimeSeriesValue &&
             (identical(other.updatedStamp, updatedStamp) ||
@@ -26269,7 +26257,7 @@ class TimeSeriesValueArray {
   static const fromJsonFactory = _$TimeSeriesValueArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TimeSeriesValueArray &&
             (identical(other.values, values) ||
@@ -26335,7 +26323,7 @@ class TimeSeriesValueArrayRes {
   static const fromJsonFactory = _$TimeSeriesValueArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TimeSeriesValueArrayRes &&
             (identical(other.ok, ok) ||
@@ -26465,7 +26453,7 @@ class LandingPage {
   static const fromJsonFactory = _$LandingPageFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is LandingPage &&
             (identical(other.logoImage, logoImage) ||
@@ -26597,7 +26585,7 @@ class ElasticEmailConfig {
   static const fromJsonFactory = _$ElasticEmailConfigFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ElasticEmailConfig &&
             (identical(other.apiKey, apiKey) ||
@@ -26640,7 +26628,7 @@ class TwilioConfig {
   static const fromJsonFactory = _$TwilioConfigFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TwilioConfig &&
             (identical(other.apiKey, apiKey) ||
@@ -26682,7 +26670,7 @@ class TextLocalConfig {
   static const fromJsonFactory = _$TextLocalConfigFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TextLocalConfig &&
             (identical(other.apiKey, apiKey) ||
@@ -26725,7 +26713,7 @@ class GeoapifyConfig {
   static const fromJsonFactory = _$GeoapifyConfigFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is GeoapifyConfig &&
             (identical(other.apiKey, apiKey) ||
@@ -26900,7 +26888,7 @@ class TwinSysInfo {
   static const fromJsonFactory = _$TwinSysInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TwinSysInfo &&
             (identical(other.logoImage, logoImage) ||
@@ -27254,7 +27242,7 @@ class TwinSysInfoEntity {
   static const fromJsonFactory = _$TwinSysInfoEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TwinSysInfoEntity &&
             (identical(other.entity, entity) ||
@@ -27309,7 +27297,7 @@ class TwinSysInfoEntityRes {
   static const fromJsonFactory = _$TwinSysInfoEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TwinSysInfoEntityRes &&
             (identical(other.ok, ok) ||
@@ -27385,7 +27373,7 @@ class TwinSysConfigInfo {
   static const fromJsonFactory = _$TwinSysConfigInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TwinSysConfigInfo &&
             (identical(other.info, info) ||
@@ -27454,7 +27442,7 @@ class TwinSysConfig {
   static const fromJsonFactory = _$TwinSysConfigFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TwinSysConfig &&
             (identical(other.info, info) ||
@@ -27571,7 +27559,7 @@ class TwinSysConfigEntity {
   static const fromJsonFactory = _$TwinSysConfigEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TwinSysConfigEntity &&
             (identical(other.entity, entity) ||
@@ -27626,7 +27614,7 @@ class TwinSysConfigEntityRes {
   static const fromJsonFactory = _$TwinSysConfigEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TwinSysConfigEntityRes &&
             (identical(other.ok, ok) ||
@@ -27697,7 +27685,6 @@ class FloorInfo {
     this.assets,
     this.roles,
     this.location,
-    this.settings,
     required this.floorLevel,
     required this.floorType,
   });
@@ -27726,8 +27713,6 @@ class FloorInfo {
   final List<String>? roles;
   @JsonKey(name: 'location', includeIfNull: false)
   final GeoLocation? location;
-  @JsonKey(name: 'settings', includeIfNull: false, defaultValue: <Lookup>[])
-  final List<Lookup>? settings;
   @JsonKey(name: 'floorLevel', includeIfNull: false)
   final int floorLevel;
   @JsonKey(
@@ -27744,7 +27729,7 @@ class FloorInfo {
   static const fromJsonFactory = _$FloorInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FloorInfo &&
             (identical(other.premiseId, premiseId) ||
@@ -27770,9 +27755,6 @@ class FloorInfo {
             (identical(other.location, location) ||
                 const DeepCollectionEquality()
                     .equals(other.location, location)) &&
-            (identical(other.settings, settings) ||
-                const DeepCollectionEquality()
-                    .equals(other.settings, settings)) &&
             (identical(other.floorLevel, floorLevel) ||
                 const DeepCollectionEquality()
                     .equals(other.floorLevel, floorLevel)) &&
@@ -27795,7 +27777,6 @@ class FloorInfo {
       const DeepCollectionEquality().hash(assets) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(location) ^
-      const DeepCollectionEquality().hash(settings) ^
       const DeepCollectionEquality().hash(floorLevel) ^
       const DeepCollectionEquality().hash(floorType) ^
       runtimeType.hashCode;
@@ -27812,7 +27793,6 @@ extension $FloorInfoExtension on FloorInfo {
       List<String>? assets,
       List<String>? roles,
       GeoLocation? location,
-      List<Lookup>? settings,
       int? floorLevel,
       enums.FloorInfoFloorType? floorType}) {
     return FloorInfo(
@@ -27825,7 +27805,6 @@ extension $FloorInfoExtension on FloorInfo {
         assets: assets ?? this.assets,
         roles: roles ?? this.roles,
         location: location ?? this.location,
-        settings: settings ?? this.settings,
         floorLevel: floorLevel ?? this.floorLevel,
         floorType: floorType ?? this.floorType);
   }
@@ -27840,7 +27819,6 @@ extension $FloorInfoExtension on FloorInfo {
       Wrapped<List<String>?>? assets,
       Wrapped<List<String>?>? roles,
       Wrapped<GeoLocation?>? location,
-      Wrapped<List<Lookup>?>? settings,
       Wrapped<int>? floorLevel,
       Wrapped<enums.FloorInfoFloorType>? floorType}) {
     return FloorInfo(
@@ -27854,7 +27832,6 @@ extension $FloorInfoExtension on FloorInfo {
         assets: (assets != null ? assets.value : this.assets),
         roles: (roles != null ? roles.value : this.roles),
         location: (location != null ? location.value : this.location),
-        settings: (settings != null ? settings.value : this.settings),
         floorLevel: (floorLevel != null ? floorLevel.value : this.floorLevel),
         floorType: (floorType != null ? floorType.value : this.floorType));
   }
@@ -27872,7 +27849,6 @@ class Floor {
     this.assets,
     this.roles,
     this.location,
-    this.settings,
     required this.floorLevel,
     required this.floorType,
     required this.domainKey,
@@ -27907,8 +27883,6 @@ class Floor {
   final List<String>? roles;
   @JsonKey(name: 'location', includeIfNull: false)
   final GeoLocation? location;
-  @JsonKey(name: 'settings', includeIfNull: false, defaultValue: <Lookup>[])
-  final List<Lookup>? settings;
   @JsonKey(name: 'floorLevel', includeIfNull: false)
   final int floorLevel;
   @JsonKey(
@@ -27938,7 +27912,7 @@ class Floor {
   static const fromJsonFactory = _$FloorFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Floor &&
             (identical(other.premiseId, premiseId) ||
@@ -27964,9 +27938,6 @@ class Floor {
             (identical(other.location, location) ||
                 const DeepCollectionEquality()
                     .equals(other.location, location)) &&
-            (identical(other.settings, settings) ||
-                const DeepCollectionEquality()
-                    .equals(other.settings, settings)) &&
             (identical(other.floorLevel, floorLevel) ||
                 const DeepCollectionEquality()
                     .equals(other.floorLevel, floorLevel)) &&
@@ -28008,7 +27979,6 @@ class Floor {
       const DeepCollectionEquality().hash(assets) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(location) ^
-      const DeepCollectionEquality().hash(settings) ^
       const DeepCollectionEquality().hash(floorLevel) ^
       const DeepCollectionEquality().hash(floorType) ^
       const DeepCollectionEquality().hash(domainKey) ^
@@ -28032,7 +28002,6 @@ extension $FloorExtension on Floor {
       List<String>? assets,
       List<String>? roles,
       GeoLocation? location,
-      List<Lookup>? settings,
       int? floorLevel,
       enums.FloorFloorType? floorType,
       String? domainKey,
@@ -28052,7 +28021,6 @@ extension $FloorExtension on Floor {
         assets: assets ?? this.assets,
         roles: roles ?? this.roles,
         location: location ?? this.location,
-        settings: settings ?? this.settings,
         floorLevel: floorLevel ?? this.floorLevel,
         floorType: floorType ?? this.floorType,
         domainKey: domainKey ?? this.domainKey,
@@ -28074,7 +28042,6 @@ extension $FloorExtension on Floor {
       Wrapped<List<String>?>? assets,
       Wrapped<List<String>?>? roles,
       Wrapped<GeoLocation?>? location,
-      Wrapped<List<Lookup>?>? settings,
       Wrapped<int>? floorLevel,
       Wrapped<enums.FloorFloorType>? floorType,
       Wrapped<String>? domainKey,
@@ -28095,7 +28062,6 @@ extension $FloorExtension on Floor {
         assets: (assets != null ? assets.value : this.assets),
         roles: (roles != null ? roles.value : this.roles),
         location: (location != null ? location.value : this.location),
-        settings: (settings != null ? settings.value : this.settings),
         floorLevel: (floorLevel != null ? floorLevel.value : this.floorLevel),
         floorType: (floorType != null ? floorType.value : this.floorType),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
@@ -28127,7 +28093,7 @@ class FloorEntity {
   static const fromJsonFactory = _$FloorEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FloorEntity &&
             (identical(other.entity, entity) ||
@@ -28181,7 +28147,7 @@ class FloorEntityRes {
   static const fromJsonFactory = _$FloorEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FloorEntityRes &&
             (identical(other.ok, ok) ||
@@ -28257,7 +28223,7 @@ class FloorArray {
   static const fromJsonFactory = _$FloorArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FloorArray &&
             (identical(other.values, values) ||
@@ -28320,7 +28286,7 @@ class FloorArrayRes {
   static const fromJsonFactory = _$FloorArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FloorArrayRes &&
             (identical(other.ok, ok) ||
@@ -28415,7 +28381,7 @@ class AssetInfo {
     this.roles,
     this.location,
     this.position,
-    this.settings,
+    this.lookups,
     required this.assetModelId,
   });
 
@@ -28449,14 +28415,14 @@ class AssetInfo {
   final GeoLocation? location;
   @JsonKey(name: 'position', includeIfNull: false)
   final ScreenPosition? position;
-  @JsonKey(name: 'settings', includeIfNull: false, defaultValue: <Lookup>[])
-  final List<Lookup>? settings;
+  @JsonKey(name: 'lookups', includeIfNull: false, defaultValue: <Lookup>[])
+  final List<Lookup>? lookups;
   @JsonKey(name: 'assetModelId', includeIfNull: false, defaultValue: '')
   final String assetModelId;
   static const fromJsonFactory = _$AssetInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AssetInfo &&
             (identical(other.premiseId, premiseId) ||
@@ -28491,9 +28457,9 @@ class AssetInfo {
             (identical(other.position, position) ||
                 const DeepCollectionEquality()
                     .equals(other.position, position)) &&
-            (identical(other.settings, settings) ||
+            (identical(other.lookups, lookups) ||
                 const DeepCollectionEquality()
-                    .equals(other.settings, settings)) &&
+                    .equals(other.lookups, lookups)) &&
             (identical(other.assetModelId, assetModelId) ||
                 const DeepCollectionEquality()
                     .equals(other.assetModelId, assetModelId)));
@@ -28516,7 +28482,7 @@ class AssetInfo {
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(location) ^
       const DeepCollectionEquality().hash(position) ^
-      const DeepCollectionEquality().hash(settings) ^
+      const DeepCollectionEquality().hash(lookups) ^
       const DeepCollectionEquality().hash(assetModelId) ^
       runtimeType.hashCode;
 }
@@ -28535,7 +28501,7 @@ extension $AssetInfoExtension on AssetInfo {
       List<String>? roles,
       GeoLocation? location,
       ScreenPosition? position,
-      List<Lookup>? settings,
+      List<Lookup>? lookups,
       String? assetModelId}) {
     return AssetInfo(
         premiseId: premiseId ?? this.premiseId,
@@ -28550,7 +28516,7 @@ extension $AssetInfoExtension on AssetInfo {
         roles: roles ?? this.roles,
         location: location ?? this.location,
         position: position ?? this.position,
-        settings: settings ?? this.settings,
+        lookups: lookups ?? this.lookups,
         assetModelId: assetModelId ?? this.assetModelId);
   }
 
@@ -28567,7 +28533,7 @@ extension $AssetInfoExtension on AssetInfo {
       Wrapped<List<String>?>? roles,
       Wrapped<GeoLocation?>? location,
       Wrapped<ScreenPosition?>? position,
-      Wrapped<List<Lookup>?>? settings,
+      Wrapped<List<Lookup>?>? lookups,
       Wrapped<String>? assetModelId}) {
     return AssetInfo(
         premiseId: (premiseId != null ? premiseId.value : this.premiseId),
@@ -28584,7 +28550,7 @@ extension $AssetInfoExtension on AssetInfo {
         roles: (roles != null ? roles.value : this.roles),
         location: (location != null ? location.value : this.location),
         position: (position != null ? position.value : this.position),
-        settings: (settings != null ? settings.value : this.settings),
+        lookups: (lookups != null ? lookups.value : this.lookups),
         assetModelId:
             (assetModelId != null ? assetModelId.value : this.assetModelId));
   }
@@ -28605,7 +28571,7 @@ class Asset {
     this.roles,
     this.location,
     this.position,
-    this.settings,
+    this.lookups,
     required this.assetModelId,
     required this.domainKey,
     required this.id,
@@ -28645,8 +28611,8 @@ class Asset {
   final GeoLocation? location;
   @JsonKey(name: 'position', includeIfNull: false)
   final ScreenPosition? position;
-  @JsonKey(name: 'settings', includeIfNull: false, defaultValue: <Lookup>[])
-  final List<Lookup>? settings;
+  @JsonKey(name: 'lookups', includeIfNull: false, defaultValue: <Lookup>[])
+  final List<Lookup>? lookups;
   @JsonKey(name: 'assetModelId', includeIfNull: false, defaultValue: '')
   final String assetModelId;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
@@ -28666,7 +28632,7 @@ class Asset {
   static const fromJsonFactory = _$AssetFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Asset &&
             (identical(other.premiseId, premiseId) ||
@@ -28701,9 +28667,9 @@ class Asset {
             (identical(other.position, position) ||
                 const DeepCollectionEquality()
                     .equals(other.position, position)) &&
-            (identical(other.settings, settings) ||
+            (identical(other.lookups, lookups) ||
                 const DeepCollectionEquality()
-                    .equals(other.settings, settings)) &&
+                    .equals(other.lookups, lookups)) &&
             (identical(other.assetModelId, assetModelId) ||
                 const DeepCollectionEquality()
                     .equals(other.assetModelId, assetModelId)) &&
@@ -28745,7 +28711,7 @@ class Asset {
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(location) ^
       const DeepCollectionEquality().hash(position) ^
-      const DeepCollectionEquality().hash(settings) ^
+      const DeepCollectionEquality().hash(lookups) ^
       const DeepCollectionEquality().hash(assetModelId) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
@@ -28771,7 +28737,7 @@ extension $AssetExtension on Asset {
       List<String>? roles,
       GeoLocation? location,
       ScreenPosition? position,
-      List<Lookup>? settings,
+      List<Lookup>? lookups,
       String? assetModelId,
       String? domainKey,
       String? id,
@@ -28793,7 +28759,7 @@ extension $AssetExtension on Asset {
         roles: roles ?? this.roles,
         location: location ?? this.location,
         position: position ?? this.position,
-        settings: settings ?? this.settings,
+        lookups: lookups ?? this.lookups,
         assetModelId: assetModelId ?? this.assetModelId,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
@@ -28817,7 +28783,7 @@ extension $AssetExtension on Asset {
       Wrapped<List<String>?>? roles,
       Wrapped<GeoLocation?>? location,
       Wrapped<ScreenPosition?>? position,
-      Wrapped<List<Lookup>?>? settings,
+      Wrapped<List<Lookup>?>? lookups,
       Wrapped<String>? assetModelId,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
@@ -28841,7 +28807,7 @@ extension $AssetExtension on Asset {
         roles: (roles != null ? roles.value : this.roles),
         location: (location != null ? location.value : this.location),
         position: (position != null ? position.value : this.position),
-        settings: (settings != null ? settings.value : this.settings),
+        lookups: (lookups != null ? lookups.value : this.lookups),
         assetModelId:
             (assetModelId != null ? assetModelId.value : this.assetModelId),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
@@ -28873,7 +28839,7 @@ class AssetEntity {
   static const fromJsonFactory = _$AssetEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AssetEntity &&
             (identical(other.entity, entity) ||
@@ -28927,7 +28893,7 @@ class AssetEntityRes {
   static const fromJsonFactory = _$AssetEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AssetEntityRes &&
             (identical(other.ok, ok) ||
@@ -29003,7 +28969,7 @@ class AssetArray {
   static const fromJsonFactory = _$AssetArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AssetArray &&
             (identical(other.values, values) ||
@@ -29066,7 +29032,7 @@ class AssetArrayRes {
   static const fromJsonFactory = _$AssetArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AssetArrayRes &&
             (identical(other.ok, ok) ||
@@ -29157,7 +29123,6 @@ class FacilityInfo {
     this.images,
     this.roles,
     this.location,
-    this.settings,
   });
 
   factory FacilityInfo.fromJson(Map<String, dynamic> json) =>
@@ -29182,12 +29147,10 @@ class FacilityInfo {
   final List<String>? roles;
   @JsonKey(name: 'location', includeIfNull: false)
   final GeoLocation? location;
-  @JsonKey(name: 'settings', includeIfNull: false, defaultValue: <Lookup>[])
-  final List<Lookup>? settings;
   static const fromJsonFactory = _$FacilityInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FacilityInfo &&
             (identical(other.premiseId, premiseId) ||
@@ -29209,10 +29172,7 @@ class FacilityInfo {
                 const DeepCollectionEquality().equals(other.roles, roles)) &&
             (identical(other.location, location) ||
                 const DeepCollectionEquality()
-                    .equals(other.location, location)) &&
-            (identical(other.settings, settings) ||
-                const DeepCollectionEquality()
-                    .equals(other.settings, settings)));
+                    .equals(other.location, location)));
   }
 
   @override
@@ -29228,7 +29188,6 @@ class FacilityInfo {
       const DeepCollectionEquality().hash(images) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(location) ^
-      const DeepCollectionEquality().hash(settings) ^
       runtimeType.hashCode;
 }
 
@@ -29241,8 +29200,7 @@ extension $FacilityInfoExtension on FacilityInfo {
       int? selectedImage,
       List<String>? images,
       List<String>? roles,
-      GeoLocation? location,
-      List<Lookup>? settings}) {
+      GeoLocation? location}) {
     return FacilityInfo(
         premiseId: premiseId ?? this.premiseId,
         name: name ?? this.name,
@@ -29251,8 +29209,7 @@ extension $FacilityInfoExtension on FacilityInfo {
         selectedImage: selectedImage ?? this.selectedImage,
         images: images ?? this.images,
         roles: roles ?? this.roles,
-        location: location ?? this.location,
-        settings: settings ?? this.settings);
+        location: location ?? this.location);
   }
 
   FacilityInfo copyWithWrapped(
@@ -29263,8 +29220,7 @@ extension $FacilityInfoExtension on FacilityInfo {
       Wrapped<int?>? selectedImage,
       Wrapped<List<String>?>? images,
       Wrapped<List<String>?>? roles,
-      Wrapped<GeoLocation?>? location,
-      Wrapped<List<Lookup>?>? settings}) {
+      Wrapped<GeoLocation?>? location}) {
     return FacilityInfo(
         premiseId: (premiseId != null ? premiseId.value : this.premiseId),
         name: (name != null ? name.value : this.name),
@@ -29275,8 +29231,7 @@ extension $FacilityInfoExtension on FacilityInfo {
             (selectedImage != null ? selectedImage.value : this.selectedImage),
         images: (images != null ? images.value : this.images),
         roles: (roles != null ? roles.value : this.roles),
-        location: (location != null ? location.value : this.location),
-        settings: (settings != null ? settings.value : this.settings));
+        location: (location != null ? location.value : this.location));
   }
 }
 
@@ -29291,7 +29246,6 @@ class Facility {
     this.images,
     this.roles,
     this.location,
-    this.settings,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -29323,8 +29277,6 @@ class Facility {
   final List<String>? roles;
   @JsonKey(name: 'location', includeIfNull: false)
   final GeoLocation? location;
-  @JsonKey(name: 'settings', includeIfNull: false, defaultValue: <Lookup>[])
-  final List<Lookup>? settings;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -29342,7 +29294,7 @@ class Facility {
   static const fromJsonFactory = _$FacilityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Facility &&
             (identical(other.premiseId, premiseId) ||
@@ -29365,9 +29317,6 @@ class Facility {
             (identical(other.location, location) ||
                 const DeepCollectionEquality()
                     .equals(other.location, location)) &&
-            (identical(other.settings, settings) ||
-                const DeepCollectionEquality()
-                    .equals(other.settings, settings)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -29402,7 +29351,6 @@ class Facility {
       const DeepCollectionEquality().hash(images) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(location) ^
-      const DeepCollectionEquality().hash(settings) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -29423,7 +29371,6 @@ extension $FacilityExtension on Facility {
       List<String>? images,
       List<String>? roles,
       GeoLocation? location,
-      List<Lookup>? settings,
       String? domainKey,
       String? id,
       String? rtype,
@@ -29440,7 +29387,6 @@ extension $FacilityExtension on Facility {
         images: images ?? this.images,
         roles: roles ?? this.roles,
         location: location ?? this.location,
-        settings: settings ?? this.settings,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -29459,7 +29405,6 @@ extension $FacilityExtension on Facility {
       Wrapped<List<String>?>? images,
       Wrapped<List<String>?>? roles,
       Wrapped<GeoLocation?>? location,
-      Wrapped<List<Lookup>?>? settings,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -29478,7 +29423,6 @@ extension $FacilityExtension on Facility {
         images: (images != null ? images.value : this.images),
         roles: (roles != null ? roles.value : this.roles),
         location: (location != null ? location.value : this.location),
-        settings: (settings != null ? settings.value : this.settings),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -29508,7 +29452,7 @@ class FacilityEntity {
   static const fromJsonFactory = _$FacilityEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FacilityEntity &&
             (identical(other.entity, entity) ||
@@ -29563,7 +29507,7 @@ class FacilityEntityRes {
   static const fromJsonFactory = _$FacilityEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FacilityEntityRes &&
             (identical(other.ok, ok) ||
@@ -29639,7 +29583,7 @@ class FacilityArray {
   static const fromJsonFactory = _$FacilityArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FacilityArray &&
             (identical(other.values, values) ||
@@ -29702,7 +29646,7 @@ class FacilityArrayRes {
   static const fromJsonFactory = _$FacilityArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FacilityArrayRes &&
             (identical(other.ok, ok) ||
@@ -29826,7 +29770,7 @@ class TwinUserInfo {
   static const fromJsonFactory = _$TwinUserInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TwinUserInfo &&
             (identical(other.name, name) ||
@@ -29949,7 +29893,7 @@ class TwinUserBase {
   static const fromJsonFactory = _$TwinUserBaseFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TwinUserBase &&
             (identical(other.stripeCustomerId, stripeCustomerId) ||
@@ -30076,7 +30020,7 @@ class TwinUser {
   static const fromJsonFactory = _$TwinUserFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TwinUser &&
             (identical(other.name, name) ||
@@ -30277,7 +30221,7 @@ class TwinUserEntity {
   static const fromJsonFactory = _$TwinUserEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TwinUserEntity &&
             (identical(other.entity, entity) ||
@@ -30332,7 +30276,7 @@ class TwinUserEntityRes {
   static const fromJsonFactory = _$TwinUserEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TwinUserEntityRes &&
             (identical(other.ok, ok) ||
@@ -30408,7 +30352,7 @@ class TwinUserArray {
   static const fromJsonFactory = _$TwinUserArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TwinUserArray &&
             (identical(other.values, values) ||
@@ -30471,7 +30415,7 @@ class TwinUserArrayRes {
   static const fromJsonFactory = _$TwinUserArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TwinUserArrayRes &&
             (identical(other.ok, ok) ||
@@ -30574,7 +30518,7 @@ class RoleInfo {
   static const fromJsonFactory = _$RoleInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is RoleInfo &&
             (identical(other.name, name) ||
@@ -30660,7 +30604,7 @@ class Role {
   static const fromJsonFactory = _$RoleFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Role &&
             (identical(other.name, name) ||
@@ -30779,7 +30723,7 @@ class RoleEntity {
   static const fromJsonFactory = _$RoleEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is RoleEntity &&
             (identical(other.entity, entity) ||
@@ -30833,7 +30777,7 @@ class RoleEntityRes {
   static const fromJsonFactory = _$RoleEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is RoleEntityRes &&
             (identical(other.ok, ok) ||
@@ -30905,7 +30849,7 @@ class RoleArray {
   static const fromJsonFactory = _$RoleArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is RoleArray &&
             (identical(other.values, values) ||
@@ -30968,7 +30912,7 @@ class RoleArrayRes {
   static const fromJsonFactory = _$RoleArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is RoleArrayRes &&
             (identical(other.ok, ok) ||
@@ -31054,7 +30998,6 @@ class PremiseInfo {
     required this.name,
     this.description,
     this.tags,
-    this.settings,
     this.selectedImage,
     this.images,
     this.location,
@@ -31073,8 +31016,6 @@ class PremiseInfo {
   final String? description;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
-  @JsonKey(name: 'settings', includeIfNull: false, defaultValue: <Lookup>[])
-  final List<Lookup>? settings;
   @JsonKey(name: 'selectedImage', includeIfNull: false)
   final int? selectedImage;
   @JsonKey(name: 'images', includeIfNull: false, defaultValue: <String>[])
@@ -31086,7 +31027,7 @@ class PremiseInfo {
   static const fromJsonFactory = _$PremiseInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is PremiseInfo &&
             (identical(other.name, name) ||
@@ -31096,9 +31037,6 @@ class PremiseInfo {
                     .equals(other.description, description)) &&
             (identical(other.tags, tags) ||
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
-            (identical(other.settings, settings) ||
-                const DeepCollectionEquality()
-                    .equals(other.settings, settings)) &&
             (identical(other.selectedImage, selectedImage) ||
                 const DeepCollectionEquality()
                     .equals(other.selectedImage, selectedImage)) &&
@@ -31119,7 +31057,6 @@ class PremiseInfo {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(tags) ^
-      const DeepCollectionEquality().hash(settings) ^
       const DeepCollectionEquality().hash(selectedImage) ^
       const DeepCollectionEquality().hash(images) ^
       const DeepCollectionEquality().hash(location) ^
@@ -31132,7 +31069,6 @@ extension $PremiseInfoExtension on PremiseInfo {
       {String? name,
       String? description,
       List<String>? tags,
-      List<Lookup>? settings,
       int? selectedImage,
       List<String>? images,
       GeoLocation? location,
@@ -31141,7 +31077,6 @@ extension $PremiseInfoExtension on PremiseInfo {
         name: name ?? this.name,
         description: description ?? this.description,
         tags: tags ?? this.tags,
-        settings: settings ?? this.settings,
         selectedImage: selectedImage ?? this.selectedImage,
         images: images ?? this.images,
         location: location ?? this.location,
@@ -31152,7 +31087,6 @@ extension $PremiseInfoExtension on PremiseInfo {
       {Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
-      Wrapped<List<Lookup>?>? settings,
       Wrapped<int?>? selectedImage,
       Wrapped<List<String>?>? images,
       Wrapped<GeoLocation?>? location,
@@ -31162,7 +31096,6 @@ extension $PremiseInfoExtension on PremiseInfo {
         description:
             (description != null ? description.value : this.description),
         tags: (tags != null ? tags.value : this.tags),
-        settings: (settings != null ? settings.value : this.settings),
         selectedImage:
             (selectedImage != null ? selectedImage.value : this.selectedImage),
         images: (images != null ? images.value : this.images),
@@ -31177,7 +31110,6 @@ class Premise {
     required this.name,
     this.description,
     this.tags,
-    this.settings,
     this.selectedImage,
     this.images,
     this.location,
@@ -31203,8 +31135,6 @@ class Premise {
   final String? description;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
-  @JsonKey(name: 'settings', includeIfNull: false, defaultValue: <Lookup>[])
-  final List<Lookup>? settings;
   @JsonKey(name: 'selectedImage', includeIfNull: false)
   final int? selectedImage;
   @JsonKey(name: 'images', includeIfNull: false, defaultValue: <String>[])
@@ -31230,7 +31160,7 @@ class Premise {
   static const fromJsonFactory = _$PremiseFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Premise &&
             (identical(other.name, name) ||
@@ -31240,9 +31170,6 @@ class Premise {
                     .equals(other.description, description)) &&
             (identical(other.tags, tags) ||
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
-            (identical(other.settings, settings) ||
-                const DeepCollectionEquality()
-                    .equals(other.settings, settings)) &&
             (identical(other.selectedImage, selectedImage) ||
                 const DeepCollectionEquality()
                     .equals(other.selectedImage, selectedImage)) &&
@@ -31282,7 +31209,6 @@ class Premise {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(tags) ^
-      const DeepCollectionEquality().hash(settings) ^
       const DeepCollectionEquality().hash(selectedImage) ^
       const DeepCollectionEquality().hash(images) ^
       const DeepCollectionEquality().hash(location) ^
@@ -31302,7 +31228,6 @@ extension $PremiseExtension on Premise {
       {String? name,
       String? description,
       List<String>? tags,
-      List<Lookup>? settings,
       int? selectedImage,
       List<String>? images,
       GeoLocation? location,
@@ -31318,7 +31243,6 @@ extension $PremiseExtension on Premise {
         name: name ?? this.name,
         description: description ?? this.description,
         tags: tags ?? this.tags,
-        settings: settings ?? this.settings,
         selectedImage: selectedImage ?? this.selectedImage,
         images: images ?? this.images,
         location: location ?? this.location,
@@ -31336,7 +31260,6 @@ extension $PremiseExtension on Premise {
       {Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
-      Wrapped<List<Lookup>?>? settings,
       Wrapped<int?>? selectedImage,
       Wrapped<List<String>?>? images,
       Wrapped<GeoLocation?>? location,
@@ -31353,7 +31276,6 @@ extension $PremiseExtension on Premise {
         description:
             (description != null ? description.value : this.description),
         tags: (tags != null ? tags.value : this.tags),
-        settings: (settings != null ? settings.value : this.settings),
         selectedImage:
             (selectedImage != null ? selectedImage.value : this.selectedImage),
         images: (images != null ? images.value : this.images),
@@ -31388,7 +31310,7 @@ class PremiseEntity {
   static const fromJsonFactory = _$PremiseEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is PremiseEntity &&
             (identical(other.entity, entity) ||
@@ -31442,7 +31364,7 @@ class PremiseEntityRes {
   static const fromJsonFactory = _$PremiseEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is PremiseEntityRes &&
             (identical(other.ok, ok) ||
@@ -31518,7 +31440,7 @@ class PremiseArray {
   static const fromJsonFactory = _$PremiseArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is PremiseArray &&
             (identical(other.values, values) ||
@@ -31581,7 +31503,7 @@ class PremiseArrayRes {
   static const fromJsonFactory = _$PremiseArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is PremiseArrayRes &&
             (identical(other.ok, ok) ||
@@ -31687,7 +31609,7 @@ class ScreenPosition {
   static const fromJsonFactory = _$ScreenPositionFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ScreenPosition &&
             (identical(other.topX, topX) ||
@@ -31742,7 +31664,7 @@ class Attribute {
     this.description,
     this.label,
     required this.attributeType,
-    required this.value,
+    required this.$value,
     this.editable,
     this.validator,
     this.allowedValues,
@@ -31774,7 +31696,7 @@ class Attribute {
   )
   final enums.AttributeAttributeType attributeType;
   @JsonKey(name: 'value', includeIfNull: false, defaultValue: '')
-  final String value;
+  final String $value;
   @JsonKey(name: 'editable', includeIfNull: false, defaultValue: true)
   final bool? editable;
   @JsonKey(
@@ -31803,7 +31725,7 @@ class Attribute {
   static const fromJsonFactory = _$AttributeFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Attribute &&
             (identical(other.name, name) ||
@@ -31816,8 +31738,8 @@ class Attribute {
             (identical(other.attributeType, attributeType) ||
                 const DeepCollectionEquality()
                     .equals(other.attributeType, attributeType)) &&
-            (identical(other.value, value) ||
-                const DeepCollectionEquality().equals(other.value, value)) &&
+            (identical(other.$value, $value) ||
+                const DeepCollectionEquality().equals(other.$value, $value)) &&
             (identical(other.editable, editable) ||
                 const DeepCollectionEquality()
                     .equals(other.editable, editable)) &&
@@ -31856,7 +31778,7 @@ class Attribute {
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(label) ^
       const DeepCollectionEquality().hash(attributeType) ^
-      const DeepCollectionEquality().hash(value) ^
+      const DeepCollectionEquality().hash($value) ^
       const DeepCollectionEquality().hash(editable) ^
       const DeepCollectionEquality().hash(validator) ^
       const DeepCollectionEquality().hash(allowedValues) ^
@@ -31875,7 +31797,7 @@ extension $AttributeExtension on Attribute {
       String? description,
       String? label,
       enums.AttributeAttributeType? attributeType,
-      String? value,
+      String? $value,
       bool? editable,
       enums.AttributeValidator? validator,
       List<String>? allowedValues,
@@ -31890,7 +31812,7 @@ extension $AttributeExtension on Attribute {
         description: description ?? this.description,
         label: label ?? this.label,
         attributeType: attributeType ?? this.attributeType,
-        value: value ?? this.value,
+        $value: $value ?? this.$value,
         editable: editable ?? this.editable,
         validator: validator ?? this.validator,
         allowedValues: allowedValues ?? this.allowedValues,
@@ -31907,7 +31829,7 @@ extension $AttributeExtension on Attribute {
       Wrapped<String?>? description,
       Wrapped<String?>? label,
       Wrapped<enums.AttributeAttributeType>? attributeType,
-      Wrapped<String>? value,
+      Wrapped<String>? $value,
       Wrapped<bool?>? editable,
       Wrapped<enums.AttributeValidator?>? validator,
       Wrapped<List<String>?>? allowedValues,
@@ -31924,7 +31846,7 @@ extension $AttributeExtension on Attribute {
         label: (label != null ? label.value : this.label),
         attributeType:
             (attributeType != null ? attributeType.value : this.attributeType),
-        value: (value != null ? value.value : this.value),
+        $value: ($value != null ? $value.value : this.$value),
         editable: (editable != null ? editable.value : this.editable),
         validator: (validator != null ? validator.value : this.validator),
         allowedValues:
@@ -31961,7 +31883,7 @@ class Lookup {
   static const fromJsonFactory = _$LookupFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Lookup &&
             (identical(other.name, name) ||
@@ -32021,7 +31943,7 @@ class SettingsInfo {
   static const fromJsonFactory = _$SettingsInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is SettingsInfo &&
             (identical(other.name, name) ||
@@ -32123,7 +32045,7 @@ class Settings {
   static const fromJsonFactory = _$SettingsFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Settings &&
             (identical(other.name, name) ||
@@ -32250,7 +32172,7 @@ class SettingsEntity {
   static const fromJsonFactory = _$SettingsEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is SettingsEntity &&
             (identical(other.entity, entity) ||
@@ -32305,7 +32227,7 @@ class SettingsEntityRes {
   static const fromJsonFactory = _$SettingsEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is SettingsEntityRes &&
             (identical(other.ok, ok) ||
@@ -32381,7 +32303,7 @@ class SettingsArray {
   static const fromJsonFactory = _$SettingsArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is SettingsArray &&
             (identical(other.values, values) ||
@@ -32444,7 +32366,7 @@ class SettingsArrayRes {
   static const fromJsonFactory = _$SettingsArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is SettingsArrayRes &&
             (identical(other.ok, ok) ||
@@ -32540,7 +32462,7 @@ class Tags {
   static const fromJsonFactory = _$TagsFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Tags &&
             (identical(other.values, values) ||
@@ -32585,7 +32507,7 @@ class FloorStats {
   static const fromJsonFactory = _$FloorStatsFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FloorStats &&
             (identical(other.assets, assets) ||
@@ -32634,7 +32556,7 @@ class FloorStatsEntity {
   static const fromJsonFactory = _$FloorStatsEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FloorStatsEntity &&
             (identical(other.entity, entity) ||
@@ -32689,7 +32611,7 @@ class FloorStatsEntityRes {
   static const fromJsonFactory = _$FloorStatsEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FloorStatsEntityRes &&
             (identical(other.ok, ok) ||
@@ -32771,7 +32693,7 @@ class FacilityStats {
   static const fromJsonFactory = _$FacilityStatsFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FacilityStats &&
             (identical(other.floors, floors) ||
@@ -32827,7 +32749,7 @@ class FacilityStatsEntity {
   static const fromJsonFactory = _$FacilityStatsEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FacilityStatsEntity &&
             (identical(other.entity, entity) ||
@@ -32882,7 +32804,7 @@ class FacilityStatsEntityRes {
   static const fromJsonFactory = _$FacilityStatsEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FacilityStatsEntityRes &&
             (identical(other.ok, ok) ||
@@ -32967,7 +32889,7 @@ class PremiseStats {
   static const fromJsonFactory = _$PremiseStatsFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is PremiseStats &&
             (identical(other.facilities, facilities) ||
@@ -33033,7 +32955,7 @@ class PremiseStatsEntity {
   static const fromJsonFactory = _$PremiseStatsEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is PremiseStatsEntity &&
             (identical(other.entity, entity) ||
@@ -33088,7 +33010,7 @@ class PremiseStatsEntityRes {
   static const fromJsonFactory = _$PremiseStatsEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is PremiseStatsEntityRes &&
             (identical(other.ok, ok) ||
@@ -33176,7 +33098,7 @@ class TagsRes {
   static const fromJsonFactory = _$TagsResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TagsRes &&
             (identical(other.ok, ok) ||
@@ -33255,7 +33177,7 @@ class CustomWidget {
   static const fromJsonFactory = _$CustomWidgetFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is CustomWidget &&
             (identical(other.id, id) ||
@@ -33309,7 +33231,7 @@ class SensorWidget {
   static const fromJsonFactory = _$SensorWidgetFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is SensorWidget &&
             (identical(other.widgetId, widgetId) ||
@@ -33382,7 +33304,7 @@ class AssetGroupInfo {
   static const fromJsonFactory = _$AssetGroupInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AssetGroupInfo &&
             (identical(other.name, name) ||
@@ -33508,7 +33430,7 @@ class AssetGroup {
   static const fromJsonFactory = _$AssetGroupFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AssetGroup &&
             (identical(other.name, name) ||
@@ -33649,7 +33571,7 @@ class AssetGroupEntity {
   static const fromJsonFactory = _$AssetGroupEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AssetGroupEntity &&
             (identical(other.entity, entity) ||
@@ -33704,7 +33626,7 @@ class AssetGroupEntityRes {
   static const fromJsonFactory = _$AssetGroupEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AssetGroupEntityRes &&
             (identical(other.ok, ok) ||
@@ -33780,7 +33702,7 @@ class AssetGroupArray {
   static const fromJsonFactory = _$AssetGroupArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AssetGroupArray &&
             (identical(other.values, values) ||
@@ -33844,7 +33766,7 @@ class AssetGroupArrayRes {
   static const fromJsonFactory = _$AssetGroupArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AssetGroupArrayRes &&
             (identical(other.ok, ok) ||
@@ -33980,7 +33902,7 @@ class ReportInfo {
   static const fromJsonFactory = _$ReportInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ReportInfo &&
             (identical(other.modelId, modelId) ||
@@ -34196,7 +34118,7 @@ class Report {
   static const fromJsonFactory = _$ReportFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Report &&
             (identical(other.modelId, modelId) ||
@@ -34409,7 +34331,7 @@ class ReportEntity {
   static const fromJsonFactory = _$ReportEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ReportEntity &&
             (identical(other.entity, entity) ||
@@ -34463,7 +34385,7 @@ class ReportEntityRes {
   static const fromJsonFactory = _$ReportEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ReportEntityRes &&
             (identical(other.ok, ok) ||
@@ -34539,7 +34461,7 @@ class ReportArray {
   static const fromJsonFactory = _$ReportArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ReportArray &&
             (identical(other.values, values) ||
@@ -34602,7 +34524,7 @@ class ReportArrayRes {
   static const fromJsonFactory = _$ReportArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ReportArrayRes &&
             (identical(other.ok, ok) ||
@@ -34697,7 +34619,7 @@ class AssetModelInfo {
     this.hasGeoLocation,
     this.movable,
     this.geolocation,
-    this.settings,
+    this.deviceModelsIds,
   });
 
   factory AssetModelInfo.fromJson(Map<String, dynamic> json) =>
@@ -34730,12 +34652,13 @@ class AssetModelInfo {
   final bool? movable;
   @JsonKey(name: 'geolocation', includeIfNull: false)
   final GeoLocation? geolocation;
-  @JsonKey(name: 'settings', includeIfNull: false, defaultValue: <Lookup>[])
-  final List<Lookup>? settings;
+  @JsonKey(
+      name: 'deviceModelsIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? deviceModelsIds;
   static const fromJsonFactory = _$AssetModelInfoFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AssetModelInfo &&
             (identical(other.name, name) ||
@@ -34770,9 +34693,9 @@ class AssetModelInfo {
             (identical(other.geolocation, geolocation) ||
                 const DeepCollectionEquality()
                     .equals(other.geolocation, geolocation)) &&
-            (identical(other.settings, settings) ||
+            (identical(other.deviceModelsIds, deviceModelsIds) ||
                 const DeepCollectionEquality()
-                    .equals(other.settings, settings)));
+                    .equals(other.deviceModelsIds, deviceModelsIds)));
   }
 
   @override
@@ -34792,7 +34715,7 @@ class AssetModelInfo {
       const DeepCollectionEquality().hash(hasGeoLocation) ^
       const DeepCollectionEquality().hash(movable) ^
       const DeepCollectionEquality().hash(geolocation) ^
-      const DeepCollectionEquality().hash(settings) ^
+      const DeepCollectionEquality().hash(deviceModelsIds) ^
       runtimeType.hashCode;
 }
 
@@ -34810,7 +34733,7 @@ extension $AssetModelInfoExtension on AssetModelInfo {
       bool? hasGeoLocation,
       bool? movable,
       GeoLocation? geolocation,
-      List<Lookup>? settings}) {
+      List<String>? deviceModelsIds}) {
     return AssetModelInfo(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -34824,7 +34747,7 @@ extension $AssetModelInfoExtension on AssetModelInfo {
         hasGeoLocation: hasGeoLocation ?? this.hasGeoLocation,
         movable: movable ?? this.movable,
         geolocation: geolocation ?? this.geolocation,
-        settings: settings ?? this.settings);
+        deviceModelsIds: deviceModelsIds ?? this.deviceModelsIds);
   }
 
   AssetModelInfo copyWithWrapped(
@@ -34840,7 +34763,7 @@ extension $AssetModelInfoExtension on AssetModelInfo {
       Wrapped<bool?>? hasGeoLocation,
       Wrapped<bool?>? movable,
       Wrapped<GeoLocation?>? geolocation,
-      Wrapped<List<Lookup>?>? settings}) {
+      Wrapped<List<String>?>? deviceModelsIds}) {
     return AssetModelInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -34861,7 +34784,9 @@ extension $AssetModelInfoExtension on AssetModelInfo {
         movable: (movable != null ? movable.value : this.movable),
         geolocation:
             (geolocation != null ? geolocation.value : this.geolocation),
-        settings: (settings != null ? settings.value : this.settings));
+        deviceModelsIds: (deviceModelsIds != null
+            ? deviceModelsIds.value
+            : this.deviceModelsIds));
   }
 }
 
@@ -34880,7 +34805,7 @@ class AssetModel {
     this.hasGeoLocation,
     this.movable,
     this.geolocation,
-    this.settings,
+    this.deviceModelsIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -34920,8 +34845,9 @@ class AssetModel {
   final bool? movable;
   @JsonKey(name: 'geolocation', includeIfNull: false)
   final GeoLocation? geolocation;
-  @JsonKey(name: 'settings', includeIfNull: false, defaultValue: <Lookup>[])
-  final List<Lookup>? settings;
+  @JsonKey(
+      name: 'deviceModelsIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? deviceModelsIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -34939,7 +34865,7 @@ class AssetModel {
   static const fromJsonFactory = _$AssetModelFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AssetModel &&
             (identical(other.name, name) ||
@@ -34974,9 +34900,9 @@ class AssetModel {
             (identical(other.geolocation, geolocation) ||
                 const DeepCollectionEquality()
                     .equals(other.geolocation, geolocation)) &&
-            (identical(other.settings, settings) ||
+            (identical(other.deviceModelsIds, deviceModelsIds) ||
                 const DeepCollectionEquality()
-                    .equals(other.settings, settings)) &&
+                    .equals(other.deviceModelsIds, deviceModelsIds)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -35015,7 +34941,7 @@ class AssetModel {
       const DeepCollectionEquality().hash(hasGeoLocation) ^
       const DeepCollectionEquality().hash(movable) ^
       const DeepCollectionEquality().hash(geolocation) ^
-      const DeepCollectionEquality().hash(settings) ^
+      const DeepCollectionEquality().hash(deviceModelsIds) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -35040,7 +34966,7 @@ extension $AssetModelExtension on AssetModel {
       bool? hasGeoLocation,
       bool? movable,
       GeoLocation? geolocation,
-      List<Lookup>? settings,
+      List<String>? deviceModelsIds,
       String? domainKey,
       String? id,
       String? rtype,
@@ -35061,7 +34987,7 @@ extension $AssetModelExtension on AssetModel {
         hasGeoLocation: hasGeoLocation ?? this.hasGeoLocation,
         movable: movable ?? this.movable,
         geolocation: geolocation ?? this.geolocation,
-        settings: settings ?? this.settings,
+        deviceModelsIds: deviceModelsIds ?? this.deviceModelsIds,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -35084,7 +35010,7 @@ extension $AssetModelExtension on AssetModel {
       Wrapped<bool?>? hasGeoLocation,
       Wrapped<bool?>? movable,
       Wrapped<GeoLocation?>? geolocation,
-      Wrapped<List<Lookup>?>? settings,
+      Wrapped<List<String>?>? deviceModelsIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -35112,7 +35038,9 @@ extension $AssetModelExtension on AssetModel {
         movable: (movable != null ? movable.value : this.movable),
         geolocation:
             (geolocation != null ? geolocation.value : this.geolocation),
-        settings: (settings != null ? settings.value : this.settings),
+        deviceModelsIds: (deviceModelsIds != null
+            ? deviceModelsIds.value
+            : this.deviceModelsIds),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -35142,7 +35070,7 @@ class AssetModelEntity {
   static const fromJsonFactory = _$AssetModelEntityFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AssetModelEntity &&
             (identical(other.entity, entity) ||
@@ -35197,7 +35125,7 @@ class AssetModelEntityRes {
   static const fromJsonFactory = _$AssetModelEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AssetModelEntityRes &&
             (identical(other.ok, ok) ||
@@ -35273,7 +35201,7 @@ class AssetModelArray {
   static const fromJsonFactory = _$AssetModelArrayFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AssetModelArray &&
             (identical(other.values, values) ||
@@ -35337,7 +35265,7 @@ class AssetModelArrayRes {
   static const fromJsonFactory = _$AssetModelArrayResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is AssetModelArrayRes &&
             (identical(other.ok, ok) ||
@@ -35436,7 +35364,7 @@ class IDList {
   static const fromJsonFactory = _$IDListFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is IDList &&
             (identical(other.total, total) ||
@@ -35499,7 +35427,7 @@ class IDListEntityRes {
   static const fromJsonFactory = _$IDListEntityResFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is IDListEntityRes &&
             (identical(other.ok, ok) ||
@@ -35566,6 +35494,59 @@ extension $IDListEntityResExtension on IDListEntityRes {
 }
 
 @JsonSerializable(explicitToJson: true)
+class CustomSetting {
+  const CustomSetting({
+    required this.name,
+    this.lookup,
+  });
+
+  factory CustomSetting.fromJson(Map<String, dynamic> json) =>
+      _$CustomSettingFromJson(json);
+
+  static const toJsonFactory = _$CustomSettingToJson;
+  Map<String, dynamic> toJson() => _$CustomSettingToJson(this);
+
+  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
+  final String name;
+  @JsonKey(name: 'lookup', includeIfNull: false, defaultValue: <Lookup>[])
+  final List<Lookup>? lookup;
+  static const fromJsonFactory = _$CustomSettingFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is CustomSetting &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.lookup, lookup) ||
+                const DeepCollectionEquality().equals(other.lookup, lookup)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(lookup) ^
+      runtimeType.hashCode;
+}
+
+extension $CustomSettingExtension on CustomSetting {
+  CustomSetting copyWith({String? name, List<Lookup>? lookup}) {
+    return CustomSetting(
+        name: name ?? this.name, lookup: lookup ?? this.lookup);
+  }
+
+  CustomSetting copyWithWrapped(
+      {Wrapped<String>? name, Wrapped<List<Lookup>?>? lookup}) {
+    return CustomSetting(
+        name: (name != null ? name.value : this.name),
+        lookup: (lookup != null ? lookup.value : this.lookup));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class ExportData {
   const ExportData({
     required this.model,
@@ -35616,7 +35597,7 @@ class ExportData {
   static const fromJsonFactory = _$ExportDataFromJson;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ExportData &&
             (identical(other.model, model) ||
@@ -35742,6 +35723,11 @@ enums.RangeFilterFilter? rangeFilterFilterNullableFromJson(
       defaultValue;
 }
 
+String rangeFilterFilterExplodedListToJson(
+    List<enums.RangeFilterFilter>? rangeFilterFilter) {
+  return rangeFilterFilter?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> rangeFilterFilterListToJson(
     List<enums.RangeFilterFilter>? rangeFilterFilter) {
   if (rangeFilterFilter == null) {
@@ -35807,6 +35793,10 @@ enums.CleanReqType? cleanReqTypeNullableFromJson(
       defaultValue;
 }
 
+String cleanReqTypeExplodedListToJson(List<enums.CleanReqType>? cleanReqType) {
+  return cleanReqType?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> cleanReqTypeListToJson(List<enums.CleanReqType>? cleanReqType) {
   if (cleanReqType == null) {
     return [];
@@ -35867,6 +35857,11 @@ enums.ParameterParameterType? parameterParameterTypeNullableFromJson(
   return enums.ParameterParameterType.values
           .firstWhereOrNull((e) => e.value == parameterParameterType) ??
       defaultValue;
+}
+
+String parameterParameterTypeExplodedListToJson(
+    List<enums.ParameterParameterType>? parameterParameterType) {
+  return parameterParameterType?.map((e) => e.value!).join(',') ?? '';
 }
 
 List<String> parameterParameterTypeListToJson(
@@ -35936,6 +35931,11 @@ enums.ConditionInfoCondition? conditionInfoConditionNullableFromJson(
       defaultValue;
 }
 
+String conditionInfoConditionExplodedListToJson(
+    List<enums.ConditionInfoCondition>? conditionInfoCondition) {
+  return conditionInfoCondition?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> conditionInfoConditionListToJson(
     List<enums.ConditionInfoCondition>? conditionInfoCondition) {
   if (conditionInfoCondition == null) {
@@ -36000,6 +36000,11 @@ enums.ConditionCondition? conditionConditionNullableFromJson(
   return enums.ConditionCondition.values
           .firstWhereOrNull((e) => e.value == conditionCondition) ??
       defaultValue;
+}
+
+String conditionConditionExplodedListToJson(
+    List<enums.ConditionCondition>? conditionCondition) {
+  return conditionCondition?.map((e) => e.value!).join(',') ?? '';
 }
 
 List<String> conditionConditionListToJson(
@@ -36069,6 +36074,11 @@ enums.MatchGroupMatchType? matchGroupMatchTypeNullableFromJson(
       defaultValue;
 }
 
+String matchGroupMatchTypeExplodedListToJson(
+    List<enums.MatchGroupMatchType>? matchGroupMatchType) {
+  return matchGroupMatchType?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> matchGroupMatchTypeListToJson(
     List<enums.MatchGroupMatchType>? matchGroupMatchType) {
   if (matchGroupMatchType == null) {
@@ -36134,6 +36144,11 @@ enums.AlarmMatchGroupMatchType? alarmMatchGroupMatchTypeNullableFromJson(
   return enums.AlarmMatchGroupMatchType.values
           .firstWhereOrNull((e) => e.value == alarmMatchGroupMatchType) ??
       defaultValue;
+}
+
+String alarmMatchGroupMatchTypeExplodedListToJson(
+    List<enums.AlarmMatchGroupMatchType>? alarmMatchGroupMatchType) {
+  return alarmMatchGroupMatchType?.map((e) => e.value!).join(',') ?? '';
 }
 
 List<String> alarmMatchGroupMatchTypeListToJson(
@@ -36203,6 +36218,11 @@ enums.ControlCommandType? controlCommandTypeNullableFromJson(
       defaultValue;
 }
 
+String controlCommandTypeExplodedListToJson(
+    List<enums.ControlCommandType>? controlCommandType) {
+  return controlCommandType?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> controlCommandTypeListToJson(
     List<enums.ControlCommandType>? controlCommandType) {
   if (controlCommandType == null) {
@@ -36268,6 +36288,11 @@ enums.ControlCommandFixedType? controlCommandFixedTypeNullableFromJson(
   return enums.ControlCommandFixedType.values
           .firstWhereOrNull((e) => e.value == controlCommandFixedType) ??
       defaultValue;
+}
+
+String controlCommandFixedTypeExplodedListToJson(
+    List<enums.ControlCommandFixedType>? controlCommandFixedType) {
+  return controlCommandFixedType?.map((e) => e.value!).join(',') ?? '';
 }
 
 List<String> controlCommandFixedTypeListToJson(
@@ -36337,6 +36362,11 @@ enums.HttpConfigProtocol? httpConfigProtocolNullableFromJson(
       defaultValue;
 }
 
+String httpConfigProtocolExplodedListToJson(
+    List<enums.HttpConfigProtocol>? httpConfigProtocol) {
+  return httpConfigProtocol?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> httpConfigProtocolListToJson(
     List<enums.HttpConfigProtocol>? httpConfigProtocol) {
   if (httpConfigProtocol == null) {
@@ -36402,6 +36432,11 @@ enums.TriggerControlTriggerTarget? triggerControlTriggerTargetNullableFromJson(
   return enums.TriggerControlTriggerTarget.values
           .firstWhereOrNull((e) => e.value == triggerControlTriggerTarget) ??
       defaultValue;
+}
+
+String triggerControlTriggerTargetExplodedListToJson(
+    List<enums.TriggerControlTriggerTarget>? triggerControlTriggerTarget) {
+  return triggerControlTriggerTarget?.map((e) => e.value!).join(',') ?? '';
 }
 
 List<String> triggerControlTriggerTargetListToJson(
@@ -36470,6 +36505,11 @@ enums.TriggerControlTriggerType? triggerControlTriggerTypeNullableFromJson(
   return enums.TriggerControlTriggerType.values
           .firstWhereOrNull((e) => e.value == triggerControlTriggerType) ??
       defaultValue;
+}
+
+String triggerControlTriggerTypeExplodedListToJson(
+    List<enums.TriggerControlTriggerType>? triggerControlTriggerType) {
+  return triggerControlTriggerType?.map((e) => e.value!).join(',') ?? '';
 }
 
 List<String> triggerControlTriggerTypeListToJson(
@@ -36541,6 +36581,11 @@ enums.TriggerControlDeliveryTarget?
       defaultValue;
 }
 
+String triggerControlDeliveryTargetExplodedListToJson(
+    List<enums.TriggerControlDeliveryTarget>? triggerControlDeliveryTarget) {
+  return triggerControlDeliveryTarget?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> triggerControlDeliveryTargetListToJson(
     List<enums.TriggerControlDeliveryTarget>? triggerControlDeliveryTarget) {
   if (triggerControlDeliveryTarget == null) {
@@ -36610,6 +36655,11 @@ enums.ImageFileInfoImageType? imageFileInfoImageTypeNullableFromJson(
       defaultValue;
 }
 
+String imageFileInfoImageTypeExplodedListToJson(
+    List<enums.ImageFileInfoImageType>? imageFileInfoImageType) {
+  return imageFileInfoImageType?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> imageFileInfoImageTypeListToJson(
     List<enums.ImageFileInfoImageType>? imageFileInfoImageType) {
   if (imageFileInfoImageType == null) {
@@ -36675,6 +36725,11 @@ enums.ImageFileInfoImageTarget? imageFileInfoImageTargetNullableFromJson(
   return enums.ImageFileInfoImageTarget.values
           .firstWhereOrNull((e) => e.value == imageFileInfoImageTarget) ??
       defaultValue;
+}
+
+String imageFileInfoImageTargetExplodedListToJson(
+    List<enums.ImageFileInfoImageTarget>? imageFileInfoImageTarget) {
+  return imageFileInfoImageTarget?.map((e) => e.value!).join(',') ?? '';
 }
 
 List<String> imageFileInfoImageTargetListToJson(
@@ -36744,6 +36799,11 @@ enums.ImageFileImageType? imageFileImageTypeNullableFromJson(
       defaultValue;
 }
 
+String imageFileImageTypeExplodedListToJson(
+    List<enums.ImageFileImageType>? imageFileImageType) {
+  return imageFileImageType?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> imageFileImageTypeListToJson(
     List<enums.ImageFileImageType>? imageFileImageType) {
   if (imageFileImageType == null) {
@@ -36811,6 +36871,11 @@ enums.ImageFileImageTarget? imageFileImageTargetNullableFromJson(
       defaultValue;
 }
 
+String imageFileImageTargetExplodedListToJson(
+    List<enums.ImageFileImageTarget>? imageFileImageTarget) {
+  return imageFileImageTarget?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> imageFileImageTargetListToJson(
     List<enums.ImageFileImageTarget>? imageFileImageTarget) {
   if (imageFileImageTarget == null) {
@@ -36876,6 +36941,11 @@ enums.DisplayMatchGroupMatchType? displayMatchGroupMatchTypeNullableFromJson(
   return enums.DisplayMatchGroupMatchType.values
           .firstWhereOrNull((e) => e.value == displayMatchGroupMatchType) ??
       defaultValue;
+}
+
+String displayMatchGroupMatchTypeExplodedListToJson(
+    List<enums.DisplayMatchGroupMatchType>? displayMatchGroupMatchType) {
+  return displayMatchGroupMatchType?.map((e) => e.value!).join(',') ?? '';
 }
 
 List<String> displayMatchGroupMatchTypeListToJson(
@@ -36946,6 +37016,11 @@ enums.DisplayMatchGroupBorderType? displayMatchGroupBorderTypeNullableFromJson(
       defaultValue;
 }
 
+String displayMatchGroupBorderTypeExplodedListToJson(
+    List<enums.DisplayMatchGroupBorderType>? displayMatchGroupBorderType) {
+  return displayMatchGroupBorderType?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> displayMatchGroupBorderTypeListToJson(
     List<enums.DisplayMatchGroupBorderType>? displayMatchGroupBorderType) {
   if (displayMatchGroupBorderType == null) {
@@ -37010,6 +37085,11 @@ enums.DisplayableType? displayableTypeNullableFromJson(
   return enums.DisplayableType.values
           .firstWhereOrNull((e) => e.value == displayableType) ??
       defaultValue;
+}
+
+String displayableTypeExplodedListToJson(
+    List<enums.DisplayableType>? displayableType) {
+  return displayableType?.map((e) => e.value!).join(',') ?? '';
 }
 
 List<String> displayableTypeListToJson(
@@ -37077,6 +37157,11 @@ enums.DeviceViewInfoInfoPosition? deviceViewInfoInfoPositionNullableFromJson(
   return enums.DeviceViewInfoInfoPosition.values
           .firstWhereOrNull((e) => e.value == deviceViewInfoInfoPosition) ??
       defaultValue;
+}
+
+String deviceViewInfoInfoPositionExplodedListToJson(
+    List<enums.DeviceViewInfoInfoPosition>? deviceViewInfoInfoPosition) {
+  return deviceViewInfoInfoPosition?.map((e) => e.value!).join(',') ?? '';
 }
 
 List<String> deviceViewInfoInfoPositionListToJson(
@@ -37147,6 +37232,11 @@ enums.DeviceViewInfoBorder? deviceViewInfoBorderNullableFromJson(
       defaultValue;
 }
 
+String deviceViewInfoBorderExplodedListToJson(
+    List<enums.DeviceViewInfoBorder>? deviceViewInfoBorder) {
+  return deviceViewInfoBorder?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> deviceViewInfoBorderListToJson(
     List<enums.DeviceViewInfoBorder>? deviceViewInfoBorder) {
   if (deviceViewInfoBorder == null) {
@@ -37212,6 +37302,11 @@ enums.DeviceViewInfoPosition? deviceViewInfoPositionNullableFromJson(
   return enums.DeviceViewInfoPosition.values
           .firstWhereOrNull((e) => e.value == deviceViewInfoPosition) ??
       defaultValue;
+}
+
+String deviceViewInfoPositionExplodedListToJson(
+    List<enums.DeviceViewInfoPosition>? deviceViewInfoPosition) {
+  return deviceViewInfoPosition?.map((e) => e.value!).join(',') ?? '';
 }
 
 List<String> deviceViewInfoPositionListToJson(
@@ -37280,6 +37375,11 @@ enums.DeviceViewBorder? deviceViewBorderNullableFromJson(
       defaultValue;
 }
 
+String deviceViewBorderExplodedListToJson(
+    List<enums.DeviceViewBorder>? deviceViewBorder) {
+  return deviceViewBorder?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> deviceViewBorderListToJson(
     List<enums.DeviceViewBorder>? deviceViewBorder) {
   if (deviceViewBorder == null) {
@@ -37346,6 +37446,12 @@ enums.TriggeredControlDeliveryStatus?
   return enums.TriggeredControlDeliveryStatus.values
           .firstWhereOrNull((e) => e.value == triggeredControlDeliveryStatus) ??
       defaultValue;
+}
+
+String triggeredControlDeliveryStatusExplodedListToJson(
+    List<enums.TriggeredControlDeliveryStatus>?
+        triggeredControlDeliveryStatus) {
+  return triggeredControlDeliveryStatus?.map((e) => e.value!).join(',') ?? '';
 }
 
 List<String> triggeredControlDeliveryStatusListToJson(
@@ -37418,6 +37524,11 @@ enums.DashboardMenuLinkType? dashboardMenuLinkTypeNullableFromJson(
       defaultValue;
 }
 
+String dashboardMenuLinkTypeExplodedListToJson(
+    List<enums.DashboardMenuLinkType>? dashboardMenuLinkType) {
+  return dashboardMenuLinkType?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> dashboardMenuLinkTypeListToJson(
     List<enums.DashboardMenuLinkType>? dashboardMenuLinkType) {
   if (dashboardMenuLinkType == null) {
@@ -37485,6 +37596,11 @@ enums.ScreenChildViewType? screenChildViewTypeNullableFromJson(
       defaultValue;
 }
 
+String screenChildViewTypeExplodedListToJson(
+    List<enums.ScreenChildViewType>? screenChildViewType) {
+  return screenChildViewType?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> screenChildViewTypeListToJson(
     List<enums.ScreenChildViewType>? screenChildViewType) {
   if (screenChildViewType == null) {
@@ -37550,6 +37666,11 @@ enums.TriggeredEventEventType? triggeredEventEventTypeNullableFromJson(
   return enums.TriggeredEventEventType.values
           .firstWhereOrNull((e) => e.value == triggeredEventEventType) ??
       defaultValue;
+}
+
+String triggeredEventEventTypeExplodedListToJson(
+    List<enums.TriggeredEventEventType>? triggeredEventEventType) {
+  return triggeredEventEventType?.map((e) => e.value!).join(',') ?? '';
 }
 
 List<String> triggeredEventEventTypeListToJson(
@@ -37621,6 +37742,11 @@ enums.TriggeredEventDeliveryStatus?
       defaultValue;
 }
 
+String triggeredEventDeliveryStatusExplodedListToJson(
+    List<enums.TriggeredEventDeliveryStatus>? triggeredEventDeliveryStatus) {
+  return triggeredEventDeliveryStatus?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> triggeredEventDeliveryStatusListToJson(
     List<enums.TriggeredEventDeliveryStatus>? triggeredEventDeliveryStatus) {
   if (triggeredEventDeliveryStatus == null) {
@@ -37690,6 +37816,11 @@ enums.ScreenWidgetInfoTarget? screenWidgetInfoTargetNullableFromJson(
       defaultValue;
 }
 
+String screenWidgetInfoTargetExplodedListToJson(
+    List<enums.ScreenWidgetInfoTarget>? screenWidgetInfoTarget) {
+  return screenWidgetInfoTarget?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> screenWidgetInfoTargetListToJson(
     List<enums.ScreenWidgetInfoTarget>? screenWidgetInfoTarget) {
   if (screenWidgetInfoTarget == null) {
@@ -37754,6 +37885,11 @@ enums.ScreenWidgetTarget? screenWidgetTargetNullableFromJson(
   return enums.ScreenWidgetTarget.values
           .firstWhereOrNull((e) => e.value == screenWidgetTarget) ??
       defaultValue;
+}
+
+String screenWidgetTargetExplodedListToJson(
+    List<enums.ScreenWidgetTarget>? screenWidgetTarget) {
+  return screenWidgetTarget?.map((e) => e.value!).join(',') ?? '';
 }
 
 List<String> screenWidgetTargetListToJson(
@@ -37821,6 +37957,11 @@ enums.FilterConditionCondition? filterConditionConditionNullableFromJson(
   return enums.FilterConditionCondition.values
           .firstWhereOrNull((e) => e.value == filterConditionCondition) ??
       defaultValue;
+}
+
+String filterConditionConditionExplodedListToJson(
+    List<enums.FilterConditionCondition>? filterConditionCondition) {
+  return filterConditionCondition?.map((e) => e.value!).join(',') ?? '';
 }
 
 List<String> filterConditionConditionListToJson(
@@ -37891,6 +38032,11 @@ enums.FilterMatchGroupMatchType? filterMatchGroupMatchTypeNullableFromJson(
       defaultValue;
 }
 
+String filterMatchGroupMatchTypeExplodedListToJson(
+    List<enums.FilterMatchGroupMatchType>? filterMatchGroupMatchType) {
+  return filterMatchGroupMatchType?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> filterMatchGroupMatchTypeListToJson(
     List<enums.FilterMatchGroupMatchType>? filterMatchGroupMatchType) {
   if (filterMatchGroupMatchType == null) {
@@ -37959,6 +38105,11 @@ enums.GeoFenceInfoFenceType? geoFenceInfoFenceTypeNullableFromJson(
       defaultValue;
 }
 
+String geoFenceInfoFenceTypeExplodedListToJson(
+    List<enums.GeoFenceInfoFenceType>? geoFenceInfoFenceType) {
+  return geoFenceInfoFenceType?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> geoFenceInfoFenceTypeListToJson(
     List<enums.GeoFenceInfoFenceType>? geoFenceInfoFenceType) {
   if (geoFenceInfoFenceType == null) {
@@ -38023,6 +38174,11 @@ enums.GeoFenceFenceType? geoFenceFenceTypeNullableFromJson(
   return enums.GeoFenceFenceType.values
           .firstWhereOrNull((e) => e.value == geoFenceFenceType) ??
       defaultValue;
+}
+
+String geoFenceFenceTypeExplodedListToJson(
+    List<enums.GeoFenceFenceType>? geoFenceFenceType) {
+  return geoFenceFenceType?.map((e) => e.value!).join(',') ?? '';
 }
 
 List<String> geoFenceFenceTypeListToJson(
@@ -38090,6 +38246,11 @@ enums.TwinSysInfoEmailProvider? twinSysInfoEmailProviderNullableFromJson(
   return enums.TwinSysInfoEmailProvider.values
           .firstWhereOrNull((e) => e.value == twinSysInfoEmailProvider) ??
       defaultValue;
+}
+
+String twinSysInfoEmailProviderExplodedListToJson(
+    List<enums.TwinSysInfoEmailProvider>? twinSysInfoEmailProvider) {
+  return twinSysInfoEmailProvider?.map((e) => e.value!).join(',') ?? '';
 }
 
 List<String> twinSysInfoEmailProviderListToJson(
@@ -38160,6 +38321,11 @@ enums.TwinSysInfoSmsProvider? twinSysInfoSmsProviderNullableFromJson(
       defaultValue;
 }
 
+String twinSysInfoSmsProviderExplodedListToJson(
+    List<enums.TwinSysInfoSmsProvider>? twinSysInfoSmsProvider) {
+  return twinSysInfoSmsProvider?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> twinSysInfoSmsProviderListToJson(
     List<enums.TwinSysInfoSmsProvider>? twinSysInfoSmsProvider) {
   if (twinSysInfoSmsProvider == null) {
@@ -38225,6 +38391,11 @@ enums.TwinSysInfoVoiceProvider? twinSysInfoVoiceProviderNullableFromJson(
   return enums.TwinSysInfoVoiceProvider.values
           .firstWhereOrNull((e) => e.value == twinSysInfoVoiceProvider) ??
       defaultValue;
+}
+
+String twinSysInfoVoiceProviderExplodedListToJson(
+    List<enums.TwinSysInfoVoiceProvider>? twinSysInfoVoiceProvider) {
+  return twinSysInfoVoiceProvider?.map((e) => e.value!).join(',') ?? '';
 }
 
 List<String> twinSysInfoVoiceProviderListToJson(
@@ -38294,6 +38465,11 @@ enums.FloorInfoFloorType? floorInfoFloorTypeNullableFromJson(
       defaultValue;
 }
 
+String floorInfoFloorTypeExplodedListToJson(
+    List<enums.FloorInfoFloorType>? floorInfoFloorType) {
+  return floorInfoFloorType?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> floorInfoFloorTypeListToJson(
     List<enums.FloorInfoFloorType>? floorInfoFloorType) {
   if (floorInfoFloorType == null) {
@@ -38357,6 +38533,11 @@ enums.FloorFloorType? floorFloorTypeNullableFromJson(
   return enums.FloorFloorType.values
           .firstWhereOrNull((e) => e.value == floorFloorType) ??
       defaultValue;
+}
+
+String floorFloorTypeExplodedListToJson(
+    List<enums.FloorFloorType>? floorFloorType) {
+  return floorFloorType?.map((e) => e.value!).join(',') ?? '';
 }
 
 List<String> floorFloorTypeListToJson(
@@ -38426,6 +38607,11 @@ enums.AttributeAttributeType? attributeAttributeTypeNullableFromJson(
       defaultValue;
 }
 
+String attributeAttributeTypeExplodedListToJson(
+    List<enums.AttributeAttributeType>? attributeAttributeType) {
+  return attributeAttributeType?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> attributeAttributeTypeListToJson(
     List<enums.AttributeAttributeType>? attributeAttributeType) {
   if (attributeAttributeType == null) {
@@ -38490,6 +38676,11 @@ enums.AttributeValidator? attributeValidatorNullableFromJson(
   return enums.AttributeValidator.values
           .firstWhereOrNull((e) => e.value == attributeValidator) ??
       defaultValue;
+}
+
+String attributeValidatorExplodedListToJson(
+    List<enums.AttributeValidator>? attributeValidator) {
+  return attributeValidator?.map((e) => e.value!).join(',') ?? '';
 }
 
 List<String> attributeValidatorListToJson(
@@ -38559,6 +38750,11 @@ enums.AssetGroupInfoTarget? assetGroupInfoTargetNullableFromJson(
       defaultValue;
 }
 
+String assetGroupInfoTargetExplodedListToJson(
+    List<enums.AssetGroupInfoTarget>? assetGroupInfoTarget) {
+  return assetGroupInfoTarget?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> assetGroupInfoTargetListToJson(
     List<enums.AssetGroupInfoTarget>? assetGroupInfoTarget) {
   if (assetGroupInfoTarget == null) {
@@ -38623,6 +38819,11 @@ enums.AssetGroupTarget? assetGroupTargetNullableFromJson(
   return enums.AssetGroupTarget.values
           .firstWhereOrNull((e) => e.value == assetGroupTarget) ??
       defaultValue;
+}
+
+String assetGroupTargetExplodedListToJson(
+    List<enums.AssetGroupTarget>? assetGroupTarget) {
+  return assetGroupTarget?.map((e) => e.value!).join(',') ?? '';
 }
 
 List<String> assetGroupTargetListToJson(
@@ -38694,6 +38895,15 @@ enums.IoTTwinTagsGetEntityTypeGetEntityType?
   return enums.IoTTwinTagsGetEntityTypeGetEntityType.values.firstWhereOrNull(
           (e) => e.value == ioTTwinTagsGetEntityTypeGetEntityType) ??
       defaultValue;
+}
+
+String ioTTwinTagsGetEntityTypeGetEntityTypeExplodedListToJson(
+    List<enums.IoTTwinTagsGetEntityTypeGetEntityType>?
+        ioTTwinTagsGetEntityTypeGetEntityType) {
+  return ioTTwinTagsGetEntityTypeGetEntityType
+          ?.map((e) => e.value!)
+          .join(',') ??
+      '';
 }
 
 List<String> ioTTwinTagsGetEntityTypeGetEntityTypeListToJson(
@@ -38770,6 +38980,15 @@ enums.DeviceDataTrendsDeviceIdFieldGetFilter?
       defaultValue;
 }
 
+String deviceDataTrendsDeviceIdFieldGetFilterExplodedListToJson(
+    List<enums.DeviceDataTrendsDeviceIdFieldGetFilter>?
+        deviceDataTrendsDeviceIdFieldGetFilter) {
+  return deviceDataTrendsDeviceIdFieldGetFilter
+          ?.map((e) => e.value!)
+          .join(',') ??
+      '';
+}
+
 List<String> deviceDataTrendsDeviceIdFieldGetFilterListToJson(
     List<enums.DeviceDataTrendsDeviceIdFieldGetFilter>?
         deviceDataTrendsDeviceIdFieldGetFilter) {
@@ -38842,6 +39061,15 @@ enums.DeviceDataTrendsDeviceIdFieldGetInterval?
   return enums.DeviceDataTrendsDeviceIdFieldGetInterval.values.firstWhereOrNull(
           (e) => e.value == deviceDataTrendsDeviceIdFieldGetInterval) ??
       defaultValue;
+}
+
+String deviceDataTrendsDeviceIdFieldGetIntervalExplodedListToJson(
+    List<enums.DeviceDataTrendsDeviceIdFieldGetInterval>?
+        deviceDataTrendsDeviceIdFieldGetInterval) {
+  return deviceDataTrendsDeviceIdFieldGetInterval
+          ?.map((e) => e.value!)
+          .join(',') ??
+      '';
 }
 
 List<String> deviceDataTrendsDeviceIdFieldGetIntervalListToJson(
@@ -38923,6 +39151,15 @@ enums.DeviceDataSeriesDeviceIdFieldPageSizeGetFilter?
       defaultValue;
 }
 
+String deviceDataSeriesDeviceIdFieldPageSizeGetFilterExplodedListToJson(
+    List<enums.DeviceDataSeriesDeviceIdFieldPageSizeGetFilter>?
+        deviceDataSeriesDeviceIdFieldPageSizeGetFilter) {
+  return deviceDataSeriesDeviceIdFieldPageSizeGetFilter
+          ?.map((e) => e.value!)
+          .join(',') ??
+      '';
+}
+
 List<String> deviceDataSeriesDeviceIdFieldPageSizeGetFilterListToJson(
     List<enums.DeviceDataSeriesDeviceIdFieldPageSizeGetFilter>?
         deviceDataSeriesDeviceIdFieldPageSizeGetFilter) {
@@ -38998,6 +39235,12 @@ enums.ScreenWidgetListTargetPostTarget?
       defaultValue;
 }
 
+String screenWidgetListTargetPostTargetExplodedListToJson(
+    List<enums.ScreenWidgetListTargetPostTarget>?
+        screenWidgetListTargetPostTarget) {
+  return screenWidgetListTargetPostTarget?.map((e) => e.value!).join(',') ?? '';
+}
+
 List<String> screenWidgetListTargetPostTargetListToJson(
     List<enums.ScreenWidgetListTargetPostTarget>?
         screenWidgetListTargetPostTarget) {
@@ -39070,6 +39313,13 @@ enums.ScreenWidgetSearchTargetPostTarget?
   return enums.ScreenWidgetSearchTargetPostTarget.values.firstWhereOrNull(
           (e) => e.value == screenWidgetSearchTargetPostTarget) ??
       defaultValue;
+}
+
+String screenWidgetSearchTargetPostTargetExplodedListToJson(
+    List<enums.ScreenWidgetSearchTargetPostTarget>?
+        screenWidgetSearchTargetPostTarget) {
+  return screenWidgetSearchTargetPostTarget?.map((e) => e.value!).join(',') ??
+      '';
 }
 
 List<String> screenWidgetSearchTargetPostTargetListToJson(
@@ -39147,6 +39397,15 @@ enums.TwinImageUploadModelImageTypeModelIdPostImageType?
           .firstWhereOrNull((e) =>
               e.value == twinImageUploadModelImageTypeModelIdPostImageType) ??
       defaultValue;
+}
+
+String twinImageUploadModelImageTypeModelIdPostImageTypeExplodedListToJson(
+    List<enums.TwinImageUploadModelImageTypeModelIdPostImageType>?
+        twinImageUploadModelImageTypeModelIdPostImageType) {
+  return twinImageUploadModelImageTypeModelIdPostImageType
+          ?.map((e) => e.value!)
+          .join(',') ??
+      '';
 }
 
 List<String> twinImageUploadModelImageTypeModelIdPostImageTypeListToJson(
@@ -39230,6 +39489,15 @@ enums.TwinImageUploadAlarmImageTypeAlarmIdPostImageType?
       defaultValue;
 }
 
+String twinImageUploadAlarmImageTypeAlarmIdPostImageTypeExplodedListToJson(
+    List<enums.TwinImageUploadAlarmImageTypeAlarmIdPostImageType>?
+        twinImageUploadAlarmImageTypeAlarmIdPostImageType) {
+  return twinImageUploadAlarmImageTypeAlarmIdPostImageType
+          ?.map((e) => e.value!)
+          .join(',') ??
+      '';
+}
+
 List<String> twinImageUploadAlarmImageTypeAlarmIdPostImageTypeListToJson(
     List<enums.TwinImageUploadAlarmImageTypeAlarmIdPostImageType>?
         twinImageUploadAlarmImageTypeAlarmIdPostImageType) {
@@ -39309,6 +39577,15 @@ enums.TwinImageUploadDeviceImageTypeDeviceIdPostImageType?
           .firstWhereOrNull((e) =>
               e.value == twinImageUploadDeviceImageTypeDeviceIdPostImageType) ??
       defaultValue;
+}
+
+String twinImageUploadDeviceImageTypeDeviceIdPostImageTypeExplodedListToJson(
+    List<enums.TwinImageUploadDeviceImageTypeDeviceIdPostImageType>?
+        twinImageUploadDeviceImageTypeDeviceIdPostImageType) {
+  return twinImageUploadDeviceImageTypeDeviceIdPostImageType
+          ?.map((e) => e.value!)
+          .join(',') ??
+      '';
 }
 
 List<String> twinImageUploadDeviceImageTypeDeviceIdPostImageTypeListToJson(
@@ -39391,6 +39668,15 @@ enums.TwinImageUploadDomainImageTypePostImageType?
       defaultValue;
 }
 
+String twinImageUploadDomainImageTypePostImageTypeExplodedListToJson(
+    List<enums.TwinImageUploadDomainImageTypePostImageType>?
+        twinImageUploadDomainImageTypePostImageType) {
+  return twinImageUploadDomainImageTypePostImageType
+          ?.map((e) => e.value!)
+          .join(',') ??
+      '';
+}
+
 List<String> twinImageUploadDomainImageTypePostImageTypeListToJson(
     List<enums.TwinImageUploadDomainImageTypePostImageType>?
         twinImageUploadDomainImageTypePostImageType) {
@@ -39469,6 +39755,15 @@ enums.TwinImageSearchImageTypePostImageType?
       defaultValue;
 }
 
+String twinImageSearchImageTypePostImageTypeExplodedListToJson(
+    List<enums.TwinImageSearchImageTypePostImageType>?
+        twinImageSearchImageTypePostImageType) {
+  return twinImageSearchImageTypePostImageType
+          ?.map((e) => e.value!)
+          .join(',') ??
+      '';
+}
+
 List<String> twinImageSearchImageTypePostImageTypeListToJson(
     List<enums.TwinImageSearchImageTypePostImageType>?
         twinImageSearchImageTypePostImageType) {
@@ -39541,6 +39836,13 @@ enums.TwinImageListImageTypePostImageType?
   return enums.TwinImageListImageTypePostImageType.values.firstWhereOrNull(
           (e) => e.value == twinImageListImageTypePostImageType) ??
       defaultValue;
+}
+
+String twinImageListImageTypePostImageTypeExplodedListToJson(
+    List<enums.TwinImageListImageTypePostImageType>?
+        twinImageListImageTypePostImageType) {
+  return twinImageListImageTypePostImageType?.map((e) => e.value!).join(',') ??
+      '';
 }
 
 List<String> twinImageListImageTypePostImageTypeListToJson(

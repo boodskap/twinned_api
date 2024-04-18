@@ -6,6 +6,7 @@ part of 'twinned.swagger.dart';
 // ChopperGenerator
 // **************************************************************************
 
+// coverage:ignore-file
 // ignore_for_file: type=lint
 final class _$Twinned extends Twinned {
   _$Twinned([ChopperClient? client]) {
@@ -14,7 +15,7 @@ final class _$Twinned extends Twinned {
   }
 
   @override
-  final definitionType = Twinned;
+  final Type definitionType = Twinned;
 
   @override
   Future<Response<BaseResponse>> _cleanup({
