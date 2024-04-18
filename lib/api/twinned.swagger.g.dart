@@ -7706,6 +7706,7 @@ Map<String, dynamic> _$AttributeToJson(Attribute instance) {
 
 Lookup _$LookupFromJson(Map<String, dynamic> json) => Lookup(
       name: json['name'] as String? ?? '',
+      settingsName: json['settingsName'] as String? ?? '',
       attributes: (json['attributes'] as List<dynamic>?)
               ?.map((e) => Attribute.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -7714,6 +7715,7 @@ Lookup _$LookupFromJson(Map<String, dynamic> json) => Lookup(
 
 Map<String, dynamic> _$LookupToJson(Lookup instance) => <String, dynamic>{
       'name': instance.name,
+      'settingsName': instance.settingsName,
       'attributes': instance.attributes.map((e) => e.toJson()).toList(),
     };
 

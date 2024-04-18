@@ -31868,6 +31868,7 @@ extension $AttributeExtension on Attribute {
 class Lookup {
   const Lookup({
     required this.name,
+    required this.settingsName,
     required this.attributes,
   });
 
@@ -31878,6 +31879,8 @@ class Lookup {
 
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
   final String name;
+  @JsonKey(name: 'settingsName', includeIfNull: false, defaultValue: '')
+  final String settingsName;
   @JsonKey(
       name: 'attributes', includeIfNull: false, defaultValue: <Attribute>[])
   final List<Attribute> attributes;
@@ -31889,6 +31892,9 @@ class Lookup {
         (other is Lookup &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.settingsName, settingsName) ||
+                const DeepCollectionEquality()
+                    .equals(other.settingsName, settingsName)) &&
             (identical(other.attributes, attributes) ||
                 const DeepCollectionEquality()
                     .equals(other.attributes, attributes)));
@@ -31900,20 +31906,28 @@ class Lookup {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(settingsName) ^
       const DeepCollectionEquality().hash(attributes) ^
       runtimeType.hashCode;
 }
 
 extension $LookupExtension on Lookup {
-  Lookup copyWith({String? name, List<Attribute>? attributes}) {
+  Lookup copyWith(
+      {String? name, String? settingsName, List<Attribute>? attributes}) {
     return Lookup(
-        name: name ?? this.name, attributes: attributes ?? this.attributes);
+        name: name ?? this.name,
+        settingsName: settingsName ?? this.settingsName,
+        attributes: attributes ?? this.attributes);
   }
 
   Lookup copyWithWrapped(
-      {Wrapped<String>? name, Wrapped<List<Attribute>>? attributes}) {
+      {Wrapped<String>? name,
+      Wrapped<String>? settingsName,
+      Wrapped<List<Attribute>>? attributes}) {
     return Lookup(
         name: (name != null ? name.value : this.name),
+        settingsName:
+            (settingsName != null ? settingsName.value : this.settingsName),
         attributes: (attributes != null ? attributes.value : this.attributes));
   }
 }

@@ -17944,10 +17944,14 @@
       "type": "object",
       "required": [
         "name",
+        "settingsName",
         "attributes"
       ],
       "properties": {
         "name": {
+          "type": "string"
+        },
+        "settingsName": {
           "type": "string"
         },
         "attributes": {
