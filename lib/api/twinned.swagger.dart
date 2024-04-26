@@ -681,6 +681,27 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
+  ///Field filter recent device data
+  ///@param fieldFilterId
+  Future<chopper.Response<DeviceDataArrayRes>> fieldFilterRecentDeviceData({
+    required String? fieldFilterId,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        DeviceDataArrayRes, () => DeviceDataArrayRes.fromJsonFactory);
+
+    return _fieldFilterRecentDeviceData(
+        fieldFilterId: fieldFilterId, apikey: apikey?.toString());
+  }
+
+  ///Field filter recent device data
+  ///@param fieldFilterId
+  @Get(path: '/DeviceData/field/filter/{fieldFilterId}')
+  Future<chopper.Response<DeviceDataArrayRes>> _fieldFilterRecentDeviceData({
+    @Path('fieldFilterId') required String? fieldFilterId,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Create device view
   ///@param body
   Future<chopper.Response<DeviceViewEntityRes>> createDeviceView({
@@ -6491,6 +6512,191 @@ abstract class Twinned extends ChopperService {
   ///@param eql
   @Post(path: '/AssetModel/eql')
   Future<chopper.Response<AssetModelArrayRes>> _searchEqlAssetModel({
+    @Body() required Object? eql,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///Create field filter
+  ///@param body
+  Future<chopper.Response<FieldFilterEntityRes>> createFieldFilter({
+    required FieldFilterInfo? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        FieldFilterInfo, () => FieldFilterInfo.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        FieldFilterEntityRes, () => FieldFilterEntityRes.fromJsonFactory);
+
+    return _createFieldFilter(body: body, apikey: apikey?.toString());
+  }
+
+  ///Create field filter
+  ///@param body
+  @Post(path: '/FieldFilter/create')
+  Future<chopper.Response<FieldFilterEntityRes>> _createFieldFilter({
+    @Body() required FieldFilterInfo? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///Update field filter
+  ///@param fieldFilterId
+  ///@param body
+  Future<chopper.Response<FieldFilterEntityRes>> updateFieldFilter({
+    String? fieldFilterId,
+    required FieldFilterInfo? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        FieldFilterInfo, () => FieldFilterInfo.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        FieldFilterEntityRes, () => FieldFilterEntityRes.fromJsonFactory);
+
+    return _updateFieldFilter(
+        fieldFilterId: fieldFilterId?.toString(),
+        body: body,
+        apikey: apikey?.toString());
+  }
+
+  ///Update field filter
+  ///@param fieldFilterId
+  ///@param body
+  @Post(path: '/FieldFilter/update')
+  Future<chopper.Response<FieldFilterEntityRes>> _updateFieldFilter({
+    @Header('fieldFilterId') String? fieldFilterId,
+    @Body() required FieldFilterInfo? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///Delete field filter
+  ///@param fieldFilterId
+  Future<chopper.Response<FieldFilterEntityRes>> deleteFieldFilter({
+    String? fieldFilterId,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        FieldFilterEntityRes, () => FieldFilterEntityRes.fromJsonFactory);
+
+    return _deleteFieldFilter(
+        fieldFilterId: fieldFilterId?.toString(), apikey: apikey?.toString());
+  }
+
+  ///Delete field filter
+  ///@param fieldFilterId
+  @Delete(path: '/FieldFilter/remove')
+  Future<chopper.Response<FieldFilterEntityRes>> _deleteFieldFilter({
+    @Header('fieldFilterId') String? fieldFilterId,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///List field filters
+  ///@param modelId
+  ///@param body
+  Future<chopper.Response<FieldFilterArrayRes>> listFieldFilters({
+    String? modelId,
+    required ListReq? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(ListReq, () => ListReq.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        FieldFilterArrayRes, () => FieldFilterArrayRes.fromJsonFactory);
+
+    return _listFieldFilters(
+        modelId: modelId?.toString(), body: body, apikey: apikey?.toString());
+  }
+
+  ///List field filters
+  ///@param modelId
+  ///@param body
+  @Post(path: '/FieldFilter/list')
+  Future<chopper.Response<FieldFilterArrayRes>> _listFieldFilters({
+    @Header('modelId') String? modelId,
+    @Body() required ListReq? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///Search field filters
+  ///@param modelId
+  ///@param body
+  Future<chopper.Response<FieldFilterArrayRes>> searchFieldFilters({
+    String? modelId,
+    required SearchReq? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        FieldFilterArrayRes, () => FieldFilterArrayRes.fromJsonFactory);
+
+    return _searchFieldFilters(
+        modelId: modelId?.toString(), body: body, apikey: apikey?.toString());
+  }
+
+  ///Search field filters
+  ///@param modelId
+  ///@param body
+  @Post(path: '/FieldFilter/search')
+  Future<chopper.Response<FieldFilterArrayRes>> _searchFieldFilters({
+    @Header('modelId') String? modelId,
+    @Body() required SearchReq? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///Get field filters
+  ///@param body
+  Future<chopper.Response<FieldFilterArrayRes>> getFieldFilters({
+    required GetReq? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(GetReq, () => GetReq.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        FieldFilterArrayRes, () => FieldFilterArrayRes.fromJsonFactory);
+
+    return _getFieldFilters(body: body, apikey: apikey?.toString());
+  }
+
+  ///Get field filters
+  ///@param body
+  @Post(path: '/FieldFilter/get')
+  Future<chopper.Response<FieldFilterArrayRes>> _getFieldFilters({
+    @Body() required GetReq? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///get field filter by id
+  ///@param fieldFilterId
+  Future<chopper.Response<FieldFilterEntityRes>> getFieldFilter({
+    required String? fieldFilterId,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        FieldFilterEntityRes, () => FieldFilterEntityRes.fromJsonFactory);
+
+    return _getFieldFilter(
+        fieldFilterId: fieldFilterId, apikey: apikey?.toString());
+  }
+
+  ///get field filter by id
+  ///@param fieldFilterId
+  @Get(path: '/FieldFilter/one/{fieldFilterId}')
+  Future<chopper.Response<FieldFilterEntityRes>> _getFieldFilter({
+    @Path('fieldFilterId') required String? fieldFilterId,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///Search using SQL
+  ///@param eql
+  Future<chopper.Response<FieldFilterArrayRes>> searchEqlFieldFilter({
+    required Object? eql,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        FieldFilterArrayRes, () => FieldFilterArrayRes.fromJsonFactory);
+
+    return _searchEqlFieldFilter(eql: eql, apikey: apikey?.toString());
+  }
+
+  ///Search using SQL
+  ///@param eql
+  @Post(path: '/FieldFilter/eql')
+  Future<chopper.Response<FieldFilterArrayRes>> _searchEqlFieldFilter({
     @Body() required Object? eql,
     @Header('APIKEY') String? apikey,
   });
@@ -23737,79 +23943,6 @@ extension $PreprocessorArrayResExtension on PreprocessorArrayRes {
 }
 
 @JsonSerializable(explicitToJson: true)
-class FilterCondition {
-  const FilterCondition({
-    required this.field,
-    required this.condition,
-    required this.values,
-  });
-
-  factory FilterCondition.fromJson(Map<String, dynamic> json) =>
-      _$FilterConditionFromJson(json);
-
-  static const toJsonFactory = _$FilterConditionToJson;
-  Map<String, dynamic> toJson() => _$FilterConditionToJson(this);
-
-  @JsonKey(name: 'field', includeIfNull: false, defaultValue: '')
-  final String field;
-  @JsonKey(
-    name: 'condition',
-    includeIfNull: false,
-    toJson: filterConditionConditionToJson,
-    fromJson: filterConditionConditionFromJson,
-  )
-  final enums.FilterConditionCondition condition;
-  @JsonKey(name: 'values', includeIfNull: false, defaultValue: <String>[])
-  final List<String> values;
-  static const fromJsonFactory = _$FilterConditionFromJson;
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other is FilterCondition &&
-            (identical(other.field, field) ||
-                const DeepCollectionEquality().equals(other.field, field)) &&
-            (identical(other.condition, condition) ||
-                const DeepCollectionEquality()
-                    .equals(other.condition, condition)) &&
-            (identical(other.values, values) ||
-                const DeepCollectionEquality().equals(other.values, values)));
-  }
-
-  @override
-  String toString() => jsonEncode(this);
-
-  @override
-  int get hashCode =>
-      const DeepCollectionEquality().hash(field) ^
-      const DeepCollectionEquality().hash(condition) ^
-      const DeepCollectionEquality().hash(values) ^
-      runtimeType.hashCode;
-}
-
-extension $FilterConditionExtension on FilterCondition {
-  FilterCondition copyWith(
-      {String? field,
-      enums.FilterConditionCondition? condition,
-      List<String>? values}) {
-    return FilterCondition(
-        field: field ?? this.field,
-        condition: condition ?? this.condition,
-        values: values ?? this.values);
-  }
-
-  FilterCondition copyWithWrapped(
-      {Wrapped<String>? field,
-      Wrapped<enums.FilterConditionCondition>? condition,
-      Wrapped<List<String>>? values}) {
-    return FilterCondition(
-        field: (field != null ? field.value : this.field),
-        condition: (condition != null ? condition.value : this.condition),
-        values: (values != null ? values.value : this.values));
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
 class FilterMatchGroup {
   const FilterMatchGroup({
     required this.matchType,
@@ -35636,6 +35769,701 @@ extension $CustomSettingExtension on CustomSetting {
 }
 
 @JsonSerializable(explicitToJson: true)
+class FieldFilterInfo {
+  const FieldFilterInfo({
+    required this.name,
+    this.description,
+    this.icon,
+    required this.field,
+    required this.fieldType,
+    required this.condition,
+    this.$value,
+    this.leftValue,
+    this.rightValue,
+    this.values,
+    this.tags,
+  });
+
+  factory FieldFilterInfo.fromJson(Map<String, dynamic> json) =>
+      _$FieldFilterInfoFromJson(json);
+
+  static const toJsonFactory = _$FieldFilterInfoToJson;
+  Map<String, dynamic> toJson() => _$FieldFilterInfoToJson(this);
+
+  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
+  final String name;
+  @JsonKey(name: 'description', includeIfNull: false, defaultValue: '')
+  final String? description;
+  @JsonKey(name: 'icon', includeIfNull: false, defaultValue: '')
+  final String? icon;
+  @JsonKey(name: 'field', includeIfNull: false, defaultValue: '')
+  final String field;
+  @JsonKey(
+    name: 'fieldType',
+    includeIfNull: false,
+    toJson: fieldFilterInfoFieldTypeToJson,
+    fromJson: fieldFilterInfoFieldTypeFromJson,
+  )
+  final enums.FieldFilterInfoFieldType fieldType;
+  @JsonKey(
+    name: 'condition',
+    includeIfNull: false,
+    toJson: fieldFilterInfoConditionToJson,
+    fromJson: fieldFilterInfoConditionFromJson,
+  )
+  final enums.FieldFilterInfoCondition condition;
+  @JsonKey(name: 'value', includeIfNull: false, defaultValue: '')
+  final String? $value;
+  @JsonKey(name: 'leftValue', includeIfNull: false, defaultValue: '')
+  final String? leftValue;
+  @JsonKey(name: 'rightValue', includeIfNull: false, defaultValue: '')
+  final String? rightValue;
+  @JsonKey(name: 'values', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? values;
+  @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? tags;
+  static const fromJsonFactory = _$FieldFilterInfoFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is FieldFilterInfo &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.description, description) ||
+                const DeepCollectionEquality()
+                    .equals(other.description, description)) &&
+            (identical(other.icon, icon) ||
+                const DeepCollectionEquality().equals(other.icon, icon)) &&
+            (identical(other.field, field) ||
+                const DeepCollectionEquality().equals(other.field, field)) &&
+            (identical(other.fieldType, fieldType) ||
+                const DeepCollectionEquality()
+                    .equals(other.fieldType, fieldType)) &&
+            (identical(other.condition, condition) ||
+                const DeepCollectionEquality()
+                    .equals(other.condition, condition)) &&
+            (identical(other.$value, $value) ||
+                const DeepCollectionEquality().equals(other.$value, $value)) &&
+            (identical(other.leftValue, leftValue) ||
+                const DeepCollectionEquality()
+                    .equals(other.leftValue, leftValue)) &&
+            (identical(other.rightValue, rightValue) ||
+                const DeepCollectionEquality()
+                    .equals(other.rightValue, rightValue)) &&
+            (identical(other.values, values) ||
+                const DeepCollectionEquality().equals(other.values, values)) &&
+            (identical(other.tags, tags) ||
+                const DeepCollectionEquality().equals(other.tags, tags)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(description) ^
+      const DeepCollectionEquality().hash(icon) ^
+      const DeepCollectionEquality().hash(field) ^
+      const DeepCollectionEquality().hash(fieldType) ^
+      const DeepCollectionEquality().hash(condition) ^
+      const DeepCollectionEquality().hash($value) ^
+      const DeepCollectionEquality().hash(leftValue) ^
+      const DeepCollectionEquality().hash(rightValue) ^
+      const DeepCollectionEquality().hash(values) ^
+      const DeepCollectionEquality().hash(tags) ^
+      runtimeType.hashCode;
+}
+
+extension $FieldFilterInfoExtension on FieldFilterInfo {
+  FieldFilterInfo copyWith(
+      {String? name,
+      String? description,
+      String? icon,
+      String? field,
+      enums.FieldFilterInfoFieldType? fieldType,
+      enums.FieldFilterInfoCondition? condition,
+      String? $value,
+      String? leftValue,
+      String? rightValue,
+      List<String>? values,
+      List<String>? tags}) {
+    return FieldFilterInfo(
+        name: name ?? this.name,
+        description: description ?? this.description,
+        icon: icon ?? this.icon,
+        field: field ?? this.field,
+        fieldType: fieldType ?? this.fieldType,
+        condition: condition ?? this.condition,
+        $value: $value ?? this.$value,
+        leftValue: leftValue ?? this.leftValue,
+        rightValue: rightValue ?? this.rightValue,
+        values: values ?? this.values,
+        tags: tags ?? this.tags);
+  }
+
+  FieldFilterInfo copyWithWrapped(
+      {Wrapped<String>? name,
+      Wrapped<String?>? description,
+      Wrapped<String?>? icon,
+      Wrapped<String>? field,
+      Wrapped<enums.FieldFilterInfoFieldType>? fieldType,
+      Wrapped<enums.FieldFilterInfoCondition>? condition,
+      Wrapped<String?>? $value,
+      Wrapped<String?>? leftValue,
+      Wrapped<String?>? rightValue,
+      Wrapped<List<String>?>? values,
+      Wrapped<List<String>?>? tags}) {
+    return FieldFilterInfo(
+        name: (name != null ? name.value : this.name),
+        description:
+            (description != null ? description.value : this.description),
+        icon: (icon != null ? icon.value : this.icon),
+        field: (field != null ? field.value : this.field),
+        fieldType: (fieldType != null ? fieldType.value : this.fieldType),
+        condition: (condition != null ? condition.value : this.condition),
+        $value: ($value != null ? $value.value : this.$value),
+        leftValue: (leftValue != null ? leftValue.value : this.leftValue),
+        rightValue: (rightValue != null ? rightValue.value : this.rightValue),
+        values: (values != null ? values.value : this.values),
+        tags: (tags != null ? tags.value : this.tags));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class FieldFilter {
+  const FieldFilter({
+    required this.name,
+    this.description,
+    this.icon,
+    required this.field,
+    required this.fieldType,
+    required this.condition,
+    this.$value,
+    this.leftValue,
+    this.rightValue,
+    this.values,
+    this.tags,
+    required this.domainKey,
+    required this.id,
+    required this.rtype,
+    required this.createdStamp,
+    required this.createdBy,
+    required this.updatedBy,
+    required this.updatedStamp,
+  });
+
+  factory FieldFilter.fromJson(Map<String, dynamic> json) =>
+      _$FieldFilterFromJson(json);
+
+  static const toJsonFactory = _$FieldFilterToJson;
+  Map<String, dynamic> toJson() => _$FieldFilterToJson(this);
+
+  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
+  final String name;
+  @JsonKey(name: 'description', includeIfNull: false, defaultValue: '')
+  final String? description;
+  @JsonKey(name: 'icon', includeIfNull: false, defaultValue: '')
+  final String? icon;
+  @JsonKey(name: 'field', includeIfNull: false, defaultValue: '')
+  final String field;
+  @JsonKey(
+    name: 'fieldType',
+    includeIfNull: false,
+    toJson: fieldFilterFieldTypeToJson,
+    fromJson: fieldFilterFieldTypeFromJson,
+  )
+  final enums.FieldFilterFieldType fieldType;
+  @JsonKey(
+    name: 'condition',
+    includeIfNull: false,
+    toJson: fieldFilterConditionToJson,
+    fromJson: fieldFilterConditionFromJson,
+  )
+  final enums.FieldFilterCondition condition;
+  @JsonKey(name: 'value', includeIfNull: false, defaultValue: '')
+  final String? $value;
+  @JsonKey(name: 'leftValue', includeIfNull: false, defaultValue: '')
+  final String? leftValue;
+  @JsonKey(name: 'rightValue', includeIfNull: false, defaultValue: '')
+  final String? rightValue;
+  @JsonKey(name: 'values', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? values;
+  @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? tags;
+  @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
+  final String domainKey;
+  @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
+  final String id;
+  @JsonKey(name: 'rtype', includeIfNull: false, defaultValue: '')
+  final String rtype;
+  @JsonKey(name: 'createdStamp', includeIfNull: false)
+  final int createdStamp;
+  @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
+  final String createdBy;
+  @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
+  final String updatedBy;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
+  static const fromJsonFactory = _$FieldFilterFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is FieldFilter &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.description, description) ||
+                const DeepCollectionEquality()
+                    .equals(other.description, description)) &&
+            (identical(other.icon, icon) ||
+                const DeepCollectionEquality().equals(other.icon, icon)) &&
+            (identical(other.field, field) ||
+                const DeepCollectionEquality().equals(other.field, field)) &&
+            (identical(other.fieldType, fieldType) ||
+                const DeepCollectionEquality()
+                    .equals(other.fieldType, fieldType)) &&
+            (identical(other.condition, condition) ||
+                const DeepCollectionEquality()
+                    .equals(other.condition, condition)) &&
+            (identical(other.$value, $value) ||
+                const DeepCollectionEquality().equals(other.$value, $value)) &&
+            (identical(other.leftValue, leftValue) ||
+                const DeepCollectionEquality()
+                    .equals(other.leftValue, leftValue)) &&
+            (identical(other.rightValue, rightValue) ||
+                const DeepCollectionEquality()
+                    .equals(other.rightValue, rightValue)) &&
+            (identical(other.values, values) ||
+                const DeepCollectionEquality().equals(other.values, values)) &&
+            (identical(other.tags, tags) ||
+                const DeepCollectionEquality().equals(other.tags, tags)) &&
+            (identical(other.domainKey, domainKey) ||
+                const DeepCollectionEquality()
+                    .equals(other.domainKey, domainKey)) &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.rtype, rtype) ||
+                const DeepCollectionEquality().equals(other.rtype, rtype)) &&
+            (identical(other.createdStamp, createdStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.createdBy, createdBy) ||
+                const DeepCollectionEquality()
+                    .equals(other.createdBy, createdBy)) &&
+            (identical(other.updatedBy, updatedBy) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedBy, updatedBy)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(description) ^
+      const DeepCollectionEquality().hash(icon) ^
+      const DeepCollectionEquality().hash(field) ^
+      const DeepCollectionEquality().hash(fieldType) ^
+      const DeepCollectionEquality().hash(condition) ^
+      const DeepCollectionEquality().hash($value) ^
+      const DeepCollectionEquality().hash(leftValue) ^
+      const DeepCollectionEquality().hash(rightValue) ^
+      const DeepCollectionEquality().hash(values) ^
+      const DeepCollectionEquality().hash(tags) ^
+      const DeepCollectionEquality().hash(domainKey) ^
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(rtype) ^
+      const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(createdBy) ^
+      const DeepCollectionEquality().hash(updatedBy) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
+      runtimeType.hashCode;
+}
+
+extension $FieldFilterExtension on FieldFilter {
+  FieldFilter copyWith(
+      {String? name,
+      String? description,
+      String? icon,
+      String? field,
+      enums.FieldFilterFieldType? fieldType,
+      enums.FieldFilterCondition? condition,
+      String? $value,
+      String? leftValue,
+      String? rightValue,
+      List<String>? values,
+      List<String>? tags,
+      String? domainKey,
+      String? id,
+      String? rtype,
+      int? createdStamp,
+      String? createdBy,
+      String? updatedBy,
+      int? updatedStamp}) {
+    return FieldFilter(
+        name: name ?? this.name,
+        description: description ?? this.description,
+        icon: icon ?? this.icon,
+        field: field ?? this.field,
+        fieldType: fieldType ?? this.fieldType,
+        condition: condition ?? this.condition,
+        $value: $value ?? this.$value,
+        leftValue: leftValue ?? this.leftValue,
+        rightValue: rightValue ?? this.rightValue,
+        values: values ?? this.values,
+        tags: tags ?? this.tags,
+        domainKey: domainKey ?? this.domainKey,
+        id: id ?? this.id,
+        rtype: rtype ?? this.rtype,
+        createdStamp: createdStamp ?? this.createdStamp,
+        createdBy: createdBy ?? this.createdBy,
+        updatedBy: updatedBy ?? this.updatedBy,
+        updatedStamp: updatedStamp ?? this.updatedStamp);
+  }
+
+  FieldFilter copyWithWrapped(
+      {Wrapped<String>? name,
+      Wrapped<String?>? description,
+      Wrapped<String?>? icon,
+      Wrapped<String>? field,
+      Wrapped<enums.FieldFilterFieldType>? fieldType,
+      Wrapped<enums.FieldFilterCondition>? condition,
+      Wrapped<String?>? $value,
+      Wrapped<String?>? leftValue,
+      Wrapped<String?>? rightValue,
+      Wrapped<List<String>?>? values,
+      Wrapped<List<String>?>? tags,
+      Wrapped<String>? domainKey,
+      Wrapped<String>? id,
+      Wrapped<String>? rtype,
+      Wrapped<int>? createdStamp,
+      Wrapped<String>? createdBy,
+      Wrapped<String>? updatedBy,
+      Wrapped<int>? updatedStamp}) {
+    return FieldFilter(
+        name: (name != null ? name.value : this.name),
+        description:
+            (description != null ? description.value : this.description),
+        icon: (icon != null ? icon.value : this.icon),
+        field: (field != null ? field.value : this.field),
+        fieldType: (fieldType != null ? fieldType.value : this.fieldType),
+        condition: (condition != null ? condition.value : this.condition),
+        $value: ($value != null ? $value.value : this.$value),
+        leftValue: (leftValue != null ? leftValue.value : this.leftValue),
+        rightValue: (rightValue != null ? rightValue.value : this.rightValue),
+        values: (values != null ? values.value : this.values),
+        tags: (tags != null ? tags.value : this.tags),
+        domainKey: (domainKey != null ? domainKey.value : this.domainKey),
+        id: (id != null ? id.value : this.id),
+        rtype: (rtype != null ? rtype.value : this.rtype),
+        createdStamp:
+            (createdStamp != null ? createdStamp.value : this.createdStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
+        updatedStamp:
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class FieldFilterEntity {
+  const FieldFilterEntity({
+    this.entity,
+  });
+
+  factory FieldFilterEntity.fromJson(Map<String, dynamic> json) =>
+      _$FieldFilterEntityFromJson(json);
+
+  static const toJsonFactory = _$FieldFilterEntityToJson;
+  Map<String, dynamic> toJson() => _$FieldFilterEntityToJson(this);
+
+  @JsonKey(name: 'entity', includeIfNull: false)
+  final FieldFilter? entity;
+  static const fromJsonFactory = _$FieldFilterEntityFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is FieldFilterEntity &&
+            (identical(other.entity, entity) ||
+                const DeepCollectionEquality().equals(other.entity, entity)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(entity) ^ runtimeType.hashCode;
+}
+
+extension $FieldFilterEntityExtension on FieldFilterEntity {
+  FieldFilterEntity copyWith({FieldFilter? entity}) {
+    return FieldFilterEntity(entity: entity ?? this.entity);
+  }
+
+  FieldFilterEntity copyWithWrapped({Wrapped<FieldFilter?>? entity}) {
+    return FieldFilterEntity(
+        entity: (entity != null ? entity.value : this.entity));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class FieldFilterEntityRes {
+  const FieldFilterEntityRes({
+    this.entity,
+    required this.ok,
+    this.msg,
+    this.trace,
+    this.errorCode,
+  });
+
+  factory FieldFilterEntityRes.fromJson(Map<String, dynamic> json) =>
+      _$FieldFilterEntityResFromJson(json);
+
+  static const toJsonFactory = _$FieldFilterEntityResToJson;
+  Map<String, dynamic> toJson() => _$FieldFilterEntityResToJson(this);
+
+  @JsonKey(name: 'entity', includeIfNull: false)
+  final FieldFilter? entity;
+  @JsonKey(name: 'ok', includeIfNull: false)
+  final bool ok;
+  @JsonKey(name: 'msg', includeIfNull: false, defaultValue: '')
+  final String? msg;
+  @JsonKey(name: 'trace', includeIfNull: false, defaultValue: '')
+  final String? trace;
+  @JsonKey(name: 'errorCode', includeIfNull: false, defaultValue: '')
+  final String? errorCode;
+  static const fromJsonFactory = _$FieldFilterEntityResFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is FieldFilterEntityRes &&
+            (identical(other.entity, entity) ||
+                const DeepCollectionEquality().equals(other.entity, entity)) &&
+            (identical(other.ok, ok) ||
+                const DeepCollectionEquality().equals(other.ok, ok)) &&
+            (identical(other.msg, msg) ||
+                const DeepCollectionEquality().equals(other.msg, msg)) &&
+            (identical(other.trace, trace) ||
+                const DeepCollectionEquality().equals(other.trace, trace)) &&
+            (identical(other.errorCode, errorCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.errorCode, errorCode)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(entity) ^
+      const DeepCollectionEquality().hash(ok) ^
+      const DeepCollectionEquality().hash(msg) ^
+      const DeepCollectionEquality().hash(trace) ^
+      const DeepCollectionEquality().hash(errorCode) ^
+      runtimeType.hashCode;
+}
+
+extension $FieldFilterEntityResExtension on FieldFilterEntityRes {
+  FieldFilterEntityRes copyWith(
+      {FieldFilter? entity,
+      bool? ok,
+      String? msg,
+      String? trace,
+      String? errorCode}) {
+    return FieldFilterEntityRes(
+        entity: entity ?? this.entity,
+        ok: ok ?? this.ok,
+        msg: msg ?? this.msg,
+        trace: trace ?? this.trace,
+        errorCode: errorCode ?? this.errorCode);
+  }
+
+  FieldFilterEntityRes copyWithWrapped(
+      {Wrapped<FieldFilter?>? entity,
+      Wrapped<bool>? ok,
+      Wrapped<String?>? msg,
+      Wrapped<String?>? trace,
+      Wrapped<String?>? errorCode}) {
+    return FieldFilterEntityRes(
+        entity: (entity != null ? entity.value : this.entity),
+        ok: (ok != null ? ok.value : this.ok),
+        msg: (msg != null ? msg.value : this.msg),
+        trace: (trace != null ? trace.value : this.trace),
+        errorCode: (errorCode != null ? errorCode.value : this.errorCode));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class FieldFilterArray {
+  const FieldFilterArray({
+    this.values,
+  });
+
+  factory FieldFilterArray.fromJson(Map<String, dynamic> json) =>
+      _$FieldFilterArrayFromJson(json);
+
+  static const toJsonFactory = _$FieldFilterArrayToJson;
+  Map<String, dynamic> toJson() => _$FieldFilterArrayToJson(this);
+
+  @JsonKey(name: 'values', includeIfNull: false, defaultValue: <FieldFilter>[])
+  final List<FieldFilter>? values;
+  static const fromJsonFactory = _$FieldFilterArrayFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is FieldFilterArray &&
+            (identical(other.values, values) ||
+                const DeepCollectionEquality().equals(other.values, values)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(values) ^ runtimeType.hashCode;
+}
+
+extension $FieldFilterArrayExtension on FieldFilterArray {
+  FieldFilterArray copyWith({List<FieldFilter>? values}) {
+    return FieldFilterArray(values: values ?? this.values);
+  }
+
+  FieldFilterArray copyWithWrapped({Wrapped<List<FieldFilter>?>? values}) {
+    return FieldFilterArray(
+        values: (values != null ? values.value : this.values));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class FieldFilterArrayRes {
+  const FieldFilterArrayRes({
+    required this.ok,
+    this.msg,
+    this.trace,
+    this.errorCode,
+    required this.page,
+    required this.size,
+    required this.total,
+    this.values,
+  });
+
+  factory FieldFilterArrayRes.fromJson(Map<String, dynamic> json) =>
+      _$FieldFilterArrayResFromJson(json);
+
+  static const toJsonFactory = _$FieldFilterArrayResToJson;
+  Map<String, dynamic> toJson() => _$FieldFilterArrayResToJson(this);
+
+  @JsonKey(name: 'ok', includeIfNull: false)
+  final bool ok;
+  @JsonKey(name: 'msg', includeIfNull: false, defaultValue: '')
+  final String? msg;
+  @JsonKey(name: 'trace', includeIfNull: false, defaultValue: '')
+  final String? trace;
+  @JsonKey(name: 'errorCode', includeIfNull: false, defaultValue: '')
+  final String? errorCode;
+  @JsonKey(name: 'page', includeIfNull: false)
+  final int page;
+  @JsonKey(name: 'size', includeIfNull: false)
+  final int size;
+  @JsonKey(name: 'total', includeIfNull: false)
+  final int total;
+  @JsonKey(name: 'values', includeIfNull: false, defaultValue: <FieldFilter>[])
+  final List<FieldFilter>? values;
+  static const fromJsonFactory = _$FieldFilterArrayResFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is FieldFilterArrayRes &&
+            (identical(other.ok, ok) ||
+                const DeepCollectionEquality().equals(other.ok, ok)) &&
+            (identical(other.msg, msg) ||
+                const DeepCollectionEquality().equals(other.msg, msg)) &&
+            (identical(other.trace, trace) ||
+                const DeepCollectionEquality().equals(other.trace, trace)) &&
+            (identical(other.errorCode, errorCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.errorCode, errorCode)) &&
+            (identical(other.page, page) ||
+                const DeepCollectionEquality().equals(other.page, page)) &&
+            (identical(other.size, size) ||
+                const DeepCollectionEquality().equals(other.size, size)) &&
+            (identical(other.total, total) ||
+                const DeepCollectionEquality().equals(other.total, total)) &&
+            (identical(other.values, values) ||
+                const DeepCollectionEquality().equals(other.values, values)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(ok) ^
+      const DeepCollectionEquality().hash(msg) ^
+      const DeepCollectionEquality().hash(trace) ^
+      const DeepCollectionEquality().hash(errorCode) ^
+      const DeepCollectionEquality().hash(page) ^
+      const DeepCollectionEquality().hash(size) ^
+      const DeepCollectionEquality().hash(total) ^
+      const DeepCollectionEquality().hash(values) ^
+      runtimeType.hashCode;
+}
+
+extension $FieldFilterArrayResExtension on FieldFilterArrayRes {
+  FieldFilterArrayRes copyWith(
+      {bool? ok,
+      String? msg,
+      String? trace,
+      String? errorCode,
+      int? page,
+      int? size,
+      int? total,
+      List<FieldFilter>? values}) {
+    return FieldFilterArrayRes(
+        ok: ok ?? this.ok,
+        msg: msg ?? this.msg,
+        trace: trace ?? this.trace,
+        errorCode: errorCode ?? this.errorCode,
+        page: page ?? this.page,
+        size: size ?? this.size,
+        total: total ?? this.total,
+        values: values ?? this.values);
+  }
+
+  FieldFilterArrayRes copyWithWrapped(
+      {Wrapped<bool>? ok,
+      Wrapped<String?>? msg,
+      Wrapped<String?>? trace,
+      Wrapped<String?>? errorCode,
+      Wrapped<int>? page,
+      Wrapped<int>? size,
+      Wrapped<int>? total,
+      Wrapped<List<FieldFilter>?>? values}) {
+    return FieldFilterArrayRes(
+        ok: (ok != null ? ok.value : this.ok),
+        msg: (msg != null ? msg.value : this.msg),
+        trace: (trace != null ? trace.value : this.trace),
+        errorCode: (errorCode != null ? errorCode.value : this.errorCode),
+        page: (page != null ? page.value : this.page),
+        size: (size != null ? size.value : this.size),
+        total: (total != null ? total.value : this.total),
+        values: (values != null ? values.value : this.values));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class ExportData {
   const ExportData({
     required this.model,
@@ -38016,79 +38844,6 @@ List<enums.ScreenWidgetTarget>? screenWidgetTargetNullableListFromJson(
       .toList();
 }
 
-String? filterConditionConditionNullableToJson(
-    enums.FilterConditionCondition? filterConditionCondition) {
-  return filterConditionCondition?.value;
-}
-
-String? filterConditionConditionToJson(
-    enums.FilterConditionCondition filterConditionCondition) {
-  return filterConditionCondition.value;
-}
-
-enums.FilterConditionCondition filterConditionConditionFromJson(
-  Object? filterConditionCondition, [
-  enums.FilterConditionCondition? defaultValue,
-]) {
-  return enums.FilterConditionCondition.values
-          .firstWhereOrNull((e) => e.value == filterConditionCondition) ??
-      defaultValue ??
-      enums.FilterConditionCondition.swaggerGeneratedUnknown;
-}
-
-enums.FilterConditionCondition? filterConditionConditionNullableFromJson(
-  Object? filterConditionCondition, [
-  enums.FilterConditionCondition? defaultValue,
-]) {
-  if (filterConditionCondition == null) {
-    return null;
-  }
-  return enums.FilterConditionCondition.values
-          .firstWhereOrNull((e) => e.value == filterConditionCondition) ??
-      defaultValue;
-}
-
-String filterConditionConditionExplodedListToJson(
-    List<enums.FilterConditionCondition>? filterConditionCondition) {
-  return filterConditionCondition?.map((e) => e.value!).join(',') ?? '';
-}
-
-List<String> filterConditionConditionListToJson(
-    List<enums.FilterConditionCondition>? filterConditionCondition) {
-  if (filterConditionCondition == null) {
-    return [];
-  }
-
-  return filterConditionCondition.map((e) => e.value!).toList();
-}
-
-List<enums.FilterConditionCondition> filterConditionConditionListFromJson(
-  List? filterConditionCondition, [
-  List<enums.FilterConditionCondition>? defaultValue,
-]) {
-  if (filterConditionCondition == null) {
-    return defaultValue ?? [];
-  }
-
-  return filterConditionCondition
-      .map((e) => filterConditionConditionFromJson(e.toString()))
-      .toList();
-}
-
-List<enums.FilterConditionCondition>?
-    filterConditionConditionNullableListFromJson(
-  List? filterConditionCondition, [
-  List<enums.FilterConditionCondition>? defaultValue,
-]) {
-  if (filterConditionCondition == null) {
-    return defaultValue;
-  }
-
-  return filterConditionCondition
-      .map((e) => filterConditionConditionFromJson(e.toString()))
-      .toList();
-}
-
 String? filterMatchGroupMatchTypeNullableToJson(
     enums.FilterMatchGroupMatchType? filterMatchGroupMatchType) {
   return filterMatchGroupMatchType?.value;
@@ -38947,6 +39702,296 @@ List<enums.AssetGroupTarget>? assetGroupTargetNullableListFromJson(
 
   return assetGroupTarget
       .map((e) => assetGroupTargetFromJson(e.toString()))
+      .toList();
+}
+
+String? fieldFilterInfoFieldTypeNullableToJson(
+    enums.FieldFilterInfoFieldType? fieldFilterInfoFieldType) {
+  return fieldFilterInfoFieldType?.value;
+}
+
+String? fieldFilterInfoFieldTypeToJson(
+    enums.FieldFilterInfoFieldType fieldFilterInfoFieldType) {
+  return fieldFilterInfoFieldType.value;
+}
+
+enums.FieldFilterInfoFieldType fieldFilterInfoFieldTypeFromJson(
+  Object? fieldFilterInfoFieldType, [
+  enums.FieldFilterInfoFieldType? defaultValue,
+]) {
+  return enums.FieldFilterInfoFieldType.values
+          .firstWhereOrNull((e) => e.value == fieldFilterInfoFieldType) ??
+      defaultValue ??
+      enums.FieldFilterInfoFieldType.swaggerGeneratedUnknown;
+}
+
+enums.FieldFilterInfoFieldType? fieldFilterInfoFieldTypeNullableFromJson(
+  Object? fieldFilterInfoFieldType, [
+  enums.FieldFilterInfoFieldType? defaultValue,
+]) {
+  if (fieldFilterInfoFieldType == null) {
+    return null;
+  }
+  return enums.FieldFilterInfoFieldType.values
+          .firstWhereOrNull((e) => e.value == fieldFilterInfoFieldType) ??
+      defaultValue;
+}
+
+String fieldFilterInfoFieldTypeExplodedListToJson(
+    List<enums.FieldFilterInfoFieldType>? fieldFilterInfoFieldType) {
+  return fieldFilterInfoFieldType?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> fieldFilterInfoFieldTypeListToJson(
+    List<enums.FieldFilterInfoFieldType>? fieldFilterInfoFieldType) {
+  if (fieldFilterInfoFieldType == null) {
+    return [];
+  }
+
+  return fieldFilterInfoFieldType.map((e) => e.value!).toList();
+}
+
+List<enums.FieldFilterInfoFieldType> fieldFilterInfoFieldTypeListFromJson(
+  List? fieldFilterInfoFieldType, [
+  List<enums.FieldFilterInfoFieldType>? defaultValue,
+]) {
+  if (fieldFilterInfoFieldType == null) {
+    return defaultValue ?? [];
+  }
+
+  return fieldFilterInfoFieldType
+      .map((e) => fieldFilterInfoFieldTypeFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.FieldFilterInfoFieldType>?
+    fieldFilterInfoFieldTypeNullableListFromJson(
+  List? fieldFilterInfoFieldType, [
+  List<enums.FieldFilterInfoFieldType>? defaultValue,
+]) {
+  if (fieldFilterInfoFieldType == null) {
+    return defaultValue;
+  }
+
+  return fieldFilterInfoFieldType
+      .map((e) => fieldFilterInfoFieldTypeFromJson(e.toString()))
+      .toList();
+}
+
+String? fieldFilterInfoConditionNullableToJson(
+    enums.FieldFilterInfoCondition? fieldFilterInfoCondition) {
+  return fieldFilterInfoCondition?.value;
+}
+
+String? fieldFilterInfoConditionToJson(
+    enums.FieldFilterInfoCondition fieldFilterInfoCondition) {
+  return fieldFilterInfoCondition.value;
+}
+
+enums.FieldFilterInfoCondition fieldFilterInfoConditionFromJson(
+  Object? fieldFilterInfoCondition, [
+  enums.FieldFilterInfoCondition? defaultValue,
+]) {
+  return enums.FieldFilterInfoCondition.values
+          .firstWhereOrNull((e) => e.value == fieldFilterInfoCondition) ??
+      defaultValue ??
+      enums.FieldFilterInfoCondition.swaggerGeneratedUnknown;
+}
+
+enums.FieldFilterInfoCondition? fieldFilterInfoConditionNullableFromJson(
+  Object? fieldFilterInfoCondition, [
+  enums.FieldFilterInfoCondition? defaultValue,
+]) {
+  if (fieldFilterInfoCondition == null) {
+    return null;
+  }
+  return enums.FieldFilterInfoCondition.values
+          .firstWhereOrNull((e) => e.value == fieldFilterInfoCondition) ??
+      defaultValue;
+}
+
+String fieldFilterInfoConditionExplodedListToJson(
+    List<enums.FieldFilterInfoCondition>? fieldFilterInfoCondition) {
+  return fieldFilterInfoCondition?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> fieldFilterInfoConditionListToJson(
+    List<enums.FieldFilterInfoCondition>? fieldFilterInfoCondition) {
+  if (fieldFilterInfoCondition == null) {
+    return [];
+  }
+
+  return fieldFilterInfoCondition.map((e) => e.value!).toList();
+}
+
+List<enums.FieldFilterInfoCondition> fieldFilterInfoConditionListFromJson(
+  List? fieldFilterInfoCondition, [
+  List<enums.FieldFilterInfoCondition>? defaultValue,
+]) {
+  if (fieldFilterInfoCondition == null) {
+    return defaultValue ?? [];
+  }
+
+  return fieldFilterInfoCondition
+      .map((e) => fieldFilterInfoConditionFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.FieldFilterInfoCondition>?
+    fieldFilterInfoConditionNullableListFromJson(
+  List? fieldFilterInfoCondition, [
+  List<enums.FieldFilterInfoCondition>? defaultValue,
+]) {
+  if (fieldFilterInfoCondition == null) {
+    return defaultValue;
+  }
+
+  return fieldFilterInfoCondition
+      .map((e) => fieldFilterInfoConditionFromJson(e.toString()))
+      .toList();
+}
+
+String? fieldFilterFieldTypeNullableToJson(
+    enums.FieldFilterFieldType? fieldFilterFieldType) {
+  return fieldFilterFieldType?.value;
+}
+
+String? fieldFilterFieldTypeToJson(
+    enums.FieldFilterFieldType fieldFilterFieldType) {
+  return fieldFilterFieldType.value;
+}
+
+enums.FieldFilterFieldType fieldFilterFieldTypeFromJson(
+  Object? fieldFilterFieldType, [
+  enums.FieldFilterFieldType? defaultValue,
+]) {
+  return enums.FieldFilterFieldType.values
+          .firstWhereOrNull((e) => e.value == fieldFilterFieldType) ??
+      defaultValue ??
+      enums.FieldFilterFieldType.swaggerGeneratedUnknown;
+}
+
+enums.FieldFilterFieldType? fieldFilterFieldTypeNullableFromJson(
+  Object? fieldFilterFieldType, [
+  enums.FieldFilterFieldType? defaultValue,
+]) {
+  if (fieldFilterFieldType == null) {
+    return null;
+  }
+  return enums.FieldFilterFieldType.values
+          .firstWhereOrNull((e) => e.value == fieldFilterFieldType) ??
+      defaultValue;
+}
+
+String fieldFilterFieldTypeExplodedListToJson(
+    List<enums.FieldFilterFieldType>? fieldFilterFieldType) {
+  return fieldFilterFieldType?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> fieldFilterFieldTypeListToJson(
+    List<enums.FieldFilterFieldType>? fieldFilterFieldType) {
+  if (fieldFilterFieldType == null) {
+    return [];
+  }
+
+  return fieldFilterFieldType.map((e) => e.value!).toList();
+}
+
+List<enums.FieldFilterFieldType> fieldFilterFieldTypeListFromJson(
+  List? fieldFilterFieldType, [
+  List<enums.FieldFilterFieldType>? defaultValue,
+]) {
+  if (fieldFilterFieldType == null) {
+    return defaultValue ?? [];
+  }
+
+  return fieldFilterFieldType
+      .map((e) => fieldFilterFieldTypeFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.FieldFilterFieldType>? fieldFilterFieldTypeNullableListFromJson(
+  List? fieldFilterFieldType, [
+  List<enums.FieldFilterFieldType>? defaultValue,
+]) {
+  if (fieldFilterFieldType == null) {
+    return defaultValue;
+  }
+
+  return fieldFilterFieldType
+      .map((e) => fieldFilterFieldTypeFromJson(e.toString()))
+      .toList();
+}
+
+String? fieldFilterConditionNullableToJson(
+    enums.FieldFilterCondition? fieldFilterCondition) {
+  return fieldFilterCondition?.value;
+}
+
+String? fieldFilterConditionToJson(
+    enums.FieldFilterCondition fieldFilterCondition) {
+  return fieldFilterCondition.value;
+}
+
+enums.FieldFilterCondition fieldFilterConditionFromJson(
+  Object? fieldFilterCondition, [
+  enums.FieldFilterCondition? defaultValue,
+]) {
+  return enums.FieldFilterCondition.values
+          .firstWhereOrNull((e) => e.value == fieldFilterCondition) ??
+      defaultValue ??
+      enums.FieldFilterCondition.swaggerGeneratedUnknown;
+}
+
+enums.FieldFilterCondition? fieldFilterConditionNullableFromJson(
+  Object? fieldFilterCondition, [
+  enums.FieldFilterCondition? defaultValue,
+]) {
+  if (fieldFilterCondition == null) {
+    return null;
+  }
+  return enums.FieldFilterCondition.values
+          .firstWhereOrNull((e) => e.value == fieldFilterCondition) ??
+      defaultValue;
+}
+
+String fieldFilterConditionExplodedListToJson(
+    List<enums.FieldFilterCondition>? fieldFilterCondition) {
+  return fieldFilterCondition?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> fieldFilterConditionListToJson(
+    List<enums.FieldFilterCondition>? fieldFilterCondition) {
+  if (fieldFilterCondition == null) {
+    return [];
+  }
+
+  return fieldFilterCondition.map((e) => e.value!).toList();
+}
+
+List<enums.FieldFilterCondition> fieldFilterConditionListFromJson(
+  List? fieldFilterCondition, [
+  List<enums.FieldFilterCondition>? defaultValue,
+]) {
+  if (fieldFilterCondition == null) {
+    return defaultValue ?? [];
+  }
+
+  return fieldFilterCondition
+      .map((e) => fieldFilterConditionFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.FieldFilterCondition>? fieldFilterConditionNullableListFromJson(
+  List? fieldFilterCondition, [
+  List<enums.FieldFilterCondition>? defaultValue,
+]) {
+  if (fieldFilterCondition == null) {
+    return defaultValue;
+  }
+
+  return fieldFilterCondition
+      .map((e) => fieldFilterConditionFromJson(e.toString()))
       .toList();
 }
 

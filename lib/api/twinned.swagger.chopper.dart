@@ -513,6 +513,24 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<DeviceDataArrayRes>> _fieldFilterRecentDeviceData({
+    required String? fieldFilterId,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/DeviceData/field/filter/${fieldFilterId}');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<DeviceDataArrayRes, DeviceDataArrayRes>($request);
+  }
+
+  @override
   Future<Response<DeviceViewEntityRes>> _createDeviceView({
     required DeviceViewInfo? body,
     String? apikey,
@@ -5539,5 +5557,168 @@ final class _$Twinned extends Twinned {
       headers: $headers,
     );
     return client.send<AssetModelArrayRes, AssetModelArrayRes>($request);
+  }
+
+  @override
+  Future<Response<FieldFilterEntityRes>> _createFieldFilter({
+    required FieldFilterInfo? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/FieldFilter/create');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<FieldFilterEntityRes, FieldFilterEntityRes>($request);
+  }
+
+  @override
+  Future<Response<FieldFilterEntityRes>> _updateFieldFilter({
+    String? fieldFilterId,
+    required FieldFilterInfo? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/FieldFilter/update');
+    final Map<String, String> $headers = {
+      if (fieldFilterId != null) 'fieldFilterId': fieldFilterId,
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<FieldFilterEntityRes, FieldFilterEntityRes>($request);
+  }
+
+  @override
+  Future<Response<FieldFilterEntityRes>> _deleteFieldFilter({
+    String? fieldFilterId,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/FieldFilter/remove');
+    final Map<String, String> $headers = {
+      if (fieldFilterId != null) 'fieldFilterId': fieldFilterId,
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'DELETE',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<FieldFilterEntityRes, FieldFilterEntityRes>($request);
+  }
+
+  @override
+  Future<Response<FieldFilterArrayRes>> _listFieldFilters({
+    String? modelId,
+    required ListReq? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/FieldFilter/list');
+    final Map<String, String> $headers = {
+      if (modelId != null) 'modelId': modelId,
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<FieldFilterArrayRes, FieldFilterArrayRes>($request);
+  }
+
+  @override
+  Future<Response<FieldFilterArrayRes>> _searchFieldFilters({
+    String? modelId,
+    required SearchReq? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/FieldFilter/search');
+    final Map<String, String> $headers = {
+      if (modelId != null) 'modelId': modelId,
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<FieldFilterArrayRes, FieldFilterArrayRes>($request);
+  }
+
+  @override
+  Future<Response<FieldFilterArrayRes>> _getFieldFilters({
+    required GetReq? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/FieldFilter/get');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<FieldFilterArrayRes, FieldFilterArrayRes>($request);
+  }
+
+  @override
+  Future<Response<FieldFilterEntityRes>> _getFieldFilter({
+    required String? fieldFilterId,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/FieldFilter/one/${fieldFilterId}');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<FieldFilterEntityRes, FieldFilterEntityRes>($request);
+  }
+
+  @override
+  Future<Response<FieldFilterArrayRes>> _searchEqlFieldFilter({
+    required Object? eql,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/FieldFilter/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = eql;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<FieldFilterArrayRes, FieldFilterArrayRes>($request);
   }
 }
