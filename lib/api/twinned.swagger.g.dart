@@ -6608,10 +6608,6 @@ AssetInfo _$AssetInfoFromJson(Map<String, dynamic> json) => AssetInfo(
       position: json['position'] == null
           ? null
           : ScreenPosition.fromJson(json['position'] as Map<String, dynamic>),
-      lookups: (json['lookups'] as List<dynamic>?)
-              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
       assetModelId: json['assetModelId'] as String? ?? '',
     );
 
@@ -6637,7 +6633,6 @@ Map<String, dynamic> _$AssetInfoToJson(AssetInfo instance) {
   writeNotNull('roles', instance.roles);
   writeNotNull('location', instance.location?.toJson());
   writeNotNull('position', instance.position?.toJson());
-  writeNotNull('lookups', instance.lookups?.map((e) => e.toJson()).toList());
   val['assetModelId'] = instance.assetModelId;
   return val;
 }
@@ -6669,10 +6664,6 @@ Asset _$AssetFromJson(Map<String, dynamic> json) => Asset(
       position: json['position'] == null
           ? null
           : ScreenPosition.fromJson(json['position'] as Map<String, dynamic>),
-      lookups: (json['lookups'] as List<dynamic>?)
-              ?.map((e) => Lookup.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
       assetModelId: json['assetModelId'] as String? ?? '',
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
@@ -6705,7 +6696,6 @@ Map<String, dynamic> _$AssetToJson(Asset instance) {
   writeNotNull('roles', instance.roles);
   writeNotNull('location', instance.location?.toJson());
   writeNotNull('position', instance.position?.toJson());
-  writeNotNull('lookups', instance.lookups?.map((e) => e.toJson()).toList());
   val['assetModelId'] = instance.assetModelId;
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
@@ -7719,6 +7709,17 @@ Map<String, dynamic> _$LookupToJson(Lookup instance) => <String, dynamic>{
       'attributes': instance.attributes.map((e) => e.toJson()).toList(),
     };
 
+ModelLookup _$ModelLookupFromJson(Map<String, dynamic> json) => ModelLookup(
+      deviceModelId: json['deviceModelId'] as String? ?? '',
+      lookup: Lookup.fromJson(json['lookup'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ModelLookupToJson(ModelLookup instance) =>
+    <String, dynamic>{
+      'deviceModelId': instance.deviceModelId,
+      'lookup': instance.lookup.toJson(),
+    };
+
 SettingsInfo _$SettingsInfoFromJson(Map<String, dynamic> json) => SettingsInfo(
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
@@ -8614,6 +8615,10 @@ AssetModelInfo _$AssetModelInfoFromJson(Map<String, dynamic> json) =>
               ?.map((e) => e as String)
               .toList() ??
           [],
+      modelLookups: (json['modelLookups'] as List<dynamic>?)
+              ?.map((e) => ModelLookup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$AssetModelInfoToJson(AssetModelInfo instance) {
@@ -8639,6 +8644,8 @@ Map<String, dynamic> _$AssetModelInfoToJson(AssetModelInfo instance) {
   writeNotNull('movable', instance.movable);
   writeNotNull('geolocation', instance.geolocation?.toJson());
   writeNotNull('deviceModelsIds', instance.deviceModelsIds);
+  writeNotNull(
+      'modelLookups', instance.modelLookups?.map((e) => e.toJson()).toList());
   return val;
 }
 
@@ -8667,6 +8674,10 @@ AssetModel _$AssetModelFromJson(Map<String, dynamic> json) => AssetModel(
           : GeoLocation.fromJson(json['geolocation'] as Map<String, dynamic>),
       deviceModelsIds: (json['deviceModelsIds'] as List<dynamic>?)
               ?.map((e) => e as String)
+              .toList() ??
+          [],
+      modelLookups: (json['modelLookups'] as List<dynamic>?)
+              ?.map((e) => ModelLookup.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
       domainKey: json['domainKey'] as String? ?? '',
@@ -8701,6 +8712,8 @@ Map<String, dynamic> _$AssetModelToJson(AssetModel instance) {
   writeNotNull('movable', instance.movable);
   writeNotNull('geolocation', instance.geolocation?.toJson());
   writeNotNull('deviceModelsIds', instance.deviceModelsIds);
+  writeNotNull(
+      'modelLookups', instance.modelLookups?.map((e) => e.toJson()).toList());
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -8865,6 +8878,7 @@ Map<String, dynamic> _$IDListEntityResToJson(IDListEntityRes instance) {
 CustomSetting _$CustomSettingFromJson(Map<String, dynamic> json) =>
     CustomSetting(
       name: json['name'] as String? ?? '',
+      label: json['label'] as String? ?? '',
       settingIds: (json['settingIds'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -8874,6 +8888,7 @@ CustomSetting _$CustomSettingFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$CustomSettingToJson(CustomSetting instance) =>
     <String, dynamic>{
       'name': instance.name,
+      'label': instance.label,
       'settingIds': instance.settingIds,
     };
 

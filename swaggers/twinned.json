@@ -17354,12 +17354,6 @@
         "position": {
           "$ref": "#/definitions/ScreenPosition"
         },
-        "lookups": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Lookup"
-          }
-        },
         "assetModelId": {
           "type": "string"
         }
@@ -17962,6 +17956,21 @@
         }
       }
     },
+    "ModelLookup": {
+      "type": "object",
+      "required": [
+        "deviceModelId",
+        "lookup"
+      ],
+      "properties": {
+        "deviceModelId": {
+          "type": "string"
+        },
+        "lookup": {
+          "$ref": "#/definitions/Lookup"
+        }
+      }
+    },
     "SettingsInfo": {
       "type": "object",
       "required": [
@@ -18485,6 +18494,12 @@
           "items": {
             "type": "string"
           }
+        },
+        "modelLookups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelLookup"
+          }
         }
       }
     },
@@ -18588,10 +18603,14 @@
       "type": "object",
       "required": [
         "name",
+        "label",
         "settingIds"
       ],
       "properties": {
         "name": {
+          "type": "string"
+        },
+        "label": {
           "type": "string"
         },
         "settingIds": {
