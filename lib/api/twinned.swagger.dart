@@ -28381,7 +28381,6 @@ class AssetInfo {
     this.roles,
     this.location,
     this.position,
-    this.lookups,
     required this.assetModelId,
   });
 
@@ -28415,8 +28414,6 @@ class AssetInfo {
   final GeoLocation? location;
   @JsonKey(name: 'position', includeIfNull: false)
   final ScreenPosition? position;
-  @JsonKey(name: 'lookups', includeIfNull: false, defaultValue: <Lookup>[])
-  final List<Lookup>? lookups;
   @JsonKey(name: 'assetModelId', includeIfNull: false, defaultValue: '')
   final String assetModelId;
   static const fromJsonFactory = _$AssetInfoFromJson;
@@ -28457,9 +28454,6 @@ class AssetInfo {
             (identical(other.position, position) ||
                 const DeepCollectionEquality()
                     .equals(other.position, position)) &&
-            (identical(other.lookups, lookups) ||
-                const DeepCollectionEquality()
-                    .equals(other.lookups, lookups)) &&
             (identical(other.assetModelId, assetModelId) ||
                 const DeepCollectionEquality()
                     .equals(other.assetModelId, assetModelId)));
@@ -28482,7 +28476,6 @@ class AssetInfo {
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(location) ^
       const DeepCollectionEquality().hash(position) ^
-      const DeepCollectionEquality().hash(lookups) ^
       const DeepCollectionEquality().hash(assetModelId) ^
       runtimeType.hashCode;
 }
@@ -28501,7 +28494,6 @@ extension $AssetInfoExtension on AssetInfo {
       List<String>? roles,
       GeoLocation? location,
       ScreenPosition? position,
-      List<Lookup>? lookups,
       String? assetModelId}) {
     return AssetInfo(
         premiseId: premiseId ?? this.premiseId,
@@ -28516,7 +28508,6 @@ extension $AssetInfoExtension on AssetInfo {
         roles: roles ?? this.roles,
         location: location ?? this.location,
         position: position ?? this.position,
-        lookups: lookups ?? this.lookups,
         assetModelId: assetModelId ?? this.assetModelId);
   }
 
@@ -28533,7 +28524,6 @@ extension $AssetInfoExtension on AssetInfo {
       Wrapped<List<String>?>? roles,
       Wrapped<GeoLocation?>? location,
       Wrapped<ScreenPosition?>? position,
-      Wrapped<List<Lookup>?>? lookups,
       Wrapped<String>? assetModelId}) {
     return AssetInfo(
         premiseId: (premiseId != null ? premiseId.value : this.premiseId),
@@ -28550,7 +28540,6 @@ extension $AssetInfoExtension on AssetInfo {
         roles: (roles != null ? roles.value : this.roles),
         location: (location != null ? location.value : this.location),
         position: (position != null ? position.value : this.position),
-        lookups: (lookups != null ? lookups.value : this.lookups),
         assetModelId:
             (assetModelId != null ? assetModelId.value : this.assetModelId));
   }
@@ -28571,7 +28560,6 @@ class Asset {
     this.roles,
     this.location,
     this.position,
-    this.lookups,
     required this.assetModelId,
     required this.domainKey,
     required this.id,
@@ -28611,8 +28599,6 @@ class Asset {
   final GeoLocation? location;
   @JsonKey(name: 'position', includeIfNull: false)
   final ScreenPosition? position;
-  @JsonKey(name: 'lookups', includeIfNull: false, defaultValue: <Lookup>[])
-  final List<Lookup>? lookups;
   @JsonKey(name: 'assetModelId', includeIfNull: false, defaultValue: '')
   final String assetModelId;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
@@ -28667,9 +28653,6 @@ class Asset {
             (identical(other.position, position) ||
                 const DeepCollectionEquality()
                     .equals(other.position, position)) &&
-            (identical(other.lookups, lookups) ||
-                const DeepCollectionEquality()
-                    .equals(other.lookups, lookups)) &&
             (identical(other.assetModelId, assetModelId) ||
                 const DeepCollectionEquality()
                     .equals(other.assetModelId, assetModelId)) &&
@@ -28711,7 +28694,6 @@ class Asset {
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(location) ^
       const DeepCollectionEquality().hash(position) ^
-      const DeepCollectionEquality().hash(lookups) ^
       const DeepCollectionEquality().hash(assetModelId) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
@@ -28737,7 +28719,6 @@ extension $AssetExtension on Asset {
       List<String>? roles,
       GeoLocation? location,
       ScreenPosition? position,
-      List<Lookup>? lookups,
       String? assetModelId,
       String? domainKey,
       String? id,
@@ -28759,7 +28740,6 @@ extension $AssetExtension on Asset {
         roles: roles ?? this.roles,
         location: location ?? this.location,
         position: position ?? this.position,
-        lookups: lookups ?? this.lookups,
         assetModelId: assetModelId ?? this.assetModelId,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
@@ -28783,7 +28763,6 @@ extension $AssetExtension on Asset {
       Wrapped<List<String>?>? roles,
       Wrapped<GeoLocation?>? location,
       Wrapped<ScreenPosition?>? position,
-      Wrapped<List<Lookup>?>? lookups,
       Wrapped<String>? assetModelId,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
@@ -28807,7 +28786,6 @@ extension $AssetExtension on Asset {
         roles: (roles != null ? roles.value : this.roles),
         location: (location != null ? location.value : this.location),
         position: (position != null ? position.value : this.position),
-        lookups: (lookups != null ? lookups.value : this.lookups),
         assetModelId:
             (assetModelId != null ? assetModelId.value : this.assetModelId),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
@@ -31933,6 +31911,62 @@ extension $LookupExtension on Lookup {
 }
 
 @JsonSerializable(explicitToJson: true)
+class ModelLookup {
+  const ModelLookup({
+    required this.deviceModelId,
+    required this.lookup,
+  });
+
+  factory ModelLookup.fromJson(Map<String, dynamic> json) =>
+      _$ModelLookupFromJson(json);
+
+  static const toJsonFactory = _$ModelLookupToJson;
+  Map<String, dynamic> toJson() => _$ModelLookupToJson(this);
+
+  @JsonKey(name: 'deviceModelId', includeIfNull: false, defaultValue: '')
+  final String deviceModelId;
+  @JsonKey(name: 'lookup', includeIfNull: false)
+  final Lookup lookup;
+  static const fromJsonFactory = _$ModelLookupFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is ModelLookup &&
+            (identical(other.deviceModelId, deviceModelId) ||
+                const DeepCollectionEquality()
+                    .equals(other.deviceModelId, deviceModelId)) &&
+            (identical(other.lookup, lookup) ||
+                const DeepCollectionEquality().equals(other.lookup, lookup)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(deviceModelId) ^
+      const DeepCollectionEquality().hash(lookup) ^
+      runtimeType.hashCode;
+}
+
+extension $ModelLookupExtension on ModelLookup {
+  ModelLookup copyWith({String? deviceModelId, Lookup? lookup}) {
+    return ModelLookup(
+        deviceModelId: deviceModelId ?? this.deviceModelId,
+        lookup: lookup ?? this.lookup);
+  }
+
+  ModelLookup copyWithWrapped(
+      {Wrapped<String>? deviceModelId, Wrapped<Lookup>? lookup}) {
+    return ModelLookup(
+        deviceModelId:
+            (deviceModelId != null ? deviceModelId.value : this.deviceModelId),
+        lookup: (lookup != null ? lookup.value : this.lookup));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class SettingsInfo {
   const SettingsInfo({
     required this.name,
@@ -34636,6 +34670,7 @@ class AssetModelInfo {
     this.movable,
     this.geolocation,
     this.deviceModelsIds,
+    this.modelLookups,
   });
 
   factory AssetModelInfo.fromJson(Map<String, dynamic> json) =>
@@ -34671,6 +34706,9 @@ class AssetModelInfo {
   @JsonKey(
       name: 'deviceModelsIds', includeIfNull: false, defaultValue: <String>[])
   final List<String>? deviceModelsIds;
+  @JsonKey(
+      name: 'modelLookups', includeIfNull: false, defaultValue: <ModelLookup>[])
+  final List<ModelLookup>? modelLookups;
   static const fromJsonFactory = _$AssetModelInfoFromJson;
 
   @override
@@ -34711,7 +34749,10 @@ class AssetModelInfo {
                     .equals(other.geolocation, geolocation)) &&
             (identical(other.deviceModelsIds, deviceModelsIds) ||
                 const DeepCollectionEquality()
-                    .equals(other.deviceModelsIds, deviceModelsIds)));
+                    .equals(other.deviceModelsIds, deviceModelsIds)) &&
+            (identical(other.modelLookups, modelLookups) ||
+                const DeepCollectionEquality()
+                    .equals(other.modelLookups, modelLookups)));
   }
 
   @override
@@ -34732,6 +34773,7 @@ class AssetModelInfo {
       const DeepCollectionEquality().hash(movable) ^
       const DeepCollectionEquality().hash(geolocation) ^
       const DeepCollectionEquality().hash(deviceModelsIds) ^
+      const DeepCollectionEquality().hash(modelLookups) ^
       runtimeType.hashCode;
 }
 
@@ -34749,7 +34791,8 @@ extension $AssetModelInfoExtension on AssetModelInfo {
       bool? hasGeoLocation,
       bool? movable,
       GeoLocation? geolocation,
-      List<String>? deviceModelsIds}) {
+      List<String>? deviceModelsIds,
+      List<ModelLookup>? modelLookups}) {
     return AssetModelInfo(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -34763,7 +34806,8 @@ extension $AssetModelInfoExtension on AssetModelInfo {
         hasGeoLocation: hasGeoLocation ?? this.hasGeoLocation,
         movable: movable ?? this.movable,
         geolocation: geolocation ?? this.geolocation,
-        deviceModelsIds: deviceModelsIds ?? this.deviceModelsIds);
+        deviceModelsIds: deviceModelsIds ?? this.deviceModelsIds,
+        modelLookups: modelLookups ?? this.modelLookups);
   }
 
   AssetModelInfo copyWithWrapped(
@@ -34779,7 +34823,8 @@ extension $AssetModelInfoExtension on AssetModelInfo {
       Wrapped<bool?>? hasGeoLocation,
       Wrapped<bool?>? movable,
       Wrapped<GeoLocation?>? geolocation,
-      Wrapped<List<String>?>? deviceModelsIds}) {
+      Wrapped<List<String>?>? deviceModelsIds,
+      Wrapped<List<ModelLookup>?>? modelLookups}) {
     return AssetModelInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -34802,7 +34847,9 @@ extension $AssetModelInfoExtension on AssetModelInfo {
             (geolocation != null ? geolocation.value : this.geolocation),
         deviceModelsIds: (deviceModelsIds != null
             ? deviceModelsIds.value
-            : this.deviceModelsIds));
+            : this.deviceModelsIds),
+        modelLookups:
+            (modelLookups != null ? modelLookups.value : this.modelLookups));
   }
 }
 
@@ -34822,6 +34869,7 @@ class AssetModel {
     this.movable,
     this.geolocation,
     this.deviceModelsIds,
+    this.modelLookups,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -34864,6 +34912,9 @@ class AssetModel {
   @JsonKey(
       name: 'deviceModelsIds', includeIfNull: false, defaultValue: <String>[])
   final List<String>? deviceModelsIds;
+  @JsonKey(
+      name: 'modelLookups', includeIfNull: false, defaultValue: <ModelLookup>[])
+  final List<ModelLookup>? modelLookups;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -34919,6 +34970,9 @@ class AssetModel {
             (identical(other.deviceModelsIds, deviceModelsIds) ||
                 const DeepCollectionEquality()
                     .equals(other.deviceModelsIds, deviceModelsIds)) &&
+            (identical(other.modelLookups, modelLookups) ||
+                const DeepCollectionEquality()
+                    .equals(other.modelLookups, modelLookups)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -34958,6 +35012,7 @@ class AssetModel {
       const DeepCollectionEquality().hash(movable) ^
       const DeepCollectionEquality().hash(geolocation) ^
       const DeepCollectionEquality().hash(deviceModelsIds) ^
+      const DeepCollectionEquality().hash(modelLookups) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -34983,6 +35038,7 @@ extension $AssetModelExtension on AssetModel {
       bool? movable,
       GeoLocation? geolocation,
       List<String>? deviceModelsIds,
+      List<ModelLookup>? modelLookups,
       String? domainKey,
       String? id,
       String? rtype,
@@ -35004,6 +35060,7 @@ extension $AssetModelExtension on AssetModel {
         movable: movable ?? this.movable,
         geolocation: geolocation ?? this.geolocation,
         deviceModelsIds: deviceModelsIds ?? this.deviceModelsIds,
+        modelLookups: modelLookups ?? this.modelLookups,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -35027,6 +35084,7 @@ extension $AssetModelExtension on AssetModel {
       Wrapped<bool?>? movable,
       Wrapped<GeoLocation?>? geolocation,
       Wrapped<List<String>?>? deviceModelsIds,
+      Wrapped<List<ModelLookup>?>? modelLookups,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -35057,6 +35115,8 @@ extension $AssetModelExtension on AssetModel {
         deviceModelsIds: (deviceModelsIds != null
             ? deviceModelsIds.value
             : this.deviceModelsIds),
+        modelLookups:
+            (modelLookups != null ? modelLookups.value : this.modelLookups),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -35513,6 +35573,7 @@ extension $IDListEntityResExtension on IDListEntityRes {
 class CustomSetting {
   const CustomSetting({
     required this.name,
+    required this.label,
     required this.settingIds,
   });
 
@@ -35524,6 +35585,8 @@ class CustomSetting {
 
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
   final String name;
+  @JsonKey(name: 'label', includeIfNull: false, defaultValue: '')
+  final String label;
   @JsonKey(name: 'settingIds', includeIfNull: false, defaultValue: <String>[])
   final List<String> settingIds;
   static const fromJsonFactory = _$CustomSettingFromJson;
@@ -35534,6 +35597,8 @@ class CustomSetting {
         (other is CustomSetting &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.label, label) ||
+                const DeepCollectionEquality().equals(other.label, label)) &&
             (identical(other.settingIds, settingIds) ||
                 const DeepCollectionEquality()
                     .equals(other.settingIds, settingIds)));
@@ -35545,20 +35610,27 @@ class CustomSetting {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(label) ^
       const DeepCollectionEquality().hash(settingIds) ^
       runtimeType.hashCode;
 }
 
 extension $CustomSettingExtension on CustomSetting {
-  CustomSetting copyWith({String? name, List<String>? settingIds}) {
+  CustomSetting copyWith(
+      {String? name, String? label, List<String>? settingIds}) {
     return CustomSetting(
-        name: name ?? this.name, settingIds: settingIds ?? this.settingIds);
+        name: name ?? this.name,
+        label: label ?? this.label,
+        settingIds: settingIds ?? this.settingIds);
   }
 
   CustomSetting copyWithWrapped(
-      {Wrapped<String>? name, Wrapped<List<String>>? settingIds}) {
+      {Wrapped<String>? name,
+      Wrapped<String>? label,
+      Wrapped<List<String>>? settingIds}) {
     return CustomSetting(
         name: (name != null ? name.value : this.name),
+        label: (label != null ? label.value : this.label),
         settingIds: (settingIds != null ? settingIds.value : this.settingIds));
   }
 }
