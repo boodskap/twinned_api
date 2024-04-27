@@ -458,11 +458,15 @@ final class _$Twinned extends Twinned {
 
   @override
   Future<Response<DeviceDataArrayRes>> _filterRecentDeviceData({
+    String? page,
+    String? size,
     required String? filterId,
     String? apikey,
   }) {
     final Uri $url = Uri.parse('/DeviceData/filter/${filterId}');
     final Map<String, String> $headers = {
+      if (page != null) 'page': page,
+      if (size != null) 'size': size,
       if (apikey != null) 'APIKEY': apikey,
     };
     final Request $request = Request(
@@ -514,11 +518,15 @@ final class _$Twinned extends Twinned {
 
   @override
   Future<Response<DeviceDataArrayRes>> _fieldFilterRecentDeviceData({
+    String? page,
+    String? size,
     required String? fieldFilterId,
     String? apikey,
   }) {
     final Uri $url = Uri.parse('/DeviceData/field/filter/${fieldFilterId}');
     final Map<String, String> $headers = {
+      if (page != null) 'page': page,
+      if (size != null) 'size': size,
       if (apikey != null) 'APIKEY': apikey,
     };
     final Request $request = Request(
@@ -1331,6 +1339,25 @@ final class _$Twinned extends Twinned {
       headers: $headers,
     );
     return client.send<DeviceModelArrayRes, DeviceModelArrayRes>($request);
+  }
+
+  @override
+  Future<Response<ParameterArrayRes>> _listAllParameters({
+    String? modelId,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/DeviceModel/param/list');
+    final Map<String, String> $headers = {
+      if (modelId != null) 'modelId': modelId,
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<ParameterArrayRes, ParameterArrayRes>($request);
   }
 
   @override
@@ -5622,13 +5649,11 @@ final class _$Twinned extends Twinned {
 
   @override
   Future<Response<FieldFilterArrayRes>> _listFieldFilters({
-    String? modelId,
     required ListReq? body,
     String? apikey,
   }) {
     final Uri $url = Uri.parse('/FieldFilter/list');
     final Map<String, String> $headers = {
-      if (modelId != null) 'modelId': modelId,
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = body;
@@ -5644,13 +5669,11 @@ final class _$Twinned extends Twinned {
 
   @override
   Future<Response<FieldFilterArrayRes>> _searchFieldFilters({
-    String? modelId,
     required SearchReq? body,
     String? apikey,
   }) {
     final Uri $url = Uri.parse('/FieldFilter/search');
     final Map<String, String> $headers = {
-      if (modelId != null) 'modelId': modelId,
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = body;

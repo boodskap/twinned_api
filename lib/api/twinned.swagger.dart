@@ -621,8 +621,12 @@ abstract class Twinned extends ChopperService {
   });
 
   ///Filter recent device data
+  ///@param page
+  ///@param size
   ///@param filterId
   Future<chopper.Response<DeviceDataArrayRes>> filterRecentDeviceData({
+    int? page,
+    int? size,
     required String? filterId,
     dynamic apikey,
   }) {
@@ -630,13 +634,20 @@ abstract class Twinned extends ChopperService {
         DeviceDataArrayRes, () => DeviceDataArrayRes.fromJsonFactory);
 
     return _filterRecentDeviceData(
-        filterId: filterId, apikey: apikey?.toString());
+        page: page?.toString(),
+        size: size?.toString(),
+        filterId: filterId,
+        apikey: apikey?.toString());
   }
 
   ///Filter recent device data
+  ///@param page
+  ///@param size
   ///@param filterId
   @Get(path: '/DeviceData/filter/{filterId}')
   Future<chopper.Response<DeviceDataArrayRes>> _filterRecentDeviceData({
+    @Header('page') String? page,
+    @Header('size') String? size,
     @Path('filterId') required String? filterId,
     @Header('APIKEY') String? apikey,
   });
@@ -682,8 +693,12 @@ abstract class Twinned extends ChopperService {
   });
 
   ///Field filter recent device data
+  ///@param page
+  ///@param size
   ///@param fieldFilterId
   Future<chopper.Response<DeviceDataArrayRes>> fieldFilterRecentDeviceData({
+    int? page,
+    int? size,
     required String? fieldFilterId,
     dynamic apikey,
   }) {
@@ -691,13 +706,20 @@ abstract class Twinned extends ChopperService {
         DeviceDataArrayRes, () => DeviceDataArrayRes.fromJsonFactory);
 
     return _fieldFilterRecentDeviceData(
-        fieldFilterId: fieldFilterId, apikey: apikey?.toString());
+        page: page?.toString(),
+        size: size?.toString(),
+        fieldFilterId: fieldFilterId,
+        apikey: apikey?.toString());
   }
 
   ///Field filter recent device data
+  ///@param page
+  ///@param size
   ///@param fieldFilterId
   @Get(path: '/DeviceData/field/filter/{fieldFilterId}')
   Future<chopper.Response<DeviceDataArrayRes>> _fieldFilterRecentDeviceData({
+    @Header('page') String? page,
+    @Header('size') String? size,
     @Path('fieldFilterId') required String? fieldFilterId,
     @Header('APIKEY') String? apikey,
   });
@@ -1587,6 +1609,27 @@ abstract class Twinned extends ChopperService {
   @Post(path: '/DeviceModel/eql')
   Future<chopper.Response<DeviceModelArrayRes>> _searchEqlDeviceModel({
     @Body() required Object? eql,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///list all device model's parameters
+  ///@param modelId
+  Future<chopper.Response<ParameterArrayRes>> listAllParameters({
+    String? modelId,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        ParameterArrayRes, () => ParameterArrayRes.fromJsonFactory);
+
+    return _listAllParameters(
+        modelId: modelId?.toString(), apikey: apikey?.toString());
+  }
+
+  ///list all device model's parameters
+  ///@param modelId
+  @Get(path: '/DeviceModel/param/list')
+  Future<chopper.Response<ParameterArrayRes>> _listAllParameters({
+    @Header('modelId') String? modelId,
     @Header('APIKEY') String? apikey,
   });
 
@@ -6589,10 +6632,8 @@ abstract class Twinned extends ChopperService {
   });
 
   ///List field filters
-  ///@param modelId
   ///@param body
   Future<chopper.Response<FieldFilterArrayRes>> listFieldFilters({
-    String? modelId,
     required ListReq? body,
     dynamic apikey,
   }) {
@@ -6600,41 +6641,33 @@ abstract class Twinned extends ChopperService {
     generatedMapping.putIfAbsent(
         FieldFilterArrayRes, () => FieldFilterArrayRes.fromJsonFactory);
 
-    return _listFieldFilters(
-        modelId: modelId?.toString(), body: body, apikey: apikey?.toString());
+    return _listFieldFilters(body: body, apikey: apikey?.toString());
   }
 
   ///List field filters
-  ///@param modelId
   ///@param body
   @Post(path: '/FieldFilter/list')
   Future<chopper.Response<FieldFilterArrayRes>> _listFieldFilters({
-    @Header('modelId') String? modelId,
     @Body() required ListReq? body,
     @Header('APIKEY') String? apikey,
   });
 
   ///Search field filters
-  ///@param modelId
   ///@param body
   Future<chopper.Response<FieldFilterArrayRes>> searchFieldFilters({
-    String? modelId,
     required SearchReq? body,
     dynamic apikey,
   }) {
     generatedMapping.putIfAbsent(
         FieldFilterArrayRes, () => FieldFilterArrayRes.fromJsonFactory);
 
-    return _searchFieldFilters(
-        modelId: modelId?.toString(), body: body, apikey: apikey?.toString());
+    return _searchFieldFilters(body: body, apikey: apikey?.toString());
   }
 
   ///Search field filters
-  ///@param modelId
   ///@param body
   @Post(path: '/FieldFilter/search')
   Future<chopper.Response<FieldFilterArrayRes>> _searchFieldFilters({
-    @Header('modelId') String? modelId,
     @Body() required SearchReq? body,
     @Header('APIKEY') String? apikey,
   });
@@ -36452,6 +36485,167 @@ extension $FieldFilterArrayResExtension on FieldFilterArrayRes {
       Wrapped<int>? total,
       Wrapped<List<FieldFilter>?>? values}) {
     return FieldFilterArrayRes(
+        ok: (ok != null ? ok.value : this.ok),
+        msg: (msg != null ? msg.value : this.msg),
+        trace: (trace != null ? trace.value : this.trace),
+        errorCode: (errorCode != null ? errorCode.value : this.errorCode),
+        page: (page != null ? page.value : this.page),
+        size: (size != null ? size.value : this.size),
+        total: (total != null ? total.value : this.total),
+        values: (values != null ? values.value : this.values));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ParameterArray {
+  const ParameterArray({
+    this.values,
+  });
+
+  factory ParameterArray.fromJson(Map<String, dynamic> json) =>
+      _$ParameterArrayFromJson(json);
+
+  static const toJsonFactory = _$ParameterArrayToJson;
+  Map<String, dynamic> toJson() => _$ParameterArrayToJson(this);
+
+  @JsonKey(name: 'values', includeIfNull: false, defaultValue: <Parameter>[])
+  final List<Parameter>? values;
+  static const fromJsonFactory = _$ParameterArrayFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is ParameterArray &&
+            (identical(other.values, values) ||
+                const DeepCollectionEquality().equals(other.values, values)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(values) ^ runtimeType.hashCode;
+}
+
+extension $ParameterArrayExtension on ParameterArray {
+  ParameterArray copyWith({List<Parameter>? values}) {
+    return ParameterArray(values: values ?? this.values);
+  }
+
+  ParameterArray copyWithWrapped({Wrapped<List<Parameter>?>? values}) {
+    return ParameterArray(
+        values: (values != null ? values.value : this.values));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ParameterArrayRes {
+  const ParameterArrayRes({
+    required this.ok,
+    this.msg,
+    this.trace,
+    this.errorCode,
+    required this.page,
+    required this.size,
+    required this.total,
+    this.values,
+  });
+
+  factory ParameterArrayRes.fromJson(Map<String, dynamic> json) =>
+      _$ParameterArrayResFromJson(json);
+
+  static const toJsonFactory = _$ParameterArrayResToJson;
+  Map<String, dynamic> toJson() => _$ParameterArrayResToJson(this);
+
+  @JsonKey(name: 'ok', includeIfNull: false)
+  final bool ok;
+  @JsonKey(name: 'msg', includeIfNull: false, defaultValue: '')
+  final String? msg;
+  @JsonKey(name: 'trace', includeIfNull: false, defaultValue: '')
+  final String? trace;
+  @JsonKey(name: 'errorCode', includeIfNull: false, defaultValue: '')
+  final String? errorCode;
+  @JsonKey(name: 'page', includeIfNull: false)
+  final int page;
+  @JsonKey(name: 'size', includeIfNull: false)
+  final int size;
+  @JsonKey(name: 'total', includeIfNull: false)
+  final int total;
+  @JsonKey(name: 'values', includeIfNull: false, defaultValue: <Parameter>[])
+  final List<Parameter>? values;
+  static const fromJsonFactory = _$ParameterArrayResFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is ParameterArrayRes &&
+            (identical(other.ok, ok) ||
+                const DeepCollectionEquality().equals(other.ok, ok)) &&
+            (identical(other.msg, msg) ||
+                const DeepCollectionEquality().equals(other.msg, msg)) &&
+            (identical(other.trace, trace) ||
+                const DeepCollectionEquality().equals(other.trace, trace)) &&
+            (identical(other.errorCode, errorCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.errorCode, errorCode)) &&
+            (identical(other.page, page) ||
+                const DeepCollectionEquality().equals(other.page, page)) &&
+            (identical(other.size, size) ||
+                const DeepCollectionEquality().equals(other.size, size)) &&
+            (identical(other.total, total) ||
+                const DeepCollectionEquality().equals(other.total, total)) &&
+            (identical(other.values, values) ||
+                const DeepCollectionEquality().equals(other.values, values)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(ok) ^
+      const DeepCollectionEquality().hash(msg) ^
+      const DeepCollectionEquality().hash(trace) ^
+      const DeepCollectionEquality().hash(errorCode) ^
+      const DeepCollectionEquality().hash(page) ^
+      const DeepCollectionEquality().hash(size) ^
+      const DeepCollectionEquality().hash(total) ^
+      const DeepCollectionEquality().hash(values) ^
+      runtimeType.hashCode;
+}
+
+extension $ParameterArrayResExtension on ParameterArrayRes {
+  ParameterArrayRes copyWith(
+      {bool? ok,
+      String? msg,
+      String? trace,
+      String? errorCode,
+      int? page,
+      int? size,
+      int? total,
+      List<Parameter>? values}) {
+    return ParameterArrayRes(
+        ok: ok ?? this.ok,
+        msg: msg ?? this.msg,
+        trace: trace ?? this.trace,
+        errorCode: errorCode ?? this.errorCode,
+        page: page ?? this.page,
+        size: size ?? this.size,
+        total: total ?? this.total,
+        values: values ?? this.values);
+  }
+
+  ParameterArrayRes copyWithWrapped(
+      {Wrapped<bool>? ok,
+      Wrapped<String?>? msg,
+      Wrapped<String?>? trace,
+      Wrapped<String?>? errorCode,
+      Wrapped<int>? page,
+      Wrapped<int>? size,
+      Wrapped<int>? total,
+      Wrapped<List<Parameter>?>? values}) {
+    return ParameterArrayRes(
         ok: (ok != null ? ok.value : this.ok),
         msg: (msg != null ? msg.value : this.msg),
         trace: (trace != null ? trace.value : this.trace),

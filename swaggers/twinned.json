@@ -1120,6 +1120,18 @@
         "operationId": "filterRecentDeviceData",
         "parameters": [
           {
+            "in": "header",
+            "name": "page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "header",
+            "name": "size",
+            "required": false,
+            "type": "integer"
+          },
+          {
             "in": "path",
             "name": "filterId",
             "required": true,
@@ -1247,6 +1259,18 @@
         ],
         "operationId": "fieldFilterRecentDeviceData",
         "parameters": [
+          {
+            "in": "header",
+            "name": "page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "header",
+            "name": "size",
+            "required": false,
+            "type": "integer"
+          },
           {
             "in": "path",
             "name": "fieldFilterId",
@@ -3008,6 +3032,48 @@
             "description": "Successful operation",
             "schema": {
               "$ref": "#/definitions/DeviceModelArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/DeviceModel/param/list": {
+      "get": {
+        "tags": [
+          "Device Model"
+        ],
+        "summary": "list all device model's parameters",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "listAllParameters",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "modelId",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ParameterArrayRes"
             }
           },
           "401": {
@@ -12847,12 +12913,6 @@
         "operationId": "listFieldFilters",
         "parameters": [
           {
-            "in": "header",
-            "name": "modelId",
-            "required": false,
-            "type": "string"
-          },
-          {
             "in": "body",
             "name": "body",
             "required": true,
@@ -12896,12 +12956,6 @@
         ],
         "operationId": "searchFieldFilters",
         "parameters": [
-          {
-            "in": "header",
-            "name": "modelId",
-            "required": false,
-            "type": "string"
-          },
           {
             "in": "body",
             "name": "body",
@@ -19118,6 +19172,33 @@
         },
         {
           "$ref": "#/definitions/FieldFilterArray"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "ParameterArray": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Parameter"
+          }
+        }
+      }
+    },
+    "ParameterArrayRes": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResponse"
+        },
+        {
+          "$ref": "#/definitions/ListRes"
+        },
+        {
+          "$ref": "#/definitions/ParameterArray"
         },
         {
           "type": "object"

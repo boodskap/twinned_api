@@ -9074,6 +9074,63 @@ Map<String, dynamic> _$FieldFilterArrayResToJson(FieldFilterArrayRes instance) {
   return val;
 }
 
+ParameterArray _$ParameterArrayFromJson(Map<String, dynamic> json) =>
+    ParameterArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Parameter.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ParameterArrayToJson(ParameterArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+ParameterArrayRes _$ParameterArrayResFromJson(Map<String, dynamic> json) =>
+    ParameterArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Parameter.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ParameterArrayResToJson(ParameterArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
 ExportData _$ExportDataFromJson(Map<String, dynamic> json) => ExportData(
       model: DeviceModelInfo.fromJson(json['model'] as Map<String, dynamic>),
       conditions: (json['conditions'] as List<dynamic>?)
