@@ -599,36 +599,6 @@ enum ScreenWidgetTarget {
   const ScreenWidgetTarget(this.value);
 }
 
-enum FilterConditionCondition {
-  @JsonValue(null)
-  swaggerGeneratedUnknown(null),
-
-  @JsonValue('LT')
-  lt('LT'),
-  @JsonValue('LTE')
-  lte('LTE'),
-  @JsonValue('GT')
-  gt('GT'),
-  @JsonValue('GTE')
-  gte('GTE'),
-  @JsonValue('EQ')
-  eq('EQ'),
-  @JsonValue('NEQ')
-  neq('NEQ'),
-  @JsonValue('BETWEEN')
-  between('BETWEEN'),
-  @JsonValue('NBETWEEN')
-  nbetween('NBETWEEN'),
-  @JsonValue('CONTAINS')
-  contains('CONTAINS'),
-  @JsonValue('NCONTAINS')
-  ncontains('NCONTAINS');
-
-  final String? value;
-
-  const FilterConditionCondition(this.value);
-}
-
 enum FilterMatchGroupMatchType {
   @JsonValue(null)
   swaggerGeneratedUnknown(null),
@@ -825,6 +795,102 @@ enum AssetGroupTarget {
   final String? value;
 
   const AssetGroupTarget(this.value);
+}
+
+enum FieldFilterInfoFieldType {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('YESNO')
+  yesno('YESNO'),
+  @JsonValue('NUMERIC')
+  numeric('NUMERIC'),
+  @JsonValue('FLOATING')
+  floating('FLOATING'),
+  @JsonValue('TEXT')
+  text('TEXT');
+
+  final String? value;
+
+  const FieldFilterInfoFieldType(this.value);
+}
+
+enum FieldFilterInfoCondition {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('LT')
+  lt('LT'),
+  @JsonValue('LTE')
+  lte('LTE'),
+  @JsonValue('GT')
+  gt('GT'),
+  @JsonValue('GTE')
+  gte('GTE'),
+  @JsonValue('EQ')
+  eq('EQ'),
+  @JsonValue('NEQ')
+  neq('NEQ'),
+  @JsonValue('BETWEEN')
+  between('BETWEEN'),
+  @JsonValue('NBETWEEN')
+  nbetween('NBETWEEN'),
+  @JsonValue('CONTAINS')
+  contains('CONTAINS'),
+  @JsonValue('NCONTAINS')
+  ncontains('NCONTAINS');
+
+  final String? value;
+
+  const FieldFilterInfoCondition(this.value);
+}
+
+enum FieldFilterFieldType {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('YESNO')
+  yesno('YESNO'),
+  @JsonValue('NUMERIC')
+  numeric('NUMERIC'),
+  @JsonValue('FLOATING')
+  floating('FLOATING'),
+  @JsonValue('TEXT')
+  text('TEXT');
+
+  final String? value;
+
+  const FieldFilterFieldType(this.value);
+}
+
+enum FieldFilterCondition {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('LT')
+  lt('LT'),
+  @JsonValue('LTE')
+  lte('LTE'),
+  @JsonValue('GT')
+  gt('GT'),
+  @JsonValue('GTE')
+  gte('GTE'),
+  @JsonValue('EQ')
+  eq('EQ'),
+  @JsonValue('NEQ')
+  neq('NEQ'),
+  @JsonValue('BETWEEN')
+  between('BETWEEN'),
+  @JsonValue('NBETWEEN')
+  nbetween('NBETWEEN'),
+  @JsonValue('CONTAINS')
+  contains('CONTAINS'),
+  @JsonValue('NCONTAINS')
+  ncontains('NCONTAINS');
+
+  final String? value;
+
+  const FieldFilterCondition(this.value);
 }
 
 enum IoTTwinTagsGetEntityTypeGetEntityType {

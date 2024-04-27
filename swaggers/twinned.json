@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "1.7.8",
+    "version": "1.7.9",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -1120,6 +1120,18 @@
         "operationId": "filterRecentDeviceData",
         "parameters": [
           {
+            "in": "header",
+            "name": "page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "header",
+            "name": "size",
+            "required": false,
+            "type": "integer"
+          },
+          {
             "in": "path",
             "name": "filterId",
             "required": true,
@@ -1217,6 +1229,60 @@
             "description": "Successful operation",
             "schema": {
               "$ref": "#/definitions/IDListEntityRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/DeviceData/field/filter/{fieldFilterId}": {
+      "get": {
+        "tags": [
+          "Device Data"
+        ],
+        "summary": "Field filter recent device data",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "fieldFilterRecentDeviceData",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "header",
+            "name": "size",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "fieldFilterId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceDataArrayRes"
             }
           },
           "401": {
@@ -2966,6 +3032,48 @@
             "description": "Successful operation",
             "schema": {
               "$ref": "#/definitions/DeviceModelArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/DeviceModel/param/list": {
+      "get": {
+        "tags": [
+          "Device Model"
+        ],
+        "summary": "list all device model's parameters",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "listAllParameters",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "modelId",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ParameterArrayRes"
             }
           },
           "401": {
@@ -12653,6 +12761,360 @@
           }
         ]
       }
+    },
+    "/FieldFilter/create": {
+      "post": {
+        "tags": [
+          "Field Filter"
+        ],
+        "summary": "Create field filter",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "createFieldFilter",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FieldFilterInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/FieldFilterEntityRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/FieldFilter/update": {
+      "post": {
+        "tags": [
+          "Field Filter"
+        ],
+        "summary": "Update field filter",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "updateFieldFilter",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "fieldFilterId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FieldFilterInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/FieldFilterEntityRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/FieldFilter/remove": {
+      "delete": {
+        "tags": [
+          "Field Filter"
+        ],
+        "summary": "Delete field filter",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "deleteFieldFilter",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "fieldFilterId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/FieldFilterEntityRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/FieldFilter/list": {
+      "post": {
+        "tags": [
+          "Field Filter"
+        ],
+        "summary": "List field filters",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "listFieldFilters",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/FieldFilterArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/FieldFilter/search": {
+      "post": {
+        "tags": [
+          "Field Filter"
+        ],
+        "summary": "Search field filters",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "searchFieldFilters",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/FieldFilterArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/FieldFilter/get": {
+      "post": {
+        "tags": [
+          "Field Filter"
+        ],
+        "summary": "Get field filters",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getFieldFilters",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/FieldFilterArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/FieldFilter/one/{fieldFilterId}": {
+      "get": {
+        "tags": [
+          "Field Filter"
+        ],
+        "summary": "get field filter by id",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getFieldFilter",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "fieldFilterId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/FieldFilterEntityRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/FieldFilter/eql": {
+      "post": {
+        "tags": [
+          "Field Filter"
+        ],
+        "summary": "Search using SQL",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "searchEqlFieldFilter",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "eql",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/FieldFilterArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
     }
   },
   "securityDefinitions": {
@@ -16344,40 +16806,6 @@
         }
       ]
     },
-    "FilterCondition": {
-      "type": "object",
-      "required": [
-        "field",
-        "condition",
-        "values"
-      ],
-      "properties": {
-        "field": {
-          "type": "string"
-        },
-        "condition": {
-          "type": "string",
-          "enum": [
-            "LT",
-            "LTE",
-            "GT",
-            "GTE",
-            "EQ",
-            "NEQ",
-            "BETWEEN",
-            "NBETWEEN",
-            "CONTAINS",
-            "NCONTAINS"
-          ]
-        },
-        "values": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "FilterMatchGroup": {
       "type": "object",
       "discriminator": "filterMatchGroup",
@@ -18620,6 +19048,162 @@
           }
         }
       }
+    },
+    "FieldFilterInfo": {
+      "type": "object",
+      "required": [
+        "name",
+        "field",
+        "fieldType",
+        "condition"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "field": {
+          "type": "string"
+        },
+        "fieldType": {
+          "type": "string",
+          "enum": [
+            "YESNO",
+            "NUMERIC",
+            "FLOATING",
+            "TEXT"
+          ]
+        },
+        "condition": {
+          "type": "string",
+          "enum": [
+            "LT",
+            "LTE",
+            "GT",
+            "GTE",
+            "EQ",
+            "NEQ",
+            "BETWEEN",
+            "NBETWEEN",
+            "CONTAINS",
+            "NCONTAINS"
+          ]
+        },
+        "value": {
+          "type": "string"
+        },
+        "leftValue": {
+          "type": "string"
+        },
+        "rightValue": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FieldFilter": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/FieldFilterInfo"
+        },
+        {
+          "$ref": "#/definitions/BaseEntity"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "FieldFilterEntity": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "$ref": "#/definitions/FieldFilter"
+        }
+      }
+    },
+    "FieldFilterEntityRes": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/FieldFilterEntity"
+        },
+        {
+          "$ref": "#/definitions/BaseResponse"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "FieldFilterArray": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FieldFilter"
+          }
+        }
+      }
+    },
+    "FieldFilterArrayRes": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResponse"
+        },
+        {
+          "$ref": "#/definitions/ListRes"
+        },
+        {
+          "$ref": "#/definitions/FieldFilterArray"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "ParameterArray": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Parameter"
+          }
+        }
+      }
+    },
+    "ParameterArrayRes": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResponse"
+        },
+        {
+          "$ref": "#/definitions/ListRes"
+        },
+        {
+          "$ref": "#/definitions/ParameterArray"
+        },
+        {
+          "type": "object"
+        }
+      ]
     },
     "ExportData": {
       "type": "object",

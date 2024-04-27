@@ -5127,32 +5127,6 @@ Map<String, dynamic> _$PreprocessorArrayResToJson(
   return val;
 }
 
-FilterCondition _$FilterConditionFromJson(Map<String, dynamic> json) =>
-    FilterCondition(
-      field: json['field'] as String? ?? '',
-      condition: filterConditionConditionFromJson(json['condition']),
-      values: (json['values'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
-    );
-
-Map<String, dynamic> _$FilterConditionToJson(FilterCondition instance) {
-  final val = <String, dynamic>{
-    'field': instance.field,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('condition', filterConditionConditionToJson(instance.condition));
-  val['values'] = instance.values;
-  return val;
-}
-
 FilterMatchGroup _$FilterMatchGroupFromJson(Map<String, dynamic> json) =>
     FilterMatchGroup(
       matchType: filterMatchGroupMatchTypeFromJson(json['matchType']),
@@ -8891,6 +8865,271 @@ Map<String, dynamic> _$CustomSettingToJson(CustomSetting instance) =>
       'label': instance.label,
       'settingIds': instance.settingIds,
     };
+
+FieldFilterInfo _$FieldFilterInfoFromJson(Map<String, dynamic> json) =>
+    FieldFilterInfo(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      field: json['field'] as String? ?? '',
+      fieldType: fieldFilterInfoFieldTypeFromJson(json['fieldType']),
+      condition: fieldFilterInfoConditionFromJson(json['condition']),
+      $value: json['value'] as String? ?? '',
+      leftValue: json['leftValue'] as String? ?? '',
+      rightValue: json['rightValue'] as String? ?? '',
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$FieldFilterInfoToJson(FieldFilterInfo instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('icon', instance.icon);
+  val['field'] = instance.field;
+  writeNotNull('fieldType', fieldFilterInfoFieldTypeToJson(instance.fieldType));
+  writeNotNull('condition', fieldFilterInfoConditionToJson(instance.condition));
+  writeNotNull('value', instance.$value);
+  writeNotNull('leftValue', instance.leftValue);
+  writeNotNull('rightValue', instance.rightValue);
+  writeNotNull('values', instance.values);
+  writeNotNull('tags', instance.tags);
+  return val;
+}
+
+FieldFilter _$FieldFilterFromJson(Map<String, dynamic> json) => FieldFilter(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      field: json['field'] as String? ?? '',
+      fieldType: fieldFilterFieldTypeFromJson(json['fieldType']),
+      condition: fieldFilterConditionFromJson(json['condition']),
+      $value: json['value'] as String? ?? '',
+      leftValue: json['leftValue'] as String? ?? '',
+      rightValue: json['rightValue'] as String? ?? '',
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: json['createdStamp'] as int,
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: json['updatedStamp'] as int,
+    );
+
+Map<String, dynamic> _$FieldFilterToJson(FieldFilter instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('icon', instance.icon);
+  val['field'] = instance.field;
+  writeNotNull('fieldType', fieldFilterFieldTypeToJson(instance.fieldType));
+  writeNotNull('condition', fieldFilterConditionToJson(instance.condition));
+  writeNotNull('value', instance.$value);
+  writeNotNull('leftValue', instance.leftValue);
+  writeNotNull('rightValue', instance.rightValue);
+  writeNotNull('values', instance.values);
+  writeNotNull('tags', instance.tags);
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  return val;
+}
+
+FieldFilterEntity _$FieldFilterEntityFromJson(Map<String, dynamic> json) =>
+    FieldFilterEntity(
+      entity: json['entity'] == null
+          ? null
+          : FieldFilter.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FieldFilterEntityToJson(FieldFilterEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+FieldFilterEntityRes _$FieldFilterEntityResFromJson(
+        Map<String, dynamic> json) =>
+    FieldFilterEntityRes(
+      entity: json['entity'] == null
+          ? null
+          : FieldFilter.fromJson(json['entity'] as Map<String, dynamic>),
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$FieldFilterEntityResToJson(
+    FieldFilterEntityRes instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  val['ok'] = instance.ok;
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  return val;
+}
+
+FieldFilterArray _$FieldFilterArrayFromJson(Map<String, dynamic> json) =>
+    FieldFilterArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => FieldFilter.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$FieldFilterArrayToJson(FieldFilterArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+FieldFilterArrayRes _$FieldFilterArrayResFromJson(Map<String, dynamic> json) =>
+    FieldFilterArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => FieldFilter.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$FieldFilterArrayResToJson(FieldFilterArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+ParameterArray _$ParameterArrayFromJson(Map<String, dynamic> json) =>
+    ParameterArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Parameter.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ParameterArrayToJson(ParameterArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+ParameterArrayRes _$ParameterArrayResFromJson(Map<String, dynamic> json) =>
+    ParameterArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: json['page'] as int,
+      size: json['size'] as int,
+      total: json['total'] as int,
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => Parameter.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ParameterArrayResToJson(ParameterArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
 
 ExportData _$ExportDataFromJson(Map<String, dynamic> json) => ExportData(
       model: DeviceModelInfo.fromJson(json['model'] as Map<String, dynamic>),
