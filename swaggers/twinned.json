@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "1.7.9",
+    "version": "1.8.0",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -11590,26 +11590,26 @@
         ]
       }
     },
-    "/Settings/create": {
+    "/ScrappingTable/create": {
       "post": {
         "tags": [
-          "Settings"
+          "Scrapping Table"
         ],
-        "summary": "Create settings",
+        "summary": "Create scrapping table",
         "consumes": [
           "application/json"
         ],
         "produces": [
           "application/json"
         ],
-        "operationId": "createSettings",
+        "operationId": "createScrappingTable",
         "parameters": [
           {
             "in": "body",
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SettingsInfo"
+              "$ref": "#/definitions/ScrappingTableInfo"
             }
           }
         ],
@@ -11617,7 +11617,7 @@
           "200": {
             "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/SettingsEntityRes"
+              "$ref": "#/definitions/ScrappingTableEntityRes"
             }
           },
           "401": {
@@ -11634,23 +11634,23 @@
         ]
       }
     },
-    "/Settings/update": {
+    "/ScrappingTable/update": {
       "post": {
         "tags": [
-          "Settings"
+          "Scrapping Table"
         ],
-        "summary": "Update settings",
+        "summary": "Update scrapping table",
         "consumes": [
           "application/json"
         ],
         "produces": [
           "application/json"
         ],
-        "operationId": "updateSettings",
+        "operationId": "updateScrappingTable",
         "parameters": [
           {
             "in": "header",
-            "name": "settingsId",
+            "name": "scrappingTableId",
             "required": true,
             "type": "string"
           },
@@ -11659,7 +11659,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SettingsInfo"
+              "$ref": "#/definitions/ScrappingTableInfo"
             }
           }
         ],
@@ -11667,7 +11667,7 @@
           "200": {
             "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/SettingsEntityRes"
+              "$ref": "#/definitions/ScrappingTableEntityRes"
             }
           },
           "401": {
@@ -11684,23 +11684,23 @@
         ]
       }
     },
-    "/Settings/remove": {
+    "/ScrappingTable/remove": {
       "delete": {
         "tags": [
-          "Settings"
+          "Scrapping Table"
         ],
-        "summary": "Delete settings",
+        "summary": "Delete scrappingTable",
         "consumes": [
           "application/json"
         ],
         "produces": [
           "application/json"
         ],
-        "operationId": "deleteSettings",
+        "operationId": "deleteScrappingTable",
         "parameters": [
           {
             "in": "header",
-            "name": "settingsId",
+            "name": "scrappingTableid",
             "required": true,
             "type": "string"
           }
@@ -11709,7 +11709,7 @@
           "200": {
             "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/SettingsEntityRes"
+              "$ref": "#/definitions/ScrappingTableEntityRes"
             }
           },
           "401": {
@@ -11726,19 +11726,19 @@
         ]
       }
     },
-    "/Settings/list": {
+    "/ScrappingTable/list": {
       "post": {
         "tags": [
-          "Settings"
+          "Scrapping Table"
         ],
-        "summary": "List settingss",
+        "summary": "List scrapping tables",
         "consumes": [
           "application/json"
         ],
         "produces": [
           "application/json"
         ],
-        "operationId": "listSettings",
+        "operationId": "listScrappingTables",
         "parameters": [
           {
             "in": "body",
@@ -11753,7 +11753,7 @@
           "200": {
             "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/SettingsArrayRes"
+              "$ref": "#/definitions/ScrappingTableArrayRes"
             }
           },
           "401": {
@@ -11770,19 +11770,19 @@
         ]
       }
     },
-    "/Settings/search": {
+    "/ScrappingTable/search": {
       "post": {
         "tags": [
-          "Settings"
+          "Scrapping Table"
         ],
-        "summary": "Search settingss",
+        "summary": "Search scrapping tables",
         "consumes": [
           "application/json"
         ],
         "produces": [
           "application/json"
         ],
-        "operationId": "searchSettings",
+        "operationId": "searchScrappingTables",
         "parameters": [
           {
             "in": "body",
@@ -11797,7 +11797,7 @@
           "200": {
             "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/SettingsArrayRes"
+              "$ref": "#/definitions/ScrappingTableArrayRes"
             }
           },
           "401": {
@@ -11814,19 +11814,19 @@
         ]
       }
     },
-    "/Settings/get": {
+    "/ScrappingTable/get": {
       "post": {
         "tags": [
-          "Settings"
+          "Scrapping Table"
         ],
-        "summary": "Get settingss",
+        "summary": "Get scrapping tables",
         "consumes": [
           "application/json"
         ],
         "produces": [
           "application/json"
         ],
-        "operationId": "getSettings",
+        "operationId": "getScrappingTables",
         "parameters": [
           {
             "in": "body",
@@ -11841,7 +11841,7 @@
           "200": {
             "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/SettingsArrayRes"
+              "$ref": "#/definitions/ScrappingTableArrayRes"
             }
           },
           "401": {
@@ -11858,23 +11858,23 @@
         ]
       }
     },
-    "/Settings/one/{settingsId}": {
+    "/ScrappingTable/one/{scrappingTableId}": {
       "get": {
         "tags": [
-          "Settings"
+          "Scrapping Table"
         ],
-        "summary": "get settings by id",
+        "summary": "get scrapping table by id",
         "consumes": [
           "application/json"
         ],
         "produces": [
           "application/json"
         ],
-        "operationId": "getSetting",
+        "operationId": "getScrappingTable",
         "parameters": [
           {
             "in": "path",
-            "name": "settingsId",
+            "name": "scrappingTableId",
             "required": true,
             "type": "string"
           }
@@ -11883,7 +11883,7 @@
           "200": {
             "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/SettingsEntityRes"
+              "$ref": "#/definitions/ScrappingTableEntityRes"
             }
           },
           "401": {
@@ -13454,6 +13454,24 @@
         }
       }
     },
+    "ScrappingTableConfig": {
+      "type": "object",
+      "required": [
+        "lookupName",
+        "scrappingTableIds"
+      ],
+      "properties": {
+        "lookupName": {
+          "type": "string"
+        },
+        "scrappingTableIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "DeviceModelInfo": {
       "type": "object",
       "required": [
@@ -13533,18 +13551,18 @@
         "movable": {
           "type": "boolean"
         },
-        "customSettings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CustomSetting"
-          }
-        },
         "customWidget": {
           "$ref": "#/definitions/CustomWidget"
         },
         "makePublic": {
           "type": "boolean",
           "default": false
+        },
+        "scrappingTableConfigs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScrappingTableConfig"
+          }
         }
       }
     },
@@ -18362,44 +18380,7 @@
         }
       }
     },
-    "Lookup": {
-      "type": "object",
-      "required": [
-        "name",
-        "settingsName",
-        "attributes"
-      ],
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "settingsName": {
-          "type": "string"
-        },
-        "attributes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Attribute"
-          }
-        }
-      }
-    },
-    "ModelLookup": {
-      "type": "object",
-      "required": [
-        "deviceModelId",
-        "lookup"
-      ],
-      "properties": {
-        "deviceModelId": {
-          "type": "string"
-        },
-        "lookup": {
-          "$ref": "#/definitions/Lookup"
-        }
-      }
-    },
-    "SettingsInfo": {
+    "ScrappingTableInfo": {
       "type": "object",
       "required": [
         "name",
@@ -18426,10 +18407,10 @@
         }
       }
     },
-    "Settings": {
+    "ScrappingTable": {
       "allOf": [
         {
-          "$ref": "#/definitions/SettingsInfo"
+          "$ref": "#/definitions/ScrappingTableInfo"
         },
         {
           "$ref": "#/definitions/BaseEntity"
@@ -18439,39 +18420,39 @@
         }
       ]
     },
-    "SettingsEntity": {
+    "ScrappingTableEntity": {
       "type": "object",
       "properties": {
         "entity": {
-          "$ref": "#/definitions/Settings"
+          "$ref": "#/definitions/ScrappingTable"
         }
       }
     },
-    "SettingsEntityRes": {
+    "ScrappingTableEntityRes": {
       "allOf": [
         {
           "$ref": "#/definitions/BaseResponse"
         },
         {
-          "$ref": "#/definitions/SettingsEntity"
+          "$ref": "#/definitions/ScrappingTableEntity"
         },
         {
           "type": "object"
         }
       ]
     },
-    "SettingsArray": {
+    "ScrappingTableArray": {
       "type": "object",
       "properties": {
         "values": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Settings"
+            "$ref": "#/definitions/ScrappingTable"
           }
         }
       }
     },
-    "SettingsArrayRes": {
+    "ScrappingTableArrayRes": {
       "allOf": [
         {
           "$ref": "#/definitions/BaseResponse"
@@ -18480,7 +18461,7 @@
           "$ref": "#/definitions/ListRes"
         },
         {
-          "$ref": "#/definitions/SettingsArray"
+          "$ref": "#/definitions/ScrappingTableArray"
         },
         {
           "type": "object"
@@ -18864,6 +18845,49 @@
         }
       ]
     },
+    "AssetScrappingTable": {
+      "type": "object",
+      "required": [
+        "lookupName",
+        "scrappingTableId",
+        "scrappingTableName",
+        "attributes"
+      ],
+      "properties": {
+        "lookupName": {
+          "type": "string"
+        },
+        "scrappingTableId": {
+          "type": "string"
+        },
+        "scrappingTableName": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          }
+        }
+      }
+    },
+    "AssetDeviceModel": {
+      "type": "object",
+      "required": [
+        "deviceModelId"
+      ],
+      "properties": {
+        "deviceModelId": {
+          "type": "string"
+        },
+        "scrappingTables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssetScrappingTable"
+          }
+        }
+      }
+    },
     "AssetModelInfo": {
       "type": "object",
       "required": [
@@ -18908,25 +18932,13 @@
         "metadata": {
           "type": "object"
         },
-        "hasGeoLocation": {
-          "type": "boolean"
-        },
         "movable": {
           "type": "boolean"
         },
-        "geolocation": {
-          "$ref": "#/definitions/GeoLocation"
-        },
-        "deviceModelsIds": {
+        "allowedDeviceModels": {
           "type": "array",
           "items": {
-            "type": "string"
-          }
-        },
-        "modelLookups": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ModelLookup"
+            "$ref": "#/definitions/AssetDeviceModel"
           }
         }
       }
@@ -19026,28 +19038,6 @@
           "type": "object"
         }
       ]
-    },
-    "CustomSetting": {
-      "type": "object",
-      "required": [
-        "name",
-        "label",
-        "settingIds"
-      ],
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "label": {
-          "type": "string"
-        },
-        "settingIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
     },
     "FieldFilterInfo": {
       "type": "object",
