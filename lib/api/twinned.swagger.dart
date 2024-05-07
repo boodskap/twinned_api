@@ -5972,157 +5972,159 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
-  ///Create settings
+  ///Create scrapping table
   ///@param body
-  Future<chopper.Response<SettingsEntityRes>> createSettings({
-    required SettingsInfo? body,
+  Future<chopper.Response<ScrappingTableEntityRes>> createScrappingTable({
+    required ScrappingTableInfo? body,
     dynamic apikey,
   }) {
     generatedMapping.putIfAbsent(
-        SettingsInfo, () => SettingsInfo.fromJsonFactory);
+        ScrappingTableInfo, () => ScrappingTableInfo.fromJsonFactory);
     generatedMapping.putIfAbsent(
-        SettingsEntityRes, () => SettingsEntityRes.fromJsonFactory);
+        ScrappingTableEntityRes, () => ScrappingTableEntityRes.fromJsonFactory);
 
-    return _createSettings(body: body, apikey: apikey?.toString());
+    return _createScrappingTable(body: body, apikey: apikey?.toString());
   }
 
-  ///Create settings
+  ///Create scrapping table
   ///@param body
-  @Post(path: '/Settings/create')
-  Future<chopper.Response<SettingsEntityRes>> _createSettings({
-    @Body() required SettingsInfo? body,
+  @Post(path: '/ScrappingTable/create')
+  Future<chopper.Response<ScrappingTableEntityRes>> _createScrappingTable({
+    @Body() required ScrappingTableInfo? body,
     @Header('APIKEY') String? apikey,
   });
 
-  ///Update settings
-  ///@param settingsId
+  ///Update scrapping table
+  ///@param scrappingTableId
   ///@param body
-  Future<chopper.Response<SettingsEntityRes>> updateSettings({
-    String? settingsId,
-    required SettingsInfo? body,
+  Future<chopper.Response<ScrappingTableEntityRes>> updateScrappingTable({
+    String? scrappingTableId,
+    required ScrappingTableInfo? body,
     dynamic apikey,
   }) {
     generatedMapping.putIfAbsent(
-        SettingsInfo, () => SettingsInfo.fromJsonFactory);
+        ScrappingTableInfo, () => ScrappingTableInfo.fromJsonFactory);
     generatedMapping.putIfAbsent(
-        SettingsEntityRes, () => SettingsEntityRes.fromJsonFactory);
+        ScrappingTableEntityRes, () => ScrappingTableEntityRes.fromJsonFactory);
 
-    return _updateSettings(
-        settingsId: settingsId?.toString(),
+    return _updateScrappingTable(
+        scrappingTableId: scrappingTableId?.toString(),
         body: body,
         apikey: apikey?.toString());
   }
 
-  ///Update settings
-  ///@param settingsId
+  ///Update scrapping table
+  ///@param scrappingTableId
   ///@param body
-  @Post(path: '/Settings/update')
-  Future<chopper.Response<SettingsEntityRes>> _updateSettings({
-    @Header('settingsId') String? settingsId,
-    @Body() required SettingsInfo? body,
+  @Post(path: '/ScrappingTable/update')
+  Future<chopper.Response<ScrappingTableEntityRes>> _updateScrappingTable({
+    @Header('scrappingTableId') String? scrappingTableId,
+    @Body() required ScrappingTableInfo? body,
     @Header('APIKEY') String? apikey,
   });
 
-  ///Delete settings
-  ///@param settingsId
-  Future<chopper.Response<SettingsEntityRes>> deleteSettings({
-    String? settingsId,
+  ///Delete scrappingTable
+  ///@param scrappingTableid
+  Future<chopper.Response<ScrappingTableEntityRes>> deleteScrappingTable({
+    String? scrappingTableid,
     dynamic apikey,
   }) {
     generatedMapping.putIfAbsent(
-        SettingsEntityRes, () => SettingsEntityRes.fromJsonFactory);
+        ScrappingTableEntityRes, () => ScrappingTableEntityRes.fromJsonFactory);
 
-    return _deleteSettings(
-        settingsId: settingsId?.toString(), apikey: apikey?.toString());
+    return _deleteScrappingTable(
+        scrappingTableid: scrappingTableid?.toString(),
+        apikey: apikey?.toString());
   }
 
-  ///Delete settings
-  ///@param settingsId
-  @Delete(path: '/Settings/remove')
-  Future<chopper.Response<SettingsEntityRes>> _deleteSettings({
-    @Header('settingsId') String? settingsId,
+  ///Delete scrappingTable
+  ///@param scrappingTableid
+  @Delete(path: '/ScrappingTable/remove')
+  Future<chopper.Response<ScrappingTableEntityRes>> _deleteScrappingTable({
+    @Header('scrappingTableid') String? scrappingTableid,
     @Header('APIKEY') String? apikey,
   });
 
-  ///List settingss
+  ///List scrapping tables
   ///@param body
-  Future<chopper.Response<SettingsArrayRes>> listSettings({
+  Future<chopper.Response<ScrappingTableArrayRes>> listScrappingTables({
     required ListReq? body,
     dynamic apikey,
   }) {
     generatedMapping.putIfAbsent(ListReq, () => ListReq.fromJsonFactory);
     generatedMapping.putIfAbsent(
-        SettingsArrayRes, () => SettingsArrayRes.fromJsonFactory);
+        ScrappingTableArrayRes, () => ScrappingTableArrayRes.fromJsonFactory);
 
-    return _listSettings(body: body, apikey: apikey?.toString());
+    return _listScrappingTables(body: body, apikey: apikey?.toString());
   }
 
-  ///List settingss
+  ///List scrapping tables
   ///@param body
-  @Post(path: '/Settings/list')
-  Future<chopper.Response<SettingsArrayRes>> _listSettings({
+  @Post(path: '/ScrappingTable/list')
+  Future<chopper.Response<ScrappingTableArrayRes>> _listScrappingTables({
     @Body() required ListReq? body,
     @Header('APIKEY') String? apikey,
   });
 
-  ///Search settingss
+  ///Search scrapping tables
   ///@param body
-  Future<chopper.Response<SettingsArrayRes>> searchSettings({
+  Future<chopper.Response<ScrappingTableArrayRes>> searchScrappingTables({
     required SearchReq? body,
     dynamic apikey,
   }) {
     generatedMapping.putIfAbsent(
-        SettingsArrayRes, () => SettingsArrayRes.fromJsonFactory);
+        ScrappingTableArrayRes, () => ScrappingTableArrayRes.fromJsonFactory);
 
-    return _searchSettings(body: body, apikey: apikey?.toString());
+    return _searchScrappingTables(body: body, apikey: apikey?.toString());
   }
 
-  ///Search settingss
+  ///Search scrapping tables
   ///@param body
-  @Post(path: '/Settings/search')
-  Future<chopper.Response<SettingsArrayRes>> _searchSettings({
+  @Post(path: '/ScrappingTable/search')
+  Future<chopper.Response<ScrappingTableArrayRes>> _searchScrappingTables({
     @Body() required SearchReq? body,
     @Header('APIKEY') String? apikey,
   });
 
-  ///Get settingss
+  ///Get scrapping tables
   ///@param body
-  Future<chopper.Response<SettingsArrayRes>> getSettings({
+  Future<chopper.Response<ScrappingTableArrayRes>> getScrappingTables({
     required GetReq? body,
     dynamic apikey,
   }) {
     generatedMapping.putIfAbsent(GetReq, () => GetReq.fromJsonFactory);
     generatedMapping.putIfAbsent(
-        SettingsArrayRes, () => SettingsArrayRes.fromJsonFactory);
+        ScrappingTableArrayRes, () => ScrappingTableArrayRes.fromJsonFactory);
 
-    return _getSettings(body: body, apikey: apikey?.toString());
+    return _getScrappingTables(body: body, apikey: apikey?.toString());
   }
 
-  ///Get settingss
+  ///Get scrapping tables
   ///@param body
-  @Post(path: '/Settings/get')
-  Future<chopper.Response<SettingsArrayRes>> _getSettings({
+  @Post(path: '/ScrappingTable/get')
+  Future<chopper.Response<ScrappingTableArrayRes>> _getScrappingTables({
     @Body() required GetReq? body,
     @Header('APIKEY') String? apikey,
   });
 
-  ///get settings by id
-  ///@param settingsId
-  Future<chopper.Response<SettingsEntityRes>> getSetting({
-    required String? settingsId,
+  ///get scrapping table by id
+  ///@param scrappingTableId
+  Future<chopper.Response<ScrappingTableEntityRes>> getScrappingTable({
+    required String? scrappingTableId,
     dynamic apikey,
   }) {
     generatedMapping.putIfAbsent(
-        SettingsEntityRes, () => SettingsEntityRes.fromJsonFactory);
+        ScrappingTableEntityRes, () => ScrappingTableEntityRes.fromJsonFactory);
 
-    return _getSetting(settingsId: settingsId, apikey: apikey?.toString());
+    return _getScrappingTable(
+        scrappingTableId: scrappingTableId, apikey: apikey?.toString());
   }
 
-  ///get settings by id
-  ///@param settingsId
-  @Get(path: '/Settings/one/{settingsId}')
-  Future<chopper.Response<SettingsEntityRes>> _getSetting({
-    @Path('settingsId') required String? settingsId,
+  ///get scrapping table by id
+  ///@param scrappingTableId
+  @Get(path: '/ScrappingTable/one/{scrappingTableId}')
+  Future<chopper.Response<ScrappingTableEntityRes>> _getScrappingTable({
+    @Path('scrappingTableId') required String? scrappingTableId,
     @Header('APIKEY') String? apikey,
   });
 
@@ -7830,6 +7832,66 @@ extension $ParameterExtension on Parameter {
 }
 
 @JsonSerializable(explicitToJson: true)
+class ScrappingTableConfig {
+  const ScrappingTableConfig({
+    required this.lookupName,
+    required this.scrappingTableIds,
+  });
+
+  factory ScrappingTableConfig.fromJson(Map<String, dynamic> json) =>
+      _$ScrappingTableConfigFromJson(json);
+
+  static const toJsonFactory = _$ScrappingTableConfigToJson;
+  Map<String, dynamic> toJson() => _$ScrappingTableConfigToJson(this);
+
+  @JsonKey(name: 'lookupName', includeIfNull: false, defaultValue: '')
+  final String lookupName;
+  @JsonKey(
+      name: 'scrappingTableIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String> scrappingTableIds;
+  static const fromJsonFactory = _$ScrappingTableConfigFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is ScrappingTableConfig &&
+            (identical(other.lookupName, lookupName) ||
+                const DeepCollectionEquality()
+                    .equals(other.lookupName, lookupName)) &&
+            (identical(other.scrappingTableIds, scrappingTableIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.scrappingTableIds, scrappingTableIds)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(lookupName) ^
+      const DeepCollectionEquality().hash(scrappingTableIds) ^
+      runtimeType.hashCode;
+}
+
+extension $ScrappingTableConfigExtension on ScrappingTableConfig {
+  ScrappingTableConfig copyWith(
+      {String? lookupName, List<String>? scrappingTableIds}) {
+    return ScrappingTableConfig(
+        lookupName: lookupName ?? this.lookupName,
+        scrappingTableIds: scrappingTableIds ?? this.scrappingTableIds);
+  }
+
+  ScrappingTableConfig copyWithWrapped(
+      {Wrapped<String>? lookupName, Wrapped<List<String>>? scrappingTableIds}) {
+    return ScrappingTableConfig(
+        lookupName: (lookupName != null ? lookupName.value : this.lookupName),
+        scrappingTableIds: (scrappingTableIds != null
+            ? scrappingTableIds.value
+            : this.scrappingTableIds));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class DeviceModelInfo {
   const DeviceModelInfo({
     required this.name,
@@ -7849,9 +7911,9 @@ class DeviceModelInfo {
     this.preprocessorId,
     this.hasGeoLocation,
     this.movable,
-    this.customSettings,
     this.customWidget,
     this.makePublic,
+    this.scrappingTableConfigs,
   });
 
   factory DeviceModelInfo.fromJson(Map<String, dynamic> json) =>
@@ -7895,15 +7957,15 @@ class DeviceModelInfo {
   final bool? hasGeoLocation;
   @JsonKey(name: 'movable', includeIfNull: false)
   final bool? movable;
-  @JsonKey(
-      name: 'customSettings',
-      includeIfNull: false,
-      defaultValue: <CustomSetting>[])
-  final List<CustomSetting>? customSettings;
   @JsonKey(name: 'customWidget', includeIfNull: false)
   final CustomWidget? customWidget;
   @JsonKey(name: 'makePublic', includeIfNull: false, defaultValue: false)
   final bool? makePublic;
+  @JsonKey(
+      name: 'scrappingTableConfigs',
+      includeIfNull: false,
+      defaultValue: <ScrappingTableConfig>[])
+  final List<ScrappingTableConfig>? scrappingTableConfigs;
   static const fromJsonFactory = _$DeviceModelInfoFromJson;
 
   @override
@@ -7955,15 +8017,15 @@ class DeviceModelInfo {
             (identical(other.movable, movable) ||
                 const DeepCollectionEquality()
                     .equals(other.movable, movable)) &&
-            (identical(other.customSettings, customSettings) ||
-                const DeepCollectionEquality()
-                    .equals(other.customSettings, customSettings)) &&
             (identical(other.customWidget, customWidget) ||
                 const DeepCollectionEquality()
                     .equals(other.customWidget, customWidget)) &&
             (identical(other.makePublic, makePublic) ||
                 const DeepCollectionEquality()
-                    .equals(other.makePublic, makePublic)));
+                    .equals(other.makePublic, makePublic)) &&
+            (identical(other.scrappingTableConfigs, scrappingTableConfigs) ||
+                const DeepCollectionEquality().equals(
+                    other.scrappingTableConfigs, scrappingTableConfigs)));
   }
 
   @override
@@ -7988,9 +8050,9 @@ class DeviceModelInfo {
       const DeepCollectionEquality().hash(preprocessorId) ^
       const DeepCollectionEquality().hash(hasGeoLocation) ^
       const DeepCollectionEquality().hash(movable) ^
-      const DeepCollectionEquality().hash(customSettings) ^
       const DeepCollectionEquality().hash(customWidget) ^
       const DeepCollectionEquality().hash(makePublic) ^
+      const DeepCollectionEquality().hash(scrappingTableConfigs) ^
       runtimeType.hashCode;
 }
 
@@ -8013,9 +8075,9 @@ extension $DeviceModelInfoExtension on DeviceModelInfo {
       String? preprocessorId,
       bool? hasGeoLocation,
       bool? movable,
-      List<CustomSetting>? customSettings,
       CustomWidget? customWidget,
-      bool? makePublic}) {
+      bool? makePublic,
+      List<ScrappingTableConfig>? scrappingTableConfigs}) {
     return DeviceModelInfo(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -8034,9 +8096,10 @@ extension $DeviceModelInfoExtension on DeviceModelInfo {
         preprocessorId: preprocessorId ?? this.preprocessorId,
         hasGeoLocation: hasGeoLocation ?? this.hasGeoLocation,
         movable: movable ?? this.movable,
-        customSettings: customSettings ?? this.customSettings,
         customWidget: customWidget ?? this.customWidget,
-        makePublic: makePublic ?? this.makePublic);
+        makePublic: makePublic ?? this.makePublic,
+        scrappingTableConfigs:
+            scrappingTableConfigs ?? this.scrappingTableConfigs);
   }
 
   DeviceModelInfo copyWithWrapped(
@@ -8057,9 +8120,9 @@ extension $DeviceModelInfoExtension on DeviceModelInfo {
       Wrapped<String?>? preprocessorId,
       Wrapped<bool?>? hasGeoLocation,
       Wrapped<bool?>? movable,
-      Wrapped<List<CustomSetting>?>? customSettings,
       Wrapped<CustomWidget?>? customWidget,
-      Wrapped<bool?>? makePublic}) {
+      Wrapped<bool?>? makePublic,
+      Wrapped<List<ScrappingTableConfig>?>? scrappingTableConfigs}) {
     return DeviceModelInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -8087,12 +8150,12 @@ extension $DeviceModelInfoExtension on DeviceModelInfo {
             ? hasGeoLocation.value
             : this.hasGeoLocation),
         movable: (movable != null ? movable.value : this.movable),
-        customSettings: (customSettings != null
-            ? customSettings.value
-            : this.customSettings),
         customWidget:
             (customWidget != null ? customWidget.value : this.customWidget),
-        makePublic: (makePublic != null ? makePublic.value : this.makePublic));
+        makePublic: (makePublic != null ? makePublic.value : this.makePublic),
+        scrappingTableConfigs: (scrappingTableConfigs != null
+            ? scrappingTableConfigs.value
+            : this.scrappingTableConfigs));
   }
 }
 
@@ -8116,9 +8179,9 @@ class DeviceModel {
     this.preprocessorId,
     this.hasGeoLocation,
     this.movable,
-    this.customSettings,
     this.customWidget,
     this.makePublic,
+    this.scrappingTableConfigs,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -8169,15 +8232,15 @@ class DeviceModel {
   final bool? hasGeoLocation;
   @JsonKey(name: 'movable', includeIfNull: false)
   final bool? movable;
-  @JsonKey(
-      name: 'customSettings',
-      includeIfNull: false,
-      defaultValue: <CustomSetting>[])
-  final List<CustomSetting>? customSettings;
   @JsonKey(name: 'customWidget', includeIfNull: false)
   final CustomWidget? customWidget;
   @JsonKey(name: 'makePublic', includeIfNull: false, defaultValue: false)
   final bool? makePublic;
+  @JsonKey(
+      name: 'scrappingTableConfigs',
+      includeIfNull: false,
+      defaultValue: <ScrappingTableConfig>[])
+  final List<ScrappingTableConfig>? scrappingTableConfigs;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -8243,15 +8306,15 @@ class DeviceModel {
             (identical(other.movable, movable) ||
                 const DeepCollectionEquality()
                     .equals(other.movable, movable)) &&
-            (identical(other.customSettings, customSettings) ||
-                const DeepCollectionEquality()
-                    .equals(other.customSettings, customSettings)) &&
             (identical(other.customWidget, customWidget) ||
                 const DeepCollectionEquality()
                     .equals(other.customWidget, customWidget)) &&
             (identical(other.makePublic, makePublic) ||
                 const DeepCollectionEquality()
                     .equals(other.makePublic, makePublic)) &&
+            (identical(other.scrappingTableConfigs, scrappingTableConfigs) ||
+                const DeepCollectionEquality().equals(
+                    other.scrappingTableConfigs, scrappingTableConfigs)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -8265,8 +8328,7 @@ class DeviceModel {
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
-            (identical(other.updatedBy, updatedBy) ||
-                const DeepCollectionEquality().equals(other.updatedBy, updatedBy)) &&
+            (identical(other.updatedBy, updatedBy) || const DeepCollectionEquality().equals(other.updatedBy, updatedBy)) &&
             (identical(other.updatedStamp, updatedStamp) || const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)));
   }
 
@@ -8292,9 +8354,9 @@ class DeviceModel {
       const DeepCollectionEquality().hash(preprocessorId) ^
       const DeepCollectionEquality().hash(hasGeoLocation) ^
       const DeepCollectionEquality().hash(movable) ^
-      const DeepCollectionEquality().hash(customSettings) ^
       const DeepCollectionEquality().hash(customWidget) ^
       const DeepCollectionEquality().hash(makePublic) ^
+      const DeepCollectionEquality().hash(scrappingTableConfigs) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -8324,9 +8386,9 @@ extension $DeviceModelExtension on DeviceModel {
       String? preprocessorId,
       bool? hasGeoLocation,
       bool? movable,
-      List<CustomSetting>? customSettings,
       CustomWidget? customWidget,
       bool? makePublic,
+      List<ScrappingTableConfig>? scrappingTableConfigs,
       String? domainKey,
       String? id,
       String? rtype,
@@ -8352,9 +8414,10 @@ extension $DeviceModelExtension on DeviceModel {
         preprocessorId: preprocessorId ?? this.preprocessorId,
         hasGeoLocation: hasGeoLocation ?? this.hasGeoLocation,
         movable: movable ?? this.movable,
-        customSettings: customSettings ?? this.customSettings,
         customWidget: customWidget ?? this.customWidget,
         makePublic: makePublic ?? this.makePublic,
+        scrappingTableConfigs:
+            scrappingTableConfigs ?? this.scrappingTableConfigs,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -8382,9 +8445,9 @@ extension $DeviceModelExtension on DeviceModel {
       Wrapped<String?>? preprocessorId,
       Wrapped<bool?>? hasGeoLocation,
       Wrapped<bool?>? movable,
-      Wrapped<List<CustomSetting>?>? customSettings,
       Wrapped<CustomWidget?>? customWidget,
       Wrapped<bool?>? makePublic,
+      Wrapped<List<ScrappingTableConfig>?>? scrappingTableConfigs,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -8419,12 +8482,12 @@ extension $DeviceModelExtension on DeviceModel {
             ? hasGeoLocation.value
             : this.hasGeoLocation),
         movable: (movable != null ? movable.value : this.movable),
-        customSettings: (customSettings != null
-            ? customSettings.value
-            : this.customSettings),
         customWidget:
             (customWidget != null ? customWidget.value : this.customWidget),
         makePublic: (makePublic != null ? makePublic.value : this.makePublic),
+        scrappingTableConfigs: (scrappingTableConfigs != null
+            ? scrappingTableConfigs.value
+            : this.scrappingTableConfigs),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -32009,143 +32072,19 @@ extension $AttributeExtension on Attribute {
 }
 
 @JsonSerializable(explicitToJson: true)
-class Lookup {
-  const Lookup({
-    required this.name,
-    required this.settingsName,
-    required this.attributes,
-  });
-
-  factory Lookup.fromJson(Map<String, dynamic> json) => _$LookupFromJson(json);
-
-  static const toJsonFactory = _$LookupToJson;
-  Map<String, dynamic> toJson() => _$LookupToJson(this);
-
-  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
-  final String name;
-  @JsonKey(name: 'settingsName', includeIfNull: false, defaultValue: '')
-  final String settingsName;
-  @JsonKey(
-      name: 'attributes', includeIfNull: false, defaultValue: <Attribute>[])
-  final List<Attribute> attributes;
-  static const fromJsonFactory = _$LookupFromJson;
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other is Lookup &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.settingsName, settingsName) ||
-                const DeepCollectionEquality()
-                    .equals(other.settingsName, settingsName)) &&
-            (identical(other.attributes, attributes) ||
-                const DeepCollectionEquality()
-                    .equals(other.attributes, attributes)));
-  }
-
-  @override
-  String toString() => jsonEncode(this);
-
-  @override
-  int get hashCode =>
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(settingsName) ^
-      const DeepCollectionEquality().hash(attributes) ^
-      runtimeType.hashCode;
-}
-
-extension $LookupExtension on Lookup {
-  Lookup copyWith(
-      {String? name, String? settingsName, List<Attribute>? attributes}) {
-    return Lookup(
-        name: name ?? this.name,
-        settingsName: settingsName ?? this.settingsName,
-        attributes: attributes ?? this.attributes);
-  }
-
-  Lookup copyWithWrapped(
-      {Wrapped<String>? name,
-      Wrapped<String>? settingsName,
-      Wrapped<List<Attribute>>? attributes}) {
-    return Lookup(
-        name: (name != null ? name.value : this.name),
-        settingsName:
-            (settingsName != null ? settingsName.value : this.settingsName),
-        attributes: (attributes != null ? attributes.value : this.attributes));
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class ModelLookup {
-  const ModelLookup({
-    required this.deviceModelId,
-    required this.lookup,
-  });
-
-  factory ModelLookup.fromJson(Map<String, dynamic> json) =>
-      _$ModelLookupFromJson(json);
-
-  static const toJsonFactory = _$ModelLookupToJson;
-  Map<String, dynamic> toJson() => _$ModelLookupToJson(this);
-
-  @JsonKey(name: 'deviceModelId', includeIfNull: false, defaultValue: '')
-  final String deviceModelId;
-  @JsonKey(name: 'lookup', includeIfNull: false)
-  final Lookup lookup;
-  static const fromJsonFactory = _$ModelLookupFromJson;
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other is ModelLookup &&
-            (identical(other.deviceModelId, deviceModelId) ||
-                const DeepCollectionEquality()
-                    .equals(other.deviceModelId, deviceModelId)) &&
-            (identical(other.lookup, lookup) ||
-                const DeepCollectionEquality().equals(other.lookup, lookup)));
-  }
-
-  @override
-  String toString() => jsonEncode(this);
-
-  @override
-  int get hashCode =>
-      const DeepCollectionEquality().hash(deviceModelId) ^
-      const DeepCollectionEquality().hash(lookup) ^
-      runtimeType.hashCode;
-}
-
-extension $ModelLookupExtension on ModelLookup {
-  ModelLookup copyWith({String? deviceModelId, Lookup? lookup}) {
-    return ModelLookup(
-        deviceModelId: deviceModelId ?? this.deviceModelId,
-        lookup: lookup ?? this.lookup);
-  }
-
-  ModelLookup copyWithWrapped(
-      {Wrapped<String>? deviceModelId, Wrapped<Lookup>? lookup}) {
-    return ModelLookup(
-        deviceModelId:
-            (deviceModelId != null ? deviceModelId.value : this.deviceModelId),
-        lookup: (lookup != null ? lookup.value : this.lookup));
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class SettingsInfo {
-  const SettingsInfo({
+class ScrappingTableInfo {
+  const ScrappingTableInfo({
     required this.name,
     this.description,
     this.tags,
     required this.attributes,
   });
 
-  factory SettingsInfo.fromJson(Map<String, dynamic> json) =>
-      _$SettingsInfoFromJson(json);
+  factory ScrappingTableInfo.fromJson(Map<String, dynamic> json) =>
+      _$ScrappingTableInfoFromJson(json);
 
-  static const toJsonFactory = _$SettingsInfoToJson;
-  Map<String, dynamic> toJson() => _$SettingsInfoToJson(this);
+  static const toJsonFactory = _$ScrappingTableInfoToJson;
+  Map<String, dynamic> toJson() => _$ScrappingTableInfoToJson(this);
 
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
   final String name;
@@ -32156,12 +32095,12 @@ class SettingsInfo {
   @JsonKey(
       name: 'attributes', includeIfNull: false, defaultValue: <Attribute>[])
   final List<Attribute> attributes;
-  static const fromJsonFactory = _$SettingsInfoFromJson;
+  static const fromJsonFactory = _$ScrappingTableInfoFromJson;
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other is SettingsInfo &&
+        (other is ScrappingTableInfo &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.description, description) ||
@@ -32186,25 +32125,25 @@ class SettingsInfo {
       runtimeType.hashCode;
 }
 
-extension $SettingsInfoExtension on SettingsInfo {
-  SettingsInfo copyWith(
+extension $ScrappingTableInfoExtension on ScrappingTableInfo {
+  ScrappingTableInfo copyWith(
       {String? name,
       String? description,
       List<String>? tags,
       List<Attribute>? attributes}) {
-    return SettingsInfo(
+    return ScrappingTableInfo(
         name: name ?? this.name,
         description: description ?? this.description,
         tags: tags ?? this.tags,
         attributes: attributes ?? this.attributes);
   }
 
-  SettingsInfo copyWithWrapped(
+  ScrappingTableInfo copyWithWrapped(
       {Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
       Wrapped<List<Attribute>>? attributes}) {
-    return SettingsInfo(
+    return ScrappingTableInfo(
         name: (name != null ? name.value : this.name),
         description:
             (description != null ? description.value : this.description),
@@ -32214,8 +32153,8 @@ extension $SettingsInfoExtension on SettingsInfo {
 }
 
 @JsonSerializable(explicitToJson: true)
-class Settings {
-  const Settings({
+class ScrappingTable {
+  const ScrappingTable({
     required this.name,
     this.description,
     this.tags,
@@ -32229,11 +32168,11 @@ class Settings {
     required this.updatedStamp,
   });
 
-  factory Settings.fromJson(Map<String, dynamic> json) =>
-      _$SettingsFromJson(json);
+  factory ScrappingTable.fromJson(Map<String, dynamic> json) =>
+      _$ScrappingTableFromJson(json);
 
-  static const toJsonFactory = _$SettingsToJson;
-  Map<String, dynamic> toJson() => _$SettingsToJson(this);
+  static const toJsonFactory = _$ScrappingTableToJson;
+  Map<String, dynamic> toJson() => _$ScrappingTableToJson(this);
 
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
   final String name;
@@ -32258,12 +32197,12 @@ class Settings {
   final String updatedBy;
   @JsonKey(name: 'updatedStamp', includeIfNull: false)
   final int updatedStamp;
-  static const fromJsonFactory = _$SettingsFromJson;
+  static const fromJsonFactory = _$ScrappingTableFromJson;
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other is Settings &&
+        (other is ScrappingTable &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.description, description) ||
@@ -32314,8 +32253,8 @@ class Settings {
       runtimeType.hashCode;
 }
 
-extension $SettingsExtension on Settings {
-  Settings copyWith(
+extension $ScrappingTableExtension on ScrappingTable {
+  ScrappingTable copyWith(
       {String? name,
       String? description,
       List<String>? tags,
@@ -32327,7 +32266,7 @@ extension $SettingsExtension on Settings {
       String? createdBy,
       String? updatedBy,
       int? updatedStamp}) {
-    return Settings(
+    return ScrappingTable(
         name: name ?? this.name,
         description: description ?? this.description,
         tags: tags ?? this.tags,
@@ -32341,7 +32280,7 @@ extension $SettingsExtension on Settings {
         updatedStamp: updatedStamp ?? this.updatedStamp);
   }
 
-  Settings copyWithWrapped(
+  ScrappingTable copyWithWrapped(
       {Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
@@ -32353,7 +32292,7 @@ extension $SettingsExtension on Settings {
       Wrapped<String>? createdBy,
       Wrapped<String>? updatedBy,
       Wrapped<int>? updatedStamp}) {
-    return Settings(
+    return ScrappingTable(
         name: (name != null ? name.value : this.name),
         description:
             (description != null ? description.value : this.description),
@@ -32372,25 +32311,25 @@ extension $SettingsExtension on Settings {
 }
 
 @JsonSerializable(explicitToJson: true)
-class SettingsEntity {
-  const SettingsEntity({
+class ScrappingTableEntity {
+  const ScrappingTableEntity({
     this.entity,
   });
 
-  factory SettingsEntity.fromJson(Map<String, dynamic> json) =>
-      _$SettingsEntityFromJson(json);
+  factory ScrappingTableEntity.fromJson(Map<String, dynamic> json) =>
+      _$ScrappingTableEntityFromJson(json);
 
-  static const toJsonFactory = _$SettingsEntityToJson;
-  Map<String, dynamic> toJson() => _$SettingsEntityToJson(this);
+  static const toJsonFactory = _$ScrappingTableEntityToJson;
+  Map<String, dynamic> toJson() => _$ScrappingTableEntityToJson(this);
 
   @JsonKey(name: 'entity', includeIfNull: false)
-  final Settings? entity;
-  static const fromJsonFactory = _$SettingsEntityFromJson;
+  final ScrappingTable? entity;
+  static const fromJsonFactory = _$ScrappingTableEntityFromJson;
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other is SettingsEntity &&
+        (other is ScrappingTableEntity &&
             (identical(other.entity, entity) ||
                 const DeepCollectionEquality().equals(other.entity, entity)));
   }
@@ -32403,20 +32342,20 @@ class SettingsEntity {
       const DeepCollectionEquality().hash(entity) ^ runtimeType.hashCode;
 }
 
-extension $SettingsEntityExtension on SettingsEntity {
-  SettingsEntity copyWith({Settings? entity}) {
-    return SettingsEntity(entity: entity ?? this.entity);
+extension $ScrappingTableEntityExtension on ScrappingTableEntity {
+  ScrappingTableEntity copyWith({ScrappingTable? entity}) {
+    return ScrappingTableEntity(entity: entity ?? this.entity);
   }
 
-  SettingsEntity copyWithWrapped({Wrapped<Settings?>? entity}) {
-    return SettingsEntity(
+  ScrappingTableEntity copyWithWrapped({Wrapped<ScrappingTable?>? entity}) {
+    return ScrappingTableEntity(
         entity: (entity != null ? entity.value : this.entity));
   }
 }
 
 @JsonSerializable(explicitToJson: true)
-class SettingsEntityRes {
-  const SettingsEntityRes({
+class ScrappingTableEntityRes {
+  const ScrappingTableEntityRes({
     required this.ok,
     this.msg,
     this.trace,
@@ -32424,11 +32363,11 @@ class SettingsEntityRes {
     this.entity,
   });
 
-  factory SettingsEntityRes.fromJson(Map<String, dynamic> json) =>
-      _$SettingsEntityResFromJson(json);
+  factory ScrappingTableEntityRes.fromJson(Map<String, dynamic> json) =>
+      _$ScrappingTableEntityResFromJson(json);
 
-  static const toJsonFactory = _$SettingsEntityResToJson;
-  Map<String, dynamic> toJson() => _$SettingsEntityResToJson(this);
+  static const toJsonFactory = _$ScrappingTableEntityResToJson;
+  Map<String, dynamic> toJson() => _$ScrappingTableEntityResToJson(this);
 
   @JsonKey(name: 'ok', includeIfNull: false)
   final bool ok;
@@ -32439,13 +32378,13 @@ class SettingsEntityRes {
   @JsonKey(name: 'errorCode', includeIfNull: false, defaultValue: '')
   final String? errorCode;
   @JsonKey(name: 'entity', includeIfNull: false)
-  final Settings? entity;
-  static const fromJsonFactory = _$SettingsEntityResFromJson;
+  final ScrappingTable? entity;
+  static const fromJsonFactory = _$ScrappingTableEntityResFromJson;
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other is SettingsEntityRes &&
+        (other is ScrappingTableEntityRes &&
             (identical(other.ok, ok) ||
                 const DeepCollectionEquality().equals(other.ok, ok)) &&
             (identical(other.msg, msg) ||
@@ -32472,14 +32411,14 @@ class SettingsEntityRes {
       runtimeType.hashCode;
 }
 
-extension $SettingsEntityResExtension on SettingsEntityRes {
-  SettingsEntityRes copyWith(
+extension $ScrappingTableEntityResExtension on ScrappingTableEntityRes {
+  ScrappingTableEntityRes copyWith(
       {bool? ok,
       String? msg,
       String? trace,
       String? errorCode,
-      Settings? entity}) {
-    return SettingsEntityRes(
+      ScrappingTable? entity}) {
+    return ScrappingTableEntityRes(
         ok: ok ?? this.ok,
         msg: msg ?? this.msg,
         trace: trace ?? this.trace,
@@ -32487,13 +32426,13 @@ extension $SettingsEntityResExtension on SettingsEntityRes {
         entity: entity ?? this.entity);
   }
 
-  SettingsEntityRes copyWithWrapped(
+  ScrappingTableEntityRes copyWithWrapped(
       {Wrapped<bool>? ok,
       Wrapped<String?>? msg,
       Wrapped<String?>? trace,
       Wrapped<String?>? errorCode,
-      Wrapped<Settings?>? entity}) {
-    return SettingsEntityRes(
+      Wrapped<ScrappingTable?>? entity}) {
+    return ScrappingTableEntityRes(
         ok: (ok != null ? ok.value : this.ok),
         msg: (msg != null ? msg.value : this.msg),
         trace: (trace != null ? trace.value : this.trace),
@@ -32503,25 +32442,26 @@ extension $SettingsEntityResExtension on SettingsEntityRes {
 }
 
 @JsonSerializable(explicitToJson: true)
-class SettingsArray {
-  const SettingsArray({
+class ScrappingTableArray {
+  const ScrappingTableArray({
     this.values,
   });
 
-  factory SettingsArray.fromJson(Map<String, dynamic> json) =>
-      _$SettingsArrayFromJson(json);
+  factory ScrappingTableArray.fromJson(Map<String, dynamic> json) =>
+      _$ScrappingTableArrayFromJson(json);
 
-  static const toJsonFactory = _$SettingsArrayToJson;
-  Map<String, dynamic> toJson() => _$SettingsArrayToJson(this);
+  static const toJsonFactory = _$ScrappingTableArrayToJson;
+  Map<String, dynamic> toJson() => _$ScrappingTableArrayToJson(this);
 
-  @JsonKey(name: 'values', includeIfNull: false, defaultValue: <Settings>[])
-  final List<Settings>? values;
-  static const fromJsonFactory = _$SettingsArrayFromJson;
+  @JsonKey(
+      name: 'values', includeIfNull: false, defaultValue: <ScrappingTable>[])
+  final List<ScrappingTable>? values;
+  static const fromJsonFactory = _$ScrappingTableArrayFromJson;
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other is SettingsArray &&
+        (other is ScrappingTableArray &&
             (identical(other.values, values) ||
                 const DeepCollectionEquality().equals(other.values, values)));
   }
@@ -32534,19 +32474,21 @@ class SettingsArray {
       const DeepCollectionEquality().hash(values) ^ runtimeType.hashCode;
 }
 
-extension $SettingsArrayExtension on SettingsArray {
-  SettingsArray copyWith({List<Settings>? values}) {
-    return SettingsArray(values: values ?? this.values);
+extension $ScrappingTableArrayExtension on ScrappingTableArray {
+  ScrappingTableArray copyWith({List<ScrappingTable>? values}) {
+    return ScrappingTableArray(values: values ?? this.values);
   }
 
-  SettingsArray copyWithWrapped({Wrapped<List<Settings>?>? values}) {
-    return SettingsArray(values: (values != null ? values.value : this.values));
+  ScrappingTableArray copyWithWrapped(
+      {Wrapped<List<ScrappingTable>?>? values}) {
+    return ScrappingTableArray(
+        values: (values != null ? values.value : this.values));
   }
 }
 
 @JsonSerializable(explicitToJson: true)
-class SettingsArrayRes {
-  const SettingsArrayRes({
+class ScrappingTableArrayRes {
+  const ScrappingTableArrayRes({
     required this.ok,
     this.msg,
     this.trace,
@@ -32557,11 +32499,11 @@ class SettingsArrayRes {
     this.values,
   });
 
-  factory SettingsArrayRes.fromJson(Map<String, dynamic> json) =>
-      _$SettingsArrayResFromJson(json);
+  factory ScrappingTableArrayRes.fromJson(Map<String, dynamic> json) =>
+      _$ScrappingTableArrayResFromJson(json);
 
-  static const toJsonFactory = _$SettingsArrayResToJson;
-  Map<String, dynamic> toJson() => _$SettingsArrayResToJson(this);
+  static const toJsonFactory = _$ScrappingTableArrayResToJson;
+  Map<String, dynamic> toJson() => _$ScrappingTableArrayResToJson(this);
 
   @JsonKey(name: 'ok', includeIfNull: false)
   final bool ok;
@@ -32577,14 +32519,15 @@ class SettingsArrayRes {
   final int size;
   @JsonKey(name: 'total', includeIfNull: false)
   final int total;
-  @JsonKey(name: 'values', includeIfNull: false, defaultValue: <Settings>[])
-  final List<Settings>? values;
-  static const fromJsonFactory = _$SettingsArrayResFromJson;
+  @JsonKey(
+      name: 'values', includeIfNull: false, defaultValue: <ScrappingTable>[])
+  final List<ScrappingTable>? values;
+  static const fromJsonFactory = _$ScrappingTableArrayResFromJson;
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other is SettingsArrayRes &&
+        (other is ScrappingTableArrayRes &&
             (identical(other.ok, ok) ||
                 const DeepCollectionEquality().equals(other.ok, ok)) &&
             (identical(other.msg, msg) ||
@@ -32620,8 +32563,8 @@ class SettingsArrayRes {
       runtimeType.hashCode;
 }
 
-extension $SettingsArrayResExtension on SettingsArrayRes {
-  SettingsArrayRes copyWith(
+extension $ScrappingTableArrayResExtension on ScrappingTableArrayRes {
+  ScrappingTableArrayRes copyWith(
       {bool? ok,
       String? msg,
       String? trace,
@@ -32629,8 +32572,8 @@ extension $SettingsArrayResExtension on SettingsArrayRes {
       int? page,
       int? size,
       int? total,
-      List<Settings>? values}) {
-    return SettingsArrayRes(
+      List<ScrappingTable>? values}) {
+    return ScrappingTableArrayRes(
         ok: ok ?? this.ok,
         msg: msg ?? this.msg,
         trace: trace ?? this.trace,
@@ -32641,7 +32584,7 @@ extension $SettingsArrayResExtension on SettingsArrayRes {
         values: values ?? this.values);
   }
 
-  SettingsArrayRes copyWithWrapped(
+  ScrappingTableArrayRes copyWithWrapped(
       {Wrapped<bool>? ok,
       Wrapped<String?>? msg,
       Wrapped<String?>? trace,
@@ -32649,8 +32592,8 @@ extension $SettingsArrayResExtension on SettingsArrayRes {
       Wrapped<int>? page,
       Wrapped<int>? size,
       Wrapped<int>? total,
-      Wrapped<List<Settings>?>? values}) {
-    return SettingsArrayRes(
+      Wrapped<List<ScrappingTable>?>? values}) {
+    return ScrappingTableArrayRes(
         ok: (ok != null ? ok.value : this.ok),
         msg: (msg != null ? msg.value : this.msg),
         trace: (trace != null ? trace.value : this.trace),
@@ -34821,6 +34764,156 @@ extension $ReportArrayResExtension on ReportArrayRes {
 }
 
 @JsonSerializable(explicitToJson: true)
+class AssetScrappingTable {
+  const AssetScrappingTable({
+    required this.lookupName,
+    required this.scrappingTableId,
+    required this.scrappingTableName,
+    required this.attributes,
+  });
+
+  factory AssetScrappingTable.fromJson(Map<String, dynamic> json) =>
+      _$AssetScrappingTableFromJson(json);
+
+  static const toJsonFactory = _$AssetScrappingTableToJson;
+  Map<String, dynamic> toJson() => _$AssetScrappingTableToJson(this);
+
+  @JsonKey(name: 'lookupName', includeIfNull: false, defaultValue: '')
+  final String lookupName;
+  @JsonKey(name: 'scrappingTableId', includeIfNull: false, defaultValue: '')
+  final String scrappingTableId;
+  @JsonKey(name: 'scrappingTableName', includeIfNull: false, defaultValue: '')
+  final String scrappingTableName;
+  @JsonKey(
+      name: 'attributes', includeIfNull: false, defaultValue: <Attribute>[])
+  final List<Attribute> attributes;
+  static const fromJsonFactory = _$AssetScrappingTableFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is AssetScrappingTable &&
+            (identical(other.lookupName, lookupName) ||
+                const DeepCollectionEquality()
+                    .equals(other.lookupName, lookupName)) &&
+            (identical(other.scrappingTableId, scrappingTableId) ||
+                const DeepCollectionEquality()
+                    .equals(other.scrappingTableId, scrappingTableId)) &&
+            (identical(other.scrappingTableName, scrappingTableName) ||
+                const DeepCollectionEquality()
+                    .equals(other.scrappingTableName, scrappingTableName)) &&
+            (identical(other.attributes, attributes) ||
+                const DeepCollectionEquality()
+                    .equals(other.attributes, attributes)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(lookupName) ^
+      const DeepCollectionEquality().hash(scrappingTableId) ^
+      const DeepCollectionEquality().hash(scrappingTableName) ^
+      const DeepCollectionEquality().hash(attributes) ^
+      runtimeType.hashCode;
+}
+
+extension $AssetScrappingTableExtension on AssetScrappingTable {
+  AssetScrappingTable copyWith(
+      {String? lookupName,
+      String? scrappingTableId,
+      String? scrappingTableName,
+      List<Attribute>? attributes}) {
+    return AssetScrappingTable(
+        lookupName: lookupName ?? this.lookupName,
+        scrappingTableId: scrappingTableId ?? this.scrappingTableId,
+        scrappingTableName: scrappingTableName ?? this.scrappingTableName,
+        attributes: attributes ?? this.attributes);
+  }
+
+  AssetScrappingTable copyWithWrapped(
+      {Wrapped<String>? lookupName,
+      Wrapped<String>? scrappingTableId,
+      Wrapped<String>? scrappingTableName,
+      Wrapped<List<Attribute>>? attributes}) {
+    return AssetScrappingTable(
+        lookupName: (lookupName != null ? lookupName.value : this.lookupName),
+        scrappingTableId: (scrappingTableId != null
+            ? scrappingTableId.value
+            : this.scrappingTableId),
+        scrappingTableName: (scrappingTableName != null
+            ? scrappingTableName.value
+            : this.scrappingTableName),
+        attributes: (attributes != null ? attributes.value : this.attributes));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class AssetDeviceModel {
+  const AssetDeviceModel({
+    required this.deviceModelId,
+    this.scrappingTables,
+  });
+
+  factory AssetDeviceModel.fromJson(Map<String, dynamic> json) =>
+      _$AssetDeviceModelFromJson(json);
+
+  static const toJsonFactory = _$AssetDeviceModelToJson;
+  Map<String, dynamic> toJson() => _$AssetDeviceModelToJson(this);
+
+  @JsonKey(name: 'deviceModelId', includeIfNull: false, defaultValue: '')
+  final String deviceModelId;
+  @JsonKey(
+      name: 'scrappingTables',
+      includeIfNull: false,
+      defaultValue: <AssetScrappingTable>[])
+  final List<AssetScrappingTable>? scrappingTables;
+  static const fromJsonFactory = _$AssetDeviceModelFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is AssetDeviceModel &&
+            (identical(other.deviceModelId, deviceModelId) ||
+                const DeepCollectionEquality()
+                    .equals(other.deviceModelId, deviceModelId)) &&
+            (identical(other.scrappingTables, scrappingTables) ||
+                const DeepCollectionEquality()
+                    .equals(other.scrappingTables, scrappingTables)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(deviceModelId) ^
+      const DeepCollectionEquality().hash(scrappingTables) ^
+      runtimeType.hashCode;
+}
+
+extension $AssetDeviceModelExtension on AssetDeviceModel {
+  AssetDeviceModel copyWith(
+      {String? deviceModelId, List<AssetScrappingTable>? scrappingTables}) {
+    return AssetDeviceModel(
+        deviceModelId: deviceModelId ?? this.deviceModelId,
+        scrappingTables: scrappingTables ?? this.scrappingTables);
+  }
+
+  AssetDeviceModel copyWithWrapped(
+      {Wrapped<String>? deviceModelId,
+      Wrapped<List<AssetScrappingTable>?>? scrappingTables}) {
+    return AssetDeviceModel(
+        deviceModelId:
+            (deviceModelId != null ? deviceModelId.value : this.deviceModelId),
+        scrappingTables: (scrappingTables != null
+            ? scrappingTables.value
+            : this.scrappingTables));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class AssetModelInfo {
   const AssetModelInfo({
     required this.name,
@@ -34832,11 +34925,8 @@ class AssetModelInfo {
     this.images,
     this.banners,
     this.metadata,
-    this.hasGeoLocation,
     this.movable,
-    this.geolocation,
-    this.deviceModelsIds,
-    this.modelLookups,
+    this.allowedDeviceModels,
   });
 
   factory AssetModelInfo.fromJson(Map<String, dynamic> json) =>
@@ -34863,18 +34953,13 @@ class AssetModelInfo {
   final List<String>? banners;
   @JsonKey(name: 'metadata', includeIfNull: false)
   final Object? metadata;
-  @JsonKey(name: 'hasGeoLocation', includeIfNull: false)
-  final bool? hasGeoLocation;
   @JsonKey(name: 'movable', includeIfNull: false)
   final bool? movable;
-  @JsonKey(name: 'geolocation', includeIfNull: false)
-  final GeoLocation? geolocation;
   @JsonKey(
-      name: 'deviceModelsIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? deviceModelsIds;
-  @JsonKey(
-      name: 'modelLookups', includeIfNull: false, defaultValue: <ModelLookup>[])
-  final List<ModelLookup>? modelLookups;
+      name: 'allowedDeviceModels',
+      includeIfNull: false,
+      defaultValue: <AssetDeviceModel>[])
+  final List<AssetDeviceModel>? allowedDeviceModels;
   static const fromJsonFactory = _$AssetModelInfoFromJson;
 
   @override
@@ -34904,21 +34989,12 @@ class AssetModelInfo {
             (identical(other.metadata, metadata) ||
                 const DeepCollectionEquality()
                     .equals(other.metadata, metadata)) &&
-            (identical(other.hasGeoLocation, hasGeoLocation) ||
-                const DeepCollectionEquality()
-                    .equals(other.hasGeoLocation, hasGeoLocation)) &&
             (identical(other.movable, movable) ||
                 const DeepCollectionEquality()
                     .equals(other.movable, movable)) &&
-            (identical(other.geolocation, geolocation) ||
+            (identical(other.allowedDeviceModels, allowedDeviceModels) ||
                 const DeepCollectionEquality()
-                    .equals(other.geolocation, geolocation)) &&
-            (identical(other.deviceModelsIds, deviceModelsIds) ||
-                const DeepCollectionEquality()
-                    .equals(other.deviceModelsIds, deviceModelsIds)) &&
-            (identical(other.modelLookups, modelLookups) ||
-                const DeepCollectionEquality()
-                    .equals(other.modelLookups, modelLookups)));
+                    .equals(other.allowedDeviceModels, allowedDeviceModels)));
   }
 
   @override
@@ -34935,11 +35011,8 @@ class AssetModelInfo {
       const DeepCollectionEquality().hash(images) ^
       const DeepCollectionEquality().hash(banners) ^
       const DeepCollectionEquality().hash(metadata) ^
-      const DeepCollectionEquality().hash(hasGeoLocation) ^
       const DeepCollectionEquality().hash(movable) ^
-      const DeepCollectionEquality().hash(geolocation) ^
-      const DeepCollectionEquality().hash(deviceModelsIds) ^
-      const DeepCollectionEquality().hash(modelLookups) ^
+      const DeepCollectionEquality().hash(allowedDeviceModels) ^
       runtimeType.hashCode;
 }
 
@@ -34954,11 +35027,8 @@ extension $AssetModelInfoExtension on AssetModelInfo {
       List<String>? images,
       List<String>? banners,
       Object? metadata,
-      bool? hasGeoLocation,
       bool? movable,
-      GeoLocation? geolocation,
-      List<String>? deviceModelsIds,
-      List<ModelLookup>? modelLookups}) {
+      List<AssetDeviceModel>? allowedDeviceModels}) {
     return AssetModelInfo(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -34969,11 +35039,8 @@ extension $AssetModelInfoExtension on AssetModelInfo {
         images: images ?? this.images,
         banners: banners ?? this.banners,
         metadata: metadata ?? this.metadata,
-        hasGeoLocation: hasGeoLocation ?? this.hasGeoLocation,
         movable: movable ?? this.movable,
-        geolocation: geolocation ?? this.geolocation,
-        deviceModelsIds: deviceModelsIds ?? this.deviceModelsIds,
-        modelLookups: modelLookups ?? this.modelLookups);
+        allowedDeviceModels: allowedDeviceModels ?? this.allowedDeviceModels);
   }
 
   AssetModelInfo copyWithWrapped(
@@ -34986,11 +35053,8 @@ extension $AssetModelInfoExtension on AssetModelInfo {
       Wrapped<List<String>?>? images,
       Wrapped<List<String>?>? banners,
       Wrapped<Object?>? metadata,
-      Wrapped<bool?>? hasGeoLocation,
       Wrapped<bool?>? movable,
-      Wrapped<GeoLocation?>? geolocation,
-      Wrapped<List<String>?>? deviceModelsIds,
-      Wrapped<List<ModelLookup>?>? modelLookups}) {
+      Wrapped<List<AssetDeviceModel>?>? allowedDeviceModels}) {
     return AssetModelInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -35005,17 +35069,10 @@ extension $AssetModelInfoExtension on AssetModelInfo {
         images: (images != null ? images.value : this.images),
         banners: (banners != null ? banners.value : this.banners),
         metadata: (metadata != null ? metadata.value : this.metadata),
-        hasGeoLocation: (hasGeoLocation != null
-            ? hasGeoLocation.value
-            : this.hasGeoLocation),
         movable: (movable != null ? movable.value : this.movable),
-        geolocation:
-            (geolocation != null ? geolocation.value : this.geolocation),
-        deviceModelsIds: (deviceModelsIds != null
-            ? deviceModelsIds.value
-            : this.deviceModelsIds),
-        modelLookups:
-            (modelLookups != null ? modelLookups.value : this.modelLookups));
+        allowedDeviceModels: (allowedDeviceModels != null
+            ? allowedDeviceModels.value
+            : this.allowedDeviceModels));
   }
 }
 
@@ -35031,11 +35088,8 @@ class AssetModel {
     this.images,
     this.banners,
     this.metadata,
-    this.hasGeoLocation,
     this.movable,
-    this.geolocation,
-    this.deviceModelsIds,
-    this.modelLookups,
+    this.allowedDeviceModels,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -35069,18 +35123,13 @@ class AssetModel {
   final List<String>? banners;
   @JsonKey(name: 'metadata', includeIfNull: false)
   final Object? metadata;
-  @JsonKey(name: 'hasGeoLocation', includeIfNull: false)
-  final bool? hasGeoLocation;
   @JsonKey(name: 'movable', includeIfNull: false)
   final bool? movable;
-  @JsonKey(name: 'geolocation', includeIfNull: false)
-  final GeoLocation? geolocation;
   @JsonKey(
-      name: 'deviceModelsIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? deviceModelsIds;
-  @JsonKey(
-      name: 'modelLookups', includeIfNull: false, defaultValue: <ModelLookup>[])
-  final List<ModelLookup>? modelLookups;
+      name: 'allowedDeviceModels',
+      includeIfNull: false,
+      defaultValue: <AssetDeviceModel>[])
+  final List<AssetDeviceModel>? allowedDeviceModels;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -35124,21 +35173,12 @@ class AssetModel {
             (identical(other.metadata, metadata) ||
                 const DeepCollectionEquality()
                     .equals(other.metadata, metadata)) &&
-            (identical(other.hasGeoLocation, hasGeoLocation) ||
-                const DeepCollectionEquality()
-                    .equals(other.hasGeoLocation, hasGeoLocation)) &&
             (identical(other.movable, movable) ||
                 const DeepCollectionEquality()
                     .equals(other.movable, movable)) &&
-            (identical(other.geolocation, geolocation) ||
+            (identical(other.allowedDeviceModels, allowedDeviceModels) ||
                 const DeepCollectionEquality()
-                    .equals(other.geolocation, geolocation)) &&
-            (identical(other.deviceModelsIds, deviceModelsIds) ||
-                const DeepCollectionEquality()
-                    .equals(other.deviceModelsIds, deviceModelsIds)) &&
-            (identical(other.modelLookups, modelLookups) ||
-                const DeepCollectionEquality()
-                    .equals(other.modelLookups, modelLookups)) &&
+                    .equals(other.allowedDeviceModels, allowedDeviceModels)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -35174,11 +35214,8 @@ class AssetModel {
       const DeepCollectionEquality().hash(images) ^
       const DeepCollectionEquality().hash(banners) ^
       const DeepCollectionEquality().hash(metadata) ^
-      const DeepCollectionEquality().hash(hasGeoLocation) ^
       const DeepCollectionEquality().hash(movable) ^
-      const DeepCollectionEquality().hash(geolocation) ^
-      const DeepCollectionEquality().hash(deviceModelsIds) ^
-      const DeepCollectionEquality().hash(modelLookups) ^
+      const DeepCollectionEquality().hash(allowedDeviceModels) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -35200,11 +35237,8 @@ extension $AssetModelExtension on AssetModel {
       List<String>? images,
       List<String>? banners,
       Object? metadata,
-      bool? hasGeoLocation,
       bool? movable,
-      GeoLocation? geolocation,
-      List<String>? deviceModelsIds,
-      List<ModelLookup>? modelLookups,
+      List<AssetDeviceModel>? allowedDeviceModels,
       String? domainKey,
       String? id,
       String? rtype,
@@ -35222,11 +35256,8 @@ extension $AssetModelExtension on AssetModel {
         images: images ?? this.images,
         banners: banners ?? this.banners,
         metadata: metadata ?? this.metadata,
-        hasGeoLocation: hasGeoLocation ?? this.hasGeoLocation,
         movable: movable ?? this.movable,
-        geolocation: geolocation ?? this.geolocation,
-        deviceModelsIds: deviceModelsIds ?? this.deviceModelsIds,
-        modelLookups: modelLookups ?? this.modelLookups,
+        allowedDeviceModels: allowedDeviceModels ?? this.allowedDeviceModels,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -35246,11 +35277,8 @@ extension $AssetModelExtension on AssetModel {
       Wrapped<List<String>?>? images,
       Wrapped<List<String>?>? banners,
       Wrapped<Object?>? metadata,
-      Wrapped<bool?>? hasGeoLocation,
       Wrapped<bool?>? movable,
-      Wrapped<GeoLocation?>? geolocation,
-      Wrapped<List<String>?>? deviceModelsIds,
-      Wrapped<List<ModelLookup>?>? modelLookups,
+      Wrapped<List<AssetDeviceModel>?>? allowedDeviceModels,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -35272,17 +35300,10 @@ extension $AssetModelExtension on AssetModel {
         images: (images != null ? images.value : this.images),
         banners: (banners != null ? banners.value : this.banners),
         metadata: (metadata != null ? metadata.value : this.metadata),
-        hasGeoLocation: (hasGeoLocation != null
-            ? hasGeoLocation.value
-            : this.hasGeoLocation),
         movable: (movable != null ? movable.value : this.movable),
-        geolocation:
-            (geolocation != null ? geolocation.value : this.geolocation),
-        deviceModelsIds: (deviceModelsIds != null
-            ? deviceModelsIds.value
-            : this.deviceModelsIds),
-        modelLookups:
-            (modelLookups != null ? modelLookups.value : this.modelLookups),
+        allowedDeviceModels: (allowedDeviceModels != null
+            ? allowedDeviceModels.value
+            : this.allowedDeviceModels),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -35732,72 +35753,6 @@ extension $IDListEntityResExtension on IDListEntityRes {
         errorCode: (errorCode != null ? errorCode.value : this.errorCode),
         total: (total != null ? total.value : this.total),
         values: (values != null ? values.value : this.values));
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class CustomSetting {
-  const CustomSetting({
-    required this.name,
-    required this.label,
-    required this.settingIds,
-  });
-
-  factory CustomSetting.fromJson(Map<String, dynamic> json) =>
-      _$CustomSettingFromJson(json);
-
-  static const toJsonFactory = _$CustomSettingToJson;
-  Map<String, dynamic> toJson() => _$CustomSettingToJson(this);
-
-  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
-  final String name;
-  @JsonKey(name: 'label', includeIfNull: false, defaultValue: '')
-  final String label;
-  @JsonKey(name: 'settingIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String> settingIds;
-  static const fromJsonFactory = _$CustomSettingFromJson;
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other is CustomSetting &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.label, label) ||
-                const DeepCollectionEquality().equals(other.label, label)) &&
-            (identical(other.settingIds, settingIds) ||
-                const DeepCollectionEquality()
-                    .equals(other.settingIds, settingIds)));
-  }
-
-  @override
-  String toString() => jsonEncode(this);
-
-  @override
-  int get hashCode =>
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(label) ^
-      const DeepCollectionEquality().hash(settingIds) ^
-      runtimeType.hashCode;
-}
-
-extension $CustomSettingExtension on CustomSetting {
-  CustomSetting copyWith(
-      {String? name, String? label, List<String>? settingIds}) {
-    return CustomSetting(
-        name: name ?? this.name,
-        label: label ?? this.label,
-        settingIds: settingIds ?? this.settingIds);
-  }
-
-  CustomSetting copyWithWrapped(
-      {Wrapped<String>? name,
-      Wrapped<String>? label,
-      Wrapped<List<String>>? settingIds}) {
-    return CustomSetting(
-        name: (name != null ? name.value : this.name),
-        label: (label != null ? label.value : this.label),
-        settingIds: (settingIds != null ? settingIds.value : this.settingIds));
   }
 }
 

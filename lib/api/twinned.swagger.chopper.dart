@@ -5063,11 +5063,11 @@ final class _$Twinned extends Twinned {
   }
 
   @override
-  Future<Response<SettingsEntityRes>> _createSettings({
-    required SettingsInfo? body,
+  Future<Response<ScrappingTableEntityRes>> _createScrappingTable({
+    required ScrappingTableInfo? body,
     String? apikey,
   }) {
-    final Uri $url = Uri.parse('/Settings/create');
+    final Uri $url = Uri.parse('/ScrappingTable/create');
     final Map<String, String> $headers = {
       if (apikey != null) 'APIKEY': apikey,
     };
@@ -5079,18 +5079,19 @@ final class _$Twinned extends Twinned {
       body: $body,
       headers: $headers,
     );
-    return client.send<SettingsEntityRes, SettingsEntityRes>($request);
+    return client
+        .send<ScrappingTableEntityRes, ScrappingTableEntityRes>($request);
   }
 
   @override
-  Future<Response<SettingsEntityRes>> _updateSettings({
-    String? settingsId,
-    required SettingsInfo? body,
+  Future<Response<ScrappingTableEntityRes>> _updateScrappingTable({
+    String? scrappingTableId,
+    required ScrappingTableInfo? body,
     String? apikey,
   }) {
-    final Uri $url = Uri.parse('/Settings/update');
+    final Uri $url = Uri.parse('/ScrappingTable/update');
     final Map<String, String> $headers = {
-      if (settingsId != null) 'settingsId': settingsId,
+      if (scrappingTableId != null) 'scrappingTableId': scrappingTableId,
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = body;
@@ -5101,17 +5102,18 @@ final class _$Twinned extends Twinned {
       body: $body,
       headers: $headers,
     );
-    return client.send<SettingsEntityRes, SettingsEntityRes>($request);
+    return client
+        .send<ScrappingTableEntityRes, ScrappingTableEntityRes>($request);
   }
 
   @override
-  Future<Response<SettingsEntityRes>> _deleteSettings({
-    String? settingsId,
+  Future<Response<ScrappingTableEntityRes>> _deleteScrappingTable({
+    String? scrappingTableid,
     String? apikey,
   }) {
-    final Uri $url = Uri.parse('/Settings/remove');
+    final Uri $url = Uri.parse('/ScrappingTable/remove');
     final Map<String, String> $headers = {
-      if (settingsId != null) 'settingsId': settingsId,
+      if (scrappingTableid != null) 'scrappingTableid': scrappingTableid,
       if (apikey != null) 'APIKEY': apikey,
     };
     final Request $request = Request(
@@ -5120,15 +5122,16 @@ final class _$Twinned extends Twinned {
       client.baseUrl,
       headers: $headers,
     );
-    return client.send<SettingsEntityRes, SettingsEntityRes>($request);
+    return client
+        .send<ScrappingTableEntityRes, ScrappingTableEntityRes>($request);
   }
 
   @override
-  Future<Response<SettingsArrayRes>> _listSettings({
+  Future<Response<ScrappingTableArrayRes>> _listScrappingTables({
     required ListReq? body,
     String? apikey,
   }) {
-    final Uri $url = Uri.parse('/Settings/list');
+    final Uri $url = Uri.parse('/ScrappingTable/list');
     final Map<String, String> $headers = {
       if (apikey != null) 'APIKEY': apikey,
     };
@@ -5140,15 +5143,16 @@ final class _$Twinned extends Twinned {
       body: $body,
       headers: $headers,
     );
-    return client.send<SettingsArrayRes, SettingsArrayRes>($request);
+    return client
+        .send<ScrappingTableArrayRes, ScrappingTableArrayRes>($request);
   }
 
   @override
-  Future<Response<SettingsArrayRes>> _searchSettings({
+  Future<Response<ScrappingTableArrayRes>> _searchScrappingTables({
     required SearchReq? body,
     String? apikey,
   }) {
-    final Uri $url = Uri.parse('/Settings/search');
+    final Uri $url = Uri.parse('/ScrappingTable/search');
     final Map<String, String> $headers = {
       if (apikey != null) 'APIKEY': apikey,
     };
@@ -5160,15 +5164,16 @@ final class _$Twinned extends Twinned {
       body: $body,
       headers: $headers,
     );
-    return client.send<SettingsArrayRes, SettingsArrayRes>($request);
+    return client
+        .send<ScrappingTableArrayRes, ScrappingTableArrayRes>($request);
   }
 
   @override
-  Future<Response<SettingsArrayRes>> _getSettings({
+  Future<Response<ScrappingTableArrayRes>> _getScrappingTables({
     required GetReq? body,
     String? apikey,
   }) {
-    final Uri $url = Uri.parse('/Settings/get');
+    final Uri $url = Uri.parse('/ScrappingTable/get');
     final Map<String, String> $headers = {
       if (apikey != null) 'APIKEY': apikey,
     };
@@ -5180,15 +5185,16 @@ final class _$Twinned extends Twinned {
       body: $body,
       headers: $headers,
     );
-    return client.send<SettingsArrayRes, SettingsArrayRes>($request);
+    return client
+        .send<ScrappingTableArrayRes, ScrappingTableArrayRes>($request);
   }
 
   @override
-  Future<Response<SettingsEntityRes>> _getSetting({
-    required String? settingsId,
+  Future<Response<ScrappingTableEntityRes>> _getScrappingTable({
+    required String? scrappingTableId,
     String? apikey,
   }) {
-    final Uri $url = Uri.parse('/Settings/one/${settingsId}');
+    final Uri $url = Uri.parse('/ScrappingTable/one/${scrappingTableId}');
     final Map<String, String> $headers = {
       if (apikey != null) 'APIKEY': apikey,
     };
@@ -5198,7 +5204,8 @@ final class _$Twinned extends Twinned {
       client.baseUrl,
       headers: $headers,
     );
-    return client.send<SettingsEntityRes, SettingsEntityRes>($request);
+    return client
+        .send<ScrappingTableEntityRes, ScrappingTableEntityRes>($request);
   }
 
   @override

@@ -309,6 +309,23 @@ Map<String, dynamic> _$ParameterToJson(Parameter instance) {
   return val;
 }
 
+ScrappingTableConfig _$ScrappingTableConfigFromJson(
+        Map<String, dynamic> json) =>
+    ScrappingTableConfig(
+      lookupName: json['lookupName'] as String? ?? '',
+      scrappingTableIds: (json['scrappingTableIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$ScrappingTableConfigToJson(
+        ScrappingTableConfig instance) =>
+    <String, dynamic>{
+      'lookupName': instance.lookupName,
+      'scrappingTableIds': instance.scrappingTableIds,
+    };
+
 DeviceModelInfo _$DeviceModelInfoFromJson(Map<String, dynamic> json) =>
     DeviceModelInfo(
       name: json['name'] as String? ?? '',
@@ -339,14 +356,15 @@ DeviceModelInfo _$DeviceModelInfoFromJson(Map<String, dynamic> json) =>
       preprocessorId: json['preprocessorId'] as String? ?? '',
       hasGeoLocation: json['hasGeoLocation'] as bool?,
       movable: json['movable'] as bool?,
-      customSettings: (json['customSettings'] as List<dynamic>?)
-              ?.map((e) => CustomSetting.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
       customWidget: json['customWidget'] == null
           ? null
           : CustomWidget.fromJson(json['customWidget'] as Map<String, dynamic>),
       makePublic: json['makePublic'] as bool? ?? false,
+      scrappingTableConfigs: (json['scrappingTableConfigs'] as List<dynamic>?)
+              ?.map((e) =>
+                  ScrappingTableConfig.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$DeviceModelInfoToJson(DeviceModelInfo instance) {
@@ -376,10 +394,10 @@ Map<String, dynamic> _$DeviceModelInfoToJson(DeviceModelInfo instance) {
   writeNotNull('preprocessorId', instance.preprocessorId);
   writeNotNull('hasGeoLocation', instance.hasGeoLocation);
   writeNotNull('movable', instance.movable);
-  writeNotNull('customSettings',
-      instance.customSettings?.map((e) => e.toJson()).toList());
   writeNotNull('customWidget', instance.customWidget?.toJson());
   writeNotNull('makePublic', instance.makePublic);
+  writeNotNull('scrappingTableConfigs',
+      instance.scrappingTableConfigs?.map((e) => e.toJson()).toList());
   return val;
 }
 
@@ -412,14 +430,15 @@ DeviceModel _$DeviceModelFromJson(Map<String, dynamic> json) => DeviceModel(
       preprocessorId: json['preprocessorId'] as String? ?? '',
       hasGeoLocation: json['hasGeoLocation'] as bool?,
       movable: json['movable'] as bool?,
-      customSettings: (json['customSettings'] as List<dynamic>?)
-              ?.map((e) => CustomSetting.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
       customWidget: json['customWidget'] == null
           ? null
           : CustomWidget.fromJson(json['customWidget'] as Map<String, dynamic>),
       makePublic: json['makePublic'] as bool? ?? false,
+      scrappingTableConfigs: (json['scrappingTableConfigs'] as List<dynamic>?)
+              ?.map((e) =>
+                  ScrappingTableConfig.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -456,10 +475,10 @@ Map<String, dynamic> _$DeviceModelToJson(DeviceModel instance) {
   writeNotNull('preprocessorId', instance.preprocessorId);
   writeNotNull('hasGeoLocation', instance.hasGeoLocation);
   writeNotNull('movable', instance.movable);
-  writeNotNull('customSettings',
-      instance.customSettings?.map((e) => e.toJson()).toList());
   writeNotNull('customWidget', instance.customWidget?.toJson());
   writeNotNull('makePublic', instance.makePublic);
+  writeNotNull('scrappingTableConfigs',
+      instance.scrappingTableConfigs?.map((e) => e.toJson()).toList());
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -7668,33 +7687,8 @@ Map<String, dynamic> _$AttributeToJson(Attribute instance) {
   return val;
 }
 
-Lookup _$LookupFromJson(Map<String, dynamic> json) => Lookup(
-      name: json['name'] as String? ?? '',
-      settingsName: json['settingsName'] as String? ?? '',
-      attributes: (json['attributes'] as List<dynamic>?)
-              ?.map((e) => Attribute.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
-    );
-
-Map<String, dynamic> _$LookupToJson(Lookup instance) => <String, dynamic>{
-      'name': instance.name,
-      'settingsName': instance.settingsName,
-      'attributes': instance.attributes.map((e) => e.toJson()).toList(),
-    };
-
-ModelLookup _$ModelLookupFromJson(Map<String, dynamic> json) => ModelLookup(
-      deviceModelId: json['deviceModelId'] as String? ?? '',
-      lookup: Lookup.fromJson(json['lookup'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$ModelLookupToJson(ModelLookup instance) =>
-    <String, dynamic>{
-      'deviceModelId': instance.deviceModelId,
-      'lookup': instance.lookup.toJson(),
-    };
-
-SettingsInfo _$SettingsInfoFromJson(Map<String, dynamic> json) => SettingsInfo(
+ScrappingTableInfo _$ScrappingTableInfoFromJson(Map<String, dynamic> json) =>
+    ScrappingTableInfo(
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
       tags:
@@ -7706,7 +7700,7 @@ SettingsInfo _$SettingsInfoFromJson(Map<String, dynamic> json) => SettingsInfo(
           [],
     );
 
-Map<String, dynamic> _$SettingsInfoToJson(SettingsInfo instance) {
+Map<String, dynamic> _$ScrappingTableInfoToJson(ScrappingTableInfo instance) {
   final val = <String, dynamic>{
     'name': instance.name,
   };
@@ -7723,7 +7717,8 @@ Map<String, dynamic> _$SettingsInfoToJson(SettingsInfo instance) {
   return val;
 }
 
-Settings _$SettingsFromJson(Map<String, dynamic> json) => Settings(
+ScrappingTable _$ScrappingTableFromJson(Map<String, dynamic> json) =>
+    ScrappingTable(
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
       tags:
@@ -7742,7 +7737,7 @@ Settings _$SettingsFromJson(Map<String, dynamic> json) => Settings(
       updatedStamp: json['updatedStamp'] as int,
     );
 
-Map<String, dynamic> _$SettingsToJson(Settings instance) {
+Map<String, dynamic> _$ScrappingTableToJson(ScrappingTable instance) {
   final val = <String, dynamic>{
     'name': instance.name,
   };
@@ -7766,14 +7761,16 @@ Map<String, dynamic> _$SettingsToJson(Settings instance) {
   return val;
 }
 
-SettingsEntity _$SettingsEntityFromJson(Map<String, dynamic> json) =>
-    SettingsEntity(
+ScrappingTableEntity _$ScrappingTableEntityFromJson(
+        Map<String, dynamic> json) =>
+    ScrappingTableEntity(
       entity: json['entity'] == null
           ? null
-          : Settings.fromJson(json['entity'] as Map<String, dynamic>),
+          : ScrappingTable.fromJson(json['entity'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$SettingsEntityToJson(SettingsEntity instance) {
+Map<String, dynamic> _$ScrappingTableEntityToJson(
+    ScrappingTableEntity instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -7786,18 +7783,20 @@ Map<String, dynamic> _$SettingsEntityToJson(SettingsEntity instance) {
   return val;
 }
 
-SettingsEntityRes _$SettingsEntityResFromJson(Map<String, dynamic> json) =>
-    SettingsEntityRes(
+ScrappingTableEntityRes _$ScrappingTableEntityResFromJson(
+        Map<String, dynamic> json) =>
+    ScrappingTableEntityRes(
       ok: json['ok'] as bool,
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
       entity: json['entity'] == null
           ? null
-          : Settings.fromJson(json['entity'] as Map<String, dynamic>),
+          : ScrappingTable.fromJson(json['entity'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$SettingsEntityResToJson(SettingsEntityRes instance) {
+Map<String, dynamic> _$ScrappingTableEntityResToJson(
+    ScrappingTableEntityRes instance) {
   final val = <String, dynamic>{
     'ok': instance.ok,
   };
@@ -7815,15 +7814,15 @@ Map<String, dynamic> _$SettingsEntityResToJson(SettingsEntityRes instance) {
   return val;
 }
 
-SettingsArray _$SettingsArrayFromJson(Map<String, dynamic> json) =>
-    SettingsArray(
+ScrappingTableArray _$ScrappingTableArrayFromJson(Map<String, dynamic> json) =>
+    ScrappingTableArray(
       values: (json['values'] as List<dynamic>?)
-              ?.map((e) => Settings.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => ScrappingTable.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
     );
 
-Map<String, dynamic> _$SettingsArrayToJson(SettingsArray instance) {
+Map<String, dynamic> _$ScrappingTableArrayToJson(ScrappingTableArray instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -7836,8 +7835,9 @@ Map<String, dynamic> _$SettingsArrayToJson(SettingsArray instance) {
   return val;
 }
 
-SettingsArrayRes _$SettingsArrayResFromJson(Map<String, dynamic> json) =>
-    SettingsArrayRes(
+ScrappingTableArrayRes _$ScrappingTableArrayResFromJson(
+        Map<String, dynamic> json) =>
+    ScrappingTableArrayRes(
       ok: json['ok'] as bool,
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
@@ -7846,12 +7846,13 @@ SettingsArrayRes _$SettingsArrayResFromJson(Map<String, dynamic> json) =>
       size: json['size'] as int,
       total: json['total'] as int,
       values: (json['values'] as List<dynamic>?)
-              ?.map((e) => Settings.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => ScrappingTable.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
     );
 
-Map<String, dynamic> _$SettingsArrayResToJson(SettingsArrayRes instance) {
+Map<String, dynamic> _$ScrappingTableArrayResToJson(
+    ScrappingTableArrayRes instance) {
   final val = <String, dynamic>{
     'ok': instance.ok,
   };
@@ -8561,6 +8562,52 @@ Map<String, dynamic> _$ReportArrayResToJson(ReportArrayRes instance) {
   return val;
 }
 
+AssetScrappingTable _$AssetScrappingTableFromJson(Map<String, dynamic> json) =>
+    AssetScrappingTable(
+      lookupName: json['lookupName'] as String? ?? '',
+      scrappingTableId: json['scrappingTableId'] as String? ?? '',
+      scrappingTableName: json['scrappingTableName'] as String? ?? '',
+      attributes: (json['attributes'] as List<dynamic>?)
+              ?.map((e) => Attribute.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$AssetScrappingTableToJson(
+        AssetScrappingTable instance) =>
+    <String, dynamic>{
+      'lookupName': instance.lookupName,
+      'scrappingTableId': instance.scrappingTableId,
+      'scrappingTableName': instance.scrappingTableName,
+      'attributes': instance.attributes.map((e) => e.toJson()).toList(),
+    };
+
+AssetDeviceModel _$AssetDeviceModelFromJson(Map<String, dynamic> json) =>
+    AssetDeviceModel(
+      deviceModelId: json['deviceModelId'] as String? ?? '',
+      scrappingTables: (json['scrappingTables'] as List<dynamic>?)
+              ?.map((e) =>
+                  AssetScrappingTable.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$AssetDeviceModelToJson(AssetDeviceModel instance) {
+  final val = <String, dynamic>{
+    'deviceModelId': instance.deviceModelId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('scrappingTables',
+      instance.scrappingTables?.map((e) => e.toJson()).toList());
+  return val;
+}
+
 AssetModelInfo _$AssetModelInfoFromJson(Map<String, dynamic> json) =>
     AssetModelInfo(
       name: json['name'] as String? ?? '',
@@ -8580,17 +8627,9 @@ AssetModelInfo _$AssetModelInfoFromJson(Map<String, dynamic> json) =>
               .toList() ??
           [],
       metadata: json['metadata'],
-      hasGeoLocation: json['hasGeoLocation'] as bool?,
       movable: json['movable'] as bool?,
-      geolocation: json['geolocation'] == null
-          ? null
-          : GeoLocation.fromJson(json['geolocation'] as Map<String, dynamic>),
-      deviceModelsIds: (json['deviceModelsIds'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
-      modelLookups: (json['modelLookups'] as List<dynamic>?)
-              ?.map((e) => ModelLookup.fromJson(e as Map<String, dynamic>))
+      allowedDeviceModels: (json['allowedDeviceModels'] as List<dynamic>?)
+              ?.map((e) => AssetDeviceModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
     );
@@ -8614,12 +8653,9 @@ Map<String, dynamic> _$AssetModelInfoToJson(AssetModelInfo instance) {
   writeNotNull('images', instance.images);
   writeNotNull('banners', instance.banners);
   writeNotNull('metadata', instance.metadata);
-  writeNotNull('hasGeoLocation', instance.hasGeoLocation);
   writeNotNull('movable', instance.movable);
-  writeNotNull('geolocation', instance.geolocation?.toJson());
-  writeNotNull('deviceModelsIds', instance.deviceModelsIds);
-  writeNotNull(
-      'modelLookups', instance.modelLookups?.map((e) => e.toJson()).toList());
+  writeNotNull('allowedDeviceModels',
+      instance.allowedDeviceModels?.map((e) => e.toJson()).toList());
   return val;
 }
 
@@ -8641,17 +8677,9 @@ AssetModel _$AssetModelFromJson(Map<String, dynamic> json) => AssetModel(
               .toList() ??
           [],
       metadata: json['metadata'],
-      hasGeoLocation: json['hasGeoLocation'] as bool?,
       movable: json['movable'] as bool?,
-      geolocation: json['geolocation'] == null
-          ? null
-          : GeoLocation.fromJson(json['geolocation'] as Map<String, dynamic>),
-      deviceModelsIds: (json['deviceModelsIds'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
-      modelLookups: (json['modelLookups'] as List<dynamic>?)
-              ?.map((e) => ModelLookup.fromJson(e as Map<String, dynamic>))
+      allowedDeviceModels: (json['allowedDeviceModels'] as List<dynamic>?)
+              ?.map((e) => AssetDeviceModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
       domainKey: json['domainKey'] as String? ?? '',
@@ -8682,12 +8710,9 @@ Map<String, dynamic> _$AssetModelToJson(AssetModel instance) {
   writeNotNull('images', instance.images);
   writeNotNull('banners', instance.banners);
   writeNotNull('metadata', instance.metadata);
-  writeNotNull('hasGeoLocation', instance.hasGeoLocation);
   writeNotNull('movable', instance.movable);
-  writeNotNull('geolocation', instance.geolocation?.toJson());
-  writeNotNull('deviceModelsIds', instance.deviceModelsIds);
-  writeNotNull(
-      'modelLookups', instance.modelLookups?.map((e) => e.toJson()).toList());
+  writeNotNull('allowedDeviceModels',
+      instance.allowedDeviceModels?.map((e) => e.toJson()).toList());
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -8848,23 +8873,6 @@ Map<String, dynamic> _$IDListEntityResToJson(IDListEntityRes instance) {
   val['values'] = instance.values;
   return val;
 }
-
-CustomSetting _$CustomSettingFromJson(Map<String, dynamic> json) =>
-    CustomSetting(
-      name: json['name'] as String? ?? '',
-      label: json['label'] as String? ?? '',
-      settingIds: (json['settingIds'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
-    );
-
-Map<String, dynamic> _$CustomSettingToJson(CustomSetting instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'label': instance.label,
-      'settingIds': instance.settingIds,
-    };
 
 FieldFilterInfo _$FieldFilterInfoFromJson(Map<String, dynamic> json) =>
     FieldFilterInfo(
