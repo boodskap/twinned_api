@@ -7835,6 +7835,7 @@ extension $ParameterExtension on Parameter {
 class ScrappingTableConfig {
   const ScrappingTableConfig({
     required this.lookupName,
+    required this.scrappingTableName,
     required this.scrappingTableIds,
   });
 
@@ -7846,6 +7847,8 @@ class ScrappingTableConfig {
 
   @JsonKey(name: 'lookupName', includeIfNull: false, defaultValue: '')
   final String lookupName;
+  @JsonKey(name: 'scrappingTableName', includeIfNull: false, defaultValue: '')
+  final String scrappingTableName;
   @JsonKey(
       name: 'scrappingTableIds', includeIfNull: false, defaultValue: <String>[])
   final List<String> scrappingTableIds;
@@ -7858,6 +7861,9 @@ class ScrappingTableConfig {
             (identical(other.lookupName, lookupName) ||
                 const DeepCollectionEquality()
                     .equals(other.lookupName, lookupName)) &&
+            (identical(other.scrappingTableName, scrappingTableName) ||
+                const DeepCollectionEquality()
+                    .equals(other.scrappingTableName, scrappingTableName)) &&
             (identical(other.scrappingTableIds, scrappingTableIds) ||
                 const DeepCollectionEquality()
                     .equals(other.scrappingTableIds, scrappingTableIds)));
@@ -7869,22 +7875,31 @@ class ScrappingTableConfig {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(lookupName) ^
+      const DeepCollectionEquality().hash(scrappingTableName) ^
       const DeepCollectionEquality().hash(scrappingTableIds) ^
       runtimeType.hashCode;
 }
 
 extension $ScrappingTableConfigExtension on ScrappingTableConfig {
   ScrappingTableConfig copyWith(
-      {String? lookupName, List<String>? scrappingTableIds}) {
+      {String? lookupName,
+      String? scrappingTableName,
+      List<String>? scrappingTableIds}) {
     return ScrappingTableConfig(
         lookupName: lookupName ?? this.lookupName,
+        scrappingTableName: scrappingTableName ?? this.scrappingTableName,
         scrappingTableIds: scrappingTableIds ?? this.scrappingTableIds);
   }
 
   ScrappingTableConfig copyWithWrapped(
-      {Wrapped<String>? lookupName, Wrapped<List<String>>? scrappingTableIds}) {
+      {Wrapped<String>? lookupName,
+      Wrapped<String>? scrappingTableName,
+      Wrapped<List<String>>? scrappingTableIds}) {
     return ScrappingTableConfig(
         lookupName: (lookupName != null ? lookupName.value : this.lookupName),
+        scrappingTableName: (scrappingTableName != null
+            ? scrappingTableName.value
+            : this.scrappingTableName),
         scrappingTableIds: (scrappingTableIds != null
             ? scrappingTableIds.value
             : this.scrappingTableIds));

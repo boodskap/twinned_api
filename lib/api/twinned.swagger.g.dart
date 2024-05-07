@@ -313,6 +313,7 @@ ScrappingTableConfig _$ScrappingTableConfigFromJson(
         Map<String, dynamic> json) =>
     ScrappingTableConfig(
       lookupName: json['lookupName'] as String? ?? '',
+      scrappingTableName: json['scrappingTableName'] as String? ?? '',
       scrappingTableIds: (json['scrappingTableIds'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -323,6 +324,7 @@ Map<String, dynamic> _$ScrappingTableConfigToJson(
         ScrappingTableConfig instance) =>
     <String, dynamic>{
       'lookupName': instance.lookupName,
+      'scrappingTableName': instance.scrappingTableName,
       'scrappingTableIds': instance.scrappingTableIds,
     };
 

@@ -13458,10 +13458,14 @@
       "type": "object",
       "required": [
         "lookupName",
+        "scrappingTableName",
         "scrappingTableIds"
       ],
       "properties": {
         "lookupName": {
+          "type": "string"
+        },
+        "scrappingTableName": {
           "type": "string"
         },
         "scrappingTableIds": {
