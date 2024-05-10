@@ -19875,9 +19875,10 @@
     "EqlSearch": {
       "type": "object",
       "required": [
-        "mustConditions",
+        "conditions",
+        "queryConditions",
         "boolConditions",
-        "queryConditions"
+        "mustConditions"
       ],
       "properties": {
         "source": {
@@ -19886,13 +19887,7 @@
             "type": "string"
           }
         },
-        "mustConditions": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "boolConditions": {
+        "conditions": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/EqlCondition"
@@ -19902,6 +19897,18 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/EqlCondition"
+          }
+        },
+        "boolConditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EqlCondition"
+          }
+        },
+        "mustConditions": {
+          "type": "array",
+          "items": {
+            "type": "object"
           }
         },
         "sort": {

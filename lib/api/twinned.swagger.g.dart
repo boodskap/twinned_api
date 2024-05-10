@@ -9398,16 +9398,20 @@ EqlSearch _$EqlSearchFromJson(Map<String, dynamic> json) => EqlSearch(
               ?.map((e) => e as String)
               .toList() ??
           [],
-      mustConditions: (json['mustConditions'] as List<dynamic>?)
-              ?.map((e) => e as Object)
+      conditions: (json['conditions'] as List<dynamic>?)
+              ?.map((e) => EqlCondition.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      queryConditions: (json['queryConditions'] as List<dynamic>?)
+              ?.map((e) => EqlCondition.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
       boolConditions: (json['boolConditions'] as List<dynamic>?)
               ?.map((e) => EqlCondition.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      queryConditions: (json['queryConditions'] as List<dynamic>?)
-              ?.map((e) => EqlCondition.fromJson(e as Map<String, dynamic>))
+      mustConditions: (json['mustConditions'] as List<dynamic>?)
+              ?.map((e) => e as Object)
               .toList() ??
           [],
       sort: json['sort'],
@@ -9425,11 +9429,12 @@ Map<String, dynamic> _$EqlSearchToJson(EqlSearch instance) {
   }
 
   writeNotNull('source', instance.source);
-  val['mustConditions'] = instance.mustConditions;
-  val['boolConditions'] =
-      instance.boolConditions.map((e) => e.toJson()).toList();
+  val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
   val['queryConditions'] =
       instance.queryConditions.map((e) => e.toJson()).toList();
+  val['boolConditions'] =
+      instance.boolConditions.map((e) => e.toJson()).toList();
+  val['mustConditions'] = instance.mustConditions;
   writeNotNull('sort', instance.sort);
   writeNotNull('page', instance.page);
   writeNotNull('size', instance.size);
