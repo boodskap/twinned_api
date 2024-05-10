@@ -234,7 +234,7 @@ final class _$Twinned extends Twinned {
     required FilterSearchReq? body,
     String? apikey,
   }) {
-    final Uri $url = Uri.parse('/DeviceData/history');
+    final Uri $url = Uri.parse('/DeviceData/history/search');
     final Map<String, String> $headers = {
       if (deviceId != null) 'deviceId': deviceId,
       if (apikey != null) 'APIKEY': apikey,
@@ -533,6 +533,46 @@ final class _$Twinned extends Twinned {
       'GET',
       $url,
       client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<DeviceDataArrayRes, DeviceDataArrayRes>($request);
+  }
+
+  @override
+  Future<Response<DeviceDataArrayRes>> _queryDeviceData({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/DeviceData/query');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<DeviceDataArrayRes, DeviceDataArrayRes>($request);
+  }
+
+  @override
+  Future<Response<DeviceDataArrayRes>> _queryDeviceHistoryData({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/DeviceData/history/query');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
       headers: $headers,
     );
     return client.send<DeviceDataArrayRes, DeviceDataArrayRes>($request);
@@ -5750,5 +5790,164 @@ final class _$Twinned extends Twinned {
       headers: $headers,
     );
     return client.send<FieldFilterArrayRes, FieldFilterArrayRes>($request);
+  }
+
+  @override
+  Future<Response<ClientEntityRes>> _createClient({
+    required ClientInfo? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Client/create');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<ClientEntityRes, ClientEntityRes>($request);
+  }
+
+  @override
+  Future<Response<ClientEntityRes>> _updateClient({
+    String? clientId,
+    required ClientInfo? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Client/update');
+    final Map<String, String> $headers = {
+      if (clientId != null) 'clientId': clientId,
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<ClientEntityRes, ClientEntityRes>($request);
+  }
+
+  @override
+  Future<Response<ClientEntityRes>> _deleteClient({
+    String? clientId,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Client/remove');
+    final Map<String, String> $headers = {
+      if (clientId != null) 'clientId': clientId,
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'DELETE',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<ClientEntityRes, ClientEntityRes>($request);
+  }
+
+  @override
+  Future<Response<ClientArrayRes>> _listClients({
+    required ListReq? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Client/list');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<ClientArrayRes, ClientArrayRes>($request);
+  }
+
+  @override
+  Future<Response<ClientArrayRes>> _searchClients({
+    required SearchReq? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Client/search');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<ClientArrayRes, ClientArrayRes>($request);
+  }
+
+  @override
+  Future<Response<ClientArrayRes>> _getClients({
+    required GetReq? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Client/get');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<ClientArrayRes, ClientArrayRes>($request);
+  }
+
+  @override
+  Future<Response<ClientEntityRes>> _getClient({
+    required String? clientId,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Client/one/${clientId}');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<ClientEntityRes, ClientEntityRes>($request);
+  }
+
+  @override
+  Future<Response<ClientArrayRes>> _searchEqlClient({
+    required Object? eql,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Client/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = eql;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<ClientArrayRes, ClientArrayRes>($request);
   }
 }

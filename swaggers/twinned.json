@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "1.8.0",
+    "version": "1.8.1",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -15,7 +15,7 @@
       "name": "MIT"
     }
   },
-  "host": "twinned.boodskap.io",
+  "host": "twinned.digital",
   "basePath": "/rest/nocode",
   "schemes": [
     "https"
@@ -519,7 +519,7 @@
         ]
       }
     },
-    "/DeviceData/history": {
+    "/DeviceData/history/search": {
       "post": {
         "tags": [
           "Device Data"
@@ -1297,6 +1297,90 @@
             "apiKey": []
           }
         ]
+      }
+    },
+    "/DeviceData/query": {
+      "post": {
+        "tags": [
+          "Device Data"
+        ],
+        "description": "query device data",
+        "operationId": "queryDeviceData",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceDataArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "Cleanup entire data"
+      }
+    },
+    "/DeviceData/history/query": {
+      "post": {
+        "tags": [
+          "Device Data"
+        ],
+        "description": "query device history data",
+        "operationId": "queryDeviceHistoryData",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceDataArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "Cleanup entire data"
       }
     },
     "/DeviceView/create": {
@@ -13115,6 +13199,360 @@
           }
         ]
       }
+    },
+    "/Client/create": {
+      "post": {
+        "tags": [
+          "Client"
+        ],
+        "summary": "Create client",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "createClient",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClientInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ClientEntityRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/Client/update": {
+      "post": {
+        "tags": [
+          "Client"
+        ],
+        "summary": "Update client",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "updateClient",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "clientId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClientInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ClientEntityRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/Client/remove": {
+      "delete": {
+        "tags": [
+          "Client"
+        ],
+        "summary": "Delete client",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "deleteClient",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "clientId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ClientEntityRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/Client/list": {
+      "post": {
+        "tags": [
+          "Client"
+        ],
+        "summary": "List clients",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "listClients",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ClientArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/Client/search": {
+      "post": {
+        "tags": [
+          "Client"
+        ],
+        "summary": "Search clients",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "searchClients",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ClientArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/Client/get": {
+      "post": {
+        "tags": [
+          "Client"
+        ],
+        "summary": "Get clients",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getClients",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ClientArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/Client/one/{clientId}": {
+      "get": {
+        "tags": [
+          "Client"
+        ],
+        "summary": "get client by id",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getClient",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "clientId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ClientEntityRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/Client/eql": {
+      "post": {
+        "tags": [
+          "Client"
+        ],
+        "summary": "Search using SQL",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "searchEqlClient",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "eql",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ClientArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
     }
   },
   "securityDefinitions": {
@@ -15710,6 +16148,12 @@
           "items": {
             "type": "string"
           }
+        },
+        "client": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
         }
       }
     },
@@ -17557,6 +18001,10 @@
         },
         "logoText": {
           "type": "string"
+        },
+        "enforceClient": {
+          "type": "boolean",
+          "default": false
         }
       }
     },
@@ -17682,6 +18130,12 @@
             "BELOWGROUND"
           ],
           "default": "ONGROUND"
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -17806,6 +18260,12 @@
         },
         "assetModelId": {
           "type": "string"
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -17909,6 +18369,12 @@
         },
         "location": {
           "$ref": "#/definitions/GeoLocation"
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -18019,6 +18485,12 @@
         "userState": {
           "type": "integer",
           "description": "0-> disabled, 1-> active, 2-> must change pswd"
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -18215,6 +18687,12 @@
           "$ref": "#/definitions/GeoLocation"
         },
         "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "clientIds": {
           "type": "array",
           "items": {
             "type": "string"
@@ -19198,6 +19676,145 @@
           "type": "object"
         }
       ]
+    },
+    "ClientInfo": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "icon": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        }
+      }
+    },
+    "Client": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientInfo"
+        },
+        {
+          "$ref": "#/definitions/BaseEntity"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "ClientEntity": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "$ref": "#/definitions/Client"
+        }
+      }
+    },
+    "ClientEntityRes": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResponse"
+        },
+        {
+          "$ref": "#/definitions/ClientEntity"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "ClientArray": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Client"
+          }
+        }
+      }
+    },
+    "ClientArrayRes": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResponse"
+        },
+        {
+          "$ref": "#/definitions/ListRes"
+        },
+        {
+          "$ref": "#/definitions/ClientArray"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "EqlCondition": {
+      "type": "object",
+      "required": [
+        "name",
+        "condition"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "object"
+        }
+      }
+    },
+    "EqlSearch": {
+      "type": "object",
+      "required": [
+        "mustConditions",
+        "conditions",
+        "size"
+      ],
+      "properties": {
+        "mustConditions": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EqlCondition"
+          }
+        },
+        "sort": {
+          "type": "object"
+        },
+        "from": {
+          "type": "integer"
+        },
+        "size": {
+          "type": "integer"
+        }
+      }
     },
     "ExportData": {
       "type": "object",
