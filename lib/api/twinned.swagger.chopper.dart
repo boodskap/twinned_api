@@ -539,7 +539,7 @@ final class _$Twinned extends Twinned {
   }
 
   @override
-  Future<Response<DeviceDataArrayRes>> _queryDeviceData({
+  Future<Response<QueryRes>> _queryDeviceData({
     required EqlSearch? body,
     String? apikey,
   }) {
@@ -555,11 +555,11 @@ final class _$Twinned extends Twinned {
       body: $body,
       headers: $headers,
     );
-    return client.send<DeviceDataArrayRes, DeviceDataArrayRes>($request);
+    return client.send<QueryRes, QueryRes>($request);
   }
 
   @override
-  Future<Response<DeviceDataArrayRes>> _queryDeviceHistoryData({
+  Future<Response<QueryRes>> _queryDeviceHistoryData({
     required EqlSearch? body,
     String? apikey,
   }) {
@@ -575,7 +575,47 @@ final class _$Twinned extends Twinned {
       body: $body,
       headers: $headers,
     );
-    return client.send<DeviceDataArrayRes, DeviceDataArrayRes>($request);
+    return client.send<QueryRes, QueryRes>($request);
+  }
+
+  @override
+  Future<Response<CountRes>> _queryCountDeviceData({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/DeviceData/count/query');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<CountRes, CountRes>($request);
+  }
+
+  @override
+  Future<Response<CountRes>> _queryCountHistoryDeviceData({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/DeviceData/count/history/query');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<CountRes, CountRes>($request);
   }
 
   @override

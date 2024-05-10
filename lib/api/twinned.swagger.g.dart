@@ -3312,7 +3312,10 @@ DeviceData _$DeviceDataFromJson(Map<String, dynamic> json) => DeviceData(
           (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
       $client: json['client'] as String? ?? '',
-      clientId: json['clientId'] as String? ?? '',
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$DeviceDataToJson(DeviceData instance) {
@@ -3366,7 +3369,7 @@ Map<String, dynamic> _$DeviceDataToJson(DeviceData instance) {
   writeNotNull('assetId', instance.assetId);
   writeNotNull('roles', instance.roles);
   writeNotNull('client', instance.$client);
-  writeNotNull('clientId', instance.clientId);
+  writeNotNull('clientIds', instance.clientIds);
   return val;
 }
 
@@ -9391,23 +9394,76 @@ Map<String, dynamic> _$EqlConditionToJson(EqlCondition instance) =>
     };
 
 EqlSearch _$EqlSearchFromJson(Map<String, dynamic> json) => EqlSearch(
+      source: (json['source'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
       mustConditions: (json['mustConditions'] as List<dynamic>?)
               ?.map((e) => e as Object)
               .toList() ??
           [],
-      conditions: (json['conditions'] as List<dynamic>?)
+      boolConditions: (json['boolConditions'] as List<dynamic>?)
+              ?.map((e) => EqlCondition.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      queryConditions: (json['queryConditions'] as List<dynamic>?)
               ?.map((e) => EqlCondition.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
       sort: json['sort'],
-      from: json['from'] as int?,
-      size: json['size'] as int,
+      page: json['page'] as int?,
+      size: json['size'] as int?,
     );
 
 Map<String, dynamic> _$EqlSearchToJson(EqlSearch instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('source', instance.source);
+  val['mustConditions'] = instance.mustConditions;
+  val['boolConditions'] =
+      instance.boolConditions.map((e) => e.toJson()).toList();
+  val['queryConditions'] =
+      instance.queryConditions.map((e) => e.toJson()).toList();
+  writeNotNull('sort', instance.sort);
+  writeNotNull('page', instance.page);
+  writeNotNull('size', instance.size);
+  return val;
+}
+
+BaseQueryRes _$BaseQueryResFromJson(Map<String, dynamic> json) => BaseQueryRes(
+      result: json['result'],
+    );
+
+Map<String, dynamic> _$BaseQueryResToJson(BaseQueryRes instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('result', instance.result);
+  return val;
+}
+
+QueryRes _$QueryResFromJson(Map<String, dynamic> json) => QueryRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      result: json['result'],
+    );
+
+Map<String, dynamic> _$QueryResToJson(QueryRes instance) {
   final val = <String, dynamic>{
-    'mustConditions': instance.mustConditions,
-    'conditions': instance.conditions.map((e) => e.toJson()).toList(),
+    'ok': instance.ok,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -9416,9 +9472,45 @@ Map<String, dynamic> _$EqlSearchToJson(EqlSearch instance) {
     }
   }
 
-  writeNotNull('sort', instance.sort);
-  writeNotNull('from', instance.from);
-  val['size'] = instance.size;
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('result', instance.result);
+  return val;
+}
+
+BaseCountRes _$BaseCountResFromJson(Map<String, dynamic> json) => BaseCountRes(
+      total: json['total'] as int,
+    );
+
+Map<String, dynamic> _$BaseCountResToJson(BaseCountRes instance) =>
+    <String, dynamic>{
+      'total': instance.total,
+    };
+
+CountRes _$CountResFromJson(Map<String, dynamic> json) => CountRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      total: json['total'] as int,
+    );
+
+Map<String, dynamic> _$CountResToJson(CountRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['total'] = instance.total;
   return val;
 }
 

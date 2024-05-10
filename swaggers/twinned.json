@@ -1323,7 +1323,7 @@
           "200": {
             "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/DeviceDataArrayRes"
+              "$ref": "#/definitions/QueryRes"
             }
           },
           "401": {
@@ -1365,7 +1365,91 @@
           "200": {
             "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/DeviceDataArrayRes"
+              "$ref": "#/definitions/QueryRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "Cleanup entire data"
+      }
+    },
+    "/DeviceData/count/query": {
+      "post": {
+        "tags": [
+          "Device Data"
+        ],
+        "description": "query count device data",
+        "operationId": "queryCountDeviceData",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CountRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "Cleanup entire data"
+      }
+    },
+    "/DeviceData/count/history/query": {
+      "post": {
+        "tags": [
+          "Device Data"
+        ],
+        "description": "query count history device data",
+        "operationId": "queryCountHistoryDeviceData",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CountRes"
             }
           },
           "401": {
@@ -16152,8 +16236,11 @@
         "client": {
           "type": "string"
         },
-        "clientId": {
-          "type": "string"
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -19789,17 +19876,29 @@
       "type": "object",
       "required": [
         "mustConditions",
-        "conditions",
-        "size"
+        "boolConditions",
+        "queryConditions"
       ],
       "properties": {
+        "source": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "mustConditions": {
           "type": "array",
           "items": {
             "type": "object"
           }
         },
-        "conditions": {
+        "boolConditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EqlCondition"
+          }
+        },
+        "queryConditions": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/EqlCondition"
@@ -19808,13 +19907,61 @@
         "sort": {
           "type": "object"
         },
-        "from": {
-          "type": "integer"
+        "page": {
+          "type": "integer",
+          "default": 0
         },
         "size": {
-          "type": "integer"
+          "type": "integer",
+          "default": 100
         }
       }
+    },
+    "BaseQueryRes": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "object"
+        }
+      }
+    },
+    "QueryRes": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResponse"
+        },
+        {
+          "$ref": "#/definitions/BaseQueryRes"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "BaseCountRes": {
+      "type": "object",
+      "required": [
+        "total"
+      ],
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "CountRes": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResponse"
+        },
+        {
+          "$ref": "#/definitions/BaseCountRes"
+        },
+        {
+          "type": "object"
+        }
+      ]
     },
     "ExportData": {
       "type": "object",

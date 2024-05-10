@@ -725,13 +725,12 @@ abstract class Twinned extends ChopperService {
 
   ///Cleanup entire data
   ///@param body
-  Future<chopper.Response<DeviceDataArrayRes>> queryDeviceData({
+  Future<chopper.Response<QueryRes>> queryDeviceData({
     required EqlSearch? body,
     dynamic apikey,
   }) {
     generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
-    generatedMapping.putIfAbsent(
-        DeviceDataArrayRes, () => DeviceDataArrayRes.fromJsonFactory);
+    generatedMapping.putIfAbsent(QueryRes, () => QueryRes.fromJsonFactory);
 
     return _queryDeviceData(body: body, apikey: apikey?.toString());
   }
@@ -739,20 +738,19 @@ abstract class Twinned extends ChopperService {
   ///Cleanup entire data
   ///@param body
   @Post(path: '/DeviceData/query')
-  Future<chopper.Response<DeviceDataArrayRes>> _queryDeviceData({
+  Future<chopper.Response<QueryRes>> _queryDeviceData({
     @Body() required EqlSearch? body,
     @Header('APIKEY') String? apikey,
   });
 
   ///Cleanup entire data
   ///@param body
-  Future<chopper.Response<DeviceDataArrayRes>> queryDeviceHistoryData({
+  Future<chopper.Response<QueryRes>> queryDeviceHistoryData({
     required EqlSearch? body,
     dynamic apikey,
   }) {
     generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
-    generatedMapping.putIfAbsent(
-        DeviceDataArrayRes, () => DeviceDataArrayRes.fromJsonFactory);
+    generatedMapping.putIfAbsent(QueryRes, () => QueryRes.fromJsonFactory);
 
     return _queryDeviceHistoryData(body: body, apikey: apikey?.toString());
   }
@@ -760,7 +758,47 @@ abstract class Twinned extends ChopperService {
   ///Cleanup entire data
   ///@param body
   @Post(path: '/DeviceData/history/query')
-  Future<chopper.Response<DeviceDataArrayRes>> _queryDeviceHistoryData({
+  Future<chopper.Response<QueryRes>> _queryDeviceHistoryData({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///Cleanup entire data
+  ///@param body
+  Future<chopper.Response<CountRes>> queryCountDeviceData({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(CountRes, () => CountRes.fromJsonFactory);
+
+    return _queryCountDeviceData(body: body, apikey: apikey?.toString());
+  }
+
+  ///Cleanup entire data
+  ///@param body
+  @Post(path: '/DeviceData/count/query')
+  Future<chopper.Response<CountRes>> _queryCountDeviceData({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///Cleanup entire data
+  ///@param body
+  Future<chopper.Response<CountRes>> queryCountHistoryDeviceData({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(CountRes, () => CountRes.fromJsonFactory);
+
+    return _queryCountHistoryDeviceData(body: body, apikey: apikey?.toString());
+  }
+
+  ///Cleanup entire data
+  ///@param body
+  @Post(path: '/DeviceData/count/history/query')
+  Future<chopper.Response<CountRes>> _queryCountHistoryDeviceData({
     @Body() required EqlSearch? body,
     @Header('APIKEY') String? apikey,
   });
@@ -18047,7 +18085,7 @@ class DeviceData {
     this.assetId,
     this.roles,
     this.$client,
-    this.clientId,
+    this.clientIds,
   });
 
   factory DeviceData.fromJson(Map<String, dynamic> json) =>
@@ -18148,8 +18186,8 @@ class DeviceData {
   final List<String>? roles;
   @JsonKey(name: 'client', includeIfNull: false, defaultValue: '')
   final String? $client;
-  @JsonKey(name: 'clientId', includeIfNull: false, defaultValue: '')
-  final String? clientId;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   static const fromJsonFactory = _$DeviceDataFromJson;
 
   @override
@@ -18240,7 +18278,7 @@ class DeviceData {
             (identical(other.assetId, assetId) || const DeepCollectionEquality().equals(other.assetId, assetId)) &&
             (identical(other.roles, roles) || const DeepCollectionEquality().equals(other.roles, roles)) &&
             (identical(other.$client, $client) || const DeepCollectionEquality().equals(other.$client, $client)) &&
-            (identical(other.clientId, clientId) || const DeepCollectionEquality().equals(other.clientId, clientId)));
+            (identical(other.clientIds, clientIds) || const DeepCollectionEquality().equals(other.clientIds, clientIds)));
   }
 
   @override
@@ -18289,7 +18327,7 @@ class DeviceData {
       const DeepCollectionEquality().hash(assetId) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash($client) ^
-      const DeepCollectionEquality().hash(clientId) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       runtimeType.hashCode;
 }
 
@@ -18336,7 +18374,7 @@ extension $DeviceDataExtension on DeviceData {
       String? assetId,
       List<String>? roles,
       String? $client,
-      String? clientId}) {
+      List<String>? clientIds}) {
     return DeviceData(
         domainKey: domainKey ?? this.domainKey,
         deviceId: deviceId ?? this.deviceId,
@@ -18379,7 +18417,7 @@ extension $DeviceDataExtension on DeviceData {
         assetId: assetId ?? this.assetId,
         roles: roles ?? this.roles,
         $client: $client ?? this.$client,
-        clientId: clientId ?? this.clientId);
+        clientIds: clientIds ?? this.clientIds);
   }
 
   DeviceData copyWithWrapped(
@@ -18424,7 +18462,7 @@ extension $DeviceDataExtension on DeviceData {
       Wrapped<String?>? assetId,
       Wrapped<List<String>?>? roles,
       Wrapped<String?>? $client,
-      Wrapped<String?>? clientId}) {
+      Wrapped<List<String>?>? clientIds}) {
     return DeviceData(
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         deviceId: (deviceId != null ? deviceId.value : this.deviceId),
@@ -18481,7 +18519,7 @@ extension $DeviceDataExtension on DeviceData {
         assetId: (assetId != null ? assetId.value : this.assetId),
         roles: (roles != null ? roles.value : this.roles),
         $client: ($client != null ? $client.value : this.$client),
-        clientId: (clientId != null ? clientId.value : this.clientId));
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
   }
 }
 
@@ -37618,11 +37656,13 @@ extension $EqlConditionExtension on EqlCondition {
 @JsonSerializable(explicitToJson: true)
 class EqlSearch {
   const EqlSearch({
+    this.source,
     required this.mustConditions,
-    required this.conditions,
+    required this.boolConditions,
+    required this.queryConditions,
     this.sort,
-    this.from,
-    required this.size,
+    this.page,
+    this.size,
   });
 
   factory EqlSearch.fromJson(Map<String, dynamic> json) =>
@@ -37631,34 +37671,48 @@ class EqlSearch {
   static const toJsonFactory = _$EqlSearchToJson;
   Map<String, dynamic> toJson() => _$EqlSearchToJson(this);
 
+  @JsonKey(name: 'source', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? source;
   @JsonKey(
       name: 'mustConditions', includeIfNull: false, defaultValue: <Object>[])
   final List<Object> mustConditions;
   @JsonKey(
-      name: 'conditions', includeIfNull: false, defaultValue: <EqlCondition>[])
-  final List<EqlCondition> conditions;
+      name: 'boolConditions',
+      includeIfNull: false,
+      defaultValue: <EqlCondition>[])
+  final List<EqlCondition> boolConditions;
+  @JsonKey(
+      name: 'queryConditions',
+      includeIfNull: false,
+      defaultValue: <EqlCondition>[])
+  final List<EqlCondition> queryConditions;
   @JsonKey(name: 'sort', includeIfNull: false)
   final Object? sort;
-  @JsonKey(name: 'from', includeIfNull: false)
-  final int? from;
+  @JsonKey(name: 'page', includeIfNull: false)
+  final int? page;
   @JsonKey(name: 'size', includeIfNull: false)
-  final int size;
+  final int? size;
   static const fromJsonFactory = _$EqlSearchFromJson;
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other is EqlSearch &&
+            (identical(other.source, source) ||
+                const DeepCollectionEquality().equals(other.source, source)) &&
             (identical(other.mustConditions, mustConditions) ||
                 const DeepCollectionEquality()
                     .equals(other.mustConditions, mustConditions)) &&
-            (identical(other.conditions, conditions) ||
+            (identical(other.boolConditions, boolConditions) ||
                 const DeepCollectionEquality()
-                    .equals(other.conditions, conditions)) &&
+                    .equals(other.boolConditions, boolConditions)) &&
+            (identical(other.queryConditions, queryConditions) ||
+                const DeepCollectionEquality()
+                    .equals(other.queryConditions, queryConditions)) &&
             (identical(other.sort, sort) ||
                 const DeepCollectionEquality().equals(other.sort, sort)) &&
-            (identical(other.from, from) ||
-                const DeepCollectionEquality().equals(other.from, from)) &&
+            (identical(other.page, page) ||
+                const DeepCollectionEquality().equals(other.page, page)) &&
             (identical(other.size, size) ||
                 const DeepCollectionEquality().equals(other.size, size)));
   }
@@ -37668,43 +37722,313 @@ class EqlSearch {
 
   @override
   int get hashCode =>
+      const DeepCollectionEquality().hash(source) ^
       const DeepCollectionEquality().hash(mustConditions) ^
-      const DeepCollectionEquality().hash(conditions) ^
+      const DeepCollectionEquality().hash(boolConditions) ^
+      const DeepCollectionEquality().hash(queryConditions) ^
       const DeepCollectionEquality().hash(sort) ^
-      const DeepCollectionEquality().hash(from) ^
+      const DeepCollectionEquality().hash(page) ^
       const DeepCollectionEquality().hash(size) ^
       runtimeType.hashCode;
 }
 
 extension $EqlSearchExtension on EqlSearch {
   EqlSearch copyWith(
-      {List<Object>? mustConditions,
-      List<EqlCondition>? conditions,
+      {List<String>? source,
+      List<Object>? mustConditions,
+      List<EqlCondition>? boolConditions,
+      List<EqlCondition>? queryConditions,
       Object? sort,
-      int? from,
+      int? page,
       int? size}) {
     return EqlSearch(
+        source: source ?? this.source,
         mustConditions: mustConditions ?? this.mustConditions,
-        conditions: conditions ?? this.conditions,
+        boolConditions: boolConditions ?? this.boolConditions,
+        queryConditions: queryConditions ?? this.queryConditions,
         sort: sort ?? this.sort,
-        from: from ?? this.from,
+        page: page ?? this.page,
         size: size ?? this.size);
   }
 
   EqlSearch copyWithWrapped(
-      {Wrapped<List<Object>>? mustConditions,
-      Wrapped<List<EqlCondition>>? conditions,
+      {Wrapped<List<String>?>? source,
+      Wrapped<List<Object>>? mustConditions,
+      Wrapped<List<EqlCondition>>? boolConditions,
+      Wrapped<List<EqlCondition>>? queryConditions,
       Wrapped<Object?>? sort,
-      Wrapped<int?>? from,
-      Wrapped<int>? size}) {
+      Wrapped<int?>? page,
+      Wrapped<int?>? size}) {
     return EqlSearch(
+        source: (source != null ? source.value : this.source),
         mustConditions: (mustConditions != null
             ? mustConditions.value
             : this.mustConditions),
-        conditions: (conditions != null ? conditions.value : this.conditions),
+        boolConditions: (boolConditions != null
+            ? boolConditions.value
+            : this.boolConditions),
+        queryConditions: (queryConditions != null
+            ? queryConditions.value
+            : this.queryConditions),
         sort: (sort != null ? sort.value : this.sort),
-        from: (from != null ? from.value : this.from),
+        page: (page != null ? page.value : this.page),
         size: (size != null ? size.value : this.size));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class BaseQueryRes {
+  const BaseQueryRes({
+    this.result,
+  });
+
+  factory BaseQueryRes.fromJson(Map<String, dynamic> json) =>
+      _$BaseQueryResFromJson(json);
+
+  static const toJsonFactory = _$BaseQueryResToJson;
+  Map<String, dynamic> toJson() => _$BaseQueryResToJson(this);
+
+  @JsonKey(name: 'result', includeIfNull: false)
+  final Object? result;
+  static const fromJsonFactory = _$BaseQueryResFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is BaseQueryRes &&
+            (identical(other.result, result) ||
+                const DeepCollectionEquality().equals(other.result, result)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(result) ^ runtimeType.hashCode;
+}
+
+extension $BaseQueryResExtension on BaseQueryRes {
+  BaseQueryRes copyWith({Object? result}) {
+    return BaseQueryRes(result: result ?? this.result);
+  }
+
+  BaseQueryRes copyWithWrapped({Wrapped<Object?>? result}) {
+    return BaseQueryRes(result: (result != null ? result.value : this.result));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class QueryRes {
+  const QueryRes({
+    required this.ok,
+    this.msg,
+    this.trace,
+    this.errorCode,
+    this.result,
+  });
+
+  factory QueryRes.fromJson(Map<String, dynamic> json) =>
+      _$QueryResFromJson(json);
+
+  static const toJsonFactory = _$QueryResToJson;
+  Map<String, dynamic> toJson() => _$QueryResToJson(this);
+
+  @JsonKey(name: 'ok', includeIfNull: false)
+  final bool ok;
+  @JsonKey(name: 'msg', includeIfNull: false, defaultValue: '')
+  final String? msg;
+  @JsonKey(name: 'trace', includeIfNull: false, defaultValue: '')
+  final String? trace;
+  @JsonKey(name: 'errorCode', includeIfNull: false, defaultValue: '')
+  final String? errorCode;
+  @JsonKey(name: 'result', includeIfNull: false)
+  final Object? result;
+  static const fromJsonFactory = _$QueryResFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is QueryRes &&
+            (identical(other.ok, ok) ||
+                const DeepCollectionEquality().equals(other.ok, ok)) &&
+            (identical(other.msg, msg) ||
+                const DeepCollectionEquality().equals(other.msg, msg)) &&
+            (identical(other.trace, trace) ||
+                const DeepCollectionEquality().equals(other.trace, trace)) &&
+            (identical(other.errorCode, errorCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.errorCode, errorCode)) &&
+            (identical(other.result, result) ||
+                const DeepCollectionEquality().equals(other.result, result)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(ok) ^
+      const DeepCollectionEquality().hash(msg) ^
+      const DeepCollectionEquality().hash(trace) ^
+      const DeepCollectionEquality().hash(errorCode) ^
+      const DeepCollectionEquality().hash(result) ^
+      runtimeType.hashCode;
+}
+
+extension $QueryResExtension on QueryRes {
+  QueryRes copyWith(
+      {bool? ok,
+      String? msg,
+      String? trace,
+      String? errorCode,
+      Object? result}) {
+    return QueryRes(
+        ok: ok ?? this.ok,
+        msg: msg ?? this.msg,
+        trace: trace ?? this.trace,
+        errorCode: errorCode ?? this.errorCode,
+        result: result ?? this.result);
+  }
+
+  QueryRes copyWithWrapped(
+      {Wrapped<bool>? ok,
+      Wrapped<String?>? msg,
+      Wrapped<String?>? trace,
+      Wrapped<String?>? errorCode,
+      Wrapped<Object?>? result}) {
+    return QueryRes(
+        ok: (ok != null ? ok.value : this.ok),
+        msg: (msg != null ? msg.value : this.msg),
+        trace: (trace != null ? trace.value : this.trace),
+        errorCode: (errorCode != null ? errorCode.value : this.errorCode),
+        result: (result != null ? result.value : this.result));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class BaseCountRes {
+  const BaseCountRes({
+    required this.total,
+  });
+
+  factory BaseCountRes.fromJson(Map<String, dynamic> json) =>
+      _$BaseCountResFromJson(json);
+
+  static const toJsonFactory = _$BaseCountResToJson;
+  Map<String, dynamic> toJson() => _$BaseCountResToJson(this);
+
+  @JsonKey(name: 'total', includeIfNull: false)
+  final int total;
+  static const fromJsonFactory = _$BaseCountResFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is BaseCountRes &&
+            (identical(other.total, total) ||
+                const DeepCollectionEquality().equals(other.total, total)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(total) ^ runtimeType.hashCode;
+}
+
+extension $BaseCountResExtension on BaseCountRes {
+  BaseCountRes copyWith({int? total}) {
+    return BaseCountRes(total: total ?? this.total);
+  }
+
+  BaseCountRes copyWithWrapped({Wrapped<int>? total}) {
+    return BaseCountRes(total: (total != null ? total.value : this.total));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class CountRes {
+  const CountRes({
+    required this.ok,
+    this.msg,
+    this.trace,
+    this.errorCode,
+    required this.total,
+  });
+
+  factory CountRes.fromJson(Map<String, dynamic> json) =>
+      _$CountResFromJson(json);
+
+  static const toJsonFactory = _$CountResToJson;
+  Map<String, dynamic> toJson() => _$CountResToJson(this);
+
+  @JsonKey(name: 'ok', includeIfNull: false)
+  final bool ok;
+  @JsonKey(name: 'msg', includeIfNull: false, defaultValue: '')
+  final String? msg;
+  @JsonKey(name: 'trace', includeIfNull: false, defaultValue: '')
+  final String? trace;
+  @JsonKey(name: 'errorCode', includeIfNull: false, defaultValue: '')
+  final String? errorCode;
+  @JsonKey(name: 'total', includeIfNull: false)
+  final int total;
+  static const fromJsonFactory = _$CountResFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is CountRes &&
+            (identical(other.ok, ok) ||
+                const DeepCollectionEquality().equals(other.ok, ok)) &&
+            (identical(other.msg, msg) ||
+                const DeepCollectionEquality().equals(other.msg, msg)) &&
+            (identical(other.trace, trace) ||
+                const DeepCollectionEquality().equals(other.trace, trace)) &&
+            (identical(other.errorCode, errorCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.errorCode, errorCode)) &&
+            (identical(other.total, total) ||
+                const DeepCollectionEquality().equals(other.total, total)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(ok) ^
+      const DeepCollectionEquality().hash(msg) ^
+      const DeepCollectionEquality().hash(trace) ^
+      const DeepCollectionEquality().hash(errorCode) ^
+      const DeepCollectionEquality().hash(total) ^
+      runtimeType.hashCode;
+}
+
+extension $CountResExtension on CountRes {
+  CountRes copyWith(
+      {bool? ok, String? msg, String? trace, String? errorCode, int? total}) {
+    return CountRes(
+        ok: ok ?? this.ok,
+        msg: msg ?? this.msg,
+        trace: trace ?? this.trace,
+        errorCode: errorCode ?? this.errorCode,
+        total: total ?? this.total);
+  }
+
+  CountRes copyWithWrapped(
+      {Wrapped<bool>? ok,
+      Wrapped<String?>? msg,
+      Wrapped<String?>? trace,
+      Wrapped<String?>? errorCode,
+      Wrapped<int>? total}) {
+    return CountRes(
+        ok: (ok != null ? ok.value : this.ok),
+        msg: (msg != null ? msg.value : this.msg),
+        trace: (trace != null ? trace.value : this.trace),
+        errorCode: (errorCode != null ? errorCode.value : this.errorCode),
+        total: (total != null ? total.value : this.total));
   }
 }
 
