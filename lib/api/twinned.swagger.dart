@@ -37657,9 +37657,10 @@ extension $EqlConditionExtension on EqlCondition {
 class EqlSearch {
   const EqlSearch({
     this.source,
-    required this.mustConditions,
-    required this.boolConditions,
+    required this.conditions,
     required this.queryConditions,
+    required this.boolConditions,
+    required this.mustConditions,
     this.sort,
     this.page,
     this.size,
@@ -37674,18 +37675,21 @@ class EqlSearch {
   @JsonKey(name: 'source', includeIfNull: false, defaultValue: <String>[])
   final List<String>? source;
   @JsonKey(
-      name: 'mustConditions', includeIfNull: false, defaultValue: <Object>[])
-  final List<Object> mustConditions;
+      name: 'conditions', includeIfNull: false, defaultValue: <EqlCondition>[])
+  final List<EqlCondition> conditions;
+  @JsonKey(
+      name: 'queryConditions',
+      includeIfNull: false,
+      defaultValue: <EqlCondition>[])
+  final List<EqlCondition> queryConditions;
   @JsonKey(
       name: 'boolConditions',
       includeIfNull: false,
       defaultValue: <EqlCondition>[])
   final List<EqlCondition> boolConditions;
   @JsonKey(
-      name: 'queryConditions',
-      includeIfNull: false,
-      defaultValue: <EqlCondition>[])
-  final List<EqlCondition> queryConditions;
+      name: 'mustConditions', includeIfNull: false, defaultValue: <Object>[])
+  final List<Object> mustConditions;
   @JsonKey(name: 'sort', includeIfNull: false)
   final Object? sort;
   @JsonKey(name: 'page', includeIfNull: false)
@@ -37700,15 +37704,18 @@ class EqlSearch {
         (other is EqlSearch &&
             (identical(other.source, source) ||
                 const DeepCollectionEquality().equals(other.source, source)) &&
-            (identical(other.mustConditions, mustConditions) ||
+            (identical(other.conditions, conditions) ||
                 const DeepCollectionEquality()
-                    .equals(other.mustConditions, mustConditions)) &&
-            (identical(other.boolConditions, boolConditions) ||
-                const DeepCollectionEquality()
-                    .equals(other.boolConditions, boolConditions)) &&
+                    .equals(other.conditions, conditions)) &&
             (identical(other.queryConditions, queryConditions) ||
                 const DeepCollectionEquality()
                     .equals(other.queryConditions, queryConditions)) &&
+            (identical(other.boolConditions, boolConditions) ||
+                const DeepCollectionEquality()
+                    .equals(other.boolConditions, boolConditions)) &&
+            (identical(other.mustConditions, mustConditions) ||
+                const DeepCollectionEquality()
+                    .equals(other.mustConditions, mustConditions)) &&
             (identical(other.sort, sort) ||
                 const DeepCollectionEquality().equals(other.sort, sort)) &&
             (identical(other.page, page) ||
@@ -37723,9 +37730,10 @@ class EqlSearch {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(source) ^
-      const DeepCollectionEquality().hash(mustConditions) ^
-      const DeepCollectionEquality().hash(boolConditions) ^
+      const DeepCollectionEquality().hash(conditions) ^
       const DeepCollectionEquality().hash(queryConditions) ^
+      const DeepCollectionEquality().hash(boolConditions) ^
+      const DeepCollectionEquality().hash(mustConditions) ^
       const DeepCollectionEquality().hash(sort) ^
       const DeepCollectionEquality().hash(page) ^
       const DeepCollectionEquality().hash(size) ^
@@ -37735,17 +37743,19 @@ class EqlSearch {
 extension $EqlSearchExtension on EqlSearch {
   EqlSearch copyWith(
       {List<String>? source,
-      List<Object>? mustConditions,
-      List<EqlCondition>? boolConditions,
+      List<EqlCondition>? conditions,
       List<EqlCondition>? queryConditions,
+      List<EqlCondition>? boolConditions,
+      List<Object>? mustConditions,
       Object? sort,
       int? page,
       int? size}) {
     return EqlSearch(
         source: source ?? this.source,
-        mustConditions: mustConditions ?? this.mustConditions,
-        boolConditions: boolConditions ?? this.boolConditions,
+        conditions: conditions ?? this.conditions,
         queryConditions: queryConditions ?? this.queryConditions,
+        boolConditions: boolConditions ?? this.boolConditions,
+        mustConditions: mustConditions ?? this.mustConditions,
         sort: sort ?? this.sort,
         page: page ?? this.page,
         size: size ?? this.size);
@@ -37753,23 +37763,25 @@ extension $EqlSearchExtension on EqlSearch {
 
   EqlSearch copyWithWrapped(
       {Wrapped<List<String>?>? source,
-      Wrapped<List<Object>>? mustConditions,
-      Wrapped<List<EqlCondition>>? boolConditions,
+      Wrapped<List<EqlCondition>>? conditions,
       Wrapped<List<EqlCondition>>? queryConditions,
+      Wrapped<List<EqlCondition>>? boolConditions,
+      Wrapped<List<Object>>? mustConditions,
       Wrapped<Object?>? sort,
       Wrapped<int?>? page,
       Wrapped<int?>? size}) {
     return EqlSearch(
         source: (source != null ? source.value : this.source),
-        mustConditions: (mustConditions != null
-            ? mustConditions.value
-            : this.mustConditions),
-        boolConditions: (boolConditions != null
-            ? boolConditions.value
-            : this.boolConditions),
+        conditions: (conditions != null ? conditions.value : this.conditions),
         queryConditions: (queryConditions != null
             ? queryConditions.value
             : this.queryConditions),
+        boolConditions: (boolConditions != null
+            ? boolConditions.value
+            : this.boolConditions),
+        mustConditions: (mustConditions != null
+            ? mustConditions.value
+            : this.mustConditions),
         sort: (sort != null ? sort.value : this.sort),
         page: (page != null ? page.value : this.page),
         size: (size != null ? size.value : this.size));
