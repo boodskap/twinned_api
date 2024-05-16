@@ -723,7 +723,7 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
-  ///Cleanup entire data
+  ///query data
   ///@param body
   Future<chopper.Response<QueryRes>> queryDeviceData({
     required EqlSearch? body,
@@ -735,7 +735,7 @@ abstract class Twinned extends ChopperService {
     return _queryDeviceData(body: body, apikey: apikey?.toString());
   }
 
-  ///Cleanup entire data
+  ///query data
   ///@param body
   @Post(path: '/DeviceData/query')
   Future<chopper.Response<QueryRes>> _queryDeviceData({
@@ -743,7 +743,7 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
-  ///Cleanup entire data
+  ///query history data
   ///@param body
   Future<chopper.Response<QueryRes>> queryDeviceHistoryData({
     required EqlSearch? body,
@@ -755,7 +755,7 @@ abstract class Twinned extends ChopperService {
     return _queryDeviceHistoryData(body: body, apikey: apikey?.toString());
   }
 
-  ///Cleanup entire data
+  ///query history data
   ///@param body
   @Post(path: '/DeviceData/history/query')
   Future<chopper.Response<QueryRes>> _queryDeviceHistoryData({
@@ -763,7 +763,7 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
-  ///Cleanup entire data
+  ///count by query
   ///@param body
   Future<chopper.Response<CountRes>> queryCountDeviceData({
     required EqlSearch? body,
@@ -775,7 +775,7 @@ abstract class Twinned extends ChopperService {
     return _queryCountDeviceData(body: body, apikey: apikey?.toString());
   }
 
-  ///Cleanup entire data
+  ///count by query
   ///@param body
   @Post(path: '/DeviceData/count/query')
   Future<chopper.Response<CountRes>> _queryCountDeviceData({
@@ -783,7 +783,7 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
-  ///Cleanup entire data
+  ///county history by query
   ///@param body
   Future<chopper.Response<CountRes>> queryCountHistoryDeviceData({
     required EqlSearch? body,
@@ -795,7 +795,7 @@ abstract class Twinned extends ChopperService {
     return _queryCountHistoryDeviceData(body: body, apikey: apikey?.toString());
   }
 
-  ///Cleanup entire data
+  ///county history by query
   ///@param body
   @Post(path: '/DeviceData/count/history/query')
   Future<chopper.Response<CountRes>> _queryCountHistoryDeviceData({
@@ -5228,6 +5228,46 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
+  ///query data
+  ///@param body
+  Future<chopper.Response<QueryRes>> queryFloor({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(QueryRes, () => QueryRes.fromJsonFactory);
+
+    return _queryFloor(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/Floor/query')
+  Future<chopper.Response<QueryRes>> _queryFloor({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///count by query
+  ///@param body
+  Future<chopper.Response<CountRes>> queryCountFloor({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(CountRes, () => CountRes.fromJsonFactory);
+
+    return _queryCountFloor(body: body, apikey: apikey?.toString());
+  }
+
+  ///count by query
+  ///@param body
+  @Post(path: '/Floor/count/query')
+  Future<chopper.Response<CountRes>> _queryCountFloor({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Create asset
   ///@param body
   Future<chopper.Response<AssetEntityRes>> createAsset({
@@ -5417,6 +5457,46 @@ abstract class Twinned extends ChopperService {
   @Post(path: '/Asset/eql')
   Future<chopper.Response<AssetArrayRes>> _searchEqlAsset({
     @Body() required Object? eql,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///query data
+  ///@param body
+  Future<chopper.Response<QueryRes>> queryAsset({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(QueryRes, () => QueryRes.fromJsonFactory);
+
+    return _queryAsset(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/Asset/query')
+  Future<chopper.Response<QueryRes>> _queryAsset({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///count by query
+  ///@param body
+  Future<chopper.Response<CountRes>> queryCountAsset({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(CountRes, () => CountRes.fromJsonFactory);
+
+    return _queryCountAsset(body: body, apikey: apikey?.toString());
+  }
+
+  ///count by query
+  ///@param body
+  @Post(path: '/Asset/count/query')
+  Future<chopper.Response<CountRes>> _queryCountAsset({
+    @Body() required EqlSearch? body,
     @Header('APIKEY') String? apikey,
   });
 
@@ -5626,6 +5706,46 @@ abstract class Twinned extends ChopperService {
   @Get(path: '/Facility/stats/{facilityId}')
   Future<chopper.Response<FacilityStatsEntityRes>> _getFacilityStats({
     @Path('facilityId') required String? facilityId,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///query data
+  ///@param body
+  Future<chopper.Response<QueryRes>> queryFacility({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(QueryRes, () => QueryRes.fromJsonFactory);
+
+    return _queryFacility(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/Facility/query')
+  Future<chopper.Response<QueryRes>> _queryFacility({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///count by query
+  ///@param body
+  Future<chopper.Response<CountRes>> queryCountFacility({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(CountRes, () => CountRes.fromJsonFactory);
+
+    return _queryCountFacility(body: body, apikey: apikey?.toString());
+  }
+
+  ///count by query
+  ///@param body
+  @Post(path: '/Facility/count/query')
+  Future<chopper.Response<CountRes>> _queryCountFacility({
+    @Body() required EqlSearch? body,
     @Header('APIKEY') String? apikey,
   });
 
@@ -6048,6 +6168,46 @@ abstract class Twinned extends ChopperService {
   @Get(path: '/Premise/stats/{premiseId}')
   Future<chopper.Response<PremiseStatsEntityRes>> _getPremiseStats({
     @Path('premiseId') required String? premiseId,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///query data
+  ///@param body
+  Future<chopper.Response<QueryRes>> queryPremise({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(QueryRes, () => QueryRes.fromJsonFactory);
+
+    return _queryPremise(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/Premise/query')
+  Future<chopper.Response<QueryRes>> _queryPremise({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///count by query
+  ///@param body
+  Future<chopper.Response<CountRes>> queryCountPremise({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(CountRes, () => CountRes.fromJsonFactory);
+
+    return _queryCountPremise(body: body, apikey: apikey?.toString());
+  }
+
+  ///count by query
+  ///@param body
+  @Post(path: '/Premise/count/query')
+  Future<chopper.Response<CountRes>> _queryCountPremise({
+    @Body() required EqlSearch? body,
     @Header('APIKEY') String? apikey,
   });
 

@@ -4408,6 +4408,46 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<QueryRes>> _queryFloor({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Floor/query');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<QueryRes, QueryRes>($request);
+  }
+
+  @override
+  Future<Response<CountRes>> _queryCountFloor({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Floor/count/query');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<CountRes, CountRes>($request);
+  }
+
+  @override
   Future<Response<AssetEntityRes>> _createAsset({
     required AssetInfo? body,
     String? apikey,
@@ -4572,6 +4612,46 @@ final class _$Twinned extends Twinned {
       headers: $headers,
     );
     return client.send<AssetArrayRes, AssetArrayRes>($request);
+  }
+
+  @override
+  Future<Response<QueryRes>> _queryAsset({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Asset/query');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<QueryRes, QueryRes>($request);
+  }
+
+  @override
+  Future<Response<CountRes>> _queryCountAsset({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Asset/count/query');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<CountRes, CountRes>($request);
   }
 
   @override
@@ -4754,6 +4834,46 @@ final class _$Twinned extends Twinned {
     );
     return client
         .send<FacilityStatsEntityRes, FacilityStatsEntityRes>($request);
+  }
+
+  @override
+  Future<Response<QueryRes>> _queryFacility({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Facility/query');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<QueryRes, QueryRes>($request);
+  }
+
+  @override
+  Future<Response<CountRes>> _queryCountFacility({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Facility/count/query');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<CountRes, CountRes>($request);
   }
 
   @override
@@ -5140,6 +5260,46 @@ final class _$Twinned extends Twinned {
       headers: $headers,
     );
     return client.send<PremiseStatsEntityRes, PremiseStatsEntityRes>($request);
+  }
+
+  @override
+  Future<Response<QueryRes>> _queryPremise({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Premise/query');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<QueryRes, QueryRes>($request);
+  }
+
+  @override
+  Future<Response<CountRes>> _queryCountPremise({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Premise/count/query');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<CountRes, CountRes>($request);
   }
 
   @override
