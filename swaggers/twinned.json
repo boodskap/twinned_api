@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "1.8.1",
+    "version": "1.8.2",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -1338,7 +1338,7 @@
             "apiKey": []
           }
         ],
-        "summary": "Cleanup entire data"
+        "summary": "query data"
       }
     },
     "/DeviceData/history/query": {
@@ -1380,7 +1380,7 @@
             "apiKey": []
           }
         ],
-        "summary": "Cleanup entire data"
+        "summary": "query history data"
       }
     },
     "/DeviceData/count/query": {
@@ -1422,7 +1422,7 @@
             "apiKey": []
           }
         ],
-        "summary": "Cleanup entire data"
+        "summary": "count by query"
       }
     },
     "/DeviceData/count/history/query": {
@@ -1464,7 +1464,7 @@
             "apiKey": []
           }
         ],
-        "summary": "Cleanup entire data"
+        "summary": "county history by query"
       }
     },
     "/DeviceView/create": {
@@ -10105,6 +10105,90 @@
         ]
       }
     },
+    "/Floor/query": {
+      "post": {
+        "tags": [
+          "Floor"
+        ],
+        "description": "query floor",
+        "operationId": "queryFloor",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/QueryRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
+      }
+    },
+    "/Floor/count/query": {
+      "post": {
+        "tags": [
+          "Floor"
+        ],
+        "description": "query count floor",
+        "operationId": "queryCountFloor",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CountRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "count by query"
+      }
+    },
     "/Asset/create": {
       "post": {
         "tags": [
@@ -10481,6 +10565,90 @@
             "apiKey": []
           }
         ]
+      }
+    },
+    "/Asset/query": {
+      "post": {
+        "tags": [
+          "Asset"
+        ],
+        "description": "query asset",
+        "operationId": "queryAsset",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/QueryRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
+      }
+    },
+    "/Asset/count/query": {
+      "post": {
+        "tags": [
+          "Asset"
+        ],
+        "description": "query count asset",
+        "operationId": "queryCountAsset",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CountRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "count by query"
       }
     },
     "/Facility/create": {
@@ -10889,6 +11057,90 @@
             "apiKey": []
           }
         ]
+      }
+    },
+    "/Facility/query": {
+      "post": {
+        "tags": [
+          "Facility"
+        ],
+        "description": "query facility",
+        "operationId": "queryFacility",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/QueryRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
+      }
+    },
+    "/Facility/count/query": {
+      "post": {
+        "tags": [
+          "Facility"
+        ],
+        "description": "query count facility",
+        "operationId": "queryCountFacility",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CountRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "count by query"
       }
     },
     "/TwinUser/create": {
@@ -11756,6 +12008,90 @@
             "apiKey": []
           }
         ]
+      }
+    },
+    "/Premise/query": {
+      "post": {
+        "tags": [
+          "Premise"
+        ],
+        "description": "query premise",
+        "operationId": "queryPremise",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/QueryRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
+      }
+    },
+    "/Premise/count/query": {
+      "post": {
+        "tags": [
+          "Premise"
+        ],
+        "description": "query count premise",
+        "operationId": "queryCountPremise",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CountRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "count by query"
       }
     },
     "/ScrappingTable/create": {
