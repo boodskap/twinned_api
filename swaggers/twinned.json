@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "1.8.2",
+    "version": "1.8.3",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -14559,6 +14559,10 @@
         },
         "customWidget": {
           "$ref": "#/definitions/CustomWidget"
+        },
+        "reportedStamp": {
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -16577,6 +16581,9 @@
           "items": {
             "type": "string"
           }
+        },
+        "assetModelId": {
+          "type": "string"
         }
       }
     },
@@ -18559,6 +18566,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "reportedStamp": {
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -18689,6 +18700,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "reportedStamp": {
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -18798,6 +18813,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "reportedStamp": {
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -19120,6 +19139,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "reportedStamp": {
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
