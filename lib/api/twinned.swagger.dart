@@ -19639,9 +19639,8 @@ extension $DashboardMenuGroupArrayResExtension on DashboardMenuGroupArrayRes {
 @JsonSerializable(explicitToJson: true)
 class ScreenChild {
   const ScreenChild({
-    required this.deviceId,
-    this.viewId,
-    required this.viewType,
+    required this.widgetId,
+    required this.config,
     this.width,
     this.height,
   });
@@ -19652,35 +19651,25 @@ class ScreenChild {
   static const toJsonFactory = _$ScreenChildToJson;
   Map<String, dynamic> toJson() => _$ScreenChildToJson(this);
 
-  @JsonKey(name: 'deviceId', includeIfNull: false, defaultValue: '')
-  final String deviceId;
-  @JsonKey(name: 'viewId', includeIfNull: false, defaultValue: '')
-  final String? viewId;
-  @JsonKey(
-    name: 'viewType',
-    includeIfNull: false,
-    toJson: screenChildViewTypeToJson,
-    fromJson: screenChildViewTypeFromJson,
-  )
-  final enums.ScreenChildViewType viewType;
+  @JsonKey(name: 'widgetId', includeIfNull: false, defaultValue: '')
+  final String widgetId;
+  @JsonKey(name: 'config', includeIfNull: false)
+  final Object config;
   @JsonKey(name: 'width', includeIfNull: false)
-  final int? width;
+  final double? width;
   @JsonKey(name: 'height', includeIfNull: false)
-  final int? height;
+  final double? height;
   static const fromJsonFactory = _$ScreenChildFromJson;
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ScreenChild &&
-            (identical(other.deviceId, deviceId) ||
+            (identical(other.widgetId, widgetId) ||
                 const DeepCollectionEquality()
-                    .equals(other.deviceId, deviceId)) &&
-            (identical(other.viewId, viewId) ||
-                const DeepCollectionEquality().equals(other.viewId, viewId)) &&
-            (identical(other.viewType, viewType) ||
-                const DeepCollectionEquality()
-                    .equals(other.viewType, viewType)) &&
+                    .equals(other.widgetId, widgetId)) &&
+            (identical(other.config, config) ||
+                const DeepCollectionEquality().equals(other.config, config)) &&
             (identical(other.width, width) ||
                 const DeepCollectionEquality().equals(other.width, width)) &&
             (identical(other.height, height) ||
@@ -19692,9 +19681,8 @@ class ScreenChild {
 
   @override
   int get hashCode =>
-      const DeepCollectionEquality().hash(deviceId) ^
-      const DeepCollectionEquality().hash(viewId) ^
-      const DeepCollectionEquality().hash(viewType) ^
+      const DeepCollectionEquality().hash(widgetId) ^
+      const DeepCollectionEquality().hash(config) ^
       const DeepCollectionEquality().hash(width) ^
       const DeepCollectionEquality().hash(height) ^
       runtimeType.hashCode;
@@ -19702,29 +19690,22 @@ class ScreenChild {
 
 extension $ScreenChildExtension on ScreenChild {
   ScreenChild copyWith(
-      {String? deviceId,
-      String? viewId,
-      enums.ScreenChildViewType? viewType,
-      int? width,
-      int? height}) {
+      {String? widgetId, Object? config, double? width, double? height}) {
     return ScreenChild(
-        deviceId: deviceId ?? this.deviceId,
-        viewId: viewId ?? this.viewId,
-        viewType: viewType ?? this.viewType,
+        widgetId: widgetId ?? this.widgetId,
+        config: config ?? this.config,
         width: width ?? this.width,
         height: height ?? this.height);
   }
 
   ScreenChild copyWithWrapped(
-      {Wrapped<String>? deviceId,
-      Wrapped<String?>? viewId,
-      Wrapped<enums.ScreenChildViewType>? viewType,
-      Wrapped<int?>? width,
-      Wrapped<int?>? height}) {
+      {Wrapped<String>? widgetId,
+      Wrapped<Object>? config,
+      Wrapped<double?>? width,
+      Wrapped<double?>? height}) {
     return ScreenChild(
-        deviceId: (deviceId != null ? deviceId.value : this.deviceId),
-        viewId: (viewId != null ? viewId.value : this.viewId),
-        viewType: (viewType != null ? viewType.value : this.viewType),
+        widgetId: (widgetId != null ? widgetId.value : this.widgetId),
+        config: (config != null ? config.value : this.config),
         width: (width != null ? width.value : this.width),
         height: (height != null ? height.value : this.height));
   }
@@ -19733,6 +19714,8 @@ extension $ScreenChildExtension on ScreenChild {
 @JsonSerializable(explicitToJson: true)
 class ScreenRow {
   const ScreenRow({
+    this.height,
+    this.spacing,
     required this.children,
   });
 
@@ -19742,6 +19725,10 @@ class ScreenRow {
   static const toJsonFactory = _$ScreenRowToJson;
   Map<String, dynamic> toJson() => _$ScreenRowToJson(this);
 
+  @JsonKey(name: 'height', includeIfNull: false)
+  final double? height;
+  @JsonKey(name: 'spacing', includeIfNull: false)
+  final double? spacing;
   @JsonKey(
       name: 'children', includeIfNull: false, defaultValue: <ScreenChild>[])
   final List<ScreenChild> children;
@@ -19751,6 +19738,11 @@ class ScreenRow {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other is ScreenRow &&
+            (identical(other.height, height) ||
+                const DeepCollectionEquality().equals(other.height, height)) &&
+            (identical(other.spacing, spacing) ||
+                const DeepCollectionEquality()
+                    .equals(other.spacing, spacing)) &&
             (identical(other.children, children) ||
                 const DeepCollectionEquality()
                     .equals(other.children, children)));
@@ -19761,16 +19753,28 @@ class ScreenRow {
 
   @override
   int get hashCode =>
-      const DeepCollectionEquality().hash(children) ^ runtimeType.hashCode;
+      const DeepCollectionEquality().hash(height) ^
+      const DeepCollectionEquality().hash(spacing) ^
+      const DeepCollectionEquality().hash(children) ^
+      runtimeType.hashCode;
 }
 
 extension $ScreenRowExtension on ScreenRow {
-  ScreenRow copyWith({List<ScreenChild>? children}) {
-    return ScreenRow(children: children ?? this.children);
+  ScreenRow copyWith(
+      {double? height, double? spacing, List<ScreenChild>? children}) {
+    return ScreenRow(
+        height: height ?? this.height,
+        spacing: spacing ?? this.spacing,
+        children: children ?? this.children);
   }
 
-  ScreenRow copyWithWrapped({Wrapped<List<ScreenChild>>? children}) {
+  ScreenRow copyWithWrapped(
+      {Wrapped<double?>? height,
+      Wrapped<double?>? spacing,
+      Wrapped<List<ScreenChild>>? children}) {
     return ScreenRow(
+        height: (height != null ? height.value : this.height),
+        spacing: (spacing != null ? spacing.value : this.spacing),
         children: (children != null ? children.value : this.children));
   }
 }
@@ -19782,9 +19786,7 @@ class DashboardScreenInfo {
     this.description,
     required this.title,
     this.banner,
-    required this.webSupported,
-    required this.tabletSupported,
-    required this.mobileSupported,
+    this.spacing,
     required this.rows,
     this.tags,
   });
@@ -19803,12 +19805,8 @@ class DashboardScreenInfo {
   final String title;
   @JsonKey(name: 'banner', includeIfNull: false, defaultValue: '')
   final String? banner;
-  @JsonKey(name: 'webSupported', includeIfNull: false, defaultValue: true)
-  final bool webSupported;
-  @JsonKey(name: 'tabletSupported', includeIfNull: false, defaultValue: true)
-  final bool tabletSupported;
-  @JsonKey(name: 'mobileSupported', includeIfNull: false, defaultValue: true)
-  final bool mobileSupported;
+  @JsonKey(name: 'spacing', includeIfNull: false)
+  final double? spacing;
   @JsonKey(name: 'rows', includeIfNull: false, defaultValue: <ScreenRow>[])
   final List<ScreenRow> rows;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
@@ -19828,15 +19826,9 @@ class DashboardScreenInfo {
                 const DeepCollectionEquality().equals(other.title, title)) &&
             (identical(other.banner, banner) ||
                 const DeepCollectionEquality().equals(other.banner, banner)) &&
-            (identical(other.webSupported, webSupported) ||
+            (identical(other.spacing, spacing) ||
                 const DeepCollectionEquality()
-                    .equals(other.webSupported, webSupported)) &&
-            (identical(other.tabletSupported, tabletSupported) ||
-                const DeepCollectionEquality()
-                    .equals(other.tabletSupported, tabletSupported)) &&
-            (identical(other.mobileSupported, mobileSupported) ||
-                const DeepCollectionEquality()
-                    .equals(other.mobileSupported, mobileSupported)) &&
+                    .equals(other.spacing, spacing)) &&
             (identical(other.rows, rows) ||
                 const DeepCollectionEquality().equals(other.rows, rows)) &&
             (identical(other.tags, tags) ||
@@ -19852,9 +19844,7 @@ class DashboardScreenInfo {
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(banner) ^
-      const DeepCollectionEquality().hash(webSupported) ^
-      const DeepCollectionEquality().hash(tabletSupported) ^
-      const DeepCollectionEquality().hash(mobileSupported) ^
+      const DeepCollectionEquality().hash(spacing) ^
       const DeepCollectionEquality().hash(rows) ^
       const DeepCollectionEquality().hash(tags) ^
       runtimeType.hashCode;
@@ -19866,9 +19856,7 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
       String? description,
       String? title,
       String? banner,
-      bool? webSupported,
-      bool? tabletSupported,
-      bool? mobileSupported,
+      double? spacing,
       List<ScreenRow>? rows,
       List<String>? tags}) {
     return DashboardScreenInfo(
@@ -19876,9 +19864,7 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
         description: description ?? this.description,
         title: title ?? this.title,
         banner: banner ?? this.banner,
-        webSupported: webSupported ?? this.webSupported,
-        tabletSupported: tabletSupported ?? this.tabletSupported,
-        mobileSupported: mobileSupported ?? this.mobileSupported,
+        spacing: spacing ?? this.spacing,
         rows: rows ?? this.rows,
         tags: tags ?? this.tags);
   }
@@ -19888,9 +19874,7 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
       Wrapped<String?>? description,
       Wrapped<String>? title,
       Wrapped<String?>? banner,
-      Wrapped<bool>? webSupported,
-      Wrapped<bool>? tabletSupported,
-      Wrapped<bool>? mobileSupported,
+      Wrapped<double?>? spacing,
       Wrapped<List<ScreenRow>>? rows,
       Wrapped<List<String>?>? tags}) {
     return DashboardScreenInfo(
@@ -19899,14 +19883,7 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
             (description != null ? description.value : this.description),
         title: (title != null ? title.value : this.title),
         banner: (banner != null ? banner.value : this.banner),
-        webSupported:
-            (webSupported != null ? webSupported.value : this.webSupported),
-        tabletSupported: (tabletSupported != null
-            ? tabletSupported.value
-            : this.tabletSupported),
-        mobileSupported: (mobileSupported != null
-            ? mobileSupported.value
-            : this.mobileSupported),
+        spacing: (spacing != null ? spacing.value : this.spacing),
         rows: (rows != null ? rows.value : this.rows),
         tags: (tags != null ? tags.value : this.tags));
   }
@@ -19927,9 +19904,7 @@ class DashboardScreen {
     this.description,
     required this.title,
     this.banner,
-    required this.webSupported,
-    required this.tabletSupported,
-    required this.mobileSupported,
+    this.spacing,
     required this.rows,
   });
 
@@ -19963,12 +19938,8 @@ class DashboardScreen {
   final String title;
   @JsonKey(name: 'banner', includeIfNull: false, defaultValue: '')
   final String? banner;
-  @JsonKey(name: 'webSupported', includeIfNull: false, defaultValue: true)
-  final bool webSupported;
-  @JsonKey(name: 'tabletSupported', includeIfNull: false, defaultValue: true)
-  final bool tabletSupported;
-  @JsonKey(name: 'mobileSupported', includeIfNull: false, defaultValue: true)
-  final bool mobileSupported;
+  @JsonKey(name: 'spacing', includeIfNull: false)
+  final double? spacing;
   @JsonKey(name: 'rows', includeIfNull: false, defaultValue: <ScreenRow>[])
   final List<ScreenRow> rows;
   static const fromJsonFactory = _$DashboardScreenFromJson;
@@ -20007,15 +19978,9 @@ class DashboardScreen {
                 const DeepCollectionEquality().equals(other.title, title)) &&
             (identical(other.banner, banner) ||
                 const DeepCollectionEquality().equals(other.banner, banner)) &&
-            (identical(other.webSupported, webSupported) ||
+            (identical(other.spacing, spacing) ||
                 const DeepCollectionEquality()
-                    .equals(other.webSupported, webSupported)) &&
-            (identical(other.tabletSupported, tabletSupported) ||
-                const DeepCollectionEquality()
-                    .equals(other.tabletSupported, tabletSupported)) &&
-            (identical(other.mobileSupported, mobileSupported) ||
-                const DeepCollectionEquality()
-                    .equals(other.mobileSupported, mobileSupported)) &&
+                    .equals(other.spacing, spacing)) &&
             (identical(other.rows, rows) ||
                 const DeepCollectionEquality().equals(other.rows, rows)));
   }
@@ -20037,9 +20002,7 @@ class DashboardScreen {
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(banner) ^
-      const DeepCollectionEquality().hash(webSupported) ^
-      const DeepCollectionEquality().hash(tabletSupported) ^
-      const DeepCollectionEquality().hash(mobileSupported) ^
+      const DeepCollectionEquality().hash(spacing) ^
       const DeepCollectionEquality().hash(rows) ^
       runtimeType.hashCode;
 }
@@ -20058,9 +20021,7 @@ extension $DashboardScreenExtension on DashboardScreen {
       String? description,
       String? title,
       String? banner,
-      bool? webSupported,
-      bool? tabletSupported,
-      bool? mobileSupported,
+      double? spacing,
       List<ScreenRow>? rows}) {
     return DashboardScreen(
         domainKey: domainKey ?? this.domainKey,
@@ -20075,9 +20036,7 @@ extension $DashboardScreenExtension on DashboardScreen {
         description: description ?? this.description,
         title: title ?? this.title,
         banner: banner ?? this.banner,
-        webSupported: webSupported ?? this.webSupported,
-        tabletSupported: tabletSupported ?? this.tabletSupported,
-        mobileSupported: mobileSupported ?? this.mobileSupported,
+        spacing: spacing ?? this.spacing,
         rows: rows ?? this.rows);
   }
 
@@ -20094,9 +20053,7 @@ extension $DashboardScreenExtension on DashboardScreen {
       Wrapped<String?>? description,
       Wrapped<String>? title,
       Wrapped<String?>? banner,
-      Wrapped<bool>? webSupported,
-      Wrapped<bool>? tabletSupported,
-      Wrapped<bool>? mobileSupported,
+      Wrapped<double?>? spacing,
       Wrapped<List<ScreenRow>>? rows}) {
     return DashboardScreen(
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
@@ -20114,14 +20071,7 @@ extension $DashboardScreenExtension on DashboardScreen {
             (description != null ? description.value : this.description),
         title: (title != null ? title.value : this.title),
         banner: (banner != null ? banner.value : this.banner),
-        webSupported:
-            (webSupported != null ? webSupported.value : this.webSupported),
-        tabletSupported: (tabletSupported != null
-            ? tabletSupported.value
-            : this.tabletSupported),
-        mobileSupported: (mobileSupported != null
-            ? mobileSupported.value
-            : this.mobileSupported),
+        spacing: (spacing != null ? spacing.value : this.spacing),
         rows: (rows != null ? rows.value : this.rows));
   }
 }
@@ -40337,78 +40287,6 @@ List<enums.DashboardMenuLinkType>? dashboardMenuLinkTypeNullableListFromJson(
 
   return dashboardMenuLinkType
       .map((e) => dashboardMenuLinkTypeFromJson(e.toString()))
-      .toList();
-}
-
-String? screenChildViewTypeNullableToJson(
-    enums.ScreenChildViewType? screenChildViewType) {
-  return screenChildViewType?.value;
-}
-
-String? screenChildViewTypeToJson(
-    enums.ScreenChildViewType screenChildViewType) {
-  return screenChildViewType.value;
-}
-
-enums.ScreenChildViewType screenChildViewTypeFromJson(
-  Object? screenChildViewType, [
-  enums.ScreenChildViewType? defaultValue,
-]) {
-  return enums.ScreenChildViewType.values
-          .firstWhereOrNull((e) => e.value == screenChildViewType) ??
-      defaultValue ??
-      enums.ScreenChildViewType.swaggerGeneratedUnknown;
-}
-
-enums.ScreenChildViewType? screenChildViewTypeNullableFromJson(
-  Object? screenChildViewType, [
-  enums.ScreenChildViewType? defaultValue,
-]) {
-  if (screenChildViewType == null) {
-    return null;
-  }
-  return enums.ScreenChildViewType.values
-          .firstWhereOrNull((e) => e.value == screenChildViewType) ??
-      defaultValue;
-}
-
-String screenChildViewTypeExplodedListToJson(
-    List<enums.ScreenChildViewType>? screenChildViewType) {
-  return screenChildViewType?.map((e) => e.value!).join(',') ?? '';
-}
-
-List<String> screenChildViewTypeListToJson(
-    List<enums.ScreenChildViewType>? screenChildViewType) {
-  if (screenChildViewType == null) {
-    return [];
-  }
-
-  return screenChildViewType.map((e) => e.value!).toList();
-}
-
-List<enums.ScreenChildViewType> screenChildViewTypeListFromJson(
-  List? screenChildViewType, [
-  List<enums.ScreenChildViewType>? defaultValue,
-]) {
-  if (screenChildViewType == null) {
-    return defaultValue ?? [];
-  }
-
-  return screenChildViewType
-      .map((e) => screenChildViewTypeFromJson(e.toString()))
-      .toList();
-}
-
-List<enums.ScreenChildViewType>? screenChildViewTypeNullableListFromJson(
-  List? screenChildViewType, [
-  List<enums.ScreenChildViewType>? defaultValue,
-]) {
-  if (screenChildViewType == null) {
-    return defaultValue;
-  }
-
-  return screenChildViewType
-      .map((e) => screenChildViewTypeFromJson(e.toString()))
       .toList();
 }
 

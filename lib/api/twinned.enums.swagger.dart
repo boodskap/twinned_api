@@ -515,20 +515,6 @@ enum DashboardMenuLinkType {
   const DashboardMenuLinkType(this.value);
 }
 
-enum ScreenChildViewType {
-  @JsonValue(null)
-  swaggerGeneratedUnknown(null),
-
-  @JsonValue('BUILTIN')
-  builtin('BUILTIN'),
-  @JsonValue('PROVIDED')
-  provided('PROVIDED');
-
-  final String? value;
-
-  const ScreenChildViewType(this.value);
-}
-
 enum TriggeredEventEventType {
   @JsonValue(null)
   swaggerGeneratedUnknown(null),
