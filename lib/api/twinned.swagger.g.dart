@@ -3680,16 +3680,16 @@ Map<String, dynamic> _$DashboardMenuGroupArrayResToJson(
 }
 
 ScreenChild _$ScreenChildFromJson(Map<String, dynamic> json) => ScreenChild(
-      deviceId: json['deviceId'] as String? ?? '',
-      viewId: json['viewId'] as String? ?? '',
-      viewType: screenChildViewTypeFromJson(json['viewType']),
-      width: json['width'] as int?,
-      height: json['height'] as int?,
+      widgetId: json['widgetId'] as String? ?? '',
+      config: json['config'] as Object,
+      width: (json['width'] as num?)?.toDouble(),
+      height: (json['height'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$ScreenChildToJson(ScreenChild instance) {
   final val = <String, dynamic>{
-    'deviceId': instance.deviceId,
+    'widgetId': instance.widgetId,
+    'config': instance.config,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -3698,23 +3698,34 @@ Map<String, dynamic> _$ScreenChildToJson(ScreenChild instance) {
     }
   }
 
-  writeNotNull('viewId', instance.viewId);
-  writeNotNull('viewType', screenChildViewTypeToJson(instance.viewType));
   writeNotNull('width', instance.width);
   writeNotNull('height', instance.height);
   return val;
 }
 
 ScreenRow _$ScreenRowFromJson(Map<String, dynamic> json) => ScreenRow(
+      height: (json['height'] as num?)?.toDouble(),
+      spacing: (json['spacing'] as num?)?.toDouble(),
       children: (json['children'] as List<dynamic>?)
               ?.map((e) => ScreenChild.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
     );
 
-Map<String, dynamic> _$ScreenRowToJson(ScreenRow instance) => <String, dynamic>{
-      'children': instance.children.map((e) => e.toJson()).toList(),
-    };
+Map<String, dynamic> _$ScreenRowToJson(ScreenRow instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('height', instance.height);
+  writeNotNull('spacing', instance.spacing);
+  val['children'] = instance.children.map((e) => e.toJson()).toList();
+  return val;
+}
 
 DashboardScreenInfo _$DashboardScreenInfoFromJson(Map<String, dynamic> json) =>
     DashboardScreenInfo(
@@ -3722,9 +3733,7 @@ DashboardScreenInfo _$DashboardScreenInfoFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String? ?? '',
       title: json['title'] as String? ?? '',
       banner: json['banner'] as String? ?? '',
-      webSupported: json['webSupported'] as bool? ?? true,
-      tabletSupported: json['tabletSupported'] as bool? ?? true,
-      mobileSupported: json['mobileSupported'] as bool? ?? true,
+      spacing: (json['spacing'] as num?)?.toDouble(),
       rows: (json['rows'] as List<dynamic>?)
               ?.map((e) => ScreenRow.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -3748,9 +3757,7 @@ Map<String, dynamic> _$DashboardScreenInfoToJson(DashboardScreenInfo instance) {
   writeNotNull('description', instance.description);
   val['title'] = instance.title;
   writeNotNull('banner', instance.banner);
-  val['webSupported'] = instance.webSupported;
-  val['tabletSupported'] = instance.tabletSupported;
-  val['mobileSupported'] = instance.mobileSupported;
+  writeNotNull('spacing', instance.spacing);
   val['rows'] = instance.rows.map((e) => e.toJson()).toList();
   writeNotNull('tags', instance.tags);
   return val;
@@ -3772,9 +3779,7 @@ DashboardScreen _$DashboardScreenFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String? ?? '',
       title: json['title'] as String? ?? '',
       banner: json['banner'] as String? ?? '',
-      webSupported: json['webSupported'] as bool? ?? true,
-      tabletSupported: json['tabletSupported'] as bool? ?? true,
-      mobileSupported: json['mobileSupported'] as bool? ?? true,
+      spacing: (json['spacing'] as num?)?.toDouble(),
       rows: (json['rows'] as List<dynamic>?)
               ?.map((e) => ScreenRow.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -3803,9 +3808,7 @@ Map<String, dynamic> _$DashboardScreenToJson(DashboardScreen instance) {
   writeNotNull('description', instance.description);
   val['title'] = instance.title;
   writeNotNull('banner', instance.banner);
-  val['webSupported'] = instance.webSupported;
-  val['tabletSupported'] = instance.tabletSupported;
-  val['mobileSupported'] = instance.mobileSupported;
+  writeNotNull('spacing', instance.spacing);
   val['rows'] = instance.rows.map((e) => e.toJson()).toList();
   return val;
 }

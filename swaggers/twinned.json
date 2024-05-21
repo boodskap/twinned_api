@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "1.8.3",
+    "version": "1.8.4",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -16759,30 +16759,23 @@
     "ScreenChild": {
       "type": "object",
       "required": [
-        "deviceId",
-        "viewType"
+        "widgetId",
+        "config"
       ],
       "properties": {
-        "deviceId": {
+        "widgetId": {
           "type": "string"
         },
-        "viewId": {
-          "type": "string"
-        },
-        "viewType": {
-          "type": "string",
-          "enum": [
-            "BUILTIN",
-            "PROVIDED"
-          ]
+        "config": {
+          "type": "object"
         },
         "width": {
-          "type": "integer",
-          "default": 350
+          "type": "number",
+          "format": "double"
         },
         "height": {
-          "type": "integer",
-          "default": 350
+          "type": "number",
+          "format": "double"
         }
       }
     },
@@ -16792,6 +16785,14 @@
         "children"
       ],
       "properties": {
+        "height": {
+          "type": "number",
+          "format": "double"
+        },
+        "spacing": {
+          "type": "number",
+          "format": "double"
+        },
         "children": {
           "type": "array",
           "items": {
@@ -16805,9 +16806,6 @@
       "required": [
         "name",
         "title",
-        "webSupported",
-        "tabletSupported",
-        "mobileSupported",
         "rows"
       ],
       "properties": {
@@ -16823,17 +16821,9 @@
         "banner": {
           "type": "string"
         },
-        "webSupported": {
-          "type": "boolean",
-          "default": true
-        },
-        "tabletSupported": {
-          "type": "boolean",
-          "default": true
-        },
-        "mobileSupported": {
-          "type": "boolean",
-          "default": true
+        "spacing": {
+          "type": "number",
+          "format": "double"
         },
         "rows": {
           "type": "array",
