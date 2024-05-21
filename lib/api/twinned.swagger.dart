@@ -19643,6 +19643,9 @@ class ScreenChild {
     required this.config,
     this.width,
     this.height,
+    this.bgColor,
+    this.bgImage,
+    this.scrollDirection,
   });
 
   factory ScreenChild.fromJson(Map<String, dynamic> json) =>
@@ -19659,6 +19662,12 @@ class ScreenChild {
   final double? width;
   @JsonKey(name: 'height', includeIfNull: false)
   final double? height;
+  @JsonKey(name: 'bgColor', includeIfNull: false)
+  final int? bgColor;
+  @JsonKey(name: 'bgImage', includeIfNull: false, defaultValue: '')
+  final String? bgImage;
+  @JsonKey(name: 'scrollDirection', includeIfNull: false, defaultValue: '')
+  final String? scrollDirection;
   static const fromJsonFactory = _$ScreenChildFromJson;
 
   @override
@@ -19673,7 +19682,16 @@ class ScreenChild {
             (identical(other.width, width) ||
                 const DeepCollectionEquality().equals(other.width, width)) &&
             (identical(other.height, height) ||
-                const DeepCollectionEquality().equals(other.height, height)));
+                const DeepCollectionEquality().equals(other.height, height)) &&
+            (identical(other.bgColor, bgColor) ||
+                const DeepCollectionEquality()
+                    .equals(other.bgColor, bgColor)) &&
+            (identical(other.bgImage, bgImage) ||
+                const DeepCollectionEquality()
+                    .equals(other.bgImage, bgImage)) &&
+            (identical(other.scrollDirection, scrollDirection) ||
+                const DeepCollectionEquality()
+                    .equals(other.scrollDirection, scrollDirection)));
   }
 
   @override
@@ -19685,29 +19703,49 @@ class ScreenChild {
       const DeepCollectionEquality().hash(config) ^
       const DeepCollectionEquality().hash(width) ^
       const DeepCollectionEquality().hash(height) ^
+      const DeepCollectionEquality().hash(bgColor) ^
+      const DeepCollectionEquality().hash(bgImage) ^
+      const DeepCollectionEquality().hash(scrollDirection) ^
       runtimeType.hashCode;
 }
 
 extension $ScreenChildExtension on ScreenChild {
   ScreenChild copyWith(
-      {String? widgetId, Object? config, double? width, double? height}) {
+      {String? widgetId,
+      Object? config,
+      double? width,
+      double? height,
+      int? bgColor,
+      String? bgImage,
+      String? scrollDirection}) {
     return ScreenChild(
         widgetId: widgetId ?? this.widgetId,
         config: config ?? this.config,
         width: width ?? this.width,
-        height: height ?? this.height);
+        height: height ?? this.height,
+        bgColor: bgColor ?? this.bgColor,
+        bgImage: bgImage ?? this.bgImage,
+        scrollDirection: scrollDirection ?? this.scrollDirection);
   }
 
   ScreenChild copyWithWrapped(
       {Wrapped<String>? widgetId,
       Wrapped<Object>? config,
       Wrapped<double?>? width,
-      Wrapped<double?>? height}) {
+      Wrapped<double?>? height,
+      Wrapped<int?>? bgColor,
+      Wrapped<String?>? bgImage,
+      Wrapped<String?>? scrollDirection}) {
     return ScreenChild(
         widgetId: (widgetId != null ? widgetId.value : this.widgetId),
         config: (config != null ? config.value : this.config),
         width: (width != null ? width.value : this.width),
-        height: (height != null ? height.value : this.height));
+        height: (height != null ? height.value : this.height),
+        bgColor: (bgColor != null ? bgColor.value : this.bgColor),
+        bgImage: (bgImage != null ? bgImage.value : this.bgImage),
+        scrollDirection: (scrollDirection != null
+            ? scrollDirection.value
+            : this.scrollDirection));
   }
 }
 
@@ -19716,6 +19754,12 @@ class ScreenRow {
   const ScreenRow({
     this.height,
     this.spacing,
+    this.bgColor,
+    this.bgImage,
+    this.mainAxisAlignment,
+    this.crossAxisAlignment,
+    this.mainAxisSize,
+    this.scrollDirection,
     required this.children,
   });
 
@@ -19729,6 +19773,18 @@ class ScreenRow {
   final double? height;
   @JsonKey(name: 'spacing', includeIfNull: false)
   final double? spacing;
+  @JsonKey(name: 'bgColor', includeIfNull: false)
+  final int? bgColor;
+  @JsonKey(name: 'bgImage', includeIfNull: false, defaultValue: '')
+  final String? bgImage;
+  @JsonKey(name: 'mainAxisAlignment', includeIfNull: false, defaultValue: '')
+  final String? mainAxisAlignment;
+  @JsonKey(name: 'crossAxisAlignment', includeIfNull: false, defaultValue: '')
+  final String? crossAxisAlignment;
+  @JsonKey(name: 'mainAxisSize', includeIfNull: false, defaultValue: '')
+  final String? mainAxisSize;
+  @JsonKey(name: 'scrollDirection', includeIfNull: false, defaultValue: '')
+  final String? scrollDirection;
   @JsonKey(
       name: 'children', includeIfNull: false, defaultValue: <ScreenChild>[])
   final List<ScreenChild> children;
@@ -19743,6 +19799,24 @@ class ScreenRow {
             (identical(other.spacing, spacing) ||
                 const DeepCollectionEquality()
                     .equals(other.spacing, spacing)) &&
+            (identical(other.bgColor, bgColor) ||
+                const DeepCollectionEquality()
+                    .equals(other.bgColor, bgColor)) &&
+            (identical(other.bgImage, bgImage) ||
+                const DeepCollectionEquality()
+                    .equals(other.bgImage, bgImage)) &&
+            (identical(other.mainAxisAlignment, mainAxisAlignment) ||
+                const DeepCollectionEquality()
+                    .equals(other.mainAxisAlignment, mainAxisAlignment)) &&
+            (identical(other.crossAxisAlignment, crossAxisAlignment) ||
+                const DeepCollectionEquality()
+                    .equals(other.crossAxisAlignment, crossAxisAlignment)) &&
+            (identical(other.mainAxisSize, mainAxisSize) ||
+                const DeepCollectionEquality()
+                    .equals(other.mainAxisSize, mainAxisSize)) &&
+            (identical(other.scrollDirection, scrollDirection) ||
+                const DeepCollectionEquality()
+                    .equals(other.scrollDirection, scrollDirection)) &&
             (identical(other.children, children) ||
                 const DeepCollectionEquality()
                     .equals(other.children, children)));
@@ -19755,26 +19829,65 @@ class ScreenRow {
   int get hashCode =>
       const DeepCollectionEquality().hash(height) ^
       const DeepCollectionEquality().hash(spacing) ^
+      const DeepCollectionEquality().hash(bgColor) ^
+      const DeepCollectionEquality().hash(bgImage) ^
+      const DeepCollectionEquality().hash(mainAxisAlignment) ^
+      const DeepCollectionEquality().hash(crossAxisAlignment) ^
+      const DeepCollectionEquality().hash(mainAxisSize) ^
+      const DeepCollectionEquality().hash(scrollDirection) ^
       const DeepCollectionEquality().hash(children) ^
       runtimeType.hashCode;
 }
 
 extension $ScreenRowExtension on ScreenRow {
   ScreenRow copyWith(
-      {double? height, double? spacing, List<ScreenChild>? children}) {
+      {double? height,
+      double? spacing,
+      int? bgColor,
+      String? bgImage,
+      String? mainAxisAlignment,
+      String? crossAxisAlignment,
+      String? mainAxisSize,
+      String? scrollDirection,
+      List<ScreenChild>? children}) {
     return ScreenRow(
         height: height ?? this.height,
         spacing: spacing ?? this.spacing,
+        bgColor: bgColor ?? this.bgColor,
+        bgImage: bgImage ?? this.bgImage,
+        mainAxisAlignment: mainAxisAlignment ?? this.mainAxisAlignment,
+        crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment,
+        mainAxisSize: mainAxisSize ?? this.mainAxisSize,
+        scrollDirection: scrollDirection ?? this.scrollDirection,
         children: children ?? this.children);
   }
 
   ScreenRow copyWithWrapped(
       {Wrapped<double?>? height,
       Wrapped<double?>? spacing,
+      Wrapped<int?>? bgColor,
+      Wrapped<String?>? bgImage,
+      Wrapped<String?>? mainAxisAlignment,
+      Wrapped<String?>? crossAxisAlignment,
+      Wrapped<String?>? mainAxisSize,
+      Wrapped<String?>? scrollDirection,
       Wrapped<List<ScreenChild>>? children}) {
     return ScreenRow(
         height: (height != null ? height.value : this.height),
         spacing: (spacing != null ? spacing.value : this.spacing),
+        bgColor: (bgColor != null ? bgColor.value : this.bgColor),
+        bgImage: (bgImage != null ? bgImage.value : this.bgImage),
+        mainAxisAlignment: (mainAxisAlignment != null
+            ? mainAxisAlignment.value
+            : this.mainAxisAlignment),
+        crossAxisAlignment: (crossAxisAlignment != null
+            ? crossAxisAlignment.value
+            : this.crossAxisAlignment),
+        mainAxisSize:
+            (mainAxisSize != null ? mainAxisSize.value : this.mainAxisSize),
+        scrollDirection: (scrollDirection != null
+            ? scrollDirection.value
+            : this.scrollDirection),
         children: (children != null ? children.value : this.children));
   }
 }
@@ -19787,8 +19900,14 @@ class DashboardScreenInfo {
     required this.title,
     this.banner,
     this.spacing,
-    required this.rows,
     this.tags,
+    this.bgColor,
+    this.bgImage,
+    this.mainAxisAlignment,
+    this.crossAxisAlignment,
+    this.mainAxisSize,
+    this.scrollDirection,
+    required this.rows,
   });
 
   factory DashboardScreenInfo.fromJson(Map<String, dynamic> json) =>
@@ -19807,10 +19926,22 @@ class DashboardScreenInfo {
   final String? banner;
   @JsonKey(name: 'spacing', includeIfNull: false)
   final double? spacing;
-  @JsonKey(name: 'rows', includeIfNull: false, defaultValue: <ScreenRow>[])
-  final List<ScreenRow> rows;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
+  @JsonKey(name: 'bgColor', includeIfNull: false)
+  final int? bgColor;
+  @JsonKey(name: 'bgImage', includeIfNull: false, defaultValue: '')
+  final String? bgImage;
+  @JsonKey(name: 'mainAxisAlignment', includeIfNull: false, defaultValue: '')
+  final String? mainAxisAlignment;
+  @JsonKey(name: 'crossAxisAlignment', includeIfNull: false, defaultValue: '')
+  final String? crossAxisAlignment;
+  @JsonKey(name: 'mainAxisSize', includeIfNull: false, defaultValue: '')
+  final String? mainAxisSize;
+  @JsonKey(name: 'scrollDirection', includeIfNull: false, defaultValue: '')
+  final String? scrollDirection;
+  @JsonKey(name: 'rows', includeIfNull: false, defaultValue: <ScreenRow>[])
+  final List<ScreenRow> rows;
   static const fromJsonFactory = _$DashboardScreenInfoFromJson;
 
   @override
@@ -19829,10 +19960,28 @@ class DashboardScreenInfo {
             (identical(other.spacing, spacing) ||
                 const DeepCollectionEquality()
                     .equals(other.spacing, spacing)) &&
-            (identical(other.rows, rows) ||
-                const DeepCollectionEquality().equals(other.rows, rows)) &&
             (identical(other.tags, tags) ||
-                const DeepCollectionEquality().equals(other.tags, tags)));
+                const DeepCollectionEquality().equals(other.tags, tags)) &&
+            (identical(other.bgColor, bgColor) ||
+                const DeepCollectionEquality()
+                    .equals(other.bgColor, bgColor)) &&
+            (identical(other.bgImage, bgImage) ||
+                const DeepCollectionEquality()
+                    .equals(other.bgImage, bgImage)) &&
+            (identical(other.mainAxisAlignment, mainAxisAlignment) ||
+                const DeepCollectionEquality()
+                    .equals(other.mainAxisAlignment, mainAxisAlignment)) &&
+            (identical(other.crossAxisAlignment, crossAxisAlignment) ||
+                const DeepCollectionEquality()
+                    .equals(other.crossAxisAlignment, crossAxisAlignment)) &&
+            (identical(other.mainAxisSize, mainAxisSize) ||
+                const DeepCollectionEquality()
+                    .equals(other.mainAxisSize, mainAxisSize)) &&
+            (identical(other.scrollDirection, scrollDirection) ||
+                const DeepCollectionEquality()
+                    .equals(other.scrollDirection, scrollDirection)) &&
+            (identical(other.rows, rows) ||
+                const DeepCollectionEquality().equals(other.rows, rows)));
   }
 
   @override
@@ -19845,8 +19994,14 @@ class DashboardScreenInfo {
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(banner) ^
       const DeepCollectionEquality().hash(spacing) ^
-      const DeepCollectionEquality().hash(rows) ^
       const DeepCollectionEquality().hash(tags) ^
+      const DeepCollectionEquality().hash(bgColor) ^
+      const DeepCollectionEquality().hash(bgImage) ^
+      const DeepCollectionEquality().hash(mainAxisAlignment) ^
+      const DeepCollectionEquality().hash(crossAxisAlignment) ^
+      const DeepCollectionEquality().hash(mainAxisSize) ^
+      const DeepCollectionEquality().hash(scrollDirection) ^
+      const DeepCollectionEquality().hash(rows) ^
       runtimeType.hashCode;
 }
 
@@ -19857,16 +20012,28 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
       String? title,
       String? banner,
       double? spacing,
-      List<ScreenRow>? rows,
-      List<String>? tags}) {
+      List<String>? tags,
+      int? bgColor,
+      String? bgImage,
+      String? mainAxisAlignment,
+      String? crossAxisAlignment,
+      String? mainAxisSize,
+      String? scrollDirection,
+      List<ScreenRow>? rows}) {
     return DashboardScreenInfo(
         name: name ?? this.name,
         description: description ?? this.description,
         title: title ?? this.title,
         banner: banner ?? this.banner,
         spacing: spacing ?? this.spacing,
-        rows: rows ?? this.rows,
-        tags: tags ?? this.tags);
+        tags: tags ?? this.tags,
+        bgColor: bgColor ?? this.bgColor,
+        bgImage: bgImage ?? this.bgImage,
+        mainAxisAlignment: mainAxisAlignment ?? this.mainAxisAlignment,
+        crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment,
+        mainAxisSize: mainAxisSize ?? this.mainAxisSize,
+        scrollDirection: scrollDirection ?? this.scrollDirection,
+        rows: rows ?? this.rows);
   }
 
   DashboardScreenInfo copyWithWrapped(
@@ -19875,8 +20042,14 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
       Wrapped<String>? title,
       Wrapped<String?>? banner,
       Wrapped<double?>? spacing,
-      Wrapped<List<ScreenRow>>? rows,
-      Wrapped<List<String>?>? tags}) {
+      Wrapped<List<String>?>? tags,
+      Wrapped<int?>? bgColor,
+      Wrapped<String?>? bgImage,
+      Wrapped<String?>? mainAxisAlignment,
+      Wrapped<String?>? crossAxisAlignment,
+      Wrapped<String?>? mainAxisSize,
+      Wrapped<String?>? scrollDirection,
+      Wrapped<List<ScreenRow>>? rows}) {
     return DashboardScreenInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -19884,8 +20057,21 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
         title: (title != null ? title.value : this.title),
         banner: (banner != null ? banner.value : this.banner),
         spacing: (spacing != null ? spacing.value : this.spacing),
-        rows: (rows != null ? rows.value : this.rows),
-        tags: (tags != null ? tags.value : this.tags));
+        tags: (tags != null ? tags.value : this.tags),
+        bgColor: (bgColor != null ? bgColor.value : this.bgColor),
+        bgImage: (bgImage != null ? bgImage.value : this.bgImage),
+        mainAxisAlignment: (mainAxisAlignment != null
+            ? mainAxisAlignment.value
+            : this.mainAxisAlignment),
+        crossAxisAlignment: (crossAxisAlignment != null
+            ? crossAxisAlignment.value
+            : this.crossAxisAlignment),
+        mainAxisSize:
+            (mainAxisSize != null ? mainAxisSize.value : this.mainAxisSize),
+        scrollDirection: (scrollDirection != null
+            ? scrollDirection.value
+            : this.scrollDirection),
+        rows: (rows != null ? rows.value : this.rows));
   }
 }
 
@@ -19905,6 +20091,12 @@ class DashboardScreen {
     required this.title,
     this.banner,
     this.spacing,
+    this.bgColor,
+    this.bgImage,
+    this.mainAxisAlignment,
+    this.crossAxisAlignment,
+    this.mainAxisSize,
+    this.scrollDirection,
     required this.rows,
   });
 
@@ -19940,6 +20132,18 @@ class DashboardScreen {
   final String? banner;
   @JsonKey(name: 'spacing', includeIfNull: false)
   final double? spacing;
+  @JsonKey(name: 'bgColor', includeIfNull: false)
+  final int? bgColor;
+  @JsonKey(name: 'bgImage', includeIfNull: false, defaultValue: '')
+  final String? bgImage;
+  @JsonKey(name: 'mainAxisAlignment', includeIfNull: false, defaultValue: '')
+  final String? mainAxisAlignment;
+  @JsonKey(name: 'crossAxisAlignment', includeIfNull: false, defaultValue: '')
+  final String? crossAxisAlignment;
+  @JsonKey(name: 'mainAxisSize', includeIfNull: false, defaultValue: '')
+  final String? mainAxisSize;
+  @JsonKey(name: 'scrollDirection', includeIfNull: false, defaultValue: '')
+  final String? scrollDirection;
   @JsonKey(name: 'rows', includeIfNull: false, defaultValue: <ScreenRow>[])
   final List<ScreenRow> rows;
   static const fromJsonFactory = _$DashboardScreenFromJson;
@@ -19981,6 +20185,24 @@ class DashboardScreen {
             (identical(other.spacing, spacing) ||
                 const DeepCollectionEquality()
                     .equals(other.spacing, spacing)) &&
+            (identical(other.bgColor, bgColor) ||
+                const DeepCollectionEquality()
+                    .equals(other.bgColor, bgColor)) &&
+            (identical(other.bgImage, bgImage) ||
+                const DeepCollectionEquality()
+                    .equals(other.bgImage, bgImage)) &&
+            (identical(other.mainAxisAlignment, mainAxisAlignment) ||
+                const DeepCollectionEquality()
+                    .equals(other.mainAxisAlignment, mainAxisAlignment)) &&
+            (identical(other.crossAxisAlignment, crossAxisAlignment) ||
+                const DeepCollectionEquality()
+                    .equals(other.crossAxisAlignment, crossAxisAlignment)) &&
+            (identical(other.mainAxisSize, mainAxisSize) ||
+                const DeepCollectionEquality()
+                    .equals(other.mainAxisSize, mainAxisSize)) &&
+            (identical(other.scrollDirection, scrollDirection) ||
+                const DeepCollectionEquality()
+                    .equals(other.scrollDirection, scrollDirection)) &&
             (identical(other.rows, rows) ||
                 const DeepCollectionEquality().equals(other.rows, rows)));
   }
@@ -20003,6 +20225,12 @@ class DashboardScreen {
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(banner) ^
       const DeepCollectionEquality().hash(spacing) ^
+      const DeepCollectionEquality().hash(bgColor) ^
+      const DeepCollectionEquality().hash(bgImage) ^
+      const DeepCollectionEquality().hash(mainAxisAlignment) ^
+      const DeepCollectionEquality().hash(crossAxisAlignment) ^
+      const DeepCollectionEquality().hash(mainAxisSize) ^
+      const DeepCollectionEquality().hash(scrollDirection) ^
       const DeepCollectionEquality().hash(rows) ^
       runtimeType.hashCode;
 }
@@ -20022,6 +20250,12 @@ extension $DashboardScreenExtension on DashboardScreen {
       String? title,
       String? banner,
       double? spacing,
+      int? bgColor,
+      String? bgImage,
+      String? mainAxisAlignment,
+      String? crossAxisAlignment,
+      String? mainAxisSize,
+      String? scrollDirection,
       List<ScreenRow>? rows}) {
     return DashboardScreen(
         domainKey: domainKey ?? this.domainKey,
@@ -20037,6 +20271,12 @@ extension $DashboardScreenExtension on DashboardScreen {
         title: title ?? this.title,
         banner: banner ?? this.banner,
         spacing: spacing ?? this.spacing,
+        bgColor: bgColor ?? this.bgColor,
+        bgImage: bgImage ?? this.bgImage,
+        mainAxisAlignment: mainAxisAlignment ?? this.mainAxisAlignment,
+        crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment,
+        mainAxisSize: mainAxisSize ?? this.mainAxisSize,
+        scrollDirection: scrollDirection ?? this.scrollDirection,
         rows: rows ?? this.rows);
   }
 
@@ -20054,6 +20294,12 @@ extension $DashboardScreenExtension on DashboardScreen {
       Wrapped<String>? title,
       Wrapped<String?>? banner,
       Wrapped<double?>? spacing,
+      Wrapped<int?>? bgColor,
+      Wrapped<String?>? bgImage,
+      Wrapped<String?>? mainAxisAlignment,
+      Wrapped<String?>? crossAxisAlignment,
+      Wrapped<String?>? mainAxisSize,
+      Wrapped<String?>? scrollDirection,
       Wrapped<List<ScreenRow>>? rows}) {
     return DashboardScreen(
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
@@ -20072,6 +20318,19 @@ extension $DashboardScreenExtension on DashboardScreen {
         title: (title != null ? title.value : this.title),
         banner: (banner != null ? banner.value : this.banner),
         spacing: (spacing != null ? spacing.value : this.spacing),
+        bgColor: (bgColor != null ? bgColor.value : this.bgColor),
+        bgImage: (bgImage != null ? bgImage.value : this.bgImage),
+        mainAxisAlignment: (mainAxisAlignment != null
+            ? mainAxisAlignment.value
+            : this.mainAxisAlignment),
+        crossAxisAlignment: (crossAxisAlignment != null
+            ? crossAxisAlignment.value
+            : this.crossAxisAlignment),
+        mainAxisSize:
+            (mainAxisSize != null ? mainAxisSize.value : this.mainAxisSize),
+        scrollDirection: (scrollDirection != null
+            ? scrollDirection.value
+            : this.scrollDirection),
         rows: (rows != null ? rows.value : this.rows));
   }
 }

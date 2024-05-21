@@ -16776,6 +16776,16 @@
         "height": {
           "type": "number",
           "format": "double"
+        },
+        "bgColor": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "bgImage": {
+          "type": "string"
+        },
+        "scrollDirection": {
+          "type": "string"
         }
       }
     },
@@ -16792,6 +16802,25 @@
         "spacing": {
           "type": "number",
           "format": "double"
+        },
+        "bgColor": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "bgImage": {
+          "type": "string"
+        },
+        "mainAxisAlignment": {
+          "type": "string"
+        },
+        "crossAxisAlignment": {
+          "type": "string"
+        },
+        "mainAxisSize": {
+          "type": "string"
+        },
+        "scrollDirection": {
+          "type": "string"
         },
         "children": {
           "type": "array",
@@ -16825,16 +16854,35 @@
           "type": "number",
           "format": "double"
         },
-        "rows": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ScreenRow"
-          }
-        },
         "tags": {
           "type": "array",
           "items": {
             "type": "string"
+          }
+        },
+        "bgColor": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "bgImage": {
+          "type": "string"
+        },
+        "mainAxisAlignment": {
+          "type": "string"
+        },
+        "crossAxisAlignment": {
+          "type": "string"
+        },
+        "mainAxisSize": {
+          "type": "string"
+        },
+        "scrollDirection": {
+          "type": "string"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScreenRow"
           }
         }
       }
