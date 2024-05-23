@@ -19077,7 +19077,7 @@ class DashboardMenuGroupInfo {
     this.mobileSupported,
     this.tags,
     this.roles,
-    this.menus,
+    required this.menus,
   });
 
   factory DashboardMenuGroupInfo.fromJson(Map<String, dynamic> json) =>
@@ -19107,7 +19107,7 @@ class DashboardMenuGroupInfo {
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'menus', includeIfNull: false, defaultValue: <DashboardMenu>[])
-  final List<DashboardMenu>? menus;
+  final List<DashboardMenu> menus;
   static const fromJsonFactory = _$DashboardMenuGroupInfoFromJson;
 
   @override
@@ -19200,7 +19200,7 @@ extension $DashboardMenuGroupInfoExtension on DashboardMenuGroupInfo {
       Wrapped<bool?>? mobileSupported,
       Wrapped<List<String>?>? tags,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<DashboardMenu>?>? menus}) {
+      Wrapped<List<DashboardMenu>>? menus}) {
     return DashboardMenuGroupInfo(
         name: (name != null ? name.value : this.name),
         displayName:
@@ -19243,7 +19243,7 @@ class DashboardMenuGroup {
     this.tabletSupported,
     this.mobileSupported,
     this.roles,
-    this.menus,
+    required this.menus,
   });
 
   factory DashboardMenuGroup.fromJson(Map<String, dynamic> json) =>
@@ -19287,7 +19287,7 @@ class DashboardMenuGroup {
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'menus', includeIfNull: false, defaultValue: <DashboardMenu>[])
-  final List<DashboardMenu>? menus;
+  final List<DashboardMenu> menus;
   static const fromJsonFactory = _$DashboardMenuGroupFromJson;
 
   @override
@@ -19427,7 +19427,7 @@ extension $DashboardMenuGroupExtension on DashboardMenuGroup {
       Wrapped<bool?>? tabletSupported,
       Wrapped<bool?>? mobileSupported,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<DashboardMenu>?>? menus}) {
+      Wrapped<List<DashboardMenu>>? menus}) {
     return DashboardMenuGroup(
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
