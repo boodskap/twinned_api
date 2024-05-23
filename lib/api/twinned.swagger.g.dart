@@ -3434,35 +3434,6 @@ Map<String, dynamic> _$DeviceDataArrayResToJson(DeviceDataArrayRes instance) {
   return val;
 }
 
-DashboardMenu _$DashboardMenuFromJson(Map<String, dynamic> json) =>
-    DashboardMenu(
-      displayName: json['displayName'] as String? ?? '',
-      icon: json['icon'] as String? ?? '',
-      roles:
-          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-              [],
-      linkId: json['linkId'] as String? ?? '',
-      linkType: dashboardMenuLinkTypeFromJson(json['linkType']),
-    );
-
-Map<String, dynamic> _$DashboardMenuToJson(DashboardMenu instance) {
-  final val = <String, dynamic>{
-    'displayName': instance.displayName,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('icon', instance.icon);
-  writeNotNull('roles', instance.roles);
-  val['linkId'] = instance.linkId;
-  writeNotNull('linkType', dashboardMenuLinkTypeToJson(instance.linkType));
-  return val;
-}
-
 DashboardMenuGroupInfo _$DashboardMenuGroupInfoFromJson(
         Map<String, dynamic> json) =>
     DashboardMenuGroupInfo(
@@ -3471,15 +3442,19 @@ DashboardMenuGroupInfo _$DashboardMenuGroupInfoFromJson(
       description: json['description'] as String? ?? '',
       icon: json['icon'] as String? ?? '',
       order: json['order'] as int?,
-      webSupported: json['webSupported'] as bool? ?? true,
-      tabletSupported: json['tabletSupported'] as bool? ?? true,
-      mobileSupported: json['mobileSupported'] as bool? ?? true,
-      menus: (json['menus'] as List<dynamic>?)
-              ?.map((e) => DashboardMenu.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      screenIds: (json['screenIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
     );
 
@@ -3499,11 +3474,10 @@ Map<String, dynamic> _$DashboardMenuGroupInfoToJson(
   writeNotNull('description', instance.description);
   writeNotNull('icon', instance.icon);
   writeNotNull('order', instance.order);
-  val['webSupported'] = instance.webSupported;
-  val['tabletSupported'] = instance.tabletSupported;
-  val['mobileSupported'] = instance.mobileSupported;
-  val['menus'] = instance.menus.map((e) => e.toJson()).toList();
   writeNotNull('tags', instance.tags);
+  val['screenIds'] = instance.screenIds;
+  writeNotNull('clientIds', instance.clientIds);
+  writeNotNull('roles', instance.roles);
   return val;
 }
 
@@ -3524,13 +3498,17 @@ DashboardMenuGroup _$DashboardMenuGroupFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String? ?? '',
       icon: json['icon'] as String? ?? '',
       order: json['order'] as int?,
-      webSupported: json['webSupported'] as bool? ?? true,
-      tabletSupported: json['tabletSupported'] as bool? ?? true,
-      mobileSupported: json['mobileSupported'] as bool? ?? true,
-      menus: (json['menus'] as List<dynamic>?)
-              ?.map((e) => DashboardMenu.fromJson(e as Map<String, dynamic>))
+      screenIds: (json['screenIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
               .toList() ??
           [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
     );
 
 Map<String, dynamic> _$DashboardMenuGroupToJson(DashboardMenuGroup instance) {
@@ -3556,10 +3534,9 @@ Map<String, dynamic> _$DashboardMenuGroupToJson(DashboardMenuGroup instance) {
   writeNotNull('description', instance.description);
   writeNotNull('icon', instance.icon);
   writeNotNull('order', instance.order);
-  val['webSupported'] = instance.webSupported;
-  val['tabletSupported'] = instance.tabletSupported;
-  val['mobileSupported'] = instance.mobileSupported;
-  val['menus'] = instance.menus.map((e) => e.toJson()).toList();
+  val['screenIds'] = instance.screenIds;
+  writeNotNull('clientIds', instance.clientIds);
+  writeNotNull('roles', instance.roles);
   return val;
 }
 
@@ -3687,6 +3664,7 @@ ScreenChild _$ScreenChildFromJson(Map<String, dynamic> json) => ScreenChild(
       bgColor: json['bgColor'] as int?,
       bgImage: json['bgImage'] as String? ?? '',
       scrollDirection: json['scrollDirection'] as String? ?? '',
+      expanded: json['expanded'] as bool?,
     );
 
 Map<String, dynamic> _$ScreenChildToJson(ScreenChild instance) {
@@ -3706,6 +3684,7 @@ Map<String, dynamic> _$ScreenChildToJson(ScreenChild instance) {
   writeNotNull('bgColor', instance.bgColor);
   writeNotNull('bgImage', instance.bgImage);
   writeNotNull('scrollDirection', instance.scrollDirection);
+  writeNotNull('expanded', instance.expanded);
   return val;
 }
 
@@ -3718,6 +3697,7 @@ ScreenRow _$ScreenRowFromJson(Map<String, dynamic> json) => ScreenRow(
       crossAxisAlignment: json['crossAxisAlignment'] as String? ?? '',
       mainAxisSize: json['mainAxisSize'] as String? ?? '',
       scrollDirection: json['scrollDirection'] as String? ?? '',
+      expanded: json['expanded'] as bool?,
       children: (json['children'] as List<dynamic>?)
               ?.map((e) => ScreenChild.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -3741,6 +3721,7 @@ Map<String, dynamic> _$ScreenRowToJson(ScreenRow instance) {
   writeNotNull('crossAxisAlignment', instance.crossAxisAlignment);
   writeNotNull('mainAxisSize', instance.mainAxisSize);
   writeNotNull('scrollDirection', instance.scrollDirection);
+  writeNotNull('expanded', instance.expanded);
   val['children'] = instance.children.map((e) => e.toJson()).toList();
   return val;
 }
