@@ -16660,7 +16660,8 @@
       "type": "object",
       "required": [
         "name",
-        "displayName"
+        "displayName",
+        "menus"
       ],
       "properties": {
         "name": {

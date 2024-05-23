@@ -3529,7 +3529,7 @@ Map<String, dynamic> _$DashboardMenuGroupInfoToJson(
   writeNotNull('mobileSupported', instance.mobileSupported);
   writeNotNull('tags', instance.tags);
   writeNotNull('roles', instance.roles);
-  writeNotNull('menus', instance.menus?.map((e) => e.toJson()).toList());
+  val['menus'] = instance.menus.map((e) => e.toJson()).toList();
   return val;
 }
 
@@ -3589,7 +3589,7 @@ Map<String, dynamic> _$DashboardMenuGroupToJson(DashboardMenuGroup instance) {
   writeNotNull('tabletSupported', instance.tabletSupported);
   writeNotNull('mobileSupported', instance.mobileSupported);
   writeNotNull('roles', instance.roles);
-  writeNotNull('menus', instance.menus?.map((e) => e.toJson()).toList());
+  val['menus'] = instance.menus.map((e) => e.toJson()).toList();
   return val;
 }
 
