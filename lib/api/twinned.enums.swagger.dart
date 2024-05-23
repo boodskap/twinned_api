@@ -501,20 +501,6 @@ enum TriggeredControlDeliveryStatus {
   const TriggeredControlDeliveryStatus(this.value);
 }
 
-enum DashboardMenuLinkType {
-  @JsonValue(null)
-  swaggerGeneratedUnknown(null),
-
-  @JsonValue('SCREEN')
-  screen('SCREEN'),
-  @JsonValue('PAGE')
-  page('PAGE');
-
-  final String? value;
-
-  const DashboardMenuLinkType(this.value);
-}
-
 enum TriggeredEventEventType {
   @JsonValue(null)
   swaggerGeneratedUnknown(null),

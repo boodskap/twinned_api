@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "1.8.4",
+    "version": "1.8.5",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -16614,47 +16614,12 @@
         }
       ]
     },
-    "DashboardMenu": {
-      "type": "object",
-      "required": [
-        "displayName",
-        "linkId",
-        "linkType"
-      ],
-      "properties": {
-        "displayName": {
-          "type": "string"
-        },
-        "icon": {
-          "type": "string"
-        },
-        "roles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "linkId": {
-          "type": "string"
-        },
-        "linkType": {
-          "type": "string",
-          "enum": [
-            "SCREEN",
-            "PAGE"
-          ]
-        }
-      }
-    },
     "DashboardMenuGroupInfo": {
       "type": "object",
       "required": [
         "name",
         "displayName",
-        "webSupported",
-        "tabletSupported",
-        "mobileSupported",
-        "menus"
+        "screenIds"
       ],
       "properties": {
         "name": {
@@ -16672,25 +16637,25 @@
         "order": {
           "type": "integer"
         },
-        "webSupported": {
-          "type": "boolean",
-          "default": true
-        },
-        "tabletSupported": {
-          "type": "boolean",
-          "default": true
-        },
-        "mobileSupported": {
-          "type": "boolean",
-          "default": true
-        },
-        "menus": {
+        "tags": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DashboardMenu"
+            "type": "string"
           }
         },
-        "tags": {
+        "screenIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "roles": {
           "type": "array",
           "items": {
             "type": "string"
@@ -16786,6 +16751,9 @@
         },
         "scrollDirection": {
           "type": "string"
+        },
+        "expanded": {
+          "type": "boolean"
         }
       }
     },
@@ -16821,6 +16789,9 @@
         },
         "scrollDirection": {
           "type": "string"
+        },
+        "expanded": {
+          "type": "boolean"
         },
         "children": {
           "type": "array",

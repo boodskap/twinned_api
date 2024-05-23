@@ -18867,101 +18867,6 @@ extension $DeviceDataArrayResExtension on DeviceDataArrayRes {
 }
 
 @JsonSerializable(explicitToJson: true)
-class DashboardMenu {
-  const DashboardMenu({
-    required this.displayName,
-    this.icon,
-    this.roles,
-    required this.linkId,
-    required this.linkType,
-  });
-
-  factory DashboardMenu.fromJson(Map<String, dynamic> json) =>
-      _$DashboardMenuFromJson(json);
-
-  static const toJsonFactory = _$DashboardMenuToJson;
-  Map<String, dynamic> toJson() => _$DashboardMenuToJson(this);
-
-  @JsonKey(name: 'displayName', includeIfNull: false, defaultValue: '')
-  final String displayName;
-  @JsonKey(name: 'icon', includeIfNull: false, defaultValue: '')
-  final String? icon;
-  @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? roles;
-  @JsonKey(name: 'linkId', includeIfNull: false, defaultValue: '')
-  final String linkId;
-  @JsonKey(
-    name: 'linkType',
-    includeIfNull: false,
-    toJson: dashboardMenuLinkTypeToJson,
-    fromJson: dashboardMenuLinkTypeFromJson,
-  )
-  final enums.DashboardMenuLinkType linkType;
-  static const fromJsonFactory = _$DashboardMenuFromJson;
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other is DashboardMenu &&
-            (identical(other.displayName, displayName) ||
-                const DeepCollectionEquality()
-                    .equals(other.displayName, displayName)) &&
-            (identical(other.icon, icon) ||
-                const DeepCollectionEquality().equals(other.icon, icon)) &&
-            (identical(other.roles, roles) ||
-                const DeepCollectionEquality().equals(other.roles, roles)) &&
-            (identical(other.linkId, linkId) ||
-                const DeepCollectionEquality().equals(other.linkId, linkId)) &&
-            (identical(other.linkType, linkType) ||
-                const DeepCollectionEquality()
-                    .equals(other.linkType, linkType)));
-  }
-
-  @override
-  String toString() => jsonEncode(this);
-
-  @override
-  int get hashCode =>
-      const DeepCollectionEquality().hash(displayName) ^
-      const DeepCollectionEquality().hash(icon) ^
-      const DeepCollectionEquality().hash(roles) ^
-      const DeepCollectionEquality().hash(linkId) ^
-      const DeepCollectionEquality().hash(linkType) ^
-      runtimeType.hashCode;
-}
-
-extension $DashboardMenuExtension on DashboardMenu {
-  DashboardMenu copyWith(
-      {String? displayName,
-      String? icon,
-      List<String>? roles,
-      String? linkId,
-      enums.DashboardMenuLinkType? linkType}) {
-    return DashboardMenu(
-        displayName: displayName ?? this.displayName,
-        icon: icon ?? this.icon,
-        roles: roles ?? this.roles,
-        linkId: linkId ?? this.linkId,
-        linkType: linkType ?? this.linkType);
-  }
-
-  DashboardMenu copyWithWrapped(
-      {Wrapped<String>? displayName,
-      Wrapped<String?>? icon,
-      Wrapped<List<String>?>? roles,
-      Wrapped<String>? linkId,
-      Wrapped<enums.DashboardMenuLinkType>? linkType}) {
-    return DashboardMenu(
-        displayName:
-            (displayName != null ? displayName.value : this.displayName),
-        icon: (icon != null ? icon.value : this.icon),
-        roles: (roles != null ? roles.value : this.roles),
-        linkId: (linkId != null ? linkId.value : this.linkId),
-        linkType: (linkType != null ? linkType.value : this.linkType));
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
 class DashboardMenuGroupInfo {
   const DashboardMenuGroupInfo({
     required this.name,
@@ -18969,11 +18874,10 @@ class DashboardMenuGroupInfo {
     this.description,
     this.icon,
     this.order,
-    required this.webSupported,
-    required this.tabletSupported,
-    required this.mobileSupported,
-    required this.menus,
     this.tags,
+    required this.screenIds,
+    this.clientIds,
+    this.roles,
   });
 
   factory DashboardMenuGroupInfo.fromJson(Map<String, dynamic> json) =>
@@ -18992,16 +18896,14 @@ class DashboardMenuGroupInfo {
   final String? icon;
   @JsonKey(name: 'order', includeIfNull: false)
   final int? order;
-  @JsonKey(name: 'webSupported', includeIfNull: false, defaultValue: true)
-  final bool webSupported;
-  @JsonKey(name: 'tabletSupported', includeIfNull: false, defaultValue: true)
-  final bool tabletSupported;
-  @JsonKey(name: 'mobileSupported', includeIfNull: false, defaultValue: true)
-  final bool mobileSupported;
-  @JsonKey(name: 'menus', includeIfNull: false, defaultValue: <DashboardMenu>[])
-  final List<DashboardMenu> menus;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
+  @JsonKey(name: 'screenIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String> screenIds;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
+  @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? roles;
   static const fromJsonFactory = _$DashboardMenuGroupInfoFromJson;
 
   @override
@@ -19020,19 +18922,16 @@ class DashboardMenuGroupInfo {
                 const DeepCollectionEquality().equals(other.icon, icon)) &&
             (identical(other.order, order) ||
                 const DeepCollectionEquality().equals(other.order, order)) &&
-            (identical(other.webSupported, webSupported) ||
-                const DeepCollectionEquality()
-                    .equals(other.webSupported, webSupported)) &&
-            (identical(other.tabletSupported, tabletSupported) ||
-                const DeepCollectionEquality()
-                    .equals(other.tabletSupported, tabletSupported)) &&
-            (identical(other.mobileSupported, mobileSupported) ||
-                const DeepCollectionEquality()
-                    .equals(other.mobileSupported, mobileSupported)) &&
-            (identical(other.menus, menus) ||
-                const DeepCollectionEquality().equals(other.menus, menus)) &&
             (identical(other.tags, tags) ||
-                const DeepCollectionEquality().equals(other.tags, tags)));
+                const DeepCollectionEquality().equals(other.tags, tags)) &&
+            (identical(other.screenIds, screenIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.screenIds, screenIds)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)) &&
+            (identical(other.roles, roles) ||
+                const DeepCollectionEquality().equals(other.roles, roles)));
   }
 
   @override
@@ -19045,11 +18944,10 @@ class DashboardMenuGroupInfo {
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(icon) ^
       const DeepCollectionEquality().hash(order) ^
-      const DeepCollectionEquality().hash(webSupported) ^
-      const DeepCollectionEquality().hash(tabletSupported) ^
-      const DeepCollectionEquality().hash(mobileSupported) ^
-      const DeepCollectionEquality().hash(menus) ^
       const DeepCollectionEquality().hash(tags) ^
+      const DeepCollectionEquality().hash(screenIds) ^
+      const DeepCollectionEquality().hash(clientIds) ^
+      const DeepCollectionEquality().hash(roles) ^
       runtimeType.hashCode;
 }
 
@@ -19060,22 +18958,20 @@ extension $DashboardMenuGroupInfoExtension on DashboardMenuGroupInfo {
       String? description,
       String? icon,
       int? order,
-      bool? webSupported,
-      bool? tabletSupported,
-      bool? mobileSupported,
-      List<DashboardMenu>? menus,
-      List<String>? tags}) {
+      List<String>? tags,
+      List<String>? screenIds,
+      List<String>? clientIds,
+      List<String>? roles}) {
     return DashboardMenuGroupInfo(
         name: name ?? this.name,
         displayName: displayName ?? this.displayName,
         description: description ?? this.description,
         icon: icon ?? this.icon,
         order: order ?? this.order,
-        webSupported: webSupported ?? this.webSupported,
-        tabletSupported: tabletSupported ?? this.tabletSupported,
-        mobileSupported: mobileSupported ?? this.mobileSupported,
-        menus: menus ?? this.menus,
-        tags: tags ?? this.tags);
+        tags: tags ?? this.tags,
+        screenIds: screenIds ?? this.screenIds,
+        clientIds: clientIds ?? this.clientIds,
+        roles: roles ?? this.roles);
   }
 
   DashboardMenuGroupInfo copyWithWrapped(
@@ -19084,11 +18980,10 @@ extension $DashboardMenuGroupInfoExtension on DashboardMenuGroupInfo {
       Wrapped<String?>? description,
       Wrapped<String?>? icon,
       Wrapped<int?>? order,
-      Wrapped<bool>? webSupported,
-      Wrapped<bool>? tabletSupported,
-      Wrapped<bool>? mobileSupported,
-      Wrapped<List<DashboardMenu>>? menus,
-      Wrapped<List<String>?>? tags}) {
+      Wrapped<List<String>?>? tags,
+      Wrapped<List<String>>? screenIds,
+      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>?>? roles}) {
     return DashboardMenuGroupInfo(
         name: (name != null ? name.value : this.name),
         displayName:
@@ -19097,16 +18992,10 @@ extension $DashboardMenuGroupInfoExtension on DashboardMenuGroupInfo {
             (description != null ? description.value : this.description),
         icon: (icon != null ? icon.value : this.icon),
         order: (order != null ? order.value : this.order),
-        webSupported:
-            (webSupported != null ? webSupported.value : this.webSupported),
-        tabletSupported: (tabletSupported != null
-            ? tabletSupported.value
-            : this.tabletSupported),
-        mobileSupported: (mobileSupported != null
-            ? mobileSupported.value
-            : this.mobileSupported),
-        menus: (menus != null ? menus.value : this.menus),
-        tags: (tags != null ? tags.value : this.tags));
+        tags: (tags != null ? tags.value : this.tags),
+        screenIds: (screenIds != null ? screenIds.value : this.screenIds),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
+        roles: (roles != null ? roles.value : this.roles));
   }
 }
 
@@ -19126,10 +19015,9 @@ class DashboardMenuGroup {
     this.description,
     this.icon,
     this.order,
-    required this.webSupported,
-    required this.tabletSupported,
-    required this.mobileSupported,
-    required this.menus,
+    required this.screenIds,
+    this.clientIds,
+    this.roles,
   });
 
   factory DashboardMenuGroup.fromJson(Map<String, dynamic> json) =>
@@ -19164,14 +19052,12 @@ class DashboardMenuGroup {
   final String? icon;
   @JsonKey(name: 'order', includeIfNull: false)
   final int? order;
-  @JsonKey(name: 'webSupported', includeIfNull: false, defaultValue: true)
-  final bool webSupported;
-  @JsonKey(name: 'tabletSupported', includeIfNull: false, defaultValue: true)
-  final bool tabletSupported;
-  @JsonKey(name: 'mobileSupported', includeIfNull: false, defaultValue: true)
-  final bool mobileSupported;
-  @JsonKey(name: 'menus', includeIfNull: false, defaultValue: <DashboardMenu>[])
-  final List<DashboardMenu> menus;
+  @JsonKey(name: 'screenIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String> screenIds;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
+  @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? roles;
   static const fromJsonFactory = _$DashboardMenuGroupFromJson;
 
   @override
@@ -19211,17 +19097,14 @@ class DashboardMenuGroup {
                 const DeepCollectionEquality().equals(other.icon, icon)) &&
             (identical(other.order, order) ||
                 const DeepCollectionEquality().equals(other.order, order)) &&
-            (identical(other.webSupported, webSupported) ||
+            (identical(other.screenIds, screenIds) ||
                 const DeepCollectionEquality()
-                    .equals(other.webSupported, webSupported)) &&
-            (identical(other.tabletSupported, tabletSupported) ||
+                    .equals(other.screenIds, screenIds)) &&
+            (identical(other.clientIds, clientIds) ||
                 const DeepCollectionEquality()
-                    .equals(other.tabletSupported, tabletSupported)) &&
-            (identical(other.mobileSupported, mobileSupported) ||
-                const DeepCollectionEquality()
-                    .equals(other.mobileSupported, mobileSupported)) &&
-            (identical(other.menus, menus) ||
-                const DeepCollectionEquality().equals(other.menus, menus)));
+                    .equals(other.clientIds, clientIds)) &&
+            (identical(other.roles, roles) ||
+                const DeepCollectionEquality().equals(other.roles, roles)));
   }
 
   @override
@@ -19242,10 +19125,9 @@ class DashboardMenuGroup {
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(icon) ^
       const DeepCollectionEquality().hash(order) ^
-      const DeepCollectionEquality().hash(webSupported) ^
-      const DeepCollectionEquality().hash(tabletSupported) ^
-      const DeepCollectionEquality().hash(mobileSupported) ^
-      const DeepCollectionEquality().hash(menus) ^
+      const DeepCollectionEquality().hash(screenIds) ^
+      const DeepCollectionEquality().hash(clientIds) ^
+      const DeepCollectionEquality().hash(roles) ^
       runtimeType.hashCode;
 }
 
@@ -19264,10 +19146,9 @@ extension $DashboardMenuGroupExtension on DashboardMenuGroup {
       String? description,
       String? icon,
       int? order,
-      bool? webSupported,
-      bool? tabletSupported,
-      bool? mobileSupported,
-      List<DashboardMenu>? menus}) {
+      List<String>? screenIds,
+      List<String>? clientIds,
+      List<String>? roles}) {
     return DashboardMenuGroup(
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
@@ -19282,10 +19163,9 @@ extension $DashboardMenuGroupExtension on DashboardMenuGroup {
         description: description ?? this.description,
         icon: icon ?? this.icon,
         order: order ?? this.order,
-        webSupported: webSupported ?? this.webSupported,
-        tabletSupported: tabletSupported ?? this.tabletSupported,
-        mobileSupported: mobileSupported ?? this.mobileSupported,
-        menus: menus ?? this.menus);
+        screenIds: screenIds ?? this.screenIds,
+        clientIds: clientIds ?? this.clientIds,
+        roles: roles ?? this.roles);
   }
 
   DashboardMenuGroup copyWithWrapped(
@@ -19302,10 +19182,9 @@ extension $DashboardMenuGroupExtension on DashboardMenuGroup {
       Wrapped<String?>? description,
       Wrapped<String?>? icon,
       Wrapped<int?>? order,
-      Wrapped<bool>? webSupported,
-      Wrapped<bool>? tabletSupported,
-      Wrapped<bool>? mobileSupported,
-      Wrapped<List<DashboardMenu>>? menus}) {
+      Wrapped<List<String>>? screenIds,
+      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>?>? roles}) {
     return DashboardMenuGroup(
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
@@ -19324,15 +19203,9 @@ extension $DashboardMenuGroupExtension on DashboardMenuGroup {
             (description != null ? description.value : this.description),
         icon: (icon != null ? icon.value : this.icon),
         order: (order != null ? order.value : this.order),
-        webSupported:
-            (webSupported != null ? webSupported.value : this.webSupported),
-        tabletSupported: (tabletSupported != null
-            ? tabletSupported.value
-            : this.tabletSupported),
-        mobileSupported: (mobileSupported != null
-            ? mobileSupported.value
-            : this.mobileSupported),
-        menus: (menus != null ? menus.value : this.menus));
+        screenIds: (screenIds != null ? screenIds.value : this.screenIds),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
+        roles: (roles != null ? roles.value : this.roles));
   }
 }
 
@@ -19646,6 +19519,7 @@ class ScreenChild {
     this.bgColor,
     this.bgImage,
     this.scrollDirection,
+    this.expanded,
   });
 
   factory ScreenChild.fromJson(Map<String, dynamic> json) =>
@@ -19668,6 +19542,8 @@ class ScreenChild {
   final String? bgImage;
   @JsonKey(name: 'scrollDirection', includeIfNull: false, defaultValue: '')
   final String? scrollDirection;
+  @JsonKey(name: 'expanded', includeIfNull: false)
+  final bool? expanded;
   static const fromJsonFactory = _$ScreenChildFromJson;
 
   @override
@@ -19691,7 +19567,10 @@ class ScreenChild {
                     .equals(other.bgImage, bgImage)) &&
             (identical(other.scrollDirection, scrollDirection) ||
                 const DeepCollectionEquality()
-                    .equals(other.scrollDirection, scrollDirection)));
+                    .equals(other.scrollDirection, scrollDirection)) &&
+            (identical(other.expanded, expanded) ||
+                const DeepCollectionEquality()
+                    .equals(other.expanded, expanded)));
   }
 
   @override
@@ -19706,6 +19585,7 @@ class ScreenChild {
       const DeepCollectionEquality().hash(bgColor) ^
       const DeepCollectionEquality().hash(bgImage) ^
       const DeepCollectionEquality().hash(scrollDirection) ^
+      const DeepCollectionEquality().hash(expanded) ^
       runtimeType.hashCode;
 }
 
@@ -19717,7 +19597,8 @@ extension $ScreenChildExtension on ScreenChild {
       double? height,
       int? bgColor,
       String? bgImage,
-      String? scrollDirection}) {
+      String? scrollDirection,
+      bool? expanded}) {
     return ScreenChild(
         widgetId: widgetId ?? this.widgetId,
         config: config ?? this.config,
@@ -19725,7 +19606,8 @@ extension $ScreenChildExtension on ScreenChild {
         height: height ?? this.height,
         bgColor: bgColor ?? this.bgColor,
         bgImage: bgImage ?? this.bgImage,
-        scrollDirection: scrollDirection ?? this.scrollDirection);
+        scrollDirection: scrollDirection ?? this.scrollDirection,
+        expanded: expanded ?? this.expanded);
   }
 
   ScreenChild copyWithWrapped(
@@ -19735,7 +19617,8 @@ extension $ScreenChildExtension on ScreenChild {
       Wrapped<double?>? height,
       Wrapped<int?>? bgColor,
       Wrapped<String?>? bgImage,
-      Wrapped<String?>? scrollDirection}) {
+      Wrapped<String?>? scrollDirection,
+      Wrapped<bool?>? expanded}) {
     return ScreenChild(
         widgetId: (widgetId != null ? widgetId.value : this.widgetId),
         config: (config != null ? config.value : this.config),
@@ -19745,7 +19628,8 @@ extension $ScreenChildExtension on ScreenChild {
         bgImage: (bgImage != null ? bgImage.value : this.bgImage),
         scrollDirection: (scrollDirection != null
             ? scrollDirection.value
-            : this.scrollDirection));
+            : this.scrollDirection),
+        expanded: (expanded != null ? expanded.value : this.expanded));
   }
 }
 
@@ -19760,6 +19644,7 @@ class ScreenRow {
     this.crossAxisAlignment,
     this.mainAxisSize,
     this.scrollDirection,
+    this.expanded,
     required this.children,
   });
 
@@ -19785,6 +19670,8 @@ class ScreenRow {
   final String? mainAxisSize;
   @JsonKey(name: 'scrollDirection', includeIfNull: false, defaultValue: '')
   final String? scrollDirection;
+  @JsonKey(name: 'expanded', includeIfNull: false)
+  final bool? expanded;
   @JsonKey(
       name: 'children', includeIfNull: false, defaultValue: <ScreenChild>[])
   final List<ScreenChild> children;
@@ -19817,6 +19704,9 @@ class ScreenRow {
             (identical(other.scrollDirection, scrollDirection) ||
                 const DeepCollectionEquality()
                     .equals(other.scrollDirection, scrollDirection)) &&
+            (identical(other.expanded, expanded) ||
+                const DeepCollectionEquality()
+                    .equals(other.expanded, expanded)) &&
             (identical(other.children, children) ||
                 const DeepCollectionEquality()
                     .equals(other.children, children)));
@@ -19835,6 +19725,7 @@ class ScreenRow {
       const DeepCollectionEquality().hash(crossAxisAlignment) ^
       const DeepCollectionEquality().hash(mainAxisSize) ^
       const DeepCollectionEquality().hash(scrollDirection) ^
+      const DeepCollectionEquality().hash(expanded) ^
       const DeepCollectionEquality().hash(children) ^
       runtimeType.hashCode;
 }
@@ -19849,6 +19740,7 @@ extension $ScreenRowExtension on ScreenRow {
       String? crossAxisAlignment,
       String? mainAxisSize,
       String? scrollDirection,
+      bool? expanded,
       List<ScreenChild>? children}) {
     return ScreenRow(
         height: height ?? this.height,
@@ -19859,6 +19751,7 @@ extension $ScreenRowExtension on ScreenRow {
         crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment,
         mainAxisSize: mainAxisSize ?? this.mainAxisSize,
         scrollDirection: scrollDirection ?? this.scrollDirection,
+        expanded: expanded ?? this.expanded,
         children: children ?? this.children);
   }
 
@@ -19871,6 +19764,7 @@ extension $ScreenRowExtension on ScreenRow {
       Wrapped<String?>? crossAxisAlignment,
       Wrapped<String?>? mainAxisSize,
       Wrapped<String?>? scrollDirection,
+      Wrapped<bool?>? expanded,
       Wrapped<List<ScreenChild>>? children}) {
     return ScreenRow(
         height: (height != null ? height.value : this.height),
@@ -19888,6 +19782,7 @@ extension $ScreenRowExtension on ScreenRow {
         scrollDirection: (scrollDirection != null
             ? scrollDirection.value
             : this.scrollDirection),
+        expanded: (expanded != null ? expanded.value : this.expanded),
         children: (children != null ? children.value : this.children));
   }
 }
@@ -40474,78 +40369,6 @@ List<enums.TriggeredControlDeliveryStatus>?
 
   return triggeredControlDeliveryStatus
       .map((e) => triggeredControlDeliveryStatusFromJson(e.toString()))
-      .toList();
-}
-
-String? dashboardMenuLinkTypeNullableToJson(
-    enums.DashboardMenuLinkType? dashboardMenuLinkType) {
-  return dashboardMenuLinkType?.value;
-}
-
-String? dashboardMenuLinkTypeToJson(
-    enums.DashboardMenuLinkType dashboardMenuLinkType) {
-  return dashboardMenuLinkType.value;
-}
-
-enums.DashboardMenuLinkType dashboardMenuLinkTypeFromJson(
-  Object? dashboardMenuLinkType, [
-  enums.DashboardMenuLinkType? defaultValue,
-]) {
-  return enums.DashboardMenuLinkType.values
-          .firstWhereOrNull((e) => e.value == dashboardMenuLinkType) ??
-      defaultValue ??
-      enums.DashboardMenuLinkType.swaggerGeneratedUnknown;
-}
-
-enums.DashboardMenuLinkType? dashboardMenuLinkTypeNullableFromJson(
-  Object? dashboardMenuLinkType, [
-  enums.DashboardMenuLinkType? defaultValue,
-]) {
-  if (dashboardMenuLinkType == null) {
-    return null;
-  }
-  return enums.DashboardMenuLinkType.values
-          .firstWhereOrNull((e) => e.value == dashboardMenuLinkType) ??
-      defaultValue;
-}
-
-String dashboardMenuLinkTypeExplodedListToJson(
-    List<enums.DashboardMenuLinkType>? dashboardMenuLinkType) {
-  return dashboardMenuLinkType?.map((e) => e.value!).join(',') ?? '';
-}
-
-List<String> dashboardMenuLinkTypeListToJson(
-    List<enums.DashboardMenuLinkType>? dashboardMenuLinkType) {
-  if (dashboardMenuLinkType == null) {
-    return [];
-  }
-
-  return dashboardMenuLinkType.map((e) => e.value!).toList();
-}
-
-List<enums.DashboardMenuLinkType> dashboardMenuLinkTypeListFromJson(
-  List? dashboardMenuLinkType, [
-  List<enums.DashboardMenuLinkType>? defaultValue,
-]) {
-  if (dashboardMenuLinkType == null) {
-    return defaultValue ?? [];
-  }
-
-  return dashboardMenuLinkType
-      .map((e) => dashboardMenuLinkTypeFromJson(e.toString()))
-      .toList();
-}
-
-List<enums.DashboardMenuLinkType>? dashboardMenuLinkTypeNullableListFromJson(
-  List? dashboardMenuLinkType, [
-  List<enums.DashboardMenuLinkType>? defaultValue,
-]) {
-  if (dashboardMenuLinkType == null) {
-    return defaultValue;
-  }
-
-  return dashboardMenuLinkType
-      .map((e) => dashboardMenuLinkTypeFromJson(e.toString()))
       .toList();
 }
 
