@@ -16661,6 +16661,9 @@
       "required": [
         "name",
         "displayName",
+        "webSupported",
+        "tabletSupported",
+        "mobileSupported",
         "menus"
       ],
       "properties": {
