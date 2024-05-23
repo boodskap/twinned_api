@@ -16800,11 +16800,11 @@
         "bgImage": {
           "type": "string"
         },
-        "scrollDirection": {
-          "type": "string"
-        },
         "expanded": {
           "type": "boolean"
+        },
+        "flex": {
+          "type": "integer"
         }
       }
     },
@@ -16840,9 +16840,6 @@
         },
         "scrollDirection": {
           "type": "string"
-        },
-        "expanded": {
-          "type": "boolean"
         },
         "children": {
           "type": "array",

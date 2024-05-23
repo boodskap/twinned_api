@@ -19768,8 +19768,8 @@ class ScreenChild {
     this.height,
     this.bgColor,
     this.bgImage,
-    this.scrollDirection,
     this.expanded,
+    this.flex,
   });
 
   factory ScreenChild.fromJson(Map<String, dynamic> json) =>
@@ -19790,10 +19790,10 @@ class ScreenChild {
   final int? bgColor;
   @JsonKey(name: 'bgImage', includeIfNull: false, defaultValue: '')
   final String? bgImage;
-  @JsonKey(name: 'scrollDirection', includeIfNull: false, defaultValue: '')
-  final String? scrollDirection;
   @JsonKey(name: 'expanded', includeIfNull: false)
   final bool? expanded;
+  @JsonKey(name: 'flex', includeIfNull: false)
+  final int? flex;
   static const fromJsonFactory = _$ScreenChildFromJson;
 
   @override
@@ -19815,12 +19815,11 @@ class ScreenChild {
             (identical(other.bgImage, bgImage) ||
                 const DeepCollectionEquality()
                     .equals(other.bgImage, bgImage)) &&
-            (identical(other.scrollDirection, scrollDirection) ||
-                const DeepCollectionEquality()
-                    .equals(other.scrollDirection, scrollDirection)) &&
             (identical(other.expanded, expanded) ||
                 const DeepCollectionEquality()
-                    .equals(other.expanded, expanded)));
+                    .equals(other.expanded, expanded)) &&
+            (identical(other.flex, flex) ||
+                const DeepCollectionEquality().equals(other.flex, flex)));
   }
 
   @override
@@ -19834,8 +19833,8 @@ class ScreenChild {
       const DeepCollectionEquality().hash(height) ^
       const DeepCollectionEquality().hash(bgColor) ^
       const DeepCollectionEquality().hash(bgImage) ^
-      const DeepCollectionEquality().hash(scrollDirection) ^
       const DeepCollectionEquality().hash(expanded) ^
+      const DeepCollectionEquality().hash(flex) ^
       runtimeType.hashCode;
 }
 
@@ -19847,8 +19846,8 @@ extension $ScreenChildExtension on ScreenChild {
       double? height,
       int? bgColor,
       String? bgImage,
-      String? scrollDirection,
-      bool? expanded}) {
+      bool? expanded,
+      int? flex}) {
     return ScreenChild(
         widgetId: widgetId ?? this.widgetId,
         config: config ?? this.config,
@@ -19856,8 +19855,8 @@ extension $ScreenChildExtension on ScreenChild {
         height: height ?? this.height,
         bgColor: bgColor ?? this.bgColor,
         bgImage: bgImage ?? this.bgImage,
-        scrollDirection: scrollDirection ?? this.scrollDirection,
-        expanded: expanded ?? this.expanded);
+        expanded: expanded ?? this.expanded,
+        flex: flex ?? this.flex);
   }
 
   ScreenChild copyWithWrapped(
@@ -19867,8 +19866,8 @@ extension $ScreenChildExtension on ScreenChild {
       Wrapped<double?>? height,
       Wrapped<int?>? bgColor,
       Wrapped<String?>? bgImage,
-      Wrapped<String?>? scrollDirection,
-      Wrapped<bool?>? expanded}) {
+      Wrapped<bool?>? expanded,
+      Wrapped<int?>? flex}) {
     return ScreenChild(
         widgetId: (widgetId != null ? widgetId.value : this.widgetId),
         config: (config != null ? config.value : this.config),
@@ -19876,10 +19875,8 @@ extension $ScreenChildExtension on ScreenChild {
         height: (height != null ? height.value : this.height),
         bgColor: (bgColor != null ? bgColor.value : this.bgColor),
         bgImage: (bgImage != null ? bgImage.value : this.bgImage),
-        scrollDirection: (scrollDirection != null
-            ? scrollDirection.value
-            : this.scrollDirection),
-        expanded: (expanded != null ? expanded.value : this.expanded));
+        expanded: (expanded != null ? expanded.value : this.expanded),
+        flex: (flex != null ? flex.value : this.flex));
   }
 }
 
@@ -19894,7 +19891,6 @@ class ScreenRow {
     this.crossAxisAlignment,
     this.mainAxisSize,
     this.scrollDirection,
-    this.expanded,
     required this.children,
   });
 
@@ -19920,8 +19916,6 @@ class ScreenRow {
   final String? mainAxisSize;
   @JsonKey(name: 'scrollDirection', includeIfNull: false, defaultValue: '')
   final String? scrollDirection;
-  @JsonKey(name: 'expanded', includeIfNull: false)
-  final bool? expanded;
   @JsonKey(
       name: 'children', includeIfNull: false, defaultValue: <ScreenChild>[])
   final List<ScreenChild> children;
@@ -19954,9 +19948,6 @@ class ScreenRow {
             (identical(other.scrollDirection, scrollDirection) ||
                 const DeepCollectionEquality()
                     .equals(other.scrollDirection, scrollDirection)) &&
-            (identical(other.expanded, expanded) ||
-                const DeepCollectionEquality()
-                    .equals(other.expanded, expanded)) &&
             (identical(other.children, children) ||
                 const DeepCollectionEquality()
                     .equals(other.children, children)));
@@ -19975,7 +19966,6 @@ class ScreenRow {
       const DeepCollectionEquality().hash(crossAxisAlignment) ^
       const DeepCollectionEquality().hash(mainAxisSize) ^
       const DeepCollectionEquality().hash(scrollDirection) ^
-      const DeepCollectionEquality().hash(expanded) ^
       const DeepCollectionEquality().hash(children) ^
       runtimeType.hashCode;
 }
@@ -19990,7 +19980,6 @@ extension $ScreenRowExtension on ScreenRow {
       String? crossAxisAlignment,
       String? mainAxisSize,
       String? scrollDirection,
-      bool? expanded,
       List<ScreenChild>? children}) {
     return ScreenRow(
         height: height ?? this.height,
@@ -20001,7 +19990,6 @@ extension $ScreenRowExtension on ScreenRow {
         crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment,
         mainAxisSize: mainAxisSize ?? this.mainAxisSize,
         scrollDirection: scrollDirection ?? this.scrollDirection,
-        expanded: expanded ?? this.expanded,
         children: children ?? this.children);
   }
 
@@ -20014,7 +20002,6 @@ extension $ScreenRowExtension on ScreenRow {
       Wrapped<String?>? crossAxisAlignment,
       Wrapped<String?>? mainAxisSize,
       Wrapped<String?>? scrollDirection,
-      Wrapped<bool?>? expanded,
       Wrapped<List<ScreenChild>>? children}) {
     return ScreenRow(
         height: (height != null ? height.value : this.height),
@@ -20032,7 +20019,6 @@ extension $ScreenRowExtension on ScreenRow {
         scrollDirection: (scrollDirection != null
             ? scrollDirection.value
             : this.scrollDirection),
-        expanded: (expanded != null ? expanded.value : this.expanded),
         children: (children != null ? children.value : this.children));
   }
 }
