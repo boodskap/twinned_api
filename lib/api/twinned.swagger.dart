@@ -19072,9 +19072,9 @@ class DashboardMenuGroupInfo {
     this.description,
     this.icon,
     this.order,
-    this.webSupported,
-    this.tabletSupported,
-    this.mobileSupported,
+    required this.webSupported,
+    required this.tabletSupported,
+    required this.mobileSupported,
     this.tags,
     this.roles,
     required this.menus,
@@ -19097,11 +19097,11 @@ class DashboardMenuGroupInfo {
   @JsonKey(name: 'order', includeIfNull: false)
   final int? order;
   @JsonKey(name: 'webSupported', includeIfNull: false, defaultValue: true)
-  final bool? webSupported;
+  final bool webSupported;
   @JsonKey(name: 'tabletSupported', includeIfNull: false, defaultValue: true)
-  final bool? tabletSupported;
+  final bool tabletSupported;
   @JsonKey(name: 'mobileSupported', includeIfNull: false, defaultValue: true)
-  final bool? mobileSupported;
+  final bool mobileSupported;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
@@ -19195,9 +19195,9 @@ extension $DashboardMenuGroupInfoExtension on DashboardMenuGroupInfo {
       Wrapped<String?>? description,
       Wrapped<String?>? icon,
       Wrapped<int?>? order,
-      Wrapped<bool?>? webSupported,
-      Wrapped<bool?>? tabletSupported,
-      Wrapped<bool?>? mobileSupported,
+      Wrapped<bool>? webSupported,
+      Wrapped<bool>? tabletSupported,
+      Wrapped<bool>? mobileSupported,
       Wrapped<List<String>?>? tags,
       Wrapped<List<String>?>? roles,
       Wrapped<List<DashboardMenu>>? menus}) {
@@ -19239,9 +19239,9 @@ class DashboardMenuGroup {
     this.description,
     this.icon,
     this.order,
-    this.webSupported,
-    this.tabletSupported,
-    this.mobileSupported,
+    required this.webSupported,
+    required this.tabletSupported,
+    required this.mobileSupported,
     this.roles,
     required this.menus,
   });
@@ -19279,11 +19279,11 @@ class DashboardMenuGroup {
   @JsonKey(name: 'order', includeIfNull: false)
   final int? order;
   @JsonKey(name: 'webSupported', includeIfNull: false, defaultValue: true)
-  final bool? webSupported;
+  final bool webSupported;
   @JsonKey(name: 'tabletSupported', includeIfNull: false, defaultValue: true)
-  final bool? tabletSupported;
+  final bool tabletSupported;
   @JsonKey(name: 'mobileSupported', includeIfNull: false, defaultValue: true)
-  final bool? mobileSupported;
+  final bool mobileSupported;
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'menus', includeIfNull: false, defaultValue: <DashboardMenu>[])
@@ -19423,9 +19423,9 @@ extension $DashboardMenuGroupExtension on DashboardMenuGroup {
       Wrapped<String?>? description,
       Wrapped<String?>? icon,
       Wrapped<int?>? order,
-      Wrapped<bool?>? webSupported,
-      Wrapped<bool?>? tabletSupported,
-      Wrapped<bool?>? mobileSupported,
+      Wrapped<bool>? webSupported,
+      Wrapped<bool>? tabletSupported,
+      Wrapped<bool>? mobileSupported,
       Wrapped<List<String>?>? roles,
       Wrapped<List<DashboardMenu>>? menus}) {
     return DashboardMenuGroup(

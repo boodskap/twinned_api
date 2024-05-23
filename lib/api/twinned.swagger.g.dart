@@ -3524,9 +3524,9 @@ Map<String, dynamic> _$DashboardMenuGroupInfoToJson(
   writeNotNull('description', instance.description);
   writeNotNull('icon', instance.icon);
   writeNotNull('order', instance.order);
-  writeNotNull('webSupported', instance.webSupported);
-  writeNotNull('tabletSupported', instance.tabletSupported);
-  writeNotNull('mobileSupported', instance.mobileSupported);
+  val['webSupported'] = instance.webSupported;
+  val['tabletSupported'] = instance.tabletSupported;
+  val['mobileSupported'] = instance.mobileSupported;
   writeNotNull('tags', instance.tags);
   writeNotNull('roles', instance.roles);
   val['menus'] = instance.menus.map((e) => e.toJson()).toList();
@@ -3585,9 +3585,9 @@ Map<String, dynamic> _$DashboardMenuGroupToJson(DashboardMenuGroup instance) {
   writeNotNull('description', instance.description);
   writeNotNull('icon', instance.icon);
   writeNotNull('order', instance.order);
-  writeNotNull('webSupported', instance.webSupported);
-  writeNotNull('tabletSupported', instance.tabletSupported);
-  writeNotNull('mobileSupported', instance.mobileSupported);
+  val['webSupported'] = instance.webSupported;
+  val['tabletSupported'] = instance.tabletSupported;
+  val['mobileSupported'] = instance.mobileSupported;
   writeNotNull('roles', instance.roles);
   val['menus'] = instance.menus.map((e) => e.toJson()).toList();
   return val;
