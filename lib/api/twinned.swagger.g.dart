@@ -35,10 +35,10 @@ BaseEntity _$BaseEntityFromJson(Map<String, dynamic> json) => BaseEntity(
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
@@ -70,8 +70,8 @@ DisplayableEntity _$DisplayableEntityFromJson(Map<String, dynamic> json) =>
     DisplayableEntity(
       description: json['description'] as String? ?? '',
       icon: json['icon'] as String? ?? '',
-      selectedImage: json['selectedImage'] as int?,
-      selectedBanner: json['selectedBanner'] as int?,
+      selectedImage: (json['selectedImage'] as num?)?.toInt(),
+      selectedBanner: (json['selectedBanner'] as num?)?.toInt(),
       images: (json['images'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -103,7 +103,7 @@ Map<String, dynamic> _$DisplayableEntityToJson(DisplayableEntity instance) {
 FireReq _$FireReqFromJson(Map<String, dynamic> json) => FireReq(
       deviceId: json['deviceId'] as String? ?? '',
       controlId: json['controlId'] as String? ?? '',
-      controlState: json['controlState'] as int,
+      controlState: (json['controlState'] as num).toInt(),
       arguments: json['arguments'],
     );
 
@@ -134,8 +134,8 @@ Map<String, dynamic> _$GetReqToJson(GetReq instance) => <String, dynamic>{
     };
 
 ListReq _$ListReqFromJson(Map<String, dynamic> json) => ListReq(
-      page: json['page'] as int,
-      size: json['size'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
     );
 
 Map<String, dynamic> _$ListReqToJson(ListReq instance) => <String, dynamic>{
@@ -144,9 +144,9 @@ Map<String, dynamic> _$ListReqToJson(ListReq instance) => <String, dynamic>{
     };
 
 ListRes _$ListResFromJson(Map<String, dynamic> json) => ListRes(
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
     );
 
 Map<String, dynamic> _$ListResToJson(ListRes instance) => <String, dynamic>{
@@ -167,8 +167,8 @@ Map<String, dynamic> _$SearchReqBaseToJson(SearchReqBase instance) =>
 
 SearchReq _$SearchReqFromJson(Map<String, dynamic> json) => SearchReq(
       search: json['search'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
     );
 
 Map<String, dynamic> _$SearchReqToJson(SearchReq instance) => <String, dynamic>{
@@ -180,8 +180,8 @@ Map<String, dynamic> _$SearchReqToJson(SearchReq instance) => <String, dynamic>{
 RangeFilter _$RangeFilterFromJson(Map<String, dynamic> json) => RangeFilter(
       tz: json['tz'] as String? ?? '',
       filter: rangeFilterFilterNullableFromJson(json['filter']),
-      beginStamp: json['beginStamp'] as int?,
-      endStamp: json['endStamp'] as int?,
+      beginStamp: (json['beginStamp'] as num?)?.toInt(),
+      endStamp: (json['endStamp'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$RangeFilterToJson(RangeFilter instance) {
@@ -226,8 +226,8 @@ FilterSearchReq _$FilterSearchReqFromJson(Map<String, dynamic> json) =>
       filter: json['filter'] == null
           ? null
           : RangeFilter.fromJson(json['filter'] as Map<String, dynamic>),
-      page: json['page'] as int,
-      size: json['size'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
     );
 
 Map<String, dynamic> _$FilterSearchReqToJson(FilterSearchReq instance) {
@@ -340,8 +340,8 @@ DeviceModelInfo _$DeviceModelInfoFromJson(Map<String, dynamic> json) =>
               .toList() ??
           [],
       icon: json['icon'] as String? ?? '',
-      selectedImage: json['selectedImage'] as int?,
-      selectedBanner: json['selectedBanner'] as int?,
+      selectedImage: (json['selectedImage'] as num?)?.toInt(),
+      selectedBanner: (json['selectedBanner'] as num?)?.toInt(),
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
@@ -414,8 +414,8 @@ DeviceModel _$DeviceModelFromJson(Map<String, dynamic> json) => DeviceModel(
               .toList() ??
           [],
       icon: json['icon'] as String? ?? '',
-      selectedImage: json['selectedImage'] as int?,
-      selectedBanner: json['selectedBanner'] as int?,
+      selectedImage: (json['selectedImage'] as num?)?.toInt(),
+      selectedBanner: (json['selectedBanner'] as num?)?.toInt(),
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
@@ -444,10 +444,10 @@ DeviceModel _$DeviceModelFromJson(Map<String, dynamic> json) => DeviceModel(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$DeviceModelToJson(DeviceModel instance) {
@@ -569,9 +569,9 @@ DeviceModelArrayRes _$DeviceModelArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => DeviceModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -608,8 +608,8 @@ DeviceInfo _$DeviceInfoFromJson(Map<String, dynamic> json) => DeviceInfo(
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
       icon: json['icon'] as String? ?? '',
-      selectedImage: json['selectedImage'] as int?,
-      selectedBanner: json['selectedBanner'] as int?,
+      selectedImage: (json['selectedImage'] as num?)?.toInt(),
+      selectedBanner: (json['selectedBanner'] as num?)?.toInt(),
       images: (json['images'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -628,7 +628,7 @@ DeviceInfo _$DeviceInfoFromJson(Map<String, dynamic> json) => DeviceInfo(
       customWidget: json['customWidget'] == null
           ? null
           : CustomWidget.fromJson(json['customWidget'] as Map<String, dynamic>),
-      reportedStamp: json['reportedStamp'] as int?,
+      reportedStamp: (json['reportedStamp'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$DeviceInfoToJson(DeviceInfo instance) {
@@ -663,11 +663,17 @@ Map<String, dynamic> _$DeviceInfoToJson(DeviceInfo instance) {
 
 DeviceBase _$DeviceBaseFromJson(Map<String, dynamic> json) => DeviceBase(
       apiKey: json['apiKey'] as String? ?? '',
-      reportedStamp: json['reportedStamp'] as int,
+      reportedStamp: (json['reportedStamp'] as num).toInt(),
       premiseId: json['premiseId'] as String? ?? '',
       facilityId: json['facilityId'] as String? ?? '',
       floorId: json['floorId'] as String? ?? '',
       assetId: json['assetId'] as String? ?? '',
+      premise: json['premise'] as String? ?? '',
+      facility: json['facility'] as String? ?? '',
+      floor: json['floor'] as String? ?? '',
+      asset: json['asset'] as String? ?? '',
+      clientId: json['clientId'] as String? ?? '',
+      $client: json['client'] as String? ?? '',
     );
 
 Map<String, dynamic> _$DeviceBaseToJson(DeviceBase instance) {
@@ -686,16 +692,28 @@ Map<String, dynamic> _$DeviceBaseToJson(DeviceBase instance) {
   writeNotNull('facilityId', instance.facilityId);
   writeNotNull('floorId', instance.floorId);
   writeNotNull('assetId', instance.assetId);
+  writeNotNull('premise', instance.premise);
+  writeNotNull('facility', instance.facility);
+  writeNotNull('floor', instance.floor);
+  writeNotNull('asset', instance.asset);
+  writeNotNull('clientId', instance.clientId);
+  writeNotNull('client', instance.$client);
   return val;
 }
 
 Device _$DeviceFromJson(Map<String, dynamic> json) => Device(
       apiKey: json['apiKey'] as String? ?? '',
-      reportedStamp: json['reportedStamp'] as int,
+      reportedStamp: (json['reportedStamp'] as num).toInt(),
       premiseId: json['premiseId'] as String? ?? '',
       facilityId: json['facilityId'] as String? ?? '',
       floorId: json['floorId'] as String? ?? '',
       assetId: json['assetId'] as String? ?? '',
+      premise: json['premise'] as String? ?? '',
+      facility: json['facility'] as String? ?? '',
+      floor: json['floor'] as String? ?? '',
+      asset: json['asset'] as String? ?? '',
+      clientId: json['clientId'] as String? ?? '',
+      $client: json['client'] as String? ?? '',
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
       modelId: json['modelId'] as String? ?? '',
@@ -704,8 +722,8 @@ Device _$DeviceFromJson(Map<String, dynamic> json) => Device(
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
       icon: json['icon'] as String? ?? '',
-      selectedImage: json['selectedImage'] as int?,
-      selectedBanner: json['selectedBanner'] as int?,
+      selectedImage: (json['selectedImage'] as num?)?.toInt(),
+      selectedBanner: (json['selectedBanner'] as num?)?.toInt(),
       images: (json['images'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -727,10 +745,10 @@ Device _$DeviceFromJson(Map<String, dynamic> json) => Device(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$DeviceToJson(Device instance) {
@@ -749,6 +767,12 @@ Map<String, dynamic> _$DeviceToJson(Device instance) {
   writeNotNull('facilityId', instance.facilityId);
   writeNotNull('floorId', instance.floorId);
   writeNotNull('assetId', instance.assetId);
+  writeNotNull('premise', instance.premise);
+  writeNotNull('facility', instance.facility);
+  writeNotNull('floor', instance.floor);
+  writeNotNull('asset', instance.asset);
+  writeNotNull('clientId', instance.clientId);
+  writeNotNull('client', instance.$client);
   val['name'] = instance.name;
   writeNotNull('description', instance.description);
   val['modelId'] = instance.modelId;
@@ -849,9 +873,9 @@ DeviceArrayRes _$DeviceArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => Device.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -943,10 +967,10 @@ Condition _$ConditionFromJson(Map<String, dynamic> json) => Condition(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$ConditionToJson(Condition instance) {
@@ -1055,9 +1079,9 @@ ConditionArrayRes _$ConditionArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => Condition.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -1114,8 +1138,8 @@ AlarmMatchGroup _$AlarmMatchGroupFromJson(Map<String, dynamic> json) =>
               ?.map((e) => e as String)
               .toList() ??
           [],
-      alarmState: json['alarmState'] as int,
-      deviceState: json['deviceState'] as int?,
+      alarmState: (json['alarmState'] as num).toInt(),
+      deviceState: (json['deviceState'] as num?)?.toInt(),
       tooltip: json['tooltip'] as String? ?? '',
     );
 
@@ -1141,7 +1165,7 @@ AlarmInfo _$AlarmInfoFromJson(Map<String, dynamic> json) => AlarmInfo(
       description: json['description'] as String? ?? '',
       label: json['label'] as String? ?? '',
       modelId: json['modelId'] as String? ?? '',
-      state: json['state'] as int,
+      state: (json['state'] as num).toInt(),
       stateIcons: (json['stateIcons'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -1183,7 +1207,7 @@ Alarm _$AlarmFromJson(Map<String, dynamic> json) => Alarm(
       description: json['description'] as String? ?? '',
       label: json['label'] as String? ?? '',
       modelId: json['modelId'] as String? ?? '',
-      state: json['state'] as int,
+      state: (json['state'] as num).toInt(),
       stateIcons: (json['stateIcons'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -1199,10 +1223,10 @@ Alarm _$AlarmFromJson(Map<String, dynamic> json) => Alarm(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$AlarmToJson(Alarm instance) {
@@ -1308,9 +1332,9 @@ AlarmArrayRes _$AlarmArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => Alarm.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -1375,7 +1399,7 @@ ControlInfo _$ControlInfoFromJson(Map<String, dynamic> json) => ControlInfo(
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
       modelId: json['modelId'] as String? ?? '',
-      state: json['state'] as int,
+      state: (json['state'] as num).toInt(),
       stateIcons: (json['stateIcons'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -1413,7 +1437,7 @@ Control _$ControlFromJson(Map<String, dynamic> json) => Control(
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
       modelId: json['modelId'] as String? ?? '',
-      state: json['state'] as int,
+      state: (json['state'] as num).toInt(),
       stateIcons: (json['stateIcons'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -1428,10 +1452,10 @@ Control _$ControlFromJson(Map<String, dynamic> json) => Control(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$ControlToJson(Control instance) {
@@ -1536,9 +1560,9 @@ ControlArrayRes _$ControlArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => Control.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -1662,10 +1686,10 @@ Event _$EventFromJson(Map<String, dynamic> json) => Event(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$EventToJson(Event instance) {
@@ -1774,9 +1798,9 @@ EventArrayRes _$EventArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => Event.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -1857,7 +1881,7 @@ Map<String, dynamic> _$HttpConfigToJson(HttpConfig instance) {
 
 UdpConfig _$UdpConfigFromJson(Map<String, dynamic> json) => UdpConfig(
       host: json['host'] as String? ?? '',
-      port: json['port'] as int,
+      port: (json['port'] as num).toInt(),
     );
 
 Map<String, dynamic> _$UdpConfigToJson(UdpConfig instance) => <String, dynamic>{
@@ -1867,9 +1891,9 @@ Map<String, dynamic> _$UdpConfigToJson(UdpConfig instance) => <String, dynamic>{
 
 MqttConfig _$MqttConfigFromJson(Map<String, dynamic> json) => MqttConfig(
       host: json['host'] as String? ?? '',
-      port: json['port'] as int,
+      port: (json['port'] as num).toInt(),
       topic: json['topic'] as String? ?? '',
-      qos: json['qos'] as int?,
+      qos: (json['qos'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$MqttConfigToJson(MqttConfig instance) {
@@ -1891,7 +1915,7 @@ Map<String, dynamic> _$MqttConfigToJson(MqttConfig instance) {
 
 TriggerControl _$TriggerControlFromJson(Map<String, dynamic> json) =>
     TriggerControl(
-      controlState: json['controlState'] as int,
+      controlState: (json['controlState'] as num).toInt(),
       triggerTarget:
           TriggerControl.triggerControlTriggerTargetTriggerTargetFromJson(
               json['triggerTarget']),
@@ -1998,10 +2022,10 @@ Trigger _$TriggerFromJson(Map<String, dynamic> json) => Trigger(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$TriggerToJson(Trigger instance) {
@@ -2106,9 +2130,9 @@ TriggerArrayRes _$TriggerArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => Trigger.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -2205,7 +2229,7 @@ ImageFileInfo _$ImageFileInfoFromJson(Map<String, dynamic> json) =>
       eventId: json['eventId'] as String? ?? '',
       triggerId: json['triggerId'] as String? ?? '',
       menuGroupId: json['menuGroupId'] as String? ?? '',
-      menuIndex: json['menuIndex'] as int?,
+      menuIndex: (json['menuIndex'] as num?)?.toInt(),
       screenId: json['screenId'] as String? ?? '',
       displayId: json['displayId'] as String? ?? '',
       assetId: json['assetId'] as String? ?? '',
@@ -2269,7 +2293,7 @@ ImageFile _$ImageFileFromJson(Map<String, dynamic> json) => ImageFile(
       eventId: json['eventId'] as String? ?? '',
       triggerId: json['triggerId'] as String? ?? '',
       menuGroupId: json['menuGroupId'] as String? ?? '',
-      menuIndex: json['menuIndex'] as int?,
+      menuIndex: (json['menuIndex'] as num?)?.toInt(),
       screenId: json['screenId'] as String? ?? '',
       displayId: json['displayId'] as String? ?? '',
       assetId: json['assetId'] as String? ?? '',
@@ -2281,10 +2305,10 @@ ImageFile _$ImageFileFromJson(Map<String, dynamic> json) => ImageFile(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
@@ -2405,9 +2429,9 @@ ImageFileArrayRes _$ImageFileArrayResFromJson(Map<String, dynamic> json) =>
               ?.map((e) => ImageFile.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       ok: json['ok'] as bool,
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
@@ -2443,41 +2467,41 @@ DisplayMatchGroup _$DisplayMatchGroupFromJson(Map<String, dynamic> json) =>
           [],
       font: json['font'] as String? ?? '',
       fontSize: (json['fontSize'] as num).toDouble(),
-      fontColor: json['fontColor'] as int,
+      fontColor: (json['fontColor'] as num).toInt(),
       fontStyle: json['fontStyle'] as String? ?? '',
-      fontWeight: json['fontWeight'] as int?,
-      bordorColor: json['bordorColor'] as int?,
+      fontWeight: (json['fontWeight'] as num?)?.toInt(),
+      bordorColor: (json['bordorColor'] as num?)?.toInt(),
       borderType:
           displayMatchGroupBorderTypeNullableFromJson(json['borderType']),
       $value: json['value'] as String? ?? '',
-      bgColor: json['bgColor'] as int?,
+      bgColor: (json['bgColor'] as num?)?.toInt(),
       prefixText: json['prefixText'] as String? ?? '',
       prefixFont: json['prefixFont'] as String? ?? '',
       prefixFontSize: (json['prefixFontSize'] as num?)?.toDouble(),
-      prefixFontColor: json['prefixFontColor'] as int?,
+      prefixFontColor: (json['prefixFontColor'] as num?)?.toInt(),
       prefixFontStyle: json['prefixFontStyle'] as String? ?? '',
-      prefixFontWeight: json['prefixFontWeight'] as int?,
+      prefixFontWeight: (json['prefixFontWeight'] as num?)?.toInt(),
       prefixPadding: (json['prefixPadding'] as num?)?.toDouble(),
       suffixText: json['suffixText'] as String? ?? '',
       suffixFont: json['suffixFont'] as String? ?? '',
       suffixFontSize: (json['suffixFontSize'] as num?)?.toDouble(),
-      suffixFontColor: json['suffixFontColor'] as int?,
+      suffixFontColor: (json['suffixFontColor'] as num?)?.toInt(),
       suffixFontStyle: json['suffixFontStyle'] as String? ?? '',
-      suffixFontWeight: json['suffixFontWeight'] as int?,
+      suffixFontWeight: (json['suffixFontWeight'] as num?)?.toInt(),
       suffixPadding: (json['suffixPadding'] as num?)?.toDouble(),
       topText: json['topText'] as String? ?? '',
       topFont: json['topFont'] as String? ?? '',
       topFontSize: (json['topFontSize'] as num?)?.toDouble(),
-      topFontColor: json['topFontColor'] as int?,
+      topFontColor: (json['topFontColor'] as num?)?.toInt(),
       topFontStyle: json['topFontStyle'] as String? ?? '',
-      topFontWeight: json['topFontWeight'] as int?,
+      topFontWeight: (json['topFontWeight'] as num?)?.toInt(),
       topPadding: (json['topPadding'] as num?)?.toDouble(),
       bottomText: json['bottomText'] as String? ?? '',
       bottomFont: json['bottomFont'] as String? ?? '',
       bottomFontSize: (json['bottomFontSize'] as num?)?.toDouble(),
-      bottomFontColor: json['bottomFontColor'] as int?,
+      bottomFontColor: (json['bottomFontColor'] as num?)?.toInt(),
       bottomFontStyle: json['bottomFontStyle'] as String? ?? '',
-      bottomFontWeight: json['bottomFontWeight'] as int?,
+      bottomFontWeight: (json['bottomFontWeight'] as num?)?.toInt(),
       bottomPadding: (json['bottomPadding'] as num?)?.toDouble(),
       width: (json['width'] as num).toDouble(),
       height: (json['height'] as num).toDouble(),
@@ -2595,10 +2619,10 @@ Display _$DisplayFromJson(Map<String, dynamic> json) => Display(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$DisplayToJson(Display instance) {
@@ -2703,9 +2727,9 @@ DisplayArrayRes _$DisplayArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => Display.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -2736,8 +2760,8 @@ Map<String, dynamic> _$DisplayArrayResToJson(DisplayArrayRes instance) {
 Displayable _$DisplayableFromJson(Map<String, dynamic> json) => Displayable(
       type: displayableTypeFromJson(json['type']),
       id: json['id'] as String? ?? '',
-      width: json['width'] as int,
-      height: json['height'] as int,
+      width: (json['width'] as num).toInt(),
+      height: (json['height'] as num).toInt(),
     );
 
 Map<String, dynamic> _$DisplayableToJson(Displayable instance) {
@@ -2758,10 +2782,10 @@ Map<String, dynamic> _$DisplayableToJson(Displayable instance) {
 
 Positionable _$PositionableFromJson(Map<String, dynamic> json) => Positionable(
       view: Displayable.fromJson(json['view'] as Map<String, dynamic>),
-      top: json['top'] as int?,
-      bottom: json['bottom'] as int?,
-      left: json['left'] as int?,
-      right: json['right'] as int?,
+      top: (json['top'] as num?)?.toInt(),
+      bottom: (json['bottom'] as num?)?.toInt(),
+      left: (json['left'] as num?)?.toInt(),
+      right: (json['right'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$PositionableToJson(Positionable instance) {
@@ -2810,12 +2834,12 @@ DeviceViewInfo _$DeviceViewInfoFromJson(Map<String, dynamic> json) =>
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
-      width: json['width'] as int?,
-      height: json['height'] as int?,
-      topHeight: json['topHeight'] as int?,
-      bottomHeight: json['bottomHeight'] as int?,
-      leftWidth: json['leftWidth'] as int?,
-      rightWidth: json['rightWidth'] as int?,
+      width: (json['width'] as num?)?.toInt(),
+      height: (json['height'] as num?)?.toInt(),
+      topHeight: (json['topHeight'] as num?)?.toInt(),
+      bottomHeight: (json['bottomHeight'] as num?)?.toInt(),
+      leftWidth: (json['leftWidth'] as num?)?.toInt(),
+      rightWidth: (json['rightWidth'] as num?)?.toInt(),
       showInfo: json['showInfo'] as bool? ?? true,
       infoPosition:
           DeviceViewInfo.deviceViewInfoInfoPositionInfoPositionNullableFromJson(
@@ -2884,12 +2908,12 @@ DeviceView _$DeviceViewFromJson(Map<String, dynamic> json) => DeviceView(
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
-      width: json['width'] as int?,
-      height: json['height'] as int?,
-      topHeight: json['topHeight'] as int?,
-      bottomHeight: json['bottomHeight'] as int?,
-      leftWidth: json['leftWidth'] as int?,
-      rightWidth: json['rightWidth'] as int?,
+      width: (json['width'] as num?)?.toInt(),
+      height: (json['height'] as num?)?.toInt(),
+      topHeight: (json['topHeight'] as num?)?.toInt(),
+      bottomHeight: (json['bottomHeight'] as num?)?.toInt(),
+      leftWidth: (json['leftWidth'] as num?)?.toInt(),
+      rightWidth: (json['rightWidth'] as num?)?.toInt(),
       showInfo: json['showInfo'] as bool? ?? true,
       infoPosition:
           DeviceView.deviceViewInfoPositionInfoPositionNullableFromJson(
@@ -2898,10 +2922,10 @@ DeviceView _$DeviceViewFromJson(Map<String, dynamic> json) => DeviceView(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$DeviceViewToJson(DeviceView instance) {
@@ -3020,9 +3044,9 @@ DeviceViewArrayRes _$DeviceViewArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => DeviceView.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -3053,10 +3077,10 @@ Map<String, dynamic> _$DeviceViewArrayResToJson(DeviceViewArrayRes instance) {
 EvaluatedAlarm _$EvaluatedAlarmFromJson(Map<String, dynamic> json) =>
     EvaluatedAlarm(
       alarmId: json['alarmId'] as String? ?? '',
-      state: json['state'] as int,
+      state: (json['state'] as num).toInt(),
       stateIcon: json['stateIcon'] as String? ?? '',
       tooltip: json['tooltip'] as String? ?? '',
-      deviceState: json['deviceState'] as int?,
+      deviceState: (json['deviceState'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$EvaluatedAlarmToJson(EvaluatedAlarm instance) {
@@ -3083,7 +3107,7 @@ EvaluatedDisplay _$EvaluatedDisplayFromJson(Map<String, dynamic> json) =>
       prefix: json['prefix'] as String? ?? '',
       suffix: json['suffix'] as String? ?? '',
       $value: json['value'] as String? ?? '',
-      conditionIndex: json['conditionIndex'] as int,
+      conditionIndex: (json['conditionIndex'] as num).toInt(),
       tooltip: json['tooltip'] as String? ?? '',
     );
 
@@ -3111,15 +3135,15 @@ DeviceControl _$DeviceControlFromJson(Map<String, dynamic> json) =>
       controlId: json['controlId'] as String? ?? '',
       deviceId: json['deviceId'] as String? ?? '',
       hardwareDeviceId: json['hardwareDeviceId'] as String? ?? '',
-      state: json['state'] as int,
+      state: (json['state'] as num).toInt(),
       stateIcon: json['stateIcon'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int?,
+      createdStamp: (json['createdStamp'] as num?)?.toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int?,
+      updatedStamp: (json['updatedStamp'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$DeviceControlToJson(DeviceControl instance) {
@@ -3172,15 +3196,15 @@ TriggeredControl _$TriggeredControlFromJson(Map<String, dynamic> json) =>
       triggerId: json['triggerId'] as String? ?? '',
       triggerIcon: json['triggerIcon'] as String? ?? '',
       hardwareDeviceId: json['hardwareDeviceId'] as String? ?? '',
-      state: json['state'] as int?,
+      state: (json['state'] as num?)?.toInt(),
       stateIcon: json['stateIcon'] as String? ?? '',
       data: json['data'],
       rtype: json['rtype'] as String? ?? '',
       name: json['name'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int?,
+      createdStamp: (json['createdStamp'] as num?)?.toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int?,
+      updatedStamp: (json['updatedStamp'] as num?)?.toInt(),
       deliveryStatus: triggeredControlDeliveryStatusNullableFromJson(
           json['deliveryStatus']),
       deliveryErrors: (json['deliveryErrors'] as List<dynamic>?)
@@ -3250,8 +3274,8 @@ DeviceData _$DeviceDataFromJson(Map<String, dynamic> json) => DeviceData(
       subType: json['subType'] as String? ?? '',
       modelId: json['modelId'] as String? ?? '',
       hardwareDeviceId: json['hardwareDeviceId'] as String? ?? '',
-      reportedStamp: json['reportedStamp'] as int?,
-      processedStamp: json['processedStamp'] as int?,
+      reportedStamp: (json['reportedStamp'] as num?)?.toInt(),
+      processedStamp: (json['processedStamp'] as num?)?.toInt(),
       data: json['data'] as Object,
       deviceName: json['deviceName'] as String? ?? '',
       modelName: json['modelName'] as String? ?? '',
@@ -3262,10 +3286,10 @@ DeviceData _$DeviceDataFromJson(Map<String, dynamic> json) => DeviceData(
       rtype: json['rtype'] as String? ?? '',
       name: json['name'] as String? ?? '',
       id: json['id'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       controls: (json['controls'] as List<dynamic>?)
               ?.map((e) => DeviceControl.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -3404,9 +3428,9 @@ DeviceDataArrayRes _$DeviceDataArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => DeviceData.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -3434,6 +3458,33 @@ Map<String, dynamic> _$DeviceDataArrayResToJson(DeviceDataArrayRes instance) {
   return val;
 }
 
+DashboardMenu _$DashboardMenuFromJson(Map<String, dynamic> json) =>
+    DashboardMenu(
+      displayName: json['displayName'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      screenId: json['screenId'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$DashboardMenuToJson(DashboardMenu instance) {
+  final val = <String, dynamic>{
+    'displayName': instance.displayName,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('icon', instance.icon);
+  writeNotNull('roles', instance.roles);
+  val['screenId'] = instance.screenId;
+  return val;
+}
+
 DashboardMenuGroupInfo _$DashboardMenuGroupInfoFromJson(
         Map<String, dynamic> json) =>
     DashboardMenuGroupInfo(
@@ -3441,21 +3492,20 @@ DashboardMenuGroupInfo _$DashboardMenuGroupInfoFromJson(
       displayName: json['displayName'] as String? ?? '',
       description: json['description'] as String? ?? '',
       icon: json['icon'] as String? ?? '',
-      order: json['order'] as int?,
+      order: (json['order'] as num?)?.toInt(),
+      webSupported: json['webSupported'] as bool? ?? true,
+      tabletSupported: json['tabletSupported'] as bool? ?? true,
+      mobileSupported: json['mobileSupported'] as bool? ?? true,
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
-      screenIds: (json['screenIds'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
-      clientIds: (json['clientIds'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
       roles:
           (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
+      menus: (json['menus'] as List<dynamic>?)
+              ?.map((e) => DashboardMenu.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$DashboardMenuGroupInfoToJson(
@@ -3474,10 +3524,12 @@ Map<String, dynamic> _$DashboardMenuGroupInfoToJson(
   writeNotNull('description', instance.description);
   writeNotNull('icon', instance.icon);
   writeNotNull('order', instance.order);
+  writeNotNull('webSupported', instance.webSupported);
+  writeNotNull('tabletSupported', instance.tabletSupported);
+  writeNotNull('mobileSupported', instance.mobileSupported);
   writeNotNull('tags', instance.tags);
-  val['screenIds'] = instance.screenIds;
-  writeNotNull('clientIds', instance.clientIds);
   writeNotNull('roles', instance.roles);
+  writeNotNull('menus', instance.menus?.map((e) => e.toJson()).toList());
   return val;
 }
 
@@ -3487,28 +3539,27 @@ DashboardMenuGroup _$DashboardMenuGroupFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
       displayName: json['displayName'] as String? ?? '',
       description: json['description'] as String? ?? '',
       icon: json['icon'] as String? ?? '',
-      order: json['order'] as int?,
-      screenIds: (json['screenIds'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
-      clientIds: (json['clientIds'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
+      order: (json['order'] as num?)?.toInt(),
+      webSupported: json['webSupported'] as bool? ?? true,
+      tabletSupported: json['tabletSupported'] as bool? ?? true,
+      mobileSupported: json['mobileSupported'] as bool? ?? true,
       roles:
           (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
+      menus: (json['menus'] as List<dynamic>?)
+              ?.map((e) => DashboardMenu.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$DashboardMenuGroupToJson(DashboardMenuGroup instance) {
@@ -3534,9 +3585,11 @@ Map<String, dynamic> _$DashboardMenuGroupToJson(DashboardMenuGroup instance) {
   writeNotNull('description', instance.description);
   writeNotNull('icon', instance.icon);
   writeNotNull('order', instance.order);
-  val['screenIds'] = instance.screenIds;
-  writeNotNull('clientIds', instance.clientIds);
+  writeNotNull('webSupported', instance.webSupported);
+  writeNotNull('tabletSupported', instance.tabletSupported);
+  writeNotNull('mobileSupported', instance.mobileSupported);
   writeNotNull('roles', instance.roles);
+  writeNotNull('menus', instance.menus?.map((e) => e.toJson()).toList());
   return val;
 }
 
@@ -3624,9 +3677,9 @@ DashboardMenuGroupArrayRes _$DashboardMenuGroupArrayResFromJson(
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map(
                   (e) => DashboardMenuGroup.fromJson(e as Map<String, dynamic>))
@@ -3661,7 +3714,7 @@ ScreenChild _$ScreenChildFromJson(Map<String, dynamic> json) => ScreenChild(
       config: json['config'] as Object,
       width: (json['width'] as num?)?.toDouble(),
       height: (json['height'] as num?)?.toDouble(),
-      bgColor: json['bgColor'] as int?,
+      bgColor: (json['bgColor'] as num?)?.toInt(),
       bgImage: json['bgImage'] as String? ?? '',
       scrollDirection: json['scrollDirection'] as String? ?? '',
       expanded: json['expanded'] as bool?,
@@ -3691,7 +3744,7 @@ Map<String, dynamic> _$ScreenChildToJson(ScreenChild instance) {
 ScreenRow _$ScreenRowFromJson(Map<String, dynamic> json) => ScreenRow(
       height: (json['height'] as num?)?.toDouble(),
       spacing: (json['spacing'] as num?)?.toDouble(),
-      bgColor: json['bgColor'] as int?,
+      bgColor: (json['bgColor'] as num?)?.toInt(),
       bgImage: json['bgImage'] as String? ?? '',
       mainAxisAlignment: json['mainAxisAlignment'] as String? ?? '',
       crossAxisAlignment: json['crossAxisAlignment'] as String? ?? '',
@@ -3736,7 +3789,7 @@ DashboardScreenInfo _$DashboardScreenInfoFromJson(Map<String, dynamic> json) =>
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
-      bgColor: json['bgColor'] as int?,
+      bgColor: (json['bgColor'] as num?)?.toInt(),
       bgImage: json['bgImage'] as String? ?? '',
       mainAxisAlignment: json['mainAxisAlignment'] as String? ?? '',
       crossAxisAlignment: json['crossAxisAlignment'] as String? ?? '',
@@ -3780,10 +3833,10 @@ DashboardScreen _$DashboardScreenFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
@@ -3791,7 +3844,7 @@ DashboardScreen _$DashboardScreenFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String? ?? '',
       banner: json['banner'] as String? ?? '',
       spacing: (json['spacing'] as num?)?.toDouble(),
-      bgColor: json['bgColor'] as int?,
+      bgColor: (json['bgColor'] as num?)?.toInt(),
       bgImage: json['bgImage'] as String? ?? '',
       mainAxisAlignment: json['mainAxisAlignment'] as String? ?? '',
       crossAxisAlignment: json['crossAxisAlignment'] as String? ?? '',
@@ -3919,9 +3972,9 @@ DashboardScreenArrayRes _$DashboardScreenArrayResFromJson(
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => DashboardScreen.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -4063,10 +4116,10 @@ EventRegistration _$EventRegistrationFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
@@ -4201,9 +4254,9 @@ EventRegistrationArrayRes _$EventRegistrationArrayResFromJson(
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map(
                   (e) => EventRegistration.fromJson(e as Map<String, dynamic>))
@@ -4261,10 +4314,10 @@ TriggeredEvent _$TriggeredEventFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
@@ -4339,9 +4392,9 @@ TriggeredEventArrayRes _$TriggeredEventArrayResFromJson(
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => TriggeredEvent.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -4400,9 +4453,9 @@ TriggeredControlArrayRes _$TriggeredControlArrayResFromJson(
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => TriggeredControl.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -4564,10 +4617,10 @@ DisplayWidget _$DisplayWidgetFromJson(Map<String, dynamic> json) =>
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$DisplayWidgetToJson(DisplayWidget instance) {
@@ -4677,9 +4730,9 @@ DisplayWidgetArrayRes _$DisplayWidgetArrayResFromJson(
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => DisplayWidget.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -4757,10 +4810,10 @@ ScreenWidget _$ScreenWidgetFromJson(Map<String, dynamic> json) => ScreenWidget(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$ScreenWidgetToJson(ScreenWidget instance) {
@@ -4870,9 +4923,9 @@ ScreenWidgetArrayRes _$ScreenWidgetArrayResFromJson(
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => ScreenWidget.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -4996,7 +5049,7 @@ Map<String, dynamic> _$GeoMultiPolygonToJson(GeoMultiPolygon instance) =>
 
 GeoCircle _$GeoCircleFromJson(Map<String, dynamic> json) => GeoCircle(
       center: GeoLocation.fromJson(json['center'] as Map<String, dynamic>),
-      radius: json['radius'] as int,
+      radius: (json['radius'] as num).toInt(),
     );
 
 Map<String, dynamic> _$GeoCircleToJson(GeoCircle instance) => <String, dynamic>{
@@ -5044,10 +5097,10 @@ Preprocessor _$PreprocessorFromJson(Map<String, dynamic> json) => Preprocessor(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$PreprocessorToJson(Preprocessor instance) {
@@ -5154,9 +5207,9 @@ PreprocessorArrayRes _$PreprocessorArrayResFromJson(
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => Preprocessor.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -5261,10 +5314,10 @@ DataFilter _$DataFilterFromJson(Map<String, dynamic> json) => DataFilter(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$DataFilterToJson(DataFilter instance) {
@@ -5370,9 +5423,9 @@ DataFilterArrayRes _$DataFilterArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => DataFilter.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -5507,10 +5560,10 @@ GeoFence _$GeoFenceFromJson(Map<String, dynamic> json) => GeoFence(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$GeoFenceToJson(GeoFence instance) {
@@ -5623,9 +5676,9 @@ GeoFenceArrayRes _$GeoFenceArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => GeoFence.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -5654,8 +5707,8 @@ Map<String, dynamic> _$GeoFenceArrayResToJson(GeoFenceArrayRes instance) {
 }
 
 AnalyticsRow _$AnalyticsRowFromJson(Map<String, dynamic> json) => AnalyticsRow(
-      height: json['height'] as int,
-      flex: json['flex'] as int,
+      height: (json['height'] as num).toInt(),
+      flex: (json['flex'] as num).toInt(),
       widgetIds: (json['widgetIds'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -5735,10 +5788,10 @@ AnalyticsScreen _$AnalyticsScreenFromJson(Map<String, dynamic> json) =>
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$AnalyticsScreenToJson(AnalyticsScreen instance) {
@@ -5851,9 +5904,9 @@ AnalyticsScreenArrayRes _$AnalyticsScreenArrayResFromJson(
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => AnalyticsScreen.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -5883,8 +5936,8 @@ Map<String, dynamic> _$AnalyticsScreenArrayResToJson(
 }
 
 TrendValue _$TrendValueFromJson(Map<String, dynamic> json) => TrendValue(
-      stamp: json['stamp'] as int,
-      count: json['count'] as int?,
+      stamp: (json['stamp'] as num).toInt(),
+      count: (json['count'] as num?)?.toInt(),
       min: (json['min'] as num?)?.toDouble(),
       max: (json['max'] as num?)?.toDouble(),
       avg: (json['avg'] as num?)?.toDouble(),
@@ -5935,9 +5988,9 @@ TrendValueArrayRes _$TrendValueArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => TrendValue.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -5967,7 +6020,7 @@ Map<String, dynamic> _$TrendValueArrayResToJson(TrendValueArrayRes instance) {
 
 TimeSeriesValue _$TimeSeriesValueFromJson(Map<String, dynamic> json) =>
     TimeSeriesValue(
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       data: json['data'],
     );
 
@@ -6016,9 +6069,9 @@ TimeSeriesValueArrayRes _$TimeSeriesValueArrayResFromJson(
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => TimeSeriesValue.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -6056,10 +6109,10 @@ LandingPage _$LandingPageFromJson(Map<String, dynamic> json) => LandingPage(
       line3: json['line3'] as String? ?? '',
       line4: json['line4'] as String? ?? '',
       line5: json['line5'] as String? ?? '',
-      bgColor: json['bgColor'] as int?,
-      imageFlex: json['imageFlex'] as int?,
-      contentFlex: json['contentFlex'] as int?,
-      imageWidth: json['imageWidth'] as int?,
+      bgColor: (json['bgColor'] as num?)?.toInt(),
+      imageFlex: (json['imageFlex'] as num?)?.toInt(),
+      contentFlex: (json['contentFlex'] as num?)?.toInt(),
+      imageWidth: (json['imageWidth'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$LandingPageToJson(LandingPage instance) {
@@ -6130,24 +6183,24 @@ TwinSysInfo _$TwinSysInfoFromJson(Map<String, dynamic> json) => TwinSysInfo(
       bannerImage: json['bannerImage'] as String? ?? '',
       font: json['font'] as String? ?? '',
       fontSize: (json['fontSize'] as num?)?.toDouble(),
-      fontColor: json['fontColor'] as int?,
+      fontColor: (json['fontColor'] as num?)?.toInt(),
       headerFont: json['headerFont'] as String? ?? '',
       headerFontSize: (json['headerFontSize'] as num?)?.toDouble(),
-      headerFontColor: json['headerFontColor'] as int?,
+      headerFontColor: (json['headerFontColor'] as num?)?.toInt(),
       subHeaderFont: json['subHeaderFont'] as String? ?? '',
       subHeaderFontSize: (json['subHeaderFontSize'] as num?)?.toDouble(),
-      subHeaderFontColor: json['subHeaderFontColor'] as int?,
+      subHeaderFontColor: (json['subHeaderFontColor'] as num?)?.toInt(),
       menuFont: json['menuFont'] as String? ?? '',
       menuFontSize: (json['menuFontSize'] as num?)?.toDouble(),
-      menuFontColor: json['menuFontColor'] as int?,
+      menuFontColor: (json['menuFontColor'] as num?)?.toInt(),
       toolFont: json['toolFont'] as String? ?? '',
       toolFontSize: (json['toolFontSize'] as num?)?.toDouble(),
-      toolFontColor: json['toolFontColor'] as int?,
-      toolIconColor: json['toolIconColor'] as int?,
+      toolFontColor: (json['toolFontColor'] as num?)?.toInt(),
+      toolIconColor: (json['toolIconColor'] as num?)?.toInt(),
       labelFont: json['labelFont'] as String? ?? '',
       labelFontSize: (json['labelFontSize'] as num?)?.toDouble(),
-      labelFontColor: json['labelFontColor'] as int?,
-      labelIconColor: json['labelIconColor'] as int?,
+      labelFontColor: (json['labelFontColor'] as num?)?.toInt(),
+      labelIconColor: (json['labelIconColor'] as num?)?.toInt(),
       enableSelfRegistration: json['enableSelfRegistration'] as bool? ?? true,
       selfRegistrationDomain: json['selfRegistrationDomain'] as String? ?? '',
       autoApproveSelfRegistration:
@@ -6177,8 +6230,8 @@ TwinSysInfo _$TwinSysInfoFromJson(Map<String, dynamic> json) => TwinSysInfo(
           : GeoapifyConfig.fromJson(
               json['geoapifyConfig'] as Map<String, dynamic>),
       enforceRoles: json['enforceRoles'] as bool? ?? false,
-      headerBgColor: json['headerBgColor'] as int?,
-      pageBgColor: json['pageBgColor'] as int?,
+      headerBgColor: (json['headerBgColor'] as num?)?.toInt(),
+      pageBgColor: (json['pageBgColor'] as num?)?.toInt(),
       appName: json['appName'] as String? ?? '',
       logoText: json['logoText'] as String? ?? '',
       enforceClient: json['enforceClient'] as bool? ?? false,
@@ -6320,10 +6373,10 @@ TwinSysConfig _$TwinSysConfigFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
@@ -6421,14 +6474,14 @@ FloorInfo _$FloorInfoFromJson(Map<String, dynamic> json) => FloorInfo(
       location: json['location'] == null
           ? null
           : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
-      floorLevel: json['floorLevel'] as int,
+      floorLevel: (json['floorLevel'] as num).toInt(),
       floorType:
           FloorInfo.floorInfoFloorTypeFloorTypeFromJson(json['floorType']),
       clientIds: (json['clientIds'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           [],
-      reportedStamp: json['reportedStamp'] as int?,
+      reportedStamp: (json['reportedStamp'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$FloorInfoToJson(FloorInfo instance) {
@@ -6476,20 +6529,20 @@ Floor _$FloorFromJson(Map<String, dynamic> json) => Floor(
       location: json['location'] == null
           ? null
           : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
-      floorLevel: json['floorLevel'] as int,
+      floorLevel: (json['floorLevel'] as num).toInt(),
       floorType: Floor.floorFloorTypeFloorTypeFromJson(json['floorType']),
       clientIds: (json['clientIds'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           [],
-      reportedStamp: json['reportedStamp'] as int?,
+      reportedStamp: (json['reportedStamp'] as num?)?.toInt(),
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$FloorToJson(Floor instance) {
@@ -6599,9 +6652,9 @@ FloorArrayRes _$FloorArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => Floor.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -6638,7 +6691,7 @@ AssetInfo _$AssetInfoFromJson(Map<String, dynamic> json) => AssetInfo(
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
-      selectedImage: json['selectedImage'] as int?,
+      selectedImage: (json['selectedImage'] as num?)?.toInt(),
       images: (json['images'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -6661,7 +6714,7 @@ AssetInfo _$AssetInfoFromJson(Map<String, dynamic> json) => AssetInfo(
               ?.map((e) => e as String)
               .toList() ??
           [],
-      reportedStamp: json['reportedStamp'] as int?,
+      reportedStamp: (json['reportedStamp'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$AssetInfoToJson(AssetInfo instance) {
@@ -6701,7 +6754,7 @@ Asset _$AssetFromJson(Map<String, dynamic> json) => Asset(
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
-      selectedImage: json['selectedImage'] as int?,
+      selectedImage: (json['selectedImage'] as num?)?.toInt(),
       images: (json['images'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -6724,14 +6777,14 @@ Asset _$AssetFromJson(Map<String, dynamic> json) => Asset(
               ?.map((e) => e as String)
               .toList() ??
           [],
-      reportedStamp: json['reportedStamp'] as int?,
+      reportedStamp: (json['reportedStamp'] as num?)?.toInt(),
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$AssetToJson(Asset instance) {
@@ -6843,9 +6896,9 @@ AssetArrayRes _$AssetArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => Asset.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -6880,7 +6933,7 @@ FacilityInfo _$FacilityInfoFromJson(Map<String, dynamic> json) => FacilityInfo(
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
-      selectedImage: json['selectedImage'] as int?,
+      selectedImage: (json['selectedImage'] as num?)?.toInt(),
       images: (json['images'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -6895,7 +6948,7 @@ FacilityInfo _$FacilityInfoFromJson(Map<String, dynamic> json) => FacilityInfo(
               ?.map((e) => e as String)
               .toList() ??
           [],
-      reportedStamp: json['reportedStamp'] as int?,
+      reportedStamp: (json['reportedStamp'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$FacilityInfoToJson(FacilityInfo instance) {
@@ -6928,7 +6981,7 @@ Facility _$FacilityFromJson(Map<String, dynamic> json) => Facility(
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
-      selectedImage: json['selectedImage'] as int?,
+      selectedImage: (json['selectedImage'] as num?)?.toInt(),
       images: (json['images'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -6943,14 +6996,14 @@ Facility _$FacilityFromJson(Map<String, dynamic> json) => Facility(
               ?.map((e) => e as String)
               .toList() ??
           [],
-      reportedStamp: json['reportedStamp'] as int?,
+      reportedStamp: (json['reportedStamp'] as num?)?.toInt(),
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$FacilityToJson(Facility instance) {
@@ -7059,9 +7112,9 @@ FacilityArrayRes _$FacilityArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => Facility.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -7098,7 +7151,7 @@ TwinUserInfo _$TwinUserInfoFromJson(Map<String, dynamic> json) => TwinUserInfo(
               [],
       phone: json['phone'] as String? ?? '',
       address: json['address'] as String? ?? '',
-      selectedImage: json['selectedImage'] as int?,
+      selectedImage: (json['selectedImage'] as num?)?.toInt(),
       images: (json['images'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -7106,7 +7159,7 @@ TwinUserInfo _$TwinUserInfoFromJson(Map<String, dynamic> json) => TwinUserInfo(
       roles:
           (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
-      userState: json['userState'] as int?,
+      userState: (json['userState'] as num?)?.toInt(),
       clientIds: (json['clientIds'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -7170,7 +7223,7 @@ TwinUser _$TwinUserFromJson(Map<String, dynamic> json) => TwinUser(
               [],
       phone: json['phone'] as String? ?? '',
       address: json['address'] as String? ?? '',
-      selectedImage: json['selectedImage'] as int?,
+      selectedImage: (json['selectedImage'] as num?)?.toInt(),
       images: (json['images'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -7178,7 +7231,7 @@ TwinUser _$TwinUserFromJson(Map<String, dynamic> json) => TwinUser(
       roles:
           (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
-      userState: json['userState'] as int?,
+      userState: (json['userState'] as num?)?.toInt(),
       clientIds: (json['clientIds'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -7192,10 +7245,10 @@ TwinUser _$TwinUserFromJson(Map<String, dynamic> json) => TwinUser(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$TwinUserToJson(TwinUser instance) {
@@ -7308,9 +7361,9 @@ TwinUserArrayRes _$TwinUserArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => TwinUser.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -7371,10 +7424,10 @@ Role _$RoleFromJson(Map<String, dynamic> json) => Role(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$RoleToJson(Role instance) {
@@ -7473,9 +7526,9 @@ RoleArrayRes _$RoleArrayResFromJson(Map<String, dynamic> json) => RoleArrayRes(
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => Role.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -7509,7 +7562,7 @@ PremiseInfo _$PremiseInfoFromJson(Map<String, dynamic> json) => PremiseInfo(
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
-      selectedImage: json['selectedImage'] as int?,
+      selectedImage: (json['selectedImage'] as num?)?.toInt(),
       images: (json['images'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -7524,7 +7577,7 @@ PremiseInfo _$PremiseInfoFromJson(Map<String, dynamic> json) => PremiseInfo(
               ?.map((e) => e as String)
               .toList() ??
           [],
-      reportedStamp: json['reportedStamp'] as int?,
+      reportedStamp: (json['reportedStamp'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$PremiseInfoToJson(PremiseInfo instance) {
@@ -7555,7 +7608,7 @@ Premise _$PremiseFromJson(Map<String, dynamic> json) => Premise(
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
-      selectedImage: json['selectedImage'] as int?,
+      selectedImage: (json['selectedImage'] as num?)?.toInt(),
       images: (json['images'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -7570,14 +7623,14 @@ Premise _$PremiseFromJson(Map<String, dynamic> json) => Premise(
               ?.map((e) => e as String)
               .toList() ??
           [],
-      reportedStamp: json['reportedStamp'] as int?,
+      reportedStamp: (json['reportedStamp'] as num?)?.toInt(),
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$PremiseToJson(Premise instance) {
@@ -7684,9 +7737,9 @@ PremiseArrayRes _$PremiseArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => Premise.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -7716,10 +7769,10 @@ Map<String, dynamic> _$PremiseArrayResToJson(PremiseArrayRes instance) {
 
 ScreenPosition _$ScreenPositionFromJson(Map<String, dynamic> json) =>
     ScreenPosition(
-      topX: json['topX'] as int,
-      topY: json['topY'] as int,
-      bottomX: json['bottomX'] as int?,
-      bottomY: json['bottomY'] as int?,
+      topX: (json['topX'] as num).toInt(),
+      topY: (json['topY'] as num).toInt(),
+      bottomX: (json['bottomX'] as num?)?.toInt(),
+      bottomY: (json['bottomY'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$ScreenPositionToJson(ScreenPosition instance) {
@@ -7752,15 +7805,15 @@ Attribute _$AttributeFromJson(Map<String, dynamic> json) => Attribute(
               .toList() ??
           [],
       allowedNumbers: (json['allowedNumbers'] as List<dynamic>?)
-              ?.map((e) => e as int)
+              ?.map((e) => (e as num).toInt())
               .toList() ??
           [],
       allowedDecimals: (json['allowedDecimals'] as List<dynamic>?)
               ?.map((e) => (e as num).toDouble())
               .toList() ??
           [],
-      minNumber: json['minNumber'] as int?,
-      maxNumber: json['maxNumber'] as int?,
+      minNumber: (json['minNumber'] as num?)?.toInt(),
+      maxNumber: (json['maxNumber'] as num?)?.toInt(),
       minDecimal: (json['minDecimal'] as num?)?.toDouble(),
       maxDecimal: (json['maxDecimal'] as num?)?.toDouble(),
     );
@@ -7838,10 +7891,10 @@ ScrappingTable _$ScrappingTableFromJson(Map<String, dynamic> json) =>
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$ScrappingTableToJson(ScrappingTable instance) {
@@ -7949,9 +8002,9 @@ ScrappingTableArrayRes _$ScrappingTableArrayResFromJson(
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => ScrappingTable.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -8001,8 +8054,8 @@ Map<String, dynamic> _$TagsToJson(Tags instance) {
 }
 
 FloorStats _$FloorStatsFromJson(Map<String, dynamic> json) => FloorStats(
-      assets: json['assets'] as int?,
-      devices: json['devices'] as int?,
+      assets: (json['assets'] as num?)?.toInt(),
+      devices: (json['devices'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$FloorStatsToJson(FloorStats instance) {
@@ -8070,9 +8123,9 @@ Map<String, dynamic> _$FloorStatsEntityResToJson(FloorStatsEntityRes instance) {
 
 FacilityStats _$FacilityStatsFromJson(Map<String, dynamic> json) =>
     FacilityStats(
-      floors: json['floors'] as int?,
-      assets: json['assets'] as int?,
-      devices: json['devices'] as int?,
+      floors: (json['floors'] as num?)?.toInt(),
+      assets: (json['assets'] as num?)?.toInt(),
+      devices: (json['devices'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$FacilityStatsToJson(FacilityStats instance) {
@@ -8142,10 +8195,10 @@ Map<String, dynamic> _$FacilityStatsEntityResToJson(
 }
 
 PremiseStats _$PremiseStatsFromJson(Map<String, dynamic> json) => PremiseStats(
-      facilities: json['facilities'] as int?,
-      floors: json['floors'] as int?,
-      assets: json['assets'] as int?,
-      devices: json['devices'] as int?,
+      facilities: (json['facilities'] as num?)?.toInt(),
+      floors: (json['floors'] as num?)?.toInt(),
+      assets: (json['assets'] as num?)?.toInt(),
+      devices: (json['devices'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$PremiseStatsToJson(PremiseStats instance) {
@@ -8315,10 +8368,10 @@ AssetGroup _$AssetGroupFromJson(Map<String, dynamic> json) => AssetGroup(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$AssetGroupToJson(AssetGroup instance) {
@@ -8423,9 +8476,9 @@ AssetGroupArrayRes _$AssetGroupArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => AssetGroup.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -8525,10 +8578,10 @@ Report _$ReportFromJson(Map<String, dynamic> json) => Report(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$ReportToJson(Report instance) {
@@ -8639,9 +8692,9 @@ ReportArrayRes _$ReportArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => Report.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -8723,8 +8776,8 @@ AssetModelInfo _$AssetModelInfoFromJson(Map<String, dynamic> json) =>
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
       icon: json['icon'] as String? ?? '',
-      selectedImage: json['selectedImage'] as int?,
-      selectedBanner: json['selectedBanner'] as int?,
+      selectedImage: (json['selectedImage'] as num?)?.toInt(),
+      selectedBanner: (json['selectedBanner'] as num?)?.toInt(),
       images: (json['images'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -8773,8 +8826,8 @@ AssetModel _$AssetModelFromJson(Map<String, dynamic> json) => AssetModel(
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
       icon: json['icon'] as String? ?? '',
-      selectedImage: json['selectedImage'] as int?,
-      selectedBanner: json['selectedBanner'] as int?,
+      selectedImage: (json['selectedImage'] as num?)?.toInt(),
+      selectedBanner: (json['selectedBanner'] as num?)?.toInt(),
       images: (json['images'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -8792,10 +8845,10 @@ AssetModel _$AssetModelFromJson(Map<String, dynamic> json) => AssetModel(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$AssetModelToJson(AssetModel instance) {
@@ -8906,9 +8959,9 @@ AssetModelArrayRes _$AssetModelArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => AssetModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -8937,7 +8990,7 @@ Map<String, dynamic> _$AssetModelArrayResToJson(AssetModelArrayRes instance) {
 }
 
 IDList _$IDListFromJson(Map<String, dynamic> json) => IDList(
-      total: json['total'] as int,
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -8955,7 +9008,7 @@ IDListEntityRes _$IDListEntityResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      total: json['total'] as int,
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -9045,10 +9098,10 @@ FieldFilter _$FieldFilterFromJson(Map<String, dynamic> json) => FieldFilter(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$FieldFilterToJson(FieldFilter instance) {
@@ -9159,9 +9212,9 @@ FieldFilterArrayRes _$FieldFilterArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => FieldFilter.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -9216,9 +9269,9 @@ ParameterArrayRes _$ParameterArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => Parameter.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -9291,10 +9344,10 @@ Client _$ClientFromJson(Map<String, dynamic> json) => Client(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: json['createdStamp'] as int,
+      createdStamp: (json['createdStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: json['updatedStamp'] as int,
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$ClientToJson(Client instance) {
@@ -9398,9 +9451,9 @@ ClientArrayRes _$ClientArrayResFromJson(Map<String, dynamic> json) =>
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      page: json['page'] as int,
-      size: json['size'] as int,
-      total: json['total'] as int,
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
       values: (json['values'] as List<dynamic>?)
               ?.map((e) => Client.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -9461,8 +9514,8 @@ EqlSearch _$EqlSearchFromJson(Map<String, dynamic> json) => EqlSearch(
               .toList() ??
           [],
       sort: json['sort'],
-      page: json['page'] as int?,
-      size: json['size'] as int?,
+      page: (json['page'] as num?)?.toInt(),
+      size: (json['size'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$EqlSearchToJson(EqlSearch instance) {
@@ -9531,7 +9584,7 @@ Map<String, dynamic> _$QueryResToJson(QueryRes instance) {
 }
 
 BaseCountRes _$BaseCountResFromJson(Map<String, dynamic> json) => BaseCountRes(
-      total: json['total'] as int,
+      total: (json['total'] as num).toInt(),
     );
 
 Map<String, dynamic> _$BaseCountResToJson(BaseCountRes instance) =>
@@ -9544,7 +9597,7 @@ CountRes _$CountResFromJson(Map<String, dynamic> json) => CountRes(
       msg: json['msg'] as String? ?? '',
       trace: json['trace'] as String? ?? '',
       errorCode: json['errorCode'] as String? ?? '',
-      total: json['total'] as int,
+      total: (json['total'] as num).toInt(),
     );
 
 Map<String, dynamic> _$CountResToJson(CountRes instance) {
