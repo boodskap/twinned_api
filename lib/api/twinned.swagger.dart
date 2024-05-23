@@ -9455,6 +9455,12 @@ class DeviceBase {
     this.facilityId,
     this.floorId,
     this.assetId,
+    this.premise,
+    this.facility,
+    this.floor,
+    this.asset,
+    this.clientId,
+    this.$client,
   });
 
   factory DeviceBase.fromJson(Map<String, dynamic> json) =>
@@ -9475,6 +9481,18 @@ class DeviceBase {
   final String? floorId;
   @JsonKey(name: 'assetId', includeIfNull: false, defaultValue: '')
   final String? assetId;
+  @JsonKey(name: 'premise', includeIfNull: false, defaultValue: '')
+  final String? premise;
+  @JsonKey(name: 'facility', includeIfNull: false, defaultValue: '')
+  final String? facility;
+  @JsonKey(name: 'floor', includeIfNull: false, defaultValue: '')
+  final String? floor;
+  @JsonKey(name: 'asset', includeIfNull: false, defaultValue: '')
+  final String? asset;
+  @JsonKey(name: 'clientId', includeIfNull: false, defaultValue: '')
+  final String? clientId;
+  @JsonKey(name: 'client', includeIfNull: false, defaultValue: '')
+  final String? $client;
   static const fromJsonFactory = _$DeviceBaseFromJson;
 
   @override
@@ -9496,7 +9514,23 @@ class DeviceBase {
                 const DeepCollectionEquality()
                     .equals(other.floorId, floorId)) &&
             (identical(other.assetId, assetId) ||
-                const DeepCollectionEquality().equals(other.assetId, assetId)));
+                const DeepCollectionEquality()
+                    .equals(other.assetId, assetId)) &&
+            (identical(other.premise, premise) ||
+                const DeepCollectionEquality()
+                    .equals(other.premise, premise)) &&
+            (identical(other.facility, facility) ||
+                const DeepCollectionEquality()
+                    .equals(other.facility, facility)) &&
+            (identical(other.floor, floor) ||
+                const DeepCollectionEquality().equals(other.floor, floor)) &&
+            (identical(other.asset, asset) ||
+                const DeepCollectionEquality().equals(other.asset, asset)) &&
+            (identical(other.clientId, clientId) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientId, clientId)) &&
+            (identical(other.$client, $client) ||
+                const DeepCollectionEquality().equals(other.$client, $client)));
   }
 
   @override
@@ -9510,6 +9544,12 @@ class DeviceBase {
       const DeepCollectionEquality().hash(facilityId) ^
       const DeepCollectionEquality().hash(floorId) ^
       const DeepCollectionEquality().hash(assetId) ^
+      const DeepCollectionEquality().hash(premise) ^
+      const DeepCollectionEquality().hash(facility) ^
+      const DeepCollectionEquality().hash(floor) ^
+      const DeepCollectionEquality().hash(asset) ^
+      const DeepCollectionEquality().hash(clientId) ^
+      const DeepCollectionEquality().hash($client) ^
       runtimeType.hashCode;
 }
 
@@ -9520,14 +9560,26 @@ extension $DeviceBaseExtension on DeviceBase {
       String? premiseId,
       String? facilityId,
       String? floorId,
-      String? assetId}) {
+      String? assetId,
+      String? premise,
+      String? facility,
+      String? floor,
+      String? asset,
+      String? clientId,
+      String? $client}) {
     return DeviceBase(
         apiKey: apiKey ?? this.apiKey,
         reportedStamp: reportedStamp ?? this.reportedStamp,
         premiseId: premiseId ?? this.premiseId,
         facilityId: facilityId ?? this.facilityId,
         floorId: floorId ?? this.floorId,
-        assetId: assetId ?? this.assetId);
+        assetId: assetId ?? this.assetId,
+        premise: premise ?? this.premise,
+        facility: facility ?? this.facility,
+        floor: floor ?? this.floor,
+        asset: asset ?? this.asset,
+        clientId: clientId ?? this.clientId,
+        $client: $client ?? this.$client);
   }
 
   DeviceBase copyWithWrapped(
@@ -9536,7 +9588,13 @@ extension $DeviceBaseExtension on DeviceBase {
       Wrapped<String?>? premiseId,
       Wrapped<String?>? facilityId,
       Wrapped<String?>? floorId,
-      Wrapped<String?>? assetId}) {
+      Wrapped<String?>? assetId,
+      Wrapped<String?>? premise,
+      Wrapped<String?>? facility,
+      Wrapped<String?>? floor,
+      Wrapped<String?>? asset,
+      Wrapped<String?>? clientId,
+      Wrapped<String?>? $client}) {
     return DeviceBase(
         apiKey: (apiKey != null ? apiKey.value : this.apiKey),
         reportedStamp:
@@ -9544,7 +9602,13 @@ extension $DeviceBaseExtension on DeviceBase {
         premiseId: (premiseId != null ? premiseId.value : this.premiseId),
         facilityId: (facilityId != null ? facilityId.value : this.facilityId),
         floorId: (floorId != null ? floorId.value : this.floorId),
-        assetId: (assetId != null ? assetId.value : this.assetId));
+        assetId: (assetId != null ? assetId.value : this.assetId),
+        premise: (premise != null ? premise.value : this.premise),
+        facility: (facility != null ? facility.value : this.facility),
+        floor: (floor != null ? floor.value : this.floor),
+        asset: (asset != null ? asset.value : this.asset),
+        clientId: (clientId != null ? clientId.value : this.clientId),
+        $client: ($client != null ? $client.value : this.$client));
   }
 }
 
@@ -9557,6 +9621,12 @@ class Device {
     this.facilityId,
     this.floorId,
     this.assetId,
+    this.premise,
+    this.facility,
+    this.floor,
+    this.asset,
+    this.clientId,
+    this.$client,
     required this.name,
     this.description,
     required this.modelId,
@@ -9599,6 +9669,18 @@ class Device {
   final String? floorId;
   @JsonKey(name: 'assetId', includeIfNull: false, defaultValue: '')
   final String? assetId;
+  @JsonKey(name: 'premise', includeIfNull: false, defaultValue: '')
+  final String? premise;
+  @JsonKey(name: 'facility', includeIfNull: false, defaultValue: '')
+  final String? facility;
+  @JsonKey(name: 'floor', includeIfNull: false, defaultValue: '')
+  final String? floor;
+  @JsonKey(name: 'asset', includeIfNull: false, defaultValue: '')
+  final String? asset;
+  @JsonKey(name: 'clientId', includeIfNull: false, defaultValue: '')
+  final String? clientId;
+  @JsonKey(name: 'client', includeIfNull: false, defaultValue: '')
+  final String? $client;
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
   final String name;
   @JsonKey(name: 'description', includeIfNull: false, defaultValue: '')
@@ -9668,6 +9750,22 @@ class Device {
             (identical(other.assetId, assetId) ||
                 const DeepCollectionEquality()
                     .equals(other.assetId, assetId)) &&
+            (identical(other.premise, premise) ||
+                const DeepCollectionEquality()
+                    .equals(other.premise, premise)) &&
+            (identical(other.facility, facility) ||
+                const DeepCollectionEquality()
+                    .equals(other.facility, facility)) &&
+            (identical(other.floor, floor) ||
+                const DeepCollectionEquality().equals(other.floor, floor)) &&
+            (identical(other.asset, asset) ||
+                const DeepCollectionEquality().equals(other.asset, asset)) &&
+            (identical(other.clientId, clientId) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientId, clientId)) &&
+            (identical(other.$client, $client) ||
+                const DeepCollectionEquality()
+                    .equals(other.$client, $client)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.description, description) ||
@@ -9703,22 +9801,12 @@ class Device {
             (identical(other.hasGeoLocation, hasGeoLocation) ||
                 const DeepCollectionEquality()
                     .equals(other.hasGeoLocation, hasGeoLocation)) &&
-            (identical(other.movable, movable) ||
-                const DeepCollectionEquality()
-                    .equals(other.movable, movable)) &&
-            (identical(other.geolocation, geolocation) ||
-                const DeepCollectionEquality()
-                    .equals(other.geolocation, geolocation)) &&
-            (identical(other.customWidget, customWidget) ||
-                const DeepCollectionEquality()
-                    .equals(other.customWidget, customWidget)) &&
-            (identical(other.domainKey, domainKey) ||
-                const DeepCollectionEquality()
-                    .equals(other.domainKey, domainKey)) &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.rtype, rtype) ||
-                const DeepCollectionEquality().equals(other.rtype, rtype)) &&
+            (identical(other.movable, movable) || const DeepCollectionEquality().equals(other.movable, movable)) &&
+            (identical(other.geolocation, geolocation) || const DeepCollectionEquality().equals(other.geolocation, geolocation)) &&
+            (identical(other.customWidget, customWidget) || const DeepCollectionEquality().equals(other.customWidget, customWidget)) &&
+            (identical(other.domainKey, domainKey) || const DeepCollectionEquality().equals(other.domainKey, domainKey)) &&
+            (identical(other.id, id) || const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.rtype, rtype) || const DeepCollectionEquality().equals(other.rtype, rtype)) &&
             (identical(other.createdStamp, createdStamp) || const DeepCollectionEquality().equals(other.createdStamp, createdStamp)) &&
             (identical(other.createdBy, createdBy) || const DeepCollectionEquality().equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) || const DeepCollectionEquality().equals(other.updatedBy, updatedBy)) &&
@@ -9736,6 +9824,12 @@ class Device {
       const DeepCollectionEquality().hash(facilityId) ^
       const DeepCollectionEquality().hash(floorId) ^
       const DeepCollectionEquality().hash(assetId) ^
+      const DeepCollectionEquality().hash(premise) ^
+      const DeepCollectionEquality().hash(facility) ^
+      const DeepCollectionEquality().hash(floor) ^
+      const DeepCollectionEquality().hash(asset) ^
+      const DeepCollectionEquality().hash(clientId) ^
+      const DeepCollectionEquality().hash($client) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(modelId) ^
@@ -9770,6 +9864,12 @@ extension $DeviceExtension on Device {
       String? facilityId,
       String? floorId,
       String? assetId,
+      String? premise,
+      String? facility,
+      String? floor,
+      String? asset,
+      String? clientId,
+      String? $client,
       String? name,
       String? description,
       String? modelId,
@@ -9800,6 +9900,12 @@ extension $DeviceExtension on Device {
         facilityId: facilityId ?? this.facilityId,
         floorId: floorId ?? this.floorId,
         assetId: assetId ?? this.assetId,
+        premise: premise ?? this.premise,
+        facility: facility ?? this.facility,
+        floor: floor ?? this.floor,
+        asset: asset ?? this.asset,
+        clientId: clientId ?? this.clientId,
+        $client: $client ?? this.$client,
         name: name ?? this.name,
         description: description ?? this.description,
         modelId: modelId ?? this.modelId,
@@ -9832,6 +9938,12 @@ extension $DeviceExtension on Device {
       Wrapped<String?>? facilityId,
       Wrapped<String?>? floorId,
       Wrapped<String?>? assetId,
+      Wrapped<String?>? premise,
+      Wrapped<String?>? facility,
+      Wrapped<String?>? floor,
+      Wrapped<String?>? asset,
+      Wrapped<String?>? clientId,
+      Wrapped<String?>? $client,
       Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<String>? modelId,
@@ -9863,6 +9975,12 @@ extension $DeviceExtension on Device {
         facilityId: (facilityId != null ? facilityId.value : this.facilityId),
         floorId: (floorId != null ? floorId.value : this.floorId),
         assetId: (assetId != null ? assetId.value : this.assetId),
+        premise: (premise != null ? premise.value : this.premise),
+        facility: (facility != null ? facility.value : this.facility),
+        floor: (floor != null ? floor.value : this.floor),
+        asset: (asset != null ? asset.value : this.asset),
+        clientId: (clientId != null ? clientId.value : this.clientId),
+        $client: ($client != null ? $client.value : this.$client),
         name: (name != null ? name.value : this.name),
         description:
             (description != null ? description.value : this.description),
@@ -18867,6 +18985,86 @@ extension $DeviceDataArrayResExtension on DeviceDataArrayRes {
 }
 
 @JsonSerializable(explicitToJson: true)
+class DashboardMenu {
+  const DashboardMenu({
+    required this.displayName,
+    this.icon,
+    this.roles,
+    required this.screenId,
+  });
+
+  factory DashboardMenu.fromJson(Map<String, dynamic> json) =>
+      _$DashboardMenuFromJson(json);
+
+  static const toJsonFactory = _$DashboardMenuToJson;
+  Map<String, dynamic> toJson() => _$DashboardMenuToJson(this);
+
+  @JsonKey(name: 'displayName', includeIfNull: false, defaultValue: '')
+  final String displayName;
+  @JsonKey(name: 'icon', includeIfNull: false, defaultValue: '')
+  final String? icon;
+  @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? roles;
+  @JsonKey(name: 'screenId', includeIfNull: false, defaultValue: '')
+  final String screenId;
+  static const fromJsonFactory = _$DashboardMenuFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is DashboardMenu &&
+            (identical(other.displayName, displayName) ||
+                const DeepCollectionEquality()
+                    .equals(other.displayName, displayName)) &&
+            (identical(other.icon, icon) ||
+                const DeepCollectionEquality().equals(other.icon, icon)) &&
+            (identical(other.roles, roles) ||
+                const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.screenId, screenId) ||
+                const DeepCollectionEquality()
+                    .equals(other.screenId, screenId)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(displayName) ^
+      const DeepCollectionEquality().hash(icon) ^
+      const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(screenId) ^
+      runtimeType.hashCode;
+}
+
+extension $DashboardMenuExtension on DashboardMenu {
+  DashboardMenu copyWith(
+      {String? displayName,
+      String? icon,
+      List<String>? roles,
+      String? screenId}) {
+    return DashboardMenu(
+        displayName: displayName ?? this.displayName,
+        icon: icon ?? this.icon,
+        roles: roles ?? this.roles,
+        screenId: screenId ?? this.screenId);
+  }
+
+  DashboardMenu copyWithWrapped(
+      {Wrapped<String>? displayName,
+      Wrapped<String?>? icon,
+      Wrapped<List<String>?>? roles,
+      Wrapped<String>? screenId}) {
+    return DashboardMenu(
+        displayName:
+            (displayName != null ? displayName.value : this.displayName),
+        icon: (icon != null ? icon.value : this.icon),
+        roles: (roles != null ? roles.value : this.roles),
+        screenId: (screenId != null ? screenId.value : this.screenId));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class DashboardMenuGroupInfo {
   const DashboardMenuGroupInfo({
     required this.name,
@@ -18874,10 +19072,12 @@ class DashboardMenuGroupInfo {
     this.description,
     this.icon,
     this.order,
+    this.webSupported,
+    this.tabletSupported,
+    this.mobileSupported,
     this.tags,
-    required this.screenIds,
-    this.clientIds,
     this.roles,
+    this.menus,
   });
 
   factory DashboardMenuGroupInfo.fromJson(Map<String, dynamic> json) =>
@@ -18896,14 +19096,18 @@ class DashboardMenuGroupInfo {
   final String? icon;
   @JsonKey(name: 'order', includeIfNull: false)
   final int? order;
+  @JsonKey(name: 'webSupported', includeIfNull: false, defaultValue: true)
+  final bool? webSupported;
+  @JsonKey(name: 'tabletSupported', includeIfNull: false, defaultValue: true)
+  final bool? tabletSupported;
+  @JsonKey(name: 'mobileSupported', includeIfNull: false, defaultValue: true)
+  final bool? mobileSupported;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
-  @JsonKey(name: 'screenIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String> screenIds;
-  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
+  @JsonKey(name: 'menus', includeIfNull: false, defaultValue: <DashboardMenu>[])
+  final List<DashboardMenu>? menus;
   static const fromJsonFactory = _$DashboardMenuGroupInfoFromJson;
 
   @override
@@ -18922,16 +19126,21 @@ class DashboardMenuGroupInfo {
                 const DeepCollectionEquality().equals(other.icon, icon)) &&
             (identical(other.order, order) ||
                 const DeepCollectionEquality().equals(other.order, order)) &&
+            (identical(other.webSupported, webSupported) ||
+                const DeepCollectionEquality()
+                    .equals(other.webSupported, webSupported)) &&
+            (identical(other.tabletSupported, tabletSupported) ||
+                const DeepCollectionEquality()
+                    .equals(other.tabletSupported, tabletSupported)) &&
+            (identical(other.mobileSupported, mobileSupported) ||
+                const DeepCollectionEquality()
+                    .equals(other.mobileSupported, mobileSupported)) &&
             (identical(other.tags, tags) ||
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
-            (identical(other.screenIds, screenIds) ||
-                const DeepCollectionEquality()
-                    .equals(other.screenIds, screenIds)) &&
-            (identical(other.clientIds, clientIds) ||
-                const DeepCollectionEquality()
-                    .equals(other.clientIds, clientIds)) &&
             (identical(other.roles, roles) ||
-                const DeepCollectionEquality().equals(other.roles, roles)));
+                const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.menus, menus) ||
+                const DeepCollectionEquality().equals(other.menus, menus)));
   }
 
   @override
@@ -18944,10 +19153,12 @@ class DashboardMenuGroupInfo {
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(icon) ^
       const DeepCollectionEquality().hash(order) ^
+      const DeepCollectionEquality().hash(webSupported) ^
+      const DeepCollectionEquality().hash(tabletSupported) ^
+      const DeepCollectionEquality().hash(mobileSupported) ^
       const DeepCollectionEquality().hash(tags) ^
-      const DeepCollectionEquality().hash(screenIds) ^
-      const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(menus) ^
       runtimeType.hashCode;
 }
 
@@ -18958,20 +19169,24 @@ extension $DashboardMenuGroupInfoExtension on DashboardMenuGroupInfo {
       String? description,
       String? icon,
       int? order,
+      bool? webSupported,
+      bool? tabletSupported,
+      bool? mobileSupported,
       List<String>? tags,
-      List<String>? screenIds,
-      List<String>? clientIds,
-      List<String>? roles}) {
+      List<String>? roles,
+      List<DashboardMenu>? menus}) {
     return DashboardMenuGroupInfo(
         name: name ?? this.name,
         displayName: displayName ?? this.displayName,
         description: description ?? this.description,
         icon: icon ?? this.icon,
         order: order ?? this.order,
+        webSupported: webSupported ?? this.webSupported,
+        tabletSupported: tabletSupported ?? this.tabletSupported,
+        mobileSupported: mobileSupported ?? this.mobileSupported,
         tags: tags ?? this.tags,
-        screenIds: screenIds ?? this.screenIds,
-        clientIds: clientIds ?? this.clientIds,
-        roles: roles ?? this.roles);
+        roles: roles ?? this.roles,
+        menus: menus ?? this.menus);
   }
 
   DashboardMenuGroupInfo copyWithWrapped(
@@ -18980,10 +19195,12 @@ extension $DashboardMenuGroupInfoExtension on DashboardMenuGroupInfo {
       Wrapped<String?>? description,
       Wrapped<String?>? icon,
       Wrapped<int?>? order,
+      Wrapped<bool?>? webSupported,
+      Wrapped<bool?>? tabletSupported,
+      Wrapped<bool?>? mobileSupported,
       Wrapped<List<String>?>? tags,
-      Wrapped<List<String>>? screenIds,
-      Wrapped<List<String>?>? clientIds,
-      Wrapped<List<String>?>? roles}) {
+      Wrapped<List<String>?>? roles,
+      Wrapped<List<DashboardMenu>?>? menus}) {
     return DashboardMenuGroupInfo(
         name: (name != null ? name.value : this.name),
         displayName:
@@ -18992,10 +19209,17 @@ extension $DashboardMenuGroupInfoExtension on DashboardMenuGroupInfo {
             (description != null ? description.value : this.description),
         icon: (icon != null ? icon.value : this.icon),
         order: (order != null ? order.value : this.order),
+        webSupported:
+            (webSupported != null ? webSupported.value : this.webSupported),
+        tabletSupported: (tabletSupported != null
+            ? tabletSupported.value
+            : this.tabletSupported),
+        mobileSupported: (mobileSupported != null
+            ? mobileSupported.value
+            : this.mobileSupported),
         tags: (tags != null ? tags.value : this.tags),
-        screenIds: (screenIds != null ? screenIds.value : this.screenIds),
-        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
-        roles: (roles != null ? roles.value : this.roles));
+        roles: (roles != null ? roles.value : this.roles),
+        menus: (menus != null ? menus.value : this.menus));
   }
 }
 
@@ -19015,9 +19239,11 @@ class DashboardMenuGroup {
     this.description,
     this.icon,
     this.order,
-    required this.screenIds,
-    this.clientIds,
+    this.webSupported,
+    this.tabletSupported,
+    this.mobileSupported,
     this.roles,
+    this.menus,
   });
 
   factory DashboardMenuGroup.fromJson(Map<String, dynamic> json) =>
@@ -19052,12 +19278,16 @@ class DashboardMenuGroup {
   final String? icon;
   @JsonKey(name: 'order', includeIfNull: false)
   final int? order;
-  @JsonKey(name: 'screenIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String> screenIds;
-  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  @JsonKey(name: 'webSupported', includeIfNull: false, defaultValue: true)
+  final bool? webSupported;
+  @JsonKey(name: 'tabletSupported', includeIfNull: false, defaultValue: true)
+  final bool? tabletSupported;
+  @JsonKey(name: 'mobileSupported', includeIfNull: false, defaultValue: true)
+  final bool? mobileSupported;
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
+  @JsonKey(name: 'menus', includeIfNull: false, defaultValue: <DashboardMenu>[])
+  final List<DashboardMenu>? menus;
   static const fromJsonFactory = _$DashboardMenuGroupFromJson;
 
   @override
@@ -19097,14 +19327,19 @@ class DashboardMenuGroup {
                 const DeepCollectionEquality().equals(other.icon, icon)) &&
             (identical(other.order, order) ||
                 const DeepCollectionEquality().equals(other.order, order)) &&
-            (identical(other.screenIds, screenIds) ||
+            (identical(other.webSupported, webSupported) ||
                 const DeepCollectionEquality()
-                    .equals(other.screenIds, screenIds)) &&
-            (identical(other.clientIds, clientIds) ||
+                    .equals(other.webSupported, webSupported)) &&
+            (identical(other.tabletSupported, tabletSupported) ||
                 const DeepCollectionEquality()
-                    .equals(other.clientIds, clientIds)) &&
+                    .equals(other.tabletSupported, tabletSupported)) &&
+            (identical(other.mobileSupported, mobileSupported) ||
+                const DeepCollectionEquality()
+                    .equals(other.mobileSupported, mobileSupported)) &&
             (identical(other.roles, roles) ||
-                const DeepCollectionEquality().equals(other.roles, roles)));
+                const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.menus, menus) ||
+                const DeepCollectionEquality().equals(other.menus, menus)));
   }
 
   @override
@@ -19125,9 +19360,11 @@ class DashboardMenuGroup {
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(icon) ^
       const DeepCollectionEquality().hash(order) ^
-      const DeepCollectionEquality().hash(screenIds) ^
-      const DeepCollectionEquality().hash(clientIds) ^
+      const DeepCollectionEquality().hash(webSupported) ^
+      const DeepCollectionEquality().hash(tabletSupported) ^
+      const DeepCollectionEquality().hash(mobileSupported) ^
       const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(menus) ^
       runtimeType.hashCode;
 }
 
@@ -19146,9 +19383,11 @@ extension $DashboardMenuGroupExtension on DashboardMenuGroup {
       String? description,
       String? icon,
       int? order,
-      List<String>? screenIds,
-      List<String>? clientIds,
-      List<String>? roles}) {
+      bool? webSupported,
+      bool? tabletSupported,
+      bool? mobileSupported,
+      List<String>? roles,
+      List<DashboardMenu>? menus}) {
     return DashboardMenuGroup(
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
@@ -19163,9 +19402,11 @@ extension $DashboardMenuGroupExtension on DashboardMenuGroup {
         description: description ?? this.description,
         icon: icon ?? this.icon,
         order: order ?? this.order,
-        screenIds: screenIds ?? this.screenIds,
-        clientIds: clientIds ?? this.clientIds,
-        roles: roles ?? this.roles);
+        webSupported: webSupported ?? this.webSupported,
+        tabletSupported: tabletSupported ?? this.tabletSupported,
+        mobileSupported: mobileSupported ?? this.mobileSupported,
+        roles: roles ?? this.roles,
+        menus: menus ?? this.menus);
   }
 
   DashboardMenuGroup copyWithWrapped(
@@ -19182,9 +19423,11 @@ extension $DashboardMenuGroupExtension on DashboardMenuGroup {
       Wrapped<String?>? description,
       Wrapped<String?>? icon,
       Wrapped<int?>? order,
-      Wrapped<List<String>>? screenIds,
-      Wrapped<List<String>?>? clientIds,
-      Wrapped<List<String>?>? roles}) {
+      Wrapped<bool?>? webSupported,
+      Wrapped<bool?>? tabletSupported,
+      Wrapped<bool?>? mobileSupported,
+      Wrapped<List<String>?>? roles,
+      Wrapped<List<DashboardMenu>?>? menus}) {
     return DashboardMenuGroup(
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
@@ -19203,9 +19446,16 @@ extension $DashboardMenuGroupExtension on DashboardMenuGroup {
             (description != null ? description.value : this.description),
         icon: (icon != null ? icon.value : this.icon),
         order: (order != null ? order.value : this.order),
-        screenIds: (screenIds != null ? screenIds.value : this.screenIds),
-        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
-        roles: (roles != null ? roles.value : this.roles));
+        webSupported:
+            (webSupported != null ? webSupported.value : this.webSupported),
+        tabletSupported: (tabletSupported != null
+            ? tabletSupported.value
+            : this.tabletSupported),
+        mobileSupported: (mobileSupported != null
+            ? mobileSupported.value
+            : this.mobileSupported),
+        roles: (roles != null ? roles.value : this.roles),
+        menus: (menus != null ? menus.value : this.menus));
   }
 }
 

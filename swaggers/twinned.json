@@ -14591,6 +14591,24 @@
         },
         "assetId": {
           "type": "string"
+        },
+        "premise": {
+          "type": "string"
+        },
+        "facility": {
+          "type": "string"
+        },
+        "floor": {
+          "type": "string"
+        },
+        "asset": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "client": {
+          "type": "string"
         }
       }
     },
@@ -16614,12 +16632,35 @@
         }
       ]
     },
+    "DashboardMenu": {
+      "type": "object",
+      "required": [
+        "displayName",
+        "screenId"
+      ],
+      "properties": {
+        "displayName": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "screenId": {
+          "type": "string"
+        }
+      }
+    },
     "DashboardMenuGroupInfo": {
       "type": "object",
       "required": [
         "name",
-        "displayName",
-        "screenIds"
+        "displayName"
       ],
       "properties": {
         "name": {
@@ -16637,19 +16678,19 @@
         "order": {
           "type": "integer"
         },
+        "webSupported": {
+          "type": "boolean",
+          "default": true
+        },
+        "tabletSupported": {
+          "type": "boolean",
+          "default": true
+        },
+        "mobileSupported": {
+          "type": "boolean",
+          "default": true
+        },
         "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "screenIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "clientIds": {
           "type": "array",
           "items": {
             "type": "string"
@@ -16659,6 +16700,12 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        },
+        "menus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DashboardMenu"
           }
         }
       }
