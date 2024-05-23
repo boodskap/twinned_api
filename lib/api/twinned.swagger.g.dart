@@ -3716,8 +3716,8 @@ ScreenChild _$ScreenChildFromJson(Map<String, dynamic> json) => ScreenChild(
       height: (json['height'] as num?)?.toDouble(),
       bgColor: (json['bgColor'] as num?)?.toInt(),
       bgImage: json['bgImage'] as String? ?? '',
-      scrollDirection: json['scrollDirection'] as String? ?? '',
       expanded: json['expanded'] as bool?,
+      flex: (json['flex'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$ScreenChildToJson(ScreenChild instance) {
@@ -3736,8 +3736,8 @@ Map<String, dynamic> _$ScreenChildToJson(ScreenChild instance) {
   writeNotNull('height', instance.height);
   writeNotNull('bgColor', instance.bgColor);
   writeNotNull('bgImage', instance.bgImage);
-  writeNotNull('scrollDirection', instance.scrollDirection);
   writeNotNull('expanded', instance.expanded);
+  writeNotNull('flex', instance.flex);
   return val;
 }
 
@@ -3750,7 +3750,6 @@ ScreenRow _$ScreenRowFromJson(Map<String, dynamic> json) => ScreenRow(
       crossAxisAlignment: json['crossAxisAlignment'] as String? ?? '',
       mainAxisSize: json['mainAxisSize'] as String? ?? '',
       scrollDirection: json['scrollDirection'] as String? ?? '',
-      expanded: json['expanded'] as bool?,
       children: (json['children'] as List<dynamic>?)
               ?.map((e) => ScreenChild.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -3774,7 +3773,6 @@ Map<String, dynamic> _$ScreenRowToJson(ScreenRow instance) {
   writeNotNull('crossAxisAlignment', instance.crossAxisAlignment);
   writeNotNull('mainAxisSize', instance.mainAxisSize);
   writeNotNull('scrollDirection', instance.scrollDirection);
-  writeNotNull('expanded', instance.expanded);
   val['children'] = instance.children.map((e) => e.toJson()).toList();
   return val;
 }
