@@ -501,6 +501,44 @@ enum TriggeredControlDeliveryStatus {
   const TriggeredControlDeliveryStatus(this.value);
 }
 
+enum RadiusConfigType {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('zero')
+  zero('zero'),
+  @JsonValue('circular')
+  circular('circular'),
+  @JsonValue('elliptical')
+  elliptical('elliptical');
+
+  final String? value;
+
+  const RadiusConfigType(this.value);
+}
+
+enum BorderConfigType {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('ZERO')
+  zero('ZERO'),
+  @JsonValue('ALL')
+  all('ALL'),
+  @JsonValue('ONLY')
+  only('ONLY'),
+  @JsonValue('HORIZONTAL')
+  horizontal('HORIZONTAL'),
+  @JsonValue('VERTICAL')
+  vertical('VERTICAL'),
+  @JsonValue('CIRCULAR')
+  circular('CIRCULAR');
+
+  final String? value;
+
+  const BorderConfigType(this.value);
+}
+
 enum TriggeredEventEventType {
   @JsonValue(null)
   swaggerGeneratedUnknown(null),

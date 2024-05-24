@@ -2400,12 +2400,6 @@
         "operationId": "searchDashboardMenuGroups",
         "parameters": [
           {
-            "in": "header",
-            "name": "modelId",
-            "required": false,
-            "type": "string"
-          },
-          {
             "in": "body",
             "name": "body",
             "required": true,
@@ -16636,6 +16630,9 @@
       "type": "object",
       "required": [
         "displayName",
+        "webSupported",
+        "tabletSupported",
+        "mobileSupported",
         "screenId"
       ],
       "properties": {
@@ -16645,11 +16642,17 @@
         "icon": {
           "type": "string"
         },
-        "roles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "webSupported": {
+          "type": "boolean",
+          "default": true
+        },
+        "tabletSupported": {
+          "type": "boolean",
+          "default": true
+        },
+        "mobileSupported": {
+          "type": "boolean",
+          "default": true
         },
         "screenId": {
           "type": "string"
@@ -16701,6 +16704,12 @@
           }
         },
         "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "clientIds": {
           "type": "array",
           "items": {
             "type": "string"
@@ -16772,6 +16781,113 @@
         }
       ]
     },
+    "PaddingConfig": {
+      "type": "object",
+      "properties": {
+        "left": {
+          "type": "number",
+          "format": "double"
+        },
+        "top": {
+          "type": "number",
+          "format": "double"
+        },
+        "right": {
+          "type": "number",
+          "format": "double"
+        },
+        "bottom": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "RadiusConfig": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "zero",
+            "circular",
+            "elliptical"
+          ]
+        },
+        "radius": {
+          "type": "number",
+          "format": "double"
+        },
+        "xRadius": {
+          "type": "number",
+          "format": "double"
+        },
+        "yRadius": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "BorderConfig": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "ZERO",
+            "ALL",
+            "ONLY",
+            "HORIZONTAL",
+            "VERTICAL",
+            "CIRCULAR"
+          ]
+        },
+        "color": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "width": {
+          "type": "number",
+          "format": "double"
+        },
+        "allRadius": {
+          "$ref": "#/definitions/RadiusConfig"
+        },
+        "leftRadius": {
+          "$ref": "#/definitions/RadiusConfig"
+        },
+        "rightRadius": {
+          "$ref": "#/definitions/RadiusConfig"
+        },
+        "topRadius": {
+          "$ref": "#/definitions/RadiusConfig"
+        },
+        "bottomRadius": {
+          "$ref": "#/definitions/RadiusConfig"
+        },
+        "topLeftRadius": {
+          "$ref": "#/definitions/RadiusConfig"
+        },
+        "bottomLeftRadius": {
+          "$ref": "#/definitions/RadiusConfig"
+        },
+        "topRightRadius": {
+          "$ref": "#/definitions/RadiusConfig"
+        },
+        "bottomRightRadius": {
+          "$ref": "#/definitions/RadiusConfig"
+        },
+        "circularRadius": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "ScreenChild": {
       "type": "object",
       "required": [
@@ -16805,6 +16921,15 @@
         },
         "flex": {
           "type": "integer"
+        },
+        "padding": {
+          "$ref": "#/definitions/PaddingConfig"
+        },
+        "margin": {
+          "$ref": "#/definitions/PaddingConfig"
+        },
+        "border": {
+          "$ref": "#/definitions/BorderConfig"
         }
       }
     },
@@ -16840,6 +16965,15 @@
         },
         "scrollDirection": {
           "type": "string"
+        },
+        "padding": {
+          "$ref": "#/definitions/PaddingConfig"
+        },
+        "margin": {
+          "$ref": "#/definitions/PaddingConfig"
+        },
+        "border": {
+          "$ref": "#/definitions/BorderConfig"
         },
         "children": {
           "type": "array",
@@ -20291,10 +20425,7 @@
     "EqlSearch": {
       "type": "object",
       "required": [
-        "conditions",
-        "queryConditions",
-        "boolConditions",
-        "mustConditions"
+        "source"
       ],
       "properties": {
         "source": {
