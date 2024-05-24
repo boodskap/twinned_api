@@ -1276,28 +1276,23 @@ abstract class Twinned extends ChopperService {
   });
 
   ///Search dashboard menus
-  ///@param modelId
   ///@param body
   Future<chopper.Response<DashboardMenuGroupArrayRes>>
       searchDashboardMenuGroups({
-    String? modelId,
     required SearchReq? body,
     dynamic apikey,
   }) {
     generatedMapping.putIfAbsent(DashboardMenuGroupArrayRes,
         () => DashboardMenuGroupArrayRes.fromJsonFactory);
 
-    return _searchDashboardMenuGroups(
-        modelId: modelId?.toString(), body: body, apikey: apikey?.toString());
+    return _searchDashboardMenuGroups(body: body, apikey: apikey?.toString());
   }
 
   ///Search dashboard menus
-  ///@param modelId
   ///@param body
   @Post(path: '/DashboardMenu/search')
   Future<chopper.Response<DashboardMenuGroupArrayRes>>
       _searchDashboardMenuGroups({
-    @Header('modelId') String? modelId,
     @Body() required SearchReq? body,
     @Header('APIKEY') String? apikey,
   });
@@ -18989,7 +18984,9 @@ class DashboardMenu {
   const DashboardMenu({
     required this.displayName,
     this.icon,
-    this.roles,
+    required this.webSupported,
+    required this.tabletSupported,
+    required this.mobileSupported,
     required this.screenId,
   });
 
@@ -19003,8 +19000,12 @@ class DashboardMenu {
   final String displayName;
   @JsonKey(name: 'icon', includeIfNull: false, defaultValue: '')
   final String? icon;
-  @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? roles;
+  @JsonKey(name: 'webSupported', includeIfNull: false, defaultValue: true)
+  final bool webSupported;
+  @JsonKey(name: 'tabletSupported', includeIfNull: false, defaultValue: true)
+  final bool tabletSupported;
+  @JsonKey(name: 'mobileSupported', includeIfNull: false, defaultValue: true)
+  final bool mobileSupported;
   @JsonKey(name: 'screenId', includeIfNull: false, defaultValue: '')
   final String screenId;
   static const fromJsonFactory = _$DashboardMenuFromJson;
@@ -19018,8 +19019,15 @@ class DashboardMenu {
                     .equals(other.displayName, displayName)) &&
             (identical(other.icon, icon) ||
                 const DeepCollectionEquality().equals(other.icon, icon)) &&
-            (identical(other.roles, roles) ||
-                const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.webSupported, webSupported) ||
+                const DeepCollectionEquality()
+                    .equals(other.webSupported, webSupported)) &&
+            (identical(other.tabletSupported, tabletSupported) ||
+                const DeepCollectionEquality()
+                    .equals(other.tabletSupported, tabletSupported)) &&
+            (identical(other.mobileSupported, mobileSupported) ||
+                const DeepCollectionEquality()
+                    .equals(other.mobileSupported, mobileSupported)) &&
             (identical(other.screenId, screenId) ||
                 const DeepCollectionEquality()
                     .equals(other.screenId, screenId)));
@@ -19032,7 +19040,9 @@ class DashboardMenu {
   int get hashCode =>
       const DeepCollectionEquality().hash(displayName) ^
       const DeepCollectionEquality().hash(icon) ^
-      const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(webSupported) ^
+      const DeepCollectionEquality().hash(tabletSupported) ^
+      const DeepCollectionEquality().hash(mobileSupported) ^
       const DeepCollectionEquality().hash(screenId) ^
       runtimeType.hashCode;
 }
@@ -19041,25 +19051,38 @@ extension $DashboardMenuExtension on DashboardMenu {
   DashboardMenu copyWith(
       {String? displayName,
       String? icon,
-      List<String>? roles,
+      bool? webSupported,
+      bool? tabletSupported,
+      bool? mobileSupported,
       String? screenId}) {
     return DashboardMenu(
         displayName: displayName ?? this.displayName,
         icon: icon ?? this.icon,
-        roles: roles ?? this.roles,
+        webSupported: webSupported ?? this.webSupported,
+        tabletSupported: tabletSupported ?? this.tabletSupported,
+        mobileSupported: mobileSupported ?? this.mobileSupported,
         screenId: screenId ?? this.screenId);
   }
 
   DashboardMenu copyWithWrapped(
       {Wrapped<String>? displayName,
       Wrapped<String?>? icon,
-      Wrapped<List<String>?>? roles,
+      Wrapped<bool>? webSupported,
+      Wrapped<bool>? tabletSupported,
+      Wrapped<bool>? mobileSupported,
       Wrapped<String>? screenId}) {
     return DashboardMenu(
         displayName:
             (displayName != null ? displayName.value : this.displayName),
         icon: (icon != null ? icon.value : this.icon),
-        roles: (roles != null ? roles.value : this.roles),
+        webSupported:
+            (webSupported != null ? webSupported.value : this.webSupported),
+        tabletSupported: (tabletSupported != null
+            ? tabletSupported.value
+            : this.tabletSupported),
+        mobileSupported: (mobileSupported != null
+            ? mobileSupported.value
+            : this.mobileSupported),
         screenId: (screenId != null ? screenId.value : this.screenId));
   }
 }
@@ -19077,6 +19100,7 @@ class DashboardMenuGroupInfo {
     required this.mobileSupported,
     this.tags,
     this.roles,
+    this.clientIds,
     required this.menus,
   });
 
@@ -19106,6 +19130,8 @@ class DashboardMenuGroupInfo {
   final List<String>? tags;
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   @JsonKey(name: 'menus', includeIfNull: false, defaultValue: <DashboardMenu>[])
   final List<DashboardMenu> menus;
   static const fromJsonFactory = _$DashboardMenuGroupInfoFromJson;
@@ -19139,6 +19165,9 @@ class DashboardMenuGroupInfo {
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.roles, roles) ||
                 const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)) &&
             (identical(other.menus, menus) ||
                 const DeepCollectionEquality().equals(other.menus, menus)));
   }
@@ -19158,6 +19187,7 @@ class DashboardMenuGroupInfo {
       const DeepCollectionEquality().hash(mobileSupported) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(menus) ^
       runtimeType.hashCode;
 }
@@ -19174,6 +19204,7 @@ extension $DashboardMenuGroupInfoExtension on DashboardMenuGroupInfo {
       bool? mobileSupported,
       List<String>? tags,
       List<String>? roles,
+      List<String>? clientIds,
       List<DashboardMenu>? menus}) {
     return DashboardMenuGroupInfo(
         name: name ?? this.name,
@@ -19186,6 +19217,7 @@ extension $DashboardMenuGroupInfoExtension on DashboardMenuGroupInfo {
         mobileSupported: mobileSupported ?? this.mobileSupported,
         tags: tags ?? this.tags,
         roles: roles ?? this.roles,
+        clientIds: clientIds ?? this.clientIds,
         menus: menus ?? this.menus);
   }
 
@@ -19200,6 +19232,7 @@ extension $DashboardMenuGroupInfoExtension on DashboardMenuGroupInfo {
       Wrapped<bool>? mobileSupported,
       Wrapped<List<String>?>? tags,
       Wrapped<List<String>?>? roles,
+      Wrapped<List<String>?>? clientIds,
       Wrapped<List<DashboardMenu>>? menus}) {
     return DashboardMenuGroupInfo(
         name: (name != null ? name.value : this.name),
@@ -19219,6 +19252,7 @@ extension $DashboardMenuGroupInfoExtension on DashboardMenuGroupInfo {
             : this.mobileSupported),
         tags: (tags != null ? tags.value : this.tags),
         roles: (roles != null ? roles.value : this.roles),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         menus: (menus != null ? menus.value : this.menus));
   }
 }
@@ -19243,6 +19277,7 @@ class DashboardMenuGroup {
     required this.tabletSupported,
     required this.mobileSupported,
     this.roles,
+    this.clientIds,
     required this.menus,
   });
 
@@ -19286,6 +19321,8 @@ class DashboardMenuGroup {
   final bool mobileSupported;
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   @JsonKey(name: 'menus', includeIfNull: false, defaultValue: <DashboardMenu>[])
   final List<DashboardMenu> menus;
   static const fromJsonFactory = _$DashboardMenuGroupFromJson;
@@ -19338,6 +19375,9 @@ class DashboardMenuGroup {
                     .equals(other.mobileSupported, mobileSupported)) &&
             (identical(other.roles, roles) ||
                 const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)) &&
             (identical(other.menus, menus) ||
                 const DeepCollectionEquality().equals(other.menus, menus)));
   }
@@ -19364,6 +19404,7 @@ class DashboardMenuGroup {
       const DeepCollectionEquality().hash(tabletSupported) ^
       const DeepCollectionEquality().hash(mobileSupported) ^
       const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(menus) ^
       runtimeType.hashCode;
 }
@@ -19387,6 +19428,7 @@ extension $DashboardMenuGroupExtension on DashboardMenuGroup {
       bool? tabletSupported,
       bool? mobileSupported,
       List<String>? roles,
+      List<String>? clientIds,
       List<DashboardMenu>? menus}) {
     return DashboardMenuGroup(
         domainKey: domainKey ?? this.domainKey,
@@ -19406,6 +19448,7 @@ extension $DashboardMenuGroupExtension on DashboardMenuGroup {
         tabletSupported: tabletSupported ?? this.tabletSupported,
         mobileSupported: mobileSupported ?? this.mobileSupported,
         roles: roles ?? this.roles,
+        clientIds: clientIds ?? this.clientIds,
         menus: menus ?? this.menus);
   }
 
@@ -19427,6 +19470,7 @@ extension $DashboardMenuGroupExtension on DashboardMenuGroup {
       Wrapped<bool>? tabletSupported,
       Wrapped<bool>? mobileSupported,
       Wrapped<List<String>?>? roles,
+      Wrapped<List<String>?>? clientIds,
       Wrapped<List<DashboardMenu>>? menus}) {
     return DashboardMenuGroup(
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
@@ -19455,6 +19499,7 @@ extension $DashboardMenuGroupExtension on DashboardMenuGroup {
             ? mobileSupported.value
             : this.mobileSupported),
         roles: (roles != null ? roles.value : this.roles),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         menus: (menus != null ? menus.value : this.menus));
   }
 }
@@ -19760,6 +19805,356 @@ extension $DashboardMenuGroupArrayResExtension on DashboardMenuGroupArrayRes {
 }
 
 @JsonSerializable(explicitToJson: true)
+class PaddingConfig {
+  const PaddingConfig({
+    this.left,
+    this.top,
+    this.right,
+    this.bottom,
+  });
+
+  factory PaddingConfig.fromJson(Map<String, dynamic> json) =>
+      _$PaddingConfigFromJson(json);
+
+  static const toJsonFactory = _$PaddingConfigToJson;
+  Map<String, dynamic> toJson() => _$PaddingConfigToJson(this);
+
+  @JsonKey(name: 'left', includeIfNull: false)
+  final double? left;
+  @JsonKey(name: 'top', includeIfNull: false)
+  final double? top;
+  @JsonKey(name: 'right', includeIfNull: false)
+  final double? right;
+  @JsonKey(name: 'bottom', includeIfNull: false)
+  final double? bottom;
+  static const fromJsonFactory = _$PaddingConfigFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is PaddingConfig &&
+            (identical(other.left, left) ||
+                const DeepCollectionEquality().equals(other.left, left)) &&
+            (identical(other.top, top) ||
+                const DeepCollectionEquality().equals(other.top, top)) &&
+            (identical(other.right, right) ||
+                const DeepCollectionEquality().equals(other.right, right)) &&
+            (identical(other.bottom, bottom) ||
+                const DeepCollectionEquality().equals(other.bottom, bottom)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(left) ^
+      const DeepCollectionEquality().hash(top) ^
+      const DeepCollectionEquality().hash(right) ^
+      const DeepCollectionEquality().hash(bottom) ^
+      runtimeType.hashCode;
+}
+
+extension $PaddingConfigExtension on PaddingConfig {
+  PaddingConfig copyWith(
+      {double? left, double? top, double? right, double? bottom}) {
+    return PaddingConfig(
+        left: left ?? this.left,
+        top: top ?? this.top,
+        right: right ?? this.right,
+        bottom: bottom ?? this.bottom);
+  }
+
+  PaddingConfig copyWithWrapped(
+      {Wrapped<double?>? left,
+      Wrapped<double?>? top,
+      Wrapped<double?>? right,
+      Wrapped<double?>? bottom}) {
+    return PaddingConfig(
+        left: (left != null ? left.value : this.left),
+        top: (top != null ? top.value : this.top),
+        right: (right != null ? right.value : this.right),
+        bottom: (bottom != null ? bottom.value : this.bottom));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class RadiusConfig {
+  const RadiusConfig({
+    required this.type,
+    this.radius,
+    this.xRadius,
+    this.yRadius,
+  });
+
+  factory RadiusConfig.fromJson(Map<String, dynamic> json) =>
+      _$RadiusConfigFromJson(json);
+
+  static const toJsonFactory = _$RadiusConfigToJson;
+  Map<String, dynamic> toJson() => _$RadiusConfigToJson(this);
+
+  @JsonKey(
+    name: 'type',
+    includeIfNull: false,
+    toJson: radiusConfigTypeToJson,
+    fromJson: radiusConfigTypeFromJson,
+  )
+  final enums.RadiusConfigType type;
+  @JsonKey(name: 'radius', includeIfNull: false)
+  final double? radius;
+  @JsonKey(name: 'xRadius', includeIfNull: false)
+  final double? xRadius;
+  @JsonKey(name: 'yRadius', includeIfNull: false)
+  final double? yRadius;
+  static const fromJsonFactory = _$RadiusConfigFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is RadiusConfig &&
+            (identical(other.type, type) ||
+                const DeepCollectionEquality().equals(other.type, type)) &&
+            (identical(other.radius, radius) ||
+                const DeepCollectionEquality().equals(other.radius, radius)) &&
+            (identical(other.xRadius, xRadius) ||
+                const DeepCollectionEquality()
+                    .equals(other.xRadius, xRadius)) &&
+            (identical(other.yRadius, yRadius) ||
+                const DeepCollectionEquality().equals(other.yRadius, yRadius)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(type) ^
+      const DeepCollectionEquality().hash(radius) ^
+      const DeepCollectionEquality().hash(xRadius) ^
+      const DeepCollectionEquality().hash(yRadius) ^
+      runtimeType.hashCode;
+}
+
+extension $RadiusConfigExtension on RadiusConfig {
+  RadiusConfig copyWith(
+      {enums.RadiusConfigType? type,
+      double? radius,
+      double? xRadius,
+      double? yRadius}) {
+    return RadiusConfig(
+        type: type ?? this.type,
+        radius: radius ?? this.radius,
+        xRadius: xRadius ?? this.xRadius,
+        yRadius: yRadius ?? this.yRadius);
+  }
+
+  RadiusConfig copyWithWrapped(
+      {Wrapped<enums.RadiusConfigType>? type,
+      Wrapped<double?>? radius,
+      Wrapped<double?>? xRadius,
+      Wrapped<double?>? yRadius}) {
+    return RadiusConfig(
+        type: (type != null ? type.value : this.type),
+        radius: (radius != null ? radius.value : this.radius),
+        xRadius: (xRadius != null ? xRadius.value : this.xRadius),
+        yRadius: (yRadius != null ? yRadius.value : this.yRadius));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class BorderConfig {
+  const BorderConfig({
+    required this.type,
+    this.color,
+    this.width,
+    this.allRadius,
+    this.leftRadius,
+    this.rightRadius,
+    this.topRadius,
+    this.bottomRadius,
+    this.topLeftRadius,
+    this.bottomLeftRadius,
+    this.topRightRadius,
+    this.bottomRightRadius,
+    this.circularRadius,
+  });
+
+  factory BorderConfig.fromJson(Map<String, dynamic> json) =>
+      _$BorderConfigFromJson(json);
+
+  static const toJsonFactory = _$BorderConfigToJson;
+  Map<String, dynamic> toJson() => _$BorderConfigToJson(this);
+
+  @JsonKey(
+    name: 'type',
+    includeIfNull: false,
+    toJson: borderConfigTypeToJson,
+    fromJson: borderConfigTypeFromJson,
+  )
+  final enums.BorderConfigType type;
+  @JsonKey(name: 'color', includeIfNull: false)
+  final int? color;
+  @JsonKey(name: 'width', includeIfNull: false)
+  final double? width;
+  @JsonKey(name: 'allRadius', includeIfNull: false)
+  final RadiusConfig? allRadius;
+  @JsonKey(name: 'leftRadius', includeIfNull: false)
+  final RadiusConfig? leftRadius;
+  @JsonKey(name: 'rightRadius', includeIfNull: false)
+  final RadiusConfig? rightRadius;
+  @JsonKey(name: 'topRadius', includeIfNull: false)
+  final RadiusConfig? topRadius;
+  @JsonKey(name: 'bottomRadius', includeIfNull: false)
+  final RadiusConfig? bottomRadius;
+  @JsonKey(name: 'topLeftRadius', includeIfNull: false)
+  final RadiusConfig? topLeftRadius;
+  @JsonKey(name: 'bottomLeftRadius', includeIfNull: false)
+  final RadiusConfig? bottomLeftRadius;
+  @JsonKey(name: 'topRightRadius', includeIfNull: false)
+  final RadiusConfig? topRightRadius;
+  @JsonKey(name: 'bottomRightRadius', includeIfNull: false)
+  final RadiusConfig? bottomRightRadius;
+  @JsonKey(name: 'circularRadius', includeIfNull: false)
+  final double? circularRadius;
+  static const fromJsonFactory = _$BorderConfigFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is BorderConfig &&
+            (identical(other.type, type) ||
+                const DeepCollectionEquality().equals(other.type, type)) &&
+            (identical(other.color, color) ||
+                const DeepCollectionEquality().equals(other.color, color)) &&
+            (identical(other.width, width) ||
+                const DeepCollectionEquality().equals(other.width, width)) &&
+            (identical(other.allRadius, allRadius) ||
+                const DeepCollectionEquality()
+                    .equals(other.allRadius, allRadius)) &&
+            (identical(other.leftRadius, leftRadius) ||
+                const DeepCollectionEquality()
+                    .equals(other.leftRadius, leftRadius)) &&
+            (identical(other.rightRadius, rightRadius) ||
+                const DeepCollectionEquality()
+                    .equals(other.rightRadius, rightRadius)) &&
+            (identical(other.topRadius, topRadius) ||
+                const DeepCollectionEquality()
+                    .equals(other.topRadius, topRadius)) &&
+            (identical(other.bottomRadius, bottomRadius) ||
+                const DeepCollectionEquality()
+                    .equals(other.bottomRadius, bottomRadius)) &&
+            (identical(other.topLeftRadius, topLeftRadius) ||
+                const DeepCollectionEquality()
+                    .equals(other.topLeftRadius, topLeftRadius)) &&
+            (identical(other.bottomLeftRadius, bottomLeftRadius) ||
+                const DeepCollectionEquality()
+                    .equals(other.bottomLeftRadius, bottomLeftRadius)) &&
+            (identical(other.topRightRadius, topRightRadius) ||
+                const DeepCollectionEquality()
+                    .equals(other.topRightRadius, topRightRadius)) &&
+            (identical(other.bottomRightRadius, bottomRightRadius) ||
+                const DeepCollectionEquality()
+                    .equals(other.bottomRightRadius, bottomRightRadius)) &&
+            (identical(other.circularRadius, circularRadius) ||
+                const DeepCollectionEquality()
+                    .equals(other.circularRadius, circularRadius)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(type) ^
+      const DeepCollectionEquality().hash(color) ^
+      const DeepCollectionEquality().hash(width) ^
+      const DeepCollectionEquality().hash(allRadius) ^
+      const DeepCollectionEquality().hash(leftRadius) ^
+      const DeepCollectionEquality().hash(rightRadius) ^
+      const DeepCollectionEquality().hash(topRadius) ^
+      const DeepCollectionEquality().hash(bottomRadius) ^
+      const DeepCollectionEquality().hash(topLeftRadius) ^
+      const DeepCollectionEquality().hash(bottomLeftRadius) ^
+      const DeepCollectionEquality().hash(topRightRadius) ^
+      const DeepCollectionEquality().hash(bottomRightRadius) ^
+      const DeepCollectionEquality().hash(circularRadius) ^
+      runtimeType.hashCode;
+}
+
+extension $BorderConfigExtension on BorderConfig {
+  BorderConfig copyWith(
+      {enums.BorderConfigType? type,
+      int? color,
+      double? width,
+      RadiusConfig? allRadius,
+      RadiusConfig? leftRadius,
+      RadiusConfig? rightRadius,
+      RadiusConfig? topRadius,
+      RadiusConfig? bottomRadius,
+      RadiusConfig? topLeftRadius,
+      RadiusConfig? bottomLeftRadius,
+      RadiusConfig? topRightRadius,
+      RadiusConfig? bottomRightRadius,
+      double? circularRadius}) {
+    return BorderConfig(
+        type: type ?? this.type,
+        color: color ?? this.color,
+        width: width ?? this.width,
+        allRadius: allRadius ?? this.allRadius,
+        leftRadius: leftRadius ?? this.leftRadius,
+        rightRadius: rightRadius ?? this.rightRadius,
+        topRadius: topRadius ?? this.topRadius,
+        bottomRadius: bottomRadius ?? this.bottomRadius,
+        topLeftRadius: topLeftRadius ?? this.topLeftRadius,
+        bottomLeftRadius: bottomLeftRadius ?? this.bottomLeftRadius,
+        topRightRadius: topRightRadius ?? this.topRightRadius,
+        bottomRightRadius: bottomRightRadius ?? this.bottomRightRadius,
+        circularRadius: circularRadius ?? this.circularRadius);
+  }
+
+  BorderConfig copyWithWrapped(
+      {Wrapped<enums.BorderConfigType>? type,
+      Wrapped<int?>? color,
+      Wrapped<double?>? width,
+      Wrapped<RadiusConfig?>? allRadius,
+      Wrapped<RadiusConfig?>? leftRadius,
+      Wrapped<RadiusConfig?>? rightRadius,
+      Wrapped<RadiusConfig?>? topRadius,
+      Wrapped<RadiusConfig?>? bottomRadius,
+      Wrapped<RadiusConfig?>? topLeftRadius,
+      Wrapped<RadiusConfig?>? bottomLeftRadius,
+      Wrapped<RadiusConfig?>? topRightRadius,
+      Wrapped<RadiusConfig?>? bottomRightRadius,
+      Wrapped<double?>? circularRadius}) {
+    return BorderConfig(
+        type: (type != null ? type.value : this.type),
+        color: (color != null ? color.value : this.color),
+        width: (width != null ? width.value : this.width),
+        allRadius: (allRadius != null ? allRadius.value : this.allRadius),
+        leftRadius: (leftRadius != null ? leftRadius.value : this.leftRadius),
+        rightRadius:
+            (rightRadius != null ? rightRadius.value : this.rightRadius),
+        topRadius: (topRadius != null ? topRadius.value : this.topRadius),
+        bottomRadius:
+            (bottomRadius != null ? bottomRadius.value : this.bottomRadius),
+        topLeftRadius:
+            (topLeftRadius != null ? topLeftRadius.value : this.topLeftRadius),
+        bottomLeftRadius: (bottomLeftRadius != null
+            ? bottomLeftRadius.value
+            : this.bottomLeftRadius),
+        topRightRadius: (topRightRadius != null
+            ? topRightRadius.value
+            : this.topRightRadius),
+        bottomRightRadius: (bottomRightRadius != null
+            ? bottomRightRadius.value
+            : this.bottomRightRadius),
+        circularRadius: (circularRadius != null
+            ? circularRadius.value
+            : this.circularRadius));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class ScreenChild {
   const ScreenChild({
     required this.widgetId,
@@ -19770,6 +20165,9 @@ class ScreenChild {
     this.bgImage,
     this.expanded,
     this.flex,
+    this.padding,
+    this.margin,
+    this.border,
   });
 
   factory ScreenChild.fromJson(Map<String, dynamic> json) =>
@@ -19794,6 +20192,12 @@ class ScreenChild {
   final bool? expanded;
   @JsonKey(name: 'flex', includeIfNull: false)
   final int? flex;
+  @JsonKey(name: 'padding', includeIfNull: false)
+  final PaddingConfig? padding;
+  @JsonKey(name: 'margin', includeIfNull: false)
+  final PaddingConfig? margin;
+  @JsonKey(name: 'border', includeIfNull: false)
+  final BorderConfig? border;
   static const fromJsonFactory = _$ScreenChildFromJson;
 
   @override
@@ -19819,7 +20223,14 @@ class ScreenChild {
                 const DeepCollectionEquality()
                     .equals(other.expanded, expanded)) &&
             (identical(other.flex, flex) ||
-                const DeepCollectionEquality().equals(other.flex, flex)));
+                const DeepCollectionEquality().equals(other.flex, flex)) &&
+            (identical(other.padding, padding) ||
+                const DeepCollectionEquality()
+                    .equals(other.padding, padding)) &&
+            (identical(other.margin, margin) ||
+                const DeepCollectionEquality().equals(other.margin, margin)) &&
+            (identical(other.border, border) ||
+                const DeepCollectionEquality().equals(other.border, border)));
   }
 
   @override
@@ -19835,6 +20246,9 @@ class ScreenChild {
       const DeepCollectionEquality().hash(bgImage) ^
       const DeepCollectionEquality().hash(expanded) ^
       const DeepCollectionEquality().hash(flex) ^
+      const DeepCollectionEquality().hash(padding) ^
+      const DeepCollectionEquality().hash(margin) ^
+      const DeepCollectionEquality().hash(border) ^
       runtimeType.hashCode;
 }
 
@@ -19847,7 +20261,10 @@ extension $ScreenChildExtension on ScreenChild {
       int? bgColor,
       String? bgImage,
       bool? expanded,
-      int? flex}) {
+      int? flex,
+      PaddingConfig? padding,
+      PaddingConfig? margin,
+      BorderConfig? border}) {
     return ScreenChild(
         widgetId: widgetId ?? this.widgetId,
         config: config ?? this.config,
@@ -19856,7 +20273,10 @@ extension $ScreenChildExtension on ScreenChild {
         bgColor: bgColor ?? this.bgColor,
         bgImage: bgImage ?? this.bgImage,
         expanded: expanded ?? this.expanded,
-        flex: flex ?? this.flex);
+        flex: flex ?? this.flex,
+        padding: padding ?? this.padding,
+        margin: margin ?? this.margin,
+        border: border ?? this.border);
   }
 
   ScreenChild copyWithWrapped(
@@ -19867,7 +20287,10 @@ extension $ScreenChildExtension on ScreenChild {
       Wrapped<int?>? bgColor,
       Wrapped<String?>? bgImage,
       Wrapped<bool?>? expanded,
-      Wrapped<int?>? flex}) {
+      Wrapped<int?>? flex,
+      Wrapped<PaddingConfig?>? padding,
+      Wrapped<PaddingConfig?>? margin,
+      Wrapped<BorderConfig?>? border}) {
     return ScreenChild(
         widgetId: (widgetId != null ? widgetId.value : this.widgetId),
         config: (config != null ? config.value : this.config),
@@ -19876,7 +20299,10 @@ extension $ScreenChildExtension on ScreenChild {
         bgColor: (bgColor != null ? bgColor.value : this.bgColor),
         bgImage: (bgImage != null ? bgImage.value : this.bgImage),
         expanded: (expanded != null ? expanded.value : this.expanded),
-        flex: (flex != null ? flex.value : this.flex));
+        flex: (flex != null ? flex.value : this.flex),
+        padding: (padding != null ? padding.value : this.padding),
+        margin: (margin != null ? margin.value : this.margin),
+        border: (border != null ? border.value : this.border));
   }
 }
 
@@ -19891,6 +20317,9 @@ class ScreenRow {
     this.crossAxisAlignment,
     this.mainAxisSize,
     this.scrollDirection,
+    this.padding,
+    this.margin,
+    this.border,
     required this.children,
   });
 
@@ -19916,6 +20345,12 @@ class ScreenRow {
   final String? mainAxisSize;
   @JsonKey(name: 'scrollDirection', includeIfNull: false, defaultValue: '')
   final String? scrollDirection;
+  @JsonKey(name: 'padding', includeIfNull: false)
+  final PaddingConfig? padding;
+  @JsonKey(name: 'margin', includeIfNull: false)
+  final PaddingConfig? margin;
+  @JsonKey(name: 'border', includeIfNull: false)
+  final BorderConfig? border;
   @JsonKey(
       name: 'children', includeIfNull: false, defaultValue: <ScreenChild>[])
   final List<ScreenChild> children;
@@ -19948,6 +20383,13 @@ class ScreenRow {
             (identical(other.scrollDirection, scrollDirection) ||
                 const DeepCollectionEquality()
                     .equals(other.scrollDirection, scrollDirection)) &&
+            (identical(other.padding, padding) ||
+                const DeepCollectionEquality()
+                    .equals(other.padding, padding)) &&
+            (identical(other.margin, margin) ||
+                const DeepCollectionEquality().equals(other.margin, margin)) &&
+            (identical(other.border, border) ||
+                const DeepCollectionEquality().equals(other.border, border)) &&
             (identical(other.children, children) ||
                 const DeepCollectionEquality()
                     .equals(other.children, children)));
@@ -19966,6 +20408,9 @@ class ScreenRow {
       const DeepCollectionEquality().hash(crossAxisAlignment) ^
       const DeepCollectionEquality().hash(mainAxisSize) ^
       const DeepCollectionEquality().hash(scrollDirection) ^
+      const DeepCollectionEquality().hash(padding) ^
+      const DeepCollectionEquality().hash(margin) ^
+      const DeepCollectionEquality().hash(border) ^
       const DeepCollectionEquality().hash(children) ^
       runtimeType.hashCode;
 }
@@ -19980,6 +20425,9 @@ extension $ScreenRowExtension on ScreenRow {
       String? crossAxisAlignment,
       String? mainAxisSize,
       String? scrollDirection,
+      PaddingConfig? padding,
+      PaddingConfig? margin,
+      BorderConfig? border,
       List<ScreenChild>? children}) {
     return ScreenRow(
         height: height ?? this.height,
@@ -19990,6 +20438,9 @@ extension $ScreenRowExtension on ScreenRow {
         crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment,
         mainAxisSize: mainAxisSize ?? this.mainAxisSize,
         scrollDirection: scrollDirection ?? this.scrollDirection,
+        padding: padding ?? this.padding,
+        margin: margin ?? this.margin,
+        border: border ?? this.border,
         children: children ?? this.children);
   }
 
@@ -20002,6 +20453,9 @@ extension $ScreenRowExtension on ScreenRow {
       Wrapped<String?>? crossAxisAlignment,
       Wrapped<String?>? mainAxisSize,
       Wrapped<String?>? scrollDirection,
+      Wrapped<PaddingConfig?>? padding,
+      Wrapped<PaddingConfig?>? margin,
+      Wrapped<BorderConfig?>? border,
       Wrapped<List<ScreenChild>>? children}) {
     return ScreenRow(
         height: (height != null ? height.value : this.height),
@@ -20019,6 +20473,9 @@ extension $ScreenRowExtension on ScreenRow {
         scrollDirection: (scrollDirection != null
             ? scrollDirection.value
             : this.scrollDirection),
+        padding: (padding != null ? padding.value : this.padding),
+        margin: (margin != null ? margin.value : this.margin),
+        border: (border != null ? border.value : this.border),
         children: (children != null ? children.value : this.children));
   }
 }
@@ -38274,11 +38731,11 @@ extension $EqlConditionExtension on EqlCondition {
 @JsonSerializable(explicitToJson: true)
 class EqlSearch {
   const EqlSearch({
-    this.source,
-    required this.conditions,
-    required this.queryConditions,
-    required this.boolConditions,
-    required this.mustConditions,
+    required this.source,
+    this.conditions,
+    this.queryConditions,
+    this.boolConditions,
+    this.mustConditions,
     this.sort,
     this.page,
     this.size,
@@ -38291,23 +38748,23 @@ class EqlSearch {
   Map<String, dynamic> toJson() => _$EqlSearchToJson(this);
 
   @JsonKey(name: 'source', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? source;
+  final List<String> source;
   @JsonKey(
       name: 'conditions', includeIfNull: false, defaultValue: <EqlCondition>[])
-  final List<EqlCondition> conditions;
+  final List<EqlCondition>? conditions;
   @JsonKey(
       name: 'queryConditions',
       includeIfNull: false,
       defaultValue: <EqlCondition>[])
-  final List<EqlCondition> queryConditions;
+  final List<EqlCondition>? queryConditions;
   @JsonKey(
       name: 'boolConditions',
       includeIfNull: false,
       defaultValue: <EqlCondition>[])
-  final List<EqlCondition> boolConditions;
+  final List<EqlCondition>? boolConditions;
   @JsonKey(
       name: 'mustConditions', includeIfNull: false, defaultValue: <Object>[])
-  final List<Object> mustConditions;
+  final List<Object>? mustConditions;
   @JsonKey(name: 'sort', includeIfNull: false)
   final Object? sort;
   @JsonKey(name: 'page', includeIfNull: false)
@@ -38380,11 +38837,11 @@ extension $EqlSearchExtension on EqlSearch {
   }
 
   EqlSearch copyWithWrapped(
-      {Wrapped<List<String>?>? source,
-      Wrapped<List<EqlCondition>>? conditions,
-      Wrapped<List<EqlCondition>>? queryConditions,
-      Wrapped<List<EqlCondition>>? boolConditions,
-      Wrapped<List<Object>>? mustConditions,
+      {Wrapped<List<String>>? source,
+      Wrapped<List<EqlCondition>?>? conditions,
+      Wrapped<List<EqlCondition>?>? queryConditions,
+      Wrapped<List<EqlCondition>?>? boolConditions,
+      Wrapped<List<Object>?>? mustConditions,
       Wrapped<Object?>? sort,
       Wrapped<int?>? page,
       Wrapped<int?>? size}) {
@@ -40605,6 +41062,148 @@ List<enums.TriggeredControlDeliveryStatus>?
 
   return triggeredControlDeliveryStatus
       .map((e) => triggeredControlDeliveryStatusFromJson(e.toString()))
+      .toList();
+}
+
+String? radiusConfigTypeNullableToJson(
+    enums.RadiusConfigType? radiusConfigType) {
+  return radiusConfigType?.value;
+}
+
+String? radiusConfigTypeToJson(enums.RadiusConfigType radiusConfigType) {
+  return radiusConfigType.value;
+}
+
+enums.RadiusConfigType radiusConfigTypeFromJson(
+  Object? radiusConfigType, [
+  enums.RadiusConfigType? defaultValue,
+]) {
+  return enums.RadiusConfigType.values
+          .firstWhereOrNull((e) => e.value == radiusConfigType) ??
+      defaultValue ??
+      enums.RadiusConfigType.swaggerGeneratedUnknown;
+}
+
+enums.RadiusConfigType? radiusConfigTypeNullableFromJson(
+  Object? radiusConfigType, [
+  enums.RadiusConfigType? defaultValue,
+]) {
+  if (radiusConfigType == null) {
+    return null;
+  }
+  return enums.RadiusConfigType.values
+          .firstWhereOrNull((e) => e.value == radiusConfigType) ??
+      defaultValue;
+}
+
+String radiusConfigTypeExplodedListToJson(
+    List<enums.RadiusConfigType>? radiusConfigType) {
+  return radiusConfigType?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> radiusConfigTypeListToJson(
+    List<enums.RadiusConfigType>? radiusConfigType) {
+  if (radiusConfigType == null) {
+    return [];
+  }
+
+  return radiusConfigType.map((e) => e.value!).toList();
+}
+
+List<enums.RadiusConfigType> radiusConfigTypeListFromJson(
+  List? radiusConfigType, [
+  List<enums.RadiusConfigType>? defaultValue,
+]) {
+  if (radiusConfigType == null) {
+    return defaultValue ?? [];
+  }
+
+  return radiusConfigType
+      .map((e) => radiusConfigTypeFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.RadiusConfigType>? radiusConfigTypeNullableListFromJson(
+  List? radiusConfigType, [
+  List<enums.RadiusConfigType>? defaultValue,
+]) {
+  if (radiusConfigType == null) {
+    return defaultValue;
+  }
+
+  return radiusConfigType
+      .map((e) => radiusConfigTypeFromJson(e.toString()))
+      .toList();
+}
+
+String? borderConfigTypeNullableToJson(
+    enums.BorderConfigType? borderConfigType) {
+  return borderConfigType?.value;
+}
+
+String? borderConfigTypeToJson(enums.BorderConfigType borderConfigType) {
+  return borderConfigType.value;
+}
+
+enums.BorderConfigType borderConfigTypeFromJson(
+  Object? borderConfigType, [
+  enums.BorderConfigType? defaultValue,
+]) {
+  return enums.BorderConfigType.values
+          .firstWhereOrNull((e) => e.value == borderConfigType) ??
+      defaultValue ??
+      enums.BorderConfigType.swaggerGeneratedUnknown;
+}
+
+enums.BorderConfigType? borderConfigTypeNullableFromJson(
+  Object? borderConfigType, [
+  enums.BorderConfigType? defaultValue,
+]) {
+  if (borderConfigType == null) {
+    return null;
+  }
+  return enums.BorderConfigType.values
+          .firstWhereOrNull((e) => e.value == borderConfigType) ??
+      defaultValue;
+}
+
+String borderConfigTypeExplodedListToJson(
+    List<enums.BorderConfigType>? borderConfigType) {
+  return borderConfigType?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> borderConfigTypeListToJson(
+    List<enums.BorderConfigType>? borderConfigType) {
+  if (borderConfigType == null) {
+    return [];
+  }
+
+  return borderConfigType.map((e) => e.value!).toList();
+}
+
+List<enums.BorderConfigType> borderConfigTypeListFromJson(
+  List? borderConfigType, [
+  List<enums.BorderConfigType>? defaultValue,
+]) {
+  if (borderConfigType == null) {
+    return defaultValue ?? [];
+  }
+
+  return borderConfigType
+      .map((e) => borderConfigTypeFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.BorderConfigType>? borderConfigTypeNullableListFromJson(
+  List? borderConfigType, [
+  List<enums.BorderConfigType>? defaultValue,
+]) {
+  if (borderConfigType == null) {
+    return defaultValue;
+  }
+
+  return borderConfigType
+      .map((e) => borderConfigTypeFromJson(e.toString()))
       .toList();
 }
 

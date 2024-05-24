@@ -3462,9 +3462,9 @@ DashboardMenu _$DashboardMenuFromJson(Map<String, dynamic> json) =>
     DashboardMenu(
       displayName: json['displayName'] as String? ?? '',
       icon: json['icon'] as String? ?? '',
-      roles:
-          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-              [],
+      webSupported: json['webSupported'] as bool? ?? true,
+      tabletSupported: json['tabletSupported'] as bool? ?? true,
+      mobileSupported: json['mobileSupported'] as bool? ?? true,
       screenId: json['screenId'] as String? ?? '',
     );
 
@@ -3480,7 +3480,9 @@ Map<String, dynamic> _$DashboardMenuToJson(DashboardMenu instance) {
   }
 
   writeNotNull('icon', instance.icon);
-  writeNotNull('roles', instance.roles);
+  val['webSupported'] = instance.webSupported;
+  val['tabletSupported'] = instance.tabletSupported;
+  val['mobileSupported'] = instance.mobileSupported;
   val['screenId'] = instance.screenId;
   return val;
 }
@@ -3502,6 +3504,10 @@ DashboardMenuGroupInfo _$DashboardMenuGroupInfoFromJson(
       roles:
           (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
       menus: (json['menus'] as List<dynamic>?)
               ?.map((e) => DashboardMenu.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -3529,6 +3535,7 @@ Map<String, dynamic> _$DashboardMenuGroupInfoToJson(
   val['mobileSupported'] = instance.mobileSupported;
   writeNotNull('tags', instance.tags);
   writeNotNull('roles', instance.roles);
+  writeNotNull('clientIds', instance.clientIds);
   val['menus'] = instance.menus.map((e) => e.toJson()).toList();
   return val;
 }
@@ -3556,6 +3563,10 @@ DashboardMenuGroup _$DashboardMenuGroupFromJson(Map<String, dynamic> json) =>
       roles:
           (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
       menus: (json['menus'] as List<dynamic>?)
               ?.map((e) => DashboardMenu.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -3589,6 +3600,7 @@ Map<String, dynamic> _$DashboardMenuGroupToJson(DashboardMenuGroup instance) {
   val['tabletSupported'] = instance.tabletSupported;
   val['mobileSupported'] = instance.mobileSupported;
   writeNotNull('roles', instance.roles);
+  writeNotNull('clientIds', instance.clientIds);
   val['menus'] = instance.menus.map((e) => e.toJson()).toList();
   return val;
 }
@@ -3709,6 +3721,116 @@ Map<String, dynamic> _$DashboardMenuGroupArrayResToJson(
   return val;
 }
 
+PaddingConfig _$PaddingConfigFromJson(Map<String, dynamic> json) =>
+    PaddingConfig(
+      left: (json['left'] as num?)?.toDouble(),
+      top: (json['top'] as num?)?.toDouble(),
+      right: (json['right'] as num?)?.toDouble(),
+      bottom: (json['bottom'] as num?)?.toDouble(),
+    );
+
+Map<String, dynamic> _$PaddingConfigToJson(PaddingConfig instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('left', instance.left);
+  writeNotNull('top', instance.top);
+  writeNotNull('right', instance.right);
+  writeNotNull('bottom', instance.bottom);
+  return val;
+}
+
+RadiusConfig _$RadiusConfigFromJson(Map<String, dynamic> json) => RadiusConfig(
+      type: radiusConfigTypeFromJson(json['type']),
+      radius: (json['radius'] as num?)?.toDouble(),
+      xRadius: (json['xRadius'] as num?)?.toDouble(),
+      yRadius: (json['yRadius'] as num?)?.toDouble(),
+    );
+
+Map<String, dynamic> _$RadiusConfigToJson(RadiusConfig instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('type', radiusConfigTypeToJson(instance.type));
+  writeNotNull('radius', instance.radius);
+  writeNotNull('xRadius', instance.xRadius);
+  writeNotNull('yRadius', instance.yRadius);
+  return val;
+}
+
+BorderConfig _$BorderConfigFromJson(Map<String, dynamic> json) => BorderConfig(
+      type: borderConfigTypeFromJson(json['type']),
+      color: (json['color'] as num?)?.toInt(),
+      width: (json['width'] as num?)?.toDouble(),
+      allRadius: json['allRadius'] == null
+          ? null
+          : RadiusConfig.fromJson(json['allRadius'] as Map<String, dynamic>),
+      leftRadius: json['leftRadius'] == null
+          ? null
+          : RadiusConfig.fromJson(json['leftRadius'] as Map<String, dynamic>),
+      rightRadius: json['rightRadius'] == null
+          ? null
+          : RadiusConfig.fromJson(json['rightRadius'] as Map<String, dynamic>),
+      topRadius: json['topRadius'] == null
+          ? null
+          : RadiusConfig.fromJson(json['topRadius'] as Map<String, dynamic>),
+      bottomRadius: json['bottomRadius'] == null
+          ? null
+          : RadiusConfig.fromJson(json['bottomRadius'] as Map<String, dynamic>),
+      topLeftRadius: json['topLeftRadius'] == null
+          ? null
+          : RadiusConfig.fromJson(
+              json['topLeftRadius'] as Map<String, dynamic>),
+      bottomLeftRadius: json['bottomLeftRadius'] == null
+          ? null
+          : RadiusConfig.fromJson(
+              json['bottomLeftRadius'] as Map<String, dynamic>),
+      topRightRadius: json['topRightRadius'] == null
+          ? null
+          : RadiusConfig.fromJson(
+              json['topRightRadius'] as Map<String, dynamic>),
+      bottomRightRadius: json['bottomRightRadius'] == null
+          ? null
+          : RadiusConfig.fromJson(
+              json['bottomRightRadius'] as Map<String, dynamic>),
+      circularRadius: (json['circularRadius'] as num?)?.toDouble(),
+    );
+
+Map<String, dynamic> _$BorderConfigToJson(BorderConfig instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('type', borderConfigTypeToJson(instance.type));
+  writeNotNull('color', instance.color);
+  writeNotNull('width', instance.width);
+  writeNotNull('allRadius', instance.allRadius?.toJson());
+  writeNotNull('leftRadius', instance.leftRadius?.toJson());
+  writeNotNull('rightRadius', instance.rightRadius?.toJson());
+  writeNotNull('topRadius', instance.topRadius?.toJson());
+  writeNotNull('bottomRadius', instance.bottomRadius?.toJson());
+  writeNotNull('topLeftRadius', instance.topLeftRadius?.toJson());
+  writeNotNull('bottomLeftRadius', instance.bottomLeftRadius?.toJson());
+  writeNotNull('topRightRadius', instance.topRightRadius?.toJson());
+  writeNotNull('bottomRightRadius', instance.bottomRightRadius?.toJson());
+  writeNotNull('circularRadius', instance.circularRadius);
+  return val;
+}
+
 ScreenChild _$ScreenChildFromJson(Map<String, dynamic> json) => ScreenChild(
       widgetId: json['widgetId'] as String? ?? '',
       config: json['config'] as Object,
@@ -3718,6 +3840,15 @@ ScreenChild _$ScreenChildFromJson(Map<String, dynamic> json) => ScreenChild(
       bgImage: json['bgImage'] as String? ?? '',
       expanded: json['expanded'] as bool?,
       flex: (json['flex'] as num?)?.toInt(),
+      padding: json['padding'] == null
+          ? null
+          : PaddingConfig.fromJson(json['padding'] as Map<String, dynamic>),
+      margin: json['margin'] == null
+          ? null
+          : PaddingConfig.fromJson(json['margin'] as Map<String, dynamic>),
+      border: json['border'] == null
+          ? null
+          : BorderConfig.fromJson(json['border'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ScreenChildToJson(ScreenChild instance) {
@@ -3738,6 +3869,9 @@ Map<String, dynamic> _$ScreenChildToJson(ScreenChild instance) {
   writeNotNull('bgImage', instance.bgImage);
   writeNotNull('expanded', instance.expanded);
   writeNotNull('flex', instance.flex);
+  writeNotNull('padding', instance.padding?.toJson());
+  writeNotNull('margin', instance.margin?.toJson());
+  writeNotNull('border', instance.border?.toJson());
   return val;
 }
 
@@ -3750,6 +3884,15 @@ ScreenRow _$ScreenRowFromJson(Map<String, dynamic> json) => ScreenRow(
       crossAxisAlignment: json['crossAxisAlignment'] as String? ?? '',
       mainAxisSize: json['mainAxisSize'] as String? ?? '',
       scrollDirection: json['scrollDirection'] as String? ?? '',
+      padding: json['padding'] == null
+          ? null
+          : PaddingConfig.fromJson(json['padding'] as Map<String, dynamic>),
+      margin: json['margin'] == null
+          ? null
+          : PaddingConfig.fromJson(json['margin'] as Map<String, dynamic>),
+      border: json['border'] == null
+          ? null
+          : BorderConfig.fromJson(json['border'] as Map<String, dynamic>),
       children: (json['children'] as List<dynamic>?)
               ?.map((e) => ScreenChild.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -3773,6 +3916,9 @@ Map<String, dynamic> _$ScreenRowToJson(ScreenRow instance) {
   writeNotNull('crossAxisAlignment', instance.crossAxisAlignment);
   writeNotNull('mainAxisSize', instance.mainAxisSize);
   writeNotNull('scrollDirection', instance.scrollDirection);
+  writeNotNull('padding', instance.padding?.toJson());
+  writeNotNull('margin', instance.margin?.toJson());
+  writeNotNull('border', instance.border?.toJson());
   val['children'] = instance.children.map((e) => e.toJson()).toList();
   return val;
 }
@@ -9517,7 +9663,9 @@ EqlSearch _$EqlSearchFromJson(Map<String, dynamic> json) => EqlSearch(
     );
 
 Map<String, dynamic> _$EqlSearchToJson(EqlSearch instance) {
-  final val = <String, dynamic>{};
+  final val = <String, dynamic>{
+    'source': instance.source,
+  };
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -9525,13 +9673,13 @@ Map<String, dynamic> _$EqlSearchToJson(EqlSearch instance) {
     }
   }
 
-  writeNotNull('source', instance.source);
-  val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
-  val['queryConditions'] =
-      instance.queryConditions.map((e) => e.toJson()).toList();
-  val['boolConditions'] =
-      instance.boolConditions.map((e) => e.toJson()).toList();
-  val['mustConditions'] = instance.mustConditions;
+  writeNotNull(
+      'conditions', instance.conditions?.map((e) => e.toJson()).toList());
+  writeNotNull('queryConditions',
+      instance.queryConditions?.map((e) => e.toJson()).toList());
+  writeNotNull('boolConditions',
+      instance.boolConditions?.map((e) => e.toJson()).toList());
+  writeNotNull('mustConditions', instance.mustConditions);
   writeNotNull('sort', instance.sort);
   writeNotNull('page', instance.page);
   writeNotNull('size', instance.size);

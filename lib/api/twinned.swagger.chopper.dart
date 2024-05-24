@@ -1041,13 +1041,11 @@ final class _$Twinned extends Twinned {
 
   @override
   Future<Response<DashboardMenuGroupArrayRes>> _searchDashboardMenuGroups({
-    String? modelId,
     required SearchReq? body,
     String? apikey,
   }) {
     final Uri $url = Uri.parse('/DashboardMenu/search');
     final Map<String, String> $headers = {
-      if (modelId != null) 'modelId': modelId,
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = body;
