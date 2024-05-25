@@ -3786,6 +3786,24 @@ Map<String, dynamic> _$ImageFitConfigToJson(ImageFitConfig instance) {
   return val;
 }
 
+AlignmentConfig _$AlignmentConfigFromJson(Map<String, dynamic> json) =>
+    AlignmentConfig(
+      alignment: alignmentConfigAlignmentFromJson(json['alignment']),
+    );
+
+Map<String, dynamic> _$AlignmentConfigToJson(AlignmentConfig instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('alignment', alignmentConfigAlignmentToJson(instance.alignment));
+  return val;
+}
+
 BorderConfig _$BorderConfigFromJson(Map<String, dynamic> json) => BorderConfig(
       type: borderConfigTypeFromJson(json['type']),
       color: (json['color'] as num?)?.toInt(),
@@ -3858,6 +3876,9 @@ ScreenChild _$ScreenChildFromJson(Map<String, dynamic> json) => ScreenChild(
       bgImage: json['bgImage'] as String? ?? '',
       expanded: json['expanded'] as bool?,
       flex: (json['flex'] as num?)?.toInt(),
+      bgImageFit: json['bgImageFit'] == null
+          ? null
+          : ImageFitConfig.fromJson(json['bgImageFit'] as Map<String, dynamic>),
       padding: json['padding'] == null
           ? null
           : PaddingConfig.fromJson(json['padding'] as Map<String, dynamic>),
@@ -3867,6 +3888,9 @@ ScreenChild _$ScreenChildFromJson(Map<String, dynamic> json) => ScreenChild(
       border: json['border'] == null
           ? null
           : BorderConfig.fromJson(json['border'] as Map<String, dynamic>),
+      alignment: json['alignment'] == null
+          ? null
+          : AlignmentConfig.fromJson(json['alignment'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ScreenChildToJson(ScreenChild instance) {
@@ -3887,9 +3911,11 @@ Map<String, dynamic> _$ScreenChildToJson(ScreenChild instance) {
   writeNotNull('bgImage', instance.bgImage);
   writeNotNull('expanded', instance.expanded);
   writeNotNull('flex', instance.flex);
+  writeNotNull('bgImageFit', instance.bgImageFit?.toJson());
   writeNotNull('padding', instance.padding?.toJson());
   writeNotNull('margin', instance.margin?.toJson());
   writeNotNull('border', instance.border?.toJson());
+  writeNotNull('alignment', instance.alignment?.toJson());
   return val;
 }
 
@@ -3902,6 +3928,9 @@ ScreenRow _$ScreenRowFromJson(Map<String, dynamic> json) => ScreenRow(
       crossAxisAlignment: json['crossAxisAlignment'] as String? ?? '',
       mainAxisSize: json['mainAxisSize'] as String? ?? '',
       scrollDirection: json['scrollDirection'] as String? ?? '',
+      bgImageFit: json['bgImageFit'] == null
+          ? null
+          : ImageFitConfig.fromJson(json['bgImageFit'] as Map<String, dynamic>),
       padding: json['padding'] == null
           ? null
           : PaddingConfig.fromJson(json['padding'] as Map<String, dynamic>),
@@ -3934,6 +3963,7 @@ Map<String, dynamic> _$ScreenRowToJson(ScreenRow instance) {
   writeNotNull('crossAxisAlignment', instance.crossAxisAlignment);
   writeNotNull('mainAxisSize', instance.mainAxisSize);
   writeNotNull('scrollDirection', instance.scrollDirection);
+  writeNotNull('bgImageFit', instance.bgImageFit?.toJson());
   writeNotNull('padding', instance.padding?.toJson());
   writeNotNull('margin', instance.margin?.toJson());
   writeNotNull('border', instance.border?.toJson());

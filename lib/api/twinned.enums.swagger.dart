@@ -541,6 +541,34 @@ enum ImageFitConfigFit {
   const ImageFitConfigFit(this.value);
 }
 
+enum AlignmentConfigAlignment {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('BOTTOM_RIGHT')
+  bottomRight('BOTTOM_RIGHT'),
+  @JsonValue('BOTTOM_LEFT')
+  bottomLeft('BOTTOM_LEFT'),
+  @JsonValue('CENTER')
+  center('CENTER'),
+  @JsonValue('CENTER_LEFT')
+  centerLeft('CENTER_LEFT'),
+  @JsonValue('CENTER_RIGHT')
+  centerRight('CENTER_RIGHT'),
+  @JsonValue('TOP_RIGHT')
+  topRight('TOP_RIGHT'),
+  @JsonValue('TOP_LEFT')
+  topLeft('TOP_LEFT'),
+  @JsonValue('TOP_CENTER')
+  topCenter('TOP_CENTER'),
+  @JsonValue('BOTTOM_CENTER')
+  bottomCenter('BOTTOM_CENTER');
+
+  final String? value;
+
+  const AlignmentConfigAlignment(this.value);
+}
+
 enum BorderConfigType {
   @JsonValue(null)
   swaggerGeneratedUnknown(null),
