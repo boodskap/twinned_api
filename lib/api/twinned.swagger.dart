@@ -19962,6 +19962,53 @@ extension $RadiusConfigExtension on RadiusConfig {
 }
 
 @JsonSerializable(explicitToJson: true)
+class ImageFitConfig {
+  const ImageFitConfig({
+    required this.fit,
+  });
+
+  factory ImageFitConfig.fromJson(Map<String, dynamic> json) =>
+      _$ImageFitConfigFromJson(json);
+
+  static const toJsonFactory = _$ImageFitConfigToJson;
+  Map<String, dynamic> toJson() => _$ImageFitConfigToJson(this);
+
+  @JsonKey(
+    name: 'fit',
+    includeIfNull: false,
+    toJson: imageFitConfigFitToJson,
+    fromJson: imageFitConfigFitFromJson,
+  )
+  final enums.ImageFitConfigFit fit;
+  static const fromJsonFactory = _$ImageFitConfigFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is ImageFitConfig &&
+            (identical(other.fit, fit) ||
+                const DeepCollectionEquality().equals(other.fit, fit)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(fit) ^ runtimeType.hashCode;
+}
+
+extension $ImageFitConfigExtension on ImageFitConfig {
+  ImageFitConfig copyWith({enums.ImageFitConfigFit? fit}) {
+    return ImageFitConfig(fit: fit ?? this.fit);
+  }
+
+  ImageFitConfig copyWithWrapped({Wrapped<enums.ImageFitConfigFit>? fit}) {
+    return ImageFitConfig(fit: (fit != null ? fit.value : this.fit));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class BorderConfig {
   const BorderConfig({
     required this.type,
@@ -20495,6 +20542,7 @@ class DashboardScreenInfo {
     this.crossAxisAlignment,
     this.mainAxisSize,
     this.scrollDirection,
+    this.bgImageFit,
     this.border,
     required this.rows,
   });
@@ -20529,6 +20577,8 @@ class DashboardScreenInfo {
   final String? mainAxisSize;
   @JsonKey(name: 'scrollDirection', includeIfNull: false, defaultValue: '')
   final String? scrollDirection;
+  @JsonKey(name: 'bgImageFit', includeIfNull: false)
+  final ImageFitConfig? bgImageFit;
   @JsonKey(name: 'border', includeIfNull: false)
   final BorderConfig? border;
   @JsonKey(name: 'rows', includeIfNull: false, defaultValue: <ScreenRow>[])
@@ -20571,6 +20621,9 @@ class DashboardScreenInfo {
             (identical(other.scrollDirection, scrollDirection) ||
                 const DeepCollectionEquality()
                     .equals(other.scrollDirection, scrollDirection)) &&
+            (identical(other.bgImageFit, bgImageFit) ||
+                const DeepCollectionEquality()
+                    .equals(other.bgImageFit, bgImageFit)) &&
             (identical(other.border, border) ||
                 const DeepCollectionEquality().equals(other.border, border)) &&
             (identical(other.rows, rows) ||
@@ -20594,6 +20647,7 @@ class DashboardScreenInfo {
       const DeepCollectionEquality().hash(crossAxisAlignment) ^
       const DeepCollectionEquality().hash(mainAxisSize) ^
       const DeepCollectionEquality().hash(scrollDirection) ^
+      const DeepCollectionEquality().hash(bgImageFit) ^
       const DeepCollectionEquality().hash(border) ^
       const DeepCollectionEquality().hash(rows) ^
       runtimeType.hashCode;
@@ -20613,6 +20667,7 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
       String? crossAxisAlignment,
       String? mainAxisSize,
       String? scrollDirection,
+      ImageFitConfig? bgImageFit,
       BorderConfig? border,
       List<ScreenRow>? rows}) {
     return DashboardScreenInfo(
@@ -20628,6 +20683,7 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
         crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment,
         mainAxisSize: mainAxisSize ?? this.mainAxisSize,
         scrollDirection: scrollDirection ?? this.scrollDirection,
+        bgImageFit: bgImageFit ?? this.bgImageFit,
         border: border ?? this.border,
         rows: rows ?? this.rows);
   }
@@ -20645,6 +20701,7 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
       Wrapped<String?>? crossAxisAlignment,
       Wrapped<String?>? mainAxisSize,
       Wrapped<String?>? scrollDirection,
+      Wrapped<ImageFitConfig?>? bgImageFit,
       Wrapped<BorderConfig?>? border,
       Wrapped<List<ScreenRow>>? rows}) {
     return DashboardScreenInfo(
@@ -20668,6 +20725,7 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
         scrollDirection: (scrollDirection != null
             ? scrollDirection.value
             : this.scrollDirection),
+        bgImageFit: (bgImageFit != null ? bgImageFit.value : this.bgImageFit),
         border: (border != null ? border.value : this.border),
         rows: (rows != null ? rows.value : this.rows));
   }
@@ -20695,6 +20753,7 @@ class DashboardScreen {
     this.crossAxisAlignment,
     this.mainAxisSize,
     this.scrollDirection,
+    this.bgImageFit,
     this.border,
     required this.rows,
   });
@@ -20743,6 +20802,8 @@ class DashboardScreen {
   final String? mainAxisSize;
   @JsonKey(name: 'scrollDirection', includeIfNull: false, defaultValue: '')
   final String? scrollDirection;
+  @JsonKey(name: 'bgImageFit', includeIfNull: false)
+  final ImageFitConfig? bgImageFit;
   @JsonKey(name: 'border', includeIfNull: false)
   final BorderConfig? border;
   @JsonKey(name: 'rows', includeIfNull: false, defaultValue: <ScreenRow>[])
@@ -20804,6 +20865,9 @@ class DashboardScreen {
             (identical(other.scrollDirection, scrollDirection) ||
                 const DeepCollectionEquality()
                     .equals(other.scrollDirection, scrollDirection)) &&
+            (identical(other.bgImageFit, bgImageFit) ||
+                const DeepCollectionEquality()
+                    .equals(other.bgImageFit, bgImageFit)) &&
             (identical(other.border, border) ||
                 const DeepCollectionEquality().equals(other.border, border)) &&
             (identical(other.rows, rows) ||
@@ -20834,6 +20898,7 @@ class DashboardScreen {
       const DeepCollectionEquality().hash(crossAxisAlignment) ^
       const DeepCollectionEquality().hash(mainAxisSize) ^
       const DeepCollectionEquality().hash(scrollDirection) ^
+      const DeepCollectionEquality().hash(bgImageFit) ^
       const DeepCollectionEquality().hash(border) ^
       const DeepCollectionEquality().hash(rows) ^
       runtimeType.hashCode;
@@ -20860,6 +20925,7 @@ extension $DashboardScreenExtension on DashboardScreen {
       String? crossAxisAlignment,
       String? mainAxisSize,
       String? scrollDirection,
+      ImageFitConfig? bgImageFit,
       BorderConfig? border,
       List<ScreenRow>? rows}) {
     return DashboardScreen(
@@ -20882,6 +20948,7 @@ extension $DashboardScreenExtension on DashboardScreen {
         crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment,
         mainAxisSize: mainAxisSize ?? this.mainAxisSize,
         scrollDirection: scrollDirection ?? this.scrollDirection,
+        bgImageFit: bgImageFit ?? this.bgImageFit,
         border: border ?? this.border,
         rows: rows ?? this.rows);
   }
@@ -20906,6 +20973,7 @@ extension $DashboardScreenExtension on DashboardScreen {
       Wrapped<String?>? crossAxisAlignment,
       Wrapped<String?>? mainAxisSize,
       Wrapped<String?>? scrollDirection,
+      Wrapped<ImageFitConfig?>? bgImageFit,
       Wrapped<BorderConfig?>? border,
       Wrapped<List<ScreenRow>>? rows}) {
     return DashboardScreen(
@@ -20938,6 +21006,7 @@ extension $DashboardScreenExtension on DashboardScreen {
         scrollDirection: (scrollDirection != null
             ? scrollDirection.value
             : this.scrollDirection),
+        bgImageFit: (bgImageFit != null ? bgImageFit.value : this.bgImageFit),
         border: (border != null ? border.value : this.border),
         rows: (rows != null ? rows.value : this.rows));
   }
@@ -41153,6 +41222,77 @@ List<enums.RadiusConfigType>? radiusConfigTypeNullableListFromJson(
 
   return radiusConfigType
       .map((e) => radiusConfigTypeFromJson(e.toString()))
+      .toList();
+}
+
+String? imageFitConfigFitNullableToJson(
+    enums.ImageFitConfigFit? imageFitConfigFit) {
+  return imageFitConfigFit?.value;
+}
+
+String? imageFitConfigFitToJson(enums.ImageFitConfigFit imageFitConfigFit) {
+  return imageFitConfigFit.value;
+}
+
+enums.ImageFitConfigFit imageFitConfigFitFromJson(
+  Object? imageFitConfigFit, [
+  enums.ImageFitConfigFit? defaultValue,
+]) {
+  return enums.ImageFitConfigFit.values
+          .firstWhereOrNull((e) => e.value == imageFitConfigFit) ??
+      defaultValue ??
+      enums.ImageFitConfigFit.swaggerGeneratedUnknown;
+}
+
+enums.ImageFitConfigFit? imageFitConfigFitNullableFromJson(
+  Object? imageFitConfigFit, [
+  enums.ImageFitConfigFit? defaultValue,
+]) {
+  if (imageFitConfigFit == null) {
+    return null;
+  }
+  return enums.ImageFitConfigFit.values
+          .firstWhereOrNull((e) => e.value == imageFitConfigFit) ??
+      defaultValue;
+}
+
+String imageFitConfigFitExplodedListToJson(
+    List<enums.ImageFitConfigFit>? imageFitConfigFit) {
+  return imageFitConfigFit?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> imageFitConfigFitListToJson(
+    List<enums.ImageFitConfigFit>? imageFitConfigFit) {
+  if (imageFitConfigFit == null) {
+    return [];
+  }
+
+  return imageFitConfigFit.map((e) => e.value!).toList();
+}
+
+List<enums.ImageFitConfigFit> imageFitConfigFitListFromJson(
+  List? imageFitConfigFit, [
+  List<enums.ImageFitConfigFit>? defaultValue,
+]) {
+  if (imageFitConfigFit == null) {
+    return defaultValue ?? [];
+  }
+
+  return imageFitConfigFit
+      .map((e) => imageFitConfigFitFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.ImageFitConfigFit>? imageFitConfigFitNullableListFromJson(
+  List? imageFitConfigFit, [
+  List<enums.ImageFitConfigFit>? defaultValue,
+]) {
+  if (imageFitConfigFit == null) {
+    return defaultValue;
+  }
+
+  return imageFitConfigFit
+      .map((e) => imageFitConfigFitFromJson(e.toString()))
       .toList();
 }
 
