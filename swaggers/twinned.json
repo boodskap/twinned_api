@@ -16850,6 +16850,28 @@
         }
       }
     },
+    "AlignmentConfig": {
+      "type": "object",
+      "required": [
+        "alignment"
+      ],
+      "properties": {
+        "alignment": {
+          "type": "string",
+          "enum": [
+            "BOTTOM_RIGHT",
+            "BOTTOM_LEFT",
+            "CENTER",
+            "CENTER_LEFT",
+            "CENTER_RIGHT",
+            "TOP_RIGHT",
+            "TOP_LEFT",
+            "TOP_CENTER",
+            "BOTTOM_CENTER"
+          ]
+        }
+      }
+    },
     "BorderConfig": {
       "type": "object",
       "required": [
@@ -16942,6 +16964,9 @@
         "flex": {
           "type": "integer"
         },
+        "bgImageFit": {
+          "$ref": "#/definitions/ImageFitConfig"
+        },
         "padding": {
           "$ref": "#/definitions/PaddingConfig"
         },
@@ -16950,6 +16975,9 @@
         },
         "border": {
           "$ref": "#/definitions/BorderConfig"
+        },
+        "alignment": {
+          "$ref": "#/definitions/AlignmentConfig"
         }
       }
     },
@@ -16985,6 +17013,9 @@
         },
         "scrollDirection": {
           "type": "string"
+        },
+        "bgImageFit": {
+          "$ref": "#/definitions/ImageFitConfig"
         },
         "padding": {
           "$ref": "#/definitions/PaddingConfig"

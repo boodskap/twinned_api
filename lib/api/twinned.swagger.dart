@@ -20009,6 +20009,56 @@ extension $ImageFitConfigExtension on ImageFitConfig {
 }
 
 @JsonSerializable(explicitToJson: true)
+class AlignmentConfig {
+  const AlignmentConfig({
+    required this.alignment,
+  });
+
+  factory AlignmentConfig.fromJson(Map<String, dynamic> json) =>
+      _$AlignmentConfigFromJson(json);
+
+  static const toJsonFactory = _$AlignmentConfigToJson;
+  Map<String, dynamic> toJson() => _$AlignmentConfigToJson(this);
+
+  @JsonKey(
+    name: 'alignment',
+    includeIfNull: false,
+    toJson: alignmentConfigAlignmentToJson,
+    fromJson: alignmentConfigAlignmentFromJson,
+  )
+  final enums.AlignmentConfigAlignment alignment;
+  static const fromJsonFactory = _$AlignmentConfigFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is AlignmentConfig &&
+            (identical(other.alignment, alignment) ||
+                const DeepCollectionEquality()
+                    .equals(other.alignment, alignment)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(alignment) ^ runtimeType.hashCode;
+}
+
+extension $AlignmentConfigExtension on AlignmentConfig {
+  AlignmentConfig copyWith({enums.AlignmentConfigAlignment? alignment}) {
+    return AlignmentConfig(alignment: alignment ?? this.alignment);
+  }
+
+  AlignmentConfig copyWithWrapped(
+      {Wrapped<enums.AlignmentConfigAlignment>? alignment}) {
+    return AlignmentConfig(
+        alignment: (alignment != null ? alignment.value : this.alignment));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class BorderConfig {
   const BorderConfig({
     required this.type,
@@ -20212,9 +20262,11 @@ class ScreenChild {
     this.bgImage,
     this.expanded,
     this.flex,
+    this.bgImageFit,
     this.padding,
     this.margin,
     this.border,
+    this.alignment,
   });
 
   factory ScreenChild.fromJson(Map<String, dynamic> json) =>
@@ -20239,12 +20291,16 @@ class ScreenChild {
   final bool? expanded;
   @JsonKey(name: 'flex', includeIfNull: false)
   final int? flex;
+  @JsonKey(name: 'bgImageFit', includeIfNull: false)
+  final ImageFitConfig? bgImageFit;
   @JsonKey(name: 'padding', includeIfNull: false)
   final PaddingConfig? padding;
   @JsonKey(name: 'margin', includeIfNull: false)
   final PaddingConfig? margin;
   @JsonKey(name: 'border', includeIfNull: false)
   final BorderConfig? border;
+  @JsonKey(name: 'alignment', includeIfNull: false)
+  final AlignmentConfig? alignment;
   static const fromJsonFactory = _$ScreenChildFromJson;
 
   @override
@@ -20271,13 +20327,19 @@ class ScreenChild {
                     .equals(other.expanded, expanded)) &&
             (identical(other.flex, flex) ||
                 const DeepCollectionEquality().equals(other.flex, flex)) &&
+            (identical(other.bgImageFit, bgImageFit) ||
+                const DeepCollectionEquality()
+                    .equals(other.bgImageFit, bgImageFit)) &&
             (identical(other.padding, padding) ||
                 const DeepCollectionEquality()
                     .equals(other.padding, padding)) &&
             (identical(other.margin, margin) ||
                 const DeepCollectionEquality().equals(other.margin, margin)) &&
             (identical(other.border, border) ||
-                const DeepCollectionEquality().equals(other.border, border)));
+                const DeepCollectionEquality().equals(other.border, border)) &&
+            (identical(other.alignment, alignment) ||
+                const DeepCollectionEquality()
+                    .equals(other.alignment, alignment)));
   }
 
   @override
@@ -20293,9 +20355,11 @@ class ScreenChild {
       const DeepCollectionEquality().hash(bgImage) ^
       const DeepCollectionEquality().hash(expanded) ^
       const DeepCollectionEquality().hash(flex) ^
+      const DeepCollectionEquality().hash(bgImageFit) ^
       const DeepCollectionEquality().hash(padding) ^
       const DeepCollectionEquality().hash(margin) ^
       const DeepCollectionEquality().hash(border) ^
+      const DeepCollectionEquality().hash(alignment) ^
       runtimeType.hashCode;
 }
 
@@ -20309,9 +20373,11 @@ extension $ScreenChildExtension on ScreenChild {
       String? bgImage,
       bool? expanded,
       int? flex,
+      ImageFitConfig? bgImageFit,
       PaddingConfig? padding,
       PaddingConfig? margin,
-      BorderConfig? border}) {
+      BorderConfig? border,
+      AlignmentConfig? alignment}) {
     return ScreenChild(
         widgetId: widgetId ?? this.widgetId,
         config: config ?? this.config,
@@ -20321,9 +20387,11 @@ extension $ScreenChildExtension on ScreenChild {
         bgImage: bgImage ?? this.bgImage,
         expanded: expanded ?? this.expanded,
         flex: flex ?? this.flex,
+        bgImageFit: bgImageFit ?? this.bgImageFit,
         padding: padding ?? this.padding,
         margin: margin ?? this.margin,
-        border: border ?? this.border);
+        border: border ?? this.border,
+        alignment: alignment ?? this.alignment);
   }
 
   ScreenChild copyWithWrapped(
@@ -20335,9 +20403,11 @@ extension $ScreenChildExtension on ScreenChild {
       Wrapped<String?>? bgImage,
       Wrapped<bool?>? expanded,
       Wrapped<int?>? flex,
+      Wrapped<ImageFitConfig?>? bgImageFit,
       Wrapped<PaddingConfig?>? padding,
       Wrapped<PaddingConfig?>? margin,
-      Wrapped<BorderConfig?>? border}) {
+      Wrapped<BorderConfig?>? border,
+      Wrapped<AlignmentConfig?>? alignment}) {
     return ScreenChild(
         widgetId: (widgetId != null ? widgetId.value : this.widgetId),
         config: (config != null ? config.value : this.config),
@@ -20347,9 +20417,11 @@ extension $ScreenChildExtension on ScreenChild {
         bgImage: (bgImage != null ? bgImage.value : this.bgImage),
         expanded: (expanded != null ? expanded.value : this.expanded),
         flex: (flex != null ? flex.value : this.flex),
+        bgImageFit: (bgImageFit != null ? bgImageFit.value : this.bgImageFit),
         padding: (padding != null ? padding.value : this.padding),
         margin: (margin != null ? margin.value : this.margin),
-        border: (border != null ? border.value : this.border));
+        border: (border != null ? border.value : this.border),
+        alignment: (alignment != null ? alignment.value : this.alignment));
   }
 }
 
@@ -20364,6 +20436,7 @@ class ScreenRow {
     this.crossAxisAlignment,
     this.mainAxisSize,
     this.scrollDirection,
+    this.bgImageFit,
     this.padding,
     this.margin,
     this.border,
@@ -20392,6 +20465,8 @@ class ScreenRow {
   final String? mainAxisSize;
   @JsonKey(name: 'scrollDirection', includeIfNull: false, defaultValue: '')
   final String? scrollDirection;
+  @JsonKey(name: 'bgImageFit', includeIfNull: false)
+  final ImageFitConfig? bgImageFit;
   @JsonKey(name: 'padding', includeIfNull: false)
   final PaddingConfig? padding;
   @JsonKey(name: 'margin', includeIfNull: false)
@@ -20430,6 +20505,9 @@ class ScreenRow {
             (identical(other.scrollDirection, scrollDirection) ||
                 const DeepCollectionEquality()
                     .equals(other.scrollDirection, scrollDirection)) &&
+            (identical(other.bgImageFit, bgImageFit) ||
+                const DeepCollectionEquality()
+                    .equals(other.bgImageFit, bgImageFit)) &&
             (identical(other.padding, padding) ||
                 const DeepCollectionEquality()
                     .equals(other.padding, padding)) &&
@@ -20455,6 +20533,7 @@ class ScreenRow {
       const DeepCollectionEquality().hash(crossAxisAlignment) ^
       const DeepCollectionEquality().hash(mainAxisSize) ^
       const DeepCollectionEquality().hash(scrollDirection) ^
+      const DeepCollectionEquality().hash(bgImageFit) ^
       const DeepCollectionEquality().hash(padding) ^
       const DeepCollectionEquality().hash(margin) ^
       const DeepCollectionEquality().hash(border) ^
@@ -20472,6 +20551,7 @@ extension $ScreenRowExtension on ScreenRow {
       String? crossAxisAlignment,
       String? mainAxisSize,
       String? scrollDirection,
+      ImageFitConfig? bgImageFit,
       PaddingConfig? padding,
       PaddingConfig? margin,
       BorderConfig? border,
@@ -20485,6 +20565,7 @@ extension $ScreenRowExtension on ScreenRow {
         crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment,
         mainAxisSize: mainAxisSize ?? this.mainAxisSize,
         scrollDirection: scrollDirection ?? this.scrollDirection,
+        bgImageFit: bgImageFit ?? this.bgImageFit,
         padding: padding ?? this.padding,
         margin: margin ?? this.margin,
         border: border ?? this.border,
@@ -20500,6 +20581,7 @@ extension $ScreenRowExtension on ScreenRow {
       Wrapped<String?>? crossAxisAlignment,
       Wrapped<String?>? mainAxisSize,
       Wrapped<String?>? scrollDirection,
+      Wrapped<ImageFitConfig?>? bgImageFit,
       Wrapped<PaddingConfig?>? padding,
       Wrapped<PaddingConfig?>? margin,
       Wrapped<BorderConfig?>? border,
@@ -20520,6 +20602,7 @@ extension $ScreenRowExtension on ScreenRow {
         scrollDirection: (scrollDirection != null
             ? scrollDirection.value
             : this.scrollDirection),
+        bgImageFit: (bgImageFit != null ? bgImageFit.value : this.bgImageFit),
         padding: (padding != null ? padding.value : this.padding),
         margin: (margin != null ? margin.value : this.margin),
         border: (border != null ? border.value : this.border),
@@ -41293,6 +41376,79 @@ List<enums.ImageFitConfigFit>? imageFitConfigFitNullableListFromJson(
 
   return imageFitConfigFit
       .map((e) => imageFitConfigFitFromJson(e.toString()))
+      .toList();
+}
+
+String? alignmentConfigAlignmentNullableToJson(
+    enums.AlignmentConfigAlignment? alignmentConfigAlignment) {
+  return alignmentConfigAlignment?.value;
+}
+
+String? alignmentConfigAlignmentToJson(
+    enums.AlignmentConfigAlignment alignmentConfigAlignment) {
+  return alignmentConfigAlignment.value;
+}
+
+enums.AlignmentConfigAlignment alignmentConfigAlignmentFromJson(
+  Object? alignmentConfigAlignment, [
+  enums.AlignmentConfigAlignment? defaultValue,
+]) {
+  return enums.AlignmentConfigAlignment.values
+          .firstWhereOrNull((e) => e.value == alignmentConfigAlignment) ??
+      defaultValue ??
+      enums.AlignmentConfigAlignment.swaggerGeneratedUnknown;
+}
+
+enums.AlignmentConfigAlignment? alignmentConfigAlignmentNullableFromJson(
+  Object? alignmentConfigAlignment, [
+  enums.AlignmentConfigAlignment? defaultValue,
+]) {
+  if (alignmentConfigAlignment == null) {
+    return null;
+  }
+  return enums.AlignmentConfigAlignment.values
+          .firstWhereOrNull((e) => e.value == alignmentConfigAlignment) ??
+      defaultValue;
+}
+
+String alignmentConfigAlignmentExplodedListToJson(
+    List<enums.AlignmentConfigAlignment>? alignmentConfigAlignment) {
+  return alignmentConfigAlignment?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> alignmentConfigAlignmentListToJson(
+    List<enums.AlignmentConfigAlignment>? alignmentConfigAlignment) {
+  if (alignmentConfigAlignment == null) {
+    return [];
+  }
+
+  return alignmentConfigAlignment.map((e) => e.value!).toList();
+}
+
+List<enums.AlignmentConfigAlignment> alignmentConfigAlignmentListFromJson(
+  List? alignmentConfigAlignment, [
+  List<enums.AlignmentConfigAlignment>? defaultValue,
+]) {
+  if (alignmentConfigAlignment == null) {
+    return defaultValue ?? [];
+  }
+
+  return alignmentConfigAlignment
+      .map((e) => alignmentConfigAlignmentFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.AlignmentConfigAlignment>?
+    alignmentConfigAlignmentNullableListFromJson(
+  List? alignmentConfigAlignment, [
+  List<enums.AlignmentConfigAlignment>? defaultValue,
+]) {
+  if (alignmentConfigAlignment == null) {
+    return defaultValue;
+  }
+
+  return alignmentConfigAlignment
+      .map((e) => alignmentConfigAlignmentFromJson(e.toString()))
       .toList();
 }
 
