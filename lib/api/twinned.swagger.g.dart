@@ -3939,6 +3939,9 @@ DashboardScreenInfo _$DashboardScreenInfoFromJson(Map<String, dynamic> json) =>
       crossAxisAlignment: json['crossAxisAlignment'] as String? ?? '',
       mainAxisSize: json['mainAxisSize'] as String? ?? '',
       scrollDirection: json['scrollDirection'] as String? ?? '',
+      border: json['border'] == null
+          ? null
+          : BorderConfig.fromJson(json['border'] as Map<String, dynamic>),
       rows: (json['rows'] as List<dynamic>?)
               ?.map((e) => ScreenRow.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -3967,6 +3970,7 @@ Map<String, dynamic> _$DashboardScreenInfoToJson(DashboardScreenInfo instance) {
   writeNotNull('crossAxisAlignment', instance.crossAxisAlignment);
   writeNotNull('mainAxisSize', instance.mainAxisSize);
   writeNotNull('scrollDirection', instance.scrollDirection);
+  writeNotNull('border', instance.border?.toJson());
   val['rows'] = instance.rows.map((e) => e.toJson()).toList();
   return val;
 }
@@ -3994,6 +3998,9 @@ DashboardScreen _$DashboardScreenFromJson(Map<String, dynamic> json) =>
       crossAxisAlignment: json['crossAxisAlignment'] as String? ?? '',
       mainAxisSize: json['mainAxisSize'] as String? ?? '',
       scrollDirection: json['scrollDirection'] as String? ?? '',
+      border: json['border'] == null
+          ? null
+          : BorderConfig.fromJson(json['border'] as Map<String, dynamic>),
       rows: (json['rows'] as List<dynamic>?)
               ?.map((e) => ScreenRow.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -4029,6 +4036,7 @@ Map<String, dynamic> _$DashboardScreenToJson(DashboardScreen instance) {
   writeNotNull('crossAxisAlignment', instance.crossAxisAlignment);
   writeNotNull('mainAxisSize', instance.mainAxisSize);
   writeNotNull('scrollDirection', instance.scrollDirection);
+  writeNotNull('border', instance.border?.toJson());
   val['rows'] = instance.rows.map((e) => e.toJson()).toList();
   return val;
 }
