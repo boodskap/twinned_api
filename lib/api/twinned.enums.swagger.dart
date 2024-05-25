@@ -517,6 +517,30 @@ enum RadiusConfigType {
   const RadiusConfigType(this.value);
 }
 
+enum ImageFitConfigFit {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('NONE')
+  none('NONE'),
+  @JsonValue('CONTAIN')
+  contain('CONTAIN'),
+  @JsonValue('COVER')
+  cover('COVER'),
+  @JsonValue('FILL')
+  fill('FILL'),
+  @JsonValue('FITHEIGHT')
+  fitheight('FITHEIGHT'),
+  @JsonValue('FITWIDTH')
+  fitwidth('FITWIDTH'),
+  @JsonValue('SCALEDOWN')
+  scaledown('SCALEDOWN');
+
+  final String? value;
+
+  const ImageFitConfigFit(this.value);
+}
+
 enum BorderConfigType {
   @JsonValue(null)
   swaggerGeneratedUnknown(null),

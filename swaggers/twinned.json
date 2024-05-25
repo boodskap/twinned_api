@@ -16830,6 +16830,26 @@
         }
       }
     },
+    "ImageFitConfig": {
+      "type": "object",
+      "required": [
+        "fit"
+      ],
+      "properties": {
+        "fit": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "CONTAIN",
+            "COVER",
+            "FILL",
+            "FITHEIGHT",
+            "FITWIDTH",
+            "SCALEDOWN"
+          ]
+        }
+      }
+    },
     "BorderConfig": {
       "type": "object",
       "required": [
@@ -17031,6 +17051,9 @@
         },
         "scrollDirection": {
           "type": "string"
+        },
+        "bgImageFit": {
+          "$ref": "#/definitions/ImageFitConfig"
         },
         "border": {
           "$ref": "#/definitions/BorderConfig"

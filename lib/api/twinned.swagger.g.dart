@@ -3768,6 +3768,24 @@ Map<String, dynamic> _$RadiusConfigToJson(RadiusConfig instance) {
   return val;
 }
 
+ImageFitConfig _$ImageFitConfigFromJson(Map<String, dynamic> json) =>
+    ImageFitConfig(
+      fit: imageFitConfigFitFromJson(json['fit']),
+    );
+
+Map<String, dynamic> _$ImageFitConfigToJson(ImageFitConfig instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('fit', imageFitConfigFitToJson(instance.fit));
+  return val;
+}
+
 BorderConfig _$BorderConfigFromJson(Map<String, dynamic> json) => BorderConfig(
       type: borderConfigTypeFromJson(json['type']),
       color: (json['color'] as num?)?.toInt(),
@@ -3939,6 +3957,9 @@ DashboardScreenInfo _$DashboardScreenInfoFromJson(Map<String, dynamic> json) =>
       crossAxisAlignment: json['crossAxisAlignment'] as String? ?? '',
       mainAxisSize: json['mainAxisSize'] as String? ?? '',
       scrollDirection: json['scrollDirection'] as String? ?? '',
+      bgImageFit: json['bgImageFit'] == null
+          ? null
+          : ImageFitConfig.fromJson(json['bgImageFit'] as Map<String, dynamic>),
       border: json['border'] == null
           ? null
           : BorderConfig.fromJson(json['border'] as Map<String, dynamic>),
@@ -3970,6 +3991,7 @@ Map<String, dynamic> _$DashboardScreenInfoToJson(DashboardScreenInfo instance) {
   writeNotNull('crossAxisAlignment', instance.crossAxisAlignment);
   writeNotNull('mainAxisSize', instance.mainAxisSize);
   writeNotNull('scrollDirection', instance.scrollDirection);
+  writeNotNull('bgImageFit', instance.bgImageFit?.toJson());
   writeNotNull('border', instance.border?.toJson());
   val['rows'] = instance.rows.map((e) => e.toJson()).toList();
   return val;
@@ -3998,6 +4020,9 @@ DashboardScreen _$DashboardScreenFromJson(Map<String, dynamic> json) =>
       crossAxisAlignment: json['crossAxisAlignment'] as String? ?? '',
       mainAxisSize: json['mainAxisSize'] as String? ?? '',
       scrollDirection: json['scrollDirection'] as String? ?? '',
+      bgImageFit: json['bgImageFit'] == null
+          ? null
+          : ImageFitConfig.fromJson(json['bgImageFit'] as Map<String, dynamic>),
       border: json['border'] == null
           ? null
           : BorderConfig.fromJson(json['border'] as Map<String, dynamic>),
@@ -4036,6 +4061,7 @@ Map<String, dynamic> _$DashboardScreenToJson(DashboardScreen instance) {
   writeNotNull('crossAxisAlignment', instance.crossAxisAlignment);
   writeNotNull('mainAxisSize', instance.mainAxisSize);
   writeNotNull('scrollDirection', instance.scrollDirection);
+  writeNotNull('bgImageFit', instance.bgImageFit?.toJson());
   writeNotNull('border', instance.border?.toJson());
   val['rows'] = instance.rows.map((e) => e.toJson()).toList();
   return val;
