@@ -20495,6 +20495,7 @@ class DashboardScreenInfo {
     this.crossAxisAlignment,
     this.mainAxisSize,
     this.scrollDirection,
+    this.border,
     required this.rows,
   });
 
@@ -20528,6 +20529,8 @@ class DashboardScreenInfo {
   final String? mainAxisSize;
   @JsonKey(name: 'scrollDirection', includeIfNull: false, defaultValue: '')
   final String? scrollDirection;
+  @JsonKey(name: 'border', includeIfNull: false)
+  final BorderConfig? border;
   @JsonKey(name: 'rows', includeIfNull: false, defaultValue: <ScreenRow>[])
   final List<ScreenRow> rows;
   static const fromJsonFactory = _$DashboardScreenInfoFromJson;
@@ -20568,6 +20571,8 @@ class DashboardScreenInfo {
             (identical(other.scrollDirection, scrollDirection) ||
                 const DeepCollectionEquality()
                     .equals(other.scrollDirection, scrollDirection)) &&
+            (identical(other.border, border) ||
+                const DeepCollectionEquality().equals(other.border, border)) &&
             (identical(other.rows, rows) ||
                 const DeepCollectionEquality().equals(other.rows, rows)));
   }
@@ -20589,6 +20594,7 @@ class DashboardScreenInfo {
       const DeepCollectionEquality().hash(crossAxisAlignment) ^
       const DeepCollectionEquality().hash(mainAxisSize) ^
       const DeepCollectionEquality().hash(scrollDirection) ^
+      const DeepCollectionEquality().hash(border) ^
       const DeepCollectionEquality().hash(rows) ^
       runtimeType.hashCode;
 }
@@ -20607,6 +20613,7 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
       String? crossAxisAlignment,
       String? mainAxisSize,
       String? scrollDirection,
+      BorderConfig? border,
       List<ScreenRow>? rows}) {
     return DashboardScreenInfo(
         name: name ?? this.name,
@@ -20621,6 +20628,7 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
         crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment,
         mainAxisSize: mainAxisSize ?? this.mainAxisSize,
         scrollDirection: scrollDirection ?? this.scrollDirection,
+        border: border ?? this.border,
         rows: rows ?? this.rows);
   }
 
@@ -20637,6 +20645,7 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
       Wrapped<String?>? crossAxisAlignment,
       Wrapped<String?>? mainAxisSize,
       Wrapped<String?>? scrollDirection,
+      Wrapped<BorderConfig?>? border,
       Wrapped<List<ScreenRow>>? rows}) {
     return DashboardScreenInfo(
         name: (name != null ? name.value : this.name),
@@ -20659,6 +20668,7 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
         scrollDirection: (scrollDirection != null
             ? scrollDirection.value
             : this.scrollDirection),
+        border: (border != null ? border.value : this.border),
         rows: (rows != null ? rows.value : this.rows));
   }
 }
@@ -20685,6 +20695,7 @@ class DashboardScreen {
     this.crossAxisAlignment,
     this.mainAxisSize,
     this.scrollDirection,
+    this.border,
     required this.rows,
   });
 
@@ -20732,6 +20743,8 @@ class DashboardScreen {
   final String? mainAxisSize;
   @JsonKey(name: 'scrollDirection', includeIfNull: false, defaultValue: '')
   final String? scrollDirection;
+  @JsonKey(name: 'border', includeIfNull: false)
+  final BorderConfig? border;
   @JsonKey(name: 'rows', includeIfNull: false, defaultValue: <ScreenRow>[])
   final List<ScreenRow> rows;
   static const fromJsonFactory = _$DashboardScreenFromJson;
@@ -20791,6 +20804,8 @@ class DashboardScreen {
             (identical(other.scrollDirection, scrollDirection) ||
                 const DeepCollectionEquality()
                     .equals(other.scrollDirection, scrollDirection)) &&
+            (identical(other.border, border) ||
+                const DeepCollectionEquality().equals(other.border, border)) &&
             (identical(other.rows, rows) ||
                 const DeepCollectionEquality().equals(other.rows, rows)));
   }
@@ -20819,6 +20834,7 @@ class DashboardScreen {
       const DeepCollectionEquality().hash(crossAxisAlignment) ^
       const DeepCollectionEquality().hash(mainAxisSize) ^
       const DeepCollectionEquality().hash(scrollDirection) ^
+      const DeepCollectionEquality().hash(border) ^
       const DeepCollectionEquality().hash(rows) ^
       runtimeType.hashCode;
 }
@@ -20844,6 +20860,7 @@ extension $DashboardScreenExtension on DashboardScreen {
       String? crossAxisAlignment,
       String? mainAxisSize,
       String? scrollDirection,
+      BorderConfig? border,
       List<ScreenRow>? rows}) {
     return DashboardScreen(
         domainKey: domainKey ?? this.domainKey,
@@ -20865,6 +20882,7 @@ extension $DashboardScreenExtension on DashboardScreen {
         crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment,
         mainAxisSize: mainAxisSize ?? this.mainAxisSize,
         scrollDirection: scrollDirection ?? this.scrollDirection,
+        border: border ?? this.border,
         rows: rows ?? this.rows);
   }
 
@@ -20888,6 +20906,7 @@ extension $DashboardScreenExtension on DashboardScreen {
       Wrapped<String?>? crossAxisAlignment,
       Wrapped<String?>? mainAxisSize,
       Wrapped<String?>? scrollDirection,
+      Wrapped<BorderConfig?>? border,
       Wrapped<List<ScreenRow>>? rows}) {
     return DashboardScreen(
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
@@ -20919,6 +20938,7 @@ extension $DashboardScreenExtension on DashboardScreen {
         scrollDirection: (scrollDirection != null
             ? scrollDirection.value
             : this.scrollDirection),
+        border: (border != null ? border.value : this.border),
         rows: (rows != null ? rows.value : this.rows));
   }
 }

@@ -17032,6 +17032,9 @@
         "scrollDirection": {
           "type": "string"
         },
+        "border": {
+          "$ref": "#/definitions/BorderConfig"
+        },
         "rows": {
           "type": "array",
           "items": {
