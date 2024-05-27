@@ -16973,7 +16973,7 @@
         "marginConfig": {
           "$ref": "#/definitions/PaddingConfig"
         },
-        "borderConfig": {
+        "childBorderConfig": {
           "$ref": "#/definitions/BorderConfig"
         },
         "alignment": {
@@ -17023,7 +17023,7 @@
         "marginConfig": {
           "$ref": "#/definitions/PaddingConfig"
         },
-        "borderConfig": {
+        "rowBorderConfig": {
           "$ref": "#/definitions/BorderConfig"
         },
         "children": {
@@ -17086,7 +17086,7 @@
         "bgImageFit": {
           "$ref": "#/definitions/ImageFitConfig"
         },
-        "borderConfig": {
+        "screenBorderConfig": {
           "$ref": "#/definitions/BorderConfig"
         },
         "rows": {
