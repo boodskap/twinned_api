@@ -16805,7 +16805,7 @@
     "RadiusConfig": {
       "type": "object",
       "required": [
-        "radiusType"
+        "radType"
       ],
       "properties": {
         "radType": {

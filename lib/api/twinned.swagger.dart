@@ -19881,7 +19881,7 @@ extension $PaddingConfigExtension on PaddingConfig {
 @JsonSerializable(explicitToJson: true)
 class RadiusConfig {
   const RadiusConfig({
-    this.radType,
+    required this.radType,
     this.rad,
     this.xRad,
     this.yRad,
@@ -19896,10 +19896,10 @@ class RadiusConfig {
   @JsonKey(
     name: 'radType',
     includeIfNull: false,
-    toJson: radiusConfigRadTypeNullableToJson,
-    fromJson: radiusConfigRadTypeNullableFromJson,
+    toJson: radiusConfigRadTypeToJson,
+    fromJson: radiusConfigRadTypeFromJson,
   )
-  final enums.RadiusConfigRadType? radType;
+  final enums.RadiusConfigRadType radType;
   @JsonKey(name: 'rad', includeIfNull: false)
   final double? rad;
   @JsonKey(name: 'xRad', includeIfNull: false)
@@ -19949,7 +19949,7 @@ extension $RadiusConfigExtension on RadiusConfig {
   }
 
   RadiusConfig copyWithWrapped(
-      {Wrapped<enums.RadiusConfigRadType?>? radType,
+      {Wrapped<enums.RadiusConfigRadType>? radType,
       Wrapped<double?>? rad,
       Wrapped<double?>? xRad,
       Wrapped<double?>? yRad}) {
