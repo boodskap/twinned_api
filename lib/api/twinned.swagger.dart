@@ -19881,7 +19881,7 @@ extension $PaddingConfigExtension on PaddingConfig {
 @JsonSerializable(explicitToJson: true)
 class RadiusConfig {
   const RadiusConfig({
-    required this.type,
+    this.radiusType,
     this.radius,
     this.xRadius,
     this.yRadius,
@@ -19894,12 +19894,12 @@ class RadiusConfig {
   Map<String, dynamic> toJson() => _$RadiusConfigToJson(this);
 
   @JsonKey(
-    name: 'type',
+    name: 'radiusType',
     includeIfNull: false,
-    toJson: radiusConfigTypeToJson,
-    fromJson: radiusConfigTypeFromJson,
+    toJson: radiusConfigRadiusTypeNullableToJson,
+    fromJson: radiusConfigRadiusTypeNullableFromJson,
   )
-  final enums.RadiusConfigType type;
+  final enums.RadiusConfigRadiusType? radiusType;
   @JsonKey(name: 'radius', includeIfNull: false)
   final double? radius;
   @JsonKey(name: 'xRadius', includeIfNull: false)
@@ -19912,8 +19912,9 @@ class RadiusConfig {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other is RadiusConfig &&
-            (identical(other.type, type) ||
-                const DeepCollectionEquality().equals(other.type, type)) &&
+            (identical(other.radiusType, radiusType) ||
+                const DeepCollectionEquality()
+                    .equals(other.radiusType, radiusType)) &&
             (identical(other.radius, radius) ||
                 const DeepCollectionEquality().equals(other.radius, radius)) &&
             (identical(other.xRadius, xRadius) ||
@@ -19928,7 +19929,7 @@ class RadiusConfig {
 
   @override
   int get hashCode =>
-      const DeepCollectionEquality().hash(type) ^
+      const DeepCollectionEquality().hash(radiusType) ^
       const DeepCollectionEquality().hash(radius) ^
       const DeepCollectionEquality().hash(xRadius) ^
       const DeepCollectionEquality().hash(yRadius) ^
@@ -19937,24 +19938,24 @@ class RadiusConfig {
 
 extension $RadiusConfigExtension on RadiusConfig {
   RadiusConfig copyWith(
-      {enums.RadiusConfigType? type,
+      {enums.RadiusConfigRadiusType? radiusType,
       double? radius,
       double? xRadius,
       double? yRadius}) {
     return RadiusConfig(
-        type: type ?? this.type,
+        radiusType: radiusType ?? this.radiusType,
         radius: radius ?? this.radius,
         xRadius: xRadius ?? this.xRadius,
         yRadius: yRadius ?? this.yRadius);
   }
 
   RadiusConfig copyWithWrapped(
-      {Wrapped<enums.RadiusConfigType>? type,
+      {Wrapped<enums.RadiusConfigRadiusType?>? radiusType,
       Wrapped<double?>? radius,
       Wrapped<double?>? xRadius,
       Wrapped<double?>? yRadius}) {
     return RadiusConfig(
-        type: (type != null ? type.value : this.type),
+        radiusType: (radiusType != null ? radiusType.value : this.radiusType),
         radius: (radius != null ? radius.value : this.radius),
         xRadius: (xRadius != null ? xRadius.value : this.xRadius),
         yRadius: (yRadius != null ? yRadius.value : this.yRadius));
@@ -41255,74 +41256,75 @@ List<enums.TriggeredControlDeliveryStatus>?
       .toList();
 }
 
-String? radiusConfigTypeNullableToJson(
-    enums.RadiusConfigType? radiusConfigType) {
-  return radiusConfigType?.value;
+String? radiusConfigRadiusTypeNullableToJson(
+    enums.RadiusConfigRadiusType? radiusConfigRadiusType) {
+  return radiusConfigRadiusType?.value;
 }
 
-String? radiusConfigTypeToJson(enums.RadiusConfigType radiusConfigType) {
-  return radiusConfigType.value;
+String? radiusConfigRadiusTypeToJson(
+    enums.RadiusConfigRadiusType radiusConfigRadiusType) {
+  return radiusConfigRadiusType.value;
 }
 
-enums.RadiusConfigType radiusConfigTypeFromJson(
-  Object? radiusConfigType, [
-  enums.RadiusConfigType? defaultValue,
+enums.RadiusConfigRadiusType radiusConfigRadiusTypeFromJson(
+  Object? radiusConfigRadiusType, [
+  enums.RadiusConfigRadiusType? defaultValue,
 ]) {
-  return enums.RadiusConfigType.values
-          .firstWhereOrNull((e) => e.value == radiusConfigType) ??
+  return enums.RadiusConfigRadiusType.values
+          .firstWhereOrNull((e) => e.value == radiusConfigRadiusType) ??
       defaultValue ??
-      enums.RadiusConfigType.swaggerGeneratedUnknown;
+      enums.RadiusConfigRadiusType.swaggerGeneratedUnknown;
 }
 
-enums.RadiusConfigType? radiusConfigTypeNullableFromJson(
-  Object? radiusConfigType, [
-  enums.RadiusConfigType? defaultValue,
+enums.RadiusConfigRadiusType? radiusConfigRadiusTypeNullableFromJson(
+  Object? radiusConfigRadiusType, [
+  enums.RadiusConfigRadiusType? defaultValue,
 ]) {
-  if (radiusConfigType == null) {
+  if (radiusConfigRadiusType == null) {
     return null;
   }
-  return enums.RadiusConfigType.values
-          .firstWhereOrNull((e) => e.value == radiusConfigType) ??
+  return enums.RadiusConfigRadiusType.values
+          .firstWhereOrNull((e) => e.value == radiusConfigRadiusType) ??
       defaultValue;
 }
 
-String radiusConfigTypeExplodedListToJson(
-    List<enums.RadiusConfigType>? radiusConfigType) {
-  return radiusConfigType?.map((e) => e.value!).join(',') ?? '';
+String radiusConfigRadiusTypeExplodedListToJson(
+    List<enums.RadiusConfigRadiusType>? radiusConfigRadiusType) {
+  return radiusConfigRadiusType?.map((e) => e.value!).join(',') ?? '';
 }
 
-List<String> radiusConfigTypeListToJson(
-    List<enums.RadiusConfigType>? radiusConfigType) {
-  if (radiusConfigType == null) {
+List<String> radiusConfigRadiusTypeListToJson(
+    List<enums.RadiusConfigRadiusType>? radiusConfigRadiusType) {
+  if (radiusConfigRadiusType == null) {
     return [];
   }
 
-  return radiusConfigType.map((e) => e.value!).toList();
+  return radiusConfigRadiusType.map((e) => e.value!).toList();
 }
 
-List<enums.RadiusConfigType> radiusConfigTypeListFromJson(
-  List? radiusConfigType, [
-  List<enums.RadiusConfigType>? defaultValue,
+List<enums.RadiusConfigRadiusType> radiusConfigRadiusTypeListFromJson(
+  List? radiusConfigRadiusType, [
+  List<enums.RadiusConfigRadiusType>? defaultValue,
 ]) {
-  if (radiusConfigType == null) {
+  if (radiusConfigRadiusType == null) {
     return defaultValue ?? [];
   }
 
-  return radiusConfigType
-      .map((e) => radiusConfigTypeFromJson(e.toString()))
+  return radiusConfigRadiusType
+      .map((e) => radiusConfigRadiusTypeFromJson(e.toString()))
       .toList();
 }
 
-List<enums.RadiusConfigType>? radiusConfigTypeNullableListFromJson(
-  List? radiusConfigType, [
-  List<enums.RadiusConfigType>? defaultValue,
+List<enums.RadiusConfigRadiusType>? radiusConfigRadiusTypeNullableListFromJson(
+  List? radiusConfigRadiusType, [
+  List<enums.RadiusConfigRadiusType>? defaultValue,
 ]) {
-  if (radiusConfigType == null) {
+  if (radiusConfigRadiusType == null) {
     return defaultValue;
   }
 
-  return radiusConfigType
-      .map((e) => radiusConfigTypeFromJson(e.toString()))
+  return radiusConfigRadiusType
+      .map((e) => radiusConfigRadiusTypeFromJson(e.toString()))
       .toList();
 }
 
