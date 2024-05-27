@@ -16967,13 +16967,13 @@
         "bgImageFit": {
           "$ref": "#/definitions/ImageFitConfig"
         },
-        "padding": {
+        "paddingConfig": {
           "$ref": "#/definitions/PaddingConfig"
         },
-        "margin": {
+        "marginConfig": {
           "$ref": "#/definitions/PaddingConfig"
         },
-        "border": {
+        "borderConfig": {
           "$ref": "#/definitions/BorderConfig"
         },
         "alignment": {
@@ -17017,13 +17017,13 @@
         "bgImageFit": {
           "$ref": "#/definitions/ImageFitConfig"
         },
-        "padding": {
+        "paddingConfig": {
           "$ref": "#/definitions/PaddingConfig"
         },
-        "margin": {
+        "marginConfig": {
           "$ref": "#/definitions/PaddingConfig"
         },
-        "border": {
+        "borderConfig": {
           "$ref": "#/definitions/BorderConfig"
         },
         "children": {
@@ -17051,7 +17051,7 @@
         "title": {
           "type": "string"
         },
-        "banner": {
+        "bannerImage": {
           "type": "string"
         },
         "spacing": {
@@ -17086,7 +17086,7 @@
         "bgImageFit": {
           "$ref": "#/definitions/ImageFitConfig"
         },
-        "border": {
+        "borderConfig": {
           "$ref": "#/definitions/BorderConfig"
         },
         "rows": {
