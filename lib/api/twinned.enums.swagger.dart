@@ -505,12 +505,12 @@ enum RadiusConfigRadType {
   @JsonValue(null)
   swaggerGeneratedUnknown(null),
 
-  @JsonValue('zero')
-  zero('zero'),
-  @JsonValue('circular')
-  circular('circular'),
-  @JsonValue('elliptical')
-  elliptical('elliptical');
+  @JsonValue('ZERO')
+  zero('ZERO'),
+  @JsonValue('CIRCULAR')
+  circular('CIRCULAR'),
+  @JsonValue('ELLIPTICAL')
+  elliptical('ELLIPTICAL');
 
   final String? value;
 
