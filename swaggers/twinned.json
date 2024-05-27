@@ -16811,9 +16811,9 @@
         "radType": {
           "type": "string",
           "enum": [
-            "zero",
-            "circular",
-            "elliptical"
+            "ZERO",
+            "CIRCULAR",
+            "ELLIPTICAL"
           ]
         },
         "rad": {
