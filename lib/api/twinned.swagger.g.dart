@@ -3746,7 +3746,7 @@ Map<String, dynamic> _$PaddingConfigToJson(PaddingConfig instance) {
 }
 
 RadiusConfig _$RadiusConfigFromJson(Map<String, dynamic> json) => RadiusConfig(
-      radType: radiusConfigRadTypeNullableFromJson(json['radType']),
+      radType: radiusConfigRadTypeFromJson(json['radType']),
       rad: (json['rad'] as num?)?.toDouble(),
       xRad: (json['xRad'] as num?)?.toDouble(),
       yRad: (json['yRad'] as num?)?.toDouble(),
@@ -3761,7 +3761,7 @@ Map<String, dynamic> _$RadiusConfigToJson(RadiusConfig instance) {
     }
   }
 
-  writeNotNull('radType', radiusConfigRadTypeNullableToJson(instance.radType));
+  writeNotNull('radType', radiusConfigRadTypeToJson(instance.radType));
   writeNotNull('rad', instance.rad);
   writeNotNull('xRad', instance.xRad);
   writeNotNull('yRad', instance.yRad);
