@@ -16808,7 +16808,7 @@
         "type"
       ],
       "properties": {
-        "type": {
+        "radiusType": {
           "type": "string",
           "enum": [
             "zero",

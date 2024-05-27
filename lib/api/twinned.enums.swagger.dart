@@ -501,7 +501,7 @@ enum TriggeredControlDeliveryStatus {
   const TriggeredControlDeliveryStatus(this.value);
 }
 
-enum RadiusConfigType {
+enum RadiusConfigRadiusType {
   @JsonValue(null)
   swaggerGeneratedUnknown(null),
 
@@ -514,7 +514,7 @@ enum RadiusConfigType {
 
   final String? value;
 
-  const RadiusConfigType(this.value);
+  const RadiusConfigRadiusType(this.value);
 }
 
 enum ImageFitConfigFit {
