@@ -16808,7 +16808,7 @@
         "radiusType"
       ],
       "properties": {
-        "radiusType": {
+        "radType": {
           "type": "string",
           "enum": [
             "zero",
@@ -16816,15 +16816,15 @@
             "elliptical"
           ]
         },
-        "radius": {
+        "rad": {
           "type": "number",
           "format": "double"
         },
-        "xRadius": {
+        "xRad": {
           "type": "number",
           "format": "double"
         },
-        "yRadius": {
+        "yRad": {
           "type": "number",
           "format": "double"
         }
