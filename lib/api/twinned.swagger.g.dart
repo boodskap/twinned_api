@@ -3879,15 +3879,17 @@ ScreenChild _$ScreenChildFromJson(Map<String, dynamic> json) => ScreenChild(
       bgImageFit: json['bgImageFit'] == null
           ? null
           : ImageFitConfig.fromJson(json['bgImageFit'] as Map<String, dynamic>),
-      padding: json['padding'] == null
+      paddingConfig: json['paddingConfig'] == null
           ? null
-          : PaddingConfig.fromJson(json['padding'] as Map<String, dynamic>),
-      margin: json['margin'] == null
+          : PaddingConfig.fromJson(
+              json['paddingConfig'] as Map<String, dynamic>),
+      marginConfig: json['marginConfig'] == null
           ? null
-          : PaddingConfig.fromJson(json['margin'] as Map<String, dynamic>),
-      border: json['border'] == null
+          : PaddingConfig.fromJson(
+              json['marginConfig'] as Map<String, dynamic>),
+      borderConfig: json['borderConfig'] == null
           ? null
-          : BorderConfig.fromJson(json['border'] as Map<String, dynamic>),
+          : BorderConfig.fromJson(json['borderConfig'] as Map<String, dynamic>),
       alignment: json['alignment'] == null
           ? null
           : AlignmentConfig.fromJson(json['alignment'] as Map<String, dynamic>),
@@ -3912,9 +3914,9 @@ Map<String, dynamic> _$ScreenChildToJson(ScreenChild instance) {
   writeNotNull('expanded', instance.expanded);
   writeNotNull('flex', instance.flex);
   writeNotNull('bgImageFit', instance.bgImageFit?.toJson());
-  writeNotNull('padding', instance.padding?.toJson());
-  writeNotNull('margin', instance.margin?.toJson());
-  writeNotNull('border', instance.border?.toJson());
+  writeNotNull('paddingConfig', instance.paddingConfig?.toJson());
+  writeNotNull('marginConfig', instance.marginConfig?.toJson());
+  writeNotNull('borderConfig', instance.borderConfig?.toJson());
   writeNotNull('alignment', instance.alignment?.toJson());
   return val;
 }
@@ -3931,15 +3933,17 @@ ScreenRow _$ScreenRowFromJson(Map<String, dynamic> json) => ScreenRow(
       bgImageFit: json['bgImageFit'] == null
           ? null
           : ImageFitConfig.fromJson(json['bgImageFit'] as Map<String, dynamic>),
-      padding: json['padding'] == null
+      paddingConfig: json['paddingConfig'] == null
           ? null
-          : PaddingConfig.fromJson(json['padding'] as Map<String, dynamic>),
-      margin: json['margin'] == null
+          : PaddingConfig.fromJson(
+              json['paddingConfig'] as Map<String, dynamic>),
+      marginConfig: json['marginConfig'] == null
           ? null
-          : PaddingConfig.fromJson(json['margin'] as Map<String, dynamic>),
-      border: json['border'] == null
+          : PaddingConfig.fromJson(
+              json['marginConfig'] as Map<String, dynamic>),
+      borderConfig: json['borderConfig'] == null
           ? null
-          : BorderConfig.fromJson(json['border'] as Map<String, dynamic>),
+          : BorderConfig.fromJson(json['borderConfig'] as Map<String, dynamic>),
       children: (json['children'] as List<dynamic>?)
               ?.map((e) => ScreenChild.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -3964,9 +3968,9 @@ Map<String, dynamic> _$ScreenRowToJson(ScreenRow instance) {
   writeNotNull('mainAxisSize', instance.mainAxisSize);
   writeNotNull('scrollDirection', instance.scrollDirection);
   writeNotNull('bgImageFit', instance.bgImageFit?.toJson());
-  writeNotNull('padding', instance.padding?.toJson());
-  writeNotNull('margin', instance.margin?.toJson());
-  writeNotNull('border', instance.border?.toJson());
+  writeNotNull('paddingConfig', instance.paddingConfig?.toJson());
+  writeNotNull('marginConfig', instance.marginConfig?.toJson());
+  writeNotNull('borderConfig', instance.borderConfig?.toJson());
   val['children'] = instance.children.map((e) => e.toJson()).toList();
   return val;
 }
@@ -3976,7 +3980,7 @@ DashboardScreenInfo _$DashboardScreenInfoFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
       title: json['title'] as String? ?? '',
-      banner: json['banner'] as String? ?? '',
+      bannerImage: json['bannerImage'] as String? ?? '',
       spacing: (json['spacing'] as num?)?.toDouble(),
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
@@ -3990,9 +3994,9 @@ DashboardScreenInfo _$DashboardScreenInfoFromJson(Map<String, dynamic> json) =>
       bgImageFit: json['bgImageFit'] == null
           ? null
           : ImageFitConfig.fromJson(json['bgImageFit'] as Map<String, dynamic>),
-      border: json['border'] == null
+      borderConfig: json['borderConfig'] == null
           ? null
-          : BorderConfig.fromJson(json['border'] as Map<String, dynamic>),
+          : BorderConfig.fromJson(json['borderConfig'] as Map<String, dynamic>),
       rows: (json['rows'] as List<dynamic>?)
               ?.map((e) => ScreenRow.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -4012,7 +4016,7 @@ Map<String, dynamic> _$DashboardScreenInfoToJson(DashboardScreenInfo instance) {
 
   writeNotNull('description', instance.description);
   val['title'] = instance.title;
-  writeNotNull('banner', instance.banner);
+  writeNotNull('bannerImage', instance.bannerImage);
   writeNotNull('spacing', instance.spacing);
   writeNotNull('tags', instance.tags);
   writeNotNull('bgColor', instance.bgColor);
@@ -4022,7 +4026,7 @@ Map<String, dynamic> _$DashboardScreenInfoToJson(DashboardScreenInfo instance) {
   writeNotNull('mainAxisSize', instance.mainAxisSize);
   writeNotNull('scrollDirection', instance.scrollDirection);
   writeNotNull('bgImageFit', instance.bgImageFit?.toJson());
-  writeNotNull('border', instance.border?.toJson());
+  writeNotNull('borderConfig', instance.borderConfig?.toJson());
   val['rows'] = instance.rows.map((e) => e.toJson()).toList();
   return val;
 }
@@ -4042,7 +4046,7 @@ DashboardScreen _$DashboardScreenFromJson(Map<String, dynamic> json) =>
               [],
       description: json['description'] as String? ?? '',
       title: json['title'] as String? ?? '',
-      banner: json['banner'] as String? ?? '',
+      bannerImage: json['bannerImage'] as String? ?? '',
       spacing: (json['spacing'] as num?)?.toDouble(),
       bgColor: (json['bgColor'] as num?)?.toInt(),
       bgImage: json['bgImage'] as String? ?? '',
@@ -4053,9 +4057,9 @@ DashboardScreen _$DashboardScreenFromJson(Map<String, dynamic> json) =>
       bgImageFit: json['bgImageFit'] == null
           ? null
           : ImageFitConfig.fromJson(json['bgImageFit'] as Map<String, dynamic>),
-      border: json['border'] == null
+      borderConfig: json['borderConfig'] == null
           ? null
-          : BorderConfig.fromJson(json['border'] as Map<String, dynamic>),
+          : BorderConfig.fromJson(json['borderConfig'] as Map<String, dynamic>),
       rows: (json['rows'] as List<dynamic>?)
               ?.map((e) => ScreenRow.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -4083,7 +4087,7 @@ Map<String, dynamic> _$DashboardScreenToJson(DashboardScreen instance) {
   writeNotNull('tags', instance.tags);
   writeNotNull('description', instance.description);
   val['title'] = instance.title;
-  writeNotNull('banner', instance.banner);
+  writeNotNull('bannerImage', instance.bannerImage);
   writeNotNull('spacing', instance.spacing);
   writeNotNull('bgColor', instance.bgColor);
   writeNotNull('bgImage', instance.bgImage);
@@ -4092,7 +4096,7 @@ Map<String, dynamic> _$DashboardScreenToJson(DashboardScreen instance) {
   writeNotNull('mainAxisSize', instance.mainAxisSize);
   writeNotNull('scrollDirection', instance.scrollDirection);
   writeNotNull('bgImageFit', instance.bgImageFit?.toJson());
-  writeNotNull('border', instance.border?.toJson());
+  writeNotNull('borderConfig', instance.borderConfig?.toJson());
   val['rows'] = instance.rows.map((e) => e.toJson()).toList();
   return val;
 }
