@@ -15,7 +15,7 @@
       "name": "MIT"
     }
   },
-  "host": "twinned.digital",
+  "host": "twinned.boodskap.io",
   "basePath": "/rest/nocode",
   "schemes": [
     "https"
@@ -17088,6 +17088,12 @@
         },
         "screenBorderConfig": {
           "$ref": "#/definitions/BorderConfig"
+        },
+        "paddingConfig": {
+          "$ref": "#/definitions/PaddingConfig"
+        },
+        "marginConfig": {
+          "$ref": "#/definitions/PaddingConfig"
         },
         "rows": {
           "type": "array",
