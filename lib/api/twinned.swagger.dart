@@ -43,7 +43,8 @@ abstract class Twinned extends ChopperService {
         client: httpClient,
         authenticator: authenticator,
         errorConverter: errorConverter,
-        baseUrl: baseUrl ?? Uri.parse('http://twinned.digital/rest/nocode'));
+        baseUrl:
+            baseUrl ?? Uri.parse('http://twinned.boodskap.io/rest/nocode'));
     return _$Twinned(newClient);
   }
 
@@ -20639,6 +20640,8 @@ class DashboardScreenInfo {
     this.scrollDirection,
     this.bgImageFit,
     this.screenBorderConfig,
+    this.paddingConfig,
+    this.marginConfig,
     required this.rows,
   });
 
@@ -20676,6 +20679,10 @@ class DashboardScreenInfo {
   final ImageFitConfig? bgImageFit;
   @JsonKey(name: 'screenBorderConfig', includeIfNull: false)
   final BorderConfig? screenBorderConfig;
+  @JsonKey(name: 'paddingConfig', includeIfNull: false)
+  final PaddingConfig? paddingConfig;
+  @JsonKey(name: 'marginConfig', includeIfNull: false)
+  final PaddingConfig? marginConfig;
   @JsonKey(name: 'rows', includeIfNull: false, defaultValue: <ScreenRow>[])
   final List<ScreenRow> rows;
   static const fromJsonFactory = _$DashboardScreenInfoFromJson;
@@ -20723,6 +20730,12 @@ class DashboardScreenInfo {
             (identical(other.screenBorderConfig, screenBorderConfig) ||
                 const DeepCollectionEquality()
                     .equals(other.screenBorderConfig, screenBorderConfig)) &&
+            (identical(other.paddingConfig, paddingConfig) ||
+                const DeepCollectionEquality()
+                    .equals(other.paddingConfig, paddingConfig)) &&
+            (identical(other.marginConfig, marginConfig) ||
+                const DeepCollectionEquality()
+                    .equals(other.marginConfig, marginConfig)) &&
             (identical(other.rows, rows) ||
                 const DeepCollectionEquality().equals(other.rows, rows)));
   }
@@ -20746,6 +20759,8 @@ class DashboardScreenInfo {
       const DeepCollectionEquality().hash(scrollDirection) ^
       const DeepCollectionEquality().hash(bgImageFit) ^
       const DeepCollectionEquality().hash(screenBorderConfig) ^
+      const DeepCollectionEquality().hash(paddingConfig) ^
+      const DeepCollectionEquality().hash(marginConfig) ^
       const DeepCollectionEquality().hash(rows) ^
       runtimeType.hashCode;
 }
@@ -20766,6 +20781,8 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
       String? scrollDirection,
       ImageFitConfig? bgImageFit,
       BorderConfig? screenBorderConfig,
+      PaddingConfig? paddingConfig,
+      PaddingConfig? marginConfig,
       List<ScreenRow>? rows}) {
     return DashboardScreenInfo(
         name: name ?? this.name,
@@ -20782,6 +20799,8 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
         scrollDirection: scrollDirection ?? this.scrollDirection,
         bgImageFit: bgImageFit ?? this.bgImageFit,
         screenBorderConfig: screenBorderConfig ?? this.screenBorderConfig,
+        paddingConfig: paddingConfig ?? this.paddingConfig,
+        marginConfig: marginConfig ?? this.marginConfig,
         rows: rows ?? this.rows);
   }
 
@@ -20800,6 +20819,8 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
       Wrapped<String?>? scrollDirection,
       Wrapped<ImageFitConfig?>? bgImageFit,
       Wrapped<BorderConfig?>? screenBorderConfig,
+      Wrapped<PaddingConfig?>? paddingConfig,
+      Wrapped<PaddingConfig?>? marginConfig,
       Wrapped<List<ScreenRow>>? rows}) {
     return DashboardScreenInfo(
         name: (name != null ? name.value : this.name),
@@ -20827,6 +20848,10 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
         screenBorderConfig: (screenBorderConfig != null
             ? screenBorderConfig.value
             : this.screenBorderConfig),
+        paddingConfig:
+            (paddingConfig != null ? paddingConfig.value : this.paddingConfig),
+        marginConfig:
+            (marginConfig != null ? marginConfig.value : this.marginConfig),
         rows: (rows != null ? rows.value : this.rows));
   }
 }
@@ -20855,6 +20880,8 @@ class DashboardScreen {
     this.scrollDirection,
     this.bgImageFit,
     this.screenBorderConfig,
+    this.paddingConfig,
+    this.marginConfig,
     required this.rows,
   });
 
@@ -20906,6 +20933,10 @@ class DashboardScreen {
   final ImageFitConfig? bgImageFit;
   @JsonKey(name: 'screenBorderConfig', includeIfNull: false)
   final BorderConfig? screenBorderConfig;
+  @JsonKey(name: 'paddingConfig', includeIfNull: false)
+  final PaddingConfig? paddingConfig;
+  @JsonKey(name: 'marginConfig', includeIfNull: false)
+  final PaddingConfig? marginConfig;
   @JsonKey(name: 'rows', includeIfNull: false, defaultValue: <ScreenRow>[])
   final List<ScreenRow> rows;
   static const fromJsonFactory = _$DashboardScreenFromJson;
@@ -20972,6 +21003,12 @@ class DashboardScreen {
             (identical(other.screenBorderConfig, screenBorderConfig) ||
                 const DeepCollectionEquality()
                     .equals(other.screenBorderConfig, screenBorderConfig)) &&
+            (identical(other.paddingConfig, paddingConfig) ||
+                const DeepCollectionEquality()
+                    .equals(other.paddingConfig, paddingConfig)) &&
+            (identical(other.marginConfig, marginConfig) ||
+                const DeepCollectionEquality()
+                    .equals(other.marginConfig, marginConfig)) &&
             (identical(other.rows, rows) ||
                 const DeepCollectionEquality().equals(other.rows, rows)));
   }
@@ -21002,6 +21039,8 @@ class DashboardScreen {
       const DeepCollectionEquality().hash(scrollDirection) ^
       const DeepCollectionEquality().hash(bgImageFit) ^
       const DeepCollectionEquality().hash(screenBorderConfig) ^
+      const DeepCollectionEquality().hash(paddingConfig) ^
+      const DeepCollectionEquality().hash(marginConfig) ^
       const DeepCollectionEquality().hash(rows) ^
       runtimeType.hashCode;
 }
@@ -21029,6 +21068,8 @@ extension $DashboardScreenExtension on DashboardScreen {
       String? scrollDirection,
       ImageFitConfig? bgImageFit,
       BorderConfig? screenBorderConfig,
+      PaddingConfig? paddingConfig,
+      PaddingConfig? marginConfig,
       List<ScreenRow>? rows}) {
     return DashboardScreen(
         domainKey: domainKey ?? this.domainKey,
@@ -21052,6 +21093,8 @@ extension $DashboardScreenExtension on DashboardScreen {
         scrollDirection: scrollDirection ?? this.scrollDirection,
         bgImageFit: bgImageFit ?? this.bgImageFit,
         screenBorderConfig: screenBorderConfig ?? this.screenBorderConfig,
+        paddingConfig: paddingConfig ?? this.paddingConfig,
+        marginConfig: marginConfig ?? this.marginConfig,
         rows: rows ?? this.rows);
   }
 
@@ -21077,6 +21120,8 @@ extension $DashboardScreenExtension on DashboardScreen {
       Wrapped<String?>? scrollDirection,
       Wrapped<ImageFitConfig?>? bgImageFit,
       Wrapped<BorderConfig?>? screenBorderConfig,
+      Wrapped<PaddingConfig?>? paddingConfig,
+      Wrapped<PaddingConfig?>? marginConfig,
       Wrapped<List<ScreenRow>>? rows}) {
     return DashboardScreen(
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
@@ -21113,6 +21158,10 @@ extension $DashboardScreenExtension on DashboardScreen {
         screenBorderConfig: (screenBorderConfig != null
             ? screenBorderConfig.value
             : this.screenBorderConfig),
+        paddingConfig:
+            (paddingConfig != null ? paddingConfig.value : this.paddingConfig),
+        marginConfig:
+            (marginConfig != null ? marginConfig.value : this.marginConfig),
         rows: (rows != null ? rows.value : this.rows));
   }
 }

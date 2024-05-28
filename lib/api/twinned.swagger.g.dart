@@ -4000,6 +4000,14 @@ DashboardScreenInfo _$DashboardScreenInfoFromJson(Map<String, dynamic> json) =>
           ? null
           : BorderConfig.fromJson(
               json['screenBorderConfig'] as Map<String, dynamic>),
+      paddingConfig: json['paddingConfig'] == null
+          ? null
+          : PaddingConfig.fromJson(
+              json['paddingConfig'] as Map<String, dynamic>),
+      marginConfig: json['marginConfig'] == null
+          ? null
+          : PaddingConfig.fromJson(
+              json['marginConfig'] as Map<String, dynamic>),
       rows: (json['rows'] as List<dynamic>?)
               ?.map((e) => ScreenRow.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -4030,6 +4038,8 @@ Map<String, dynamic> _$DashboardScreenInfoToJson(DashboardScreenInfo instance) {
   writeNotNull('scrollDirection', instance.scrollDirection);
   writeNotNull('bgImageFit', instance.bgImageFit?.toJson());
   writeNotNull('screenBorderConfig', instance.screenBorderConfig?.toJson());
+  writeNotNull('paddingConfig', instance.paddingConfig?.toJson());
+  writeNotNull('marginConfig', instance.marginConfig?.toJson());
   val['rows'] = instance.rows.map((e) => e.toJson()).toList();
   return val;
 }
@@ -4064,6 +4074,14 @@ DashboardScreen _$DashboardScreenFromJson(Map<String, dynamic> json) =>
           ? null
           : BorderConfig.fromJson(
               json['screenBorderConfig'] as Map<String, dynamic>),
+      paddingConfig: json['paddingConfig'] == null
+          ? null
+          : PaddingConfig.fromJson(
+              json['paddingConfig'] as Map<String, dynamic>),
+      marginConfig: json['marginConfig'] == null
+          ? null
+          : PaddingConfig.fromJson(
+              json['marginConfig'] as Map<String, dynamic>),
       rows: (json['rows'] as List<dynamic>?)
               ?.map((e) => ScreenRow.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -4101,6 +4119,8 @@ Map<String, dynamic> _$DashboardScreenToJson(DashboardScreen instance) {
   writeNotNull('scrollDirection', instance.scrollDirection);
   writeNotNull('bgImageFit', instance.bgImageFit?.toJson());
   writeNotNull('screenBorderConfig', instance.screenBorderConfig?.toJson());
+  writeNotNull('paddingConfig', instance.paddingConfig?.toJson());
+  writeNotNull('marginConfig', instance.marginConfig?.toJson());
   val['rows'] = instance.rows.map((e) => e.toJson()).toList();
   return val;
 }
