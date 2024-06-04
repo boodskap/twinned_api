@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "1.8.5",
+    "version": "1.8.6",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -3229,6 +3229,100 @@
             "name": "modelId",
             "required": false,
             "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ParameterArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/DeviceModel/param/search": {
+      "post": {
+        "tags": [
+          "Device Model"
+        ],
+        "summary": "Search device model parameters",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "searchAllParameters",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "modelId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ParameterArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/DeviceModel/param/get": {
+      "post": {
+        "tags": [
+          "Device Model"
+        ],
+        "summary": "get parameters by list of names",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getParameters",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetReq"
+            }
           }
         ],
         "responses": {
@@ -10645,6 +10739,91 @@
         "summary": "count by query"
       }
     },
+    "/Asset/bulk/upload": {
+      "post": {
+        "tags": [
+          "Asset"
+        ],
+        "description": "bulk upload assets",
+        "operationId": "bulkUploadAssets",
+        "summary": "bulk upload assets",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "premiseId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "facilityId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "floorId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "assetModelId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "deviceModelId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "clientIds",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "roleIds",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "file",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/AssetBulkUploadRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
     "/Facility/create": {
       "post": {
         "tags": [
@@ -16930,6 +17109,43 @@
         }
       }
     },
+    "FontConfig": {
+      "type": "object",
+      "properties": {
+        "fontFamily": {
+          "type": "string"
+        },
+        "fontColor": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fontSize": {
+          "type": "number",
+          "format": "double"
+        },
+        "fontBold": {
+          "type": "boolean"
+        }
+      }
+    },
+    "TitleConfig": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "bgColor": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "titleFont": {
+          "$ref": "#/definitions/FontConfig"
+        },
+        "titleAlignment": {
+          "$ref": "#/definitions/AlignmentConfig"
+        }
+      }
+    },
     "ScreenChild": {
       "type": "object",
       "required": [
@@ -16963,6 +17179,12 @@
         },
         "flex": {
           "type": "integer"
+        },
+        "titleConfig": {
+          "$ref": "#/definitions/TitleConfig"
+        },
+        "titleAlignment": {
+          "$ref": "#/definitions/AlignmentConfig"
         },
         "bgImageFit": {
           "$ref": "#/definitions/ImageFitConfig"
@@ -17014,6 +17236,9 @@
         "scrollDirection": {
           "type": "string"
         },
+        "titleConfig": {
+          "$ref": "#/definitions/TitleConfig"
+        },
         "bgImageFit": {
           "$ref": "#/definitions/ImageFitConfig"
         },
@@ -17048,9 +17273,6 @@
         "description": {
           "type": "string"
         },
-        "title": {
-          "type": "string"
-        },
         "bannerImage": {
           "type": "string"
         },
@@ -17082,6 +17304,16 @@
         },
         "scrollDirection": {
           "type": "string"
+        },
+        "bannerHeight": {
+          "type": "number",
+          "format": "double"
+        },
+        "titleConfig": {
+          "$ref": "#/definitions/TitleConfig"
+        },
+        "bannerImageFit": {
+          "$ref": "#/definitions/ImageFitConfig"
         },
         "bgImageFit": {
           "$ref": "#/definitions/ImageFitConfig"
@@ -18687,6 +18919,10 @@
           "type": "string"
         },
         "enforceClient": {
+          "type": "boolean",
+          "default": false
+        },
+        "useMenuAsLanding": {
           "type": "boolean",
           "default": false
         }
@@ -20574,6 +20810,63 @@
         },
         {
           "$ref": "#/definitions/BaseCountRes"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "FailedAssetUpload": {
+      "type": "object",
+      "required": [
+        "line",
+        "assetName",
+        "hardwareDeviceId"
+      ],
+      "properties": {
+        "line": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "assetName": {
+          "type": "string"
+        },
+        "hardwareDeviceId": {
+          "type": "string"
+        }
+      }
+    },
+    "BaseAssetUploadRes": {
+      "type": "object",
+      "required": [
+        "total",
+        "failed",
+        "failures"
+      ],
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "failed": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "failures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FailedAssetUpload"
+          }
+        }
+      }
+    },
+    "AssetBulkUploadRes": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResponse"
+        },
+        {
+          "$ref": "#/definitions/BaseAssetUploadRes"
         },
         {
           "type": "object"

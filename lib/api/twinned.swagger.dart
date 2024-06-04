@@ -1708,6 +1708,52 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
+  ///Search device model parameters
+  ///@param modelId
+  ///@param body
+  Future<chopper.Response<ParameterArrayRes>> searchAllParameters({
+    String? modelId,
+    required SearchReq? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        ParameterArrayRes, () => ParameterArrayRes.fromJsonFactory);
+
+    return _searchAllParameters(
+        modelId: modelId?.toString(), body: body, apikey: apikey?.toString());
+  }
+
+  ///Search device model parameters
+  ///@param modelId
+  ///@param body
+  @Post(path: '/DeviceModel/param/search')
+  Future<chopper.Response<ParameterArrayRes>> _searchAllParameters({
+    @Header('modelId') String? modelId,
+    @Body() required SearchReq? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///get parameters by list of names
+  ///@param body
+  Future<chopper.Response<ParameterArrayRes>> getParameters({
+    required GetReq? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(GetReq, () => GetReq.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        ParameterArrayRes, () => ParameterArrayRes.fromJsonFactory);
+
+    return _getParameters(body: body, apikey: apikey?.toString());
+  }
+
+  ///get parameters by list of names
+  ///@param body
+  @Post(path: '/DeviceModel/param/get')
+  Future<chopper.Response<ParameterArrayRes>> _getParameters({
+    @Body() required GetReq? body,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Create device
   ///@param body
   Future<chopper.Response<DeviceEntityRes>> createDevice({
@@ -5493,6 +5539,66 @@ abstract class Twinned extends ChopperService {
   @Post(path: '/Asset/count/query')
   Future<chopper.Response<CountRes>> _queryCountAsset({
     @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///bulk upload assets
+  ///@param premiseId
+  ///@param facilityId
+  ///@param floorId
+  ///@param assetModelId
+  ///@param deviceModelId
+  ///@param clientIds
+  ///@param roleIds
+  ///@param file
+  Future<chopper.Response<AssetBulkUploadRes>> bulkUploadAssets({
+    String? premiseId,
+    String? facilityId,
+    String? floorId,
+    String? assetModelId,
+    String? deviceModelId,
+    String? clientIds,
+    String? roleIds,
+    required List<int>? file,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        AssetBulkUploadRes, () => AssetBulkUploadRes.fromJsonFactory);
+
+    return _bulkUploadAssets(
+        premiseId: premiseId?.toString(),
+        facilityId: facilityId?.toString(),
+        floorId: floorId?.toString(),
+        assetModelId: assetModelId?.toString(),
+        deviceModelId: deviceModelId?.toString(),
+        clientIds: clientIds?.toString(),
+        roleIds: roleIds?.toString(),
+        file: file,
+        apikey: apikey?.toString());
+  }
+
+  ///bulk upload assets
+  ///@param premiseId
+  ///@param facilityId
+  ///@param floorId
+  ///@param assetModelId
+  ///@param deviceModelId
+  ///@param clientIds
+  ///@param roleIds
+  ///@param file
+  @Post(
+    path: '/Asset/bulk/upload',
+    optionalBody: true,
+  )
+  Future<chopper.Response<AssetBulkUploadRes>> _bulkUploadAssets({
+    @Header('premiseId') String? premiseId,
+    @Header('facilityId') String? facilityId,
+    @Header('floorId') String? floorId,
+    @Header('assetModelId') String? assetModelId,
+    @Header('deviceModelId') String? deviceModelId,
+    @Header('clientIds') String? clientIds,
+    @Header('roleIds') String? roleIds,
+    @Field('file') required List<int>? file,
     @Header('APIKEY') String? apikey,
   });
 
@@ -20253,6 +20359,166 @@ extension $BorderConfigExtension on BorderConfig {
 }
 
 @JsonSerializable(explicitToJson: true)
+class FontConfig {
+  const FontConfig({
+    this.fontFamily,
+    this.fontColor,
+    this.fontSize,
+    this.fontBold,
+  });
+
+  factory FontConfig.fromJson(Map<String, dynamic> json) =>
+      _$FontConfigFromJson(json);
+
+  static const toJsonFactory = _$FontConfigToJson;
+  Map<String, dynamic> toJson() => _$FontConfigToJson(this);
+
+  @JsonKey(name: 'fontFamily', includeIfNull: false, defaultValue: '')
+  final String? fontFamily;
+  @JsonKey(name: 'fontColor', includeIfNull: false)
+  final int? fontColor;
+  @JsonKey(name: 'fontSize', includeIfNull: false)
+  final double? fontSize;
+  @JsonKey(name: 'fontBold', includeIfNull: false)
+  final bool? fontBold;
+  static const fromJsonFactory = _$FontConfigFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is FontConfig &&
+            (identical(other.fontFamily, fontFamily) ||
+                const DeepCollectionEquality()
+                    .equals(other.fontFamily, fontFamily)) &&
+            (identical(other.fontColor, fontColor) ||
+                const DeepCollectionEquality()
+                    .equals(other.fontColor, fontColor)) &&
+            (identical(other.fontSize, fontSize) ||
+                const DeepCollectionEquality()
+                    .equals(other.fontSize, fontSize)) &&
+            (identical(other.fontBold, fontBold) ||
+                const DeepCollectionEquality()
+                    .equals(other.fontBold, fontBold)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(fontFamily) ^
+      const DeepCollectionEquality().hash(fontColor) ^
+      const DeepCollectionEquality().hash(fontSize) ^
+      const DeepCollectionEquality().hash(fontBold) ^
+      runtimeType.hashCode;
+}
+
+extension $FontConfigExtension on FontConfig {
+  FontConfig copyWith(
+      {String? fontFamily, int? fontColor, double? fontSize, bool? fontBold}) {
+    return FontConfig(
+        fontFamily: fontFamily ?? this.fontFamily,
+        fontColor: fontColor ?? this.fontColor,
+        fontSize: fontSize ?? this.fontSize,
+        fontBold: fontBold ?? this.fontBold);
+  }
+
+  FontConfig copyWithWrapped(
+      {Wrapped<String?>? fontFamily,
+      Wrapped<int?>? fontColor,
+      Wrapped<double?>? fontSize,
+      Wrapped<bool?>? fontBold}) {
+    return FontConfig(
+        fontFamily: (fontFamily != null ? fontFamily.value : this.fontFamily),
+        fontColor: (fontColor != null ? fontColor.value : this.fontColor),
+        fontSize: (fontSize != null ? fontSize.value : this.fontSize),
+        fontBold: (fontBold != null ? fontBold.value : this.fontBold));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class TitleConfig {
+  const TitleConfig({
+    this.title,
+    this.bgColor,
+    this.titleFont,
+    this.titleAlignment,
+  });
+
+  factory TitleConfig.fromJson(Map<String, dynamic> json) =>
+      _$TitleConfigFromJson(json);
+
+  static const toJsonFactory = _$TitleConfigToJson;
+  Map<String, dynamic> toJson() => _$TitleConfigToJson(this);
+
+  @JsonKey(name: 'title', includeIfNull: false, defaultValue: '')
+  final String? title;
+  @JsonKey(name: 'bgColor', includeIfNull: false)
+  final int? bgColor;
+  @JsonKey(name: 'titleFont', includeIfNull: false)
+  final FontConfig? titleFont;
+  @JsonKey(name: 'titleAlignment', includeIfNull: false)
+  final AlignmentConfig? titleAlignment;
+  static const fromJsonFactory = _$TitleConfigFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is TitleConfig &&
+            (identical(other.title, title) ||
+                const DeepCollectionEquality().equals(other.title, title)) &&
+            (identical(other.bgColor, bgColor) ||
+                const DeepCollectionEquality()
+                    .equals(other.bgColor, bgColor)) &&
+            (identical(other.titleFont, titleFont) ||
+                const DeepCollectionEquality()
+                    .equals(other.titleFont, titleFont)) &&
+            (identical(other.titleAlignment, titleAlignment) ||
+                const DeepCollectionEquality()
+                    .equals(other.titleAlignment, titleAlignment)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(title) ^
+      const DeepCollectionEquality().hash(bgColor) ^
+      const DeepCollectionEquality().hash(titleFont) ^
+      const DeepCollectionEquality().hash(titleAlignment) ^
+      runtimeType.hashCode;
+}
+
+extension $TitleConfigExtension on TitleConfig {
+  TitleConfig copyWith(
+      {String? title,
+      int? bgColor,
+      FontConfig? titleFont,
+      AlignmentConfig? titleAlignment}) {
+    return TitleConfig(
+        title: title ?? this.title,
+        bgColor: bgColor ?? this.bgColor,
+        titleFont: titleFont ?? this.titleFont,
+        titleAlignment: titleAlignment ?? this.titleAlignment);
+  }
+
+  TitleConfig copyWithWrapped(
+      {Wrapped<String?>? title,
+      Wrapped<int?>? bgColor,
+      Wrapped<FontConfig?>? titleFont,
+      Wrapped<AlignmentConfig?>? titleAlignment}) {
+    return TitleConfig(
+        title: (title != null ? title.value : this.title),
+        bgColor: (bgColor != null ? bgColor.value : this.bgColor),
+        titleFont: (titleFont != null ? titleFont.value : this.titleFont),
+        titleAlignment: (titleAlignment != null
+            ? titleAlignment.value
+            : this.titleAlignment));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class ScreenChild {
   const ScreenChild({
     required this.widgetId,
@@ -20263,6 +20529,8 @@ class ScreenChild {
     this.bgImage,
     this.expanded,
     this.flex,
+    this.titleConfig,
+    this.titleAlignment,
     this.bgImageFit,
     this.paddingConfig,
     this.marginConfig,
@@ -20292,6 +20560,10 @@ class ScreenChild {
   final bool? expanded;
   @JsonKey(name: 'flex', includeIfNull: false)
   final int? flex;
+  @JsonKey(name: 'titleConfig', includeIfNull: false)
+  final TitleConfig? titleConfig;
+  @JsonKey(name: 'titleAlignment', includeIfNull: false)
+  final AlignmentConfig? titleAlignment;
   @JsonKey(name: 'bgImageFit', includeIfNull: false)
   final ImageFitConfig? bgImageFit;
   @JsonKey(name: 'paddingConfig', includeIfNull: false)
@@ -20328,6 +20600,12 @@ class ScreenChild {
                     .equals(other.expanded, expanded)) &&
             (identical(other.flex, flex) ||
                 const DeepCollectionEquality().equals(other.flex, flex)) &&
+            (identical(other.titleConfig, titleConfig) ||
+                const DeepCollectionEquality()
+                    .equals(other.titleConfig, titleConfig)) &&
+            (identical(other.titleAlignment, titleAlignment) ||
+                const DeepCollectionEquality()
+                    .equals(other.titleAlignment, titleAlignment)) &&
             (identical(other.bgImageFit, bgImageFit) ||
                 const DeepCollectionEquality()
                     .equals(other.bgImageFit, bgImageFit)) &&
@@ -20358,6 +20636,8 @@ class ScreenChild {
       const DeepCollectionEquality().hash(bgImage) ^
       const DeepCollectionEquality().hash(expanded) ^
       const DeepCollectionEquality().hash(flex) ^
+      const DeepCollectionEquality().hash(titleConfig) ^
+      const DeepCollectionEquality().hash(titleAlignment) ^
       const DeepCollectionEquality().hash(bgImageFit) ^
       const DeepCollectionEquality().hash(paddingConfig) ^
       const DeepCollectionEquality().hash(marginConfig) ^
@@ -20376,6 +20656,8 @@ extension $ScreenChildExtension on ScreenChild {
       String? bgImage,
       bool? expanded,
       int? flex,
+      TitleConfig? titleConfig,
+      AlignmentConfig? titleAlignment,
       ImageFitConfig? bgImageFit,
       PaddingConfig? paddingConfig,
       PaddingConfig? marginConfig,
@@ -20390,6 +20672,8 @@ extension $ScreenChildExtension on ScreenChild {
         bgImage: bgImage ?? this.bgImage,
         expanded: expanded ?? this.expanded,
         flex: flex ?? this.flex,
+        titleConfig: titleConfig ?? this.titleConfig,
+        titleAlignment: titleAlignment ?? this.titleAlignment,
         bgImageFit: bgImageFit ?? this.bgImageFit,
         paddingConfig: paddingConfig ?? this.paddingConfig,
         marginConfig: marginConfig ?? this.marginConfig,
@@ -20406,6 +20690,8 @@ extension $ScreenChildExtension on ScreenChild {
       Wrapped<String?>? bgImage,
       Wrapped<bool?>? expanded,
       Wrapped<int?>? flex,
+      Wrapped<TitleConfig?>? titleConfig,
+      Wrapped<AlignmentConfig?>? titleAlignment,
       Wrapped<ImageFitConfig?>? bgImageFit,
       Wrapped<PaddingConfig?>? paddingConfig,
       Wrapped<PaddingConfig?>? marginConfig,
@@ -20420,6 +20706,11 @@ extension $ScreenChildExtension on ScreenChild {
         bgImage: (bgImage != null ? bgImage.value : this.bgImage),
         expanded: (expanded != null ? expanded.value : this.expanded),
         flex: (flex != null ? flex.value : this.flex),
+        titleConfig:
+            (titleConfig != null ? titleConfig.value : this.titleConfig),
+        titleAlignment: (titleAlignment != null
+            ? titleAlignment.value
+            : this.titleAlignment),
         bgImageFit: (bgImageFit != null ? bgImageFit.value : this.bgImageFit),
         paddingConfig:
             (paddingConfig != null ? paddingConfig.value : this.paddingConfig),
@@ -20443,6 +20734,7 @@ class ScreenRow {
     this.crossAxisAlignment,
     this.mainAxisSize,
     this.scrollDirection,
+    this.titleConfig,
     this.bgImageFit,
     this.paddingConfig,
     this.marginConfig,
@@ -20472,6 +20764,8 @@ class ScreenRow {
   final String? mainAxisSize;
   @JsonKey(name: 'scrollDirection', includeIfNull: false, defaultValue: '')
   final String? scrollDirection;
+  @JsonKey(name: 'titleConfig', includeIfNull: false)
+  final TitleConfig? titleConfig;
   @JsonKey(name: 'bgImageFit', includeIfNull: false)
   final ImageFitConfig? bgImageFit;
   @JsonKey(name: 'paddingConfig', includeIfNull: false)
@@ -20512,6 +20806,9 @@ class ScreenRow {
             (identical(other.scrollDirection, scrollDirection) ||
                 const DeepCollectionEquality()
                     .equals(other.scrollDirection, scrollDirection)) &&
+            (identical(other.titleConfig, titleConfig) ||
+                const DeepCollectionEquality()
+                    .equals(other.titleConfig, titleConfig)) &&
             (identical(other.bgImageFit, bgImageFit) ||
                 const DeepCollectionEquality()
                     .equals(other.bgImageFit, bgImageFit)) &&
@@ -20542,6 +20839,7 @@ class ScreenRow {
       const DeepCollectionEquality().hash(crossAxisAlignment) ^
       const DeepCollectionEquality().hash(mainAxisSize) ^
       const DeepCollectionEquality().hash(scrollDirection) ^
+      const DeepCollectionEquality().hash(titleConfig) ^
       const DeepCollectionEquality().hash(bgImageFit) ^
       const DeepCollectionEquality().hash(paddingConfig) ^
       const DeepCollectionEquality().hash(marginConfig) ^
@@ -20560,6 +20858,7 @@ extension $ScreenRowExtension on ScreenRow {
       String? crossAxisAlignment,
       String? mainAxisSize,
       String? scrollDirection,
+      TitleConfig? titleConfig,
       ImageFitConfig? bgImageFit,
       PaddingConfig? paddingConfig,
       PaddingConfig? marginConfig,
@@ -20574,6 +20873,7 @@ extension $ScreenRowExtension on ScreenRow {
         crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment,
         mainAxisSize: mainAxisSize ?? this.mainAxisSize,
         scrollDirection: scrollDirection ?? this.scrollDirection,
+        titleConfig: titleConfig ?? this.titleConfig,
         bgImageFit: bgImageFit ?? this.bgImageFit,
         paddingConfig: paddingConfig ?? this.paddingConfig,
         marginConfig: marginConfig ?? this.marginConfig,
@@ -20590,6 +20890,7 @@ extension $ScreenRowExtension on ScreenRow {
       Wrapped<String?>? crossAxisAlignment,
       Wrapped<String?>? mainAxisSize,
       Wrapped<String?>? scrollDirection,
+      Wrapped<TitleConfig?>? titleConfig,
       Wrapped<ImageFitConfig?>? bgImageFit,
       Wrapped<PaddingConfig?>? paddingConfig,
       Wrapped<PaddingConfig?>? marginConfig,
@@ -20611,6 +20912,8 @@ extension $ScreenRowExtension on ScreenRow {
         scrollDirection: (scrollDirection != null
             ? scrollDirection.value
             : this.scrollDirection),
+        titleConfig:
+            (titleConfig != null ? titleConfig.value : this.titleConfig),
         bgImageFit: (bgImageFit != null ? bgImageFit.value : this.bgImageFit),
         paddingConfig:
             (paddingConfig != null ? paddingConfig.value : this.paddingConfig),
@@ -20628,7 +20931,6 @@ class DashboardScreenInfo {
   const DashboardScreenInfo({
     required this.name,
     this.description,
-    required this.title,
     this.bannerImage,
     this.spacing,
     this.tags,
@@ -20638,6 +20940,9 @@ class DashboardScreenInfo {
     this.crossAxisAlignment,
     this.mainAxisSize,
     this.scrollDirection,
+    this.bannerHeight,
+    this.titleConfig,
+    this.bannerImageFit,
     this.bgImageFit,
     this.screenBorderConfig,
     this.paddingConfig,
@@ -20655,8 +20960,6 @@ class DashboardScreenInfo {
   final String name;
   @JsonKey(name: 'description', includeIfNull: false, defaultValue: '')
   final String? description;
-  @JsonKey(name: 'title', includeIfNull: false, defaultValue: '')
-  final String title;
   @JsonKey(name: 'bannerImage', includeIfNull: false, defaultValue: '')
   final String? bannerImage;
   @JsonKey(name: 'spacing', includeIfNull: false)
@@ -20675,6 +20978,12 @@ class DashboardScreenInfo {
   final String? mainAxisSize;
   @JsonKey(name: 'scrollDirection', includeIfNull: false, defaultValue: '')
   final String? scrollDirection;
+  @JsonKey(name: 'bannerHeight', includeIfNull: false)
+  final double? bannerHeight;
+  @JsonKey(name: 'titleConfig', includeIfNull: false)
+  final TitleConfig? titleConfig;
+  @JsonKey(name: 'bannerImageFit', includeIfNull: false)
+  final ImageFitConfig? bannerImageFit;
   @JsonKey(name: 'bgImageFit', includeIfNull: false)
   final ImageFitConfig? bgImageFit;
   @JsonKey(name: 'screenBorderConfig', includeIfNull: false)
@@ -20696,8 +21005,6 @@ class DashboardScreenInfo {
             (identical(other.description, description) ||
                 const DeepCollectionEquality()
                     .equals(other.description, description)) &&
-            (identical(other.title, title) ||
-                const DeepCollectionEquality().equals(other.title, title)) &&
             (identical(other.bannerImage, bannerImage) ||
                 const DeepCollectionEquality()
                     .equals(other.bannerImage, bannerImage)) &&
@@ -20724,6 +21031,15 @@ class DashboardScreenInfo {
             (identical(other.scrollDirection, scrollDirection) ||
                 const DeepCollectionEquality()
                     .equals(other.scrollDirection, scrollDirection)) &&
+            (identical(other.bannerHeight, bannerHeight) ||
+                const DeepCollectionEquality()
+                    .equals(other.bannerHeight, bannerHeight)) &&
+            (identical(other.titleConfig, titleConfig) ||
+                const DeepCollectionEquality()
+                    .equals(other.titleConfig, titleConfig)) &&
+            (identical(other.bannerImageFit, bannerImageFit) ||
+                const DeepCollectionEquality()
+                    .equals(other.bannerImageFit, bannerImageFit)) &&
             (identical(other.bgImageFit, bgImageFit) ||
                 const DeepCollectionEquality()
                     .equals(other.bgImageFit, bgImageFit)) &&
@@ -20747,7 +21063,6 @@ class DashboardScreenInfo {
   int get hashCode =>
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(description) ^
-      const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(bannerImage) ^
       const DeepCollectionEquality().hash(spacing) ^
       const DeepCollectionEquality().hash(tags) ^
@@ -20757,6 +21072,9 @@ class DashboardScreenInfo {
       const DeepCollectionEquality().hash(crossAxisAlignment) ^
       const DeepCollectionEquality().hash(mainAxisSize) ^
       const DeepCollectionEquality().hash(scrollDirection) ^
+      const DeepCollectionEquality().hash(bannerHeight) ^
+      const DeepCollectionEquality().hash(titleConfig) ^
+      const DeepCollectionEquality().hash(bannerImageFit) ^
       const DeepCollectionEquality().hash(bgImageFit) ^
       const DeepCollectionEquality().hash(screenBorderConfig) ^
       const DeepCollectionEquality().hash(paddingConfig) ^
@@ -20769,7 +21087,6 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
   DashboardScreenInfo copyWith(
       {String? name,
       String? description,
-      String? title,
       String? bannerImage,
       double? spacing,
       List<String>? tags,
@@ -20779,6 +21096,9 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
       String? crossAxisAlignment,
       String? mainAxisSize,
       String? scrollDirection,
+      double? bannerHeight,
+      TitleConfig? titleConfig,
+      ImageFitConfig? bannerImageFit,
       ImageFitConfig? bgImageFit,
       BorderConfig? screenBorderConfig,
       PaddingConfig? paddingConfig,
@@ -20787,7 +21107,6 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
     return DashboardScreenInfo(
         name: name ?? this.name,
         description: description ?? this.description,
-        title: title ?? this.title,
         bannerImage: bannerImage ?? this.bannerImage,
         spacing: spacing ?? this.spacing,
         tags: tags ?? this.tags,
@@ -20797,6 +21116,9 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
         crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment,
         mainAxisSize: mainAxisSize ?? this.mainAxisSize,
         scrollDirection: scrollDirection ?? this.scrollDirection,
+        bannerHeight: bannerHeight ?? this.bannerHeight,
+        titleConfig: titleConfig ?? this.titleConfig,
+        bannerImageFit: bannerImageFit ?? this.bannerImageFit,
         bgImageFit: bgImageFit ?? this.bgImageFit,
         screenBorderConfig: screenBorderConfig ?? this.screenBorderConfig,
         paddingConfig: paddingConfig ?? this.paddingConfig,
@@ -20807,7 +21129,6 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
   DashboardScreenInfo copyWithWrapped(
       {Wrapped<String>? name,
       Wrapped<String?>? description,
-      Wrapped<String>? title,
       Wrapped<String?>? bannerImage,
       Wrapped<double?>? spacing,
       Wrapped<List<String>?>? tags,
@@ -20817,6 +21138,9 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
       Wrapped<String?>? crossAxisAlignment,
       Wrapped<String?>? mainAxisSize,
       Wrapped<String?>? scrollDirection,
+      Wrapped<double?>? bannerHeight,
+      Wrapped<TitleConfig?>? titleConfig,
+      Wrapped<ImageFitConfig?>? bannerImageFit,
       Wrapped<ImageFitConfig?>? bgImageFit,
       Wrapped<BorderConfig?>? screenBorderConfig,
       Wrapped<PaddingConfig?>? paddingConfig,
@@ -20826,7 +21150,6 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
         name: (name != null ? name.value : this.name),
         description:
             (description != null ? description.value : this.description),
-        title: (title != null ? title.value : this.title),
         bannerImage:
             (bannerImage != null ? bannerImage.value : this.bannerImage),
         spacing: (spacing != null ? spacing.value : this.spacing),
@@ -20844,6 +21167,13 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
         scrollDirection: (scrollDirection != null
             ? scrollDirection.value
             : this.scrollDirection),
+        bannerHeight:
+            (bannerHeight != null ? bannerHeight.value : this.bannerHeight),
+        titleConfig:
+            (titleConfig != null ? titleConfig.value : this.titleConfig),
+        bannerImageFit: (bannerImageFit != null
+            ? bannerImageFit.value
+            : this.bannerImageFit),
         bgImageFit: (bgImageFit != null ? bgImageFit.value : this.bgImageFit),
         screenBorderConfig: (screenBorderConfig != null
             ? screenBorderConfig.value
@@ -20869,7 +21199,6 @@ class DashboardScreen {
     required this.updatedStamp,
     this.tags,
     this.description,
-    required this.title,
     this.bannerImage,
     this.spacing,
     this.bgColor,
@@ -20878,6 +21207,9 @@ class DashboardScreen {
     this.crossAxisAlignment,
     this.mainAxisSize,
     this.scrollDirection,
+    this.bannerHeight,
+    this.titleConfig,
+    this.bannerImageFit,
     this.bgImageFit,
     this.screenBorderConfig,
     this.paddingConfig,
@@ -20911,8 +21243,6 @@ class DashboardScreen {
   final List<String>? tags;
   @JsonKey(name: 'description', includeIfNull: false, defaultValue: '')
   final String? description;
-  @JsonKey(name: 'title', includeIfNull: false, defaultValue: '')
-  final String title;
   @JsonKey(name: 'bannerImage', includeIfNull: false, defaultValue: '')
   final String? bannerImage;
   @JsonKey(name: 'spacing', includeIfNull: false)
@@ -20929,6 +21259,12 @@ class DashboardScreen {
   final String? mainAxisSize;
   @JsonKey(name: 'scrollDirection', includeIfNull: false, defaultValue: '')
   final String? scrollDirection;
+  @JsonKey(name: 'bannerHeight', includeIfNull: false)
+  final double? bannerHeight;
+  @JsonKey(name: 'titleConfig', includeIfNull: false)
+  final TitleConfig? titleConfig;
+  @JsonKey(name: 'bannerImageFit', includeIfNull: false)
+  final ImageFitConfig? bannerImageFit;
   @JsonKey(name: 'bgImageFit', includeIfNull: false)
   final ImageFitConfig? bgImageFit;
   @JsonKey(name: 'screenBorderConfig', includeIfNull: false)
@@ -20971,8 +21307,6 @@ class DashboardScreen {
             (identical(other.description, description) ||
                 const DeepCollectionEquality()
                     .equals(other.description, description)) &&
-            (identical(other.title, title) ||
-                const DeepCollectionEquality().equals(other.title, title)) &&
             (identical(other.bannerImage, bannerImage) ||
                 const DeepCollectionEquality()
                     .equals(other.bannerImage, bannerImage)) &&
@@ -20997,6 +21331,15 @@ class DashboardScreen {
             (identical(other.scrollDirection, scrollDirection) ||
                 const DeepCollectionEquality()
                     .equals(other.scrollDirection, scrollDirection)) &&
+            (identical(other.bannerHeight, bannerHeight) ||
+                const DeepCollectionEquality()
+                    .equals(other.bannerHeight, bannerHeight)) &&
+            (identical(other.titleConfig, titleConfig) ||
+                const DeepCollectionEquality()
+                    .equals(other.titleConfig, titleConfig)) &&
+            (identical(other.bannerImageFit, bannerImageFit) ||
+                const DeepCollectionEquality()
+                    .equals(other.bannerImageFit, bannerImageFit)) &&
             (identical(other.bgImageFit, bgImageFit) ||
                 const DeepCollectionEquality()
                     .equals(other.bgImageFit, bgImageFit)) &&
@@ -21004,13 +21347,9 @@ class DashboardScreen {
                 const DeepCollectionEquality()
                     .equals(other.screenBorderConfig, screenBorderConfig)) &&
             (identical(other.paddingConfig, paddingConfig) ||
-                const DeepCollectionEquality()
-                    .equals(other.paddingConfig, paddingConfig)) &&
-            (identical(other.marginConfig, marginConfig) ||
-                const DeepCollectionEquality()
-                    .equals(other.marginConfig, marginConfig)) &&
-            (identical(other.rows, rows) ||
-                const DeepCollectionEquality().equals(other.rows, rows)));
+                const DeepCollectionEquality().equals(other.paddingConfig, paddingConfig)) &&
+            (identical(other.marginConfig, marginConfig) || const DeepCollectionEquality().equals(other.marginConfig, marginConfig)) &&
+            (identical(other.rows, rows) || const DeepCollectionEquality().equals(other.rows, rows)));
   }
 
   @override
@@ -21028,7 +21367,6 @@ class DashboardScreen {
       const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(description) ^
-      const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(bannerImage) ^
       const DeepCollectionEquality().hash(spacing) ^
       const DeepCollectionEquality().hash(bgColor) ^
@@ -21037,6 +21375,9 @@ class DashboardScreen {
       const DeepCollectionEquality().hash(crossAxisAlignment) ^
       const DeepCollectionEquality().hash(mainAxisSize) ^
       const DeepCollectionEquality().hash(scrollDirection) ^
+      const DeepCollectionEquality().hash(bannerHeight) ^
+      const DeepCollectionEquality().hash(titleConfig) ^
+      const DeepCollectionEquality().hash(bannerImageFit) ^
       const DeepCollectionEquality().hash(bgImageFit) ^
       const DeepCollectionEquality().hash(screenBorderConfig) ^
       const DeepCollectionEquality().hash(paddingConfig) ^
@@ -21057,7 +21398,6 @@ extension $DashboardScreenExtension on DashboardScreen {
       int? updatedStamp,
       List<String>? tags,
       String? description,
-      String? title,
       String? bannerImage,
       double? spacing,
       int? bgColor,
@@ -21066,6 +21406,9 @@ extension $DashboardScreenExtension on DashboardScreen {
       String? crossAxisAlignment,
       String? mainAxisSize,
       String? scrollDirection,
+      double? bannerHeight,
+      TitleConfig? titleConfig,
+      ImageFitConfig? bannerImageFit,
       ImageFitConfig? bgImageFit,
       BorderConfig? screenBorderConfig,
       PaddingConfig? paddingConfig,
@@ -21082,7 +21425,6 @@ extension $DashboardScreenExtension on DashboardScreen {
         updatedStamp: updatedStamp ?? this.updatedStamp,
         tags: tags ?? this.tags,
         description: description ?? this.description,
-        title: title ?? this.title,
         bannerImage: bannerImage ?? this.bannerImage,
         spacing: spacing ?? this.spacing,
         bgColor: bgColor ?? this.bgColor,
@@ -21091,6 +21433,9 @@ extension $DashboardScreenExtension on DashboardScreen {
         crossAxisAlignment: crossAxisAlignment ?? this.crossAxisAlignment,
         mainAxisSize: mainAxisSize ?? this.mainAxisSize,
         scrollDirection: scrollDirection ?? this.scrollDirection,
+        bannerHeight: bannerHeight ?? this.bannerHeight,
+        titleConfig: titleConfig ?? this.titleConfig,
+        bannerImageFit: bannerImageFit ?? this.bannerImageFit,
         bgImageFit: bgImageFit ?? this.bgImageFit,
         screenBorderConfig: screenBorderConfig ?? this.screenBorderConfig,
         paddingConfig: paddingConfig ?? this.paddingConfig,
@@ -21109,7 +21454,6 @@ extension $DashboardScreenExtension on DashboardScreen {
       Wrapped<int>? updatedStamp,
       Wrapped<List<String>?>? tags,
       Wrapped<String?>? description,
-      Wrapped<String>? title,
       Wrapped<String?>? bannerImage,
       Wrapped<double?>? spacing,
       Wrapped<int?>? bgColor,
@@ -21118,6 +21462,9 @@ extension $DashboardScreenExtension on DashboardScreen {
       Wrapped<String?>? crossAxisAlignment,
       Wrapped<String?>? mainAxisSize,
       Wrapped<String?>? scrollDirection,
+      Wrapped<double?>? bannerHeight,
+      Wrapped<TitleConfig?>? titleConfig,
+      Wrapped<ImageFitConfig?>? bannerImageFit,
       Wrapped<ImageFitConfig?>? bgImageFit,
       Wrapped<BorderConfig?>? screenBorderConfig,
       Wrapped<PaddingConfig?>? paddingConfig,
@@ -21137,7 +21484,6 @@ extension $DashboardScreenExtension on DashboardScreen {
         tags: (tags != null ? tags.value : this.tags),
         description:
             (description != null ? description.value : this.description),
-        title: (title != null ? title.value : this.title),
         bannerImage:
             (bannerImage != null ? bannerImage.value : this.bannerImage),
         spacing: (spacing != null ? spacing.value : this.spacing),
@@ -21154,6 +21500,13 @@ extension $DashboardScreenExtension on DashboardScreen {
         scrollDirection: (scrollDirection != null
             ? scrollDirection.value
             : this.scrollDirection),
+        bannerHeight:
+            (bannerHeight != null ? bannerHeight.value : this.bannerHeight),
+        titleConfig:
+            (titleConfig != null ? titleConfig.value : this.titleConfig),
+        bannerImageFit: (bannerImageFit != null
+            ? bannerImageFit.value
+            : this.bannerImageFit),
         bgImageFit: (bgImageFit != null ? bgImageFit.value : this.bgImageFit),
         screenBorderConfig: (screenBorderConfig != null
             ? screenBorderConfig.value
@@ -28514,6 +28867,7 @@ class TwinSysInfo {
     this.appName,
     this.logoText,
     this.enforceClient,
+    this.useMenuAsLanding,
   });
 
   factory TwinSysInfo.fromJson(Map<String, dynamic> json) =>
@@ -28621,6 +28975,8 @@ class TwinSysInfo {
   final String? logoText;
   @JsonKey(name: 'enforceClient', includeIfNull: false, defaultValue: false)
   final bool? enforceClient;
+  @JsonKey(name: 'useMenuAsLanding', includeIfNull: false, defaultValue: false)
+  final bool? useMenuAsLanding;
   static const fromJsonFactory = _$TwinSysInfoFromJson;
 
   @override
@@ -28708,7 +29064,8 @@ class TwinSysInfo {
             (identical(other.pageBgColor, pageBgColor) || const DeepCollectionEquality().equals(other.pageBgColor, pageBgColor)) &&
             (identical(other.appName, appName) || const DeepCollectionEquality().equals(other.appName, appName)) &&
             (identical(other.logoText, logoText) || const DeepCollectionEquality().equals(other.logoText, logoText)) &&
-            (identical(other.enforceClient, enforceClient) || const DeepCollectionEquality().equals(other.enforceClient, enforceClient)));
+            (identical(other.enforceClient, enforceClient) || const DeepCollectionEquality().equals(other.enforceClient, enforceClient)) &&
+            (identical(other.useMenuAsLanding, useMenuAsLanding) || const DeepCollectionEquality().equals(other.useMenuAsLanding, useMenuAsLanding)));
   }
 
   @override
@@ -28755,6 +29112,7 @@ class TwinSysInfo {
       const DeepCollectionEquality().hash(appName) ^
       const DeepCollectionEquality().hash(logoText) ^
       const DeepCollectionEquality().hash(enforceClient) ^
+      const DeepCollectionEquality().hash(useMenuAsLanding) ^
       runtimeType.hashCode;
 }
 
@@ -28798,7 +29156,8 @@ extension $TwinSysInfoExtension on TwinSysInfo {
       int? pageBgColor,
       String? appName,
       String? logoText,
-      bool? enforceClient}) {
+      bool? enforceClient,
+      bool? useMenuAsLanding}) {
     return TwinSysInfo(
         logoImage: logoImage ?? this.logoImage,
         bannerImage: bannerImage ?? this.bannerImage,
@@ -28841,7 +29200,8 @@ extension $TwinSysInfoExtension on TwinSysInfo {
         pageBgColor: pageBgColor ?? this.pageBgColor,
         appName: appName ?? this.appName,
         logoText: logoText ?? this.logoText,
-        enforceClient: enforceClient ?? this.enforceClient);
+        enforceClient: enforceClient ?? this.enforceClient,
+        useMenuAsLanding: useMenuAsLanding ?? this.useMenuAsLanding);
   }
 
   TwinSysInfo copyWithWrapped(
@@ -28883,7 +29243,8 @@ extension $TwinSysInfoExtension on TwinSysInfo {
       Wrapped<int?>? pageBgColor,
       Wrapped<String?>? appName,
       Wrapped<String?>? logoText,
-      Wrapped<bool?>? enforceClient}) {
+      Wrapped<bool?>? enforceClient,
+      Wrapped<bool?>? useMenuAsLanding}) {
     return TwinSysInfo(
         logoImage: (logoImage != null ? logoImage.value : this.logoImage),
         bannerImage:
@@ -28964,7 +29325,10 @@ extension $TwinSysInfoExtension on TwinSysInfo {
         appName: (appName != null ? appName.value : this.appName),
         logoText: (logoText != null ? logoText.value : this.logoText),
         enforceClient:
-            (enforceClient != null ? enforceClient.value : this.enforceClient));
+            (enforceClient != null ? enforceClient.value : this.enforceClient),
+        useMenuAsLanding: (useMenuAsLanding != null
+            ? useMenuAsLanding.value
+            : this.useMenuAsLanding));
   }
 }
 
@@ -39359,6 +39723,256 @@ extension $CountResExtension on CountRes {
         trace: (trace != null ? trace.value : this.trace),
         errorCode: (errorCode != null ? errorCode.value : this.errorCode),
         total: (total != null ? total.value : this.total));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class FailedAssetUpload {
+  const FailedAssetUpload({
+    required this.line,
+    required this.assetName,
+    required this.hardwareDeviceId,
+  });
+
+  factory FailedAssetUpload.fromJson(Map<String, dynamic> json) =>
+      _$FailedAssetUploadFromJson(json);
+
+  static const toJsonFactory = _$FailedAssetUploadToJson;
+  Map<String, dynamic> toJson() => _$FailedAssetUploadToJson(this);
+
+  @JsonKey(name: 'line', includeIfNull: false)
+  final int line;
+  @JsonKey(name: 'assetName', includeIfNull: false, defaultValue: '')
+  final String assetName;
+  @JsonKey(name: 'hardwareDeviceId', includeIfNull: false, defaultValue: '')
+  final String hardwareDeviceId;
+  static const fromJsonFactory = _$FailedAssetUploadFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is FailedAssetUpload &&
+            (identical(other.line, line) ||
+                const DeepCollectionEquality().equals(other.line, line)) &&
+            (identical(other.assetName, assetName) ||
+                const DeepCollectionEquality()
+                    .equals(other.assetName, assetName)) &&
+            (identical(other.hardwareDeviceId, hardwareDeviceId) ||
+                const DeepCollectionEquality()
+                    .equals(other.hardwareDeviceId, hardwareDeviceId)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(line) ^
+      const DeepCollectionEquality().hash(assetName) ^
+      const DeepCollectionEquality().hash(hardwareDeviceId) ^
+      runtimeType.hashCode;
+}
+
+extension $FailedAssetUploadExtension on FailedAssetUpload {
+  FailedAssetUpload copyWith(
+      {int? line, String? assetName, String? hardwareDeviceId}) {
+    return FailedAssetUpload(
+        line: line ?? this.line,
+        assetName: assetName ?? this.assetName,
+        hardwareDeviceId: hardwareDeviceId ?? this.hardwareDeviceId);
+  }
+
+  FailedAssetUpload copyWithWrapped(
+      {Wrapped<int>? line,
+      Wrapped<String>? assetName,
+      Wrapped<String>? hardwareDeviceId}) {
+    return FailedAssetUpload(
+        line: (line != null ? line.value : this.line),
+        assetName: (assetName != null ? assetName.value : this.assetName),
+        hardwareDeviceId: (hardwareDeviceId != null
+            ? hardwareDeviceId.value
+            : this.hardwareDeviceId));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class BaseAssetUploadRes {
+  const BaseAssetUploadRes({
+    required this.total,
+    required this.failed,
+    required this.failures,
+  });
+
+  factory BaseAssetUploadRes.fromJson(Map<String, dynamic> json) =>
+      _$BaseAssetUploadResFromJson(json);
+
+  static const toJsonFactory = _$BaseAssetUploadResToJson;
+  Map<String, dynamic> toJson() => _$BaseAssetUploadResToJson(this);
+
+  @JsonKey(name: 'total', includeIfNull: false)
+  final int total;
+  @JsonKey(name: 'failed', includeIfNull: false)
+  final int failed;
+  @JsonKey(
+      name: 'failures',
+      includeIfNull: false,
+      defaultValue: <FailedAssetUpload>[])
+  final List<FailedAssetUpload> failures;
+  static const fromJsonFactory = _$BaseAssetUploadResFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is BaseAssetUploadRes &&
+            (identical(other.total, total) ||
+                const DeepCollectionEquality().equals(other.total, total)) &&
+            (identical(other.failed, failed) ||
+                const DeepCollectionEquality().equals(other.failed, failed)) &&
+            (identical(other.failures, failures) ||
+                const DeepCollectionEquality()
+                    .equals(other.failures, failures)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(total) ^
+      const DeepCollectionEquality().hash(failed) ^
+      const DeepCollectionEquality().hash(failures) ^
+      runtimeType.hashCode;
+}
+
+extension $BaseAssetUploadResExtension on BaseAssetUploadRes {
+  BaseAssetUploadRes copyWith(
+      {int? total, int? failed, List<FailedAssetUpload>? failures}) {
+    return BaseAssetUploadRes(
+        total: total ?? this.total,
+        failed: failed ?? this.failed,
+        failures: failures ?? this.failures);
+  }
+
+  BaseAssetUploadRes copyWithWrapped(
+      {Wrapped<int>? total,
+      Wrapped<int>? failed,
+      Wrapped<List<FailedAssetUpload>>? failures}) {
+    return BaseAssetUploadRes(
+        total: (total != null ? total.value : this.total),
+        failed: (failed != null ? failed.value : this.failed),
+        failures: (failures != null ? failures.value : this.failures));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class AssetBulkUploadRes {
+  const AssetBulkUploadRes({
+    required this.ok,
+    this.msg,
+    this.trace,
+    this.errorCode,
+    required this.total,
+    required this.failed,
+    required this.failures,
+  });
+
+  factory AssetBulkUploadRes.fromJson(Map<String, dynamic> json) =>
+      _$AssetBulkUploadResFromJson(json);
+
+  static const toJsonFactory = _$AssetBulkUploadResToJson;
+  Map<String, dynamic> toJson() => _$AssetBulkUploadResToJson(this);
+
+  @JsonKey(name: 'ok', includeIfNull: false)
+  final bool ok;
+  @JsonKey(name: 'msg', includeIfNull: false, defaultValue: '')
+  final String? msg;
+  @JsonKey(name: 'trace', includeIfNull: false, defaultValue: '')
+  final String? trace;
+  @JsonKey(name: 'errorCode', includeIfNull: false, defaultValue: '')
+  final String? errorCode;
+  @JsonKey(name: 'total', includeIfNull: false)
+  final int total;
+  @JsonKey(name: 'failed', includeIfNull: false)
+  final int failed;
+  @JsonKey(
+      name: 'failures',
+      includeIfNull: false,
+      defaultValue: <FailedAssetUpload>[])
+  final List<FailedAssetUpload> failures;
+  static const fromJsonFactory = _$AssetBulkUploadResFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is AssetBulkUploadRes &&
+            (identical(other.ok, ok) ||
+                const DeepCollectionEquality().equals(other.ok, ok)) &&
+            (identical(other.msg, msg) ||
+                const DeepCollectionEquality().equals(other.msg, msg)) &&
+            (identical(other.trace, trace) ||
+                const DeepCollectionEquality().equals(other.trace, trace)) &&
+            (identical(other.errorCode, errorCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.errorCode, errorCode)) &&
+            (identical(other.total, total) ||
+                const DeepCollectionEquality().equals(other.total, total)) &&
+            (identical(other.failed, failed) ||
+                const DeepCollectionEquality().equals(other.failed, failed)) &&
+            (identical(other.failures, failures) ||
+                const DeepCollectionEquality()
+                    .equals(other.failures, failures)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(ok) ^
+      const DeepCollectionEquality().hash(msg) ^
+      const DeepCollectionEquality().hash(trace) ^
+      const DeepCollectionEquality().hash(errorCode) ^
+      const DeepCollectionEquality().hash(total) ^
+      const DeepCollectionEquality().hash(failed) ^
+      const DeepCollectionEquality().hash(failures) ^
+      runtimeType.hashCode;
+}
+
+extension $AssetBulkUploadResExtension on AssetBulkUploadRes {
+  AssetBulkUploadRes copyWith(
+      {bool? ok,
+      String? msg,
+      String? trace,
+      String? errorCode,
+      int? total,
+      int? failed,
+      List<FailedAssetUpload>? failures}) {
+    return AssetBulkUploadRes(
+        ok: ok ?? this.ok,
+        msg: msg ?? this.msg,
+        trace: trace ?? this.trace,
+        errorCode: errorCode ?? this.errorCode,
+        total: total ?? this.total,
+        failed: failed ?? this.failed,
+        failures: failures ?? this.failures);
+  }
+
+  AssetBulkUploadRes copyWithWrapped(
+      {Wrapped<bool>? ok,
+      Wrapped<String?>? msg,
+      Wrapped<String?>? trace,
+      Wrapped<String?>? errorCode,
+      Wrapped<int>? total,
+      Wrapped<int>? failed,
+      Wrapped<List<FailedAssetUpload>>? failures}) {
+    return AssetBulkUploadRes(
+        ok: (ok != null ? ok.value : this.ok),
+        msg: (msg != null ? msg.value : this.msg),
+        trace: (trace != null ? trace.value : this.trace),
+        errorCode: (errorCode != null ? errorCode.value : this.errorCode),
+        total: (total != null ? total.value : this.total),
+        failed: (failed != null ? failed.value : this.failed),
+        failures: (failures != null ? failures.value : this.failures));
   }
 }
 
