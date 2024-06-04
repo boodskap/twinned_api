@@ -20359,19 +20359,19 @@ extension $BorderConfigExtension on BorderConfig {
 }
 
 @JsonSerializable(explicitToJson: true)
-class FontConfig {
-  const FontConfig({
+class TwinFontConfig {
+  const TwinFontConfig({
     this.fontFamily,
     this.fontColor,
     this.fontSize,
     this.fontBold,
   });
 
-  factory FontConfig.fromJson(Map<String, dynamic> json) =>
-      _$FontConfigFromJson(json);
+  factory TwinFontConfig.fromJson(Map<String, dynamic> json) =>
+      _$TwinFontConfigFromJson(json);
 
-  static const toJsonFactory = _$FontConfigToJson;
-  Map<String, dynamic> toJson() => _$FontConfigToJson(this);
+  static const toJsonFactory = _$TwinFontConfigToJson;
+  Map<String, dynamic> toJson() => _$TwinFontConfigToJson(this);
 
   @JsonKey(name: 'fontFamily', includeIfNull: false, defaultValue: '')
   final String? fontFamily;
@@ -20381,12 +20381,12 @@ class FontConfig {
   final double? fontSize;
   @JsonKey(name: 'fontBold', includeIfNull: false)
   final bool? fontBold;
-  static const fromJsonFactory = _$FontConfigFromJson;
+  static const fromJsonFactory = _$TwinFontConfigFromJson;
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other is FontConfig &&
+        (other is TwinFontConfig &&
             (identical(other.fontFamily, fontFamily) ||
                 const DeepCollectionEquality()
                     .equals(other.fontFamily, fontFamily)) &&
@@ -20413,22 +20413,22 @@ class FontConfig {
       runtimeType.hashCode;
 }
 
-extension $FontConfigExtension on FontConfig {
-  FontConfig copyWith(
+extension $TwinFontConfigExtension on TwinFontConfig {
+  TwinFontConfig copyWith(
       {String? fontFamily, int? fontColor, double? fontSize, bool? fontBold}) {
-    return FontConfig(
+    return TwinFontConfig(
         fontFamily: fontFamily ?? this.fontFamily,
         fontColor: fontColor ?? this.fontColor,
         fontSize: fontSize ?? this.fontSize,
         fontBold: fontBold ?? this.fontBold);
   }
 
-  FontConfig copyWithWrapped(
+  TwinFontConfig copyWithWrapped(
       {Wrapped<String?>? fontFamily,
       Wrapped<int?>? fontColor,
       Wrapped<double?>? fontSize,
       Wrapped<bool?>? fontBold}) {
-    return FontConfig(
+    return TwinFontConfig(
         fontFamily: (fontFamily != null ? fontFamily.value : this.fontFamily),
         fontColor: (fontColor != null ? fontColor.value : this.fontColor),
         fontSize: (fontSize != null ? fontSize.value : this.fontSize),
@@ -20456,7 +20456,7 @@ class TitleConfig {
   @JsonKey(name: 'bgColor', includeIfNull: false)
   final int? bgColor;
   @JsonKey(name: 'titleFont', includeIfNull: false)
-  final FontConfig? titleFont;
+  final TwinFontConfig? titleFont;
   @JsonKey(name: 'titleAlignment', includeIfNull: false)
   final AlignmentConfig? titleAlignment;
   static const fromJsonFactory = _$TitleConfigFromJson;
@@ -20494,7 +20494,7 @@ extension $TitleConfigExtension on TitleConfig {
   TitleConfig copyWith(
       {String? title,
       int? bgColor,
-      FontConfig? titleFont,
+      TwinFontConfig? titleFont,
       AlignmentConfig? titleAlignment}) {
     return TitleConfig(
         title: title ?? this.title,
@@ -20506,7 +20506,7 @@ extension $TitleConfigExtension on TitleConfig {
   TitleConfig copyWithWrapped(
       {Wrapped<String?>? title,
       Wrapped<int?>? bgColor,
-      Wrapped<FontConfig?>? titleFont,
+      Wrapped<TwinFontConfig?>? titleFont,
       Wrapped<AlignmentConfig?>? titleAlignment}) {
     return TitleConfig(
         title: (title != null ? title.value : this.title),

@@ -17109,7 +17109,7 @@
         }
       }
     },
-    "FontConfig": {
+    "TwinFontConfig": {
       "type": "object",
       "properties": {
         "fontFamily": {
@@ -17139,7 +17139,7 @@
           "format": "int64"
         },
         "titleFont": {
-          "$ref": "#/definitions/FontConfig"
+          "$ref": "#/definitions/TwinFontConfig"
         },
         "titleAlignment": {
           "$ref": "#/definitions/AlignmentConfig"

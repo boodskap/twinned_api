@@ -3867,14 +3867,15 @@ Map<String, dynamic> _$BorderConfigToJson(BorderConfig instance) {
   return val;
 }
 
-FontConfig _$FontConfigFromJson(Map<String, dynamic> json) => FontConfig(
+TwinFontConfig _$TwinFontConfigFromJson(Map<String, dynamic> json) =>
+    TwinFontConfig(
       fontFamily: json['fontFamily'] as String? ?? '',
       fontColor: (json['fontColor'] as num?)?.toInt(),
       fontSize: (json['fontSize'] as num?)?.toDouble(),
       fontBold: json['fontBold'] as bool?,
     );
 
-Map<String, dynamic> _$FontConfigToJson(FontConfig instance) {
+Map<String, dynamic> _$TwinFontConfigToJson(TwinFontConfig instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -3895,7 +3896,7 @@ TitleConfig _$TitleConfigFromJson(Map<String, dynamic> json) => TitleConfig(
       bgColor: (json['bgColor'] as num?)?.toInt(),
       titleFont: json['titleFont'] == null
           ? null
-          : FontConfig.fromJson(json['titleFont'] as Map<String, dynamic>),
+          : TwinFontConfig.fromJson(json['titleFont'] as Map<String, dynamic>),
       titleAlignment: json['titleAlignment'] == null
           ? null
           : AlignmentConfig.fromJson(
