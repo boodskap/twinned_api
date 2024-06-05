@@ -529,12 +529,12 @@ enum ImageFitConfigFit {
   cover('COVER'),
   @JsonValue('FILL')
   fill('FILL'),
-  @JsonValue('FITHEIGHT')
-  fitheight('FITHEIGHT'),
-  @JsonValue('FITWIDTH')
-  fitwidth('FITWIDTH'),
-  @JsonValue('SCALEDOWN')
-  scaledown('SCALEDOWN');
+  @JsonValue('FIT_HEIGHT')
+  fitHeight('FIT_HEIGHT'),
+  @JsonValue('FIT_WIDTH')
+  fitWidth('FIT_WIDTH'),
+  @JsonValue('SCALE_DOWN')
+  scaleDown('SCALE_DOWN');
 
   final String? value;
 
