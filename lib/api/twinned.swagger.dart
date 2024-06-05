@@ -43,8 +43,7 @@ abstract class Twinned extends ChopperService {
         client: httpClient,
         authenticator: authenticator,
         errorConverter: errorConverter,
-        baseUrl:
-            baseUrl ?? Uri.parse('http://twinned.boodskap.io/rest/nocode'));
+        baseUrl: baseUrl ?? Uri.parse('http://twinned.digital/rest/nocode'));
     return _$Twinned(newClient);
   }
 

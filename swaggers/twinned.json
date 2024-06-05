@@ -15,7 +15,7 @@
       "name": "MIT"
     }
   },
-  "host": "twinned.boodskap.io",
+  "host": "twinned.digital",
   "basePath": "/rest/nocode",
   "schemes": [
     "https"
@@ -17022,9 +17022,9 @@
             "CONTAIN",
             "COVER",
             "FILL",
-            "FITHEIGHT",
-            "FITWIDTH",
-            "SCALEDOWN"
+            "FIT_HEIGHT",
+            "FIT_WIDTH",
+            "SCALE_DOWN"
           ]
         }
       }
