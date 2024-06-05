@@ -3867,6 +3867,58 @@ Map<String, dynamic> _$BorderConfigToJson(BorderConfig instance) {
   return val;
 }
 
+TwinFontConfig _$TwinFontConfigFromJson(Map<String, dynamic> json) =>
+    TwinFontConfig(
+      fontFamily: json['fontFamily'] as String? ?? '',
+      fontColor: (json['fontColor'] as num?)?.toInt(),
+      fontSize: (json['fontSize'] as num?)?.toDouble(),
+      fontBold: json['fontBold'] as bool?,
+    );
+
+Map<String, dynamic> _$TwinFontConfigToJson(TwinFontConfig instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('fontFamily', instance.fontFamily);
+  writeNotNull('fontColor', instance.fontColor);
+  writeNotNull('fontSize', instance.fontSize);
+  writeNotNull('fontBold', instance.fontBold);
+  return val;
+}
+
+TitleConfig _$TitleConfigFromJson(Map<String, dynamic> json) => TitleConfig(
+      title: json['title'] as String? ?? '',
+      bgColor: (json['bgColor'] as num?)?.toInt(),
+      titleFont: json['titleFont'] == null
+          ? null
+          : TwinFontConfig.fromJson(json['titleFont'] as Map<String, dynamic>),
+      titleAlignment: json['titleAlignment'] == null
+          ? null
+          : AlignmentConfig.fromJson(
+              json['titleAlignment'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$TitleConfigToJson(TitleConfig instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('title', instance.title);
+  writeNotNull('bgColor', instance.bgColor);
+  writeNotNull('titleFont', instance.titleFont?.toJson());
+  writeNotNull('titleAlignment', instance.titleAlignment?.toJson());
+  return val;
+}
+
 ScreenChild _$ScreenChildFromJson(Map<String, dynamic> json) => ScreenChild(
       widgetId: json['widgetId'] as String? ?? '',
       config: json['config'] as Object,
@@ -3876,6 +3928,13 @@ ScreenChild _$ScreenChildFromJson(Map<String, dynamic> json) => ScreenChild(
       bgImage: json['bgImage'] as String? ?? '',
       expanded: json['expanded'] as bool?,
       flex: (json['flex'] as num?)?.toInt(),
+      titleConfig: json['titleConfig'] == null
+          ? null
+          : TitleConfig.fromJson(json['titleConfig'] as Map<String, dynamic>),
+      titleAlignment: json['titleAlignment'] == null
+          ? null
+          : AlignmentConfig.fromJson(
+              json['titleAlignment'] as Map<String, dynamic>),
       bgImageFit: json['bgImageFit'] == null
           ? null
           : ImageFitConfig.fromJson(json['bgImageFit'] as Map<String, dynamic>),
@@ -3914,6 +3973,8 @@ Map<String, dynamic> _$ScreenChildToJson(ScreenChild instance) {
   writeNotNull('bgImage', instance.bgImage);
   writeNotNull('expanded', instance.expanded);
   writeNotNull('flex', instance.flex);
+  writeNotNull('titleConfig', instance.titleConfig?.toJson());
+  writeNotNull('titleAlignment', instance.titleAlignment?.toJson());
   writeNotNull('bgImageFit', instance.bgImageFit?.toJson());
   writeNotNull('paddingConfig', instance.paddingConfig?.toJson());
   writeNotNull('marginConfig', instance.marginConfig?.toJson());
@@ -3931,6 +3992,9 @@ ScreenRow _$ScreenRowFromJson(Map<String, dynamic> json) => ScreenRow(
       crossAxisAlignment: json['crossAxisAlignment'] as String? ?? '',
       mainAxisSize: json['mainAxisSize'] as String? ?? '',
       scrollDirection: json['scrollDirection'] as String? ?? '',
+      titleConfig: json['titleConfig'] == null
+          ? null
+          : TitleConfig.fromJson(json['titleConfig'] as Map<String, dynamic>),
       bgImageFit: json['bgImageFit'] == null
           ? null
           : ImageFitConfig.fromJson(json['bgImageFit'] as Map<String, dynamic>),
@@ -3969,6 +4033,7 @@ Map<String, dynamic> _$ScreenRowToJson(ScreenRow instance) {
   writeNotNull('crossAxisAlignment', instance.crossAxisAlignment);
   writeNotNull('mainAxisSize', instance.mainAxisSize);
   writeNotNull('scrollDirection', instance.scrollDirection);
+  writeNotNull('titleConfig', instance.titleConfig?.toJson());
   writeNotNull('bgImageFit', instance.bgImageFit?.toJson());
   writeNotNull('paddingConfig', instance.paddingConfig?.toJson());
   writeNotNull('marginConfig', instance.marginConfig?.toJson());
@@ -3981,7 +4046,6 @@ DashboardScreenInfo _$DashboardScreenInfoFromJson(Map<String, dynamic> json) =>
     DashboardScreenInfo(
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
-      title: json['title'] as String? ?? '',
       bannerImage: json['bannerImage'] as String? ?? '',
       spacing: (json['spacing'] as num?)?.toDouble(),
       tags:
@@ -3993,6 +4057,14 @@ DashboardScreenInfo _$DashboardScreenInfoFromJson(Map<String, dynamic> json) =>
       crossAxisAlignment: json['crossAxisAlignment'] as String? ?? '',
       mainAxisSize: json['mainAxisSize'] as String? ?? '',
       scrollDirection: json['scrollDirection'] as String? ?? '',
+      bannerHeight: (json['bannerHeight'] as num?)?.toDouble(),
+      titleConfig: json['titleConfig'] == null
+          ? null
+          : TitleConfig.fromJson(json['titleConfig'] as Map<String, dynamic>),
+      bannerImageFit: json['bannerImageFit'] == null
+          ? null
+          : ImageFitConfig.fromJson(
+              json['bannerImageFit'] as Map<String, dynamic>),
       bgImageFit: json['bgImageFit'] == null
           ? null
           : ImageFitConfig.fromJson(json['bgImageFit'] as Map<String, dynamic>),
@@ -4026,7 +4098,6 @@ Map<String, dynamic> _$DashboardScreenInfoToJson(DashboardScreenInfo instance) {
   }
 
   writeNotNull('description', instance.description);
-  val['title'] = instance.title;
   writeNotNull('bannerImage', instance.bannerImage);
   writeNotNull('spacing', instance.spacing);
   writeNotNull('tags', instance.tags);
@@ -4036,6 +4107,9 @@ Map<String, dynamic> _$DashboardScreenInfoToJson(DashboardScreenInfo instance) {
   writeNotNull('crossAxisAlignment', instance.crossAxisAlignment);
   writeNotNull('mainAxisSize', instance.mainAxisSize);
   writeNotNull('scrollDirection', instance.scrollDirection);
+  writeNotNull('bannerHeight', instance.bannerHeight);
+  writeNotNull('titleConfig', instance.titleConfig?.toJson());
+  writeNotNull('bannerImageFit', instance.bannerImageFit?.toJson());
   writeNotNull('bgImageFit', instance.bgImageFit?.toJson());
   writeNotNull('screenBorderConfig', instance.screenBorderConfig?.toJson());
   writeNotNull('paddingConfig', instance.paddingConfig?.toJson());
@@ -4058,7 +4132,6 @@ DashboardScreen _$DashboardScreenFromJson(Map<String, dynamic> json) =>
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
       description: json['description'] as String? ?? '',
-      title: json['title'] as String? ?? '',
       bannerImage: json['bannerImage'] as String? ?? '',
       spacing: (json['spacing'] as num?)?.toDouble(),
       bgColor: (json['bgColor'] as num?)?.toInt(),
@@ -4067,6 +4140,14 @@ DashboardScreen _$DashboardScreenFromJson(Map<String, dynamic> json) =>
       crossAxisAlignment: json['crossAxisAlignment'] as String? ?? '',
       mainAxisSize: json['mainAxisSize'] as String? ?? '',
       scrollDirection: json['scrollDirection'] as String? ?? '',
+      bannerHeight: (json['bannerHeight'] as num?)?.toDouble(),
+      titleConfig: json['titleConfig'] == null
+          ? null
+          : TitleConfig.fromJson(json['titleConfig'] as Map<String, dynamic>),
+      bannerImageFit: json['bannerImageFit'] == null
+          ? null
+          : ImageFitConfig.fromJson(
+              json['bannerImageFit'] as Map<String, dynamic>),
       bgImageFit: json['bgImageFit'] == null
           ? null
           : ImageFitConfig.fromJson(json['bgImageFit'] as Map<String, dynamic>),
@@ -4108,7 +4189,6 @@ Map<String, dynamic> _$DashboardScreenToJson(DashboardScreen instance) {
 
   writeNotNull('tags', instance.tags);
   writeNotNull('description', instance.description);
-  val['title'] = instance.title;
   writeNotNull('bannerImage', instance.bannerImage);
   writeNotNull('spacing', instance.spacing);
   writeNotNull('bgColor', instance.bgColor);
@@ -4117,6 +4197,9 @@ Map<String, dynamic> _$DashboardScreenToJson(DashboardScreen instance) {
   writeNotNull('crossAxisAlignment', instance.crossAxisAlignment);
   writeNotNull('mainAxisSize', instance.mainAxisSize);
   writeNotNull('scrollDirection', instance.scrollDirection);
+  writeNotNull('bannerHeight', instance.bannerHeight);
+  writeNotNull('titleConfig', instance.titleConfig?.toJson());
+  writeNotNull('bannerImageFit', instance.bannerImageFit?.toJson());
   writeNotNull('bgImageFit', instance.bgImageFit?.toJson());
   writeNotNull('screenBorderConfig', instance.screenBorderConfig?.toJson());
   writeNotNull('paddingConfig', instance.paddingConfig?.toJson());
@@ -6471,6 +6554,7 @@ TwinSysInfo _$TwinSysInfoFromJson(Map<String, dynamic> json) => TwinSysInfo(
       appName: json['appName'] as String? ?? '',
       logoText: json['logoText'] as String? ?? '',
       enforceClient: json['enforceClient'] as bool? ?? false,
+      useMenuAsLanding: json['useMenuAsLanding'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$TwinSysInfoToJson(TwinSysInfo instance) {
@@ -6526,6 +6610,7 @@ Map<String, dynamic> _$TwinSysInfoToJson(TwinSysInfo instance) {
   writeNotNull('appName', instance.appName);
   writeNotNull('logoText', instance.logoText);
   writeNotNull('enforceClient', instance.enforceClient);
+  writeNotNull('useMenuAsLanding', instance.useMenuAsLanding);
   return val;
 }
 
@@ -9853,6 +9938,73 @@ Map<String, dynamic> _$CountResToJson(CountRes instance) {
   writeNotNull('trace', instance.trace);
   writeNotNull('errorCode', instance.errorCode);
   val['total'] = instance.total;
+  return val;
+}
+
+FailedAssetUpload _$FailedAssetUploadFromJson(Map<String, dynamic> json) =>
+    FailedAssetUpload(
+      line: (json['line'] as num).toInt(),
+      assetName: json['assetName'] as String? ?? '',
+      hardwareDeviceId: json['hardwareDeviceId'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$FailedAssetUploadToJson(FailedAssetUpload instance) =>
+    <String, dynamic>{
+      'line': instance.line,
+      'assetName': instance.assetName,
+      'hardwareDeviceId': instance.hardwareDeviceId,
+    };
+
+BaseAssetUploadRes _$BaseAssetUploadResFromJson(Map<String, dynamic> json) =>
+    BaseAssetUploadRes(
+      total: (json['total'] as num).toInt(),
+      failed: (json['failed'] as num).toInt(),
+      failures: (json['failures'] as List<dynamic>?)
+              ?.map(
+                  (e) => FailedAssetUpload.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$BaseAssetUploadResToJson(BaseAssetUploadRes instance) =>
+    <String, dynamic>{
+      'total': instance.total,
+      'failed': instance.failed,
+      'failures': instance.failures.map((e) => e.toJson()).toList(),
+    };
+
+AssetBulkUploadRes _$AssetBulkUploadResFromJson(Map<String, dynamic> json) =>
+    AssetBulkUploadRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      total: (json['total'] as num).toInt(),
+      failed: (json['failed'] as num).toInt(),
+      failures: (json['failures'] as List<dynamic>?)
+              ?.map(
+                  (e) => FailedAssetUpload.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$AssetBulkUploadResToJson(AssetBulkUploadRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['total'] = instance.total;
+  val['failed'] = instance.failed;
+  val['failures'] = instance.failures.map((e) => e.toJson()).toList();
   return val;
 }
 

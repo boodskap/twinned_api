@@ -1,6 +1,6 @@
 name: twinned_api
 description: Boodskap IoT Digital Twin API
-version: 1.8.5
+version: 1.8.6
 publish_to: 'none'
 
 environment:

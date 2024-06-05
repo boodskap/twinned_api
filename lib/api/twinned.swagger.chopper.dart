@@ -1439,6 +1439,48 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<ParameterArrayRes>> _searchAllParameters({
+    String? modelId,
+    required SearchReq? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/DeviceModel/param/search');
+    final Map<String, String> $headers = {
+      if (modelId != null) 'modelId': modelId,
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<ParameterArrayRes, ParameterArrayRes>($request);
+  }
+
+  @override
+  Future<Response<ParameterArrayRes>> _getParameters({
+    required GetReq? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/DeviceModel/param/get');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<ParameterArrayRes, ParameterArrayRes>($request);
+  }
+
+  @override
   Future<Response<DeviceEntityRes>> _createDevice({
     required DeviceInfo? body,
     String? apikey,
@@ -4650,6 +4692,40 @@ final class _$Twinned extends Twinned {
       headers: $headers,
     );
     return client.send<CountRes, CountRes>($request);
+  }
+
+  @override
+  Future<Response<AssetBulkUploadRes>> _bulkUploadAssets({
+    String? premiseId,
+    String? facilityId,
+    String? floorId,
+    String? assetModelId,
+    String? deviceModelId,
+    String? clientIds,
+    String? roleIds,
+    required List<int>? file,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Asset/bulk/upload');
+    final Map<String, String> $headers = {
+      if (premiseId != null) 'premiseId': premiseId,
+      if (facilityId != null) 'facilityId': facilityId,
+      if (floorId != null) 'floorId': floorId,
+      if (assetModelId != null) 'assetModelId': assetModelId,
+      if (deviceModelId != null) 'deviceModelId': deviceModelId,
+      if (clientIds != null) 'clientIds': clientIds,
+      if (roleIds != null) 'roleIds': roleIds,
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = <String, dynamic>{'file': file};
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<AssetBulkUploadRes, AssetBulkUploadRes>($request);
   }
 
   @override
