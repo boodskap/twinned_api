@@ -231,12 +231,22 @@ final class _$Twinned extends Twinned {
   @override
   Future<Response<DeviceDataArrayRes>> _searchDeviceHistoryData({
     String? deviceId,
+    String? premiseId,
+    String? facilityId,
+    String? floorId,
+    String? assetId,
+    String? filterByLocation,
     required FilterSearchReq? body,
     String? apikey,
   }) {
     final Uri $url = Uri.parse('/DeviceData/history/search');
     final Map<String, String> $headers = {
       if (deviceId != null) 'deviceId': deviceId,
+      if (premiseId != null) 'premiseId': premiseId,
+      if (facilityId != null) 'facilityId': facilityId,
+      if (floorId != null) 'floorId': floorId,
+      if (assetId != null) 'assetId': assetId,
+      if (filterByLocation != null) 'filterByLocation': filterByLocation,
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = body;

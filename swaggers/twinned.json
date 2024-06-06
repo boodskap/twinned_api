@@ -540,6 +540,36 @@
             "type": "string"
           },
           {
+            "in": "header",
+            "name": "premiseId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "facilityId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "floorId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "assetId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "filterByLocation",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "in": "body",
             "name": "body",
             "required": true,
