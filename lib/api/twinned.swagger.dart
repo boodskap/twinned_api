@@ -308,9 +308,19 @@ abstract class Twinned extends ChopperService {
 
   ///Search device history data
   ///@param deviceId
+  ///@param premiseId
+  ///@param facilityId
+  ///@param floorId
+  ///@param assetId
+  ///@param filterByLocation
   ///@param body
   Future<chopper.Response<DeviceDataArrayRes>> searchDeviceHistoryData({
     String? deviceId,
+    String? premiseId,
+    String? facilityId,
+    String? floorId,
+    String? assetId,
+    bool? filterByLocation,
     required FilterSearchReq? body,
     dynamic apikey,
   }) {
@@ -318,15 +328,32 @@ abstract class Twinned extends ChopperService {
         DeviceDataArrayRes, () => DeviceDataArrayRes.fromJsonFactory);
 
     return _searchDeviceHistoryData(
-        deviceId: deviceId?.toString(), body: body, apikey: apikey?.toString());
+        deviceId: deviceId?.toString(),
+        premiseId: premiseId?.toString(),
+        facilityId: facilityId?.toString(),
+        floorId: floorId?.toString(),
+        assetId: assetId?.toString(),
+        filterByLocation: filterByLocation?.toString(),
+        body: body,
+        apikey: apikey?.toString());
   }
 
   ///Search device history data
   ///@param deviceId
+  ///@param premiseId
+  ///@param facilityId
+  ///@param floorId
+  ///@param assetId
+  ///@param filterByLocation
   ///@param body
   @Post(path: '/DeviceData/history/search')
   Future<chopper.Response<DeviceDataArrayRes>> _searchDeviceHistoryData({
     @Header('deviceId') String? deviceId,
+    @Header('premiseId') String? premiseId,
+    @Header('facilityId') String? facilityId,
+    @Header('floorId') String? floorId,
+    @Header('assetId') String? assetId,
+    @Header('filterByLocation') String? filterByLocation,
     @Body() required FilterSearchReq? body,
     @Header('APIKEY') String? apikey,
   });
