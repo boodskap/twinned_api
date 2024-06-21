@@ -18716,6 +18716,9 @@
         },
         "data": {
           "type": "object"
+        },
+        "id": {
+          "type": "string"
         }
       }
     },
