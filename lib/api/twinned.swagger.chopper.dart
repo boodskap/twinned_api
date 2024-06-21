@@ -261,6 +261,24 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<DeviceDataEntityRes>> _removeHistoryDataRecord({
+    required String? recordId,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/DeviceData/history/remove/${recordId}');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'DELETE',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<DeviceDataEntityRes, DeviceDataEntityRes>($request);
+  }
+
+  @override
   Future<Response<BaseResponse>> _sendDeviceData({
     String? hardwareDeviceId,
     required Object? body,
