@@ -6341,6 +6341,7 @@ TimeSeriesValue _$TimeSeriesValueFromJson(Map<String, dynamic> json) =>
     TimeSeriesValue(
       updatedStamp: (json['updatedStamp'] as num).toInt(),
       data: json['data'],
+      id: json['id'] as String? ?? '',
     );
 
 Map<String, dynamic> _$TimeSeriesValueToJson(TimeSeriesValue instance) {
@@ -6355,6 +6356,7 @@ Map<String, dynamic> _$TimeSeriesValueToJson(TimeSeriesValue instance) {
   }
 
   writeNotNull('data', instance.data);
+  writeNotNull('id', instance.id);
   return val;
 }
 

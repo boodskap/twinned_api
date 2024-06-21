@@ -28322,6 +28322,7 @@ class TimeSeriesValue {
   const TimeSeriesValue({
     required this.updatedStamp,
     this.data,
+    this.id,
   });
 
   factory TimeSeriesValue.fromJson(Map<String, dynamic> json) =>
@@ -28334,6 +28335,8 @@ class TimeSeriesValue {
   final int updatedStamp;
   @JsonKey(name: 'data', includeIfNull: false)
   final Object? data;
+  @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
+  final String? id;
   static const fromJsonFactory = _$TimeSeriesValueFromJson;
 
   @override
@@ -28344,7 +28347,9 @@ class TimeSeriesValue {
                 const DeepCollectionEquality()
                     .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.data, data) ||
-                const DeepCollectionEquality().equals(other.data, data)));
+                const DeepCollectionEquality().equals(other.data, data)) &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)));
   }
 
   @override
@@ -28354,22 +28359,27 @@ class TimeSeriesValue {
   int get hashCode =>
       const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(data) ^
+      const DeepCollectionEquality().hash(id) ^
       runtimeType.hashCode;
 }
 
 extension $TimeSeriesValueExtension on TimeSeriesValue {
-  TimeSeriesValue copyWith({int? updatedStamp, Object? data}) {
+  TimeSeriesValue copyWith({int? updatedStamp, Object? data, String? id}) {
     return TimeSeriesValue(
         updatedStamp: updatedStamp ?? this.updatedStamp,
-        data: data ?? this.data);
+        data: data ?? this.data,
+        id: id ?? this.id);
   }
 
   TimeSeriesValue copyWithWrapped(
-      {Wrapped<int>? updatedStamp, Wrapped<Object?>? data}) {
+      {Wrapped<int>? updatedStamp,
+      Wrapped<Object?>? data,
+      Wrapped<String?>? id}) {
     return TimeSeriesValue(
         updatedStamp:
             (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
-        data: (data != null ? data.value : this.data));
+        data: (data != null ? data.value : this.data),
+        id: (id != null ? id.value : this.id));
   }
 }
 
