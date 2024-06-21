@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "1.8.6",
+    "version": "1.8.8",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -15,7 +15,7 @@
       "name": "MIT"
     }
   },
-  "host": "twinned.digital",
+  "host": "twinned.boodskap.io",
   "basePath": "/rest/nocode",
   "schemes": [
     "https"
@@ -583,6 +583,48 @@
             "description": "Successful operation",
             "schema": {
               "$ref": "#/definitions/DeviceDataArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/DeviceData/history/remove/{recordId}": {
+      "delete": {
+        "tags": [
+          "Device Data"
+        ],
+        "summary": "Remove history data record",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "removeHistoryDataRecord",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "recordId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceDataEntityRes"
             }
           },
           "401": {

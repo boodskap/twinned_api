@@ -43,7 +43,8 @@ abstract class Twinned extends ChopperService {
         client: httpClient,
         authenticator: authenticator,
         errorConverter: errorConverter,
-        baseUrl: baseUrl ?? Uri.parse('http://twinned.digital/rest/nocode'));
+        baseUrl:
+            baseUrl ?? Uri.parse('http://twinned.boodskap.io/rest/nocode'));
     return _$Twinned(newClient);
   }
 
@@ -355,6 +356,27 @@ abstract class Twinned extends ChopperService {
     @Header('assetId') String? assetId,
     @Header('filterByLocation') String? filterByLocation,
     @Body() required FilterSearchReq? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///Remove history data record
+  ///@param recordId
+  Future<chopper.Response<DeviceDataEntityRes>> removeHistoryDataRecord({
+    required String? recordId,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        DeviceDataEntityRes, () => DeviceDataEntityRes.fromJsonFactory);
+
+    return _removeHistoryDataRecord(
+        recordId: recordId, apikey: apikey?.toString());
+  }
+
+  ///Remove history data record
+  ///@param recordId
+  @Delete(path: '/DeviceData/history/remove/{recordId}')
+  Future<chopper.Response<DeviceDataEntityRes>> _removeHistoryDataRecord({
+    @Path('recordId') required String? recordId,
     @Header('APIKEY') String? apikey,
   });
 
