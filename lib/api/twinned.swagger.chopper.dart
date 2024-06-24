@@ -647,6 +647,21 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<CountRes>> _countOrgDeviceData({String? apikey}) {
+    final Uri $url = Uri.parse('/DeviceData/count/org');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<CountRes, CountRes>($request);
+  }
+
+  @override
   Future<Response<DeviceViewEntityRes>> _createDeviceView({
     required DeviceViewInfo? body,
     String? apikey,
@@ -978,6 +993,21 @@ final class _$Twinned extends Twinned {
     );
     return client
         .send<DashboardScreenArrayRes, DashboardScreenArrayRes>($request);
+  }
+
+  @override
+  Future<Response<CountRes>> _countOrgDashboards({String? apikey}) {
+    final Uri $url = Uri.parse('/DashboardScreen/count/org');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<CountRes, CountRes>($request);
   }
 
   @override
@@ -1509,6 +1539,21 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<CountRes>> _countOrgDeviceModels({String? apikey}) {
+    final Uri $url = Uri.parse('/DeviceModel/count/org');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<CountRes, CountRes>($request);
+  }
+
+  @override
   Future<Response<DeviceEntityRes>> _createDevice({
     required DeviceInfo? body,
     String? apikey,
@@ -1700,6 +1745,21 @@ final class _$Twinned extends Twinned {
       headers: $headers,
     );
     return client.send<DeviceArrayRes, DeviceArrayRes>($request);
+  }
+
+  @override
+  Future<Response<CountRes>> _countOrgDevices({String? apikey}) {
+    final Uri $url = Uri.parse('/Device/count/org');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<CountRes, CountRes>($request);
   }
 
   @override
@@ -5188,6 +5248,21 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<CountRes>> _countOrgTwinUsers({String? apikey}) {
+    final Uri $url = Uri.parse('/TwinUser/count/org');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<CountRes, CountRes>($request);
+  }
+
+  @override
   Future<Response<PremiseEntityRes>> _createPremise({
     required PremiseInfo? body,
     String? apikey,
@@ -6251,5 +6326,20 @@ final class _$Twinned extends Twinned {
       headers: $headers,
     );
     return client.send<ClientArrayRes, ClientArrayRes>($request);
+  }
+
+  @override
+  Future<Response<CountRes>> _countOrgClients({String? apikey}) {
+    final Uri $url = Uri.parse('/Client/count/org');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<CountRes, CountRes>($request);
   }
 }

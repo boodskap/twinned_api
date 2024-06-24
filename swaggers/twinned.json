@@ -15,7 +15,7 @@
       "name": "MIT"
     }
   },
-  "host": "twinned.boodskap.io",
+  "host": "twinned.digital",
   "basePath": "/rest/nocode",
   "schemes": [
     "https"
@@ -1539,6 +1539,39 @@
         "summary": "county history by query"
       }
     },
+    "/DeviceData/count/org": {
+      "get": {
+        "tags": [
+          "Device Data"
+        ],
+        "description": "count by org",
+        "summary": "count by org",
+        "operationId": "countOrgDeviceData",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CountRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
     "/DeviceView/create": {
       "post": {
         "tags": [
@@ -2255,6 +2288,39 @@
             "description": "Successful operation",
             "schema": {
               "$ref": "#/definitions/DashboardScreenArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/DashboardScreen/count/org": {
+      "get": {
+        "tags": [
+          "Dashboard Screen"
+        ],
+        "description": "count by org",
+        "summary": "count by org",
+        "operationId": "countOrgDashboards",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CountRes"
             }
           },
           "401": {
@@ -3418,6 +3484,39 @@
         ]
       }
     },
+    "/DeviceModel/count/org": {
+      "get": {
+        "tags": [
+          "Device Model"
+        ],
+        "description": "count by org",
+        "summary": "count by org",
+        "operationId": "countOrgDeviceModels",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CountRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
     "/Device/create": {
       "post": {
         "tags": [
@@ -3846,6 +3945,39 @@
             "description": "Successful operation",
             "schema": {
               "$ref": "#/definitions/DeviceArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/Device/count/org": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "description": "count by org",
+        "summary": "count by org",
+        "operationId": "countOrgDevices",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CountRes"
             }
           },
           "401": {
@@ -11859,6 +11991,39 @@
         ]
       }
     },
+    "/TwinUser/count/org": {
+      "get": {
+        "tags": [
+          "Twin User"
+        ],
+        "description": "count by org",
+        "summary": "count by org",
+        "operationId": "countOrgTwinUsers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CountRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
     "/Premise/create": {
       "post": {
         "tags": [
@@ -14203,6 +14368,39 @@
             "description": "Successful operation",
             "schema": {
               "$ref": "#/definitions/ClientArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/Client/count/org": {
+      "get": {
+        "tags": [
+          "Client"
+        ],
+        "description": "count by org",
+        "summary": "count by org",
+        "operationId": "countOrgClients",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CountRes"
             }
           },
           "401": {
@@ -19976,10 +20174,12 @@
       "type": "object",
       "properties": {
         "assets": {
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "devices": {
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -20008,13 +20208,16 @@
       "type": "object",
       "properties": {
         "floors": {
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "assets": {
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "devices": {
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -20043,13 +20246,16 @@
       "type": "object",
       "properties": {
         "facilities": {
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "floors": {
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "assets": {
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "devices": {
           "type": "integer"
