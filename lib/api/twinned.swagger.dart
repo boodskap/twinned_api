@@ -43,8 +43,7 @@ abstract class Twinned extends ChopperService {
         client: httpClient,
         authenticator: authenticator,
         errorConverter: errorConverter,
-        baseUrl:
-            baseUrl ?? Uri.parse('http://twinned.boodskap.io/rest/nocode'));
+        baseUrl: baseUrl ?? Uri.parse('http://twinned.digital/rest/nocode'));
     return _$Twinned(newClient);
   }
 
@@ -852,6 +851,18 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
+  ///count by org
+  Future<chopper.Response<CountRes>> countOrgDeviceData({dynamic apikey}) {
+    generatedMapping.putIfAbsent(CountRes, () => CountRes.fromJsonFactory);
+
+    return _countOrgDeviceData(apikey: apikey?.toString());
+  }
+
+  ///count by org
+  @Get(path: '/DeviceData/count/org')
+  Future<chopper.Response<CountRes>> _countOrgDeviceData(
+      {@Header('APIKEY') String? apikey});
+
   ///Create device view
   ///@param body
   Future<chopper.Response<DeviceViewEntityRes>> createDeviceView({
@@ -1218,6 +1229,18 @@ abstract class Twinned extends ChopperService {
     @Body() required Object? eql,
     @Header('APIKEY') String? apikey,
   });
+
+  ///count by org
+  Future<chopper.Response<CountRes>> countOrgDashboards({dynamic apikey}) {
+    generatedMapping.putIfAbsent(CountRes, () => CountRes.fromJsonFactory);
+
+    return _countOrgDashboards(apikey: apikey?.toString());
+  }
+
+  ///count by org
+  @Get(path: '/DashboardScreen/count/org')
+  Future<chopper.Response<CountRes>> _countOrgDashboards(
+      {@Header('APIKEY') String? apikey});
 
   ///Create dashboard menu
   ///@param body
@@ -1802,6 +1825,18 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
+  ///count by org
+  Future<chopper.Response<CountRes>> countOrgDeviceModels({dynamic apikey}) {
+    generatedMapping.putIfAbsent(CountRes, () => CountRes.fromJsonFactory);
+
+    return _countOrgDeviceModels(apikey: apikey?.toString());
+  }
+
+  ///count by org
+  @Get(path: '/DeviceModel/count/org')
+  Future<chopper.Response<CountRes>> _countOrgDeviceModels(
+      {@Header('APIKEY') String? apikey});
+
   ///Create device
   ///@param body
   Future<chopper.Response<DeviceEntityRes>> createDevice({
@@ -2040,6 +2075,18 @@ abstract class Twinned extends ChopperService {
     @Body() required Object? eql,
     @Header('APIKEY') String? apikey,
   });
+
+  ///count by org
+  Future<chopper.Response<CountRes>> countOrgDevices({dynamic apikey}) {
+    generatedMapping.putIfAbsent(CountRes, () => CountRes.fromJsonFactory);
+
+    return _countOrgDevices(apikey: apikey?.toString());
+  }
+
+  ///count by org
+  @Get(path: '/Device/count/org')
+  Future<chopper.Response<CountRes>> _countOrgDevices(
+      {@Header('APIKEY') String? apikey});
 
   ///Create condition
   ///@param body
@@ -6127,6 +6174,18 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
+  ///count by org
+  Future<chopper.Response<CountRes>> countOrgTwinUsers({dynamic apikey}) {
+    generatedMapping.putIfAbsent(CountRes, () => CountRes.fromJsonFactory);
+
+    return _countOrgTwinUsers(apikey: apikey?.toString());
+  }
+
+  ///count by org
+  @Get(path: '/TwinUser/count/org')
+  Future<chopper.Response<CountRes>> _countOrgTwinUsers(
+      {@Header('APIKEY') String? apikey});
+
   ///Create premise
   ///@param body
   Future<chopper.Response<PremiseEntityRes>> createPremise({
@@ -7294,6 +7353,18 @@ abstract class Twinned extends ChopperService {
     @Body() required Object? eql,
     @Header('APIKEY') String? apikey,
   });
+
+  ///count by org
+  Future<chopper.Response<CountRes>> countOrgClients({dynamic apikey}) {
+    generatedMapping.putIfAbsent(CountRes, () => CountRes.fromJsonFactory);
+
+    return _countOrgClients(apikey: apikey?.toString());
+  }
+
+  ///count by org
+  @Get(path: '/Client/count/org')
+  Future<chopper.Response<CountRes>> _countOrgClients(
+      {@Header('APIKEY') String? apikey});
 }
 
 @JsonSerializable(explicitToJson: true)
