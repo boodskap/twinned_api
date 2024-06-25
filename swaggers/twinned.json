@@ -15,7 +15,7 @@
       "name": "MIT"
     }
   },
-  "host": "twinned.digital",
+  "host": "lbdev.boodskap.io",
   "basePath": "/rest/nocode",
   "schemes": [
     "https"
@@ -381,6 +381,96 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/TagsRes"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/IoT/twin/plan/get": {
+      "get": {
+        "tags": [
+          "IoT"
+        ],
+        "summary": "Get plan",
+        "description": "Get plan",
+        "operationId": "getPlan",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OrgPlanEntityRes"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/IoT/twin/plan/reload": {
+      "get": {
+        "tags": [
+          "IoT"
+        ],
+        "summary": "Reload plan",
+        "description": "Reload plan",
+        "operationId": "reloadPlan",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BaseResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/IoT/twin/usage/get": {
+      "get": {
+        "tags": [
+          "IoT"
+        ],
+        "summary": "Get usage",
+        "description": "Get usage",
+        "operationId": "getUsage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UsageEntityRes"
             }
           }
         },
@@ -1539,39 +1629,6 @@
         "summary": "county history by query"
       }
     },
-    "/DeviceData/count/org": {
-      "get": {
-        "tags": [
-          "Device Data"
-        ],
-        "description": "count by org",
-        "summary": "count by org",
-        "operationId": "countOrgDeviceData",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "schema": {
-              "$ref": "#/definitions/CountRes"
-            }
-          },
-          "401": {
-            "description": "Authentication error"
-          },
-          "417": {
-            "description": "Platform error"
-          }
-        },
-        "security": [
-          {
-            "apiKey": []
-          }
-        ]
-      }
-    },
     "/DeviceView/create": {
       "post": {
         "tags": [
@@ -2304,14 +2361,14 @@
         ]
       }
     },
-    "/DashboardScreen/count/org": {
+    "/DashboardScreen/count": {
       "get": {
         "tags": [
           "Dashboard Screen"
         ],
-        "description": "count by org",
-        "summary": "count by org",
-        "operationId": "countOrgDashboards",
+        "description": "count",
+        "summary": "count",
+        "operationId": "countDashboards",
         "produces": [
           "application/json"
         ],
@@ -3390,108 +3447,14 @@
         ]
       }
     },
-    "/DeviceModel/param/search": {
-      "post": {
-        "tags": [
-          "Device Model"
-        ],
-        "summary": "Search device model parameters",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "operationId": "searchAllParameters",
-        "parameters": [
-          {
-            "in": "header",
-            "name": "modelId",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SearchReq"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "schema": {
-              "$ref": "#/definitions/ParameterArrayRes"
-            }
-          },
-          "401": {
-            "description": "Authentication error"
-          },
-          "417": {
-            "description": "Platform error"
-          }
-        },
-        "security": [
-          {
-            "apiKey": []
-          }
-        ]
-      }
-    },
-    "/DeviceModel/param/get": {
-      "post": {
-        "tags": [
-          "Device Model"
-        ],
-        "summary": "get parameters by list of names",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "operationId": "getParameters",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GetReq"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "schema": {
-              "$ref": "#/definitions/ParameterArrayRes"
-            }
-          },
-          "401": {
-            "description": "Authentication error"
-          },
-          "417": {
-            "description": "Platform error"
-          }
-        },
-        "security": [
-          {
-            "apiKey": []
-          }
-        ]
-      }
-    },
-    "/DeviceModel/count/org": {
+    "/DeviceModel/count": {
       "get": {
         "tags": [
           "Device Model"
         ],
-        "description": "count by org",
-        "summary": "count by org",
-        "operationId": "countOrgDeviceModels",
+        "description": "count",
+        "summary": "count",
+        "operationId": "countDeviceModels",
         "produces": [
           "application/json"
         ],
@@ -3961,14 +3924,14 @@
         ]
       }
     },
-    "/Device/count/org": {
+    "/Device/count": {
       "get": {
         "tags": [
           "Device"
         ],
-        "description": "count by org",
-        "summary": "count by org",
-        "operationId": "countOrgDevices",
+        "description": "count",
+        "summary": "count",
+        "operationId": "countDevices",
         "produces": [
           "application/json"
         ],
@@ -11991,14 +11954,14 @@
         ]
       }
     },
-    "/TwinUser/count/org": {
+    "/TwinUser/count": {
       "get": {
         "tags": [
           "Twin User"
         ],
-        "description": "count by org",
-        "summary": "count by org",
-        "operationId": "countOrgTwinUsers",
+        "description": "count",
+        "summary": "count",
+        "operationId": "countTwinUsers",
         "produces": [
           "application/json"
         ],
@@ -14384,14 +14347,14 @@
         ]
       }
     },
-    "/Client/count/org": {
+    "/Client/count": {
       "get": {
         "tags": [
           "Client"
         ],
-        "description": "count by org",
-        "summary": "count by org",
-        "operationId": "countOrgClients",
+        "description": "count",
+        "summary": "count",
+        "operationId": "countClients",
         "produces": [
           "application/json"
         ],
@@ -20258,7 +20221,8 @@
           "format": "int64"
         },
         "devices": {
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -21148,6 +21112,309 @@
         },
         {
           "$ref": "#/definitions/BaseAssetUploadRes"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "Usage": {
+      "type": "object",
+      "required": [
+        "usedPooledDataPoints",
+        "usedDataPoints",
+        "usedDeviceModels",
+        "usedModelParameters",
+        "usedDevices",
+        "usedUsers",
+        "usedClients",
+        "usedDashboards",
+        "availablePooledDataPoints",
+        "availableDataPoints",
+        "availabledDeviceModels",
+        "availableDevices",
+        "availableUsers",
+        "availableClients",
+        "availableDashboards"
+      ],
+      "properties": {
+        "usedPooledDataPoints": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "usedDataPoints": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "usedDeviceModels": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "usedDevices": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "usedUsers": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "usedClients": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "usedDashboards": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "availablePooledDataPoints": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "availableDataPoints": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "availableDeviceModels": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "availableDevices": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "availableUsers": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "availableClients": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "availableDashboards": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "UsageEntity": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "$ref": "#/definitions/Usage"
+        }
+      }
+    },
+    "UsageEntityRes": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResponse"
+        },
+        {
+          "$ref": "#/definitions/UsageEntity"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "OrgPlanInfo": {
+      "type": "object",
+      "required": [
+        "planId",
+        "planType",
+        "deviceModelCount",
+        "modelParametersCount",
+        "devicesCount",
+        "clientCount",
+        "userCount",
+        "dashboardCount",
+        "dataPointsCount",
+        "archivalYearsCount",
+        "purchasedModels",
+        "purchasedParameters",
+        "purchasedDevices",
+        "purchasedClients",
+        "purchasedUsers",
+        "purchasedDashboards",
+        "purchasedDataPoints",
+        "purchasedArchivals",
+        "totalDevicesCount",
+        "totalClientCount",
+        "totalUserCount",
+        "totalDashboardCount",
+        "totalArchivalYearsCount",
+        "pooledDataPointsCount"
+      ],
+      "properties": {
+        "planId": {
+          "type": "string"
+        },
+        "planType": {
+          "type": "string"
+        },
+        "deviceModelCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "modelParametersCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "devicesCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "clientCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "userCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "dashboardCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "dataPointsCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "archivalYearsCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "purchasedModels": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "purchasedParameters": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "purchasedDevices": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "purchasedClients": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "purchasedUsers": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "purchasedDashboards": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "purchasedDataPoints": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "purchasedArchivals": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalDeviceModelCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalModelParametersCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalDevicesCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalClientCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalUserCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalDashboardCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalArchivalYearsCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "pooledDataPointsCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "canBuyDataPlan": {
+          "type": "boolean"
+        },
+        "canBuyArchivalPlan": {
+          "type": "boolean"
+        },
+        "canBuyClientPlan": {
+          "type": "boolean"
+        },
+        "canBrand": {
+          "type": "boolean"
+        },
+        "canWhiteLabel": {
+          "type": "boolean"
+        }
+      }
+    },
+    "OrgPlanBase": {
+      "type": "object",
+      "required": [
+        "orgId"
+      ],
+      "properties": {
+        "orgId": {
+          "type": "string"
+        }
+      }
+    },
+    "OrgPlan": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/OrgPlanInfo"
+        },
+        {
+          "$ref": "#/definitions/OrgPlanBase"
+        },
+        {
+          "$ref": "#/definitions/BaseEntity"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "required": [
+        "orgId"
+      ],
+      "properties": {
+        "orgId": {
+          "type": "string"
+        }
+      }
+    },
+    "OrgPlanEntity": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "$ref": "#/definitions/OrgPlan"
+        }
+      }
+    },
+    "OrgPlanEntityRes": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/OrgPlanEntity"
+        },
+        {
+          "$ref": "#/definitions/BaseResponse"
         },
         {
           "type": "object"
