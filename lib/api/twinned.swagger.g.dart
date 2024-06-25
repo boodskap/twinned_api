@@ -10010,6 +10010,336 @@ Map<String, dynamic> _$AssetBulkUploadResToJson(AssetBulkUploadRes instance) {
   return val;
 }
 
+Usage _$UsageFromJson(Map<String, dynamic> json) => Usage(
+      usedPooledDataPoints: (json['usedPooledDataPoints'] as num).toInt(),
+      usedDataPoints: (json['usedDataPoints'] as num).toInt(),
+      usedDeviceModels: (json['usedDeviceModels'] as num).toInt(),
+      usedDevices: (json['usedDevices'] as num).toInt(),
+      usedUsers: (json['usedUsers'] as num).toInt(),
+      usedClients: (json['usedClients'] as num).toInt(),
+      usedDashboards: (json['usedDashboards'] as num).toInt(),
+      availablePooledDataPoints:
+          (json['availablePooledDataPoints'] as num).toInt(),
+      availableDataPoints: (json['availableDataPoints'] as num).toInt(),
+      availableDeviceModels: (json['availableDeviceModels'] as num?)?.toInt(),
+      availableDevices: (json['availableDevices'] as num).toInt(),
+      availableUsers: (json['availableUsers'] as num).toInt(),
+      availableClients: (json['availableClients'] as num).toInt(),
+      availableDashboards: (json['availableDashboards'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$UsageToJson(Usage instance) {
+  final val = <String, dynamic>{
+    'usedPooledDataPoints': instance.usedPooledDataPoints,
+    'usedDataPoints': instance.usedDataPoints,
+    'usedDeviceModels': instance.usedDeviceModels,
+    'usedDevices': instance.usedDevices,
+    'usedUsers': instance.usedUsers,
+    'usedClients': instance.usedClients,
+    'usedDashboards': instance.usedDashboards,
+    'availablePooledDataPoints': instance.availablePooledDataPoints,
+    'availableDataPoints': instance.availableDataPoints,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('availableDeviceModels', instance.availableDeviceModels);
+  val['availableDevices'] = instance.availableDevices;
+  val['availableUsers'] = instance.availableUsers;
+  val['availableClients'] = instance.availableClients;
+  val['availableDashboards'] = instance.availableDashboards;
+  return val;
+}
+
+UsageEntity _$UsageEntityFromJson(Map<String, dynamic> json) => UsageEntity(
+      entity: json['entity'] == null
+          ? null
+          : Usage.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UsageEntityToJson(UsageEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+UsageEntityRes _$UsageEntityResFromJson(Map<String, dynamic> json) =>
+    UsageEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : Usage.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UsageEntityResToJson(UsageEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+OrgPlanInfo _$OrgPlanInfoFromJson(Map<String, dynamic> json) => OrgPlanInfo(
+      planId: json['planId'] as String? ?? '',
+      planType: json['planType'] as String? ?? '',
+      deviceModelCount: (json['deviceModelCount'] as num).toInt(),
+      modelParametersCount: (json['modelParametersCount'] as num).toInt(),
+      devicesCount: (json['devicesCount'] as num).toInt(),
+      clientCount: (json['clientCount'] as num).toInt(),
+      userCount: (json['userCount'] as num).toInt(),
+      dashboardCount: (json['dashboardCount'] as num).toInt(),
+      dataPointsCount: (json['dataPointsCount'] as num).toInt(),
+      archivalYearsCount: (json['archivalYearsCount'] as num).toInt(),
+      purchasedModels: (json['purchasedModels'] as num).toInt(),
+      purchasedParameters: (json['purchasedParameters'] as num).toInt(),
+      purchasedDevices: (json['purchasedDevices'] as num).toInt(),
+      purchasedClients: (json['purchasedClients'] as num).toInt(),
+      purchasedUsers: (json['purchasedUsers'] as num).toInt(),
+      purchasedDashboards: (json['purchasedDashboards'] as num).toInt(),
+      purchasedDataPoints: (json['purchasedDataPoints'] as num).toInt(),
+      purchasedArchivals: (json['purchasedArchivals'] as num).toInt(),
+      totalDeviceModelCount: (json['totalDeviceModelCount'] as num?)?.toInt(),
+      totalModelParametersCount:
+          (json['totalModelParametersCount'] as num?)?.toInt(),
+      totalDevicesCount: (json['totalDevicesCount'] as num).toInt(),
+      totalClientCount: (json['totalClientCount'] as num).toInt(),
+      totalUserCount: (json['totalUserCount'] as num).toInt(),
+      totalDashboardCount: (json['totalDashboardCount'] as num).toInt(),
+      totalArchivalYearsCount: (json['totalArchivalYearsCount'] as num).toInt(),
+      pooledDataPointsCount: (json['pooledDataPointsCount'] as num).toInt(),
+      canBuyDataPlan: json['canBuyDataPlan'] as bool?,
+      canBuyArchivalPlan: json['canBuyArchivalPlan'] as bool?,
+      canBuyClientPlan: json['canBuyClientPlan'] as bool?,
+      canBrand: json['canBrand'] as bool?,
+      canWhiteLabel: json['canWhiteLabel'] as bool?,
+    );
+
+Map<String, dynamic> _$OrgPlanInfoToJson(OrgPlanInfo instance) {
+  final val = <String, dynamic>{
+    'planId': instance.planId,
+    'planType': instance.planType,
+    'deviceModelCount': instance.deviceModelCount,
+    'modelParametersCount': instance.modelParametersCount,
+    'devicesCount': instance.devicesCount,
+    'clientCount': instance.clientCount,
+    'userCount': instance.userCount,
+    'dashboardCount': instance.dashboardCount,
+    'dataPointsCount': instance.dataPointsCount,
+    'archivalYearsCount': instance.archivalYearsCount,
+    'purchasedModels': instance.purchasedModels,
+    'purchasedParameters': instance.purchasedParameters,
+    'purchasedDevices': instance.purchasedDevices,
+    'purchasedClients': instance.purchasedClients,
+    'purchasedUsers': instance.purchasedUsers,
+    'purchasedDashboards': instance.purchasedDashboards,
+    'purchasedDataPoints': instance.purchasedDataPoints,
+    'purchasedArchivals': instance.purchasedArchivals,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('totalDeviceModelCount', instance.totalDeviceModelCount);
+  writeNotNull('totalModelParametersCount', instance.totalModelParametersCount);
+  val['totalDevicesCount'] = instance.totalDevicesCount;
+  val['totalClientCount'] = instance.totalClientCount;
+  val['totalUserCount'] = instance.totalUserCount;
+  val['totalDashboardCount'] = instance.totalDashboardCount;
+  val['totalArchivalYearsCount'] = instance.totalArchivalYearsCount;
+  val['pooledDataPointsCount'] = instance.pooledDataPointsCount;
+  writeNotNull('canBuyDataPlan', instance.canBuyDataPlan);
+  writeNotNull('canBuyArchivalPlan', instance.canBuyArchivalPlan);
+  writeNotNull('canBuyClientPlan', instance.canBuyClientPlan);
+  writeNotNull('canBrand', instance.canBrand);
+  writeNotNull('canWhiteLabel', instance.canWhiteLabel);
+  return val;
+}
+
+OrgPlanBase _$OrgPlanBaseFromJson(Map<String, dynamic> json) => OrgPlanBase(
+      orgId: json['orgId'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$OrgPlanBaseToJson(OrgPlanBase instance) =>
+    <String, dynamic>{
+      'orgId': instance.orgId,
+    };
+
+OrgPlan _$OrgPlanFromJson(Map<String, dynamic> json) => OrgPlan(
+      orgId: json['orgId'] as String? ?? '',
+      planId: json['planId'] as String? ?? '',
+      planType: json['planType'] as String? ?? '',
+      deviceModelCount: (json['deviceModelCount'] as num).toInt(),
+      modelParametersCount: (json['modelParametersCount'] as num).toInt(),
+      devicesCount: (json['devicesCount'] as num).toInt(),
+      clientCount: (json['clientCount'] as num).toInt(),
+      userCount: (json['userCount'] as num).toInt(),
+      dashboardCount: (json['dashboardCount'] as num).toInt(),
+      dataPointsCount: (json['dataPointsCount'] as num).toInt(),
+      archivalYearsCount: (json['archivalYearsCount'] as num).toInt(),
+      purchasedModels: (json['purchasedModels'] as num).toInt(),
+      purchasedParameters: (json['purchasedParameters'] as num).toInt(),
+      purchasedDevices: (json['purchasedDevices'] as num).toInt(),
+      purchasedClients: (json['purchasedClients'] as num).toInt(),
+      purchasedUsers: (json['purchasedUsers'] as num).toInt(),
+      purchasedDashboards: (json['purchasedDashboards'] as num).toInt(),
+      purchasedDataPoints: (json['purchasedDataPoints'] as num).toInt(),
+      purchasedArchivals: (json['purchasedArchivals'] as num).toInt(),
+      totalDeviceModelCount: (json['totalDeviceModelCount'] as num?)?.toInt(),
+      totalModelParametersCount:
+          (json['totalModelParametersCount'] as num?)?.toInt(),
+      totalDevicesCount: (json['totalDevicesCount'] as num).toInt(),
+      totalClientCount: (json['totalClientCount'] as num).toInt(),
+      totalUserCount: (json['totalUserCount'] as num).toInt(),
+      totalDashboardCount: (json['totalDashboardCount'] as num).toInt(),
+      totalArchivalYearsCount: (json['totalArchivalYearsCount'] as num).toInt(),
+      pooledDataPointsCount: (json['pooledDataPointsCount'] as num).toInt(),
+      canBuyDataPlan: json['canBuyDataPlan'] as bool?,
+      canBuyArchivalPlan: json['canBuyArchivalPlan'] as bool?,
+      canBuyClientPlan: json['canBuyClientPlan'] as bool?,
+      canBrand: json['canBrand'] as bool?,
+      canWhiteLabel: json['canWhiteLabel'] as bool?,
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: (json['createdStamp'] as num).toInt(),
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$OrgPlanToJson(OrgPlan instance) {
+  final val = <String, dynamic>{
+    'orgId': instance.orgId,
+    'planId': instance.planId,
+    'planType': instance.planType,
+    'deviceModelCount': instance.deviceModelCount,
+    'modelParametersCount': instance.modelParametersCount,
+    'devicesCount': instance.devicesCount,
+    'clientCount': instance.clientCount,
+    'userCount': instance.userCount,
+    'dashboardCount': instance.dashboardCount,
+    'dataPointsCount': instance.dataPointsCount,
+    'archivalYearsCount': instance.archivalYearsCount,
+    'purchasedModels': instance.purchasedModels,
+    'purchasedParameters': instance.purchasedParameters,
+    'purchasedDevices': instance.purchasedDevices,
+    'purchasedClients': instance.purchasedClients,
+    'purchasedUsers': instance.purchasedUsers,
+    'purchasedDashboards': instance.purchasedDashboards,
+    'purchasedDataPoints': instance.purchasedDataPoints,
+    'purchasedArchivals': instance.purchasedArchivals,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('totalDeviceModelCount', instance.totalDeviceModelCount);
+  writeNotNull('totalModelParametersCount', instance.totalModelParametersCount);
+  val['totalDevicesCount'] = instance.totalDevicesCount;
+  val['totalClientCount'] = instance.totalClientCount;
+  val['totalUserCount'] = instance.totalUserCount;
+  val['totalDashboardCount'] = instance.totalDashboardCount;
+  val['totalArchivalYearsCount'] = instance.totalArchivalYearsCount;
+  val['pooledDataPointsCount'] = instance.pooledDataPointsCount;
+  writeNotNull('canBuyDataPlan', instance.canBuyDataPlan);
+  writeNotNull('canBuyArchivalPlan', instance.canBuyArchivalPlan);
+  writeNotNull('canBuyClientPlan', instance.canBuyClientPlan);
+  writeNotNull('canBrand', instance.canBrand);
+  writeNotNull('canWhiteLabel', instance.canWhiteLabel);
+  val['domainKey'] = instance.domainKey;
+  val['id'] = instance.id;
+  val['name'] = instance.name;
+  val['rtype'] = instance.rtype;
+  val['createdStamp'] = instance.createdStamp;
+  val['createdBy'] = instance.createdBy;
+  val['updatedBy'] = instance.updatedBy;
+  val['updatedStamp'] = instance.updatedStamp;
+  writeNotNull('tags', instance.tags);
+  return val;
+}
+
+OrgPlanEntity _$OrgPlanEntityFromJson(Map<String, dynamic> json) =>
+    OrgPlanEntity(
+      entity: json['entity'] == null
+          ? null
+          : OrgPlan.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$OrgPlanEntityToJson(OrgPlanEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+OrgPlanEntityRes _$OrgPlanEntityResFromJson(Map<String, dynamic> json) =>
+    OrgPlanEntityRes(
+      entity: json['entity'] == null
+          ? null
+          : OrgPlan.fromJson(json['entity'] as Map<String, dynamic>),
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$OrgPlanEntityResToJson(OrgPlanEntityRes instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  val['ok'] = instance.ok;
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  return val;
+}
+
 ExportData _$ExportDataFromJson(Map<String, dynamic> json) => ExportData(
       model: DeviceModelInfo.fromJson(json['model'] as Map<String, dynamic>),
       conditions: (json['conditions'] as List<dynamic>?)
