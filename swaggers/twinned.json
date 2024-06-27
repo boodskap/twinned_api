@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "1.8.8",
+    "version": "1.8.9",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -3464,6 +3464,39 @@
             "description": "Successful operation",
             "schema": {
               "$ref": "#/definitions/CountRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/DeviceModel/param/units": {
+      "get": {
+        "tags": [
+          "Device Model"
+        ],
+        "description": "get prameter units",
+        "summary": "get parameter units",
+        "operationId": "getParameterUnits",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ParameterUnitsEntityRes"
             }
           },
           "401": {
@@ -21425,6 +21458,41 @@
       "allOf": [
         {
           "$ref": "#/definitions/OrgPlanEntity"
+        },
+        {
+          "$ref": "#/definitions/BaseResponse"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "ParameterUnits": {
+      "type": "object",
+      "required": [
+        "units"
+      ],
+      "properties": {
+        "units": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ParameterUnitsEntity": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "$ref": "#/definitions/ParameterUnits"
+        }
+      }
+    },
+    "ParameterUnitsEntityRes": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ParameterUnitsEntity"
         },
         {
           "$ref": "#/definitions/BaseResponse"

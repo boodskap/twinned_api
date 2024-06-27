@@ -1818,6 +1818,20 @@ abstract class Twinned extends ChopperService {
   Future<chopper.Response<CountRes>> _countDeviceModels(
       {@Header('APIKEY') String? apikey});
 
+  ///get parameter units
+  Future<chopper.Response<ParameterUnitsEntityRes>> getParameterUnits(
+      {dynamic apikey}) {
+    generatedMapping.putIfAbsent(
+        ParameterUnitsEntityRes, () => ParameterUnitsEntityRes.fromJsonFactory);
+
+    return _getParameterUnits(apikey: apikey?.toString());
+  }
+
+  ///get parameter units
+  @Get(path: '/DeviceModel/param/units')
+  Future<chopper.Response<ParameterUnitsEntityRes>> _getParameterUnits(
+      {@Header('APIKEY') String? apikey});
+
   ///Create device
   ///@param body
   Future<chopper.Response<DeviceEntityRes>> createDevice({
@@ -41583,6 +41597,179 @@ extension $OrgPlanEntityResExtension on OrgPlanEntityRes {
       Wrapped<String?>? trace,
       Wrapped<String?>? errorCode}) {
     return OrgPlanEntityRes(
+        entity: (entity != null ? entity.value : this.entity),
+        ok: (ok != null ? ok.value : this.ok),
+        msg: (msg != null ? msg.value : this.msg),
+        trace: (trace != null ? trace.value : this.trace),
+        errorCode: (errorCode != null ? errorCode.value : this.errorCode));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ParameterUnits {
+  const ParameterUnits({
+    required this.units,
+  });
+
+  factory ParameterUnits.fromJson(Map<String, dynamic> json) =>
+      _$ParameterUnitsFromJson(json);
+
+  static const toJsonFactory = _$ParameterUnitsToJson;
+  Map<String, dynamic> toJson() => _$ParameterUnitsToJson(this);
+
+  @JsonKey(name: 'units', includeIfNull: false, defaultValue: <String>[])
+  final List<String> units;
+  static const fromJsonFactory = _$ParameterUnitsFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is ParameterUnits &&
+            (identical(other.units, units) ||
+                const DeepCollectionEquality().equals(other.units, units)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(units) ^ runtimeType.hashCode;
+}
+
+extension $ParameterUnitsExtension on ParameterUnits {
+  ParameterUnits copyWith({List<String>? units}) {
+    return ParameterUnits(units: units ?? this.units);
+  }
+
+  ParameterUnits copyWithWrapped({Wrapped<List<String>>? units}) {
+    return ParameterUnits(units: (units != null ? units.value : this.units));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ParameterUnitsEntity {
+  const ParameterUnitsEntity({
+    this.entity,
+  });
+
+  factory ParameterUnitsEntity.fromJson(Map<String, dynamic> json) =>
+      _$ParameterUnitsEntityFromJson(json);
+
+  static const toJsonFactory = _$ParameterUnitsEntityToJson;
+  Map<String, dynamic> toJson() => _$ParameterUnitsEntityToJson(this);
+
+  @JsonKey(name: 'entity', includeIfNull: false)
+  final ParameterUnits? entity;
+  static const fromJsonFactory = _$ParameterUnitsEntityFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is ParameterUnitsEntity &&
+            (identical(other.entity, entity) ||
+                const DeepCollectionEquality().equals(other.entity, entity)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(entity) ^ runtimeType.hashCode;
+}
+
+extension $ParameterUnitsEntityExtension on ParameterUnitsEntity {
+  ParameterUnitsEntity copyWith({ParameterUnits? entity}) {
+    return ParameterUnitsEntity(entity: entity ?? this.entity);
+  }
+
+  ParameterUnitsEntity copyWithWrapped({Wrapped<ParameterUnits?>? entity}) {
+    return ParameterUnitsEntity(
+        entity: (entity != null ? entity.value : this.entity));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ParameterUnitsEntityRes {
+  const ParameterUnitsEntityRes({
+    this.entity,
+    required this.ok,
+    this.msg,
+    this.trace,
+    this.errorCode,
+  });
+
+  factory ParameterUnitsEntityRes.fromJson(Map<String, dynamic> json) =>
+      _$ParameterUnitsEntityResFromJson(json);
+
+  static const toJsonFactory = _$ParameterUnitsEntityResToJson;
+  Map<String, dynamic> toJson() => _$ParameterUnitsEntityResToJson(this);
+
+  @JsonKey(name: 'entity', includeIfNull: false)
+  final ParameterUnits? entity;
+  @JsonKey(name: 'ok', includeIfNull: false)
+  final bool ok;
+  @JsonKey(name: 'msg', includeIfNull: false, defaultValue: '')
+  final String? msg;
+  @JsonKey(name: 'trace', includeIfNull: false, defaultValue: '')
+  final String? trace;
+  @JsonKey(name: 'errorCode', includeIfNull: false, defaultValue: '')
+  final String? errorCode;
+  static const fromJsonFactory = _$ParameterUnitsEntityResFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is ParameterUnitsEntityRes &&
+            (identical(other.entity, entity) ||
+                const DeepCollectionEquality().equals(other.entity, entity)) &&
+            (identical(other.ok, ok) ||
+                const DeepCollectionEquality().equals(other.ok, ok)) &&
+            (identical(other.msg, msg) ||
+                const DeepCollectionEquality().equals(other.msg, msg)) &&
+            (identical(other.trace, trace) ||
+                const DeepCollectionEquality().equals(other.trace, trace)) &&
+            (identical(other.errorCode, errorCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.errorCode, errorCode)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(entity) ^
+      const DeepCollectionEquality().hash(ok) ^
+      const DeepCollectionEquality().hash(msg) ^
+      const DeepCollectionEquality().hash(trace) ^
+      const DeepCollectionEquality().hash(errorCode) ^
+      runtimeType.hashCode;
+}
+
+extension $ParameterUnitsEntityResExtension on ParameterUnitsEntityRes {
+  ParameterUnitsEntityRes copyWith(
+      {ParameterUnits? entity,
+      bool? ok,
+      String? msg,
+      String? trace,
+      String? errorCode}) {
+    return ParameterUnitsEntityRes(
+        entity: entity ?? this.entity,
+        ok: ok ?? this.ok,
+        msg: msg ?? this.msg,
+        trace: trace ?? this.trace,
+        errorCode: errorCode ?? this.errorCode);
+  }
+
+  ParameterUnitsEntityRes copyWithWrapped(
+      {Wrapped<ParameterUnits?>? entity,
+      Wrapped<bool>? ok,
+      Wrapped<String?>? msg,
+      Wrapped<String?>? trace,
+      Wrapped<String?>? errorCode}) {
+    return ParameterUnitsEntityRes(
         entity: (entity != null ? entity.value : this.entity),
         ok: (ok != null ? ok.value : this.ok),
         msg: (msg != null ? msg.value : this.msg),

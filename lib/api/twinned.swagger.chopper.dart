@@ -1542,6 +1542,23 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<ParameterUnitsEntityRes>> _getParameterUnits(
+      {String? apikey}) {
+    final Uri $url = Uri.parse('/DeviceModel/param/units');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client
+        .send<ParameterUnitsEntityRes, ParameterUnitsEntityRes>($request);
+  }
+
+  @override
   Future<Response<DeviceEntityRes>> _createDevice({
     required DeviceInfo? body,
     String? apikey,
