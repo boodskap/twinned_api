@@ -10106,6 +10106,7 @@ Map<String, dynamic> _$UsageEntityResToJson(UsageEntityRes instance) {
 OrgPlanInfo _$OrgPlanInfoFromJson(Map<String, dynamic> json) => OrgPlanInfo(
       planId: json['planId'] as String? ?? '',
       planType: json['planType'] as String? ?? '',
+      planFrequency: json['planFrequency'] as String? ?? '',
       deviceModelCount: (json['deviceModelCount'] as num).toInt(),
       modelParametersCount: (json['modelParametersCount'] as num).toInt(),
       devicesCount: (json['devicesCount'] as num).toInt(),
@@ -10142,6 +10143,7 @@ Map<String, dynamic> _$OrgPlanInfoToJson(OrgPlanInfo instance) {
   final val = <String, dynamic>{
     'planId': instance.planId,
     'planType': instance.planType,
+    'planFrequency': instance.planFrequency,
     'deviceModelCount': instance.deviceModelCount,
     'modelParametersCount': instance.modelParametersCount,
     'devicesCount': instance.devicesCount,
@@ -10184,17 +10186,31 @@ Map<String, dynamic> _$OrgPlanInfoToJson(OrgPlanInfo instance) {
 
 OrgPlanBase _$OrgPlanBaseFromJson(Map<String, dynamic> json) => OrgPlanBase(
       orgId: json['orgId'] as String? ?? '',
+      currency: json['currency'] as String? ?? '',
+      currencySumbol: json['currencySumbol'] as String? ?? '',
     );
 
-Map<String, dynamic> _$OrgPlanBaseToJson(OrgPlanBase instance) =>
-    <String, dynamic>{
-      'orgId': instance.orgId,
-    };
+Map<String, dynamic> _$OrgPlanBaseToJson(OrgPlanBase instance) {
+  final val = <String, dynamic>{
+    'orgId': instance.orgId,
+    'currency': instance.currency,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('currencySumbol', instance.currencySumbol);
+  return val;
+}
 
 OrgPlan _$OrgPlanFromJson(Map<String, dynamic> json) => OrgPlan(
       orgId: json['orgId'] as String? ?? '',
       planId: json['planId'] as String? ?? '',
       planType: json['planType'] as String? ?? '',
+      planFrequency: json['planFrequency'] as String? ?? '',
       deviceModelCount: (json['deviceModelCount'] as num).toInt(),
       modelParametersCount: (json['modelParametersCount'] as num).toInt(),
       devicesCount: (json['devicesCount'] as num).toInt(),
@@ -10225,6 +10241,8 @@ OrgPlan _$OrgPlanFromJson(Map<String, dynamic> json) => OrgPlan(
       canBuyClientPlan: json['canBuyClientPlan'] as bool?,
       canBrand: json['canBrand'] as bool?,
       canWhiteLabel: json['canWhiteLabel'] as bool?,
+      currency: json['currency'] as String? ?? '',
+      currencySumbol: json['currencySumbol'] as String? ?? '',
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
@@ -10243,6 +10261,7 @@ Map<String, dynamic> _$OrgPlanToJson(OrgPlan instance) {
     'orgId': instance.orgId,
     'planId': instance.planId,
     'planType': instance.planType,
+    'planFrequency': instance.planFrequency,
     'deviceModelCount': instance.deviceModelCount,
     'modelParametersCount': instance.modelParametersCount,
     'devicesCount': instance.devicesCount,
@@ -10280,6 +10299,8 @@ Map<String, dynamic> _$OrgPlanToJson(OrgPlan instance) {
   writeNotNull('canBuyClientPlan', instance.canBuyClientPlan);
   writeNotNull('canBrand', instance.canBrand);
   writeNotNull('canWhiteLabel', instance.canWhiteLabel);
+  val['currency'] = instance.currency;
+  writeNotNull('currencySumbol', instance.currencySumbol);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['name'] = instance.name;

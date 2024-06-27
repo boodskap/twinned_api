@@ -21222,6 +21222,7 @@
       "required": [
         "planId",
         "planType",
+        "planFrequency",
         "deviceModelCount",
         "modelParametersCount",
         "devicesCount",
@@ -21250,6 +21251,10 @@
           "type": "string"
         },
         "planType": {
+          "type": "string",
+          "description": "BASIC | STANDARD | PROFESSIONAL | ENTERPRISE | CUSTOM"
+        },
+        "planFrequency": {
           "type": "string"
         },
         "deviceModelCount": {
@@ -21368,10 +21373,18 @@
     "OrgPlanBase": {
       "type": "object",
       "required": [
-        "orgId"
+        "orgId",
+        "currency",
+        "currencySymbol"
       ],
       "properties": {
         "orgId": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "currencySumbol": {
           "type": "string"
         }
       }

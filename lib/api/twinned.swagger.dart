@@ -40439,6 +40439,7 @@ class OrgPlanInfo {
   const OrgPlanInfo({
     required this.planId,
     required this.planType,
+    required this.planFrequency,
     required this.deviceModelCount,
     required this.modelParametersCount,
     required this.devicesCount,
@@ -40480,6 +40481,8 @@ class OrgPlanInfo {
   final String planId;
   @JsonKey(name: 'planType', includeIfNull: false, defaultValue: '')
   final String planType;
+  @JsonKey(name: 'planFrequency', includeIfNull: false, defaultValue: '')
+  final String planFrequency;
   @JsonKey(name: 'deviceModelCount', includeIfNull: false)
   final int deviceModelCount;
   @JsonKey(name: 'modelParametersCount', includeIfNull: false)
@@ -40549,6 +40552,9 @@ class OrgPlanInfo {
             (identical(other.planType, planType) ||
                 const DeepCollectionEquality()
                     .equals(other.planType, planType)) &&
+            (identical(other.planFrequency, planFrequency) ||
+                const DeepCollectionEquality()
+                    .equals(other.planFrequency, planFrequency)) &&
             (identical(other.deviceModelCount, deviceModelCount) ||
                 const DeepCollectionEquality()
                     .equals(other.deviceModelCount, deviceModelCount)) &&
@@ -40604,9 +40610,7 @@ class OrgPlanInfo {
                 const DeepCollectionEquality().equals(
                     other.totalModelParametersCount,
                     totalModelParametersCount)) &&
-            (identical(other.totalDevicesCount, totalDevicesCount) ||
-                const DeepCollectionEquality()
-                    .equals(other.totalDevicesCount, totalDevicesCount)) &&
+            (identical(other.totalDevicesCount, totalDevicesCount) || const DeepCollectionEquality().equals(other.totalDevicesCount, totalDevicesCount)) &&
             (identical(other.totalClientCount, totalClientCount) || const DeepCollectionEquality().equals(other.totalClientCount, totalClientCount)) &&
             (identical(other.totalUserCount, totalUserCount) || const DeepCollectionEquality().equals(other.totalUserCount, totalUserCount)) &&
             (identical(other.totalDashboardCount, totalDashboardCount) || const DeepCollectionEquality().equals(other.totalDashboardCount, totalDashboardCount)) &&
@@ -40626,6 +40630,7 @@ class OrgPlanInfo {
   int get hashCode =>
       const DeepCollectionEquality().hash(planId) ^
       const DeepCollectionEquality().hash(planType) ^
+      const DeepCollectionEquality().hash(planFrequency) ^
       const DeepCollectionEquality().hash(deviceModelCount) ^
       const DeepCollectionEquality().hash(modelParametersCount) ^
       const DeepCollectionEquality().hash(devicesCount) ^
@@ -40662,6 +40667,7 @@ extension $OrgPlanInfoExtension on OrgPlanInfo {
   OrgPlanInfo copyWith(
       {String? planId,
       String? planType,
+      String? planFrequency,
       int? deviceModelCount,
       int? modelParametersCount,
       int? devicesCount,
@@ -40694,6 +40700,7 @@ extension $OrgPlanInfoExtension on OrgPlanInfo {
     return OrgPlanInfo(
         planId: planId ?? this.planId,
         planType: planType ?? this.planType,
+        planFrequency: planFrequency ?? this.planFrequency,
         deviceModelCount: deviceModelCount ?? this.deviceModelCount,
         modelParametersCount: modelParametersCount ?? this.modelParametersCount,
         devicesCount: devicesCount ?? this.devicesCount,
@@ -40732,6 +40739,7 @@ extension $OrgPlanInfoExtension on OrgPlanInfo {
   OrgPlanInfo copyWithWrapped(
       {Wrapped<String>? planId,
       Wrapped<String>? planType,
+      Wrapped<String>? planFrequency,
       Wrapped<int>? deviceModelCount,
       Wrapped<int>? modelParametersCount,
       Wrapped<int>? devicesCount,
@@ -40764,6 +40772,8 @@ extension $OrgPlanInfoExtension on OrgPlanInfo {
     return OrgPlanInfo(
         planId: (planId != null ? planId.value : this.planId),
         planType: (planType != null ? planType.value : this.planType),
+        planFrequency:
+            (planFrequency != null ? planFrequency.value : this.planFrequency),
         deviceModelCount: (deviceModelCount != null
             ? deviceModelCount.value
             : this.deviceModelCount),
@@ -40851,6 +40861,8 @@ extension $OrgPlanInfoExtension on OrgPlanInfo {
 class OrgPlanBase {
   const OrgPlanBase({
     required this.orgId,
+    required this.currency,
+    this.currencySumbol,
   });
 
   factory OrgPlanBase.fromJson(Map<String, dynamic> json) =>
@@ -40861,6 +40873,10 @@ class OrgPlanBase {
 
   @JsonKey(name: 'orgId', includeIfNull: false, defaultValue: '')
   final String orgId;
+  @JsonKey(name: 'currency', includeIfNull: false, defaultValue: '')
+  final String currency;
+  @JsonKey(name: 'currencySumbol', includeIfNull: false, defaultValue: '')
+  final String? currencySumbol;
   static const fromJsonFactory = _$OrgPlanBaseFromJson;
 
   @override
@@ -40868,7 +40884,13 @@ class OrgPlanBase {
     return identical(this, other) ||
         (other is OrgPlanBase &&
             (identical(other.orgId, orgId) ||
-                const DeepCollectionEquality().equals(other.orgId, orgId)));
+                const DeepCollectionEquality().equals(other.orgId, orgId)) &&
+            (identical(other.currency, currency) ||
+                const DeepCollectionEquality()
+                    .equals(other.currency, currency)) &&
+            (identical(other.currencySumbol, currencySumbol) ||
+                const DeepCollectionEquality()
+                    .equals(other.currencySumbol, currencySumbol)));
   }
 
   @override
@@ -40876,16 +40898,31 @@ class OrgPlanBase {
 
   @override
   int get hashCode =>
-      const DeepCollectionEquality().hash(orgId) ^ runtimeType.hashCode;
+      const DeepCollectionEquality().hash(orgId) ^
+      const DeepCollectionEquality().hash(currency) ^
+      const DeepCollectionEquality().hash(currencySumbol) ^
+      runtimeType.hashCode;
 }
 
 extension $OrgPlanBaseExtension on OrgPlanBase {
-  OrgPlanBase copyWith({String? orgId}) {
-    return OrgPlanBase(orgId: orgId ?? this.orgId);
+  OrgPlanBase copyWith(
+      {String? orgId, String? currency, String? currencySumbol}) {
+    return OrgPlanBase(
+        orgId: orgId ?? this.orgId,
+        currency: currency ?? this.currency,
+        currencySumbol: currencySumbol ?? this.currencySumbol);
   }
 
-  OrgPlanBase copyWithWrapped({Wrapped<String>? orgId}) {
-    return OrgPlanBase(orgId: (orgId != null ? orgId.value : this.orgId));
+  OrgPlanBase copyWithWrapped(
+      {Wrapped<String>? orgId,
+      Wrapped<String>? currency,
+      Wrapped<String?>? currencySumbol}) {
+    return OrgPlanBase(
+        orgId: (orgId != null ? orgId.value : this.orgId),
+        currency: (currency != null ? currency.value : this.currency),
+        currencySumbol: (currencySumbol != null
+            ? currencySumbol.value
+            : this.currencySumbol));
   }
 }
 
@@ -40895,6 +40932,7 @@ class OrgPlan {
     required this.orgId,
     required this.planId,
     required this.planType,
+    required this.planFrequency,
     required this.deviceModelCount,
     required this.modelParametersCount,
     required this.devicesCount,
@@ -40924,6 +40962,8 @@ class OrgPlan {
     this.canBuyClientPlan,
     this.canBrand,
     this.canWhiteLabel,
+    required this.currency,
+    this.currencySumbol,
     required this.domainKey,
     required this.id,
     required this.name,
@@ -40947,6 +40987,8 @@ class OrgPlan {
   final String planId;
   @JsonKey(name: 'planType', includeIfNull: false, defaultValue: '')
   final String planType;
+  @JsonKey(name: 'planFrequency', includeIfNull: false, defaultValue: '')
+  final String planFrequency;
   @JsonKey(name: 'deviceModelCount', includeIfNull: false)
   final int deviceModelCount;
   @JsonKey(name: 'modelParametersCount', includeIfNull: false)
@@ -41005,6 +41047,10 @@ class OrgPlan {
   final bool? canBrand;
   @JsonKey(name: 'canWhiteLabel', includeIfNull: false)
   final bool? canWhiteLabel;
+  @JsonKey(name: 'currency', includeIfNull: false, defaultValue: '')
+  final String currency;
+  @JsonKey(name: 'currencySumbol', includeIfNull: false, defaultValue: '')
+  final String? currencySumbol;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -41036,6 +41082,9 @@ class OrgPlan {
             (identical(other.planType, planType) ||
                 const DeepCollectionEquality()
                     .equals(other.planType, planType)) &&
+            (identical(other.planFrequency, planFrequency) ||
+                const DeepCollectionEquality()
+                    .equals(other.planFrequency, planFrequency)) &&
             (identical(other.deviceModelCount, deviceModelCount) ||
                 const DeepCollectionEquality()
                     .equals(other.deviceModelCount, deviceModelCount)) &&
@@ -41089,10 +41138,8 @@ class OrgPlan {
                     other.totalDeviceModelCount, totalDeviceModelCount)) &&
             (identical(other.totalModelParametersCount, totalModelParametersCount) ||
                 const DeepCollectionEquality().equals(
-                    other.totalModelParametersCount,
-                    totalModelParametersCount)) &&
-            (identical(other.totalDevicesCount, totalDevicesCount) ||
-                const DeepCollectionEquality().equals(other.totalDevicesCount, totalDevicesCount)) &&
+                    other.totalModelParametersCount, totalModelParametersCount)) &&
+            (identical(other.totalDevicesCount, totalDevicesCount) || const DeepCollectionEquality().equals(other.totalDevicesCount, totalDevicesCount)) &&
             (identical(other.totalClientCount, totalClientCount) || const DeepCollectionEquality().equals(other.totalClientCount, totalClientCount)) &&
             (identical(other.totalUserCount, totalUserCount) || const DeepCollectionEquality().equals(other.totalUserCount, totalUserCount)) &&
             (identical(other.totalDashboardCount, totalDashboardCount) || const DeepCollectionEquality().equals(other.totalDashboardCount, totalDashboardCount)) &&
@@ -41103,6 +41150,8 @@ class OrgPlan {
             (identical(other.canBuyClientPlan, canBuyClientPlan) || const DeepCollectionEquality().equals(other.canBuyClientPlan, canBuyClientPlan)) &&
             (identical(other.canBrand, canBrand) || const DeepCollectionEquality().equals(other.canBrand, canBrand)) &&
             (identical(other.canWhiteLabel, canWhiteLabel) || const DeepCollectionEquality().equals(other.canWhiteLabel, canWhiteLabel)) &&
+            (identical(other.currency, currency) || const DeepCollectionEquality().equals(other.currency, currency)) &&
+            (identical(other.currencySumbol, currencySumbol) || const DeepCollectionEquality().equals(other.currencySumbol, currencySumbol)) &&
             (identical(other.domainKey, domainKey) || const DeepCollectionEquality().equals(other.domainKey, domainKey)) &&
             (identical(other.id, id) || const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) || const DeepCollectionEquality().equals(other.name, name)) &&
@@ -41122,6 +41171,7 @@ class OrgPlan {
       const DeepCollectionEquality().hash(orgId) ^
       const DeepCollectionEquality().hash(planId) ^
       const DeepCollectionEquality().hash(planType) ^
+      const DeepCollectionEquality().hash(planFrequency) ^
       const DeepCollectionEquality().hash(deviceModelCount) ^
       const DeepCollectionEquality().hash(modelParametersCount) ^
       const DeepCollectionEquality().hash(devicesCount) ^
@@ -41151,6 +41201,8 @@ class OrgPlan {
       const DeepCollectionEquality().hash(canBuyClientPlan) ^
       const DeepCollectionEquality().hash(canBrand) ^
       const DeepCollectionEquality().hash(canWhiteLabel) ^
+      const DeepCollectionEquality().hash(currency) ^
+      const DeepCollectionEquality().hash(currencySumbol) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
@@ -41168,6 +41220,7 @@ extension $OrgPlanExtension on OrgPlan {
       {String? orgId,
       String? planId,
       String? planType,
+      String? planFrequency,
       int? deviceModelCount,
       int? modelParametersCount,
       int? devicesCount,
@@ -41197,6 +41250,8 @@ extension $OrgPlanExtension on OrgPlan {
       bool? canBuyClientPlan,
       bool? canBrand,
       bool? canWhiteLabel,
+      String? currency,
+      String? currencySumbol,
       String? domainKey,
       String? id,
       String? name,
@@ -41210,6 +41265,7 @@ extension $OrgPlanExtension on OrgPlan {
         orgId: orgId ?? this.orgId,
         planId: planId ?? this.planId,
         planType: planType ?? this.planType,
+        planFrequency: planFrequency ?? this.planFrequency,
         deviceModelCount: deviceModelCount ?? this.deviceModelCount,
         modelParametersCount: modelParametersCount ?? this.modelParametersCount,
         devicesCount: devicesCount ?? this.devicesCount,
@@ -41243,6 +41299,8 @@ extension $OrgPlanExtension on OrgPlan {
         canBuyClientPlan: canBuyClientPlan ?? this.canBuyClientPlan,
         canBrand: canBrand ?? this.canBrand,
         canWhiteLabel: canWhiteLabel ?? this.canWhiteLabel,
+        currency: currency ?? this.currency,
+        currencySumbol: currencySumbol ?? this.currencySumbol,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         name: name ?? this.name,
@@ -41258,6 +41316,7 @@ extension $OrgPlanExtension on OrgPlan {
       {Wrapped<String>? orgId,
       Wrapped<String>? planId,
       Wrapped<String>? planType,
+      Wrapped<String>? planFrequency,
       Wrapped<int>? deviceModelCount,
       Wrapped<int>? modelParametersCount,
       Wrapped<int>? devicesCount,
@@ -41287,6 +41346,8 @@ extension $OrgPlanExtension on OrgPlan {
       Wrapped<bool?>? canBuyClientPlan,
       Wrapped<bool?>? canBrand,
       Wrapped<bool?>? canWhiteLabel,
+      Wrapped<String>? currency,
+      Wrapped<String?>? currencySumbol,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? name,
@@ -41300,6 +41361,8 @@ extension $OrgPlanExtension on OrgPlan {
         orgId: (orgId != null ? orgId.value : this.orgId),
         planId: (planId != null ? planId.value : this.planId),
         planType: (planType != null ? planType.value : this.planType),
+        planFrequency:
+            (planFrequency != null ? planFrequency.value : this.planFrequency),
         deviceModelCount: (deviceModelCount != null
             ? deviceModelCount.value
             : this.deviceModelCount),
@@ -41380,6 +41443,10 @@ extension $OrgPlanExtension on OrgPlan {
         canBrand: (canBrand != null ? canBrand.value : this.canBrand),
         canWhiteLabel:
             (canWhiteLabel != null ? canWhiteLabel.value : this.canWhiteLabel),
+        currency: (currency != null ? currency.value : this.currency),
+        currencySumbol: (currencySumbol != null
+            ? currencySumbol.value
+            : this.currencySumbol),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         name: (name != null ? name.value : this.name),
