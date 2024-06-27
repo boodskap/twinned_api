@@ -10361,6 +10361,70 @@ Map<String, dynamic> _$OrgPlanEntityResToJson(OrgPlanEntityRes instance) {
   return val;
 }
 
+ParameterUnits _$ParameterUnitsFromJson(Map<String, dynamic> json) =>
+    ParameterUnits(
+      units:
+          (json['units'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+    );
+
+Map<String, dynamic> _$ParameterUnitsToJson(ParameterUnits instance) =>
+    <String, dynamic>{
+      'units': instance.units,
+    };
+
+ParameterUnitsEntity _$ParameterUnitsEntityFromJson(
+        Map<String, dynamic> json) =>
+    ParameterUnitsEntity(
+      entity: json['entity'] == null
+          ? null
+          : ParameterUnits.fromJson(json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ParameterUnitsEntityToJson(
+    ParameterUnitsEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+ParameterUnitsEntityRes _$ParameterUnitsEntityResFromJson(
+        Map<String, dynamic> json) =>
+    ParameterUnitsEntityRes(
+      entity: json['entity'] == null
+          ? null
+          : ParameterUnits.fromJson(json['entity'] as Map<String, dynamic>),
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$ParameterUnitsEntityResToJson(
+    ParameterUnitsEntityRes instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  val['ok'] = instance.ok;
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  return val;
+}
+
 ExportData _$ExportDataFromJson(Map<String, dynamic> json) => ExportData(
       model: DeviceModelInfo.fromJson(json['model'] as Map<String, dynamic>),
       conditions: (json['conditions'] as List<dynamic>?)
