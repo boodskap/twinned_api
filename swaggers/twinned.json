@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "1.9.0",
+    "version": "1.9.1",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -20042,6 +20042,15 @@
         "reportedStamp": {
           "type": "integer",
           "format": "int64"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
         }
       }
     },

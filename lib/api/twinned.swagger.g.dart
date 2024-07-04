@@ -7901,6 +7901,9 @@ PremiseInfo _$PremiseInfoFromJson(Map<String, dynamic> json) => PremiseInfo(
               .toList() ??
           [],
       reportedStamp: (json['reportedStamp'] as num?)?.toInt(),
+      email: json['email'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
+      address: json['address'] as String? ?? '',
     );
 
 Map<String, dynamic> _$PremiseInfoToJson(PremiseInfo instance) {
@@ -7922,6 +7925,9 @@ Map<String, dynamic> _$PremiseInfoToJson(PremiseInfo instance) {
   writeNotNull('roles', instance.roles);
   writeNotNull('clientIds', instance.clientIds);
   writeNotNull('reportedStamp', instance.reportedStamp);
+  writeNotNull('email', instance.email);
+  writeNotNull('phone', instance.phone);
+  writeNotNull('address', instance.address);
   return val;
 }
 
@@ -7947,6 +7953,9 @@ Premise _$PremiseFromJson(Map<String, dynamic> json) => Premise(
               .toList() ??
           [],
       reportedStamp: (json['reportedStamp'] as num?)?.toInt(),
+      email: json['email'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
+      address: json['address'] as String? ?? '',
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -7975,6 +7984,9 @@ Map<String, dynamic> _$PremiseToJson(Premise instance) {
   writeNotNull('roles', instance.roles);
   writeNotNull('clientIds', instance.clientIds);
   writeNotNull('reportedStamp', instance.reportedStamp);
+  writeNotNull('email', instance.email);
+  writeNotNull('phone', instance.phone);
+  writeNotNull('address', instance.address);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;

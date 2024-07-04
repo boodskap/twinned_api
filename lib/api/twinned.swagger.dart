@@ -33445,6 +33445,9 @@ class PremiseInfo {
     this.roles,
     this.clientIds,
     this.reportedStamp,
+    this.email,
+    this.phone,
+    this.address,
   });
 
   factory PremiseInfo.fromJson(Map<String, dynamic> json) =>
@@ -33471,6 +33474,12 @@ class PremiseInfo {
   final List<String>? clientIds;
   @JsonKey(name: 'reportedStamp', includeIfNull: false)
   final int? reportedStamp;
+  @JsonKey(name: 'email', includeIfNull: false, defaultValue: '')
+  final String? email;
+  @JsonKey(name: 'phone', includeIfNull: false, defaultValue: '')
+  final String? phone;
+  @JsonKey(name: 'address', includeIfNull: false, defaultValue: '')
+  final String? address;
   static const fromJsonFactory = _$PremiseInfoFromJson;
 
   @override
@@ -33499,7 +33508,13 @@ class PremiseInfo {
                     .equals(other.clientIds, clientIds)) &&
             (identical(other.reportedStamp, reportedStamp) ||
                 const DeepCollectionEquality()
-                    .equals(other.reportedStamp, reportedStamp)));
+                    .equals(other.reportedStamp, reportedStamp)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
+            (identical(other.phone, phone) ||
+                const DeepCollectionEquality().equals(other.phone, phone)) &&
+            (identical(other.address, address) ||
+                const DeepCollectionEquality().equals(other.address, address)));
   }
 
   @override
@@ -33516,6 +33531,9 @@ class PremiseInfo {
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(reportedStamp) ^
+      const DeepCollectionEquality().hash(email) ^
+      const DeepCollectionEquality().hash(phone) ^
+      const DeepCollectionEquality().hash(address) ^
       runtimeType.hashCode;
 }
 
@@ -33529,7 +33547,10 @@ extension $PremiseInfoExtension on PremiseInfo {
       GeoLocation? location,
       List<String>? roles,
       List<String>? clientIds,
-      int? reportedStamp}) {
+      int? reportedStamp,
+      String? email,
+      String? phone,
+      String? address}) {
     return PremiseInfo(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -33539,7 +33560,10 @@ extension $PremiseInfoExtension on PremiseInfo {
         location: location ?? this.location,
         roles: roles ?? this.roles,
         clientIds: clientIds ?? this.clientIds,
-        reportedStamp: reportedStamp ?? this.reportedStamp);
+        reportedStamp: reportedStamp ?? this.reportedStamp,
+        email: email ?? this.email,
+        phone: phone ?? this.phone,
+        address: address ?? this.address);
   }
 
   PremiseInfo copyWithWrapped(
@@ -33551,7 +33575,10 @@ extension $PremiseInfoExtension on PremiseInfo {
       Wrapped<GeoLocation?>? location,
       Wrapped<List<String>?>? roles,
       Wrapped<List<String>?>? clientIds,
-      Wrapped<int?>? reportedStamp}) {
+      Wrapped<int?>? reportedStamp,
+      Wrapped<String?>? email,
+      Wrapped<String?>? phone,
+      Wrapped<String?>? address}) {
     return PremiseInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -33564,7 +33591,10 @@ extension $PremiseInfoExtension on PremiseInfo {
         roles: (roles != null ? roles.value : this.roles),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         reportedStamp:
-            (reportedStamp != null ? reportedStamp.value : this.reportedStamp));
+            (reportedStamp != null ? reportedStamp.value : this.reportedStamp),
+        email: (email != null ? email.value : this.email),
+        phone: (phone != null ? phone.value : this.phone),
+        address: (address != null ? address.value : this.address));
   }
 }
 
@@ -33580,6 +33610,9 @@ class Premise {
     this.roles,
     this.clientIds,
     this.reportedStamp,
+    this.email,
+    this.phone,
+    this.address,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -33613,6 +33646,12 @@ class Premise {
   final List<String>? clientIds;
   @JsonKey(name: 'reportedStamp', includeIfNull: false)
   final int? reportedStamp;
+  @JsonKey(name: 'email', includeIfNull: false, defaultValue: '')
+  final String? email;
+  @JsonKey(name: 'phone', includeIfNull: false, defaultValue: '')
+  final String? phone;
+  @JsonKey(name: 'address', includeIfNull: false, defaultValue: '')
+  final String? address;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -33656,6 +33695,13 @@ class Premise {
             (identical(other.reportedStamp, reportedStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.reportedStamp, reportedStamp)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
+            (identical(other.phone, phone) ||
+                const DeepCollectionEquality().equals(other.phone, phone)) &&
+            (identical(other.address, address) ||
+                const DeepCollectionEquality()
+                    .equals(other.address, address)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -33691,6 +33737,9 @@ class Premise {
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(reportedStamp) ^
+      const DeepCollectionEquality().hash(email) ^
+      const DeepCollectionEquality().hash(phone) ^
+      const DeepCollectionEquality().hash(address) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -33712,6 +33761,9 @@ extension $PremiseExtension on Premise {
       List<String>? roles,
       List<String>? clientIds,
       int? reportedStamp,
+      String? email,
+      String? phone,
+      String? address,
       String? domainKey,
       String? id,
       String? rtype,
@@ -33729,6 +33781,9 @@ extension $PremiseExtension on Premise {
         roles: roles ?? this.roles,
         clientIds: clientIds ?? this.clientIds,
         reportedStamp: reportedStamp ?? this.reportedStamp,
+        email: email ?? this.email,
+        phone: phone ?? this.phone,
+        address: address ?? this.address,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -33748,6 +33803,9 @@ extension $PremiseExtension on Premise {
       Wrapped<List<String>?>? roles,
       Wrapped<List<String>?>? clientIds,
       Wrapped<int?>? reportedStamp,
+      Wrapped<String?>? email,
+      Wrapped<String?>? phone,
+      Wrapped<String?>? address,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -33768,6 +33826,9 @@ extension $PremiseExtension on Premise {
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         reportedStamp:
             (reportedStamp != null ? reportedStamp.value : this.reportedStamp),
+        email: (email != null ? email.value : this.email),
+        phone: (phone != null ? phone.value : this.phone),
+        address: (address != null ? address.value : this.address),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
