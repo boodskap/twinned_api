@@ -5253,6 +5253,66 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<TwinUserEntityRes>> _setClientAdmin({
+    required String? twinUserId,
+    required String? clientId,
+    String? apikey,
+  }) {
+    final Uri $url =
+        Uri.parse('/TwinUser/set/client/admin/${twinUserId}/${clientId}');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<TwinUserEntityRes, TwinUserEntityRes>($request);
+  }
+
+  @override
+  Future<Response<TwinUserEntityRes>> _unsetClientAdmin({
+    required String? twinUserId,
+    required String? clientId,
+    String? apikey,
+  }) {
+    final Uri $url =
+        Uri.parse('/TwinUser/unset/client/admin/${twinUserId}/${clientId}');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<TwinUserEntityRes, TwinUserEntityRes>($request);
+  }
+
+  @override
+  Future<Response<BaseResponse>> _changePassword({
+    required ChangePassReq? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/TwinUser/change/password');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<BaseResponse, BaseResponse>($request);
+  }
+
+  @override
   Future<Response<CountRes>> _countTwinUsers({String? apikey}) {
     final Uri $url = Uri.parse('/TwinUser/count');
     final Map<String, String> $headers = {

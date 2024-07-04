@@ -10425,6 +10425,29 @@ Map<String, dynamic> _$ParameterUnitsEntityResToJson(
   return val;
 }
 
+ChangePassReq _$ChangePassReqFromJson(Map<String, dynamic> json) =>
+    ChangePassReq(
+      oldPassword: json['oldPassword'] as String? ?? '',
+      newPassword: json['newPassword'] as String? ?? '',
+      twinUserId: json['twinUserId'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$ChangePassReqToJson(ChangePassReq instance) {
+  final val = <String, dynamic>{
+    'oldPassword': instance.oldPassword,
+    'newPassword': instance.newPassword,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('twinUserId', instance.twinUserId);
+  return val;
+}
+
 ExportData _$ExportDataFromJson(Map<String, dynamic> json) => ExportData(
       model: DeviceModelInfo.fromJson(json['model'] as Map<String, dynamic>),
       conditions: (json['conditions'] as List<dynamic>?)

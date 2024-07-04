@@ -43,7 +43,7 @@ abstract class Twinned extends ChopperService {
         client: httpClient,
         authenticator: authenticator,
         errorConverter: errorConverter,
-        baseUrl: baseUrl ?? Uri.parse('http://lbdev.boodskap.io/rest/nocode'));
+        baseUrl: baseUrl ?? Uri.parse('http://twinned.digital/rest/nocode'));
     return _$Twinned(newClient);
   }
 
@@ -6166,6 +6166,78 @@ abstract class Twinned extends ChopperService {
   @Get(path: '/TwinUser/unset/admin/{twinUserId}')
   Future<chopper.Response<TwinUserEntityRes>> _unsetAdmin({
     @Path('twinUserId') required String? twinUserId,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///set twin user as client admin
+  ///@param twinUserId
+  ///@param clientId
+  Future<chopper.Response<TwinUserEntityRes>> setClientAdmin({
+    required String? twinUserId,
+    required String? clientId,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        TwinUserEntityRes, () => TwinUserEntityRes.fromJsonFactory);
+
+    return _setClientAdmin(
+        twinUserId: twinUserId, clientId: clientId, apikey: apikey?.toString());
+  }
+
+  ///set twin user as client admin
+  ///@param twinUserId
+  ///@param clientId
+  @Get(path: '/TwinUser/set/client/admin/{twinUserId}/{clientId}')
+  Future<chopper.Response<TwinUserEntityRes>> _setClientAdmin({
+    @Path('twinUserId') required String? twinUserId,
+    @Path('clientId') required String? clientId,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///set twin user as regular client user
+  ///@param twinUserId
+  ///@param clientId
+  Future<chopper.Response<TwinUserEntityRes>> unsetClientAdmin({
+    required String? twinUserId,
+    required String? clientId,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        TwinUserEntityRes, () => TwinUserEntityRes.fromJsonFactory);
+
+    return _unsetClientAdmin(
+        twinUserId: twinUserId, clientId: clientId, apikey: apikey?.toString());
+  }
+
+  ///set twin user as regular client user
+  ///@param twinUserId
+  ///@param clientId
+  @Get(path: '/TwinUser/unset/client/admin/{twinUserId}/{clientId}')
+  Future<chopper.Response<TwinUserEntityRes>> _unsetClientAdmin({
+    @Path('twinUserId') required String? twinUserId,
+    @Path('clientId') required String? clientId,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///Change password
+  ///@param body
+  Future<chopper.Response<BaseResponse>> changePassword({
+    required ChangePassReq? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        ChangePassReq, () => ChangePassReq.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        BaseResponse, () => BaseResponse.fromJsonFactory);
+
+    return _changePassword(body: body, apikey: apikey?.toString());
+  }
+
+  ///Change password
+  ///@param body
+  @Post(path: '/TwinUser/change/password')
+  Future<chopper.Response<BaseResponse>> _changePassword({
+    @Body() required ChangePassReq? body,
     @Header('APIKEY') String? apikey,
   });
 
@@ -41775,6 +41847,76 @@ extension $ParameterUnitsEntityResExtension on ParameterUnitsEntityRes {
         msg: (msg != null ? msg.value : this.msg),
         trace: (trace != null ? trace.value : this.trace),
         errorCode: (errorCode != null ? errorCode.value : this.errorCode));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ChangePassReq {
+  const ChangePassReq({
+    required this.oldPassword,
+    required this.newPassword,
+    this.twinUserId,
+  });
+
+  factory ChangePassReq.fromJson(Map<String, dynamic> json) =>
+      _$ChangePassReqFromJson(json);
+
+  static const toJsonFactory = _$ChangePassReqToJson;
+  Map<String, dynamic> toJson() => _$ChangePassReqToJson(this);
+
+  @JsonKey(name: 'oldPassword', includeIfNull: false, defaultValue: '')
+  final String oldPassword;
+  @JsonKey(name: 'newPassword', includeIfNull: false, defaultValue: '')
+  final String newPassword;
+  @JsonKey(name: 'twinUserId', includeIfNull: false, defaultValue: '')
+  final String? twinUserId;
+  static const fromJsonFactory = _$ChangePassReqFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is ChangePassReq &&
+            (identical(other.oldPassword, oldPassword) ||
+                const DeepCollectionEquality()
+                    .equals(other.oldPassword, oldPassword)) &&
+            (identical(other.newPassword, newPassword) ||
+                const DeepCollectionEquality()
+                    .equals(other.newPassword, newPassword)) &&
+            (identical(other.twinUserId, twinUserId) ||
+                const DeepCollectionEquality()
+                    .equals(other.twinUserId, twinUserId)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(oldPassword) ^
+      const DeepCollectionEquality().hash(newPassword) ^
+      const DeepCollectionEquality().hash(twinUserId) ^
+      runtimeType.hashCode;
+}
+
+extension $ChangePassReqExtension on ChangePassReq {
+  ChangePassReq copyWith(
+      {String? oldPassword, String? newPassword, String? twinUserId}) {
+    return ChangePassReq(
+        oldPassword: oldPassword ?? this.oldPassword,
+        newPassword: newPassword ?? this.newPassword,
+        twinUserId: twinUserId ?? this.twinUserId);
+  }
+
+  ChangePassReq copyWithWrapped(
+      {Wrapped<String>? oldPassword,
+      Wrapped<String>? newPassword,
+      Wrapped<String?>? twinUserId}) {
+    return ChangePassReq(
+        oldPassword:
+            (oldPassword != null ? oldPassword.value : this.oldPassword),
+        newPassword:
+            (newPassword != null ? newPassword.value : this.newPassword),
+        twinUserId: (twinUserId != null ? twinUserId.value : this.twinUserId));
   }
 }
 

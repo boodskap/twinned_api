@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "1.8.9",
+    "version": "1.9.0",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -15,7 +15,7 @@
       "name": "MIT"
     }
   },
-  "host": "lbdev.boodskap.io",
+  "host": "twinned.digital",
   "basePath": "/rest/nocode",
   "schemes": [
     "https"
@@ -11987,6 +11987,146 @@
         ]
       }
     },
+    "/TwinUser/set/client/admin/{twinUserId}/{clientId}": {
+      "get": {
+        "tags": [
+          "Twin User"
+        ],
+        "summary": "set twin user as client admin",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "setClientAdmin",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "twinUserId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "clientId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/TwinUserEntityRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/TwinUser/unset/client/admin/{twinUserId}/{clientId}": {
+      "get": {
+        "tags": [
+          "Twin User"
+        ],
+        "summary": "set twin user as regular client user",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "unsetClientAdmin",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "twinUserId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "clientId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/TwinUserEntityRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/TwinUser/change/password": {
+      "post": {
+        "tags": [
+          "Twin User"
+        ],
+        "summary": "Change password",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "changePassword",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangePassReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/BaseResponse"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
     "/TwinUser/count": {
       "get": {
         "tags": [
@@ -21501,6 +21641,24 @@
           "type": "object"
         }
       ]
+    },
+    "ChangePassReq": {
+      "type": "object",
+      "required": [
+        "oldPassword",
+        "newPassword"
+      ],
+      "properties": {
+        "oldPassword": {
+          "type": "string"
+        },
+        "newPassword": {
+          "type": "string"
+        },
+        "twinUserId": {
+          "type": "string"
+        }
+      }
     },
     "ExportData": {
       "type": "object",
