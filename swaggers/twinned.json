@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "1.9.1",
+    "version": "1.9.2",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -1627,6 +1627,90 @@
           }
         ],
         "summary": "county history by query"
+      }
+    },
+    "/DeviceData/query/eql": {
+      "post": {
+        "tags": [
+          "Device Data"
+        ],
+        "description": "query device data",
+        "operationId": "queryEqlDeviceData",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceDataArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
+      }
+    },
+    "/DeviceData/history/query/eql": {
+      "post": {
+        "tags": [
+          "Device Data"
+        ],
+        "description": "query device history data",
+        "operationId": "queryEqlDeviceHistoryData",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceDataArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
       }
     },
     "/DeviceView/create": {

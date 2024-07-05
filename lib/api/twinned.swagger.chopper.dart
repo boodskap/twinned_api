@@ -692,6 +692,46 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<DeviceDataArrayRes>> _queryEqlDeviceData({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/DeviceData/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<DeviceDataArrayRes, DeviceDataArrayRes>($request);
+  }
+
+  @override
+  Future<Response<DeviceDataArrayRes>> _queryEqlDeviceHistoryData({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/DeviceData/history/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<DeviceDataArrayRes, DeviceDataArrayRes>($request);
+  }
+
+  @override
   Future<Response<DeviceViewEntityRes>> _createDeviceView({
     required DeviceViewInfo? body,
     String? apikey,
