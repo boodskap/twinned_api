@@ -890,6 +890,48 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
+  ///query data
+  ///@param body
+  Future<chopper.Response<DeviceDataArrayRes>> queryEqlDeviceData({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        DeviceDataArrayRes, () => DeviceDataArrayRes.fromJsonFactory);
+
+    return _queryEqlDeviceData(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/DeviceData/query/eql')
+  Future<chopper.Response<DeviceDataArrayRes>> _queryEqlDeviceData({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///query data
+  ///@param body
+  Future<chopper.Response<DeviceDataArrayRes>> queryEqlDeviceHistoryData({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        DeviceDataArrayRes, () => DeviceDataArrayRes.fromJsonFactory);
+
+    return _queryEqlDeviceHistoryData(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/DeviceData/history/query/eql')
+  Future<chopper.Response<DeviceDataArrayRes>> _queryEqlDeviceHistoryData({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Create device view
   ///@param body
   Future<chopper.Response<DeviceViewEntityRes>> createDeviceView({
