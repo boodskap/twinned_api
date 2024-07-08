@@ -367,6 +367,13 @@ DeviceModelInfo _$DeviceModelInfoFromJson(Map<String, dynamic> json) =>
                   ScrappingTableConfig.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$DeviceModelInfoToJson(DeviceModelInfo instance) {
@@ -400,6 +407,8 @@ Map<String, dynamic> _$DeviceModelInfoToJson(DeviceModelInfo instance) {
   writeNotNull('makePublic', instance.makePublic);
   writeNotNull('scrappingTableConfigs',
       instance.scrappingTableConfigs?.map((e) => e.toJson()).toList());
+  writeNotNull('roles', instance.roles);
+  writeNotNull('clientIds', instance.clientIds);
   return val;
 }
 
@@ -439,6 +448,13 @@ DeviceModel _$DeviceModelFromJson(Map<String, dynamic> json) => DeviceModel(
       scrappingTableConfigs: (json['scrappingTableConfigs'] as List<dynamic>?)
               ?.map((e) =>
                   ScrappingTableConfig.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
               .toList() ??
           [],
       domainKey: json['domainKey'] as String? ?? '',
@@ -481,6 +497,8 @@ Map<String, dynamic> _$DeviceModelToJson(DeviceModel instance) {
   writeNotNull('makePublic', instance.makePublic);
   writeNotNull('scrappingTableConfigs',
       instance.scrappingTableConfigs?.map((e) => e.toJson()).toList());
+  writeNotNull('roles', instance.roles);
+  writeNotNull('clientIds', instance.clientIds);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -629,6 +647,14 @@ DeviceInfo _$DeviceInfoFromJson(Map<String, dynamic> json) => DeviceInfo(
           ? null
           : CustomWidget.fromJson(json['customWidget'] as Map<String, dynamic>),
       reportedStamp: (json['reportedStamp'] as num?)?.toInt(),
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      parameters: (json['parameters'] as List<dynamic>?)
+              ?.map((e) => Parameter.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$DeviceInfoToJson(DeviceInfo instance) {
@@ -658,6 +684,9 @@ Map<String, dynamic> _$DeviceInfoToJson(DeviceInfo instance) {
   writeNotNull('geolocation', instance.geolocation?.toJson());
   writeNotNull('customWidget', instance.customWidget?.toJson());
   writeNotNull('reportedStamp', instance.reportedStamp);
+  writeNotNull('clientIds', instance.clientIds);
+  writeNotNull(
+      'parameters', instance.parameters?.map((e) => e.toJson()).toList());
   return val;
 }
 
@@ -674,6 +703,10 @@ DeviceBase _$DeviceBaseFromJson(Map<String, dynamic> json) => DeviceBase(
       asset: json['asset'] as String? ?? '',
       clientId: json['clientId'] as String? ?? '',
       $client: json['client'] as String? ?? '',
+      currentLocation: json['currentLocation'] == null
+          ? null
+          : GeoLocation.fromJson(
+              json['currentLocation'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$DeviceBaseToJson(DeviceBase instance) {
@@ -698,6 +731,7 @@ Map<String, dynamic> _$DeviceBaseToJson(DeviceBase instance) {
   writeNotNull('asset', instance.asset);
   writeNotNull('clientId', instance.clientId);
   writeNotNull('client', instance.$client);
+  writeNotNull('currentLocation', instance.currentLocation?.toJson());
   return val;
 }
 
@@ -714,6 +748,10 @@ Device _$DeviceFromJson(Map<String, dynamic> json) => Device(
       asset: json['asset'] as String? ?? '',
       clientId: json['clientId'] as String? ?? '',
       $client: json['client'] as String? ?? '',
+      currentLocation: json['currentLocation'] == null
+          ? null
+          : GeoLocation.fromJson(
+              json['currentLocation'] as Map<String, dynamic>),
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
       modelId: json['modelId'] as String? ?? '',
@@ -742,6 +780,14 @@ Device _$DeviceFromJson(Map<String, dynamic> json) => Device(
       customWidget: json['customWidget'] == null
           ? null
           : CustomWidget.fromJson(json['customWidget'] as Map<String, dynamic>),
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      parameters: (json['parameters'] as List<dynamic>?)
+              ?.map((e) => Parameter.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -773,6 +819,7 @@ Map<String, dynamic> _$DeviceToJson(Device instance) {
   writeNotNull('asset', instance.asset);
   writeNotNull('clientId', instance.clientId);
   writeNotNull('client', instance.$client);
+  writeNotNull('currentLocation', instance.currentLocation?.toJson());
   val['name'] = instance.name;
   writeNotNull('description', instance.description);
   val['modelId'] = instance.modelId;
@@ -789,6 +836,9 @@ Map<String, dynamic> _$DeviceToJson(Device instance) {
   writeNotNull('movable', instance.movable);
   writeNotNull('geolocation', instance.geolocation?.toJson());
   writeNotNull('customWidget', instance.customWidget?.toJson());
+  writeNotNull('clientIds', instance.clientIds);
+  writeNotNull(
+      'parameters', instance.parameters?.map((e) => e.toJson()).toList());
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -921,6 +971,10 @@ ConditionInfo _$ConditionInfoFromJson(Map<String, dynamic> json) =>
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$ConditionInfoToJson(ConditionInfo instance) {
@@ -944,6 +998,7 @@ Map<String, dynamic> _$ConditionInfoToJson(ConditionInfo instance) {
   writeNotNull('rightValue', instance.rightValue);
   writeNotNull('values', instance.values);
   writeNotNull('tags', instance.tags);
+  writeNotNull('clientIds', instance.clientIds);
   return val;
 }
 
@@ -964,6 +1019,10 @@ Condition _$ConditionFromJson(Map<String, dynamic> json) => Condition(
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -994,6 +1053,7 @@ Map<String, dynamic> _$ConditionToJson(Condition instance) {
   writeNotNull('rightValue', instance.rightValue);
   writeNotNull('values', instance.values);
   writeNotNull('tags', instance.tags);
+  writeNotNull('clientIds', instance.clientIds);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -1178,6 +1238,10 @@ AlarmInfo _$AlarmInfoFromJson(Map<String, dynamic> json) => AlarmInfo(
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
       showOnlyIfMatched: json['showOnlyIfMatched'] as bool?,
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$AlarmInfoToJson(AlarmInfo instance) {
@@ -1199,6 +1263,7 @@ Map<String, dynamic> _$AlarmInfoToJson(AlarmInfo instance) {
   val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
   writeNotNull('tags', instance.tags);
   writeNotNull('showOnlyIfMatched', instance.showOnlyIfMatched);
+  writeNotNull('clientIds', instance.clientIds);
   return val;
 }
 
@@ -1220,6 +1285,10 @@ Alarm _$AlarmFromJson(Map<String, dynamic> json) => Alarm(
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
       showOnlyIfMatched: json['showOnlyIfMatched'] as bool?,
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -1248,6 +1317,7 @@ Map<String, dynamic> _$AlarmToJson(Alarm instance) {
   val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
   writeNotNull('tags', instance.tags);
   writeNotNull('showOnlyIfMatched', instance.showOnlyIfMatched);
+  writeNotNull('clientIds', instance.clientIds);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -1411,6 +1481,13 @@ ControlInfo _$ControlInfoFromJson(Map<String, dynamic> json) => ControlInfo(
               ?.map((e) => ControlCommand.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$ControlInfoToJson(ControlInfo instance) {
@@ -1430,6 +1507,8 @@ Map<String, dynamic> _$ControlInfoToJson(ControlInfo instance) {
   writeNotNull('stateIcons', instance.stateIcons);
   writeNotNull('tags', instance.tags);
   writeNotNull('commands', instance.commands?.map((e) => e.toJson()).toList());
+  writeNotNull('roles', instance.roles);
+  writeNotNull('clientIds', instance.clientIds);
   return val;
 }
 
@@ -1447,6 +1526,13 @@ Control _$ControlFromJson(Map<String, dynamic> json) => Control(
               [],
       commands: (json['commands'] as List<dynamic>?)
               ?.map((e) => ControlCommand.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
               .toList() ??
           [],
       domainKey: json['domainKey'] as String? ?? '',
@@ -1475,6 +1561,8 @@ Map<String, dynamic> _$ControlToJson(Control instance) {
   writeNotNull('stateIcons', instance.stateIcons);
   writeNotNull('tags', instance.tags);
   writeNotNull('commands', instance.commands?.map((e) => e.toJson()).toList());
+  writeNotNull('roles', instance.roles);
+  writeNotNull('clientIds', instance.clientIds);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -1623,6 +1711,10 @@ EventInfo _$EventInfoFromJson(Map<String, dynamic> json) => EventInfo(
       roles:
           (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$EventInfoToJson(EventInfo instance) {
@@ -1647,6 +1739,7 @@ Map<String, dynamic> _$EventInfoToJson(EventInfo instance) {
   writeNotNull('voiceTemplate', instance.voiceTemplate?.toJson());
   writeNotNull('tags', instance.tags);
   writeNotNull('roles', instance.roles);
+  writeNotNull('clientIds', instance.clientIds);
   return val;
 }
 
@@ -1683,6 +1776,10 @@ Event _$EventFromJson(Map<String, dynamic> json) => Event(
       roles:
           (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -1714,6 +1811,7 @@ Map<String, dynamic> _$EventToJson(Event instance) {
   writeNotNull('voiceTemplate', instance.voiceTemplate?.toJson());
   writeNotNull('tags', instance.tags);
   writeNotNull('roles', instance.roles);
+  writeNotNull('clientIds', instance.clientIds);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -2580,6 +2678,10 @@ DisplayInfo _$DisplayInfoFromJson(Map<String, dynamic> json) => DisplayInfo(
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$DisplayInfoToJson(DisplayInfo instance) {
@@ -2599,6 +2701,7 @@ Map<String, dynamic> _$DisplayInfoToJson(DisplayInfo instance) {
   writeNotNull('icon', instance.icon);
   val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
   writeNotNull('tags', instance.tags);
+  writeNotNull('clientIds', instance.clientIds);
   return val;
 }
 
@@ -2616,6 +2719,10 @@ Display _$DisplayFromJson(Map<String, dynamic> json) => Display(
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -2642,6 +2749,7 @@ Map<String, dynamic> _$DisplayToJson(Display instance) {
   writeNotNull('icon', instance.icon);
   val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
   writeNotNull('tags', instance.tags);
+  writeNotNull('clientIds', instance.clientIds);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -2846,6 +2954,13 @@ DeviceViewInfo _$DeviceViewInfoFromJson(Map<String, dynamic> json) =>
               json['infoPosition']),
       border: DeviceViewInfo.deviceViewInfoBorderBorderNullableFromJson(
           json['border']),
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$DeviceViewInfoToJson(DeviceViewInfo instance) {
@@ -2878,6 +2993,8 @@ Map<String, dynamic> _$DeviceViewInfoToJson(DeviceViewInfo instance) {
   writeNotNull('infoPosition',
       deviceViewInfoInfoPositionNullableToJson(instance.infoPosition));
   writeNotNull('border', deviceViewInfoBorderNullableToJson(instance.border));
+  writeNotNull('roles', instance.roles);
+  writeNotNull('clientIds', instance.clientIds);
   return val;
 }
 
@@ -2919,6 +3036,13 @@ DeviceView _$DeviceViewFromJson(Map<String, dynamic> json) => DeviceView(
           DeviceView.deviceViewInfoPositionInfoPositionNullableFromJson(
               json['infoPosition']),
       border: DeviceView.deviceViewBorderBorderNullableFromJson(json['border']),
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -2958,6 +3082,8 @@ Map<String, dynamic> _$DeviceViewToJson(DeviceView instance) {
   writeNotNull('infoPosition',
       deviceViewInfoPositionNullableToJson(instance.infoPosition));
   writeNotNull('border', deviceViewBorderNullableToJson(instance.border));
+  writeNotNull('roles', instance.roles);
+  writeNotNull('clientIds', instance.clientIds);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -4084,6 +4210,13 @@ DashboardScreenInfo _$DashboardScreenInfoFromJson(Map<String, dynamic> json) =>
               ?.map((e) => ScreenRow.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$DashboardScreenInfoToJson(DashboardScreenInfo instance) {
@@ -4115,6 +4248,8 @@ Map<String, dynamic> _$DashboardScreenInfoToJson(DashboardScreenInfo instance) {
   writeNotNull('paddingConfig', instance.paddingConfig?.toJson());
   writeNotNull('marginConfig', instance.marginConfig?.toJson());
   val['rows'] = instance.rows.map((e) => e.toJson()).toList();
+  writeNotNull('roles', instance.roles);
+  writeNotNull('clientIds', instance.clientIds);
   return val;
 }
 
@@ -4167,6 +4302,13 @@ DashboardScreen _$DashboardScreenFromJson(Map<String, dynamic> json) =>
               ?.map((e) => ScreenRow.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$DashboardScreenToJson(DashboardScreen instance) {
@@ -4205,6 +4347,8 @@ Map<String, dynamic> _$DashboardScreenToJson(DashboardScreen instance) {
   writeNotNull('paddingConfig', instance.paddingConfig?.toJson());
   writeNotNull('marginConfig', instance.marginConfig?.toJson());
   val['rows'] = instance.rows.map((e) => e.toJson()).toList();
+  writeNotNull('roles', instance.roles);
+  writeNotNull('clientIds', instance.clientIds);
   return val;
 }
 
@@ -4390,6 +4534,13 @@ EventRegistrationInfo _$EventRegistrationInfoFromJson(
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$EventRegistrationInfoToJson(
@@ -4414,6 +4565,8 @@ Map<String, dynamic> _$EventRegistrationInfoToJson(
   writeNotNull('name', instance.name);
   writeNotNull('targetDeviceIds', instance.targetDeviceIds);
   writeNotNull('tags', instance.tags);
+  writeNotNull('roles', instance.roles);
+  writeNotNull('clientIds', instance.clientIds);
   return val;
 }
 
@@ -4454,6 +4607,13 @@ EventRegistration _$EventRegistrationFromJson(Map<String, dynamic> json) =>
               ?.map((e) => e as String)
               .toList() ??
           [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
       userId: json['userId'] as String? ?? '',
     );
 
@@ -4485,6 +4645,8 @@ Map<String, dynamic> _$EventRegistrationToJson(EventRegistration instance) {
   writeNotNull('emailId', instance.emailId);
   writeNotNull('phoneNumber', instance.phoneNumber);
   writeNotNull('targetDeviceIds', instance.targetDeviceIds);
+  writeNotNull('roles', instance.roles);
+  writeNotNull('clientIds', instance.clientIds);
   val['userId'] = instance.userId;
   return val;
 }
@@ -5092,6 +5254,10 @@ ScreenWidgetInfo _$ScreenWidgetInfoFromJson(Map<String, dynamic> json) =>
       widgetType: json['widgetType'] as String? ?? '',
       attributes: json['attributes'] as Object,
       target: screenWidgetInfoTargetNullableFromJson(json['target']),
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$ScreenWidgetInfoToJson(ScreenWidgetInfo instance) {
@@ -5112,6 +5278,7 @@ Map<String, dynamic> _$ScreenWidgetInfoToJson(ScreenWidgetInfo instance) {
   val['widgetType'] = instance.widgetType;
   val['attributes'] = instance.attributes;
   writeNotNull('target', screenWidgetInfoTargetNullableToJson(instance.target));
+  writeNotNull('clientIds', instance.clientIds);
   return val;
 }
 
@@ -5126,6 +5293,10 @@ ScreenWidget _$ScreenWidgetFromJson(Map<String, dynamic> json) => ScreenWidget(
       widgetType: json['widgetType'] as String? ?? '',
       attributes: json['attributes'] as Object,
       target: screenWidgetTargetNullableFromJson(json['target']),
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -5153,6 +5324,7 @@ Map<String, dynamic> _$ScreenWidgetToJson(ScreenWidget instance) {
   val['widgetType'] = instance.widgetType;
   val['attributes'] = instance.attributes;
   writeNotNull('target', screenWidgetTargetNullableToJson(instance.target));
+  writeNotNull('clientIds', instance.clientIds);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -5805,6 +5977,10 @@ GeoFenceInfo _$GeoFenceInfoFromJson(Map<String, dynamic> json) => GeoFenceInfo(
       circle: json['circle'] == null
           ? null
           : GeoCircle.fromJson(json['circle'] as Map<String, dynamic>),
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$GeoFenceInfoToJson(GeoFenceInfo instance) {
@@ -5830,6 +6006,7 @@ Map<String, dynamic> _$GeoFenceInfoToJson(GeoFenceInfo instance) {
   writeNotNull('multiline', instance.multiline?.toJson());
   writeNotNull('multipolygon', instance.multipolygon?.toJson());
   writeNotNull('circle', instance.circle?.toJson());
+  writeNotNull('clientIds', instance.clientIds);
   return val;
 }
 
@@ -5875,6 +6052,10 @@ GeoFence _$GeoFenceFromJson(Map<String, dynamic> json) => GeoFence(
       circle: json['circle'] == null
           ? null
           : GeoCircle.fromJson(json['circle'] as Map<String, dynamic>),
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
       fence: json['fence'] as Object,
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
@@ -5908,6 +6089,7 @@ Map<String, dynamic> _$GeoFenceToJson(GeoFence instance) {
   writeNotNull('multiline', instance.multiline?.toJson());
   writeNotNull('multipolygon', instance.multipolygon?.toJson());
   writeNotNull('circle', instance.circle?.toJson());
+  writeNotNull('clientIds', instance.clientIds);
   val['fence'] = instance.fence;
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
@@ -7068,6 +7250,26 @@ Map<String, dynamic> _$AssetInfoToJson(AssetInfo instance) {
   return val;
 }
 
+AssetBase _$AssetBaseFromJson(Map<String, dynamic> json) => AssetBase(
+      currentLocation: json['currentLocation'] == null
+          ? null
+          : GeoLocation.fromJson(
+              json['currentLocation'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AssetBaseToJson(AssetBase instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('currentLocation', instance.currentLocation?.toJson());
+  return val;
+}
+
 Asset _$AssetFromJson(Map<String, dynamic> json) => Asset(
       premiseId: json['premiseId'] as String? ?? '',
       facilityId: json['facilityId'] as String? ?? '',
@@ -7101,6 +7303,10 @@ Asset _$AssetFromJson(Map<String, dynamic> json) => Asset(
               .toList() ??
           [],
       reportedStamp: (json['reportedStamp'] as num?)?.toInt(),
+      currentLocation: json['currentLocation'] == null
+          ? null
+          : GeoLocation.fromJson(
+              json['currentLocation'] as Map<String, dynamic>),
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -7135,6 +7341,7 @@ Map<String, dynamic> _$AssetToJson(Asset instance) {
   val['assetModelId'] = instance.assetModelId;
   writeNotNull('clientIds', instance.clientIds);
   writeNotNull('reportedStamp', instance.reportedStamp);
+  writeNotNull('currentLocation', instance.currentLocation?.toJson());
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -7720,6 +7927,10 @@ RoleInfo _$RoleInfoFromJson(Map<String, dynamic> json) => RoleInfo(
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$RoleInfoToJson(RoleInfo instance) {
@@ -7735,6 +7946,7 @@ Map<String, dynamic> _$RoleInfoToJson(RoleInfo instance) {
 
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
+  writeNotNull('clientIds', instance.clientIds);
   return val;
 }
 
@@ -7744,6 +7956,10 @@ Role _$RoleFromJson(Map<String, dynamic> json) => Role(
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -7766,6 +7982,7 @@ Map<String, dynamic> _$RoleToJson(Role instance) {
 
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
+  writeNotNull('clientIds', instance.clientIds);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -8861,6 +9078,10 @@ ReportInfo _$ReportInfoFromJson(Map<String, dynamic> json) => ReportInfo(
               ?.map((e) => e as String)
               .toList() ??
           [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$ReportInfoToJson(ReportInfo instance) {
@@ -8887,6 +9108,7 @@ Map<String, dynamic> _$ReportInfoToJson(ReportInfo instance) {
   writeNotNull('dateFormat', instance.dateFormat);
   writeNotNull('tz', instance.tz);
   val['fields'] = instance.fields;
+  writeNotNull('clientIds', instance.clientIds);
   return val;
 }
 
@@ -8907,6 +9129,10 @@ Report _$ReportFromJson(Map<String, dynamic> json) => Report(
       dateFormat: json['dateFormat'] as String? ?? '',
       tz: json['tz'] as String? ?? '',
       fields: (json['fields'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           [],
@@ -8943,6 +9169,7 @@ Map<String, dynamic> _$ReportToJson(Report instance) {
   writeNotNull('dateFormat', instance.dateFormat);
   writeNotNull('tz', instance.tz);
   val['fields'] = instance.fields;
+  writeNotNull('clientIds', instance.clientIds);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -9127,6 +9354,13 @@ AssetModelInfo _$AssetModelInfoFromJson(Map<String, dynamic> json) =>
               ?.map((e) => AssetDeviceModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$AssetModelInfoToJson(AssetModelInfo instance) {
@@ -9151,6 +9385,8 @@ Map<String, dynamic> _$AssetModelInfoToJson(AssetModelInfo instance) {
   writeNotNull('movable', instance.movable);
   writeNotNull('allowedDeviceModels',
       instance.allowedDeviceModels?.map((e) => e.toJson()).toList());
+  writeNotNull('roles', instance.roles);
+  writeNotNull('clientIds', instance.clientIds);
   return val;
 }
 
@@ -9175,6 +9411,13 @@ AssetModel _$AssetModelFromJson(Map<String, dynamic> json) => AssetModel(
       movable: json['movable'] as bool?,
       allowedDeviceModels: (json['allowedDeviceModels'] as List<dynamic>?)
               ?.map((e) => AssetDeviceModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      roles:
+          (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
               .toList() ??
           [],
       domainKey: json['domainKey'] as String? ?? '',
@@ -9208,6 +9451,8 @@ Map<String, dynamic> _$AssetModelToJson(AssetModel instance) {
   writeNotNull('movable', instance.movable);
   writeNotNull('allowedDeviceModels',
       instance.allowedDeviceModels?.map((e) => e.toJson()).toList());
+  writeNotNull('roles', instance.roles);
+  writeNotNull('clientIds', instance.clientIds);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
