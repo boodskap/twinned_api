@@ -43,7 +43,8 @@ abstract class Twinned extends ChopperService {
         client: httpClient,
         authenticator: authenticator,
         errorConverter: errorConverter,
-        baseUrl: baseUrl ?? Uri.parse('http://twinned.digital/rest/nocode'));
+        baseUrl:
+            baseUrl ?? Uri.parse('http://twinned.boodskap.io/rest/nocode'));
     return _$Twinned(newClient);
   }
 
@@ -1117,6 +1118,27 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
+  ///query data
+  ///@param body
+  Future<chopper.Response<DeviceViewArrayRes>> queryEqlDeviceView({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        DeviceViewArrayRes, () => DeviceViewArrayRes.fromJsonFactory);
+
+    return _queryEqlDeviceView(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/DeviceView/query/eql')
+  Future<chopper.Response<DeviceViewArrayRes>> _queryEqlDeviceView({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Create dashboard screen
   ///@param body
   Future<chopper.Response<DashboardScreenEntityRes>> createDashboardScreen({
@@ -1311,6 +1333,27 @@ abstract class Twinned extends ChopperService {
   Future<chopper.Response<CountRes>> _countDashboards(
       {@Header('APIKEY') String? apikey});
 
+  ///query data
+  ///@param body
+  Future<chopper.Response<DashboardScreenArrayRes>> queryEqlDashboardScreen({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        DashboardScreenArrayRes, () => DashboardScreenArrayRes.fromJsonFactory);
+
+    return _queryEqlDashboardScreen(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/DashboardScreen/query/eql')
+  Future<chopper.Response<DashboardScreenArrayRes>> _queryEqlDashboardScreen({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Create dashboard menu
   ///@param body
   Future<chopper.Response<DashboardMenuGroupEntityRes>>
@@ -1500,6 +1543,27 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
+  ///query data
+  ///@param body
+  Future<chopper.Response<DashboardMenuGroupArrayRes>> queryEqlDashboardMenu({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(DashboardMenuGroupArrayRes,
+        () => DashboardMenuGroupArrayRes.fromJsonFactory);
+
+    return _queryEqlDashboardMenu(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/DashboardMenu/query/eql')
+  Future<chopper.Response<DashboardMenuGroupArrayRes>> _queryEqlDashboardMenu({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Create event registration
   ///@param body
   Future<chopper.Response<EventRegistrationEntityRes>> createEventRegistration({
@@ -1616,6 +1680,29 @@ abstract class Twinned extends ChopperService {
   Future<chopper.Response<EventRegistrationArrayRes>>
       _searchEqlEventRegistration({
     @Body() required Object? eql,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///query data
+  ///@param body
+  Future<chopper.Response<EventRegistrationArrayRes>>
+      queryEqlEventRegistration({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(EventRegistrationArrayRes,
+        () => EventRegistrationArrayRes.fromJsonFactory);
+
+    return _queryEqlEventRegistration(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/EventRegistration/query/eql')
+  Future<chopper.Response<EventRegistrationArrayRes>>
+      _queryEqlEventRegistration({
+    @Body() required EqlSearch? body,
     @Header('APIKEY') String? apikey,
   });
 
@@ -1874,6 +1961,27 @@ abstract class Twinned extends ChopperService {
   Future<chopper.Response<ParameterUnitsEntityRes>> _getParameterUnits(
       {@Header('APIKEY') String? apikey});
 
+  ///query data
+  ///@param body
+  Future<chopper.Response<DeviceModelArrayRes>> queryEqlDeviceModel({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        DeviceModelArrayRes, () => DeviceModelArrayRes.fromJsonFactory);
+
+    return _queryEqlDeviceModel(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/DeviceModel/query/eql')
+  Future<chopper.Response<DeviceModelArrayRes>> _queryEqlDeviceModel({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Create device
   ///@param body
   Future<chopper.Response<DeviceEntityRes>> createDevice({
@@ -2125,6 +2233,27 @@ abstract class Twinned extends ChopperService {
   Future<chopper.Response<CountRes>> _countDevices(
       {@Header('APIKEY') String? apikey});
 
+  ///query data
+  ///@param body
+  Future<chopper.Response<DeviceArrayRes>> queryEqlDevice({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        DeviceArrayRes, () => DeviceArrayRes.fromJsonFactory);
+
+    return _queryEqlDevice(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/Device/query/eql')
+  Future<chopper.Response<DeviceArrayRes>> _queryEqlDevice({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Create condition
   ///@param body
   Future<chopper.Response<ConditionEntityRes>> createCondition({
@@ -2309,6 +2438,27 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
+  ///query data
+  ///@param body
+  Future<chopper.Response<ConditionArrayRes>> queryEqlCondition({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        ConditionArrayRes, () => ConditionArrayRes.fromJsonFactory);
+
+    return _queryEqlCondition(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/Condition/query/eql')
+  Future<chopper.Response<ConditionArrayRes>> _queryEqlCondition({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Create alarm
   ///@param body
   Future<chopper.Response<AlarmEntityRes>> createAlarm({
@@ -2486,6 +2636,27 @@ abstract class Twinned extends ChopperService {
   @Post(path: '/Alarm/eql')
   Future<chopper.Response<AlarmArrayRes>> _searchEqlAlarm({
     @Body() required Object? eql,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///query data
+  ///@param body
+  Future<chopper.Response<AlarmArrayRes>> queryEqlAlarm({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        AlarmArrayRes, () => AlarmArrayRes.fromJsonFactory);
+
+    return _queryEqlAlarm(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/Alarm/query/eql')
+  Future<chopper.Response<AlarmArrayRes>> _queryEqlAlarm({
+    @Body() required EqlSearch? body,
     @Header('APIKEY') String? apikey,
   });
 
@@ -2670,6 +2841,27 @@ abstract class Twinned extends ChopperService {
   @Post(path: '/Display/eql')
   Future<chopper.Response<DisplayArrayRes>> _searchEqlDisplay({
     @Body() required Object? eql,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///query data
+  ///@param body
+  Future<chopper.Response<DisplayArrayRes>> queryEqlDisplay({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        DisplayArrayRes, () => DisplayArrayRes.fromJsonFactory);
+
+    return _queryEqlDisplay(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/Display/query/eql')
+  Future<chopper.Response<DisplayArrayRes>> _queryEqlDisplay({
+    @Body() required EqlSearch? body,
     @Header('APIKEY') String? apikey,
   });
 
@@ -2913,6 +3105,27 @@ abstract class Twinned extends ChopperService {
   @Post(path: '/Control/eql')
   Future<chopper.Response<ControlArrayRes>> _searchEqlControl({
     @Body() required Object? eql,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///query data
+  ///@param body
+  Future<chopper.Response<ControlArrayRes>> queryEqlControl({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        ControlArrayRes, () => ControlArrayRes.fromJsonFactory);
+
+    return _queryEqlControl(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/Control/query/eql')
+  Future<chopper.Response<ControlArrayRes>> _queryEqlControl({
+    @Body() required EqlSearch? body,
     @Header('APIKEY') String? apikey,
   });
 
@@ -3471,6 +3684,27 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
+  ///query data
+  ///@param body
+  Future<chopper.Response<EventArrayRes>> queryEqlEvent({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        EventArrayRes, () => EventArrayRes.fromJsonFactory);
+
+    return _queryEqlEvent(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/Event/query/eql')
+  Future<chopper.Response<EventArrayRes>> _queryEqlEvent({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Create trigger
   ///@param body
   Future<chopper.Response<TriggerEntityRes>> createTrigger({
@@ -3652,6 +3886,27 @@ abstract class Twinned extends ChopperService {
   @Post(path: '/Trigger/eql')
   Future<chopper.Response<TriggerArrayRes>> _searchEqlTrigger({
     @Body() required Object? eql,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///query data
+  ///@param body
+  Future<chopper.Response<TriggerArrayRes>> queryEqlTrigger({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        TriggerArrayRes, () => TriggerArrayRes.fromJsonFactory);
+
+    return _queryEqlTrigger(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/Trigger/query/eql')
+  Future<chopper.Response<TriggerArrayRes>> _queryEqlTrigger({
+    @Body() required EqlSearch? body,
     @Header('APIKEY') String? apikey,
   });
 
@@ -4146,6 +4401,27 @@ abstract class Twinned extends ChopperService {
   @Post(path: '/GeoFence/eql')
   Future<chopper.Response<GeoFenceArrayRes>> _searchEqlGeoFence({
     @Body() required Object? eql,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///query data
+  ///@param body
+  Future<chopper.Response<GeoFenceArrayRes>> queryEqlGeoFence({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        GeoFenceArrayRes, () => GeoFenceArrayRes.fromJsonFactory);
+
+    return _queryEqlGeoFence(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/GeoFence/query/eql')
+  Future<chopper.Response<GeoFenceArrayRes>> _queryEqlGeoFence({
+    @Body() required EqlSearch? body,
     @Header('APIKEY') String? apikey,
   });
 
@@ -5442,6 +5718,27 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
+  ///query data
+  ///@param body
+  Future<chopper.Response<FloorArrayRes>> queryEqlFloor({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        FloorArrayRes, () => FloorArrayRes.fromJsonFactory);
+
+    return _queryEqlFloor(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/Floor/query/eql')
+  Future<chopper.Response<FloorArrayRes>> _queryEqlFloor({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Create asset
   ///@param body
   Future<chopper.Response<AssetEntityRes>> createAsset({
@@ -5734,6 +6031,27 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
+  ///query data
+  ///@param body
+  Future<chopper.Response<AssetArrayRes>> queryEqlAsset({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        AssetArrayRes, () => AssetArrayRes.fromJsonFactory);
+
+    return _queryEqlAsset(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/Asset/query/eql')
+  Future<chopper.Response<AssetArrayRes>> _queryEqlAsset({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Create facility
   ///@param body
   Future<chopper.Response<FacilityEntityRes>> createFacility({
@@ -5979,6 +6297,27 @@ abstract class Twinned extends ChopperService {
   ///@param body
   @Post(path: '/Facility/count/query')
   Future<chopper.Response<CountRes>> _queryCountFacility({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///query data
+  ///@param body
+  Future<chopper.Response<FacilityArrayRes>> queryEqlFacility({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        FacilityArrayRes, () => FacilityArrayRes.fromJsonFactory);
+
+    return _queryEqlFacility(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/Facility/query/eql')
+  Future<chopper.Response<FacilityArrayRes>> _queryEqlFacility({
     @Body() required EqlSearch? body,
     @Header('APIKEY') String? apikey,
   });
@@ -6295,6 +6634,27 @@ abstract class Twinned extends ChopperService {
   Future<chopper.Response<CountRes>> _countTwinUsers(
       {@Header('APIKEY') String? apikey});
 
+  ///query data
+  ///@param body
+  Future<chopper.Response<TwinUserArrayRes>> queryEqlTwinUser({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        TwinUserArrayRes, () => TwinUserArrayRes.fromJsonFactory);
+
+    return _queryEqlTwinUser(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/TwinUser/query/eql')
+  Future<chopper.Response<TwinUserArrayRes>> _queryEqlTwinUser({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Create premise
   ///@param body
   Future<chopper.Response<PremiseEntityRes>> createPremise({
@@ -6525,6 +6885,27 @@ abstract class Twinned extends ChopperService {
   ///@param body
   @Post(path: '/Premise/count/query')
   Future<chopper.Response<CountRes>> _queryCountPremise({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///query data
+  ///@param body
+  Future<chopper.Response<PremiseArrayRes>> queryEqlPremise({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        PremiseArrayRes, () => PremiseArrayRes.fromJsonFactory);
+
+    return _queryEqlPremise(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/Premise/query/eql')
+  Future<chopper.Response<PremiseArrayRes>> _queryEqlPremise({
     @Body() required EqlSearch? body,
     @Header('APIKEY') String? apikey,
   });
@@ -7118,6 +7499,27 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
+  ///query data
+  ///@param body
+  Future<chopper.Response<AssetModelArrayRes>> queryEqlAssetModel({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        AssetModelArrayRes, () => AssetModelArrayRes.fromJsonFactory);
+
+    return _queryEqlAssetModel(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/AssetModel/query/eql')
+  Future<chopper.Response<AssetModelArrayRes>> _queryEqlAssetModel({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Create field filter
   ///@param body
   Future<chopper.Response<FieldFilterEntityRes>> createFieldFilter({
@@ -7290,6 +7692,27 @@ abstract class Twinned extends ChopperService {
   @Post(path: '/FieldFilter/eql')
   Future<chopper.Response<FieldFilterArrayRes>> _searchEqlFieldFilter({
     @Body() required Object? eql,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///query data
+  ///@param body
+  Future<chopper.Response<FieldFilterArrayRes>> queryEqlFieldFilter({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        FieldFilterArrayRes, () => FieldFilterArrayRes.fromJsonFactory);
+
+    return _queryEqlFieldFilter(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/FieldFilter/query/eql')
+  Future<chopper.Response<FieldFilterArrayRes>> _queryEqlFieldFilter({
+    @Body() required EqlSearch? body,
     @Header('APIKEY') String? apikey,
   });
 
@@ -7474,6 +7897,27 @@ abstract class Twinned extends ChopperService {
   @Get(path: '/Client/count')
   Future<chopper.Response<CountRes>> _countClients(
       {@Header('APIKEY') String? apikey});
+
+  ///query data
+  ///@param body
+  Future<chopper.Response<ClientArrayRes>> queryEqlClient({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        ClientArrayRes, () => ClientArrayRes.fromJsonFactory);
+
+    return _queryEqlClient(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/Client/query/eql')
+  Future<chopper.Response<ClientArrayRes>> _queryEqlClient({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -8668,6 +9112,8 @@ class DeviceModelInfo {
     this.customWidget,
     this.makePublic,
     this.scrappingTableConfigs,
+    this.roles,
+    this.clientIds,
   });
 
   factory DeviceModelInfo.fromJson(Map<String, dynamic> json) =>
@@ -8720,6 +9166,10 @@ class DeviceModelInfo {
       includeIfNull: false,
       defaultValue: <ScrappingTableConfig>[])
   final List<ScrappingTableConfig>? scrappingTableConfigs;
+  @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? roles;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   static const fromJsonFactory = _$DeviceModelInfoFromJson;
 
   @override
@@ -8779,7 +9229,12 @@ class DeviceModelInfo {
                     .equals(other.makePublic, makePublic)) &&
             (identical(other.scrappingTableConfigs, scrappingTableConfigs) ||
                 const DeepCollectionEquality().equals(
-                    other.scrappingTableConfigs, scrappingTableConfigs)));
+                    other.scrappingTableConfigs, scrappingTableConfigs)) &&
+            (identical(other.roles, roles) ||
+                const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)));
   }
 
   @override
@@ -8807,6 +9262,8 @@ class DeviceModelInfo {
       const DeepCollectionEquality().hash(customWidget) ^
       const DeepCollectionEquality().hash(makePublic) ^
       const DeepCollectionEquality().hash(scrappingTableConfigs) ^
+      const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       runtimeType.hashCode;
 }
 
@@ -8831,7 +9288,9 @@ extension $DeviceModelInfoExtension on DeviceModelInfo {
       bool? movable,
       CustomWidget? customWidget,
       bool? makePublic,
-      List<ScrappingTableConfig>? scrappingTableConfigs}) {
+      List<ScrappingTableConfig>? scrappingTableConfigs,
+      List<String>? roles,
+      List<String>? clientIds}) {
     return DeviceModelInfo(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -8853,7 +9312,9 @@ extension $DeviceModelInfoExtension on DeviceModelInfo {
         customWidget: customWidget ?? this.customWidget,
         makePublic: makePublic ?? this.makePublic,
         scrappingTableConfigs:
-            scrappingTableConfigs ?? this.scrappingTableConfigs);
+            scrappingTableConfigs ?? this.scrappingTableConfigs,
+        roles: roles ?? this.roles,
+        clientIds: clientIds ?? this.clientIds);
   }
 
   DeviceModelInfo copyWithWrapped(
@@ -8876,7 +9337,9 @@ extension $DeviceModelInfoExtension on DeviceModelInfo {
       Wrapped<bool?>? movable,
       Wrapped<CustomWidget?>? customWidget,
       Wrapped<bool?>? makePublic,
-      Wrapped<List<ScrappingTableConfig>?>? scrappingTableConfigs}) {
+      Wrapped<List<ScrappingTableConfig>?>? scrappingTableConfigs,
+      Wrapped<List<String>?>? roles,
+      Wrapped<List<String>?>? clientIds}) {
     return DeviceModelInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -8909,7 +9372,9 @@ extension $DeviceModelInfoExtension on DeviceModelInfo {
         makePublic: (makePublic != null ? makePublic.value : this.makePublic),
         scrappingTableConfigs: (scrappingTableConfigs != null
             ? scrappingTableConfigs.value
-            : this.scrappingTableConfigs));
+            : this.scrappingTableConfigs),
+        roles: (roles != null ? roles.value : this.roles),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
   }
 }
 
@@ -8936,6 +9401,8 @@ class DeviceModel {
     this.customWidget,
     this.makePublic,
     this.scrappingTableConfigs,
+    this.roles,
+    this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -8995,6 +9462,10 @@ class DeviceModel {
       includeIfNull: false,
       defaultValue: <ScrappingTableConfig>[])
   final List<ScrappingTableConfig>? scrappingTableConfigs;
+  @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? roles;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -9069,6 +9540,11 @@ class DeviceModel {
             (identical(other.scrappingTableConfigs, scrappingTableConfigs) ||
                 const DeepCollectionEquality().equals(
                     other.scrappingTableConfigs, scrappingTableConfigs)) &&
+            (identical(other.roles, roles) ||
+                const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -9077,11 +9553,8 @@ class DeviceModel {
             (identical(other.rtype, rtype) ||
                 const DeepCollectionEquality().equals(other.rtype, rtype)) &&
             (identical(other.createdStamp, createdStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdStamp, createdStamp)) &&
-            (identical(other.createdBy, createdBy) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdBy, createdBy)) &&
+                const DeepCollectionEquality().equals(other.createdStamp, createdStamp)) &&
+            (identical(other.createdBy, createdBy) || const DeepCollectionEquality().equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) || const DeepCollectionEquality().equals(other.updatedBy, updatedBy)) &&
             (identical(other.updatedStamp, updatedStamp) || const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)));
   }
@@ -9111,6 +9584,8 @@ class DeviceModel {
       const DeepCollectionEquality().hash(customWidget) ^
       const DeepCollectionEquality().hash(makePublic) ^
       const DeepCollectionEquality().hash(scrappingTableConfigs) ^
+      const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -9143,6 +9618,8 @@ extension $DeviceModelExtension on DeviceModel {
       CustomWidget? customWidget,
       bool? makePublic,
       List<ScrappingTableConfig>? scrappingTableConfigs,
+      List<String>? roles,
+      List<String>? clientIds,
       String? domainKey,
       String? id,
       String? rtype,
@@ -9172,6 +9649,8 @@ extension $DeviceModelExtension on DeviceModel {
         makePublic: makePublic ?? this.makePublic,
         scrappingTableConfigs:
             scrappingTableConfigs ?? this.scrappingTableConfigs,
+        roles: roles ?? this.roles,
+        clientIds: clientIds ?? this.clientIds,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -9202,6 +9681,8 @@ extension $DeviceModelExtension on DeviceModel {
       Wrapped<CustomWidget?>? customWidget,
       Wrapped<bool?>? makePublic,
       Wrapped<List<ScrappingTableConfig>?>? scrappingTableConfigs,
+      Wrapped<List<String>?>? roles,
+      Wrapped<List<String>?>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -9242,6 +9723,8 @@ extension $DeviceModelExtension on DeviceModel {
         scrappingTableConfigs: (scrappingTableConfigs != null
             ? scrappingTableConfigs.value
             : this.scrappingTableConfigs),
+        roles: (roles != null ? roles.value : this.roles),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -9566,6 +10049,8 @@ class DeviceInfo {
     this.geolocation,
     this.customWidget,
     this.reportedStamp,
+    this.clientIds,
+    this.parameters,
   });
 
   factory DeviceInfo.fromJson(Map<String, dynamic> json) =>
@@ -9608,6 +10093,11 @@ class DeviceInfo {
   final CustomWidget? customWidget;
   @JsonKey(name: 'reportedStamp', includeIfNull: false)
   final int? reportedStamp;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
+  @JsonKey(
+      name: 'parameters', includeIfNull: false, defaultValue: <Parameter>[])
+  final List<Parameter>? parameters;
   static const fromJsonFactory = _$DeviceInfoFromJson;
 
   @override
@@ -9660,7 +10150,13 @@ class DeviceInfo {
                     .equals(other.customWidget, customWidget)) &&
             (identical(other.reportedStamp, reportedStamp) ||
                 const DeepCollectionEquality()
-                    .equals(other.reportedStamp, reportedStamp)));
+                    .equals(other.reportedStamp, reportedStamp)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)) &&
+            (identical(other.parameters, parameters) ||
+                const DeepCollectionEquality()
+                    .equals(other.parameters, parameters)));
   }
 
   @override
@@ -9685,6 +10181,8 @@ class DeviceInfo {
       const DeepCollectionEquality().hash(geolocation) ^
       const DeepCollectionEquality().hash(customWidget) ^
       const DeepCollectionEquality().hash(reportedStamp) ^
+      const DeepCollectionEquality().hash(clientIds) ^
+      const DeepCollectionEquality().hash(parameters) ^
       runtimeType.hashCode;
 }
 
@@ -9706,7 +10204,9 @@ extension $DeviceInfoExtension on DeviceInfo {
       bool? movable,
       GeoLocation? geolocation,
       CustomWidget? customWidget,
-      int? reportedStamp}) {
+      int? reportedStamp,
+      List<String>? clientIds,
+      List<Parameter>? parameters}) {
     return DeviceInfo(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -9724,7 +10224,9 @@ extension $DeviceInfoExtension on DeviceInfo {
         movable: movable ?? this.movable,
         geolocation: geolocation ?? this.geolocation,
         customWidget: customWidget ?? this.customWidget,
-        reportedStamp: reportedStamp ?? this.reportedStamp);
+        reportedStamp: reportedStamp ?? this.reportedStamp,
+        clientIds: clientIds ?? this.clientIds,
+        parameters: parameters ?? this.parameters);
   }
 
   DeviceInfo copyWithWrapped(
@@ -9744,7 +10246,9 @@ extension $DeviceInfoExtension on DeviceInfo {
       Wrapped<bool?>? movable,
       Wrapped<GeoLocation?>? geolocation,
       Wrapped<CustomWidget?>? customWidget,
-      Wrapped<int?>? reportedStamp}) {
+      Wrapped<int?>? reportedStamp,
+      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<Parameter>?>? parameters}) {
     return DeviceInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -9772,7 +10276,9 @@ extension $DeviceInfoExtension on DeviceInfo {
         customWidget:
             (customWidget != null ? customWidget.value : this.customWidget),
         reportedStamp:
-            (reportedStamp != null ? reportedStamp.value : this.reportedStamp));
+            (reportedStamp != null ? reportedStamp.value : this.reportedStamp),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
+        parameters: (parameters != null ? parameters.value : this.parameters));
   }
 }
 
@@ -9791,6 +10297,7 @@ class DeviceBase {
     this.asset,
     this.clientId,
     this.$client,
+    this.currentLocation,
   });
 
   factory DeviceBase.fromJson(Map<String, dynamic> json) =>
@@ -9823,6 +10330,8 @@ class DeviceBase {
   final String? clientId;
   @JsonKey(name: 'client', includeIfNull: false, defaultValue: '')
   final String? $client;
+  @JsonKey(name: 'currentLocation', includeIfNull: false)
+  final GeoLocation? currentLocation;
   static const fromJsonFactory = _$DeviceBaseFromJson;
 
   @override
@@ -9860,7 +10369,11 @@ class DeviceBase {
                 const DeepCollectionEquality()
                     .equals(other.clientId, clientId)) &&
             (identical(other.$client, $client) ||
-                const DeepCollectionEquality().equals(other.$client, $client)));
+                const DeepCollectionEquality()
+                    .equals(other.$client, $client)) &&
+            (identical(other.currentLocation, currentLocation) ||
+                const DeepCollectionEquality()
+                    .equals(other.currentLocation, currentLocation)));
   }
 
   @override
@@ -9880,6 +10393,7 @@ class DeviceBase {
       const DeepCollectionEquality().hash(asset) ^
       const DeepCollectionEquality().hash(clientId) ^
       const DeepCollectionEquality().hash($client) ^
+      const DeepCollectionEquality().hash(currentLocation) ^
       runtimeType.hashCode;
 }
 
@@ -9896,7 +10410,8 @@ extension $DeviceBaseExtension on DeviceBase {
       String? floor,
       String? asset,
       String? clientId,
-      String? $client}) {
+      String? $client,
+      GeoLocation? currentLocation}) {
     return DeviceBase(
         apiKey: apiKey ?? this.apiKey,
         reportedStamp: reportedStamp ?? this.reportedStamp,
@@ -9909,7 +10424,8 @@ extension $DeviceBaseExtension on DeviceBase {
         floor: floor ?? this.floor,
         asset: asset ?? this.asset,
         clientId: clientId ?? this.clientId,
-        $client: $client ?? this.$client);
+        $client: $client ?? this.$client,
+        currentLocation: currentLocation ?? this.currentLocation);
   }
 
   DeviceBase copyWithWrapped(
@@ -9924,7 +10440,8 @@ extension $DeviceBaseExtension on DeviceBase {
       Wrapped<String?>? floor,
       Wrapped<String?>? asset,
       Wrapped<String?>? clientId,
-      Wrapped<String?>? $client}) {
+      Wrapped<String?>? $client,
+      Wrapped<GeoLocation?>? currentLocation}) {
     return DeviceBase(
         apiKey: (apiKey != null ? apiKey.value : this.apiKey),
         reportedStamp:
@@ -9938,7 +10455,10 @@ extension $DeviceBaseExtension on DeviceBase {
         floor: (floor != null ? floor.value : this.floor),
         asset: (asset != null ? asset.value : this.asset),
         clientId: (clientId != null ? clientId.value : this.clientId),
-        $client: ($client != null ? $client.value : this.$client));
+        $client: ($client != null ? $client.value : this.$client),
+        currentLocation: (currentLocation != null
+            ? currentLocation.value
+            : this.currentLocation));
   }
 }
 
@@ -9957,6 +10477,7 @@ class Device {
     this.asset,
     this.clientId,
     this.$client,
+    this.currentLocation,
     required this.name,
     this.description,
     required this.modelId,
@@ -9973,6 +10494,8 @@ class Device {
     this.movable,
     this.geolocation,
     this.customWidget,
+    this.clientIds,
+    this.parameters,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -10011,6 +10534,8 @@ class Device {
   final String? clientId;
   @JsonKey(name: 'client', includeIfNull: false, defaultValue: '')
   final String? $client;
+  @JsonKey(name: 'currentLocation', includeIfNull: false)
+  final GeoLocation? currentLocation;
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
   final String name;
   @JsonKey(name: 'description', includeIfNull: false, defaultValue: '')
@@ -10043,6 +10568,11 @@ class Device {
   final GeoLocation? geolocation;
   @JsonKey(name: 'customWidget', includeIfNull: false)
   final CustomWidget? customWidget;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
+  @JsonKey(
+      name: 'parameters', includeIfNull: false, defaultValue: <Parameter>[])
+  final List<Parameter>? parameters;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -10096,6 +10626,9 @@ class Device {
             (identical(other.$client, $client) ||
                 const DeepCollectionEquality()
                     .equals(other.$client, $client)) &&
+            (identical(other.currentLocation, currentLocation) ||
+                const DeepCollectionEquality()
+                    .equals(other.currentLocation, currentLocation)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.description, description) ||
@@ -10128,12 +10661,12 @@ class Device {
             (identical(other.defaultView, defaultView) ||
                 const DeepCollectionEquality()
                     .equals(other.defaultView, defaultView)) &&
-            (identical(other.hasGeoLocation, hasGeoLocation) ||
-                const DeepCollectionEquality()
-                    .equals(other.hasGeoLocation, hasGeoLocation)) &&
+            (identical(other.hasGeoLocation, hasGeoLocation) || const DeepCollectionEquality().equals(other.hasGeoLocation, hasGeoLocation)) &&
             (identical(other.movable, movable) || const DeepCollectionEquality().equals(other.movable, movable)) &&
             (identical(other.geolocation, geolocation) || const DeepCollectionEquality().equals(other.geolocation, geolocation)) &&
             (identical(other.customWidget, customWidget) || const DeepCollectionEquality().equals(other.customWidget, customWidget)) &&
+            (identical(other.clientIds, clientIds) || const DeepCollectionEquality().equals(other.clientIds, clientIds)) &&
+            (identical(other.parameters, parameters) || const DeepCollectionEquality().equals(other.parameters, parameters)) &&
             (identical(other.domainKey, domainKey) || const DeepCollectionEquality().equals(other.domainKey, domainKey)) &&
             (identical(other.id, id) || const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.rtype, rtype) || const DeepCollectionEquality().equals(other.rtype, rtype)) &&
@@ -10160,6 +10693,7 @@ class Device {
       const DeepCollectionEquality().hash(asset) ^
       const DeepCollectionEquality().hash(clientId) ^
       const DeepCollectionEquality().hash($client) ^
+      const DeepCollectionEquality().hash(currentLocation) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(modelId) ^
@@ -10176,6 +10710,8 @@ class Device {
       const DeepCollectionEquality().hash(movable) ^
       const DeepCollectionEquality().hash(geolocation) ^
       const DeepCollectionEquality().hash(customWidget) ^
+      const DeepCollectionEquality().hash(clientIds) ^
+      const DeepCollectionEquality().hash(parameters) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -10200,6 +10736,7 @@ extension $DeviceExtension on Device {
       String? asset,
       String? clientId,
       String? $client,
+      GeoLocation? currentLocation,
       String? name,
       String? description,
       String? modelId,
@@ -10216,6 +10753,8 @@ extension $DeviceExtension on Device {
       bool? movable,
       GeoLocation? geolocation,
       CustomWidget? customWidget,
+      List<String>? clientIds,
+      List<Parameter>? parameters,
       String? domainKey,
       String? id,
       String? rtype,
@@ -10236,6 +10775,7 @@ extension $DeviceExtension on Device {
         asset: asset ?? this.asset,
         clientId: clientId ?? this.clientId,
         $client: $client ?? this.$client,
+        currentLocation: currentLocation ?? this.currentLocation,
         name: name ?? this.name,
         description: description ?? this.description,
         modelId: modelId ?? this.modelId,
@@ -10252,6 +10792,8 @@ extension $DeviceExtension on Device {
         movable: movable ?? this.movable,
         geolocation: geolocation ?? this.geolocation,
         customWidget: customWidget ?? this.customWidget,
+        clientIds: clientIds ?? this.clientIds,
+        parameters: parameters ?? this.parameters,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -10274,6 +10816,7 @@ extension $DeviceExtension on Device {
       Wrapped<String?>? asset,
       Wrapped<String?>? clientId,
       Wrapped<String?>? $client,
+      Wrapped<GeoLocation?>? currentLocation,
       Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<String>? modelId,
@@ -10290,6 +10833,8 @@ extension $DeviceExtension on Device {
       Wrapped<bool?>? movable,
       Wrapped<GeoLocation?>? geolocation,
       Wrapped<CustomWidget?>? customWidget,
+      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<Parameter>?>? parameters,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -10311,6 +10856,9 @@ extension $DeviceExtension on Device {
         asset: (asset != null ? asset.value : this.asset),
         clientId: (clientId != null ? clientId.value : this.clientId),
         $client: ($client != null ? $client.value : this.$client),
+        currentLocation: (currentLocation != null
+            ? currentLocation.value
+            : this.currentLocation),
         name: (name != null ? name.value : this.name),
         description:
             (description != null ? description.value : this.description),
@@ -10336,6 +10884,8 @@ extension $DeviceExtension on Device {
             (geolocation != null ? geolocation.value : this.geolocation),
         customWidget:
             (customWidget != null ? customWidget.value : this.customWidget),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
+        parameters: (parameters != null ? parameters.value : this.parameters),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -10652,6 +11202,7 @@ class ConditionInfo {
     this.rightValue,
     this.values,
     this.tags,
+    this.clientIds,
   });
 
   factory ConditionInfo.fromJson(Map<String, dynamic> json) =>
@@ -10687,6 +11238,8 @@ class ConditionInfo {
   final List<String>? values;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   static const fromJsonFactory = _$ConditionInfoFromJson;
 
   @override
@@ -10719,7 +11272,10 @@ class ConditionInfo {
             (identical(other.values, values) ||
                 const DeepCollectionEquality().equals(other.values, values)) &&
             (identical(other.tags, tags) ||
-                const DeepCollectionEquality().equals(other.tags, tags)));
+                const DeepCollectionEquality().equals(other.tags, tags)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)));
   }
 
   @override
@@ -10738,6 +11294,7 @@ class ConditionInfo {
       const DeepCollectionEquality().hash(rightValue) ^
       const DeepCollectionEquality().hash(values) ^
       const DeepCollectionEquality().hash(tags) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       runtimeType.hashCode;
 }
 
@@ -10753,7 +11310,8 @@ extension $ConditionInfoExtension on ConditionInfo {
       String? leftValue,
       String? rightValue,
       List<String>? values,
-      List<String>? tags}) {
+      List<String>? tags,
+      List<String>? clientIds}) {
     return ConditionInfo(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -10765,7 +11323,8 @@ extension $ConditionInfoExtension on ConditionInfo {
         leftValue: leftValue ?? this.leftValue,
         rightValue: rightValue ?? this.rightValue,
         values: values ?? this.values,
-        tags: tags ?? this.tags);
+        tags: tags ?? this.tags,
+        clientIds: clientIds ?? this.clientIds);
   }
 
   ConditionInfo copyWithWrapped(
@@ -10779,7 +11338,8 @@ extension $ConditionInfoExtension on ConditionInfo {
       Wrapped<String?>? leftValue,
       Wrapped<String?>? rightValue,
       Wrapped<List<String>?>? values,
-      Wrapped<List<String>?>? tags}) {
+      Wrapped<List<String>?>? tags,
+      Wrapped<List<String>?>? clientIds}) {
     return ConditionInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -10792,7 +11352,8 @@ extension $ConditionInfoExtension on ConditionInfo {
         leftValue: (leftValue != null ? leftValue.value : this.leftValue),
         rightValue: (rightValue != null ? rightValue.value : this.rightValue),
         values: (values != null ? values.value : this.values),
-        tags: (tags != null ? tags.value : this.tags));
+        tags: (tags != null ? tags.value : this.tags),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
   }
 }
 
@@ -10810,6 +11371,7 @@ class Condition {
     this.rightValue,
     this.values,
     this.tags,
+    this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -10852,6 +11414,8 @@ class Condition {
   final List<String>? values;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -10899,6 +11463,9 @@ class Condition {
                 const DeepCollectionEquality().equals(other.values, values)) &&
             (identical(other.tags, tags) ||
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -10936,6 +11503,7 @@ class Condition {
       const DeepCollectionEquality().hash(rightValue) ^
       const DeepCollectionEquality().hash(values) ^
       const DeepCollectionEquality().hash(tags) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -10959,6 +11527,7 @@ extension $ConditionExtension on Condition {
       String? rightValue,
       List<String>? values,
       List<String>? tags,
+      List<String>? clientIds,
       String? domainKey,
       String? id,
       String? rtype,
@@ -10978,6 +11547,7 @@ extension $ConditionExtension on Condition {
         rightValue: rightValue ?? this.rightValue,
         values: values ?? this.values,
         tags: tags ?? this.tags,
+        clientIds: clientIds ?? this.clientIds,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -10999,6 +11569,7 @@ extension $ConditionExtension on Condition {
       Wrapped<String?>? rightValue,
       Wrapped<List<String>?>? values,
       Wrapped<List<String>?>? tags,
+      Wrapped<List<String>?>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -11019,6 +11590,7 @@ extension $ConditionExtension on Condition {
         rightValue: (rightValue != null ? rightValue.value : this.rightValue),
         values: (values != null ? values.value : this.values),
         tags: (tags != null ? tags.value : this.tags),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -11495,6 +12067,7 @@ class AlarmInfo {
     required this.conditions,
     this.tags,
     this.showOnlyIfMatched,
+    this.clientIds,
   });
 
   factory AlarmInfo.fromJson(Map<String, dynamic> json) =>
@@ -11524,6 +12097,8 @@ class AlarmInfo {
   final List<String>? tags;
   @JsonKey(name: 'showOnlyIfMatched', includeIfNull: false)
   final bool? showOnlyIfMatched;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   static const fromJsonFactory = _$AlarmInfoFromJson;
 
   @override
@@ -11552,7 +12127,10 @@ class AlarmInfo {
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.showOnlyIfMatched, showOnlyIfMatched) ||
                 const DeepCollectionEquality()
-                    .equals(other.showOnlyIfMatched, showOnlyIfMatched)));
+                    .equals(other.showOnlyIfMatched, showOnlyIfMatched)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)));
   }
 
   @override
@@ -11569,6 +12147,7 @@ class AlarmInfo {
       const DeepCollectionEquality().hash(conditions) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(showOnlyIfMatched) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       runtimeType.hashCode;
 }
 
@@ -11582,7 +12161,8 @@ extension $AlarmInfoExtension on AlarmInfo {
       List<String>? stateIcons,
       List<AlarmMatchGroup>? conditions,
       List<String>? tags,
-      bool? showOnlyIfMatched}) {
+      bool? showOnlyIfMatched,
+      List<String>? clientIds}) {
     return AlarmInfo(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -11592,7 +12172,8 @@ extension $AlarmInfoExtension on AlarmInfo {
         stateIcons: stateIcons ?? this.stateIcons,
         conditions: conditions ?? this.conditions,
         tags: tags ?? this.tags,
-        showOnlyIfMatched: showOnlyIfMatched ?? this.showOnlyIfMatched);
+        showOnlyIfMatched: showOnlyIfMatched ?? this.showOnlyIfMatched,
+        clientIds: clientIds ?? this.clientIds);
   }
 
   AlarmInfo copyWithWrapped(
@@ -11604,7 +12185,8 @@ extension $AlarmInfoExtension on AlarmInfo {
       Wrapped<List<String>?>? stateIcons,
       Wrapped<List<AlarmMatchGroup>>? conditions,
       Wrapped<List<String>?>? tags,
-      Wrapped<bool?>? showOnlyIfMatched}) {
+      Wrapped<bool?>? showOnlyIfMatched,
+      Wrapped<List<String>?>? clientIds}) {
     return AlarmInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -11617,7 +12199,8 @@ extension $AlarmInfoExtension on AlarmInfo {
         tags: (tags != null ? tags.value : this.tags),
         showOnlyIfMatched: (showOnlyIfMatched != null
             ? showOnlyIfMatched.value
-            : this.showOnlyIfMatched));
+            : this.showOnlyIfMatched),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
   }
 }
 
@@ -11633,6 +12216,7 @@ class Alarm {
     required this.conditions,
     this.tags,
     this.showOnlyIfMatched,
+    this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -11668,6 +12252,8 @@ class Alarm {
   final List<String>? tags;
   @JsonKey(name: 'showOnlyIfMatched', includeIfNull: false)
   final bool? showOnlyIfMatched;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -11711,6 +12297,9 @@ class Alarm {
             (identical(other.showOnlyIfMatched, showOnlyIfMatched) ||
                 const DeepCollectionEquality()
                     .equals(other.showOnlyIfMatched, showOnlyIfMatched)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -11746,6 +12335,7 @@ class Alarm {
       const DeepCollectionEquality().hash(conditions) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(showOnlyIfMatched) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -11767,6 +12357,7 @@ extension $AlarmExtension on Alarm {
       List<AlarmMatchGroup>? conditions,
       List<String>? tags,
       bool? showOnlyIfMatched,
+      List<String>? clientIds,
       String? domainKey,
       String? id,
       String? rtype,
@@ -11784,6 +12375,7 @@ extension $AlarmExtension on Alarm {
         conditions: conditions ?? this.conditions,
         tags: tags ?? this.tags,
         showOnlyIfMatched: showOnlyIfMatched ?? this.showOnlyIfMatched,
+        clientIds: clientIds ?? this.clientIds,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -11803,6 +12395,7 @@ extension $AlarmExtension on Alarm {
       Wrapped<List<AlarmMatchGroup>>? conditions,
       Wrapped<List<String>?>? tags,
       Wrapped<bool?>? showOnlyIfMatched,
+      Wrapped<List<String>?>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -11823,6 +12416,7 @@ extension $AlarmExtension on Alarm {
         showOnlyIfMatched: (showOnlyIfMatched != null
             ? showOnlyIfMatched.value
             : this.showOnlyIfMatched),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -12249,6 +12843,8 @@ class ControlInfo {
     this.stateIcons,
     this.tags,
     this.commands,
+    this.roles,
+    this.clientIds,
   });
 
   factory ControlInfo.fromJson(Map<String, dynamic> json) =>
@@ -12272,6 +12868,10 @@ class ControlInfo {
   @JsonKey(
       name: 'commands', includeIfNull: false, defaultValue: <ControlCommand>[])
   final List<ControlCommand>? commands;
+  @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? roles;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   static const fromJsonFactory = _$ControlInfoFromJson;
 
   @override
@@ -12295,7 +12895,12 @@ class ControlInfo {
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.commands, commands) ||
                 const DeepCollectionEquality()
-                    .equals(other.commands, commands)));
+                    .equals(other.commands, commands)) &&
+            (identical(other.roles, roles) ||
+                const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)));
   }
 
   @override
@@ -12310,6 +12915,8 @@ class ControlInfo {
       const DeepCollectionEquality().hash(stateIcons) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(commands) ^
+      const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       runtimeType.hashCode;
 }
 
@@ -12321,7 +12928,9 @@ extension $ControlInfoExtension on ControlInfo {
       int? state,
       List<String>? stateIcons,
       List<String>? tags,
-      List<ControlCommand>? commands}) {
+      List<ControlCommand>? commands,
+      List<String>? roles,
+      List<String>? clientIds}) {
     return ControlInfo(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -12329,7 +12938,9 @@ extension $ControlInfoExtension on ControlInfo {
         state: state ?? this.state,
         stateIcons: stateIcons ?? this.stateIcons,
         tags: tags ?? this.tags,
-        commands: commands ?? this.commands);
+        commands: commands ?? this.commands,
+        roles: roles ?? this.roles,
+        clientIds: clientIds ?? this.clientIds);
   }
 
   ControlInfo copyWithWrapped(
@@ -12339,7 +12950,9 @@ extension $ControlInfoExtension on ControlInfo {
       Wrapped<int>? state,
       Wrapped<List<String>?>? stateIcons,
       Wrapped<List<String>?>? tags,
-      Wrapped<List<ControlCommand>?>? commands}) {
+      Wrapped<List<ControlCommand>?>? commands,
+      Wrapped<List<String>?>? roles,
+      Wrapped<List<String>?>? clientIds}) {
     return ControlInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -12348,7 +12961,9 @@ extension $ControlInfoExtension on ControlInfo {
         state: (state != null ? state.value : this.state),
         stateIcons: (stateIcons != null ? stateIcons.value : this.stateIcons),
         tags: (tags != null ? tags.value : this.tags),
-        commands: (commands != null ? commands.value : this.commands));
+        commands: (commands != null ? commands.value : this.commands),
+        roles: (roles != null ? roles.value : this.roles),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
   }
 }
 
@@ -12362,6 +12977,8 @@ class Control {
     this.stateIcons,
     this.tags,
     this.commands,
+    this.roles,
+    this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -12392,6 +13009,10 @@ class Control {
   @JsonKey(
       name: 'commands', includeIfNull: false, defaultValue: <ControlCommand>[])
   final List<ControlCommand>? commands;
+  @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? roles;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -12430,6 +13051,11 @@ class Control {
             (identical(other.commands, commands) ||
                 const DeepCollectionEquality()
                     .equals(other.commands, commands)) &&
+            (identical(other.roles, roles) ||
+                const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -12463,6 +13089,8 @@ class Control {
       const DeepCollectionEquality().hash(stateIcons) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(commands) ^
+      const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -12482,6 +13110,8 @@ extension $ControlExtension on Control {
       List<String>? stateIcons,
       List<String>? tags,
       List<ControlCommand>? commands,
+      List<String>? roles,
+      List<String>? clientIds,
       String? domainKey,
       String? id,
       String? rtype,
@@ -12497,6 +13127,8 @@ extension $ControlExtension on Control {
         stateIcons: stateIcons ?? this.stateIcons,
         tags: tags ?? this.tags,
         commands: commands ?? this.commands,
+        roles: roles ?? this.roles,
+        clientIds: clientIds ?? this.clientIds,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -12514,6 +13146,8 @@ extension $ControlExtension on Control {
       Wrapped<List<String>?>? stateIcons,
       Wrapped<List<String>?>? tags,
       Wrapped<List<ControlCommand>?>? commands,
+      Wrapped<List<String>?>? roles,
+      Wrapped<List<String>?>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -12530,6 +13164,8 @@ extension $ControlExtension on Control {
         stateIcons: (stateIcons != null ? stateIcons.value : this.stateIcons),
         tags: (tags != null ? tags.value : this.tags),
         commands: (commands != null ? commands.value : this.commands),
+        roles: (roles != null ? roles.value : this.roles),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -12847,6 +13483,7 @@ class EventInfo {
     this.voiceTemplate,
     this.tags,
     this.roles,
+    this.clientIds,
   });
 
   factory EventInfo.fromJson(Map<String, dynamic> json) =>
@@ -12880,6 +13517,8 @@ class EventInfo {
   final List<String>? tags;
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   static const fromJsonFactory = _$EventInfoFromJson;
 
   @override
@@ -12917,7 +13556,10 @@ class EventInfo {
             (identical(other.tags, tags) ||
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.roles, roles) ||
-                const DeepCollectionEquality().equals(other.roles, roles)));
+                const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)));
   }
 
   @override
@@ -12937,6 +13579,7 @@ class EventInfo {
       const DeepCollectionEquality().hash(voiceTemplate) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       runtimeType.hashCode;
 }
 
@@ -12953,7 +13596,8 @@ extension $EventInfoExtension on EventInfo {
       FCMTemplate? fcmTemplate,
       VoiceTemplate? voiceTemplate,
       List<String>? tags,
-      List<String>? roles}) {
+      List<String>? roles,
+      List<String>? clientIds}) {
     return EventInfo(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -12966,7 +13610,8 @@ extension $EventInfoExtension on EventInfo {
         fcmTemplate: fcmTemplate ?? this.fcmTemplate,
         voiceTemplate: voiceTemplate ?? this.voiceTemplate,
         tags: tags ?? this.tags,
-        roles: roles ?? this.roles);
+        roles: roles ?? this.roles,
+        clientIds: clientIds ?? this.clientIds);
   }
 
   EventInfo copyWithWrapped(
@@ -12981,7 +13626,8 @@ extension $EventInfoExtension on EventInfo {
       Wrapped<FCMTemplate?>? fcmTemplate,
       Wrapped<VoiceTemplate?>? voiceTemplate,
       Wrapped<List<String>?>? tags,
-      Wrapped<List<String>?>? roles}) {
+      Wrapped<List<String>?>? roles,
+      Wrapped<List<String>?>? clientIds}) {
     return EventInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -13001,7 +13647,8 @@ extension $EventInfoExtension on EventInfo {
         voiceTemplate:
             (voiceTemplate != null ? voiceTemplate.value : this.voiceTemplate),
         tags: (tags != null ? tags.value : this.tags),
-        roles: (roles != null ? roles.value : this.roles));
+        roles: (roles != null ? roles.value : this.roles),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
   }
 }
 
@@ -13020,6 +13667,7 @@ class Event {
     this.voiceTemplate,
     this.tags,
     this.roles,
+    this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -13059,6 +13707,8 @@ class Event {
   final List<String>? tags;
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -13111,6 +13761,9 @@ class Event {
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.roles, roles) ||
                 const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -13149,6 +13802,7 @@ class Event {
       const DeepCollectionEquality().hash(voiceTemplate) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -13173,6 +13827,7 @@ extension $EventExtension on Event {
       VoiceTemplate? voiceTemplate,
       List<String>? tags,
       List<String>? roles,
+      List<String>? clientIds,
       String? domainKey,
       String? id,
       String? rtype,
@@ -13193,6 +13848,7 @@ extension $EventExtension on Event {
         voiceTemplate: voiceTemplate ?? this.voiceTemplate,
         tags: tags ?? this.tags,
         roles: roles ?? this.roles,
+        clientIds: clientIds ?? this.clientIds,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -13215,6 +13871,7 @@ extension $EventExtension on Event {
       Wrapped<VoiceTemplate?>? voiceTemplate,
       Wrapped<List<String>?>? tags,
       Wrapped<List<String>?>? roles,
+      Wrapped<List<String>?>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -13242,6 +13899,7 @@ extension $EventExtension on Event {
             (voiceTemplate != null ? voiceTemplate.value : this.voiceTemplate),
         tags: (tags != null ? tags.value : this.tags),
         roles: (roles != null ? roles.value : this.roles),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -16297,6 +16955,7 @@ class DisplayInfo {
     this.icon,
     required this.conditions,
     this.tags,
+    this.clientIds,
   });
 
   factory DisplayInfo.fromJson(Map<String, dynamic> json) =>
@@ -16322,6 +16981,8 @@ class DisplayInfo {
   final List<DisplayMatchGroup> conditions;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   static const fromJsonFactory = _$DisplayInfoFromJson;
 
   @override
@@ -16344,7 +17005,10 @@ class DisplayInfo {
                 const DeepCollectionEquality()
                     .equals(other.conditions, conditions)) &&
             (identical(other.tags, tags) ||
-                const DeepCollectionEquality().equals(other.tags, tags)));
+                const DeepCollectionEquality().equals(other.tags, tags)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)));
   }
 
   @override
@@ -16359,6 +17023,7 @@ class DisplayInfo {
       const DeepCollectionEquality().hash(icon) ^
       const DeepCollectionEquality().hash(conditions) ^
       const DeepCollectionEquality().hash(tags) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       runtimeType.hashCode;
 }
 
@@ -16370,7 +17035,8 @@ extension $DisplayInfoExtension on DisplayInfo {
       String? modelId,
       String? icon,
       List<DisplayMatchGroup>? conditions,
-      List<String>? tags}) {
+      List<String>? tags,
+      List<String>? clientIds}) {
     return DisplayInfo(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -16378,7 +17044,8 @@ extension $DisplayInfoExtension on DisplayInfo {
         modelId: modelId ?? this.modelId,
         icon: icon ?? this.icon,
         conditions: conditions ?? this.conditions,
-        tags: tags ?? this.tags);
+        tags: tags ?? this.tags,
+        clientIds: clientIds ?? this.clientIds);
   }
 
   DisplayInfo copyWithWrapped(
@@ -16388,7 +17055,8 @@ extension $DisplayInfoExtension on DisplayInfo {
       Wrapped<String>? modelId,
       Wrapped<String?>? icon,
       Wrapped<List<DisplayMatchGroup>>? conditions,
-      Wrapped<List<String>?>? tags}) {
+      Wrapped<List<String>?>? tags,
+      Wrapped<List<String>?>? clientIds}) {
     return DisplayInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -16397,7 +17065,8 @@ extension $DisplayInfoExtension on DisplayInfo {
         modelId: (modelId != null ? modelId.value : this.modelId),
         icon: (icon != null ? icon.value : this.icon),
         conditions: (conditions != null ? conditions.value : this.conditions),
-        tags: (tags != null ? tags.value : this.tags));
+        tags: (tags != null ? tags.value : this.tags),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
   }
 }
 
@@ -16411,6 +17080,7 @@ class Display {
     this.icon,
     required this.conditions,
     this.tags,
+    this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -16443,6 +17113,8 @@ class Display {
   final List<DisplayMatchGroup> conditions;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -16480,6 +17152,9 @@ class Display {
                     .equals(other.conditions, conditions)) &&
             (identical(other.tags, tags) ||
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -16513,6 +17188,7 @@ class Display {
       const DeepCollectionEquality().hash(icon) ^
       const DeepCollectionEquality().hash(conditions) ^
       const DeepCollectionEquality().hash(tags) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -16532,6 +17208,7 @@ extension $DisplayExtension on Display {
       String? icon,
       List<DisplayMatchGroup>? conditions,
       List<String>? tags,
+      List<String>? clientIds,
       String? domainKey,
       String? id,
       String? rtype,
@@ -16547,6 +17224,7 @@ extension $DisplayExtension on Display {
         icon: icon ?? this.icon,
         conditions: conditions ?? this.conditions,
         tags: tags ?? this.tags,
+        clientIds: clientIds ?? this.clientIds,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -16564,6 +17242,7 @@ extension $DisplayExtension on Display {
       Wrapped<String?>? icon,
       Wrapped<List<DisplayMatchGroup>>? conditions,
       Wrapped<List<String>?>? tags,
+      Wrapped<List<String>?>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -16580,6 +17259,7 @@ extension $DisplayExtension on Display {
         icon: (icon != null ? icon.value : this.icon),
         conditions: (conditions != null ? conditions.value : this.conditions),
         tags: (tags != null ? tags.value : this.tags),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -17065,6 +17745,8 @@ class DeviceViewInfo {
     this.showInfo,
     this.infoPosition,
     this.border,
+    this.roles,
+    this.clientIds,
   });
 
   factory DeviceViewInfo.fromJson(Map<String, dynamic> json) =>
@@ -17130,6 +17812,10 @@ class DeviceViewInfo {
       deviceViewInfoBorderNullableFromJson(
           value, enums.DeviceViewInfoBorder.none);
 
+  @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? roles;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   static const fromJsonFactory = _$DeviceViewInfoFromJson;
 
   @override
@@ -17180,7 +17866,12 @@ class DeviceViewInfo {
                 const DeepCollectionEquality()
                     .equals(other.infoPosition, infoPosition)) &&
             (identical(other.border, border) ||
-                const DeepCollectionEquality().equals(other.border, border)));
+                const DeepCollectionEquality().equals(other.border, border)) &&
+            (identical(other.roles, roles) ||
+                const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)));
   }
 
   @override
@@ -17206,6 +17897,8 @@ class DeviceViewInfo {
       const DeepCollectionEquality().hash(showInfo) ^
       const DeepCollectionEquality().hash(infoPosition) ^
       const DeepCollectionEquality().hash(border) ^
+      const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       runtimeType.hashCode;
 }
 
@@ -17228,7 +17921,9 @@ extension $DeviceViewInfoExtension on DeviceViewInfo {
       int? rightWidth,
       bool? showInfo,
       enums.DeviceViewInfoInfoPosition? infoPosition,
-      enums.DeviceViewInfoBorder? border}) {
+      enums.DeviceViewInfoBorder? border,
+      List<String>? roles,
+      List<String>? clientIds}) {
     return DeviceViewInfo(
         modelId: modelId ?? this.modelId,
         name: name ?? this.name,
@@ -17247,7 +17942,9 @@ extension $DeviceViewInfoExtension on DeviceViewInfo {
         rightWidth: rightWidth ?? this.rightWidth,
         showInfo: showInfo ?? this.showInfo,
         infoPosition: infoPosition ?? this.infoPosition,
-        border: border ?? this.border);
+        border: border ?? this.border,
+        roles: roles ?? this.roles,
+        clientIds: clientIds ?? this.clientIds);
   }
 
   DeviceViewInfo copyWithWrapped(
@@ -17268,7 +17965,9 @@ extension $DeviceViewInfoExtension on DeviceViewInfo {
       Wrapped<int?>? rightWidth,
       Wrapped<bool?>? showInfo,
       Wrapped<enums.DeviceViewInfoInfoPosition?>? infoPosition,
-      Wrapped<enums.DeviceViewInfoBorder?>? border}) {
+      Wrapped<enums.DeviceViewInfoBorder?>? border,
+      Wrapped<List<String>?>? roles,
+      Wrapped<List<String>?>? clientIds}) {
     return DeviceViewInfo(
         modelId: (modelId != null ? modelId.value : this.modelId),
         name: (name != null ? name.value : this.name),
@@ -17290,7 +17989,9 @@ extension $DeviceViewInfoExtension on DeviceViewInfo {
         showInfo: (showInfo != null ? showInfo.value : this.showInfo),
         infoPosition:
             (infoPosition != null ? infoPosition.value : this.infoPosition),
-        border: (border != null ? border.value : this.border));
+        border: (border != null ? border.value : this.border),
+        roles: (roles != null ? roles.value : this.roles),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
   }
 }
 
@@ -17315,6 +18016,8 @@ class DeviceView {
     this.showInfo,
     this.infoPosition,
     this.border,
+    this.roles,
+    this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -17386,6 +18089,10 @@ class DeviceView {
           Object? value) =>
       deviceViewBorderNullableFromJson(value, enums.DeviceViewBorder.none);
 
+  @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? roles;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -17451,6 +18158,11 @@ class DeviceView {
                     .equals(other.infoPosition, infoPosition)) &&
             (identical(other.border, border) ||
                 const DeepCollectionEquality().equals(other.border, border)) &&
+            (identical(other.roles, roles) ||
+                const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -17495,6 +18207,8 @@ class DeviceView {
       const DeepCollectionEquality().hash(showInfo) ^
       const DeepCollectionEquality().hash(infoPosition) ^
       const DeepCollectionEquality().hash(border) ^
+      const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -17525,6 +18239,8 @@ extension $DeviceViewExtension on DeviceView {
       bool? showInfo,
       enums.DeviceViewInfoPosition? infoPosition,
       enums.DeviceViewBorder? border,
+      List<String>? roles,
+      List<String>? clientIds,
       String? domainKey,
       String? id,
       String? rtype,
@@ -17551,6 +18267,8 @@ extension $DeviceViewExtension on DeviceView {
         showInfo: showInfo ?? this.showInfo,
         infoPosition: infoPosition ?? this.infoPosition,
         border: border ?? this.border,
+        roles: roles ?? this.roles,
+        clientIds: clientIds ?? this.clientIds,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -17579,6 +18297,8 @@ extension $DeviceViewExtension on DeviceView {
       Wrapped<bool?>? showInfo,
       Wrapped<enums.DeviceViewInfoPosition?>? infoPosition,
       Wrapped<enums.DeviceViewBorder?>? border,
+      Wrapped<List<String>?>? roles,
+      Wrapped<List<String>?>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -17608,6 +18328,8 @@ extension $DeviceViewExtension on DeviceView {
         infoPosition:
             (infoPosition != null ? infoPosition.value : this.infoPosition),
         border: (border != null ? border.value : this.border),
+        roles: (roles != null ? roles.value : this.roles),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -21176,6 +21898,8 @@ class DashboardScreenInfo {
     this.paddingConfig,
     this.marginConfig,
     required this.rows,
+    this.roles,
+    this.clientIds,
   });
 
   factory DashboardScreenInfo.fromJson(Map<String, dynamic> json) =>
@@ -21222,6 +21946,10 @@ class DashboardScreenInfo {
   final PaddingConfig? marginConfig;
   @JsonKey(name: 'rows', includeIfNull: false, defaultValue: <ScreenRow>[])
   final List<ScreenRow> rows;
+  @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? roles;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   static const fromJsonFactory = _$DashboardScreenInfoFromJson;
 
   @override
@@ -21281,7 +22009,12 @@ class DashboardScreenInfo {
                 const DeepCollectionEquality()
                     .equals(other.marginConfig, marginConfig)) &&
             (identical(other.rows, rows) ||
-                const DeepCollectionEquality().equals(other.rows, rows)));
+                const DeepCollectionEquality().equals(other.rows, rows)) &&
+            (identical(other.roles, roles) ||
+                const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)));
   }
 
   @override
@@ -21308,6 +22041,8 @@ class DashboardScreenInfo {
       const DeepCollectionEquality().hash(paddingConfig) ^
       const DeepCollectionEquality().hash(marginConfig) ^
       const DeepCollectionEquality().hash(rows) ^
+      const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       runtimeType.hashCode;
 }
 
@@ -21331,7 +22066,9 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
       BorderConfig? screenBorderConfig,
       PaddingConfig? paddingConfig,
       PaddingConfig? marginConfig,
-      List<ScreenRow>? rows}) {
+      List<ScreenRow>? rows,
+      List<String>? roles,
+      List<String>? clientIds}) {
     return DashboardScreenInfo(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -21351,7 +22088,9 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
         screenBorderConfig: screenBorderConfig ?? this.screenBorderConfig,
         paddingConfig: paddingConfig ?? this.paddingConfig,
         marginConfig: marginConfig ?? this.marginConfig,
-        rows: rows ?? this.rows);
+        rows: rows ?? this.rows,
+        roles: roles ?? this.roles,
+        clientIds: clientIds ?? this.clientIds);
   }
 
   DashboardScreenInfo copyWithWrapped(
@@ -21373,7 +22112,9 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
       Wrapped<BorderConfig?>? screenBorderConfig,
       Wrapped<PaddingConfig?>? paddingConfig,
       Wrapped<PaddingConfig?>? marginConfig,
-      Wrapped<List<ScreenRow>>? rows}) {
+      Wrapped<List<ScreenRow>>? rows,
+      Wrapped<List<String>?>? roles,
+      Wrapped<List<String>?>? clientIds}) {
     return DashboardScreenInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -21410,7 +22151,9 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
             (paddingConfig != null ? paddingConfig.value : this.paddingConfig),
         marginConfig:
             (marginConfig != null ? marginConfig.value : this.marginConfig),
-        rows: (rows != null ? rows.value : this.rows));
+        rows: (rows != null ? rows.value : this.rows),
+        roles: (roles != null ? roles.value : this.roles),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
   }
 }
 
@@ -21443,6 +22186,8 @@ class DashboardScreen {
     this.paddingConfig,
     this.marginConfig,
     required this.rows,
+    this.roles,
+    this.clientIds,
   });
 
   factory DashboardScreen.fromJson(Map<String, dynamic> json) =>
@@ -21503,6 +22248,10 @@ class DashboardScreen {
   final PaddingConfig? marginConfig;
   @JsonKey(name: 'rows', includeIfNull: false, defaultValue: <ScreenRow>[])
   final List<ScreenRow> rows;
+  @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? roles;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   static const fromJsonFactory = _$DashboardScreenFromJson;
 
   @override
@@ -21577,7 +22326,9 @@ class DashboardScreen {
             (identical(other.paddingConfig, paddingConfig) ||
                 const DeepCollectionEquality().equals(other.paddingConfig, paddingConfig)) &&
             (identical(other.marginConfig, marginConfig) || const DeepCollectionEquality().equals(other.marginConfig, marginConfig)) &&
-            (identical(other.rows, rows) || const DeepCollectionEquality().equals(other.rows, rows)));
+            (identical(other.rows, rows) || const DeepCollectionEquality().equals(other.rows, rows)) &&
+            (identical(other.roles, roles) || const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.clientIds, clientIds) || const DeepCollectionEquality().equals(other.clientIds, clientIds)));
   }
 
   @override
@@ -21611,6 +22362,8 @@ class DashboardScreen {
       const DeepCollectionEquality().hash(paddingConfig) ^
       const DeepCollectionEquality().hash(marginConfig) ^
       const DeepCollectionEquality().hash(rows) ^
+      const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       runtimeType.hashCode;
 }
 
@@ -21641,7 +22394,9 @@ extension $DashboardScreenExtension on DashboardScreen {
       BorderConfig? screenBorderConfig,
       PaddingConfig? paddingConfig,
       PaddingConfig? marginConfig,
-      List<ScreenRow>? rows}) {
+      List<ScreenRow>? rows,
+      List<String>? roles,
+      List<String>? clientIds}) {
     return DashboardScreen(
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
@@ -21668,7 +22423,9 @@ extension $DashboardScreenExtension on DashboardScreen {
         screenBorderConfig: screenBorderConfig ?? this.screenBorderConfig,
         paddingConfig: paddingConfig ?? this.paddingConfig,
         marginConfig: marginConfig ?? this.marginConfig,
-        rows: rows ?? this.rows);
+        rows: rows ?? this.rows,
+        roles: roles ?? this.roles,
+        clientIds: clientIds ?? this.clientIds);
   }
 
   DashboardScreen copyWithWrapped(
@@ -21697,7 +22454,9 @@ extension $DashboardScreenExtension on DashboardScreen {
       Wrapped<BorderConfig?>? screenBorderConfig,
       Wrapped<PaddingConfig?>? paddingConfig,
       Wrapped<PaddingConfig?>? marginConfig,
-      Wrapped<List<ScreenRow>>? rows}) {
+      Wrapped<List<ScreenRow>>? rows,
+      Wrapped<List<String>?>? roles,
+      Wrapped<List<String>?>? clientIds}) {
     return DashboardScreen(
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
@@ -21743,7 +22502,9 @@ extension $DashboardScreenExtension on DashboardScreen {
             (paddingConfig != null ? paddingConfig.value : this.paddingConfig),
         marginConfig:
             (marginConfig != null ? marginConfig.value : this.marginConfig),
-        rows: (rows != null ? rows.value : this.rows));
+        rows: (rows != null ? rows.value : this.rows),
+        roles: (roles != null ? roles.value : this.roles),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
   }
 }
 
@@ -22186,6 +22947,8 @@ class EventRegistrationInfo {
     this.name,
     this.targetDeviceIds,
     this.tags,
+    this.roles,
+    this.clientIds,
   });
 
   factory EventRegistrationInfo.fromJson(Map<String, dynamic> json) =>
@@ -22217,6 +22980,10 @@ class EventRegistrationInfo {
   final List<String>? targetDeviceIds;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
+  @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? roles;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   static const fromJsonFactory = _$EventRegistrationInfoFromJson;
 
   @override
@@ -22249,7 +23016,12 @@ class EventRegistrationInfo {
                 const DeepCollectionEquality()
                     .equals(other.targetDeviceIds, targetDeviceIds)) &&
             (identical(other.tags, tags) ||
-                const DeepCollectionEquality().equals(other.tags, tags)));
+                const DeepCollectionEquality().equals(other.tags, tags)) &&
+            (identical(other.roles, roles) ||
+                const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)));
   }
 
   @override
@@ -22268,6 +23040,8 @@ class EventRegistrationInfo {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(targetDeviceIds) ^
       const DeepCollectionEquality().hash(tags) ^
+      const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       runtimeType.hashCode;
 }
 
@@ -22283,7 +23057,9 @@ extension $EventRegistrationInfoExtension on EventRegistrationInfo {
       String? phoneNumber,
       String? name,
       List<String>? targetDeviceIds,
-      List<String>? tags}) {
+      List<String>? tags,
+      List<String>? roles,
+      List<String>? clientIds}) {
     return EventRegistrationInfo(
         eventId: eventId ?? this.eventId,
         notification: notification ?? this.notification,
@@ -22295,7 +23071,9 @@ extension $EventRegistrationInfoExtension on EventRegistrationInfo {
         phoneNumber: phoneNumber ?? this.phoneNumber,
         name: name ?? this.name,
         targetDeviceIds: targetDeviceIds ?? this.targetDeviceIds,
-        tags: tags ?? this.tags);
+        tags: tags ?? this.tags,
+        roles: roles ?? this.roles,
+        clientIds: clientIds ?? this.clientIds);
   }
 
   EventRegistrationInfo copyWithWrapped(
@@ -22309,7 +23087,9 @@ extension $EventRegistrationInfoExtension on EventRegistrationInfo {
       Wrapped<String?>? phoneNumber,
       Wrapped<String?>? name,
       Wrapped<List<String>?>? targetDeviceIds,
-      Wrapped<List<String>?>? tags}) {
+      Wrapped<List<String>?>? tags,
+      Wrapped<List<String>?>? roles,
+      Wrapped<List<String>?>? clientIds}) {
     return EventRegistrationInfo(
         eventId: (eventId != null ? eventId.value : this.eventId),
         notification:
@@ -22325,7 +23105,9 @@ extension $EventRegistrationInfoExtension on EventRegistrationInfo {
         targetDeviceIds: (targetDeviceIds != null
             ? targetDeviceIds.value
             : this.targetDeviceIds),
-        tags: (tags != null ? tags.value : this.tags));
+        tags: (tags != null ? tags.value : this.tags),
+        roles: (roles != null ? roles.value : this.roles),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
   }
 }
 
@@ -22393,6 +23175,8 @@ class EventRegistration {
     this.emailId,
     this.phoneNumber,
     this.targetDeviceIds,
+    this.roles,
+    this.clientIds,
     required this.userId,
   });
 
@@ -22439,6 +23223,10 @@ class EventRegistration {
   @JsonKey(
       name: 'targetDeviceIds', includeIfNull: false, defaultValue: <String>[])
   final List<String>? targetDeviceIds;
+  @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? roles;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   @JsonKey(name: 'userId', includeIfNull: false, defaultValue: '')
   final String userId;
   static const fromJsonFactory = _$EventRegistrationFromJson;
@@ -22493,6 +23281,11 @@ class EventRegistration {
             (identical(other.targetDeviceIds, targetDeviceIds) ||
                 const DeepCollectionEquality()
                     .equals(other.targetDeviceIds, targetDeviceIds)) &&
+            (identical(other.roles, roles) ||
+                const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)) &&
             (identical(other.userId, userId) ||
                 const DeepCollectionEquality().equals(other.userId, userId)));
   }
@@ -22520,6 +23313,8 @@ class EventRegistration {
       const DeepCollectionEquality().hash(emailId) ^
       const DeepCollectionEquality().hash(phoneNumber) ^
       const DeepCollectionEquality().hash(targetDeviceIds) ^
+      const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(userId) ^
       runtimeType.hashCode;
 }
@@ -22544,6 +23339,8 @@ extension $EventRegistrationExtension on EventRegistration {
       String? emailId,
       String? phoneNumber,
       List<String>? targetDeviceIds,
+      List<String>? roles,
+      List<String>? clientIds,
       String? userId}) {
     return EventRegistration(
         domainKey: domainKey ?? this.domainKey,
@@ -22564,6 +23361,8 @@ extension $EventRegistrationExtension on EventRegistration {
         emailId: emailId ?? this.emailId,
         phoneNumber: phoneNumber ?? this.phoneNumber,
         targetDeviceIds: targetDeviceIds ?? this.targetDeviceIds,
+        roles: roles ?? this.roles,
+        clientIds: clientIds ?? this.clientIds,
         userId: userId ?? this.userId);
   }
 
@@ -22586,6 +23385,8 @@ extension $EventRegistrationExtension on EventRegistration {
       Wrapped<String?>? emailId,
       Wrapped<String?>? phoneNumber,
       Wrapped<List<String>?>? targetDeviceIds,
+      Wrapped<List<String>?>? roles,
+      Wrapped<List<String>?>? clientIds,
       Wrapped<String>? userId}) {
     return EventRegistration(
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
@@ -22612,6 +23413,8 @@ extension $EventRegistrationExtension on EventRegistration {
         targetDeviceIds: (targetDeviceIds != null
             ? targetDeviceIds.value
             : this.targetDeviceIds),
+        roles: (roles != null ? roles.value : this.roles),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         userId: (userId != null ? userId.value : this.userId));
   }
 }
@@ -24565,6 +25368,7 @@ class ScreenWidgetInfo {
     required this.widgetType,
     required this.attributes,
     this.target,
+    this.clientIds,
   });
 
   factory ScreenWidgetInfo.fromJson(Map<String, dynamic> json) =>
@@ -24594,6 +25398,8 @@ class ScreenWidgetInfo {
     fromJson: screenWidgetInfoTargetNullableFromJson,
   )
   final enums.ScreenWidgetInfoTarget? target;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   static const fromJsonFactory = _$ScreenWidgetInfoFromJson;
 
   @override
@@ -24619,7 +25425,10 @@ class ScreenWidgetInfo {
                 const DeepCollectionEquality()
                     .equals(other.attributes, attributes)) &&
             (identical(other.target, target) ||
-                const DeepCollectionEquality().equals(other.target, target)));
+                const DeepCollectionEquality().equals(other.target, target)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)));
   }
 
   @override
@@ -24635,6 +25444,7 @@ class ScreenWidgetInfo {
       const DeepCollectionEquality().hash(widgetType) ^
       const DeepCollectionEquality().hash(attributes) ^
       const DeepCollectionEquality().hash(target) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       runtimeType.hashCode;
 }
 
@@ -24647,7 +25457,8 @@ extension $ScreenWidgetInfoExtension on ScreenWidgetInfo {
       String? tooltip,
       String? widgetType,
       Object? attributes,
-      enums.ScreenWidgetInfoTarget? target}) {
+      enums.ScreenWidgetInfoTarget? target,
+      List<String>? clientIds}) {
     return ScreenWidgetInfo(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -24656,7 +25467,8 @@ extension $ScreenWidgetInfoExtension on ScreenWidgetInfo {
         tooltip: tooltip ?? this.tooltip,
         widgetType: widgetType ?? this.widgetType,
         attributes: attributes ?? this.attributes,
-        target: target ?? this.target);
+        target: target ?? this.target,
+        clientIds: clientIds ?? this.clientIds);
   }
 
   ScreenWidgetInfo copyWithWrapped(
@@ -24667,7 +25479,8 @@ extension $ScreenWidgetInfoExtension on ScreenWidgetInfo {
       Wrapped<String?>? tooltip,
       Wrapped<String>? widgetType,
       Wrapped<Object>? attributes,
-      Wrapped<enums.ScreenWidgetInfoTarget?>? target}) {
+      Wrapped<enums.ScreenWidgetInfoTarget?>? target,
+      Wrapped<List<String>?>? clientIds}) {
     return ScreenWidgetInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -24677,7 +25490,8 @@ extension $ScreenWidgetInfoExtension on ScreenWidgetInfo {
         tooltip: (tooltip != null ? tooltip.value : this.tooltip),
         widgetType: (widgetType != null ? widgetType.value : this.widgetType),
         attributes: (attributes != null ? attributes.value : this.attributes),
-        target: (target != null ? target.value : this.target));
+        target: (target != null ? target.value : this.target),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
   }
 }
 
@@ -24692,6 +25506,7 @@ class ScreenWidget {
     required this.widgetType,
     required this.attributes,
     this.target,
+    this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -24728,6 +25543,8 @@ class ScreenWidget {
     fromJson: screenWidgetTargetNullableFromJson,
   )
   final enums.ScreenWidgetTarget? target;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -24768,6 +25585,9 @@ class ScreenWidget {
                     .equals(other.attributes, attributes)) &&
             (identical(other.target, target) ||
                 const DeepCollectionEquality().equals(other.target, target)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -24802,6 +25622,7 @@ class ScreenWidget {
       const DeepCollectionEquality().hash(widgetType) ^
       const DeepCollectionEquality().hash(attributes) ^
       const DeepCollectionEquality().hash(target) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -24822,6 +25643,7 @@ extension $ScreenWidgetExtension on ScreenWidget {
       String? widgetType,
       Object? attributes,
       enums.ScreenWidgetTarget? target,
+      List<String>? clientIds,
       String? domainKey,
       String? id,
       String? rtype,
@@ -24838,6 +25660,7 @@ extension $ScreenWidgetExtension on ScreenWidget {
         widgetType: widgetType ?? this.widgetType,
         attributes: attributes ?? this.attributes,
         target: target ?? this.target,
+        clientIds: clientIds ?? this.clientIds,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -24856,6 +25679,7 @@ extension $ScreenWidgetExtension on ScreenWidget {
       Wrapped<String>? widgetType,
       Wrapped<Object>? attributes,
       Wrapped<enums.ScreenWidgetTarget?>? target,
+      Wrapped<List<String>?>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -24873,6 +25697,7 @@ extension $ScreenWidgetExtension on ScreenWidget {
         widgetType: (widgetType != null ? widgetType.value : this.widgetType),
         attributes: (attributes != null ? attributes.value : this.attributes),
         target: (target != null ? target.value : this.target),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -26803,6 +27628,7 @@ class GeoFenceInfo {
     this.multiline,
     this.multipolygon,
     this.circle,
+    this.clientIds,
   });
 
   factory GeoFenceInfo.fromJson(Map<String, dynamic> json) =>
@@ -26842,6 +27668,8 @@ class GeoFenceInfo {
   final GeoMultiPolygon? multipolygon;
   @JsonKey(name: 'circle', includeIfNull: false)
   final GeoCircle? circle;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   static const fromJsonFactory = _$GeoFenceInfoFromJson;
 
   @override
@@ -26880,7 +27708,10 @@ class GeoFenceInfo {
                 const DeepCollectionEquality()
                     .equals(other.multipolygon, multipolygon)) &&
             (identical(other.circle, circle) ||
-                const DeepCollectionEquality().equals(other.circle, circle)));
+                const DeepCollectionEquality().equals(other.circle, circle)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)));
   }
 
   @override
@@ -26901,6 +27732,7 @@ class GeoFenceInfo {
       const DeepCollectionEquality().hash(multiline) ^
       const DeepCollectionEquality().hash(multipolygon) ^
       const DeepCollectionEquality().hash(circle) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       runtimeType.hashCode;
 }
 
@@ -26918,7 +27750,8 @@ extension $GeoFenceInfoExtension on GeoFenceInfo {
       GeoMultiPoint? multipoint,
       GeoMultiLine? multiline,
       GeoMultiPolygon? multipolygon,
-      GeoCircle? circle}) {
+      GeoCircle? circle,
+      List<String>? clientIds}) {
     return GeoFenceInfo(
         name: name ?? this.name,
         label: label ?? this.label,
@@ -26932,7 +27765,8 @@ extension $GeoFenceInfoExtension on GeoFenceInfo {
         multipoint: multipoint ?? this.multipoint,
         multiline: multiline ?? this.multiline,
         multipolygon: multipolygon ?? this.multipolygon,
-        circle: circle ?? this.circle);
+        circle: circle ?? this.circle,
+        clientIds: clientIds ?? this.clientIds);
   }
 
   GeoFenceInfo copyWithWrapped(
@@ -26948,7 +27782,8 @@ extension $GeoFenceInfoExtension on GeoFenceInfo {
       Wrapped<GeoMultiPoint?>? multipoint,
       Wrapped<GeoMultiLine?>? multiline,
       Wrapped<GeoMultiPolygon?>? multipolygon,
-      Wrapped<GeoCircle?>? circle}) {
+      Wrapped<GeoCircle?>? circle,
+      Wrapped<List<String>?>? clientIds}) {
     return GeoFenceInfo(
         name: (name != null ? name.value : this.name),
         label: (label != null ? label.value : this.label),
@@ -26964,7 +27799,8 @@ extension $GeoFenceInfoExtension on GeoFenceInfo {
         multiline: (multiline != null ? multiline.value : this.multiline),
         multipolygon:
             (multipolygon != null ? multipolygon.value : this.multipolygon),
-        circle: (circle != null ? circle.value : this.circle));
+        circle: (circle != null ? circle.value : this.circle),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
   }
 }
 
@@ -27026,6 +27862,7 @@ class GeoFence {
     this.multiline,
     this.multipolygon,
     this.circle,
+    this.clientIds,
     required this.fence,
     required this.domainKey,
     required this.id,
@@ -27073,6 +27910,8 @@ class GeoFence {
   final GeoMultiPolygon? multipolygon;
   @JsonKey(name: 'circle', includeIfNull: false)
   final GeoCircle? circle;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   @JsonKey(name: 'fence', includeIfNull: false)
   final Object fence;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
@@ -27128,6 +27967,9 @@ class GeoFence {
                     .equals(other.multipolygon, multipolygon)) &&
             (identical(other.circle, circle) ||
                 const DeepCollectionEquality().equals(other.circle, circle)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)) &&
             (identical(other.fence, fence) ||
                 const DeepCollectionEquality().equals(other.fence, fence)) &&
             (identical(other.domainKey, domainKey) ||
@@ -27169,6 +28011,7 @@ class GeoFence {
       const DeepCollectionEquality().hash(multiline) ^
       const DeepCollectionEquality().hash(multipolygon) ^
       const DeepCollectionEquality().hash(circle) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(fence) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
@@ -27195,6 +28038,7 @@ extension $GeoFenceExtension on GeoFence {
       GeoMultiLine? multiline,
       GeoMultiPolygon? multipolygon,
       GeoCircle? circle,
+      List<String>? clientIds,
       Object? fence,
       String? domainKey,
       String? id,
@@ -27217,6 +28061,7 @@ extension $GeoFenceExtension on GeoFence {
         multiline: multiline ?? this.multiline,
         multipolygon: multipolygon ?? this.multipolygon,
         circle: circle ?? this.circle,
+        clientIds: clientIds ?? this.clientIds,
         fence: fence ?? this.fence,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
@@ -27241,6 +28086,7 @@ extension $GeoFenceExtension on GeoFence {
       Wrapped<GeoMultiLine?>? multiline,
       Wrapped<GeoMultiPolygon?>? multipolygon,
       Wrapped<GeoCircle?>? circle,
+      Wrapped<List<String>?>? clientIds,
       Wrapped<Object>? fence,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
@@ -27265,6 +28111,7 @@ extension $GeoFenceExtension on GeoFence {
         multipolygon:
             (multipolygon != null ? multipolygon.value : this.multipolygon),
         circle: (circle != null ? circle.value : this.circle),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         fence: (fence != null ? fence.value : this.fence),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
@@ -30960,6 +31807,53 @@ extension $AssetInfoExtension on AssetInfo {
 }
 
 @JsonSerializable(explicitToJson: true)
+class AssetBase {
+  const AssetBase({
+    this.currentLocation,
+  });
+
+  factory AssetBase.fromJson(Map<String, dynamic> json) =>
+      _$AssetBaseFromJson(json);
+
+  static const toJsonFactory = _$AssetBaseToJson;
+  Map<String, dynamic> toJson() => _$AssetBaseToJson(this);
+
+  @JsonKey(name: 'currentLocation', includeIfNull: false)
+  final GeoLocation? currentLocation;
+  static const fromJsonFactory = _$AssetBaseFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is AssetBase &&
+            (identical(other.currentLocation, currentLocation) ||
+                const DeepCollectionEquality()
+                    .equals(other.currentLocation, currentLocation)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(currentLocation) ^
+      runtimeType.hashCode;
+}
+
+extension $AssetBaseExtension on AssetBase {
+  AssetBase copyWith({GeoLocation? currentLocation}) {
+    return AssetBase(currentLocation: currentLocation ?? this.currentLocation);
+  }
+
+  AssetBase copyWithWrapped({Wrapped<GeoLocation?>? currentLocation}) {
+    return AssetBase(
+        currentLocation: (currentLocation != null
+            ? currentLocation.value
+            : this.currentLocation));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class Asset {
   const Asset({
     required this.premiseId,
@@ -30977,6 +31871,7 @@ class Asset {
     required this.assetModelId,
     this.clientIds,
     this.reportedStamp,
+    this.currentLocation,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -31021,6 +31916,8 @@ class Asset {
   final List<String>? clientIds;
   @JsonKey(name: 'reportedStamp', includeIfNull: false)
   final int? reportedStamp;
+  @JsonKey(name: 'currentLocation', includeIfNull: false)
+  final GeoLocation? currentLocation;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -31082,6 +31979,9 @@ class Asset {
             (identical(other.reportedStamp, reportedStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.reportedStamp, reportedStamp)) &&
+            (identical(other.currentLocation, currentLocation) ||
+                const DeepCollectionEquality()
+                    .equals(other.currentLocation, currentLocation)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -31123,6 +32023,7 @@ class Asset {
       const DeepCollectionEquality().hash(assetModelId) ^
       const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(reportedStamp) ^
+      const DeepCollectionEquality().hash(currentLocation) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -31150,6 +32051,7 @@ extension $AssetExtension on Asset {
       String? assetModelId,
       List<String>? clientIds,
       int? reportedStamp,
+      GeoLocation? currentLocation,
       String? domainKey,
       String? id,
       String? rtype,
@@ -31173,6 +32075,7 @@ extension $AssetExtension on Asset {
         assetModelId: assetModelId ?? this.assetModelId,
         clientIds: clientIds ?? this.clientIds,
         reportedStamp: reportedStamp ?? this.reportedStamp,
+        currentLocation: currentLocation ?? this.currentLocation,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -31198,6 +32101,7 @@ extension $AssetExtension on Asset {
       Wrapped<String>? assetModelId,
       Wrapped<List<String>?>? clientIds,
       Wrapped<int?>? reportedStamp,
+      Wrapped<GeoLocation?>? currentLocation,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -31225,6 +32129,9 @@ extension $AssetExtension on Asset {
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         reportedStamp:
             (reportedStamp != null ? reportedStamp.value : this.reportedStamp),
+        currentLocation: (currentLocation != null
+            ? currentLocation.value
+            : this.currentLocation),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -32984,6 +33891,7 @@ class RoleInfo {
     required this.name,
     this.description,
     this.tags,
+    this.clientIds,
   });
 
   factory RoleInfo.fromJson(Map<String, dynamic> json) =>
@@ -32998,6 +33906,8 @@ class RoleInfo {
   final String? description;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   static const fromJsonFactory = _$RoleInfoFromJson;
 
   @override
@@ -33010,7 +33920,10 @@ class RoleInfo {
                 const DeepCollectionEquality()
                     .equals(other.description, description)) &&
             (identical(other.tags, tags) ||
-                const DeepCollectionEquality().equals(other.tags, tags)));
+                const DeepCollectionEquality().equals(other.tags, tags)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)));
   }
 
   @override
@@ -33021,26 +33934,34 @@ class RoleInfo {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(tags) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       runtimeType.hashCode;
 }
 
 extension $RoleInfoExtension on RoleInfo {
-  RoleInfo copyWith({String? name, String? description, List<String>? tags}) {
+  RoleInfo copyWith(
+      {String? name,
+      String? description,
+      List<String>? tags,
+      List<String>? clientIds}) {
     return RoleInfo(
         name: name ?? this.name,
         description: description ?? this.description,
-        tags: tags ?? this.tags);
+        tags: tags ?? this.tags,
+        clientIds: clientIds ?? this.clientIds);
   }
 
   RoleInfo copyWithWrapped(
       {Wrapped<String>? name,
       Wrapped<String?>? description,
-      Wrapped<List<String>?>? tags}) {
+      Wrapped<List<String>?>? tags,
+      Wrapped<List<String>?>? clientIds}) {
     return RoleInfo(
         name: (name != null ? name.value : this.name),
         description:
             (description != null ? description.value : this.description),
-        tags: (tags != null ? tags.value : this.tags));
+        tags: (tags != null ? tags.value : this.tags),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
   }
 }
 
@@ -33050,6 +33971,7 @@ class Role {
     required this.name,
     this.description,
     this.tags,
+    this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -33070,6 +33992,8 @@ class Role {
   final String? description;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -33097,6 +34021,9 @@ class Role {
                     .equals(other.description, description)) &&
             (identical(other.tags, tags) ||
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -33126,6 +34053,7 @@ class Role {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(tags) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -33141,6 +34069,7 @@ extension $RoleExtension on Role {
       {String? name,
       String? description,
       List<String>? tags,
+      List<String>? clientIds,
       String? domainKey,
       String? id,
       String? rtype,
@@ -33152,6 +34081,7 @@ extension $RoleExtension on Role {
         name: name ?? this.name,
         description: description ?? this.description,
         tags: tags ?? this.tags,
+        clientIds: clientIds ?? this.clientIds,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -33165,6 +34095,7 @@ extension $RoleExtension on Role {
       {Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
+      Wrapped<List<String>?>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -33177,6 +34108,7 @@ extension $RoleExtension on Role {
         description:
             (description != null ? description.value : this.description),
         tags: (tags != null ? tags.value : this.tags),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -36405,6 +37337,7 @@ class ReportInfo {
     this.dateFormat,
     this.tz,
     required this.fields,
+    this.clientIds,
   });
 
   factory ReportInfo.fromJson(Map<String, dynamic> json) =>
@@ -36441,6 +37374,8 @@ class ReportInfo {
   final String? tz;
   @JsonKey(name: 'fields', includeIfNull: false, defaultValue: <String>[])
   final List<String> fields;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   static const fromJsonFactory = _$ReportInfoFromJson;
 
   @override
@@ -36483,7 +37418,10 @@ class ReportInfo {
             (identical(other.tz, tz) ||
                 const DeepCollectionEquality().equals(other.tz, tz)) &&
             (identical(other.fields, fields) ||
-                const DeepCollectionEquality().equals(other.fields, fields)));
+                const DeepCollectionEquality().equals(other.fields, fields)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)));
   }
 
   @override
@@ -36505,6 +37443,7 @@ class ReportInfo {
       const DeepCollectionEquality().hash(dateFormat) ^
       const DeepCollectionEquality().hash(tz) ^
       const DeepCollectionEquality().hash(fields) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       runtimeType.hashCode;
 }
 
@@ -36523,7 +37462,8 @@ extension $ReportInfoExtension on ReportInfo {
       bool? humanDateFormat,
       String? dateFormat,
       String? tz,
-      List<String>? fields}) {
+      List<String>? fields,
+      List<String>? clientIds}) {
     return ReportInfo(
         modelId: modelId ?? this.modelId,
         name: name ?? this.name,
@@ -36538,7 +37478,8 @@ extension $ReportInfoExtension on ReportInfo {
         humanDateFormat: humanDateFormat ?? this.humanDateFormat,
         dateFormat: dateFormat ?? this.dateFormat,
         tz: tz ?? this.tz,
-        fields: fields ?? this.fields);
+        fields: fields ?? this.fields,
+        clientIds: clientIds ?? this.clientIds);
   }
 
   ReportInfo copyWithWrapped(
@@ -36555,7 +37496,8 @@ extension $ReportInfoExtension on ReportInfo {
       Wrapped<bool?>? humanDateFormat,
       Wrapped<String?>? dateFormat,
       Wrapped<String?>? tz,
-      Wrapped<List<String>>? fields}) {
+      Wrapped<List<String>>? fields,
+      Wrapped<List<String>?>? clientIds}) {
     return ReportInfo(
         modelId: (modelId != null ? modelId.value : this.modelId),
         name: (name != null ? name.value : this.name),
@@ -36580,7 +37522,8 @@ extension $ReportInfoExtension on ReportInfo {
             : this.humanDateFormat),
         dateFormat: (dateFormat != null ? dateFormat.value : this.dateFormat),
         tz: (tz != null ? tz.value : this.tz),
-        fields: (fields != null ? fields.value : this.fields));
+        fields: (fields != null ? fields.value : this.fields),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
   }
 }
 
@@ -36601,6 +37544,7 @@ class Report {
     this.dateFormat,
     this.tz,
     required this.fields,
+    this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -36643,6 +37587,8 @@ class Report {
   final String? tz;
   @JsonKey(name: 'fields', includeIfNull: false, defaultValue: <String>[])
   final List<String> fields;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -36700,6 +37646,9 @@ class Report {
                 const DeepCollectionEquality().equals(other.tz, tz)) &&
             (identical(other.fields, fields) ||
                 const DeepCollectionEquality().equals(other.fields, fields)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -36740,6 +37689,7 @@ class Report {
       const DeepCollectionEquality().hash(dateFormat) ^
       const DeepCollectionEquality().hash(tz) ^
       const DeepCollectionEquality().hash(fields) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -36766,6 +37716,7 @@ extension $ReportExtension on Report {
       String? dateFormat,
       String? tz,
       List<String>? fields,
+      List<String>? clientIds,
       String? domainKey,
       String? id,
       String? rtype,
@@ -36788,6 +37739,7 @@ extension $ReportExtension on Report {
         dateFormat: dateFormat ?? this.dateFormat,
         tz: tz ?? this.tz,
         fields: fields ?? this.fields,
+        clientIds: clientIds ?? this.clientIds,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -36812,6 +37764,7 @@ extension $ReportExtension on Report {
       Wrapped<String?>? dateFormat,
       Wrapped<String?>? tz,
       Wrapped<List<String>>? fields,
+      Wrapped<List<String>?>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -36844,6 +37797,7 @@ extension $ReportExtension on Report {
         dateFormat: (dateFormat != null ? dateFormat.value : this.dateFormat),
         tz: (tz != null ? tz.value : this.tz),
         fields: (fields != null ? fields.value : this.fields),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -37310,6 +38264,8 @@ class AssetModelInfo {
     this.metadata,
     this.movable,
     this.allowedDeviceModels,
+    this.roles,
+    this.clientIds,
   });
 
   factory AssetModelInfo.fromJson(Map<String, dynamic> json) =>
@@ -37343,6 +38299,10 @@ class AssetModelInfo {
       includeIfNull: false,
       defaultValue: <AssetDeviceModel>[])
   final List<AssetDeviceModel>? allowedDeviceModels;
+  @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? roles;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   static const fromJsonFactory = _$AssetModelInfoFromJson;
 
   @override
@@ -37377,7 +38337,12 @@ class AssetModelInfo {
                     .equals(other.movable, movable)) &&
             (identical(other.allowedDeviceModels, allowedDeviceModels) ||
                 const DeepCollectionEquality()
-                    .equals(other.allowedDeviceModels, allowedDeviceModels)));
+                    .equals(other.allowedDeviceModels, allowedDeviceModels)) &&
+            (identical(other.roles, roles) ||
+                const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)));
   }
 
   @override
@@ -37396,6 +38361,8 @@ class AssetModelInfo {
       const DeepCollectionEquality().hash(metadata) ^
       const DeepCollectionEquality().hash(movable) ^
       const DeepCollectionEquality().hash(allowedDeviceModels) ^
+      const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       runtimeType.hashCode;
 }
 
@@ -37411,7 +38378,9 @@ extension $AssetModelInfoExtension on AssetModelInfo {
       List<String>? banners,
       Object? metadata,
       bool? movable,
-      List<AssetDeviceModel>? allowedDeviceModels}) {
+      List<AssetDeviceModel>? allowedDeviceModels,
+      List<String>? roles,
+      List<String>? clientIds}) {
     return AssetModelInfo(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -37423,7 +38392,9 @@ extension $AssetModelInfoExtension on AssetModelInfo {
         banners: banners ?? this.banners,
         metadata: metadata ?? this.metadata,
         movable: movable ?? this.movable,
-        allowedDeviceModels: allowedDeviceModels ?? this.allowedDeviceModels);
+        allowedDeviceModels: allowedDeviceModels ?? this.allowedDeviceModels,
+        roles: roles ?? this.roles,
+        clientIds: clientIds ?? this.clientIds);
   }
 
   AssetModelInfo copyWithWrapped(
@@ -37437,7 +38408,9 @@ extension $AssetModelInfoExtension on AssetModelInfo {
       Wrapped<List<String>?>? banners,
       Wrapped<Object?>? metadata,
       Wrapped<bool?>? movable,
-      Wrapped<List<AssetDeviceModel>?>? allowedDeviceModels}) {
+      Wrapped<List<AssetDeviceModel>?>? allowedDeviceModels,
+      Wrapped<List<String>?>? roles,
+      Wrapped<List<String>?>? clientIds}) {
     return AssetModelInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -37455,7 +38428,9 @@ extension $AssetModelInfoExtension on AssetModelInfo {
         movable: (movable != null ? movable.value : this.movable),
         allowedDeviceModels: (allowedDeviceModels != null
             ? allowedDeviceModels.value
-            : this.allowedDeviceModels));
+            : this.allowedDeviceModels),
+        roles: (roles != null ? roles.value : this.roles),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
   }
 }
 
@@ -37473,6 +38448,8 @@ class AssetModel {
     this.metadata,
     this.movable,
     this.allowedDeviceModels,
+    this.roles,
+    this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -37513,6 +38490,10 @@ class AssetModel {
       includeIfNull: false,
       defaultValue: <AssetDeviceModel>[])
   final List<AssetDeviceModel>? allowedDeviceModels;
+  @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? roles;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -37562,6 +38543,11 @@ class AssetModel {
             (identical(other.allowedDeviceModels, allowedDeviceModels) ||
                 const DeepCollectionEquality()
                     .equals(other.allowedDeviceModels, allowedDeviceModels)) &&
+            (identical(other.roles, roles) ||
+                const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -37599,6 +38585,8 @@ class AssetModel {
       const DeepCollectionEquality().hash(metadata) ^
       const DeepCollectionEquality().hash(movable) ^
       const DeepCollectionEquality().hash(allowedDeviceModels) ^
+      const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -37622,6 +38610,8 @@ extension $AssetModelExtension on AssetModel {
       Object? metadata,
       bool? movable,
       List<AssetDeviceModel>? allowedDeviceModels,
+      List<String>? roles,
+      List<String>? clientIds,
       String? domainKey,
       String? id,
       String? rtype,
@@ -37641,6 +38631,8 @@ extension $AssetModelExtension on AssetModel {
         metadata: metadata ?? this.metadata,
         movable: movable ?? this.movable,
         allowedDeviceModels: allowedDeviceModels ?? this.allowedDeviceModels,
+        roles: roles ?? this.roles,
+        clientIds: clientIds ?? this.clientIds,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -37662,6 +38654,8 @@ extension $AssetModelExtension on AssetModel {
       Wrapped<Object?>? metadata,
       Wrapped<bool?>? movable,
       Wrapped<List<AssetDeviceModel>?>? allowedDeviceModels,
+      Wrapped<List<String>?>? roles,
+      Wrapped<List<String>?>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -37687,6 +38681,8 @@ extension $AssetModelExtension on AssetModel {
         allowedDeviceModels: (allowedDeviceModels != null
             ? allowedDeviceModels.value
             : this.allowedDeviceModels),
+        roles: (roles != null ? roles.value : this.roles),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),

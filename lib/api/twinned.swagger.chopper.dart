@@ -895,6 +895,26 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<DeviceViewArrayRes>> _queryEqlDeviceView({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/DeviceView/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<DeviceViewArrayRes, DeviceViewArrayRes>($request);
+  }
+
+  @override
   Future<Response<DashboardScreenEntityRes>> _createDashboardScreen({
     required DashboardScreenInfo? body,
     String? apikey,
@@ -1081,6 +1101,27 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<DashboardScreenArrayRes>> _queryEqlDashboardScreen({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/DashboardScreen/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client
+        .send<DashboardScreenArrayRes, DashboardScreenArrayRes>($request);
+  }
+
+  @override
   Future<Response<DashboardMenuGroupEntityRes>> _createDashboardMenuGroup({
     required DashboardMenuGroupInfo? body,
     String? apikey,
@@ -1250,6 +1291,27 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<DashboardMenuGroupArrayRes>> _queryEqlDashboardMenu({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/DashboardMenu/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client
+        .send<DashboardMenuGroupArrayRes, DashboardMenuGroupArrayRes>($request);
+  }
+
+  @override
   Future<Response<EventRegistrationEntityRes>> _createEventRegistration({
     required EventRegistrationInfo? body,
     String? apikey,
@@ -1346,6 +1408,27 @@ final class _$Twinned extends Twinned {
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = eql;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client
+        .send<EventRegistrationArrayRes, EventRegistrationArrayRes>($request);
+  }
+
+  @override
+  Future<Response<EventRegistrationArrayRes>> _queryEqlEventRegistration({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/EventRegistration/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
     final Request $request = Request(
       'POST',
       $url,
@@ -1599,6 +1682,26 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<DeviceModelArrayRes>> _queryEqlDeviceModel({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/DeviceModel/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<DeviceModelArrayRes, DeviceModelArrayRes>($request);
+  }
+
+  @override
   Future<Response<DeviceEntityRes>> _createDevice({
     required DeviceInfo? body,
     String? apikey,
@@ -1808,6 +1911,26 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<DeviceArrayRes>> _queryEqlDevice({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Device/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<DeviceArrayRes, DeviceArrayRes>($request);
+  }
+
+  @override
   Future<Response<ConditionEntityRes>> _createCondition({
     required ConditionInfo? body,
     String? apikey,
@@ -1960,6 +2083,26 @@ final class _$Twinned extends Twinned {
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = eql;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<ConditionArrayRes, ConditionArrayRes>($request);
+  }
+
+  @override
+  Future<Response<ConditionArrayRes>> _queryEqlCondition({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Condition/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
     final Request $request = Request(
       'POST',
       $url,
@@ -2134,6 +2277,26 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<AlarmArrayRes>> _queryEqlAlarm({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Alarm/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<AlarmArrayRes, AlarmArrayRes>($request);
+  }
+
+  @override
   Future<Response<DisplayEntityRes>> _createDisplay({
     required DisplayInfo? body,
     String? apikey,
@@ -2286,6 +2449,26 @@ final class _$Twinned extends Twinned {
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = eql;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<DisplayArrayRes, DisplayArrayRes>($request);
+  }
+
+  @override
+  Future<Response<DisplayArrayRes>> _queryEqlDisplay({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Display/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
     final Request $request = Request(
       'POST',
       $url,
@@ -2492,6 +2675,26 @@ final class _$Twinned extends Twinned {
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = eql;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<ControlArrayRes, ControlArrayRes>($request);
+  }
+
+  @override
+  Future<Response<ControlArrayRes>> _queryEqlControl({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Control/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
     final Request $request = Request(
       'POST',
       $url,
@@ -2994,6 +3197,26 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<EventArrayRes>> _queryEqlEvent({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Event/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<EventArrayRes, EventArrayRes>($request);
+  }
+
+  @override
   Future<Response<TriggerEntityRes>> _createTrigger({
     required TriggerInfo? body,
     String? apikey,
@@ -3146,6 +3369,26 @@ final class _$Twinned extends Twinned {
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = eql;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<TriggerArrayRes, TriggerArrayRes>($request);
+  }
+
+  @override
+  Future<Response<TriggerArrayRes>> _queryEqlTrigger({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Trigger/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
     final Request $request = Request(
       'POST',
       $url,
@@ -3587,6 +3830,26 @@ final class _$Twinned extends Twinned {
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = eql;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<GeoFenceArrayRes, GeoFenceArrayRes>($request);
+  }
+
+  @override
+  Future<Response<GeoFenceArrayRes>> _queryEqlGeoFence({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/GeoFence/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
     final Request $request = Request(
       'POST',
       $url,
@@ -4621,6 +4884,26 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<FloorArrayRes>> _queryEqlFloor({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Floor/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<FloorArrayRes, FloorArrayRes>($request);
+  }
+
+  @override
   Future<Response<AssetEntityRes>> _createAsset({
     required AssetInfo? body,
     String? apikey,
@@ -4862,6 +5145,26 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<AssetArrayRes>> _queryEqlAsset({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Asset/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<AssetArrayRes, AssetArrayRes>($request);
+  }
+
+  @override
   Future<Response<FacilityEntityRes>> _createFacility({
     required FacilityInfo? body,
     String? apikey,
@@ -5081,6 +5384,26 @@ final class _$Twinned extends Twinned {
       headers: $headers,
     );
     return client.send<CountRes, CountRes>($request);
+  }
+
+  @override
+  Future<Response<FacilityArrayRes>> _queryEqlFacility({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Facility/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<FacilityArrayRes, FacilityArrayRes>($request);
   }
 
   @override
@@ -5368,6 +5691,26 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<TwinUserArrayRes>> _queryEqlTwinUser({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/TwinUser/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<TwinUserArrayRes, TwinUserArrayRes>($request);
+  }
+
+  @override
   Future<Response<PremiseEntityRes>> _createPremise({
     required PremiseInfo? body,
     String? apikey,
@@ -5582,6 +5925,26 @@ final class _$Twinned extends Twinned {
       headers: $headers,
     );
     return client.send<CountRes, CountRes>($request);
+  }
+
+  @override
+  Future<Response<PremiseArrayRes>> _queryEqlPremise({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Premise/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<PremiseArrayRes, PremiseArrayRes>($request);
   }
 
   @override
@@ -6116,6 +6479,26 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<AssetModelArrayRes>> _queryEqlAssetModel({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/AssetModel/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<AssetModelArrayRes, AssetModelArrayRes>($request);
+  }
+
+  @override
   Future<Response<FieldFilterEntityRes>> _createFieldFilter({
     required FieldFilterInfo? body,
     String? apikey,
@@ -6264,6 +6647,26 @@ final class _$Twinned extends Twinned {
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = eql;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<FieldFilterArrayRes, FieldFilterArrayRes>($request);
+  }
+
+  @override
+  Future<Response<FieldFilterArrayRes>> _queryEqlFieldFilter({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/FieldFilter/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
     final Request $request = Request(
       'POST',
       $url,
@@ -6446,5 +6849,25 @@ final class _$Twinned extends Twinned {
       headers: $headers,
     );
     return client.send<CountRes, CountRes>($request);
+  }
+
+  @override
+  Future<Response<ClientArrayRes>> _queryEqlClient({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Client/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<ClientArrayRes, ClientArrayRes>($request);
   }
 }

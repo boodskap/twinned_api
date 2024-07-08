@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "1.9.2",
+    "version": "1.9.3",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -15,7 +15,7 @@
       "name": "MIT"
     }
   },
-  "host": "twinned.digital",
+  "host": "twinned.boodskap.io",
   "basePath": "/rest/nocode",
   "schemes": [
     "https"
@@ -2079,6 +2079,48 @@
         ]
       }
     },
+    "/DeviceView/query/eql": {
+      "post": {
+        "tags": [
+          "Device View"
+        ],
+        "description": "query device view",
+        "operationId": "queryEqlDeviceView",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceViewArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
+      }
+    },
     "/DashboardScreen/create": {
       "post": {
         "tags": [
@@ -2478,6 +2520,48 @@
         ]
       }
     },
+    "/DashboardScreen/query/eql": {
+      "post": {
+        "tags": [
+          "Dashboard Screen"
+        ],
+        "description": "query dashboard screen",
+        "operationId": "queryEqlDashboardScreen",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/DashboardScreenArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
+      }
+    },
     "/DashboardMenu/create": {
       "post": {
         "tags": [
@@ -2838,6 +2922,48 @@
         ]
       }
     },
+    "/DashboardMenu/query/eql": {
+      "post": {
+        "tags": [
+          "Dashboard Menu"
+        ],
+        "description": "query dashboard menu",
+        "operationId": "queryEqlDashboardMenu",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/DashboardMenuGroupArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
+      }
+    },
     "/EventRegistration/create": {
       "post": {
         "tags": [
@@ -3060,6 +3186,48 @@
             "apiKey": []
           }
         ]
+      }
+    },
+    "/EventRegistration/query/eql": {
+      "post": {
+        "tags": [
+          "Event Registration"
+        ],
+        "description": "query event registration",
+        "operationId": "queryEqlEventRegistration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/EventRegistrationArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
       }
     },
     "/DeviceModel/create": {
@@ -3597,6 +3765,48 @@
         ]
       }
     },
+    "/DeviceModel/query/eql": {
+      "post": {
+        "tags": [
+          "Device Model"
+        ],
+        "description": "query",
+        "operationId": "queryEqlDeviceModel",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceModelArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
+      }
+    },
     "/Device/create": {
       "post": {
         "tags": [
@@ -4074,6 +4284,48 @@
         ]
       }
     },
+    "/Device/query/eql": {
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "description": "query device",
+        "operationId": "queryEqlDevice",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
+      }
+    },
     "/Condition/create": {
       "post": {
         "tags": [
@@ -4438,6 +4690,48 @@
             "apiKey": []
           }
         ]
+      }
+    },
+    "/Condition/query/eql": {
+      "post": {
+        "tags": [
+          "Condition"
+        ],
+        "description": "query condition",
+        "operationId": "queryEqlCondition",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ConditionArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
       }
     },
     "/Alarm/create": {
@@ -4806,6 +5100,48 @@
         ]
       }
     },
+    "/Alarm/query/eql": {
+      "post": {
+        "tags": [
+          "Alarm"
+        ],
+        "description": "query alarm",
+        "operationId": "queryEqlAlarm",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/AlarmArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
+      }
+    },
     "/Display/create": {
       "post": {
         "tags": [
@@ -5170,6 +5506,48 @@
             "apiKey": []
           }
         ]
+      }
+    },
+    "/Display/query/eql": {
+      "post": {
+        "tags": [
+          "Display"
+        ],
+        "description": "query display",
+        "operationId": "queryEqlDisplay",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/DisplayArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
       }
     },
     "/Control/create": {
@@ -5640,6 +6018,48 @@
             "apiKey": []
           }
         ]
+      }
+    },
+    "/Control/query/eql": {
+      "post": {
+        "tags": [
+          "Control"
+        ],
+        "description": "query control",
+        "operationId": "queryEqlControl",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ControlArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
       }
     },
     "/DisplayWidget/create": {
@@ -6748,6 +7168,48 @@
         ]
       }
     },
+    "/Event/query/eql": {
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "description": "query event",
+        "operationId": "queryEqlEvent",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/EventArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
+      }
+    },
     "/Trigger/create": {
       "post": {
         "tags": [
@@ -7112,6 +7574,48 @@
             "apiKey": []
           }
         ]
+      }
+    },
+    "/Trigger/query/eql": {
+      "post": {
+        "tags": [
+          "Trigger"
+        ],
+        "description": "query trigger",
+        "operationId": "queryEqlTrigger",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/TriggerArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
       }
     },
     "/Preprocessor/create": {
@@ -8098,6 +8602,48 @@
             "apiKey": []
           }
         ]
+      }
+    },
+    "/GeoFence/query/eql": {
+      "post": {
+        "tags": [
+          "GeoFence"
+        ],
+        "description": "query geofence",
+        "operationId": "queryEqlGeoFence",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/GeoFenceArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
       }
     },
     "/AnalyticsScreen/create": {
@@ -10561,6 +11107,48 @@
         "summary": "count by query"
       }
     },
+    "/Floor/query/eql": {
+      "post": {
+        "tags": [
+          "Floor"
+        ],
+        "description": "query floor",
+        "operationId": "queryEqlFloor",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/FloorArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
+      }
+    },
     "/Asset/create": {
       "post": {
         "tags": [
@@ -11108,6 +11696,48 @@
         ]
       }
     },
+    "/Asset/query/eql": {
+      "post": {
+        "tags": [
+          "Asset"
+        ],
+        "description": "query asset",
+        "operationId": "queryEqlAsset",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/AssetArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
+      }
+    },
     "/Facility/create": {
       "post": {
         "tags": [
@@ -11598,6 +12228,48 @@
           }
         ],
         "summary": "count by query"
+      }
+    },
+    "/Facility/query/eql": {
+      "post": {
+        "tags": [
+          "Facility"
+        ],
+        "description": "query facility",
+        "operationId": "queryEqlFacility",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/FacilityArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
       }
     },
     "/TwinUser/create": {
@@ -12244,6 +12916,48 @@
         ]
       }
     },
+    "/TwinUser/query/eql": {
+      "post": {
+        "tags": [
+          "Twin User"
+        ],
+        "description": "query twin user",
+        "operationId": "queryEqlTwinUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/TwinUserArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
+      }
+    },
     "/Premise/create": {
       "post": {
         "tags": [
@@ -12722,6 +13436,48 @@
           }
         ],
         "summary": "count by query"
+      }
+    },
+    "/Premise/query/eql": {
+      "post": {
+        "tags": [
+          "Premise"
+        ],
+        "description": "query premise",
+        "operationId": "queryEqlPremise",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/PremiseArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
       }
     },
     "/ScrappingTable/create": {
@@ -13896,6 +14652,48 @@
         ]
       }
     },
+    "/AssetModel/query/eql": {
+      "post": {
+        "tags": [
+          "Asset Model"
+        ],
+        "description": "query asset model",
+        "operationId": "queryEqlAssetModel",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/AssetModelArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
+      }
+    },
     "/FieldFilter/create": {
       "post": {
         "tags": [
@@ -14248,6 +15046,48 @@
             "apiKey": []
           }
         ]
+      }
+    },
+    "/FieldFilter/query/eql": {
+      "post": {
+        "tags": [
+          "Field Filter"
+        ],
+        "description": "query field filters",
+        "operationId": "queryEqlFieldFilter",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/FieldFilterArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
       }
     },
     "/Client/create": {
@@ -14635,6 +15475,48 @@
             "apiKey": []
           }
         ]
+      }
+    },
+    "/Client/query/eql": {
+      "post": {
+        "tags": [
+          "Client"
+        ],
+        "description": "query client",
+        "operationId": "queryEqlClient",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ClientArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
       }
     }
   },
@@ -15088,6 +15970,18 @@
           "items": {
             "$ref": "#/definitions/ScrappingTableConfig"
           }
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -15226,6 +16120,18 @@
         "reportedStamp": {
           "type": "integer",
           "format": "int64"
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Parameter"
+          }
         }
       }
     },
@@ -15272,6 +16178,9 @@
         },
         "client": {
           "type": "string"
+        },
+        "currentLocation": {
+          "$ref": "#/definitions/GeoLocation"
         }
       }
     },
@@ -15397,6 +16306,12 @@
           }
         },
         "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "clientIds": {
           "type": "array",
           "items": {
             "type": "string"
@@ -15568,6 +16483,12 @@
         },
         "showOnlyIfMatched": {
           "type": "boolean"
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -15710,6 +16631,18 @@
           "items": {
             "$ref": "#/definitions/ControlCommand"
           }
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -15823,6 +16756,12 @@
           }
         },
         "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "clientIds": {
           "type": "array",
           "items": {
             "type": "string"
@@ -16588,6 +17527,12 @@
           "items": {
             "type": "string"
           }
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -16803,6 +17748,18 @@
             "CIRCLE"
           ],
           "default": "NONE"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -17822,6 +18779,18 @@
           "items": {
             "$ref": "#/definitions/ScreenRow"
           }
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -17944,6 +18913,18 @@
           }
         },
         "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "clientIds": {
           "type": "array",
           "items": {
             "type": "string"
@@ -18403,6 +19384,12 @@
             "ANALYTICS",
             "DEVICE"
           ]
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -18859,6 +19846,12 @@
         },
         "circle": {
           "$ref": "#/definitions/GeoCircle"
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -19690,10 +20683,21 @@
         }
       }
     },
+    "AssetBase": {
+      "type": "object",
+      "properties": {
+        "currentLocation": {
+          "$ref": "#/definitions/GeoLocation"
+        }
+      }
+    },
     "Asset": {
       "allOf": [
         {
           "$ref": "#/definitions/AssetInfo"
+        },
+        {
+          "$ref": "#/definitions/AssetBase"
         },
         {
           "$ref": "#/definitions/BaseEntity"
@@ -20013,6 +21017,12 @@
           "type": "string"
         },
         "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "clientIds": {
           "type": "array",
           "items": {
             "type": "string"
@@ -20710,6 +21720,12 @@
           "items": {
             "type": "string"
           }
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -20868,6 +21884,18 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AssetDeviceModel"
+          }
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
