@@ -4065,6 +4065,27 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
+  ///query data
+  ///@param body
+  Future<chopper.Response<PreprocessorArrayRes>> queryEqlProcessor({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        PreprocessorArrayRes, () => PreprocessorArrayRes.fromJsonFactory);
+
+    return _queryEqlProcessor(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/Preprocessor/query/eql')
+  Future<chopper.Response<PreprocessorArrayRes>> _queryEqlProcessor({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Create dataFilter
   ///@param body
   Future<chopper.Response<DataFilterEntityRes>> createDataFilter({
