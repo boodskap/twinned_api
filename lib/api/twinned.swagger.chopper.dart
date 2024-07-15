@@ -3539,6 +3539,26 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<PreprocessorArrayRes>> _queryEqlProcessor({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Preprocessor/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<PreprocessorArrayRes, PreprocessorArrayRes>($request);
+  }
+
+  @override
   Future<Response<DataFilterEntityRes>> _createDataFilter({
     required DataFilterInfo? body,
     String? apikey,

@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "1.9.3",
+    "version": "1.9.4",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -7926,6 +7926,48 @@
             "apiKey": []
           }
         ]
+      }
+    },
+    "/Preprocessor/query/eql": {
+      "post": {
+        "tags": [
+          "Preprocessor"
+        ],
+        "description": "query preprocessor",
+        "operationId": "queryEqlProcessor",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/PreprocessorArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
       }
     },
     "/DataFilter/create": {
