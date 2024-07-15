@@ -13832,6 +13832,48 @@
         ]
       }
     },
+    "/ScrappingTable/query/eql": {
+      "post": {
+        "tags": [
+          "Scrapping Table"
+        ],
+        "description": "query scrapping tables",
+        "operationId": "queryEqlScrappingTable",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ScrappingTableArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
+      }
+    },
     "/AssetGroup/create": {
       "post": {
         "tags": [

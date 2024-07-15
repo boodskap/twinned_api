@@ -6114,6 +6114,27 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<ScrappingTableArrayRes>> _queryEqlScrappingTable({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/ScrappingTable/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client
+        .send<ScrappingTableArrayRes, ScrappingTableArrayRes>($request);
+  }
+
+  @override
   Future<Response<AssetGroupEntityRes>> _createAssetGroup({
     required AssetGroupInfo? body,
     String? apikey,
