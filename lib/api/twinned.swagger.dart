@@ -40043,6 +40043,7 @@ class ClientInfo {
     this.email,
     this.phone,
     this.address,
+    this.location,
   });
 
   factory ClientInfo.fromJson(Map<String, dynamic> json) =>
@@ -40065,6 +40066,8 @@ class ClientInfo {
   final String? phone;
   @JsonKey(name: 'address', includeIfNull: false, defaultValue: '')
   final String? address;
+  @JsonKey(name: 'location', includeIfNull: false)
+  final GeoLocation? location;
   static const fromJsonFactory = _$ClientInfoFromJson;
 
   @override
@@ -40085,7 +40088,11 @@ class ClientInfo {
             (identical(other.phone, phone) ||
                 const DeepCollectionEquality().equals(other.phone, phone)) &&
             (identical(other.address, address) ||
-                const DeepCollectionEquality().equals(other.address, address)));
+                const DeepCollectionEquality()
+                    .equals(other.address, address)) &&
+            (identical(other.location, location) ||
+                const DeepCollectionEquality()
+                    .equals(other.location, location)));
   }
 
   @override
@@ -40100,6 +40107,7 @@ class ClientInfo {
       const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(phone) ^
       const DeepCollectionEquality().hash(address) ^
+      const DeepCollectionEquality().hash(location) ^
       runtimeType.hashCode;
 }
 
@@ -40111,7 +40119,8 @@ extension $ClientInfoExtension on ClientInfo {
       String? icon,
       String? email,
       String? phone,
-      String? address}) {
+      String? address,
+      GeoLocation? location}) {
     return ClientInfo(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -40119,7 +40128,8 @@ extension $ClientInfoExtension on ClientInfo {
         icon: icon ?? this.icon,
         email: email ?? this.email,
         phone: phone ?? this.phone,
-        address: address ?? this.address);
+        address: address ?? this.address,
+        location: location ?? this.location);
   }
 
   ClientInfo copyWithWrapped(
@@ -40129,7 +40139,8 @@ extension $ClientInfoExtension on ClientInfo {
       Wrapped<String?>? icon,
       Wrapped<String?>? email,
       Wrapped<String?>? phone,
-      Wrapped<String?>? address}) {
+      Wrapped<String?>? address,
+      Wrapped<GeoLocation?>? location}) {
     return ClientInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -40138,7 +40149,8 @@ extension $ClientInfoExtension on ClientInfo {
         icon: (icon != null ? icon.value : this.icon),
         email: (email != null ? email.value : this.email),
         phone: (phone != null ? phone.value : this.phone),
-        address: (address != null ? address.value : this.address));
+        address: (address != null ? address.value : this.address),
+        location: (location != null ? location.value : this.location));
   }
 }
 
@@ -40152,6 +40164,7 @@ class Client {
     this.email,
     this.phone,
     this.address,
+    this.location,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -40180,6 +40193,8 @@ class Client {
   final String? phone;
   @JsonKey(name: 'address', includeIfNull: false, defaultValue: '')
   final String? address;
+  @JsonKey(name: 'location', includeIfNull: false)
+  final GeoLocation? location;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -40216,6 +40231,9 @@ class Client {
             (identical(other.address, address) ||
                 const DeepCollectionEquality()
                     .equals(other.address, address)) &&
+            (identical(other.location, location) ||
+                const DeepCollectionEquality()
+                    .equals(other.location, location)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -40249,6 +40267,7 @@ class Client {
       const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(phone) ^
       const DeepCollectionEquality().hash(address) ^
+      const DeepCollectionEquality().hash(location) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -40268,6 +40287,7 @@ extension $ClientExtension on Client {
       String? email,
       String? phone,
       String? address,
+      GeoLocation? location,
       String? domainKey,
       String? id,
       String? rtype,
@@ -40283,6 +40303,7 @@ extension $ClientExtension on Client {
         email: email ?? this.email,
         phone: phone ?? this.phone,
         address: address ?? this.address,
+        location: location ?? this.location,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -40300,6 +40321,7 @@ extension $ClientExtension on Client {
       Wrapped<String?>? email,
       Wrapped<String?>? phone,
       Wrapped<String?>? address,
+      Wrapped<GeoLocation?>? location,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -40316,6 +40338,7 @@ extension $ClientExtension on Client {
         email: (email != null ? email.value : this.email),
         phone: (phone != null ? phone.value : this.phone),
         address: (address != null ? address.value : this.address),
+        location: (location != null ? location.value : this.location),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),

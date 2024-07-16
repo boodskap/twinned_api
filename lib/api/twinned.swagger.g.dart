@@ -9889,6 +9889,9 @@ ClientInfo _$ClientInfoFromJson(Map<String, dynamic> json) => ClientInfo(
       email: json['email'] as String? ?? '',
       phone: json['phone'] as String? ?? '',
       address: json['address'] as String? ?? '',
+      location: json['location'] == null
+          ? null
+          : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ClientInfoToJson(ClientInfo instance) {
@@ -9908,6 +9911,7 @@ Map<String, dynamic> _$ClientInfoToJson(ClientInfo instance) {
   writeNotNull('email', instance.email);
   writeNotNull('phone', instance.phone);
   writeNotNull('address', instance.address);
+  writeNotNull('location', instance.location?.toJson());
   return val;
 }
 
@@ -9921,6 +9925,9 @@ Client _$ClientFromJson(Map<String, dynamic> json) => Client(
       email: json['email'] as String? ?? '',
       phone: json['phone'] as String? ?? '',
       address: json['address'] as String? ?? '',
+      location: json['location'] == null
+          ? null
+          : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -9947,6 +9954,7 @@ Map<String, dynamic> _$ClientToJson(Client instance) {
   writeNotNull('email', instance.email);
   writeNotNull('phone', instance.phone);
   writeNotNull('address', instance.address);
+  writeNotNull('location', instance.location?.toJson());
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;

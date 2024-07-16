@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "1.9.4",
+    "version": "1.9.5",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -22265,6 +22265,9 @@
         },
         "address": {
           "type": "string"
+        },
+        "location": {
+          "$ref": "#/definitions/GeoLocation"
         }
       }
     },
