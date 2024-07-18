@@ -44,7 +44,7 @@ abstract class Twinned extends ChopperService {
         authenticator: authenticator,
         errorConverter: errorConverter,
         baseUrl:
-            baseUrl ?? Uri.parse('http://twinned.boodskap.io/rest/nocode'));
+            baseUrl ?? Uri.parse('http://digital.boodskap.io/rest/nocode'));
     return _$Twinned(newClient);
   }
 
@@ -492,11 +492,19 @@ abstract class Twinned extends ChopperService {
   ///@param modelId
   ///@param deviceId
   ///@param userId
+  ///@param assetId
+  ///@param premiseId
+  ///@param facilityId
+  ///@param floorId
   ///@param body
   Future<chopper.Response<TriggeredEventArrayRes>> seearchTriggeredEvents({
     String? modelId,
     String? deviceId,
     String? userId,
+    String? assetId,
+    String? premiseId,
+    String? facilityId,
+    String? floorId,
     required FilterSearchReq? body,
     dynamic apikey,
   }) {
@@ -507,6 +515,10 @@ abstract class Twinned extends ChopperService {
         modelId: modelId?.toString(),
         deviceId: deviceId?.toString(),
         userId: userId?.toString(),
+        assetId: assetId?.toString(),
+        premiseId: premiseId?.toString(),
+        facilityId: facilityId?.toString(),
+        floorId: floorId?.toString(),
         body: body,
         apikey: apikey?.toString());
   }
@@ -515,12 +527,20 @@ abstract class Twinned extends ChopperService {
   ///@param modelId
   ///@param deviceId
   ///@param userId
+  ///@param assetId
+  ///@param premiseId
+  ///@param facilityId
+  ///@param floorId
   ///@param body
   @Post(path: '/DeviceData/triggered/events/search')
   Future<chopper.Response<TriggeredEventArrayRes>> _seearchTriggeredEvents({
     @Header('modelId') String? modelId,
     @Header('deviceId') String? deviceId,
     @Header('userId') String? userId,
+    @Header('assetId') String? assetId,
+    @Header('premiseId') String? premiseId,
+    @Header('facilityId') String? facilityId,
+    @Header('floorId') String? floorId,
     @Body() required FilterSearchReq? body,
     @Header('APIKEY') String? apikey,
   });
@@ -23787,6 +23807,16 @@ class TriggeredEvent {
     required this.updatedBy,
     required this.updatedStamp,
     this.tags,
+    this.modelName,
+    this.deviceName,
+    this.assetId,
+    this.assetName,
+    this.premiseId,
+    this.premiseName,
+    this.facilityId,
+    this.facilityName,
+    this.floorId,
+    this.floorName,
   });
 
   factory TriggeredEvent.fromJson(Map<String, dynamic> json) =>
@@ -23860,6 +23890,26 @@ class TriggeredEvent {
   final int updatedStamp;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
+  @JsonKey(name: 'modelName', includeIfNull: false, defaultValue: '')
+  final String? modelName;
+  @JsonKey(name: 'deviceName', includeIfNull: false, defaultValue: '')
+  final String? deviceName;
+  @JsonKey(name: 'assetId', includeIfNull: false, defaultValue: '')
+  final String? assetId;
+  @JsonKey(name: 'assetName', includeIfNull: false, defaultValue: '')
+  final String? assetName;
+  @JsonKey(name: 'premiseId', includeIfNull: false, defaultValue: '')
+  final String? premiseId;
+  @JsonKey(name: 'premiseName', includeIfNull: false, defaultValue: '')
+  final String? premiseName;
+  @JsonKey(name: 'facilityId', includeIfNull: false, defaultValue: '')
+  final String? facilityId;
+  @JsonKey(name: 'facilityName', includeIfNull: false, defaultValue: '')
+  final String? facilityName;
+  @JsonKey(name: 'floorId', includeIfNull: false, defaultValue: '')
+  final String? floorId;
+  @JsonKey(name: 'floorName', includeIfNull: false, defaultValue: '')
+  final String? floorName;
   static const fromJsonFactory = _$TriggeredEventFromJson;
 
   @override
@@ -23935,7 +23985,17 @@ class TriggeredEvent {
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) || const DeepCollectionEquality().equals(other.updatedBy, updatedBy)) &&
             (identical(other.updatedStamp, updatedStamp) || const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)) &&
-            (identical(other.tags, tags) || const DeepCollectionEquality().equals(other.tags, tags)));
+            (identical(other.tags, tags) || const DeepCollectionEquality().equals(other.tags, tags)) &&
+            (identical(other.modelName, modelName) || const DeepCollectionEquality().equals(other.modelName, modelName)) &&
+            (identical(other.deviceName, deviceName) || const DeepCollectionEquality().equals(other.deviceName, deviceName)) &&
+            (identical(other.assetId, assetId) || const DeepCollectionEquality().equals(other.assetId, assetId)) &&
+            (identical(other.assetName, assetName) || const DeepCollectionEquality().equals(other.assetName, assetName)) &&
+            (identical(other.premiseId, premiseId) || const DeepCollectionEquality().equals(other.premiseId, premiseId)) &&
+            (identical(other.premiseName, premiseName) || const DeepCollectionEquality().equals(other.premiseName, premiseName)) &&
+            (identical(other.facilityId, facilityId) || const DeepCollectionEquality().equals(other.facilityId, facilityId)) &&
+            (identical(other.facilityName, facilityName) || const DeepCollectionEquality().equals(other.facilityName, facilityName)) &&
+            (identical(other.floorId, floorId) || const DeepCollectionEquality().equals(other.floorId, floorId)) &&
+            (identical(other.floorName, floorName) || const DeepCollectionEquality().equals(other.floorName, floorName)));
   }
 
   @override
@@ -23970,6 +24030,16 @@ class TriggeredEvent {
       const DeepCollectionEquality().hash(updatedBy) ^
       const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(tags) ^
+      const DeepCollectionEquality().hash(modelName) ^
+      const DeepCollectionEquality().hash(deviceName) ^
+      const DeepCollectionEquality().hash(assetId) ^
+      const DeepCollectionEquality().hash(assetName) ^
+      const DeepCollectionEquality().hash(premiseId) ^
+      const DeepCollectionEquality().hash(premiseName) ^
+      const DeepCollectionEquality().hash(facilityId) ^
+      const DeepCollectionEquality().hash(facilityName) ^
+      const DeepCollectionEquality().hash(floorId) ^
+      const DeepCollectionEquality().hash(floorName) ^
       runtimeType.hashCode;
 }
 
@@ -24001,7 +24071,17 @@ extension $TriggeredEventExtension on TriggeredEvent {
       String? createdBy,
       String? updatedBy,
       int? updatedStamp,
-      List<String>? tags}) {
+      List<String>? tags,
+      String? modelName,
+      String? deviceName,
+      String? assetId,
+      String? assetName,
+      String? premiseId,
+      String? premiseName,
+      String? facilityId,
+      String? facilityName,
+      String? floorId,
+      String? floorName}) {
     return TriggeredEvent(
         eventId: eventId ?? this.eventId,
         modelId: modelId ?? this.modelId,
@@ -24029,7 +24109,17 @@ extension $TriggeredEventExtension on TriggeredEvent {
         createdBy: createdBy ?? this.createdBy,
         updatedBy: updatedBy ?? this.updatedBy,
         updatedStamp: updatedStamp ?? this.updatedStamp,
-        tags: tags ?? this.tags);
+        tags: tags ?? this.tags,
+        modelName: modelName ?? this.modelName,
+        deviceName: deviceName ?? this.deviceName,
+        assetId: assetId ?? this.assetId,
+        assetName: assetName ?? this.assetName,
+        premiseId: premiseId ?? this.premiseId,
+        premiseName: premiseName ?? this.premiseName,
+        facilityId: facilityId ?? this.facilityId,
+        facilityName: facilityName ?? this.facilityName,
+        floorId: floorId ?? this.floorId,
+        floorName: floorName ?? this.floorName);
   }
 
   TriggeredEvent copyWithWrapped(
@@ -24059,7 +24149,17 @@ extension $TriggeredEventExtension on TriggeredEvent {
       Wrapped<String>? createdBy,
       Wrapped<String>? updatedBy,
       Wrapped<int>? updatedStamp,
-      Wrapped<List<String>?>? tags}) {
+      Wrapped<List<String>?>? tags,
+      Wrapped<String?>? modelName,
+      Wrapped<String?>? deviceName,
+      Wrapped<String?>? assetId,
+      Wrapped<String?>? assetName,
+      Wrapped<String?>? premiseId,
+      Wrapped<String?>? premiseName,
+      Wrapped<String?>? facilityId,
+      Wrapped<String?>? facilityName,
+      Wrapped<String?>? floorId,
+      Wrapped<String?>? floorName}) {
     return TriggeredEvent(
         eventId: (eventId != null ? eventId.value : this.eventId),
         modelId: (modelId != null ? modelId.value : this.modelId),
@@ -24102,7 +24202,19 @@ extension $TriggeredEventExtension on TriggeredEvent {
         updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
             (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
-        tags: (tags != null ? tags.value : this.tags));
+        tags: (tags != null ? tags.value : this.tags),
+        modelName: (modelName != null ? modelName.value : this.modelName),
+        deviceName: (deviceName != null ? deviceName.value : this.deviceName),
+        assetId: (assetId != null ? assetId.value : this.assetId),
+        assetName: (assetName != null ? assetName.value : this.assetName),
+        premiseId: (premiseId != null ? premiseId.value : this.premiseId),
+        premiseName:
+            (premiseName != null ? premiseName.value : this.premiseName),
+        facilityId: (facilityId != null ? facilityId.value : this.facilityId),
+        facilityName:
+            (facilityName != null ? facilityName.value : this.facilityName),
+        floorId: (floorId != null ? floorId.value : this.floorId),
+        floorName: (floorName != null ? floorName.value : this.floorName));
   }
 }
 

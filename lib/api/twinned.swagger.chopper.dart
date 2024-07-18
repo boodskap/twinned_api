@@ -376,6 +376,10 @@ final class _$Twinned extends Twinned {
     String? modelId,
     String? deviceId,
     String? userId,
+    String? assetId,
+    String? premiseId,
+    String? facilityId,
+    String? floorId,
     required FilterSearchReq? body,
     String? apikey,
   }) {
@@ -384,6 +388,10 @@ final class _$Twinned extends Twinned {
       if (modelId != null) 'modelId': modelId,
       if (deviceId != null) 'deviceId': deviceId,
       if (userId != null) 'userId': userId,
+      if (assetId != null) 'assetId': assetId,
+      if (premiseId != null) 'premiseId': premiseId,
+      if (facilityId != null) 'facilityId': facilityId,
+      if (floorId != null) 'floorId': floorId,
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = body;

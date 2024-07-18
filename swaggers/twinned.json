@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "1.9.5",
+    "version": "1.9.6",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -15,7 +15,7 @@
       "name": "MIT"
     }
   },
-  "host": "twinned.boodskap.io",
+  "host": "digital.boodskap.io",
   "basePath": "/rest/nocode",
   "schemes": [
     "https"
@@ -887,6 +887,30 @@
           {
             "in": "header",
             "name": "userId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "assetId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "premiseId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "facilityId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "floorId",
             "required": false,
             "type": "string"
           },
@@ -19212,6 +19236,36 @@
           "items": {
             "type": "string"
           }
+        },
+        "modelName": {
+          "type": "string"
+        },
+        "deviceName": {
+          "type": "string"
+        },
+        "assetId": {
+          "type": "string"
+        },
+        "assetName": {
+          "type": "string"
+        },
+        "premiseId": {
+          "type": "string"
+        },
+        "premiseName": {
+          "type": "string"
+        },
+        "facilityId": {
+          "type": "string"
+        },
+        "facilityName": {
+          "type": "string"
+        },
+        "floorId": {
+          "type": "string"
+        },
+        "floorName": {
+          "type": "string"
         }
       }
     },
