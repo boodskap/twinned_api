@@ -6919,4 +6919,19 @@ final class _$Twinned extends Twinned {
     );
     return client.send<ClientArrayRes, ClientArrayRes>($request);
   }
+
+  @override
+  Future<Response<ClientEntityRes>> _makeMyselfAsNewClient({String? apikey}) {
+    final Uri $url = Uri.parse('/Client/make/myself');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<ClientEntityRes, ClientEntityRes>($request);
+  }
 }

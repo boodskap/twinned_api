@@ -7980,6 +7980,20 @@ abstract class Twinned extends ChopperService {
     @Body() required EqlSearch? body,
     @Header('APIKEY') String? apikey,
   });
+
+  ///make myself as a client
+  Future<chopper.Response<ClientEntityRes>> makeMyselfAsNewClient(
+      {dynamic apikey}) {
+    generatedMapping.putIfAbsent(
+        ClientEntityRes, () => ClientEntityRes.fromJsonFactory);
+
+    return _makeMyselfAsNewClient(apikey: apikey?.toString());
+  }
+
+  ///make myself as a client
+  @Get(path: '/Client/make/myself')
+  Future<chopper.Response<ClientEntityRes>> _makeMyselfAsNewClient(
+      {@Header('APIKEY') String? apikey});
 }
 
 @JsonSerializable(explicitToJson: true)
