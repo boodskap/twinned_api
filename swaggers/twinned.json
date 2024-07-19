@@ -15,7 +15,7 @@
       "name": "MIT"
     }
   },
-  "host": "digital.boodskap.io",
+  "host": "restdev.boodskap.io",
   "basePath": "/rest/nocode",
   "schemes": [
     "https"
@@ -479,6 +479,38 @@
             "apiKey": []
           }
         ]
+      }
+    },
+    "/IoT/twin/usage/get/by/domain/{domainKey}": {
+      "get": {
+        "tags": [
+          "IoT"
+        ],
+        "summary": "Get usage",
+        "description": "Get usage",
+        "operationId": "getUsageByDomainKey",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "domainKey",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UsageEntityRes"
+            }
+          }
+        }
       }
     },
     "/DeviceData/get/{deviceId}": {
