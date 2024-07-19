@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "1.9.6",
+    "version": "1.9.7",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -15625,6 +15625,41 @@
           }
         ],
         "summary": "query data"
+      }
+    },
+    "/Client/make/myself": {
+      "get": {
+        "tags": [
+          "Client"
+        ],
+        "summary": "make myself as a client",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "makeMyselfAsNewClient",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/ClientEntityRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
       }
     }
   },
