@@ -222,6 +222,18 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<UsageEntityRes>> _getUsageByDomainKey(
+      {required String? domainKey}) {
+    final Uri $url = Uri.parse('/IoT/twin/usage/get/by/domain/${domainKey}');
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+    );
+    return client.send<UsageEntityRes, UsageEntityRes>($request);
+  }
+
+  @override
   Future<Response<DeviceDataEntityRes>> _getDeviceData({
     required String? deviceId,
     String? isHardwareDevice,

@@ -44,7 +44,7 @@ abstract class Twinned extends ChopperService {
         authenticator: authenticator,
         errorConverter: errorConverter,
         baseUrl:
-            baseUrl ?? Uri.parse('http://digital.boodskap.io/rest/nocode'));
+            baseUrl ?? Uri.parse('http://restdev.boodskap.io/rest/nocode'));
     return _$Twinned(newClient);
   }
 
@@ -266,6 +266,22 @@ abstract class Twinned extends ChopperService {
   @Get(path: '/IoT/twin/usage/get')
   Future<chopper.Response<UsageEntityRes>> _getUsage(
       {@Header('APIKEY') String? apikey});
+
+  ///Get usage
+  ///@param domainKey
+  Future<chopper.Response<UsageEntityRes>> getUsageByDomainKey(
+      {required String? domainKey}) {
+    generatedMapping.putIfAbsent(
+        UsageEntityRes, () => UsageEntityRes.fromJsonFactory);
+
+    return _getUsageByDomainKey(domainKey: domainKey);
+  }
+
+  ///Get usage
+  ///@param domainKey
+  @Get(path: '/IoT/twin/usage/get/by/domain/{domainKey}')
+  Future<chopper.Response<UsageEntityRes>> _getUsageByDomainKey(
+      {@Path('domainKey') required String? domainKey});
 
   ///Get the most recent data for this device
   ///@param deviceId
