@@ -593,6 +593,40 @@
         }
       }
     },
+    "/IoT/twin/login": {
+      "post": {
+        "tags": [
+          "IoT"
+        ],
+        "summary": "Do Login",
+        "description": "Login a user into digital twin domain",
+        "operationId": "loginUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VerificationRes"
+            }
+          }
+        }
+      }
+    },
     "/DeviceData/get/{deviceId}": {
       "get": {
         "tags": [
@@ -23367,6 +23401,21 @@
         "code": {
           "type": "integer",
           "description": "404: User not found"
+        }
+      }
+    },
+    "Login": {
+      "type": "object",
+      "required": [
+        "userId",
+        "password"
+      ],
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
         }
       }
     },

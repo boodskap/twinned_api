@@ -11038,6 +11038,16 @@ Map<String, dynamic> _$VerificationResToJson(VerificationRes instance) {
   return val;
 }
 
+Login _$LoginFromJson(Map<String, dynamic> json) => Login(
+      userId: json['userId'] as String? ?? '',
+      password: json['password'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$LoginToJson(Login instance) => <String, dynamic>{
+      'userId': instance.userId,
+      'password': instance.password,
+    };
+
 ExportData _$ExportDataFromJson(Map<String, dynamic> json) => ExportData(
       model: DeviceModelInfo.fromJson(json['model'] as Map<String, dynamic>),
       conditions: (json['conditions'] as List<dynamic>?)
