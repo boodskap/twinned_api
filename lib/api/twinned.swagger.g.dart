@@ -11013,6 +11013,10 @@ VerificationRes _$VerificationResFromJson(Map<String, dynamic> json) =>
       user: json['user'] == null
           ? null
           : PlatformUser.fromJson(json['user'] as Map<String, dynamic>),
+      orgIds: (json['orgIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
       properties: json['properties'],
       code: (json['code'] as num?)?.toInt(),
     );
@@ -11033,6 +11037,7 @@ Map<String, dynamic> _$VerificationResToJson(VerificationRes instance) {
   writeNotNull('authToken', instance.authToken);
   writeNotNull('connCounter', instance.connCounter);
   writeNotNull('user', instance.user?.toJson());
+  writeNotNull('orgIds', instance.orgIds);
   writeNotNull('properties', instance.properties);
   writeNotNull('code', instance.code);
   return val;
