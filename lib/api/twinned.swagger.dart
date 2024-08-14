@@ -283,6 +283,54 @@ abstract class Twinned extends ChopperService {
   Future<chopper.Response<UsageEntityRes>> _getUsageByDomainKey(
       {@Path('domainKey') required String? domainKey});
 
+  ///Do Registration
+  ///@param dkey
+  ///@param body
+  Future<chopper.Response<RegistrationRes>> registerUser({
+    String? dkey,
+    required Registration? body,
+  }) {
+    generatedMapping.putIfAbsent(
+        Registration, () => Registration.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        RegistrationRes, () => RegistrationRes.fromJsonFactory);
+
+    return _registerUser(dkey: dkey?.toString(), body: body);
+  }
+
+  ///Do Registration
+  ///@param dkey
+  ///@param body
+  @Post(path: '/IoT/twin/register')
+  Future<chopper.Response<RegistrationRes>> _registerUser({
+    @Header('dkey') String? dkey,
+    @Body() required Registration? body,
+  });
+
+  ///Do Verification
+  ///@param dkey
+  ///@param body
+  Future<chopper.Response<VerificationRes>> verifyPin({
+    String? dkey,
+    required VerificationReq? body,
+  }) {
+    generatedMapping.putIfAbsent(
+        VerificationReq, () => VerificationReq.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        VerificationRes, () => VerificationRes.fromJsonFactory);
+
+    return _verifyPin(dkey: dkey?.toString(), body: body);
+  }
+
+  ///Do Verification
+  ///@param dkey
+  ///@param body
+  @Post(path: '/IoT/twin/verify')
+  Future<chopper.Response<VerificationRes>> _verifyPin({
+    @Header('dkey') String? dkey,
+    @Body() required VerificationReq? body,
+  });
+
   ///Get the most recent data for this device
   ///@param deviceId
   ///@param isHardwareDevice
@@ -44050,6 +44098,544 @@ extension $ChangePassReqExtension on ChangePassReq {
         newPassword:
             (newPassword != null ? newPassword.value : this.newPassword),
         twinUserId: (twinUserId != null ? twinUserId.value : this.twinUserId));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class Registration {
+  const Registration({
+    this.email,
+    this.phone,
+    required this.roles,
+    required this.subject,
+    required this.template,
+    required this.fname,
+    required this.lname,
+    this.properties,
+  });
+
+  factory Registration.fromJson(Map<String, dynamic> json) =>
+      _$RegistrationFromJson(json);
+
+  static const toJsonFactory = _$RegistrationToJson;
+  Map<String, dynamic> toJson() => _$RegistrationToJson(this);
+
+  @JsonKey(name: 'email', includeIfNull: false, defaultValue: '')
+  final String? email;
+  @JsonKey(name: 'phone', includeIfNull: false, defaultValue: '')
+  final String? phone;
+  @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
+  final List<String> roles;
+  @JsonKey(name: 'subject', includeIfNull: false, defaultValue: '')
+  final String subject;
+  @JsonKey(name: 'template', includeIfNull: false, defaultValue: '')
+  final String template;
+  @JsonKey(name: 'fname', includeIfNull: false, defaultValue: '')
+  final String fname;
+  @JsonKey(name: 'lname', includeIfNull: false, defaultValue: '')
+  final String lname;
+  @JsonKey(name: 'properties', includeIfNull: false)
+  final Object? properties;
+  static const fromJsonFactory = _$RegistrationFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is Registration &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
+            (identical(other.phone, phone) ||
+                const DeepCollectionEquality().equals(other.phone, phone)) &&
+            (identical(other.roles, roles) ||
+                const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.subject, subject) ||
+                const DeepCollectionEquality()
+                    .equals(other.subject, subject)) &&
+            (identical(other.template, template) ||
+                const DeepCollectionEquality()
+                    .equals(other.template, template)) &&
+            (identical(other.fname, fname) ||
+                const DeepCollectionEquality().equals(other.fname, fname)) &&
+            (identical(other.lname, lname) ||
+                const DeepCollectionEquality().equals(other.lname, lname)) &&
+            (identical(other.properties, properties) ||
+                const DeepCollectionEquality()
+                    .equals(other.properties, properties)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(email) ^
+      const DeepCollectionEquality().hash(phone) ^
+      const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(subject) ^
+      const DeepCollectionEquality().hash(template) ^
+      const DeepCollectionEquality().hash(fname) ^
+      const DeepCollectionEquality().hash(lname) ^
+      const DeepCollectionEquality().hash(properties) ^
+      runtimeType.hashCode;
+}
+
+extension $RegistrationExtension on Registration {
+  Registration copyWith(
+      {String? email,
+      String? phone,
+      List<String>? roles,
+      String? subject,
+      String? template,
+      String? fname,
+      String? lname,
+      Object? properties}) {
+    return Registration(
+        email: email ?? this.email,
+        phone: phone ?? this.phone,
+        roles: roles ?? this.roles,
+        subject: subject ?? this.subject,
+        template: template ?? this.template,
+        fname: fname ?? this.fname,
+        lname: lname ?? this.lname,
+        properties: properties ?? this.properties);
+  }
+
+  Registration copyWithWrapped(
+      {Wrapped<String?>? email,
+      Wrapped<String?>? phone,
+      Wrapped<List<String>>? roles,
+      Wrapped<String>? subject,
+      Wrapped<String>? template,
+      Wrapped<String>? fname,
+      Wrapped<String>? lname,
+      Wrapped<Object?>? properties}) {
+    return Registration(
+        email: (email != null ? email.value : this.email),
+        phone: (phone != null ? phone.value : this.phone),
+        roles: (roles != null ? roles.value : this.roles),
+        subject: (subject != null ? subject.value : this.subject),
+        template: (template != null ? template.value : this.template),
+        fname: (fname != null ? fname.value : this.fname),
+        lname: (lname != null ? lname.value : this.lname),
+        properties: (properties != null ? properties.value : this.properties));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class RegistrationRes {
+  const RegistrationRes({
+    required this.ok,
+    this.msg,
+    this.trace,
+    this.pinToken,
+    this.authToken,
+    this.delivery,
+  });
+
+  factory RegistrationRes.fromJson(Map<String, dynamic> json) =>
+      _$RegistrationResFromJson(json);
+
+  static const toJsonFactory = _$RegistrationResToJson;
+  Map<String, dynamic> toJson() => _$RegistrationResToJson(this);
+
+  @JsonKey(name: 'ok', includeIfNull: false)
+  final bool ok;
+  @JsonKey(name: 'msg', includeIfNull: false, defaultValue: '')
+  final String? msg;
+  @JsonKey(name: 'trace', includeIfNull: false, defaultValue: '')
+  final String? trace;
+  @JsonKey(name: 'pinToken', includeIfNull: false, defaultValue: '')
+  final String? pinToken;
+  @JsonKey(name: 'authToken', includeIfNull: false, defaultValue: '')
+  final String? authToken;
+  @JsonKey(name: 'delivery', includeIfNull: false)
+  final Object? delivery;
+  static const fromJsonFactory = _$RegistrationResFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is RegistrationRes &&
+            (identical(other.ok, ok) ||
+                const DeepCollectionEquality().equals(other.ok, ok)) &&
+            (identical(other.msg, msg) ||
+                const DeepCollectionEquality().equals(other.msg, msg)) &&
+            (identical(other.trace, trace) ||
+                const DeepCollectionEquality().equals(other.trace, trace)) &&
+            (identical(other.pinToken, pinToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.pinToken, pinToken)) &&
+            (identical(other.authToken, authToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.authToken, authToken)) &&
+            (identical(other.delivery, delivery) ||
+                const DeepCollectionEquality()
+                    .equals(other.delivery, delivery)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(ok) ^
+      const DeepCollectionEquality().hash(msg) ^
+      const DeepCollectionEquality().hash(trace) ^
+      const DeepCollectionEquality().hash(pinToken) ^
+      const DeepCollectionEquality().hash(authToken) ^
+      const DeepCollectionEquality().hash(delivery) ^
+      runtimeType.hashCode;
+}
+
+extension $RegistrationResExtension on RegistrationRes {
+  RegistrationRes copyWith(
+      {bool? ok,
+      String? msg,
+      String? trace,
+      String? pinToken,
+      String? authToken,
+      Object? delivery}) {
+    return RegistrationRes(
+        ok: ok ?? this.ok,
+        msg: msg ?? this.msg,
+        trace: trace ?? this.trace,
+        pinToken: pinToken ?? this.pinToken,
+        authToken: authToken ?? this.authToken,
+        delivery: delivery ?? this.delivery);
+  }
+
+  RegistrationRes copyWithWrapped(
+      {Wrapped<bool>? ok,
+      Wrapped<String?>? msg,
+      Wrapped<String?>? trace,
+      Wrapped<String?>? pinToken,
+      Wrapped<String?>? authToken,
+      Wrapped<Object?>? delivery}) {
+    return RegistrationRes(
+        ok: (ok != null ? ok.value : this.ok),
+        msg: (msg != null ? msg.value : this.msg),
+        trace: (trace != null ? trace.value : this.trace),
+        pinToken: (pinToken != null ? pinToken.value : this.pinToken),
+        authToken: (authToken != null ? authToken.value : this.authToken),
+        delivery: (delivery != null ? delivery.value : this.delivery));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class VerificationReq {
+  const VerificationReq({
+    required this.pinToken,
+    required this.pin,
+  });
+
+  factory VerificationReq.fromJson(Map<String, dynamic> json) =>
+      _$VerificationReqFromJson(json);
+
+  static const toJsonFactory = _$VerificationReqToJson;
+  Map<String, dynamic> toJson() => _$VerificationReqToJson(this);
+
+  @JsonKey(name: 'pinToken', includeIfNull: false, defaultValue: '')
+  final String pinToken;
+  @JsonKey(name: 'pin', includeIfNull: false, defaultValue: '')
+  final String pin;
+  static const fromJsonFactory = _$VerificationReqFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is VerificationReq &&
+            (identical(other.pinToken, pinToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.pinToken, pinToken)) &&
+            (identical(other.pin, pin) ||
+                const DeepCollectionEquality().equals(other.pin, pin)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(pinToken) ^
+      const DeepCollectionEquality().hash(pin) ^
+      runtimeType.hashCode;
+}
+
+extension $VerificationReqExtension on VerificationReq {
+  VerificationReq copyWith({String? pinToken, String? pin}) {
+    return VerificationReq(
+        pinToken: pinToken ?? this.pinToken, pin: pin ?? this.pin);
+  }
+
+  VerificationReq copyWithWrapped(
+      {Wrapped<String>? pinToken, Wrapped<String>? pin}) {
+    return VerificationReq(
+        pinToken: (pinToken != null ? pinToken.value : this.pinToken),
+        pin: (pin != null ? pin.value : this.pin));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class PlatformUser {
+  const PlatformUser({
+    this.email,
+    this.domainKey,
+    this.firstName,
+    this.lastName,
+    this.country,
+    this.state,
+    this.city,
+    this.address,
+    this.zipcode,
+    this.roles,
+  });
+
+  factory PlatformUser.fromJson(Map<String, dynamic> json) =>
+      _$PlatformUserFromJson(json);
+
+  static const toJsonFactory = _$PlatformUserToJson;
+  Map<String, dynamic> toJson() => _$PlatformUserToJson(this);
+
+  @JsonKey(name: 'email', includeIfNull: false, defaultValue: '')
+  final String? email;
+  @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
+  final String? domainKey;
+  @JsonKey(name: 'firstName', includeIfNull: false, defaultValue: '')
+  final String? firstName;
+  @JsonKey(name: 'lastName', includeIfNull: false, defaultValue: '')
+  final String? lastName;
+  @JsonKey(name: 'country', includeIfNull: false, defaultValue: '')
+  final String? country;
+  @JsonKey(name: 'state', includeIfNull: false, defaultValue: '')
+  final String? state;
+  @JsonKey(name: 'city', includeIfNull: false, defaultValue: '')
+  final String? city;
+  @JsonKey(name: 'address', includeIfNull: false, defaultValue: '')
+  final String? address;
+  @JsonKey(name: 'zipcode', includeIfNull: false, defaultValue: '')
+  final String? zipcode;
+  @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? roles;
+  static const fromJsonFactory = _$PlatformUserFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is PlatformUser &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
+            (identical(other.domainKey, domainKey) ||
+                const DeepCollectionEquality()
+                    .equals(other.domainKey, domainKey)) &&
+            (identical(other.firstName, firstName) ||
+                const DeepCollectionEquality()
+                    .equals(other.firstName, firstName)) &&
+            (identical(other.lastName, lastName) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastName, lastName)) &&
+            (identical(other.country, country) ||
+                const DeepCollectionEquality()
+                    .equals(other.country, country)) &&
+            (identical(other.state, state) ||
+                const DeepCollectionEquality().equals(other.state, state)) &&
+            (identical(other.city, city) ||
+                const DeepCollectionEquality().equals(other.city, city)) &&
+            (identical(other.address, address) ||
+                const DeepCollectionEquality()
+                    .equals(other.address, address)) &&
+            (identical(other.zipcode, zipcode) ||
+                const DeepCollectionEquality()
+                    .equals(other.zipcode, zipcode)) &&
+            (identical(other.roles, roles) ||
+                const DeepCollectionEquality().equals(other.roles, roles)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(email) ^
+      const DeepCollectionEquality().hash(domainKey) ^
+      const DeepCollectionEquality().hash(firstName) ^
+      const DeepCollectionEquality().hash(lastName) ^
+      const DeepCollectionEquality().hash(country) ^
+      const DeepCollectionEquality().hash(state) ^
+      const DeepCollectionEquality().hash(city) ^
+      const DeepCollectionEquality().hash(address) ^
+      const DeepCollectionEquality().hash(zipcode) ^
+      const DeepCollectionEquality().hash(roles) ^
+      runtimeType.hashCode;
+}
+
+extension $PlatformUserExtension on PlatformUser {
+  PlatformUser copyWith(
+      {String? email,
+      String? domainKey,
+      String? firstName,
+      String? lastName,
+      String? country,
+      String? state,
+      String? city,
+      String? address,
+      String? zipcode,
+      List<String>? roles}) {
+    return PlatformUser(
+        email: email ?? this.email,
+        domainKey: domainKey ?? this.domainKey,
+        firstName: firstName ?? this.firstName,
+        lastName: lastName ?? this.lastName,
+        country: country ?? this.country,
+        state: state ?? this.state,
+        city: city ?? this.city,
+        address: address ?? this.address,
+        zipcode: zipcode ?? this.zipcode,
+        roles: roles ?? this.roles);
+  }
+
+  PlatformUser copyWithWrapped(
+      {Wrapped<String?>? email,
+      Wrapped<String?>? domainKey,
+      Wrapped<String?>? firstName,
+      Wrapped<String?>? lastName,
+      Wrapped<String?>? country,
+      Wrapped<String?>? state,
+      Wrapped<String?>? city,
+      Wrapped<String?>? address,
+      Wrapped<String?>? zipcode,
+      Wrapped<List<String>?>? roles}) {
+    return PlatformUser(
+        email: (email != null ? email.value : this.email),
+        domainKey: (domainKey != null ? domainKey.value : this.domainKey),
+        firstName: (firstName != null ? firstName.value : this.firstName),
+        lastName: (lastName != null ? lastName.value : this.lastName),
+        country: (country != null ? country.value : this.country),
+        state: (state != null ? state.value : this.state),
+        city: (city != null ? city.value : this.city),
+        address: (address != null ? address.value : this.address),
+        zipcode: (zipcode != null ? zipcode.value : this.zipcode),
+        roles: (roles != null ? roles.value : this.roles));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class VerificationRes {
+  const VerificationRes({
+    required this.ok,
+    this.msg,
+    this.trace,
+    this.authToken,
+    this.connCounter,
+    this.user,
+    this.properties,
+    this.code,
+  });
+
+  factory VerificationRes.fromJson(Map<String, dynamic> json) =>
+      _$VerificationResFromJson(json);
+
+  static const toJsonFactory = _$VerificationResToJson;
+  Map<String, dynamic> toJson() => _$VerificationResToJson(this);
+
+  @JsonKey(name: 'ok', includeIfNull: false)
+  final bool ok;
+  @JsonKey(name: 'msg', includeIfNull: false, defaultValue: '')
+  final String? msg;
+  @JsonKey(name: 'trace', includeIfNull: false, defaultValue: '')
+  final String? trace;
+  @JsonKey(name: 'authToken', includeIfNull: false, defaultValue: '')
+  final String? authToken;
+  @JsonKey(name: 'connCounter', includeIfNull: false)
+  final int? connCounter;
+  @JsonKey(name: 'user', includeIfNull: false)
+  final PlatformUser? user;
+  @JsonKey(name: 'properties', includeIfNull: false)
+  final Object? properties;
+  @JsonKey(name: 'code', includeIfNull: false)
+  final int? code;
+  static const fromJsonFactory = _$VerificationResFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is VerificationRes &&
+            (identical(other.ok, ok) ||
+                const DeepCollectionEquality().equals(other.ok, ok)) &&
+            (identical(other.msg, msg) ||
+                const DeepCollectionEquality().equals(other.msg, msg)) &&
+            (identical(other.trace, trace) ||
+                const DeepCollectionEquality().equals(other.trace, trace)) &&
+            (identical(other.authToken, authToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.authToken, authToken)) &&
+            (identical(other.connCounter, connCounter) ||
+                const DeepCollectionEquality()
+                    .equals(other.connCounter, connCounter)) &&
+            (identical(other.user, user) ||
+                const DeepCollectionEquality().equals(other.user, user)) &&
+            (identical(other.properties, properties) ||
+                const DeepCollectionEquality()
+                    .equals(other.properties, properties)) &&
+            (identical(other.code, code) ||
+                const DeepCollectionEquality().equals(other.code, code)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(ok) ^
+      const DeepCollectionEquality().hash(msg) ^
+      const DeepCollectionEquality().hash(trace) ^
+      const DeepCollectionEquality().hash(authToken) ^
+      const DeepCollectionEquality().hash(connCounter) ^
+      const DeepCollectionEquality().hash(user) ^
+      const DeepCollectionEquality().hash(properties) ^
+      const DeepCollectionEquality().hash(code) ^
+      runtimeType.hashCode;
+}
+
+extension $VerificationResExtension on VerificationRes {
+  VerificationRes copyWith(
+      {bool? ok,
+      String? msg,
+      String? trace,
+      String? authToken,
+      int? connCounter,
+      PlatformUser? user,
+      Object? properties,
+      int? code}) {
+    return VerificationRes(
+        ok: ok ?? this.ok,
+        msg: msg ?? this.msg,
+        trace: trace ?? this.trace,
+        authToken: authToken ?? this.authToken,
+        connCounter: connCounter ?? this.connCounter,
+        user: user ?? this.user,
+        properties: properties ?? this.properties,
+        code: code ?? this.code);
+  }
+
+  VerificationRes copyWithWrapped(
+      {Wrapped<bool>? ok,
+      Wrapped<String?>? msg,
+      Wrapped<String?>? trace,
+      Wrapped<String?>? authToken,
+      Wrapped<int?>? connCounter,
+      Wrapped<PlatformUser?>? user,
+      Wrapped<Object?>? properties,
+      Wrapped<int?>? code}) {
+    return VerificationRes(
+        ok: (ok != null ? ok.value : this.ok),
+        msg: (msg != null ? msg.value : this.msg),
+        trace: (trace != null ? trace.value : this.trace),
+        authToken: (authToken != null ? authToken.value : this.authToken),
+        connCounter:
+            (connCounter != null ? connCounter.value : this.connCounter),
+        user: (user != null ? user.value : this.user),
+        properties: (properties != null ? properties.value : this.properties),
+        code: (code != null ? code.value : this.code));
   }
 }
 
