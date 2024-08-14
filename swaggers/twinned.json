@@ -23394,6 +23394,12 @@
         "user": {
           "$ref": "#/definitions/PlatformUser"
         },
+        "orgIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "properties": {
           "type": "object",
           "default": {}

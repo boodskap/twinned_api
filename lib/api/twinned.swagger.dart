@@ -44543,6 +44543,7 @@ class VerificationRes {
     this.authToken,
     this.connCounter,
     this.user,
+    this.orgIds,
     this.properties,
     this.code,
   });
@@ -44565,6 +44566,8 @@ class VerificationRes {
   final int? connCounter;
   @JsonKey(name: 'user', includeIfNull: false)
   final PlatformUser? user;
+  @JsonKey(name: 'orgIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? orgIds;
   @JsonKey(name: 'properties', includeIfNull: false)
   final Object? properties;
   @JsonKey(name: 'code', includeIfNull: false)
@@ -44589,6 +44592,8 @@ class VerificationRes {
                     .equals(other.connCounter, connCounter)) &&
             (identical(other.user, user) ||
                 const DeepCollectionEquality().equals(other.user, user)) &&
+            (identical(other.orgIds, orgIds) ||
+                const DeepCollectionEquality().equals(other.orgIds, orgIds)) &&
             (identical(other.properties, properties) ||
                 const DeepCollectionEquality()
                     .equals(other.properties, properties)) &&
@@ -44607,6 +44612,7 @@ class VerificationRes {
       const DeepCollectionEquality().hash(authToken) ^
       const DeepCollectionEquality().hash(connCounter) ^
       const DeepCollectionEquality().hash(user) ^
+      const DeepCollectionEquality().hash(orgIds) ^
       const DeepCollectionEquality().hash(properties) ^
       const DeepCollectionEquality().hash(code) ^
       runtimeType.hashCode;
@@ -44620,6 +44626,7 @@ extension $VerificationResExtension on VerificationRes {
       String? authToken,
       int? connCounter,
       PlatformUser? user,
+      List<String>? orgIds,
       Object? properties,
       int? code}) {
     return VerificationRes(
@@ -44629,6 +44636,7 @@ extension $VerificationResExtension on VerificationRes {
         authToken: authToken ?? this.authToken,
         connCounter: connCounter ?? this.connCounter,
         user: user ?? this.user,
+        orgIds: orgIds ?? this.orgIds,
         properties: properties ?? this.properties,
         code: code ?? this.code);
   }
@@ -44640,6 +44648,7 @@ extension $VerificationResExtension on VerificationRes {
       Wrapped<String?>? authToken,
       Wrapped<int?>? connCounter,
       Wrapped<PlatformUser?>? user,
+      Wrapped<List<String>?>? orgIds,
       Wrapped<Object?>? properties,
       Wrapped<int?>? code}) {
     return VerificationRes(
@@ -44650,6 +44659,7 @@ extension $VerificationResExtension on VerificationRes {
         connCounter:
             (connCounter != null ? connCounter.value : this.connCounter),
         user: (user != null ? user.value : this.user),
+        orgIds: (orgIds != null ? orgIds.value : this.orgIds),
         properties: (properties != null ? properties.value : this.properties),
         code: (code != null ? code.value : this.code));
   }
