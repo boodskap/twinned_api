@@ -234,6 +234,46 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<RegistrationRes>> _registerUser({
+    String? dkey,
+    required Registration? body,
+  }) {
+    final Uri $url = Uri.parse('/IoT/twin/register');
+    final Map<String, String> $headers = {
+      if (dkey != null) 'dkey': dkey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<RegistrationRes, RegistrationRes>($request);
+  }
+
+  @override
+  Future<Response<VerificationRes>> _verifyPin({
+    String? dkey,
+    required VerificationReq? body,
+  }) {
+    final Uri $url = Uri.parse('/IoT/twin/verify');
+    final Map<String, String> $headers = {
+      if (dkey != null) 'dkey': dkey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<VerificationRes, VerificationRes>($request);
+  }
+
+  @override
   Future<Response<DeviceDataEntityRes>> _getDeviceData({
     required String? deviceId,
     String? isHardwareDevice,
