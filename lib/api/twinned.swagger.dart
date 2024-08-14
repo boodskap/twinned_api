@@ -19520,6 +19520,7 @@ class DeviceData {
     this.roles,
     this.$client,
     this.clientIds,
+    this.assetModel,
     this.assetModelId,
   });
 
@@ -19623,6 +19624,8 @@ class DeviceData {
   final String? $client;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
   final List<String>? clientIds;
+  @JsonKey(name: 'assetModel', includeIfNull: false, defaultValue: '')
+  final String? assetModel;
   @JsonKey(name: 'assetModelId', includeIfNull: false, defaultValue: '')
   final String? assetModelId;
   static const fromJsonFactory = _$DeviceDataFromJson;
@@ -19716,6 +19719,7 @@ class DeviceData {
             (identical(other.roles, roles) || const DeepCollectionEquality().equals(other.roles, roles)) &&
             (identical(other.$client, $client) || const DeepCollectionEquality().equals(other.$client, $client)) &&
             (identical(other.clientIds, clientIds) || const DeepCollectionEquality().equals(other.clientIds, clientIds)) &&
+            (identical(other.assetModel, assetModel) || const DeepCollectionEquality().equals(other.assetModel, assetModel)) &&
             (identical(other.assetModelId, assetModelId) || const DeepCollectionEquality().equals(other.assetModelId, assetModelId)));
   }
 
@@ -19766,6 +19770,7 @@ class DeviceData {
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash($client) ^
       const DeepCollectionEquality().hash(clientIds) ^
+      const DeepCollectionEquality().hash(assetModel) ^
       const DeepCollectionEquality().hash(assetModelId) ^
       runtimeType.hashCode;
 }
@@ -19814,6 +19819,7 @@ extension $DeviceDataExtension on DeviceData {
       List<String>? roles,
       String? $client,
       List<String>? clientIds,
+      String? assetModel,
       String? assetModelId}) {
     return DeviceData(
         domainKey: domainKey ?? this.domainKey,
@@ -19858,6 +19864,7 @@ extension $DeviceDataExtension on DeviceData {
         roles: roles ?? this.roles,
         $client: $client ?? this.$client,
         clientIds: clientIds ?? this.clientIds,
+        assetModel: assetModel ?? this.assetModel,
         assetModelId: assetModelId ?? this.assetModelId);
   }
 
@@ -19904,6 +19911,7 @@ extension $DeviceDataExtension on DeviceData {
       Wrapped<List<String>?>? roles,
       Wrapped<String?>? $client,
       Wrapped<List<String>?>? clientIds,
+      Wrapped<String?>? assetModel,
       Wrapped<String?>? assetModelId}) {
     return DeviceData(
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
@@ -19962,6 +19970,7 @@ extension $DeviceDataExtension on DeviceData {
         roles: (roles != null ? roles.value : this.roles),
         $client: ($client != null ? $client.value : this.$client),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
+        assetModel: (assetModel != null ? assetModel.value : this.assetModel),
         assetModelId:
             (assetModelId != null ? assetModelId.value : this.assetModelId));
   }
@@ -29927,6 +29936,7 @@ extension $LandingPageExtension on LandingPage {
 class ElasticEmailConfig {
   const ElasticEmailConfig({
     required this.apiKey,
+    required this.fromEmail,
   });
 
   factory ElasticEmailConfig.fromJson(Map<String, dynamic> json) =>
@@ -29937,6 +29947,8 @@ class ElasticEmailConfig {
 
   @JsonKey(name: 'apiKey', includeIfNull: false, defaultValue: '')
   final String apiKey;
+  @JsonKey(name: 'fromEmail', includeIfNull: false, defaultValue: '')
+  final String fromEmail;
   static const fromJsonFactory = _$ElasticEmailConfigFromJson;
 
   @override
@@ -29944,7 +29956,10 @@ class ElasticEmailConfig {
     return identical(this, other) ||
         (other is ElasticEmailConfig &&
             (identical(other.apiKey, apiKey) ||
-                const DeepCollectionEquality().equals(other.apiKey, apiKey)));
+                const DeepCollectionEquality().equals(other.apiKey, apiKey)) &&
+            (identical(other.fromEmail, fromEmail) ||
+                const DeepCollectionEquality()
+                    .equals(other.fromEmail, fromEmail)));
   }
 
   @override
@@ -29952,24 +29967,31 @@ class ElasticEmailConfig {
 
   @override
   int get hashCode =>
-      const DeepCollectionEquality().hash(apiKey) ^ runtimeType.hashCode;
+      const DeepCollectionEquality().hash(apiKey) ^
+      const DeepCollectionEquality().hash(fromEmail) ^
+      runtimeType.hashCode;
 }
 
 extension $ElasticEmailConfigExtension on ElasticEmailConfig {
-  ElasticEmailConfig copyWith({String? apiKey}) {
-    return ElasticEmailConfig(apiKey: apiKey ?? this.apiKey);
+  ElasticEmailConfig copyWith({String? apiKey, String? fromEmail}) {
+    return ElasticEmailConfig(
+        apiKey: apiKey ?? this.apiKey, fromEmail: fromEmail ?? this.fromEmail);
   }
 
-  ElasticEmailConfig copyWithWrapped({Wrapped<String>? apiKey}) {
+  ElasticEmailConfig copyWithWrapped(
+      {Wrapped<String>? apiKey, Wrapped<String>? fromEmail}) {
     return ElasticEmailConfig(
-        apiKey: (apiKey != null ? apiKey.value : this.apiKey));
+        apiKey: (apiKey != null ? apiKey.value : this.apiKey),
+        fromEmail: (fromEmail != null ? fromEmail.value : this.fromEmail));
   }
 }
 
 @JsonSerializable(explicitToJson: true)
 class TwilioConfig {
   const TwilioConfig({
-    required this.apiKey,
+    required this.accountSid,
+    required this.authToken,
+    required this.phoneNumber,
   });
 
   factory TwilioConfig.fromJson(Map<String, dynamic> json) =>
@@ -29978,16 +30000,27 @@ class TwilioConfig {
   static const toJsonFactory = _$TwilioConfigToJson;
   Map<String, dynamic> toJson() => _$TwilioConfigToJson(this);
 
-  @JsonKey(name: 'apiKey', includeIfNull: false, defaultValue: '')
-  final String apiKey;
+  @JsonKey(name: 'accountSid', includeIfNull: false, defaultValue: '')
+  final String accountSid;
+  @JsonKey(name: 'authToken', includeIfNull: false, defaultValue: '')
+  final String authToken;
+  @JsonKey(name: 'phoneNumber', includeIfNull: false, defaultValue: '')
+  final String phoneNumber;
   static const fromJsonFactory = _$TwilioConfigFromJson;
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other is TwilioConfig &&
-            (identical(other.apiKey, apiKey) ||
-                const DeepCollectionEquality().equals(other.apiKey, apiKey)));
+            (identical(other.accountSid, accountSid) ||
+                const DeepCollectionEquality()
+                    .equals(other.accountSid, accountSid)) &&
+            (identical(other.authToken, authToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.authToken, authToken)) &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                const DeepCollectionEquality()
+                    .equals(other.phoneNumber, phoneNumber)));
   }
 
   @override
@@ -29995,16 +30028,30 @@ class TwilioConfig {
 
   @override
   int get hashCode =>
-      const DeepCollectionEquality().hash(apiKey) ^ runtimeType.hashCode;
+      const DeepCollectionEquality().hash(accountSid) ^
+      const DeepCollectionEquality().hash(authToken) ^
+      const DeepCollectionEquality().hash(phoneNumber) ^
+      runtimeType.hashCode;
 }
 
 extension $TwilioConfigExtension on TwilioConfig {
-  TwilioConfig copyWith({String? apiKey}) {
-    return TwilioConfig(apiKey: apiKey ?? this.apiKey);
+  TwilioConfig copyWith(
+      {String? accountSid, String? authToken, String? phoneNumber}) {
+    return TwilioConfig(
+        accountSid: accountSid ?? this.accountSid,
+        authToken: authToken ?? this.authToken,
+        phoneNumber: phoneNumber ?? this.phoneNumber);
   }
 
-  TwilioConfig copyWithWrapped({Wrapped<String>? apiKey}) {
-    return TwilioConfig(apiKey: (apiKey != null ? apiKey.value : this.apiKey));
+  TwilioConfig copyWithWrapped(
+      {Wrapped<String>? accountSid,
+      Wrapped<String>? authToken,
+      Wrapped<String>? phoneNumber}) {
+    return TwilioConfig(
+        accountSid: (accountSid != null ? accountSid.value : this.accountSid),
+        authToken: (authToken != null ? authToken.value : this.authToken),
+        phoneNumber:
+            (phoneNumber != null ? phoneNumber.value : this.phoneNumber));
   }
 }
 
@@ -31065,6 +31112,14 @@ class FloorInfo {
     required this.floorType,
     this.clientIds,
     this.reportedStamp,
+    this.email,
+    this.phone,
+    this.address,
+    this.country,
+    this.countryCode,
+    this.stateProvince,
+    this.city,
+    this.zipcode,
   });
 
   factory FloorInfo.fromJson(Map<String, dynamic> json) =>
@@ -31108,6 +31163,22 @@ class FloorInfo {
   final List<String>? clientIds;
   @JsonKey(name: 'reportedStamp', includeIfNull: false)
   final int? reportedStamp;
+  @JsonKey(name: 'email', includeIfNull: false, defaultValue: '')
+  final String? email;
+  @JsonKey(name: 'phone', includeIfNull: false, defaultValue: '')
+  final String? phone;
+  @JsonKey(name: 'address', includeIfNull: false, defaultValue: '')
+  final String? address;
+  @JsonKey(name: 'country', includeIfNull: false, defaultValue: '')
+  final String? country;
+  @JsonKey(name: 'countryCode', includeIfNull: false, defaultValue: '')
+  final String? countryCode;
+  @JsonKey(name: 'stateProvince', includeIfNull: false, defaultValue: '')
+  final String? stateProvince;
+  @JsonKey(name: 'city', includeIfNull: false, defaultValue: '')
+  final String? city;
+  @JsonKey(name: 'zipcode', includeIfNull: false, defaultValue: '')
+  final String? zipcode;
   static const fromJsonFactory = _$FloorInfoFromJson;
 
   @override
@@ -31148,7 +31219,27 @@ class FloorInfo {
                     .equals(other.clientIds, clientIds)) &&
             (identical(other.reportedStamp, reportedStamp) ||
                 const DeepCollectionEquality()
-                    .equals(other.reportedStamp, reportedStamp)));
+                    .equals(other.reportedStamp, reportedStamp)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
+            (identical(other.phone, phone) ||
+                const DeepCollectionEquality().equals(other.phone, phone)) &&
+            (identical(other.address, address) ||
+                const DeepCollectionEquality()
+                    .equals(other.address, address)) &&
+            (identical(other.country, country) ||
+                const DeepCollectionEquality()
+                    .equals(other.country, country)) &&
+            (identical(other.countryCode, countryCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryCode, countryCode)) &&
+            (identical(other.stateProvince, stateProvince) ||
+                const DeepCollectionEquality()
+                    .equals(other.stateProvince, stateProvince)) &&
+            (identical(other.city, city) ||
+                const DeepCollectionEquality().equals(other.city, city)) &&
+            (identical(other.zipcode, zipcode) ||
+                const DeepCollectionEquality().equals(other.zipcode, zipcode)));
   }
 
   @override
@@ -31169,6 +31260,14 @@ class FloorInfo {
       const DeepCollectionEquality().hash(floorType) ^
       const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(reportedStamp) ^
+      const DeepCollectionEquality().hash(email) ^
+      const DeepCollectionEquality().hash(phone) ^
+      const DeepCollectionEquality().hash(address) ^
+      const DeepCollectionEquality().hash(country) ^
+      const DeepCollectionEquality().hash(countryCode) ^
+      const DeepCollectionEquality().hash(stateProvince) ^
+      const DeepCollectionEquality().hash(city) ^
+      const DeepCollectionEquality().hash(zipcode) ^
       runtimeType.hashCode;
 }
 
@@ -31186,7 +31285,15 @@ extension $FloorInfoExtension on FloorInfo {
       int? floorLevel,
       enums.FloorInfoFloorType? floorType,
       List<String>? clientIds,
-      int? reportedStamp}) {
+      int? reportedStamp,
+      String? email,
+      String? phone,
+      String? address,
+      String? country,
+      String? countryCode,
+      String? stateProvince,
+      String? city,
+      String? zipcode}) {
     return FloorInfo(
         premiseId: premiseId ?? this.premiseId,
         facilityId: facilityId ?? this.facilityId,
@@ -31200,7 +31307,15 @@ extension $FloorInfoExtension on FloorInfo {
         floorLevel: floorLevel ?? this.floorLevel,
         floorType: floorType ?? this.floorType,
         clientIds: clientIds ?? this.clientIds,
-        reportedStamp: reportedStamp ?? this.reportedStamp);
+        reportedStamp: reportedStamp ?? this.reportedStamp,
+        email: email ?? this.email,
+        phone: phone ?? this.phone,
+        address: address ?? this.address,
+        country: country ?? this.country,
+        countryCode: countryCode ?? this.countryCode,
+        stateProvince: stateProvince ?? this.stateProvince,
+        city: city ?? this.city,
+        zipcode: zipcode ?? this.zipcode);
   }
 
   FloorInfo copyWithWrapped(
@@ -31216,7 +31331,15 @@ extension $FloorInfoExtension on FloorInfo {
       Wrapped<int>? floorLevel,
       Wrapped<enums.FloorInfoFloorType>? floorType,
       Wrapped<List<String>?>? clientIds,
-      Wrapped<int?>? reportedStamp}) {
+      Wrapped<int?>? reportedStamp,
+      Wrapped<String?>? email,
+      Wrapped<String?>? phone,
+      Wrapped<String?>? address,
+      Wrapped<String?>? country,
+      Wrapped<String?>? countryCode,
+      Wrapped<String?>? stateProvince,
+      Wrapped<String?>? city,
+      Wrapped<String?>? zipcode}) {
     return FloorInfo(
         premiseId: (premiseId != null ? premiseId.value : this.premiseId),
         facilityId: (facilityId != null ? facilityId.value : this.facilityId),
@@ -31232,7 +31355,17 @@ extension $FloorInfoExtension on FloorInfo {
         floorType: (floorType != null ? floorType.value : this.floorType),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         reportedStamp:
-            (reportedStamp != null ? reportedStamp.value : this.reportedStamp));
+            (reportedStamp != null ? reportedStamp.value : this.reportedStamp),
+        email: (email != null ? email.value : this.email),
+        phone: (phone != null ? phone.value : this.phone),
+        address: (address != null ? address.value : this.address),
+        country: (country != null ? country.value : this.country),
+        countryCode:
+            (countryCode != null ? countryCode.value : this.countryCode),
+        stateProvince:
+            (stateProvince != null ? stateProvince.value : this.stateProvince),
+        city: (city != null ? city.value : this.city),
+        zipcode: (zipcode != null ? zipcode.value : this.zipcode));
   }
 }
 
@@ -31252,6 +31385,14 @@ class Floor {
     required this.floorType,
     this.clientIds,
     this.reportedStamp,
+    this.email,
+    this.phone,
+    this.address,
+    this.country,
+    this.countryCode,
+    this.stateProvince,
+    this.city,
+    this.zipcode,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -31300,6 +31441,22 @@ class Floor {
   final List<String>? clientIds;
   @JsonKey(name: 'reportedStamp', includeIfNull: false)
   final int? reportedStamp;
+  @JsonKey(name: 'email', includeIfNull: false, defaultValue: '')
+  final String? email;
+  @JsonKey(name: 'phone', includeIfNull: false, defaultValue: '')
+  final String? phone;
+  @JsonKey(name: 'address', includeIfNull: false, defaultValue: '')
+  final String? address;
+  @JsonKey(name: 'country', includeIfNull: false, defaultValue: '')
+  final String? country;
+  @JsonKey(name: 'countryCode', includeIfNull: false, defaultValue: '')
+  final String? countryCode;
+  @JsonKey(name: 'stateProvince', includeIfNull: false, defaultValue: '')
+  final String? stateProvince;
+  @JsonKey(name: 'city', includeIfNull: false, defaultValue: '')
+  final String? city;
+  @JsonKey(name: 'zipcode', includeIfNull: false, defaultValue: '')
+  final String? zipcode;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -31355,6 +31512,27 @@ class Floor {
             (identical(other.reportedStamp, reportedStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.reportedStamp, reportedStamp)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
+            (identical(other.phone, phone) ||
+                const DeepCollectionEquality().equals(other.phone, phone)) &&
+            (identical(other.address, address) ||
+                const DeepCollectionEquality()
+                    .equals(other.address, address)) &&
+            (identical(other.country, country) ||
+                const DeepCollectionEquality()
+                    .equals(other.country, country)) &&
+            (identical(other.countryCode, countryCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryCode, countryCode)) &&
+            (identical(other.stateProvince, stateProvince) ||
+                const DeepCollectionEquality()
+                    .equals(other.stateProvince, stateProvince)) &&
+            (identical(other.city, city) ||
+                const DeepCollectionEquality().equals(other.city, city)) &&
+            (identical(other.zipcode, zipcode) ||
+                const DeepCollectionEquality()
+                    .equals(other.zipcode, zipcode)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -31368,12 +31546,8 @@ class Floor {
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
-            (identical(other.updatedBy, updatedBy) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+            (identical(other.updatedBy, updatedBy) || const DeepCollectionEquality().equals(other.updatedBy, updatedBy)) &&
+            (identical(other.updatedStamp, updatedStamp) || const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)));
   }
 
   @override
@@ -31394,6 +31568,14 @@ class Floor {
       const DeepCollectionEquality().hash(floorType) ^
       const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(reportedStamp) ^
+      const DeepCollectionEquality().hash(email) ^
+      const DeepCollectionEquality().hash(phone) ^
+      const DeepCollectionEquality().hash(address) ^
+      const DeepCollectionEquality().hash(country) ^
+      const DeepCollectionEquality().hash(countryCode) ^
+      const DeepCollectionEquality().hash(stateProvince) ^
+      const DeepCollectionEquality().hash(city) ^
+      const DeepCollectionEquality().hash(zipcode) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -31419,6 +31601,14 @@ extension $FloorExtension on Floor {
       enums.FloorFloorType? floorType,
       List<String>? clientIds,
       int? reportedStamp,
+      String? email,
+      String? phone,
+      String? address,
+      String? country,
+      String? countryCode,
+      String? stateProvince,
+      String? city,
+      String? zipcode,
       String? domainKey,
       String? id,
       String? rtype,
@@ -31440,6 +31630,14 @@ extension $FloorExtension on Floor {
         floorType: floorType ?? this.floorType,
         clientIds: clientIds ?? this.clientIds,
         reportedStamp: reportedStamp ?? this.reportedStamp,
+        email: email ?? this.email,
+        phone: phone ?? this.phone,
+        address: address ?? this.address,
+        country: country ?? this.country,
+        countryCode: countryCode ?? this.countryCode,
+        stateProvince: stateProvince ?? this.stateProvince,
+        city: city ?? this.city,
+        zipcode: zipcode ?? this.zipcode,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -31463,6 +31661,14 @@ extension $FloorExtension on Floor {
       Wrapped<enums.FloorFloorType>? floorType,
       Wrapped<List<String>?>? clientIds,
       Wrapped<int?>? reportedStamp,
+      Wrapped<String?>? email,
+      Wrapped<String?>? phone,
+      Wrapped<String?>? address,
+      Wrapped<String?>? country,
+      Wrapped<String?>? countryCode,
+      Wrapped<String?>? stateProvince,
+      Wrapped<String?>? city,
+      Wrapped<String?>? zipcode,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -31486,6 +31692,16 @@ extension $FloorExtension on Floor {
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         reportedStamp:
             (reportedStamp != null ? reportedStamp.value : this.reportedStamp),
+        email: (email != null ? email.value : this.email),
+        phone: (phone != null ? phone.value : this.phone),
+        address: (address != null ? address.value : this.address),
+        country: (country != null ? country.value : this.country),
+        countryCode:
+            (countryCode != null ? countryCode.value : this.countryCode),
+        stateProvince:
+            (stateProvince != null ? stateProvince.value : this.stateProvince),
+        city: (city != null ? city.value : this.city),
+        zipcode: (zipcode != null ? zipcode.value : this.zipcode),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -32631,6 +32847,14 @@ class FacilityInfo {
     this.location,
     this.clientIds,
     this.reportedStamp,
+    this.email,
+    this.phone,
+    this.address,
+    this.country,
+    this.countryCode,
+    this.stateProvince,
+    this.city,
+    this.zipcode,
   });
 
   factory FacilityInfo.fromJson(Map<String, dynamic> json) =>
@@ -32659,6 +32883,22 @@ class FacilityInfo {
   final List<String>? clientIds;
   @JsonKey(name: 'reportedStamp', includeIfNull: false)
   final int? reportedStamp;
+  @JsonKey(name: 'email', includeIfNull: false, defaultValue: '')
+  final String? email;
+  @JsonKey(name: 'phone', includeIfNull: false, defaultValue: '')
+  final String? phone;
+  @JsonKey(name: 'address', includeIfNull: false, defaultValue: '')
+  final String? address;
+  @JsonKey(name: 'country', includeIfNull: false, defaultValue: '')
+  final String? country;
+  @JsonKey(name: 'countryCode', includeIfNull: false, defaultValue: '')
+  final String? countryCode;
+  @JsonKey(name: 'stateProvince', includeIfNull: false, defaultValue: '')
+  final String? stateProvince;
+  @JsonKey(name: 'city', includeIfNull: false, defaultValue: '')
+  final String? city;
+  @JsonKey(name: 'zipcode', includeIfNull: false, defaultValue: '')
+  final String? zipcode;
   static const fromJsonFactory = _$FacilityInfoFromJson;
 
   @override
@@ -32690,7 +32930,27 @@ class FacilityInfo {
                     .equals(other.clientIds, clientIds)) &&
             (identical(other.reportedStamp, reportedStamp) ||
                 const DeepCollectionEquality()
-                    .equals(other.reportedStamp, reportedStamp)));
+                    .equals(other.reportedStamp, reportedStamp)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
+            (identical(other.phone, phone) ||
+                const DeepCollectionEquality().equals(other.phone, phone)) &&
+            (identical(other.address, address) ||
+                const DeepCollectionEquality()
+                    .equals(other.address, address)) &&
+            (identical(other.country, country) ||
+                const DeepCollectionEquality()
+                    .equals(other.country, country)) &&
+            (identical(other.countryCode, countryCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryCode, countryCode)) &&
+            (identical(other.stateProvince, stateProvince) ||
+                const DeepCollectionEquality()
+                    .equals(other.stateProvince, stateProvince)) &&
+            (identical(other.city, city) ||
+                const DeepCollectionEquality().equals(other.city, city)) &&
+            (identical(other.zipcode, zipcode) ||
+                const DeepCollectionEquality().equals(other.zipcode, zipcode)));
   }
 
   @override
@@ -32708,6 +32968,14 @@ class FacilityInfo {
       const DeepCollectionEquality().hash(location) ^
       const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(reportedStamp) ^
+      const DeepCollectionEquality().hash(email) ^
+      const DeepCollectionEquality().hash(phone) ^
+      const DeepCollectionEquality().hash(address) ^
+      const DeepCollectionEquality().hash(country) ^
+      const DeepCollectionEquality().hash(countryCode) ^
+      const DeepCollectionEquality().hash(stateProvince) ^
+      const DeepCollectionEquality().hash(city) ^
+      const DeepCollectionEquality().hash(zipcode) ^
       runtimeType.hashCode;
 }
 
@@ -32722,7 +32990,15 @@ extension $FacilityInfoExtension on FacilityInfo {
       List<String>? roles,
       GeoLocation? location,
       List<String>? clientIds,
-      int? reportedStamp}) {
+      int? reportedStamp,
+      String? email,
+      String? phone,
+      String? address,
+      String? country,
+      String? countryCode,
+      String? stateProvince,
+      String? city,
+      String? zipcode}) {
     return FacilityInfo(
         premiseId: premiseId ?? this.premiseId,
         name: name ?? this.name,
@@ -32733,7 +33009,15 @@ extension $FacilityInfoExtension on FacilityInfo {
         roles: roles ?? this.roles,
         location: location ?? this.location,
         clientIds: clientIds ?? this.clientIds,
-        reportedStamp: reportedStamp ?? this.reportedStamp);
+        reportedStamp: reportedStamp ?? this.reportedStamp,
+        email: email ?? this.email,
+        phone: phone ?? this.phone,
+        address: address ?? this.address,
+        country: country ?? this.country,
+        countryCode: countryCode ?? this.countryCode,
+        stateProvince: stateProvince ?? this.stateProvince,
+        city: city ?? this.city,
+        zipcode: zipcode ?? this.zipcode);
   }
 
   FacilityInfo copyWithWrapped(
@@ -32746,7 +33030,15 @@ extension $FacilityInfoExtension on FacilityInfo {
       Wrapped<List<String>?>? roles,
       Wrapped<GeoLocation?>? location,
       Wrapped<List<String>?>? clientIds,
-      Wrapped<int?>? reportedStamp}) {
+      Wrapped<int?>? reportedStamp,
+      Wrapped<String?>? email,
+      Wrapped<String?>? phone,
+      Wrapped<String?>? address,
+      Wrapped<String?>? country,
+      Wrapped<String?>? countryCode,
+      Wrapped<String?>? stateProvince,
+      Wrapped<String?>? city,
+      Wrapped<String?>? zipcode}) {
     return FacilityInfo(
         premiseId: (premiseId != null ? premiseId.value : this.premiseId),
         name: (name != null ? name.value : this.name),
@@ -32760,7 +33052,17 @@ extension $FacilityInfoExtension on FacilityInfo {
         location: (location != null ? location.value : this.location),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         reportedStamp:
-            (reportedStamp != null ? reportedStamp.value : this.reportedStamp));
+            (reportedStamp != null ? reportedStamp.value : this.reportedStamp),
+        email: (email != null ? email.value : this.email),
+        phone: (phone != null ? phone.value : this.phone),
+        address: (address != null ? address.value : this.address),
+        country: (country != null ? country.value : this.country),
+        countryCode:
+            (countryCode != null ? countryCode.value : this.countryCode),
+        stateProvince:
+            (stateProvince != null ? stateProvince.value : this.stateProvince),
+        city: (city != null ? city.value : this.city),
+        zipcode: (zipcode != null ? zipcode.value : this.zipcode));
   }
 }
 
@@ -32777,6 +33079,14 @@ class Facility {
     this.location,
     this.clientIds,
     this.reportedStamp,
+    this.email,
+    this.phone,
+    this.address,
+    this.country,
+    this.countryCode,
+    this.stateProvince,
+    this.city,
+    this.zipcode,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -32812,6 +33122,22 @@ class Facility {
   final List<String>? clientIds;
   @JsonKey(name: 'reportedStamp', includeIfNull: false)
   final int? reportedStamp;
+  @JsonKey(name: 'email', includeIfNull: false, defaultValue: '')
+  final String? email;
+  @JsonKey(name: 'phone', includeIfNull: false, defaultValue: '')
+  final String? phone;
+  @JsonKey(name: 'address', includeIfNull: false, defaultValue: '')
+  final String? address;
+  @JsonKey(name: 'country', includeIfNull: false, defaultValue: '')
+  final String? country;
+  @JsonKey(name: 'countryCode', includeIfNull: false, defaultValue: '')
+  final String? countryCode;
+  @JsonKey(name: 'stateProvince', includeIfNull: false, defaultValue: '')
+  final String? stateProvince;
+  @JsonKey(name: 'city', includeIfNull: false, defaultValue: '')
+  final String? city;
+  @JsonKey(name: 'zipcode', includeIfNull: false, defaultValue: '')
+  final String? zipcode;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -32858,6 +33184,27 @@ class Facility {
             (identical(other.reportedStamp, reportedStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.reportedStamp, reportedStamp)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
+            (identical(other.phone, phone) ||
+                const DeepCollectionEquality().equals(other.phone, phone)) &&
+            (identical(other.address, address) ||
+                const DeepCollectionEquality()
+                    .equals(other.address, address)) &&
+            (identical(other.country, country) ||
+                const DeepCollectionEquality()
+                    .equals(other.country, country)) &&
+            (identical(other.countryCode, countryCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryCode, countryCode)) &&
+            (identical(other.stateProvince, stateProvince) ||
+                const DeepCollectionEquality()
+                    .equals(other.stateProvince, stateProvince)) &&
+            (identical(other.city, city) ||
+                const DeepCollectionEquality().equals(other.city, city)) &&
+            (identical(other.zipcode, zipcode) ||
+                const DeepCollectionEquality()
+                    .equals(other.zipcode, zipcode)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -32894,6 +33241,14 @@ class Facility {
       const DeepCollectionEquality().hash(location) ^
       const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(reportedStamp) ^
+      const DeepCollectionEquality().hash(email) ^
+      const DeepCollectionEquality().hash(phone) ^
+      const DeepCollectionEquality().hash(address) ^
+      const DeepCollectionEquality().hash(country) ^
+      const DeepCollectionEquality().hash(countryCode) ^
+      const DeepCollectionEquality().hash(stateProvince) ^
+      const DeepCollectionEquality().hash(city) ^
+      const DeepCollectionEquality().hash(zipcode) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -32916,6 +33271,14 @@ extension $FacilityExtension on Facility {
       GeoLocation? location,
       List<String>? clientIds,
       int? reportedStamp,
+      String? email,
+      String? phone,
+      String? address,
+      String? country,
+      String? countryCode,
+      String? stateProvince,
+      String? city,
+      String? zipcode,
       String? domainKey,
       String? id,
       String? rtype,
@@ -32934,6 +33297,14 @@ extension $FacilityExtension on Facility {
         location: location ?? this.location,
         clientIds: clientIds ?? this.clientIds,
         reportedStamp: reportedStamp ?? this.reportedStamp,
+        email: email ?? this.email,
+        phone: phone ?? this.phone,
+        address: address ?? this.address,
+        country: country ?? this.country,
+        countryCode: countryCode ?? this.countryCode,
+        stateProvince: stateProvince ?? this.stateProvince,
+        city: city ?? this.city,
+        zipcode: zipcode ?? this.zipcode,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -32954,6 +33325,14 @@ extension $FacilityExtension on Facility {
       Wrapped<GeoLocation?>? location,
       Wrapped<List<String>?>? clientIds,
       Wrapped<int?>? reportedStamp,
+      Wrapped<String?>? email,
+      Wrapped<String?>? phone,
+      Wrapped<String?>? address,
+      Wrapped<String?>? country,
+      Wrapped<String?>? countryCode,
+      Wrapped<String?>? stateProvince,
+      Wrapped<String?>? city,
+      Wrapped<String?>? zipcode,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -32975,6 +33354,16 @@ extension $FacilityExtension on Facility {
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         reportedStamp:
             (reportedStamp != null ? reportedStamp.value : this.reportedStamp),
+        email: (email != null ? email.value : this.email),
+        phone: (phone != null ? phone.value : this.phone),
+        address: (address != null ? address.value : this.address),
+        country: (country != null ? country.value : this.country),
+        countryCode:
+            (countryCode != null ? countryCode.value : this.countryCode),
+        stateProvince:
+            (stateProvince != null ? stateProvince.value : this.stateProvince),
+        city: (city != null ? city.value : this.city),
+        zipcode: (zipcode != null ? zipcode.value : this.zipcode),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -33287,6 +33676,11 @@ class TwinUserInfo {
     this.tags,
     this.phone,
     this.address,
+    this.country,
+    this.countryCode,
+    this.stateProvince,
+    this.city,
+    this.zipcode,
     this.selectedImage,
     this.images,
     this.roles,
@@ -33312,6 +33706,16 @@ class TwinUserInfo {
   final String? phone;
   @JsonKey(name: 'address', includeIfNull: false, defaultValue: '')
   final String? address;
+  @JsonKey(name: 'country', includeIfNull: false, defaultValue: '')
+  final String? country;
+  @JsonKey(name: 'countryCode', includeIfNull: false, defaultValue: '')
+  final String? countryCode;
+  @JsonKey(name: 'stateProvince', includeIfNull: false, defaultValue: '')
+  final String? stateProvince;
+  @JsonKey(name: 'city', includeIfNull: false, defaultValue: '')
+  final String? city;
+  @JsonKey(name: 'zipcode', includeIfNull: false, defaultValue: '')
+  final String? zipcode;
   @JsonKey(name: 'selectedImage', includeIfNull: false)
   final int? selectedImage;
   @JsonKey(name: 'images', includeIfNull: false, defaultValue: <String>[])
@@ -33342,6 +33746,20 @@ class TwinUserInfo {
             (identical(other.address, address) ||
                 const DeepCollectionEquality()
                     .equals(other.address, address)) &&
+            (identical(other.country, country) ||
+                const DeepCollectionEquality()
+                    .equals(other.country, country)) &&
+            (identical(other.countryCode, countryCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryCode, countryCode)) &&
+            (identical(other.stateProvince, stateProvince) ||
+                const DeepCollectionEquality()
+                    .equals(other.stateProvince, stateProvince)) &&
+            (identical(other.city, city) ||
+                const DeepCollectionEquality().equals(other.city, city)) &&
+            (identical(other.zipcode, zipcode) ||
+                const DeepCollectionEquality()
+                    .equals(other.zipcode, zipcode)) &&
             (identical(other.selectedImage, selectedImage) ||
                 const DeepCollectionEquality()
                     .equals(other.selectedImage, selectedImage)) &&
@@ -33368,6 +33786,11 @@ class TwinUserInfo {
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(phone) ^
       const DeepCollectionEquality().hash(address) ^
+      const DeepCollectionEquality().hash(country) ^
+      const DeepCollectionEquality().hash(countryCode) ^
+      const DeepCollectionEquality().hash(stateProvince) ^
+      const DeepCollectionEquality().hash(city) ^
+      const DeepCollectionEquality().hash(zipcode) ^
       const DeepCollectionEquality().hash(selectedImage) ^
       const DeepCollectionEquality().hash(images) ^
       const DeepCollectionEquality().hash(roles) ^
@@ -33384,6 +33807,11 @@ extension $TwinUserInfoExtension on TwinUserInfo {
       List<String>? tags,
       String? phone,
       String? address,
+      String? country,
+      String? countryCode,
+      String? stateProvince,
+      String? city,
+      String? zipcode,
       int? selectedImage,
       List<String>? images,
       List<String>? roles,
@@ -33396,6 +33824,11 @@ extension $TwinUserInfoExtension on TwinUserInfo {
         tags: tags ?? this.tags,
         phone: phone ?? this.phone,
         address: address ?? this.address,
+        country: country ?? this.country,
+        countryCode: countryCode ?? this.countryCode,
+        stateProvince: stateProvince ?? this.stateProvince,
+        city: city ?? this.city,
+        zipcode: zipcode ?? this.zipcode,
         selectedImage: selectedImage ?? this.selectedImage,
         images: images ?? this.images,
         roles: roles ?? this.roles,
@@ -33410,6 +33843,11 @@ extension $TwinUserInfoExtension on TwinUserInfo {
       Wrapped<List<String>?>? tags,
       Wrapped<String?>? phone,
       Wrapped<String?>? address,
+      Wrapped<String?>? country,
+      Wrapped<String?>? countryCode,
+      Wrapped<String?>? stateProvince,
+      Wrapped<String?>? city,
+      Wrapped<String?>? zipcode,
       Wrapped<int?>? selectedImage,
       Wrapped<List<String>?>? images,
       Wrapped<List<String>?>? roles,
@@ -33423,6 +33861,13 @@ extension $TwinUserInfoExtension on TwinUserInfo {
         tags: (tags != null ? tags.value : this.tags),
         phone: (phone != null ? phone.value : this.phone),
         address: (address != null ? address.value : this.address),
+        country: (country != null ? country.value : this.country),
+        countryCode:
+            (countryCode != null ? countryCode.value : this.countryCode),
+        stateProvince:
+            (stateProvince != null ? stateProvince.value : this.stateProvince),
+        city: (city != null ? city.value : this.city),
+        zipcode: (zipcode != null ? zipcode.value : this.zipcode),
         selectedImage:
             (selectedImage != null ? selectedImage.value : this.selectedImage),
         images: (images != null ? images.value : this.images),
@@ -33517,6 +33962,11 @@ class TwinUser {
     this.tags,
     this.phone,
     this.address,
+    this.country,
+    this.countryCode,
+    this.stateProvince,
+    this.city,
+    this.zipcode,
     this.selectedImage,
     this.images,
     this.roles,
@@ -33552,6 +34002,16 @@ class TwinUser {
   final String? phone;
   @JsonKey(name: 'address', includeIfNull: false, defaultValue: '')
   final String? address;
+  @JsonKey(name: 'country', includeIfNull: false, defaultValue: '')
+  final String? country;
+  @JsonKey(name: 'countryCode', includeIfNull: false, defaultValue: '')
+  final String? countryCode;
+  @JsonKey(name: 'stateProvince', includeIfNull: false, defaultValue: '')
+  final String? stateProvince;
+  @JsonKey(name: 'city', includeIfNull: false, defaultValue: '')
+  final String? city;
+  @JsonKey(name: 'zipcode', includeIfNull: false, defaultValue: '')
+  final String? zipcode;
   @JsonKey(name: 'selectedImage', includeIfNull: false)
   final int? selectedImage;
   @JsonKey(name: 'images', includeIfNull: false, defaultValue: <String>[])
@@ -33603,6 +34063,20 @@ class TwinUser {
             (identical(other.address, address) ||
                 const DeepCollectionEquality()
                     .equals(other.address, address)) &&
+            (identical(other.country, country) ||
+                const DeepCollectionEquality()
+                    .equals(other.country, country)) &&
+            (identical(other.countryCode, countryCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryCode, countryCode)) &&
+            (identical(other.stateProvince, stateProvince) ||
+                const DeepCollectionEquality()
+                    .equals(other.stateProvince, stateProvince)) &&
+            (identical(other.city, city) ||
+                const DeepCollectionEquality().equals(other.city, city)) &&
+            (identical(other.zipcode, zipcode) ||
+                const DeepCollectionEquality()
+                    .equals(other.zipcode, zipcode)) &&
             (identical(other.selectedImage, selectedImage) ||
                 const DeepCollectionEquality()
                     .equals(other.selectedImage, selectedImage)) &&
@@ -33642,8 +34116,7 @@ class TwinUser {
                 const DeepCollectionEquality()
                     .equals(other.updatedBy, updatedBy)) &&
             (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)));
   }
 
   @override
@@ -33657,6 +34130,11 @@ class TwinUser {
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(phone) ^
       const DeepCollectionEquality().hash(address) ^
+      const DeepCollectionEquality().hash(country) ^
+      const DeepCollectionEquality().hash(countryCode) ^
+      const DeepCollectionEquality().hash(stateProvince) ^
+      const DeepCollectionEquality().hash(city) ^
+      const DeepCollectionEquality().hash(zipcode) ^
       const DeepCollectionEquality().hash(selectedImage) ^
       const DeepCollectionEquality().hash(images) ^
       const DeepCollectionEquality().hash(roles) ^
@@ -33683,6 +34161,11 @@ extension $TwinUserExtension on TwinUser {
       List<String>? tags,
       String? phone,
       String? address,
+      String? country,
+      String? countryCode,
+      String? stateProvince,
+      String? city,
+      String? zipcode,
       int? selectedImage,
       List<String>? images,
       List<String>? roles,
@@ -33705,6 +34188,11 @@ extension $TwinUserExtension on TwinUser {
         tags: tags ?? this.tags,
         phone: phone ?? this.phone,
         address: address ?? this.address,
+        country: country ?? this.country,
+        countryCode: countryCode ?? this.countryCode,
+        stateProvince: stateProvince ?? this.stateProvince,
+        city: city ?? this.city,
+        zipcode: zipcode ?? this.zipcode,
         selectedImage: selectedImage ?? this.selectedImage,
         images: images ?? this.images,
         roles: roles ?? this.roles,
@@ -33729,6 +34217,11 @@ extension $TwinUserExtension on TwinUser {
       Wrapped<List<String>?>? tags,
       Wrapped<String?>? phone,
       Wrapped<String?>? address,
+      Wrapped<String?>? country,
+      Wrapped<String?>? countryCode,
+      Wrapped<String?>? stateProvince,
+      Wrapped<String?>? city,
+      Wrapped<String?>? zipcode,
       Wrapped<int?>? selectedImage,
       Wrapped<List<String>?>? images,
       Wrapped<List<String>?>? roles,
@@ -33752,6 +34245,13 @@ extension $TwinUserExtension on TwinUser {
         tags: (tags != null ? tags.value : this.tags),
         phone: (phone != null ? phone.value : this.phone),
         address: (address != null ? address.value : this.address),
+        country: (country != null ? country.value : this.country),
+        countryCode:
+            (countryCode != null ? countryCode.value : this.countryCode),
+        stateProvince:
+            (stateProvince != null ? stateProvince.value : this.stateProvince),
+        city: (city != null ? city.value : this.city),
+        zipcode: (zipcode != null ? zipcode.value : this.zipcode),
         selectedImage:
             (selectedImage != null ? selectedImage.value : this.selectedImage),
         images: (images != null ? images.value : this.images),
@@ -34606,6 +35106,11 @@ class PremiseInfo {
     this.email,
     this.phone,
     this.address,
+    this.country,
+    this.countryCode,
+    this.stateProvince,
+    this.city,
+    this.zipcode,
   });
 
   factory PremiseInfo.fromJson(Map<String, dynamic> json) =>
@@ -34638,6 +35143,16 @@ class PremiseInfo {
   final String? phone;
   @JsonKey(name: 'address', includeIfNull: false, defaultValue: '')
   final String? address;
+  @JsonKey(name: 'country', includeIfNull: false, defaultValue: '')
+  final String? country;
+  @JsonKey(name: 'countryCode', includeIfNull: false, defaultValue: '')
+  final String? countryCode;
+  @JsonKey(name: 'stateProvince', includeIfNull: false, defaultValue: '')
+  final String? stateProvince;
+  @JsonKey(name: 'city', includeIfNull: false, defaultValue: '')
+  final String? city;
+  @JsonKey(name: 'zipcode', includeIfNull: false, defaultValue: '')
+  final String? zipcode;
   static const fromJsonFactory = _$PremiseInfoFromJson;
 
   @override
@@ -34672,7 +35187,21 @@ class PremiseInfo {
             (identical(other.phone, phone) ||
                 const DeepCollectionEquality().equals(other.phone, phone)) &&
             (identical(other.address, address) ||
-                const DeepCollectionEquality().equals(other.address, address)));
+                const DeepCollectionEquality()
+                    .equals(other.address, address)) &&
+            (identical(other.country, country) ||
+                const DeepCollectionEquality()
+                    .equals(other.country, country)) &&
+            (identical(other.countryCode, countryCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryCode, countryCode)) &&
+            (identical(other.stateProvince, stateProvince) ||
+                const DeepCollectionEquality()
+                    .equals(other.stateProvince, stateProvince)) &&
+            (identical(other.city, city) ||
+                const DeepCollectionEquality().equals(other.city, city)) &&
+            (identical(other.zipcode, zipcode) ||
+                const DeepCollectionEquality().equals(other.zipcode, zipcode)));
   }
 
   @override
@@ -34692,6 +35221,11 @@ class PremiseInfo {
       const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(phone) ^
       const DeepCollectionEquality().hash(address) ^
+      const DeepCollectionEquality().hash(country) ^
+      const DeepCollectionEquality().hash(countryCode) ^
+      const DeepCollectionEquality().hash(stateProvince) ^
+      const DeepCollectionEquality().hash(city) ^
+      const DeepCollectionEquality().hash(zipcode) ^
       runtimeType.hashCode;
 }
 
@@ -34708,7 +35242,12 @@ extension $PremiseInfoExtension on PremiseInfo {
       int? reportedStamp,
       String? email,
       String? phone,
-      String? address}) {
+      String? address,
+      String? country,
+      String? countryCode,
+      String? stateProvince,
+      String? city,
+      String? zipcode}) {
     return PremiseInfo(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -34721,7 +35260,12 @@ extension $PremiseInfoExtension on PremiseInfo {
         reportedStamp: reportedStamp ?? this.reportedStamp,
         email: email ?? this.email,
         phone: phone ?? this.phone,
-        address: address ?? this.address);
+        address: address ?? this.address,
+        country: country ?? this.country,
+        countryCode: countryCode ?? this.countryCode,
+        stateProvince: stateProvince ?? this.stateProvince,
+        city: city ?? this.city,
+        zipcode: zipcode ?? this.zipcode);
   }
 
   PremiseInfo copyWithWrapped(
@@ -34736,7 +35280,12 @@ extension $PremiseInfoExtension on PremiseInfo {
       Wrapped<int?>? reportedStamp,
       Wrapped<String?>? email,
       Wrapped<String?>? phone,
-      Wrapped<String?>? address}) {
+      Wrapped<String?>? address,
+      Wrapped<String?>? country,
+      Wrapped<String?>? countryCode,
+      Wrapped<String?>? stateProvince,
+      Wrapped<String?>? city,
+      Wrapped<String?>? zipcode}) {
     return PremiseInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -34752,7 +35301,14 @@ extension $PremiseInfoExtension on PremiseInfo {
             (reportedStamp != null ? reportedStamp.value : this.reportedStamp),
         email: (email != null ? email.value : this.email),
         phone: (phone != null ? phone.value : this.phone),
-        address: (address != null ? address.value : this.address));
+        address: (address != null ? address.value : this.address),
+        country: (country != null ? country.value : this.country),
+        countryCode:
+            (countryCode != null ? countryCode.value : this.countryCode),
+        stateProvince:
+            (stateProvince != null ? stateProvince.value : this.stateProvince),
+        city: (city != null ? city.value : this.city),
+        zipcode: (zipcode != null ? zipcode.value : this.zipcode));
   }
 }
 
@@ -34771,6 +35327,11 @@ class Premise {
     this.email,
     this.phone,
     this.address,
+    this.country,
+    this.countryCode,
+    this.stateProvince,
+    this.city,
+    this.zipcode,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -34810,6 +35371,16 @@ class Premise {
   final String? phone;
   @JsonKey(name: 'address', includeIfNull: false, defaultValue: '')
   final String? address;
+  @JsonKey(name: 'country', includeIfNull: false, defaultValue: '')
+  final String? country;
+  @JsonKey(name: 'countryCode', includeIfNull: false, defaultValue: '')
+  final String? countryCode;
+  @JsonKey(name: 'stateProvince', includeIfNull: false, defaultValue: '')
+  final String? stateProvince;
+  @JsonKey(name: 'city', includeIfNull: false, defaultValue: '')
+  final String? city;
+  @JsonKey(name: 'zipcode', includeIfNull: false, defaultValue: '')
+  final String? zipcode;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -34860,6 +35431,20 @@ class Premise {
             (identical(other.address, address) ||
                 const DeepCollectionEquality()
                     .equals(other.address, address)) &&
+            (identical(other.country, country) ||
+                const DeepCollectionEquality()
+                    .equals(other.country, country)) &&
+            (identical(other.countryCode, countryCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryCode, countryCode)) &&
+            (identical(other.stateProvince, stateProvince) ||
+                const DeepCollectionEquality()
+                    .equals(other.stateProvince, stateProvince)) &&
+            (identical(other.city, city) ||
+                const DeepCollectionEquality().equals(other.city, city)) &&
+            (identical(other.zipcode, zipcode) ||
+                const DeepCollectionEquality()
+                    .equals(other.zipcode, zipcode)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -34898,6 +35483,11 @@ class Premise {
       const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(phone) ^
       const DeepCollectionEquality().hash(address) ^
+      const DeepCollectionEquality().hash(country) ^
+      const DeepCollectionEquality().hash(countryCode) ^
+      const DeepCollectionEquality().hash(stateProvince) ^
+      const DeepCollectionEquality().hash(city) ^
+      const DeepCollectionEquality().hash(zipcode) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -34922,6 +35512,11 @@ extension $PremiseExtension on Premise {
       String? email,
       String? phone,
       String? address,
+      String? country,
+      String? countryCode,
+      String? stateProvince,
+      String? city,
+      String? zipcode,
       String? domainKey,
       String? id,
       String? rtype,
@@ -34942,6 +35537,11 @@ extension $PremiseExtension on Premise {
         email: email ?? this.email,
         phone: phone ?? this.phone,
         address: address ?? this.address,
+        country: country ?? this.country,
+        countryCode: countryCode ?? this.countryCode,
+        stateProvince: stateProvince ?? this.stateProvince,
+        city: city ?? this.city,
+        zipcode: zipcode ?? this.zipcode,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -34964,6 +35564,11 @@ extension $PremiseExtension on Premise {
       Wrapped<String?>? email,
       Wrapped<String?>? phone,
       Wrapped<String?>? address,
+      Wrapped<String?>? country,
+      Wrapped<String?>? countryCode,
+      Wrapped<String?>? stateProvince,
+      Wrapped<String?>? city,
+      Wrapped<String?>? zipcode,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -34987,6 +35592,13 @@ extension $PremiseExtension on Premise {
         email: (email != null ? email.value : this.email),
         phone: (phone != null ? phone.value : this.phone),
         address: (address != null ? address.value : this.address),
+        country: (country != null ? country.value : this.country),
+        countryCode:
+            (countryCode != null ? countryCode.value : this.countryCode),
+        stateProvince:
+            (stateProvince != null ? stateProvince.value : this.stateProvince),
+        city: (city != null ? city.value : this.city),
+        zipcode: (zipcode != null ? zipcode.value : this.zipcode),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -40176,6 +40788,109 @@ extension $ParameterArrayResExtension on ParameterArrayRes {
 }
 
 @JsonSerializable(explicitToJson: true)
+class AddressInfo {
+  const AddressInfo({
+    this.address,
+    this.country,
+    this.countryCode,
+    this.stateProvince,
+    this.city,
+    this.zipcode,
+  });
+
+  factory AddressInfo.fromJson(Map<String, dynamic> json) =>
+      _$AddressInfoFromJson(json);
+
+  static const toJsonFactory = _$AddressInfoToJson;
+  Map<String, dynamic> toJson() => _$AddressInfoToJson(this);
+
+  @JsonKey(name: 'address', includeIfNull: false, defaultValue: '')
+  final String? address;
+  @JsonKey(name: 'country', includeIfNull: false, defaultValue: '')
+  final String? country;
+  @JsonKey(name: 'countryCode', includeIfNull: false, defaultValue: '')
+  final String? countryCode;
+  @JsonKey(name: 'stateProvince', includeIfNull: false, defaultValue: '')
+  final String? stateProvince;
+  @JsonKey(name: 'city', includeIfNull: false, defaultValue: '')
+  final String? city;
+  @JsonKey(name: 'zipcode', includeIfNull: false, defaultValue: '')
+  final String? zipcode;
+  static const fromJsonFactory = _$AddressInfoFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is AddressInfo &&
+            (identical(other.address, address) ||
+                const DeepCollectionEquality()
+                    .equals(other.address, address)) &&
+            (identical(other.country, country) ||
+                const DeepCollectionEquality()
+                    .equals(other.country, country)) &&
+            (identical(other.countryCode, countryCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryCode, countryCode)) &&
+            (identical(other.stateProvince, stateProvince) ||
+                const DeepCollectionEquality()
+                    .equals(other.stateProvince, stateProvince)) &&
+            (identical(other.city, city) ||
+                const DeepCollectionEquality().equals(other.city, city)) &&
+            (identical(other.zipcode, zipcode) ||
+                const DeepCollectionEquality().equals(other.zipcode, zipcode)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(address) ^
+      const DeepCollectionEquality().hash(country) ^
+      const DeepCollectionEquality().hash(countryCode) ^
+      const DeepCollectionEquality().hash(stateProvince) ^
+      const DeepCollectionEquality().hash(city) ^
+      const DeepCollectionEquality().hash(zipcode) ^
+      runtimeType.hashCode;
+}
+
+extension $AddressInfoExtension on AddressInfo {
+  AddressInfo copyWith(
+      {String? address,
+      String? country,
+      String? countryCode,
+      String? stateProvince,
+      String? city,
+      String? zipcode}) {
+    return AddressInfo(
+        address: address ?? this.address,
+        country: country ?? this.country,
+        countryCode: countryCode ?? this.countryCode,
+        stateProvince: stateProvince ?? this.stateProvince,
+        city: city ?? this.city,
+        zipcode: zipcode ?? this.zipcode);
+  }
+
+  AddressInfo copyWithWrapped(
+      {Wrapped<String?>? address,
+      Wrapped<String?>? country,
+      Wrapped<String?>? countryCode,
+      Wrapped<String?>? stateProvince,
+      Wrapped<String?>? city,
+      Wrapped<String?>? zipcode}) {
+    return AddressInfo(
+        address: (address != null ? address.value : this.address),
+        country: (country != null ? country.value : this.country),
+        countryCode:
+            (countryCode != null ? countryCode.value : this.countryCode),
+        stateProvince:
+            (stateProvince != null ? stateProvince.value : this.stateProvince),
+        city: (city != null ? city.value : this.city),
+        zipcode: (zipcode != null ? zipcode.value : this.zipcode));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class ClientInfo {
   const ClientInfo({
     required this.name,
@@ -40185,6 +40900,11 @@ class ClientInfo {
     this.email,
     this.phone,
     this.address,
+    this.country,
+    this.countryCode,
+    this.stateProvince,
+    this.city,
+    this.zipcode,
     this.location,
   });
 
@@ -40208,6 +40928,16 @@ class ClientInfo {
   final String? phone;
   @JsonKey(name: 'address', includeIfNull: false, defaultValue: '')
   final String? address;
+  @JsonKey(name: 'country', includeIfNull: false, defaultValue: '')
+  final String? country;
+  @JsonKey(name: 'countryCode', includeIfNull: false, defaultValue: '')
+  final String? countryCode;
+  @JsonKey(name: 'stateProvince', includeIfNull: false, defaultValue: '')
+  final String? stateProvince;
+  @JsonKey(name: 'city', includeIfNull: false, defaultValue: '')
+  final String? city;
+  @JsonKey(name: 'zipcode', includeIfNull: false, defaultValue: '')
+  final String? zipcode;
   @JsonKey(name: 'location', includeIfNull: false)
   final GeoLocation? location;
   static const fromJsonFactory = _$ClientInfoFromJson;
@@ -40232,6 +40962,20 @@ class ClientInfo {
             (identical(other.address, address) ||
                 const DeepCollectionEquality()
                     .equals(other.address, address)) &&
+            (identical(other.country, country) ||
+                const DeepCollectionEquality()
+                    .equals(other.country, country)) &&
+            (identical(other.countryCode, countryCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryCode, countryCode)) &&
+            (identical(other.stateProvince, stateProvince) ||
+                const DeepCollectionEquality()
+                    .equals(other.stateProvince, stateProvince)) &&
+            (identical(other.city, city) ||
+                const DeepCollectionEquality().equals(other.city, city)) &&
+            (identical(other.zipcode, zipcode) ||
+                const DeepCollectionEquality()
+                    .equals(other.zipcode, zipcode)) &&
             (identical(other.location, location) ||
                 const DeepCollectionEquality()
                     .equals(other.location, location)));
@@ -40249,6 +40993,11 @@ class ClientInfo {
       const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(phone) ^
       const DeepCollectionEquality().hash(address) ^
+      const DeepCollectionEquality().hash(country) ^
+      const DeepCollectionEquality().hash(countryCode) ^
+      const DeepCollectionEquality().hash(stateProvince) ^
+      const DeepCollectionEquality().hash(city) ^
+      const DeepCollectionEquality().hash(zipcode) ^
       const DeepCollectionEquality().hash(location) ^
       runtimeType.hashCode;
 }
@@ -40262,6 +41011,11 @@ extension $ClientInfoExtension on ClientInfo {
       String? email,
       String? phone,
       String? address,
+      String? country,
+      String? countryCode,
+      String? stateProvince,
+      String? city,
+      String? zipcode,
       GeoLocation? location}) {
     return ClientInfo(
         name: name ?? this.name,
@@ -40271,6 +41025,11 @@ extension $ClientInfoExtension on ClientInfo {
         email: email ?? this.email,
         phone: phone ?? this.phone,
         address: address ?? this.address,
+        country: country ?? this.country,
+        countryCode: countryCode ?? this.countryCode,
+        stateProvince: stateProvince ?? this.stateProvince,
+        city: city ?? this.city,
+        zipcode: zipcode ?? this.zipcode,
         location: location ?? this.location);
   }
 
@@ -40282,6 +41041,11 @@ extension $ClientInfoExtension on ClientInfo {
       Wrapped<String?>? email,
       Wrapped<String?>? phone,
       Wrapped<String?>? address,
+      Wrapped<String?>? country,
+      Wrapped<String?>? countryCode,
+      Wrapped<String?>? stateProvince,
+      Wrapped<String?>? city,
+      Wrapped<String?>? zipcode,
       Wrapped<GeoLocation?>? location}) {
     return ClientInfo(
         name: (name != null ? name.value : this.name),
@@ -40292,6 +41056,13 @@ extension $ClientInfoExtension on ClientInfo {
         email: (email != null ? email.value : this.email),
         phone: (phone != null ? phone.value : this.phone),
         address: (address != null ? address.value : this.address),
+        country: (country != null ? country.value : this.country),
+        countryCode:
+            (countryCode != null ? countryCode.value : this.countryCode),
+        stateProvince:
+            (stateProvince != null ? stateProvince.value : this.stateProvince),
+        city: (city != null ? city.value : this.city),
+        zipcode: (zipcode != null ? zipcode.value : this.zipcode),
         location: (location != null ? location.value : this.location));
   }
 }
@@ -40306,6 +41077,11 @@ class Client {
     this.email,
     this.phone,
     this.address,
+    this.country,
+    this.countryCode,
+    this.stateProvince,
+    this.city,
+    this.zipcode,
     this.location,
     required this.domainKey,
     required this.id,
@@ -40335,6 +41111,16 @@ class Client {
   final String? phone;
   @JsonKey(name: 'address', includeIfNull: false, defaultValue: '')
   final String? address;
+  @JsonKey(name: 'country', includeIfNull: false, defaultValue: '')
+  final String? country;
+  @JsonKey(name: 'countryCode', includeIfNull: false, defaultValue: '')
+  final String? countryCode;
+  @JsonKey(name: 'stateProvince', includeIfNull: false, defaultValue: '')
+  final String? stateProvince;
+  @JsonKey(name: 'city', includeIfNull: false, defaultValue: '')
+  final String? city;
+  @JsonKey(name: 'zipcode', includeIfNull: false, defaultValue: '')
+  final String? zipcode;
   @JsonKey(name: 'location', includeIfNull: false)
   final GeoLocation? location;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
@@ -40373,6 +41159,20 @@ class Client {
             (identical(other.address, address) ||
                 const DeepCollectionEquality()
                     .equals(other.address, address)) &&
+            (identical(other.country, country) ||
+                const DeepCollectionEquality()
+                    .equals(other.country, country)) &&
+            (identical(other.countryCode, countryCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryCode, countryCode)) &&
+            (identical(other.stateProvince, stateProvince) ||
+                const DeepCollectionEquality()
+                    .equals(other.stateProvince, stateProvince)) &&
+            (identical(other.city, city) ||
+                const DeepCollectionEquality().equals(other.city, city)) &&
+            (identical(other.zipcode, zipcode) ||
+                const DeepCollectionEquality()
+                    .equals(other.zipcode, zipcode)) &&
             (identical(other.location, location) ||
                 const DeepCollectionEquality()
                     .equals(other.location, location)) &&
@@ -40409,6 +41209,11 @@ class Client {
       const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(phone) ^
       const DeepCollectionEquality().hash(address) ^
+      const DeepCollectionEquality().hash(country) ^
+      const DeepCollectionEquality().hash(countryCode) ^
+      const DeepCollectionEquality().hash(stateProvince) ^
+      const DeepCollectionEquality().hash(city) ^
+      const DeepCollectionEquality().hash(zipcode) ^
       const DeepCollectionEquality().hash(location) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
@@ -40429,6 +41234,11 @@ extension $ClientExtension on Client {
       String? email,
       String? phone,
       String? address,
+      String? country,
+      String? countryCode,
+      String? stateProvince,
+      String? city,
+      String? zipcode,
       GeoLocation? location,
       String? domainKey,
       String? id,
@@ -40445,6 +41255,11 @@ extension $ClientExtension on Client {
         email: email ?? this.email,
         phone: phone ?? this.phone,
         address: address ?? this.address,
+        country: country ?? this.country,
+        countryCode: countryCode ?? this.countryCode,
+        stateProvince: stateProvince ?? this.stateProvince,
+        city: city ?? this.city,
+        zipcode: zipcode ?? this.zipcode,
         location: location ?? this.location,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
@@ -40463,6 +41278,11 @@ extension $ClientExtension on Client {
       Wrapped<String?>? email,
       Wrapped<String?>? phone,
       Wrapped<String?>? address,
+      Wrapped<String?>? country,
+      Wrapped<String?>? countryCode,
+      Wrapped<String?>? stateProvince,
+      Wrapped<String?>? city,
+      Wrapped<String?>? zipcode,
       Wrapped<GeoLocation?>? location,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
@@ -40480,6 +41300,13 @@ extension $ClientExtension on Client {
         email: (email != null ? email.value : this.email),
         phone: (phone != null ? phone.value : this.phone),
         address: (address != null ? address.value : this.address),
+        country: (country != null ? country.value : this.country),
+        countryCode:
+            (countryCode != null ? countryCode.value : this.countryCode),
+        stateProvince:
+            (stateProvince != null ? stateProvince.value : this.stateProvince),
+        city: (city != null ? city.value : this.city),
+        zipcode: (zipcode != null ? zipcode.value : this.zipcode),
         location: (location != null ? location.value : this.location),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
