@@ -3468,6 +3468,7 @@ DeviceData _$DeviceDataFromJson(Map<String, dynamic> json) => DeviceData(
               ?.map((e) => e as String)
               .toList() ??
           [],
+      assetModel: json['assetModel'] as String? ?? '',
       assetModelId: json['assetModelId'] as String? ?? '',
     );
 
@@ -3523,6 +3524,7 @@ Map<String, dynamic> _$DeviceDataToJson(DeviceData instance) {
   writeNotNull('roles', instance.roles);
   writeNotNull('client', instance.$client);
   writeNotNull('clientIds', instance.clientIds);
+  writeNotNull('assetModel', instance.assetModel);
   writeNotNull('assetModelId', instance.assetModelId);
   return val;
 }
@@ -6665,20 +6667,26 @@ Map<String, dynamic> _$LandingPageToJson(LandingPage instance) {
 ElasticEmailConfig _$ElasticEmailConfigFromJson(Map<String, dynamic> json) =>
     ElasticEmailConfig(
       apiKey: json['apiKey'] as String? ?? '',
+      fromEmail: json['fromEmail'] as String? ?? '',
     );
 
 Map<String, dynamic> _$ElasticEmailConfigToJson(ElasticEmailConfig instance) =>
     <String, dynamic>{
       'apiKey': instance.apiKey,
+      'fromEmail': instance.fromEmail,
     };
 
 TwilioConfig _$TwilioConfigFromJson(Map<String, dynamic> json) => TwilioConfig(
-      apiKey: json['apiKey'] as String? ?? '',
+      accountSid: json['accountSid'] as String? ?? '',
+      authToken: json['authToken'] as String? ?? '',
+      phoneNumber: json['phoneNumber'] as String? ?? '',
     );
 
 Map<String, dynamic> _$TwilioConfigToJson(TwilioConfig instance) =>
     <String, dynamic>{
-      'apiKey': instance.apiKey,
+      'accountSid': instance.accountSid,
+      'authToken': instance.authToken,
+      'phoneNumber': instance.phoneNumber,
     };
 
 TextLocalConfig _$TextLocalConfigFromJson(Map<String, dynamic> json) =>
@@ -7007,6 +7015,14 @@ FloorInfo _$FloorInfoFromJson(Map<String, dynamic> json) => FloorInfo(
               .toList() ??
           [],
       reportedStamp: (json['reportedStamp'] as num?)?.toInt(),
+      email: json['email'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
+      address: json['address'] as String? ?? '',
+      country: json['country'] as String? ?? '',
+      countryCode: json['countryCode'] as String? ?? '',
+      stateProvince: json['stateProvince'] as String? ?? '',
+      city: json['city'] as String? ?? '',
+      zipcode: json['zipcode'] as String? ?? '',
     );
 
 Map<String, dynamic> _$FloorInfoToJson(FloorInfo instance) {
@@ -7032,6 +7048,14 @@ Map<String, dynamic> _$FloorInfoToJson(FloorInfo instance) {
   writeNotNull('floorType', floorInfoFloorTypeToJson(instance.floorType));
   writeNotNull('clientIds', instance.clientIds);
   writeNotNull('reportedStamp', instance.reportedStamp);
+  writeNotNull('email', instance.email);
+  writeNotNull('phone', instance.phone);
+  writeNotNull('address', instance.address);
+  writeNotNull('country', instance.country);
+  writeNotNull('countryCode', instance.countryCode);
+  writeNotNull('stateProvince', instance.stateProvince);
+  writeNotNull('city', instance.city);
+  writeNotNull('zipcode', instance.zipcode);
   return val;
 }
 
@@ -7061,6 +7085,14 @@ Floor _$FloorFromJson(Map<String, dynamic> json) => Floor(
               .toList() ??
           [],
       reportedStamp: (json['reportedStamp'] as num?)?.toInt(),
+      email: json['email'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
+      address: json['address'] as String? ?? '',
+      country: json['country'] as String? ?? '',
+      countryCode: json['countryCode'] as String? ?? '',
+      stateProvince: json['stateProvince'] as String? ?? '',
+      city: json['city'] as String? ?? '',
+      zipcode: json['zipcode'] as String? ?? '',
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -7093,6 +7125,14 @@ Map<String, dynamic> _$FloorToJson(Floor instance) {
   writeNotNull('floorType', floorFloorTypeToJson(instance.floorType));
   writeNotNull('clientIds', instance.clientIds);
   writeNotNull('reportedStamp', instance.reportedStamp);
+  writeNotNull('email', instance.email);
+  writeNotNull('phone', instance.phone);
+  writeNotNull('address', instance.address);
+  writeNotNull('country', instance.country);
+  writeNotNull('countryCode', instance.countryCode);
+  writeNotNull('stateProvince', instance.stateProvince);
+  writeNotNull('city', instance.city);
+  writeNotNull('zipcode', instance.zipcode);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -7499,6 +7539,14 @@ FacilityInfo _$FacilityInfoFromJson(Map<String, dynamic> json) => FacilityInfo(
               .toList() ??
           [],
       reportedStamp: (json['reportedStamp'] as num?)?.toInt(),
+      email: json['email'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
+      address: json['address'] as String? ?? '',
+      country: json['country'] as String? ?? '',
+      countryCode: json['countryCode'] as String? ?? '',
+      stateProvince: json['stateProvince'] as String? ?? '',
+      city: json['city'] as String? ?? '',
+      zipcode: json['zipcode'] as String? ?? '',
     );
 
 Map<String, dynamic> _$FacilityInfoToJson(FacilityInfo instance) {
@@ -7521,6 +7569,14 @@ Map<String, dynamic> _$FacilityInfoToJson(FacilityInfo instance) {
   writeNotNull('location', instance.location?.toJson());
   writeNotNull('clientIds', instance.clientIds);
   writeNotNull('reportedStamp', instance.reportedStamp);
+  writeNotNull('email', instance.email);
+  writeNotNull('phone', instance.phone);
+  writeNotNull('address', instance.address);
+  writeNotNull('country', instance.country);
+  writeNotNull('countryCode', instance.countryCode);
+  writeNotNull('stateProvince', instance.stateProvince);
+  writeNotNull('city', instance.city);
+  writeNotNull('zipcode', instance.zipcode);
   return val;
 }
 
@@ -7547,6 +7603,14 @@ Facility _$FacilityFromJson(Map<String, dynamic> json) => Facility(
               .toList() ??
           [],
       reportedStamp: (json['reportedStamp'] as num?)?.toInt(),
+      email: json['email'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
+      address: json['address'] as String? ?? '',
+      country: json['country'] as String? ?? '',
+      countryCode: json['countryCode'] as String? ?? '',
+      stateProvince: json['stateProvince'] as String? ?? '',
+      city: json['city'] as String? ?? '',
+      zipcode: json['zipcode'] as String? ?? '',
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -7576,6 +7640,14 @@ Map<String, dynamic> _$FacilityToJson(Facility instance) {
   writeNotNull('location', instance.location?.toJson());
   writeNotNull('clientIds', instance.clientIds);
   writeNotNull('reportedStamp', instance.reportedStamp);
+  writeNotNull('email', instance.email);
+  writeNotNull('phone', instance.phone);
+  writeNotNull('address', instance.address);
+  writeNotNull('country', instance.country);
+  writeNotNull('countryCode', instance.countryCode);
+  writeNotNull('stateProvince', instance.stateProvince);
+  writeNotNull('city', instance.city);
+  writeNotNull('zipcode', instance.zipcode);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -7701,6 +7773,11 @@ TwinUserInfo _$TwinUserInfoFromJson(Map<String, dynamic> json) => TwinUserInfo(
               [],
       phone: json['phone'] as String? ?? '',
       address: json['address'] as String? ?? '',
+      country: json['country'] as String? ?? '',
+      countryCode: json['countryCode'] as String? ?? '',
+      stateProvince: json['stateProvince'] as String? ?? '',
+      city: json['city'] as String? ?? '',
+      zipcode: json['zipcode'] as String? ?? '',
       selectedImage: (json['selectedImage'] as num?)?.toInt(),
       images: (json['images'] as List<dynamic>?)
               ?.map((e) => e as String)
@@ -7732,6 +7809,11 @@ Map<String, dynamic> _$TwinUserInfoToJson(TwinUserInfo instance) {
   writeNotNull('tags', instance.tags);
   writeNotNull('phone', instance.phone);
   writeNotNull('address', instance.address);
+  writeNotNull('country', instance.country);
+  writeNotNull('countryCode', instance.countryCode);
+  writeNotNull('stateProvince', instance.stateProvince);
+  writeNotNull('city', instance.city);
+  writeNotNull('zipcode', instance.zipcode);
   writeNotNull('selectedImage', instance.selectedImage);
   writeNotNull('images', instance.images);
   writeNotNull('roles', instance.roles);
@@ -7773,6 +7855,11 @@ TwinUser _$TwinUserFromJson(Map<String, dynamic> json) => TwinUser(
               [],
       phone: json['phone'] as String? ?? '',
       address: json['address'] as String? ?? '',
+      country: json['country'] as String? ?? '',
+      countryCode: json['countryCode'] as String? ?? '',
+      stateProvince: json['stateProvince'] as String? ?? '',
+      city: json['city'] as String? ?? '',
+      zipcode: json['zipcode'] as String? ?? '',
       selectedImage: (json['selectedImage'] as num?)?.toInt(),
       images: (json['images'] as List<dynamic>?)
               ?.map((e) => e as String)
@@ -7817,6 +7904,11 @@ Map<String, dynamic> _$TwinUserToJson(TwinUser instance) {
   writeNotNull('tags', instance.tags);
   writeNotNull('phone', instance.phone);
   writeNotNull('address', instance.address);
+  writeNotNull('country', instance.country);
+  writeNotNull('countryCode', instance.countryCode);
+  writeNotNull('stateProvince', instance.stateProvince);
+  writeNotNull('city', instance.city);
+  writeNotNull('zipcode', instance.zipcode);
   writeNotNull('selectedImage', instance.selectedImage);
   writeNotNull('images', instance.images);
   writeNotNull('roles', instance.roles);
@@ -8141,6 +8233,11 @@ PremiseInfo _$PremiseInfoFromJson(Map<String, dynamic> json) => PremiseInfo(
       email: json['email'] as String? ?? '',
       phone: json['phone'] as String? ?? '',
       address: json['address'] as String? ?? '',
+      country: json['country'] as String? ?? '',
+      countryCode: json['countryCode'] as String? ?? '',
+      stateProvince: json['stateProvince'] as String? ?? '',
+      city: json['city'] as String? ?? '',
+      zipcode: json['zipcode'] as String? ?? '',
     );
 
 Map<String, dynamic> _$PremiseInfoToJson(PremiseInfo instance) {
@@ -8165,6 +8262,11 @@ Map<String, dynamic> _$PremiseInfoToJson(PremiseInfo instance) {
   writeNotNull('email', instance.email);
   writeNotNull('phone', instance.phone);
   writeNotNull('address', instance.address);
+  writeNotNull('country', instance.country);
+  writeNotNull('countryCode', instance.countryCode);
+  writeNotNull('stateProvince', instance.stateProvince);
+  writeNotNull('city', instance.city);
+  writeNotNull('zipcode', instance.zipcode);
   return val;
 }
 
@@ -8193,6 +8295,11 @@ Premise _$PremiseFromJson(Map<String, dynamic> json) => Premise(
       email: json['email'] as String? ?? '',
       phone: json['phone'] as String? ?? '',
       address: json['address'] as String? ?? '',
+      country: json['country'] as String? ?? '',
+      countryCode: json['countryCode'] as String? ?? '',
+      stateProvince: json['stateProvince'] as String? ?? '',
+      city: json['city'] as String? ?? '',
+      zipcode: json['zipcode'] as String? ?? '',
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -8224,6 +8331,11 @@ Map<String, dynamic> _$PremiseToJson(Premise instance) {
   writeNotNull('email', instance.email);
   writeNotNull('phone', instance.phone);
   writeNotNull('address', instance.address);
+  writeNotNull('country', instance.country);
+  writeNotNull('countryCode', instance.countryCode);
+  writeNotNull('stateProvince', instance.stateProvince);
+  writeNotNull('city', instance.city);
+  writeNotNull('zipcode', instance.zipcode);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -9899,6 +10011,33 @@ Map<String, dynamic> _$ParameterArrayResToJson(ParameterArrayRes instance) {
   return val;
 }
 
+AddressInfo _$AddressInfoFromJson(Map<String, dynamic> json) => AddressInfo(
+      address: json['address'] as String? ?? '',
+      country: json['country'] as String? ?? '',
+      countryCode: json['countryCode'] as String? ?? '',
+      stateProvince: json['stateProvince'] as String? ?? '',
+      city: json['city'] as String? ?? '',
+      zipcode: json['zipcode'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$AddressInfoToJson(AddressInfo instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('address', instance.address);
+  writeNotNull('country', instance.country);
+  writeNotNull('countryCode', instance.countryCode);
+  writeNotNull('stateProvince', instance.stateProvince);
+  writeNotNull('city', instance.city);
+  writeNotNull('zipcode', instance.zipcode);
+  return val;
+}
+
 ClientInfo _$ClientInfoFromJson(Map<String, dynamic> json) => ClientInfo(
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
@@ -9909,6 +10048,11 @@ ClientInfo _$ClientInfoFromJson(Map<String, dynamic> json) => ClientInfo(
       email: json['email'] as String? ?? '',
       phone: json['phone'] as String? ?? '',
       address: json['address'] as String? ?? '',
+      country: json['country'] as String? ?? '',
+      countryCode: json['countryCode'] as String? ?? '',
+      stateProvince: json['stateProvince'] as String? ?? '',
+      city: json['city'] as String? ?? '',
+      zipcode: json['zipcode'] as String? ?? '',
       location: json['location'] == null
           ? null
           : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
@@ -9931,6 +10075,11 @@ Map<String, dynamic> _$ClientInfoToJson(ClientInfo instance) {
   writeNotNull('email', instance.email);
   writeNotNull('phone', instance.phone);
   writeNotNull('address', instance.address);
+  writeNotNull('country', instance.country);
+  writeNotNull('countryCode', instance.countryCode);
+  writeNotNull('stateProvince', instance.stateProvince);
+  writeNotNull('city', instance.city);
+  writeNotNull('zipcode', instance.zipcode);
   writeNotNull('location', instance.location?.toJson());
   return val;
 }
@@ -9945,6 +10094,11 @@ Client _$ClientFromJson(Map<String, dynamic> json) => Client(
       email: json['email'] as String? ?? '',
       phone: json['phone'] as String? ?? '',
       address: json['address'] as String? ?? '',
+      country: json['country'] as String? ?? '',
+      countryCode: json['countryCode'] as String? ?? '',
+      stateProvince: json['stateProvince'] as String? ?? '',
+      city: json['city'] as String? ?? '',
+      zipcode: json['zipcode'] as String? ?? '',
       location: json['location'] == null
           ? null
           : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
@@ -9974,6 +10128,11 @@ Map<String, dynamic> _$ClientToJson(Client instance) {
   writeNotNull('email', instance.email);
   writeNotNull('phone', instance.phone);
   writeNotNull('address', instance.address);
+  writeNotNull('country', instance.country);
+  writeNotNull('countryCode', instance.countryCode);
+  writeNotNull('stateProvince', instance.stateProvince);
+  writeNotNull('city', instance.city);
+  writeNotNull('zipcode', instance.zipcode);
   writeNotNull('location', instance.location?.toJson());
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;

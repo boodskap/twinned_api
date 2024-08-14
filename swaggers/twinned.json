@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "1.9.7",
+    "version": "1.9.9",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -18395,6 +18395,9 @@
             "type": "string"
           }
         },
+        "assetModel": {
+          "type": "string"
+        },
         "assetModelId": {
           "type": "string"
         }
@@ -20415,10 +20418,14 @@
       "type": "object",
       "discriminator": "eeConfig",
       "required": [
+        "fromEmail",
         "apiKey"
       ],
       "properties": {
         "apiKey": {
+          "type": "string"
+        },
+        "fromEmail": {
           "type": "string"
         }
       }
@@ -20427,10 +20434,18 @@
       "type": "object",
       "discriminator": "twConfig",
       "required": [
-        "apiKey"
+        "phoneNumber",
+        "accountSid",
+        "authToken"
       ],
       "properties": {
-        "apiKey": {
+        "accountSid": {
+          "type": "string"
+        },
+        "authToken": {
+          "type": "string"
+        },
+        "phoneNumber": {
           "type": "string"
         }
       }
@@ -20751,6 +20766,30 @@
         "reportedStamp": {
           "type": "integer",
           "format": "int64"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "stateProvince": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "zipcode": {
+          "type": "string"
         }
       }
     },
@@ -20758,6 +20797,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/FloorInfo"
+        },
+        {
+          "$ref": "#/definitions/AddressInfo"
         },
         {
           "$ref": "#/definitions/BaseEntity"
@@ -21009,6 +21051,30 @@
         "reportedStamp": {
           "type": "integer",
           "format": "int64"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "stateProvince": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "zipcode": {
+          "type": "string"
         }
       }
     },
@@ -21016,6 +21082,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/FacilityInfo"
+        },
+        {
+          "$ref": "#/definitions/AddressInfo"
         },
         {
           "$ref": "#/definitions/BaseEntity"
@@ -21101,6 +21170,21 @@
         "address": {
           "type": "string"
         },
+        "country": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "stateProvince": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "zipcode": {
+          "type": "string"
+        },
         "selectedImage": {
           "type": "integer"
         },
@@ -21152,6 +21236,9 @@
         },
         {
           "$ref": "#/definitions/TwinUserBase"
+        },
+        {
+          "$ref": "#/definitions/AddressInfo"
         },
         {
           "$ref": "#/definitions/BaseEntity"
@@ -21350,6 +21437,21 @@
         },
         "address": {
           "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "stateProvince": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "zipcode": {
+          "type": "string"
         }
       }
     },
@@ -21357,6 +21459,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/PremiseInfo"
+        },
+        {
+          "$ref": "#/definitions/AddressInfo"
         },
         {
           "$ref": "#/definitions/BaseEntity"
@@ -22357,6 +22462,29 @@
         }
       ]
     },
+    "AddressInfo": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "stateProvince": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "zipcode": {
+          "type": "string"
+        }
+      }
+    },
     "ClientInfo": {
       "type": "object",
       "required": [
@@ -22387,6 +22515,21 @@
         "address": {
           "type": "string"
         },
+        "country": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "stateProvince": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "zipcode": {
+          "type": "string"
+        },
         "location": {
           "$ref": "#/definitions/GeoLocation"
         }
@@ -22396,6 +22539,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/ClientInfo"
+        },
+        {
+          "$ref": "#/definitions/AddressInfo"
         },
         {
           "$ref": "#/definitions/BaseEntity"
