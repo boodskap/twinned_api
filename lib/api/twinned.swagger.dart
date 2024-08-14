@@ -331,6 +331,22 @@ abstract class Twinned extends ChopperService {
     @Body() required VerificationReq? body,
   });
 
+  ///Do Login
+  ///@param body
+  Future<chopper.Response<VerificationRes>> loginUser({required Login? body}) {
+    generatedMapping.putIfAbsent(Login, () => Login.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        VerificationRes, () => VerificationRes.fromJsonFactory);
+
+    return _loginUser(body: body);
+  }
+
+  ///Do Login
+  ///@param body
+  @Post(path: '/IoT/twin/login')
+  Future<chopper.Response<VerificationRes>> _loginUser(
+      {@Body() required Login? body});
+
   ///Get the most recent data for this device
   ///@param deviceId
   ///@param isHardwareDevice
@@ -44636,6 +44652,58 @@ extension $VerificationResExtension on VerificationRes {
         user: (user != null ? user.value : this.user),
         properties: (properties != null ? properties.value : this.properties),
         code: (code != null ? code.value : this.code));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class Login {
+  const Login({
+    required this.userId,
+    required this.password,
+  });
+
+  factory Login.fromJson(Map<String, dynamic> json) => _$LoginFromJson(json);
+
+  static const toJsonFactory = _$LoginToJson;
+  Map<String, dynamic> toJson() => _$LoginToJson(this);
+
+  @JsonKey(name: 'userId', includeIfNull: false, defaultValue: '')
+  final String userId;
+  @JsonKey(name: 'password', includeIfNull: false, defaultValue: '')
+  final String password;
+  static const fromJsonFactory = _$LoginFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is Login &&
+            (identical(other.userId, userId) ||
+                const DeepCollectionEquality().equals(other.userId, userId)) &&
+            (identical(other.password, password) ||
+                const DeepCollectionEquality()
+                    .equals(other.password, password)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(userId) ^
+      const DeepCollectionEquality().hash(password) ^
+      runtimeType.hashCode;
+}
+
+extension $LoginExtension on Login {
+  Login copyWith({String? userId, String? password}) {
+    return Login(
+        userId: userId ?? this.userId, password: password ?? this.password);
+  }
+
+  Login copyWithWrapped({Wrapped<String>? userId, Wrapped<String>? password}) {
+    return Login(
+        userId: (userId != null ? userId.value : this.userId),
+        password: (password != null ? password.value : this.password));
   }
 }
 

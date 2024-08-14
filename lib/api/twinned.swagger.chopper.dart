@@ -274,6 +274,19 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<VerificationRes>> _loginUser({required Login? body}) {
+    final Uri $url = Uri.parse('/IoT/twin/login');
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+    );
+    return client.send<VerificationRes, VerificationRes>($request);
+  }
+
+  @override
   Future<Response<DeviceDataEntityRes>> _getDeviceData({
     required String? deviceId,
     String? isHardwareDevice,
