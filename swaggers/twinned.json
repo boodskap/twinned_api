@@ -23487,8 +23487,8 @@
           "type": "integer",
           "format": "int64"
         },
-        "nocodeAdmin": {
-          "type": "boolean"
+        "nocodeAuthToken": {
+          "type": "string"
         },
         "user": {
           "$ref": "#/definitions/PlatformUser"
