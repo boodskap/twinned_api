@@ -23452,7 +23452,8 @@
         "id",
         "name",
         "twinDomainKey",
-        "twinAuthToken"
+        "twinAuthToken",
+        "user"
       ],
       "properties": {
         "id": {
@@ -23466,6 +23467,9 @@
         },
         "twinAuthToken": {
           "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/PlatformUser"
         }
       }
     },
