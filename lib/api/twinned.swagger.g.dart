@@ -11009,27 +11009,15 @@ Map<String, dynamic> _$PlatformUserToJson(PlatformUser instance) {
 
 OrgInfo _$OrgInfoFromJson(Map<String, dynamic> json) => OrgInfo(
       id: json['id'] as String? ?? '',
-      nane: json['nane'] as String? ?? '',
+      name: json['name'] as String? ?? '',
       twinDomainKey: json['twinDomainKey'] as String? ?? '',
-      nocodeAuthToken: json['nocodeAuthToken'] as String? ?? '',
     );
 
-Map<String, dynamic> _$OrgInfoToJson(OrgInfo instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('nane', instance.nane);
-  val['twinDomainKey'] = instance.twinDomainKey;
-  writeNotNull('nocodeAuthToken', instance.nocodeAuthToken);
-  return val;
-}
+Map<String, dynamic> _$OrgInfoToJson(OrgInfo instance) => <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'twinDomainKey': instance.twinDomainKey,
+    };
 
 VerificationRes _$VerificationResFromJson(Map<String, dynamic> json) =>
     VerificationRes(
@@ -11038,6 +11026,7 @@ VerificationRes _$VerificationResFromJson(Map<String, dynamic> json) =>
       trace: json['trace'] as String? ?? '',
       authToken: json['authToken'] as String? ?? '',
       connCounter: (json['connCounter'] as num?)?.toInt(),
+      nocodeAdmin: json['nocodeAdmin'] as bool?,
       user: json['user'] == null
           ? null
           : PlatformUser.fromJson(json['user'] as Map<String, dynamic>),
@@ -11064,6 +11053,7 @@ Map<String, dynamic> _$VerificationResToJson(VerificationRes instance) {
   writeNotNull('trace', instance.trace);
   writeNotNull('authToken', instance.authToken);
   writeNotNull('connCounter', instance.connCounter);
+  writeNotNull('nocodeAdmin', instance.nocodeAdmin);
   writeNotNull('user', instance.user?.toJson());
   writeNotNull('orgs', instance.orgs?.map((e) => e.toJson()).toList());
   writeNotNull('properties', instance.properties);

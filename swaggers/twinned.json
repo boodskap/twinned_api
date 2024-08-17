@@ -23457,13 +23457,10 @@
         "id": {
           "type": "string"
         },
-        "nane": {
+        "name": {
           "type": "string"
         },
         "twinDomainKey": {
-          "type": "string"
-        },
-        "nocodeAuthToken": {
           "type": "string"
         }
       }
@@ -23489,6 +23486,9 @@
         "connCounter": {
           "type": "integer",
           "format": "int64"
+        },
+        "nocodeAdmin": {
+          "type": "boolean"
         },
         "user": {
           "$ref": "#/definitions/PlatformUser"
