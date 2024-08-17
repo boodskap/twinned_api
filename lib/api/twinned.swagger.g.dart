@@ -11026,7 +11026,7 @@ VerificationRes _$VerificationResFromJson(Map<String, dynamic> json) =>
       trace: json['trace'] as String? ?? '',
       authToken: json['authToken'] as String? ?? '',
       connCounter: (json['connCounter'] as num?)?.toInt(),
-      nocodeAdmin: json['nocodeAdmin'] as bool?,
+      nocodeAuthToken: json['nocodeAuthToken'] as String? ?? '',
       user: json['user'] == null
           ? null
           : PlatformUser.fromJson(json['user'] as Map<String, dynamic>),
@@ -11053,7 +11053,7 @@ Map<String, dynamic> _$VerificationResToJson(VerificationRes instance) {
   writeNotNull('trace', instance.trace);
   writeNotNull('authToken', instance.authToken);
   writeNotNull('connCounter', instance.connCounter);
-  writeNotNull('nocodeAdmin', instance.nocodeAdmin);
+  writeNotNull('nocodeAuthToken', instance.nocodeAuthToken);
   writeNotNull('user', instance.user?.toJson());
   writeNotNull('orgs', instance.orgs?.map((e) => e.toJson()).toList());
   writeNotNull('properties', instance.properties);

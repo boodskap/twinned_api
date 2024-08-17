@@ -44670,7 +44670,7 @@ class VerificationRes {
     this.trace,
     this.authToken,
     this.connCounter,
-    this.nocodeAdmin,
+    this.nocodeAuthToken,
     this.user,
     this.orgs,
     this.properties,
@@ -44693,8 +44693,8 @@ class VerificationRes {
   final String? authToken;
   @JsonKey(name: 'connCounter', includeIfNull: false)
   final int? connCounter;
-  @JsonKey(name: 'nocodeAdmin', includeIfNull: false)
-  final bool? nocodeAdmin;
+  @JsonKey(name: 'nocodeAuthToken', includeIfNull: false, defaultValue: '')
+  final String? nocodeAuthToken;
   @JsonKey(name: 'user', includeIfNull: false)
   final PlatformUser? user;
   @JsonKey(name: 'orgs', includeIfNull: false, defaultValue: <OrgInfo>[])
@@ -44721,9 +44721,9 @@ class VerificationRes {
             (identical(other.connCounter, connCounter) ||
                 const DeepCollectionEquality()
                     .equals(other.connCounter, connCounter)) &&
-            (identical(other.nocodeAdmin, nocodeAdmin) ||
+            (identical(other.nocodeAuthToken, nocodeAuthToken) ||
                 const DeepCollectionEquality()
-                    .equals(other.nocodeAdmin, nocodeAdmin)) &&
+                    .equals(other.nocodeAuthToken, nocodeAuthToken)) &&
             (identical(other.user, user) ||
                 const DeepCollectionEquality().equals(other.user, user)) &&
             (identical(other.orgs, orgs) ||
@@ -44745,7 +44745,7 @@ class VerificationRes {
       const DeepCollectionEquality().hash(trace) ^
       const DeepCollectionEquality().hash(authToken) ^
       const DeepCollectionEquality().hash(connCounter) ^
-      const DeepCollectionEquality().hash(nocodeAdmin) ^
+      const DeepCollectionEquality().hash(nocodeAuthToken) ^
       const DeepCollectionEquality().hash(user) ^
       const DeepCollectionEquality().hash(orgs) ^
       const DeepCollectionEquality().hash(properties) ^
@@ -44760,7 +44760,7 @@ extension $VerificationResExtension on VerificationRes {
       String? trace,
       String? authToken,
       int? connCounter,
-      bool? nocodeAdmin,
+      String? nocodeAuthToken,
       PlatformUser? user,
       List<OrgInfo>? orgs,
       Object? properties,
@@ -44771,7 +44771,7 @@ extension $VerificationResExtension on VerificationRes {
         trace: trace ?? this.trace,
         authToken: authToken ?? this.authToken,
         connCounter: connCounter ?? this.connCounter,
-        nocodeAdmin: nocodeAdmin ?? this.nocodeAdmin,
+        nocodeAuthToken: nocodeAuthToken ?? this.nocodeAuthToken,
         user: user ?? this.user,
         orgs: orgs ?? this.orgs,
         properties: properties ?? this.properties,
@@ -44784,7 +44784,7 @@ extension $VerificationResExtension on VerificationRes {
       Wrapped<String?>? trace,
       Wrapped<String?>? authToken,
       Wrapped<int?>? connCounter,
-      Wrapped<bool?>? nocodeAdmin,
+      Wrapped<String?>? nocodeAuthToken,
       Wrapped<PlatformUser?>? user,
       Wrapped<List<OrgInfo>?>? orgs,
       Wrapped<Object?>? properties,
@@ -44796,8 +44796,9 @@ extension $VerificationResExtension on VerificationRes {
         authToken: (authToken != null ? authToken.value : this.authToken),
         connCounter:
             (connCounter != null ? connCounter.value : this.connCounter),
-        nocodeAdmin:
-            (nocodeAdmin != null ? nocodeAdmin.value : this.nocodeAdmin),
+        nocodeAuthToken: (nocodeAuthToken != null
+            ? nocodeAuthToken.value
+            : this.nocodeAuthToken),
         user: (user != null ? user.value : this.user),
         orgs: (orgs != null ? orgs.value : this.orgs),
         properties: (properties != null ? properties.value : this.properties),
