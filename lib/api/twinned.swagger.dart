@@ -44603,6 +44603,7 @@ class OrgInfo {
     required this.name,
     required this.twinDomainKey,
     required this.twinAuthToken,
+    required this.user,
   });
 
   factory OrgInfo.fromJson(Map<String, dynamic> json) =>
@@ -44619,6 +44620,8 @@ class OrgInfo {
   final String twinDomainKey;
   @JsonKey(name: 'twinAuthToken', includeIfNull: false, defaultValue: '')
   final String twinAuthToken;
+  @JsonKey(name: 'user', includeIfNull: false)
+  final PlatformUser user;
   static const fromJsonFactory = _$OrgInfoFromJson;
 
   @override
@@ -44634,7 +44637,9 @@ class OrgInfo {
                     .equals(other.twinDomainKey, twinDomainKey)) &&
             (identical(other.twinAuthToken, twinAuthToken) ||
                 const DeepCollectionEquality()
-                    .equals(other.twinAuthToken, twinAuthToken)));
+                    .equals(other.twinAuthToken, twinAuthToken)) &&
+            (identical(other.user, user) ||
+                const DeepCollectionEquality().equals(other.user, user)));
   }
 
   @override
@@ -44646,6 +44651,7 @@ class OrgInfo {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(twinDomainKey) ^
       const DeepCollectionEquality().hash(twinAuthToken) ^
+      const DeepCollectionEquality().hash(user) ^
       runtimeType.hashCode;
 }
 
@@ -44654,26 +44660,30 @@ extension $OrgInfoExtension on OrgInfo {
       {String? id,
       String? name,
       String? twinDomainKey,
-      String? twinAuthToken}) {
+      String? twinAuthToken,
+      PlatformUser? user}) {
     return OrgInfo(
         id: id ?? this.id,
         name: name ?? this.name,
         twinDomainKey: twinDomainKey ?? this.twinDomainKey,
-        twinAuthToken: twinAuthToken ?? this.twinAuthToken);
+        twinAuthToken: twinAuthToken ?? this.twinAuthToken,
+        user: user ?? this.user);
   }
 
   OrgInfo copyWithWrapped(
       {Wrapped<String>? id,
       Wrapped<String>? name,
       Wrapped<String>? twinDomainKey,
-      Wrapped<String>? twinAuthToken}) {
+      Wrapped<String>? twinAuthToken,
+      Wrapped<PlatformUser>? user}) {
     return OrgInfo(
         id: (id != null ? id.value : this.id),
         name: (name != null ? name.value : this.name),
         twinDomainKey:
             (twinDomainKey != null ? twinDomainKey.value : this.twinDomainKey),
         twinAuthToken:
-            (twinAuthToken != null ? twinAuthToken.value : this.twinAuthToken));
+            (twinAuthToken != null ? twinAuthToken.value : this.twinAuthToken),
+        user: (user != null ? user.value : this.user));
   }
 }
 
