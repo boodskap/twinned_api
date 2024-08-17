@@ -254,11 +254,25 @@ final class _$Twinned extends Twinned {
   }
 
   @override
-  Future<Response<VerificationRes>> _verifyPin({
+  Future<Response<VerificationRes>> _verifyRegistrationPin(
+      {required VerificationReq? body}) {
+    final Uri $url = Uri.parse('/IoT/twin/registration/verify');
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+    );
+    return client.send<VerificationRes, VerificationRes>($request);
+  }
+
+  @override
+  Future<Response<VerificationRes>> _verifyResetPin({
     String? dkey,
     required VerificationReq? body,
   }) {
-    final Uri $url = Uri.parse('/IoT/twin/verify');
+    final Uri $url = Uri.parse('/IoT/twin/reset/verify');
     final Map<String, String> $headers = {
       if (dkey != null) 'dkey': dkey,
     };
@@ -282,6 +296,26 @@ final class _$Twinned extends Twinned {
       $url,
       client.baseUrl,
       body: $body,
+    );
+    return client.send<VerificationRes, VerificationRes>($request);
+  }
+
+  @override
+  Future<Response<VerificationRes>> _resetPassword({
+    String? dkey,
+    required ResetPassword? body,
+  }) {
+    final Uri $url = Uri.parse('/IoT/twin/reset');
+    final Map<String, String> $headers = {
+      if (dkey != null) 'dkey': dkey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
     );
     return client.send<VerificationRes, VerificationRes>($request);
   }
