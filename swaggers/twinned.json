@@ -23451,7 +23451,8 @@
       "required": [
         "id",
         "name",
-        "twinDomainKey"
+        "twinDomainKey",
+        "twinAuthToken"
       ],
       "properties": {
         "id": {
@@ -23461,6 +23462,9 @@
           "type": "string"
         },
         "twinDomainKey": {
+          "type": "string"
+        },
+        "twinAuthToken": {
           "type": "string"
         }
       }

@@ -11011,12 +11011,14 @@ OrgInfo _$OrgInfoFromJson(Map<String, dynamic> json) => OrgInfo(
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
       twinDomainKey: json['twinDomainKey'] as String? ?? '',
+      twinAuthToken: json['twinAuthToken'] as String? ?? '',
     );
 
 Map<String, dynamic> _$OrgInfoToJson(OrgInfo instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'twinDomainKey': instance.twinDomainKey,
+      'twinAuthToken': instance.twinAuthToken,
     };
 
 VerificationRes _$VerificationResFromJson(Map<String, dynamic> json) =>
