@@ -44601,6 +44601,7 @@ class OrgInfo {
   const OrgInfo({
     required this.id,
     this.nane,
+    required this.twinDomainKey,
     this.nocodeAuthToken,
   });
 
@@ -44614,6 +44615,8 @@ class OrgInfo {
   final String id;
   @JsonKey(name: 'nane', includeIfNull: false, defaultValue: '')
   final String? nane;
+  @JsonKey(name: 'twinDomainKey', includeIfNull: false, defaultValue: '')
+  final String twinDomainKey;
   @JsonKey(name: 'nocodeAuthToken', includeIfNull: false, defaultValue: '')
   final String? nocodeAuthToken;
   static const fromJsonFactory = _$OrgInfoFromJson;
@@ -44626,6 +44629,9 @@ class OrgInfo {
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.nane, nane) ||
                 const DeepCollectionEquality().equals(other.nane, nane)) &&
+            (identical(other.twinDomainKey, twinDomainKey) ||
+                const DeepCollectionEquality()
+                    .equals(other.twinDomainKey, twinDomainKey)) &&
             (identical(other.nocodeAuthToken, nocodeAuthToken) ||
                 const DeepCollectionEquality()
                     .equals(other.nocodeAuthToken, nocodeAuthToken)));
@@ -44638,25 +44644,34 @@ class OrgInfo {
   int get hashCode =>
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(nane) ^
+      const DeepCollectionEquality().hash(twinDomainKey) ^
       const DeepCollectionEquality().hash(nocodeAuthToken) ^
       runtimeType.hashCode;
 }
 
 extension $OrgInfoExtension on OrgInfo {
-  OrgInfo copyWith({String? id, String? nane, String? nocodeAuthToken}) {
+  OrgInfo copyWith(
+      {String? id,
+      String? nane,
+      String? twinDomainKey,
+      String? nocodeAuthToken}) {
     return OrgInfo(
         id: id ?? this.id,
         nane: nane ?? this.nane,
+        twinDomainKey: twinDomainKey ?? this.twinDomainKey,
         nocodeAuthToken: nocodeAuthToken ?? this.nocodeAuthToken);
   }
 
   OrgInfo copyWithWrapped(
       {Wrapped<String>? id,
       Wrapped<String?>? nane,
+      Wrapped<String>? twinDomainKey,
       Wrapped<String?>? nocodeAuthToken}) {
     return OrgInfo(
         id: (id != null ? id.value : this.id),
         nane: (nane != null ? nane.value : this.nane),
+        twinDomainKey:
+            (twinDomainKey != null ? twinDomainKey.value : this.twinDomainKey),
         nocodeAuthToken: (nocodeAuthToken != null
             ? nocodeAuthToken.value
             : this.nocodeAuthToken));

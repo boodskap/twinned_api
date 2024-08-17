@@ -11010,6 +11010,7 @@ Map<String, dynamic> _$PlatformUserToJson(PlatformUser instance) {
 OrgInfo _$OrgInfoFromJson(Map<String, dynamic> json) => OrgInfo(
       id: json['id'] as String? ?? '',
       nane: json['nane'] as String? ?? '',
+      twinDomainKey: json['twinDomainKey'] as String? ?? '',
       nocodeAuthToken: json['nocodeAuthToken'] as String? ?? '',
     );
 
@@ -11025,6 +11026,7 @@ Map<String, dynamic> _$OrgInfoToJson(OrgInfo instance) {
   }
 
   writeNotNull('nane', instance.nane);
+  val['twinDomainKey'] = instance.twinDomainKey;
   writeNotNull('nocodeAuthToken', instance.nocodeAuthToken);
   return val;
 }
