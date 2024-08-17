@@ -44600,9 +44600,8 @@ extension $PlatformUserExtension on PlatformUser {
 class OrgInfo {
   const OrgInfo({
     required this.id,
-    this.nane,
+    required this.name,
     required this.twinDomainKey,
-    this.nocodeAuthToken,
   });
 
   factory OrgInfo.fromJson(Map<String, dynamic> json) =>
@@ -44613,12 +44612,10 @@ class OrgInfo {
 
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
   final String id;
-  @JsonKey(name: 'nane', includeIfNull: false, defaultValue: '')
-  final String? nane;
+  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
+  final String name;
   @JsonKey(name: 'twinDomainKey', includeIfNull: false, defaultValue: '')
   final String twinDomainKey;
-  @JsonKey(name: 'nocodeAuthToken', includeIfNull: false, defaultValue: '')
-  final String? nocodeAuthToken;
   static const fromJsonFactory = _$OrgInfoFromJson;
 
   @override
@@ -44627,14 +44624,11 @@ class OrgInfo {
         (other is OrgInfo &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.nane, nane) ||
-                const DeepCollectionEquality().equals(other.nane, nane)) &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.twinDomainKey, twinDomainKey) ||
                 const DeepCollectionEquality()
-                    .equals(other.twinDomainKey, twinDomainKey)) &&
-            (identical(other.nocodeAuthToken, nocodeAuthToken) ||
-                const DeepCollectionEquality()
-                    .equals(other.nocodeAuthToken, nocodeAuthToken)));
+                    .equals(other.twinDomainKey, twinDomainKey)));
   }
 
   @override
@@ -44643,38 +44637,28 @@ class OrgInfo {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(nane) ^
+      const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(twinDomainKey) ^
-      const DeepCollectionEquality().hash(nocodeAuthToken) ^
       runtimeType.hashCode;
 }
 
 extension $OrgInfoExtension on OrgInfo {
-  OrgInfo copyWith(
-      {String? id,
-      String? nane,
-      String? twinDomainKey,
-      String? nocodeAuthToken}) {
+  OrgInfo copyWith({String? id, String? name, String? twinDomainKey}) {
     return OrgInfo(
         id: id ?? this.id,
-        nane: nane ?? this.nane,
-        twinDomainKey: twinDomainKey ?? this.twinDomainKey,
-        nocodeAuthToken: nocodeAuthToken ?? this.nocodeAuthToken);
+        name: name ?? this.name,
+        twinDomainKey: twinDomainKey ?? this.twinDomainKey);
   }
 
   OrgInfo copyWithWrapped(
       {Wrapped<String>? id,
-      Wrapped<String?>? nane,
-      Wrapped<String>? twinDomainKey,
-      Wrapped<String?>? nocodeAuthToken}) {
+      Wrapped<String>? name,
+      Wrapped<String>? twinDomainKey}) {
     return OrgInfo(
         id: (id != null ? id.value : this.id),
-        nane: (nane != null ? nane.value : this.nane),
+        name: (name != null ? name.value : this.name),
         twinDomainKey:
-            (twinDomainKey != null ? twinDomainKey.value : this.twinDomainKey),
-        nocodeAuthToken: (nocodeAuthToken != null
-            ? nocodeAuthToken.value
-            : this.nocodeAuthToken));
+            (twinDomainKey != null ? twinDomainKey.value : this.twinDomainKey));
   }
 }
 
@@ -44686,6 +44670,7 @@ class VerificationRes {
     this.trace,
     this.authToken,
     this.connCounter,
+    this.nocodeAdmin,
     this.user,
     this.orgs,
     this.properties,
@@ -44708,6 +44693,8 @@ class VerificationRes {
   final String? authToken;
   @JsonKey(name: 'connCounter', includeIfNull: false)
   final int? connCounter;
+  @JsonKey(name: 'nocodeAdmin', includeIfNull: false)
+  final bool? nocodeAdmin;
   @JsonKey(name: 'user', includeIfNull: false)
   final PlatformUser? user;
   @JsonKey(name: 'orgs', includeIfNull: false, defaultValue: <OrgInfo>[])
@@ -44734,6 +44721,9 @@ class VerificationRes {
             (identical(other.connCounter, connCounter) ||
                 const DeepCollectionEquality()
                     .equals(other.connCounter, connCounter)) &&
+            (identical(other.nocodeAdmin, nocodeAdmin) ||
+                const DeepCollectionEquality()
+                    .equals(other.nocodeAdmin, nocodeAdmin)) &&
             (identical(other.user, user) ||
                 const DeepCollectionEquality().equals(other.user, user)) &&
             (identical(other.orgs, orgs) ||
@@ -44755,6 +44745,7 @@ class VerificationRes {
       const DeepCollectionEquality().hash(trace) ^
       const DeepCollectionEquality().hash(authToken) ^
       const DeepCollectionEquality().hash(connCounter) ^
+      const DeepCollectionEquality().hash(nocodeAdmin) ^
       const DeepCollectionEquality().hash(user) ^
       const DeepCollectionEquality().hash(orgs) ^
       const DeepCollectionEquality().hash(properties) ^
@@ -44769,6 +44760,7 @@ extension $VerificationResExtension on VerificationRes {
       String? trace,
       String? authToken,
       int? connCounter,
+      bool? nocodeAdmin,
       PlatformUser? user,
       List<OrgInfo>? orgs,
       Object? properties,
@@ -44779,6 +44771,7 @@ extension $VerificationResExtension on VerificationRes {
         trace: trace ?? this.trace,
         authToken: authToken ?? this.authToken,
         connCounter: connCounter ?? this.connCounter,
+        nocodeAdmin: nocodeAdmin ?? this.nocodeAdmin,
         user: user ?? this.user,
         orgs: orgs ?? this.orgs,
         properties: properties ?? this.properties,
@@ -44791,6 +44784,7 @@ extension $VerificationResExtension on VerificationRes {
       Wrapped<String?>? trace,
       Wrapped<String?>? authToken,
       Wrapped<int?>? connCounter,
+      Wrapped<bool?>? nocodeAdmin,
       Wrapped<PlatformUser?>? user,
       Wrapped<List<OrgInfo>?>? orgs,
       Wrapped<Object?>? properties,
@@ -44802,6 +44796,8 @@ extension $VerificationResExtension on VerificationRes {
         authToken: (authToken != null ? authToken.value : this.authToken),
         connCounter:
             (connCounter != null ? connCounter.value : this.connCounter),
+        nocodeAdmin:
+            (nocodeAdmin != null ? nocodeAdmin.value : this.nocodeAdmin),
         user: (user != null ? user.value : this.user),
         orgs: (orgs != null ? orgs.value : this.orgs),
         properties: (properties != null ? properties.value : this.properties),
