@@ -23450,13 +23450,17 @@
       "type": "object",
       "required": [
         "id",
-        "name"
+        "name",
+        "twinDomainKey"
       ],
       "properties": {
         "id": {
           "type": "string"
         },
         "nane": {
+          "type": "string"
+        },
+        "twinDomainKey": {
           "type": "string"
         },
         "nocodeAuthToken": {
