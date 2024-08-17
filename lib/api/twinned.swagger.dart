@@ -44602,6 +44602,7 @@ class OrgInfo {
     required this.id,
     required this.name,
     required this.twinDomainKey,
+    required this.twinAuthToken,
   });
 
   factory OrgInfo.fromJson(Map<String, dynamic> json) =>
@@ -44616,6 +44617,8 @@ class OrgInfo {
   final String name;
   @JsonKey(name: 'twinDomainKey', includeIfNull: false, defaultValue: '')
   final String twinDomainKey;
+  @JsonKey(name: 'twinAuthToken', includeIfNull: false, defaultValue: '')
+  final String twinAuthToken;
   static const fromJsonFactory = _$OrgInfoFromJson;
 
   @override
@@ -44628,7 +44631,10 @@ class OrgInfo {
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.twinDomainKey, twinDomainKey) ||
                 const DeepCollectionEquality()
-                    .equals(other.twinDomainKey, twinDomainKey)));
+                    .equals(other.twinDomainKey, twinDomainKey)) &&
+            (identical(other.twinAuthToken, twinAuthToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.twinAuthToken, twinAuthToken)));
   }
 
   @override
@@ -44639,26 +44645,35 @@ class OrgInfo {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(twinDomainKey) ^
+      const DeepCollectionEquality().hash(twinAuthToken) ^
       runtimeType.hashCode;
 }
 
 extension $OrgInfoExtension on OrgInfo {
-  OrgInfo copyWith({String? id, String? name, String? twinDomainKey}) {
+  OrgInfo copyWith(
+      {String? id,
+      String? name,
+      String? twinDomainKey,
+      String? twinAuthToken}) {
     return OrgInfo(
         id: id ?? this.id,
         name: name ?? this.name,
-        twinDomainKey: twinDomainKey ?? this.twinDomainKey);
+        twinDomainKey: twinDomainKey ?? this.twinDomainKey,
+        twinAuthToken: twinAuthToken ?? this.twinAuthToken);
   }
 
   OrgInfo copyWithWrapped(
       {Wrapped<String>? id,
       Wrapped<String>? name,
-      Wrapped<String>? twinDomainKey}) {
+      Wrapped<String>? twinDomainKey,
+      Wrapped<String>? twinAuthToken}) {
     return OrgInfo(
         id: (id != null ? id.value : this.id),
         name: (name != null ? name.value : this.name),
         twinDomainKey:
-            (twinDomainKey != null ? twinDomainKey.value : this.twinDomainKey));
+            (twinDomainKey != null ? twinDomainKey.value : this.twinDomainKey),
+        twinAuthToken:
+            (twinAuthToken != null ? twinAuthToken.value : this.twinAuthToken));
   }
 }
 
