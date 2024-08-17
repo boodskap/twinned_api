@@ -308,9 +308,27 @@ abstract class Twinned extends ChopperService {
   });
 
   ///Do Verification
+  ///@param body
+  Future<chopper.Response<VerificationRes>> verifyRegistrationPin(
+      {required VerificationReq? body}) {
+    generatedMapping.putIfAbsent(
+        VerificationReq, () => VerificationReq.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        VerificationRes, () => VerificationRes.fromJsonFactory);
+
+    return _verifyRegistrationPin(body: body);
+  }
+
+  ///Do Verification
+  ///@param body
+  @Post(path: '/IoT/twin/registration/verify')
+  Future<chopper.Response<VerificationRes>> _verifyRegistrationPin(
+      {@Body() required VerificationReq? body});
+
+  ///Do Verification
   ///@param dkey
   ///@param body
-  Future<chopper.Response<VerificationRes>> verifyPin({
+  Future<chopper.Response<VerificationRes>> verifyResetPin({
     String? dkey,
     required VerificationReq? body,
   }) {
@@ -319,14 +337,14 @@ abstract class Twinned extends ChopperService {
     generatedMapping.putIfAbsent(
         VerificationRes, () => VerificationRes.fromJsonFactory);
 
-    return _verifyPin(dkey: dkey?.toString(), body: body);
+    return _verifyResetPin(dkey: dkey?.toString(), body: body);
   }
 
   ///Do Verification
   ///@param dkey
   ///@param body
-  @Post(path: '/IoT/twin/verify')
-  Future<chopper.Response<VerificationRes>> _verifyPin({
+  @Post(path: '/IoT/twin/reset/verify')
+  Future<chopper.Response<VerificationRes>> _verifyResetPin({
     @Header('dkey') String? dkey,
     @Body() required VerificationReq? body,
   });
@@ -346,6 +364,30 @@ abstract class Twinned extends ChopperService {
   @Post(path: '/IoT/twin/login')
   Future<chopper.Response<VerificationRes>> _loginUser(
       {@Body() required Login? body});
+
+  ///Reset password
+  ///@param dkey
+  ///@param body
+  Future<chopper.Response<VerificationRes>> resetPassword({
+    String? dkey,
+    required ResetPassword? body,
+  }) {
+    generatedMapping.putIfAbsent(
+        ResetPassword, () => ResetPassword.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        VerificationRes, () => VerificationRes.fromJsonFactory);
+
+    return _resetPassword(dkey: dkey?.toString(), body: body);
+  }
+
+  ///Reset password
+  ///@param dkey
+  ///@param body
+  @Post(path: '/IoT/twin/reset')
+  Future<chopper.Response<VerificationRes>> _resetPassword({
+    @Header('dkey') String? dkey,
+    @Body() required ResetPassword? body,
+  });
 
   ///Get the most recent data for this device
   ///@param deviceId
@@ -22065,6 +22107,7 @@ class DashboardScreenInfo {
     required this.rows,
     this.roles,
     this.clientIds,
+    this.priority,
   });
 
   factory DashboardScreenInfo.fromJson(Map<String, dynamic> json) =>
@@ -22115,6 +22158,8 @@ class DashboardScreenInfo {
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
   final List<String>? clientIds;
+  @JsonKey(name: 'priority', includeIfNull: false)
+  final int? priority;
   static const fromJsonFactory = _$DashboardScreenInfoFromJson;
 
   @override
@@ -22179,7 +22224,10 @@ class DashboardScreenInfo {
                 const DeepCollectionEquality().equals(other.roles, roles)) &&
             (identical(other.clientIds, clientIds) ||
                 const DeepCollectionEquality()
-                    .equals(other.clientIds, clientIds)));
+                    .equals(other.clientIds, clientIds)) &&
+            (identical(other.priority, priority) ||
+                const DeepCollectionEquality()
+                    .equals(other.priority, priority)));
   }
 
   @override
@@ -22208,6 +22256,7 @@ class DashboardScreenInfo {
       const DeepCollectionEquality().hash(rows) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(clientIds) ^
+      const DeepCollectionEquality().hash(priority) ^
       runtimeType.hashCode;
 }
 
@@ -22233,7 +22282,8 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
       PaddingConfig? marginConfig,
       List<ScreenRow>? rows,
       List<String>? roles,
-      List<String>? clientIds}) {
+      List<String>? clientIds,
+      int? priority}) {
     return DashboardScreenInfo(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -22255,7 +22305,8 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
         marginConfig: marginConfig ?? this.marginConfig,
         rows: rows ?? this.rows,
         roles: roles ?? this.roles,
-        clientIds: clientIds ?? this.clientIds);
+        clientIds: clientIds ?? this.clientIds,
+        priority: priority ?? this.priority);
   }
 
   DashboardScreenInfo copyWithWrapped(
@@ -22279,7 +22330,8 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
       Wrapped<PaddingConfig?>? marginConfig,
       Wrapped<List<ScreenRow>>? rows,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds}) {
+      Wrapped<List<String>?>? clientIds,
+      Wrapped<int?>? priority}) {
     return DashboardScreenInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -22318,7 +22370,8 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
             (marginConfig != null ? marginConfig.value : this.marginConfig),
         rows: (rows != null ? rows.value : this.rows),
         roles: (roles != null ? roles.value : this.roles),
-        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
+        priority: (priority != null ? priority.value : this.priority));
   }
 }
 
@@ -22353,6 +22406,7 @@ class DashboardScreen {
     required this.rows,
     this.roles,
     this.clientIds,
+    this.priority,
   });
 
   factory DashboardScreen.fromJson(Map<String, dynamic> json) =>
@@ -22417,6 +22471,8 @@ class DashboardScreen {
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
   final List<String>? clientIds;
+  @JsonKey(name: 'priority', includeIfNull: false)
+  final int? priority;
   static const fromJsonFactory = _$DashboardScreenFromJson;
 
   @override
@@ -22493,7 +22549,8 @@ class DashboardScreen {
             (identical(other.marginConfig, marginConfig) || const DeepCollectionEquality().equals(other.marginConfig, marginConfig)) &&
             (identical(other.rows, rows) || const DeepCollectionEquality().equals(other.rows, rows)) &&
             (identical(other.roles, roles) || const DeepCollectionEquality().equals(other.roles, roles)) &&
-            (identical(other.clientIds, clientIds) || const DeepCollectionEquality().equals(other.clientIds, clientIds)));
+            (identical(other.clientIds, clientIds) || const DeepCollectionEquality().equals(other.clientIds, clientIds)) &&
+            (identical(other.priority, priority) || const DeepCollectionEquality().equals(other.priority, priority)));
   }
 
   @override
@@ -22529,6 +22586,7 @@ class DashboardScreen {
       const DeepCollectionEquality().hash(rows) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(clientIds) ^
+      const DeepCollectionEquality().hash(priority) ^
       runtimeType.hashCode;
 }
 
@@ -22561,7 +22619,8 @@ extension $DashboardScreenExtension on DashboardScreen {
       PaddingConfig? marginConfig,
       List<ScreenRow>? rows,
       List<String>? roles,
-      List<String>? clientIds}) {
+      List<String>? clientIds,
+      int? priority}) {
     return DashboardScreen(
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
@@ -22590,7 +22649,8 @@ extension $DashboardScreenExtension on DashboardScreen {
         marginConfig: marginConfig ?? this.marginConfig,
         rows: rows ?? this.rows,
         roles: roles ?? this.roles,
-        clientIds: clientIds ?? this.clientIds);
+        clientIds: clientIds ?? this.clientIds,
+        priority: priority ?? this.priority);
   }
 
   DashboardScreen copyWithWrapped(
@@ -22621,7 +22681,8 @@ extension $DashboardScreenExtension on DashboardScreen {
       Wrapped<PaddingConfig?>? marginConfig,
       Wrapped<List<ScreenRow>>? rows,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds}) {
+      Wrapped<List<String>?>? clientIds,
+      Wrapped<int?>? priority}) {
     return DashboardScreen(
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
@@ -22669,7 +22730,8 @@ extension $DashboardScreenExtension on DashboardScreen {
             (marginConfig != null ? marginConfig.value : this.marginConfig),
         rows: (rows != null ? rows.value : this.rows),
         roles: (roles != null ? roles.value : this.roles),
-        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
+        priority: (priority != null ? priority.value : this.priority));
   }
 }
 
@@ -44535,6 +44597,73 @@ extension $PlatformUserExtension on PlatformUser {
 }
 
 @JsonSerializable(explicitToJson: true)
+class OrgInfo {
+  const OrgInfo({
+    required this.id,
+    this.nane,
+    this.nocodeAuthToken,
+  });
+
+  factory OrgInfo.fromJson(Map<String, dynamic> json) =>
+      _$OrgInfoFromJson(json);
+
+  static const toJsonFactory = _$OrgInfoToJson;
+  Map<String, dynamic> toJson() => _$OrgInfoToJson(this);
+
+  @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
+  final String id;
+  @JsonKey(name: 'nane', includeIfNull: false, defaultValue: '')
+  final String? nane;
+  @JsonKey(name: 'nocodeAuthToken', includeIfNull: false, defaultValue: '')
+  final String? nocodeAuthToken;
+  static const fromJsonFactory = _$OrgInfoFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is OrgInfo &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.nane, nane) ||
+                const DeepCollectionEquality().equals(other.nane, nane)) &&
+            (identical(other.nocodeAuthToken, nocodeAuthToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.nocodeAuthToken, nocodeAuthToken)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(nane) ^
+      const DeepCollectionEquality().hash(nocodeAuthToken) ^
+      runtimeType.hashCode;
+}
+
+extension $OrgInfoExtension on OrgInfo {
+  OrgInfo copyWith({String? id, String? nane, String? nocodeAuthToken}) {
+    return OrgInfo(
+        id: id ?? this.id,
+        nane: nane ?? this.nane,
+        nocodeAuthToken: nocodeAuthToken ?? this.nocodeAuthToken);
+  }
+
+  OrgInfo copyWithWrapped(
+      {Wrapped<String>? id,
+      Wrapped<String?>? nane,
+      Wrapped<String?>? nocodeAuthToken}) {
+    return OrgInfo(
+        id: (id != null ? id.value : this.id),
+        nane: (nane != null ? nane.value : this.nane),
+        nocodeAuthToken: (nocodeAuthToken != null
+            ? nocodeAuthToken.value
+            : this.nocodeAuthToken));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class VerificationRes {
   const VerificationRes({
     required this.ok,
@@ -44543,7 +44672,7 @@ class VerificationRes {
     this.authToken,
     this.connCounter,
     this.user,
-    this.orgIds,
+    this.orgs,
     this.properties,
     this.code,
   });
@@ -44566,8 +44695,8 @@ class VerificationRes {
   final int? connCounter;
   @JsonKey(name: 'user', includeIfNull: false)
   final PlatformUser? user;
-  @JsonKey(name: 'orgIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? orgIds;
+  @JsonKey(name: 'orgs', includeIfNull: false, defaultValue: <OrgInfo>[])
+  final List<OrgInfo>? orgs;
   @JsonKey(name: 'properties', includeIfNull: false)
   final Object? properties;
   @JsonKey(name: 'code', includeIfNull: false)
@@ -44592,8 +44721,8 @@ class VerificationRes {
                     .equals(other.connCounter, connCounter)) &&
             (identical(other.user, user) ||
                 const DeepCollectionEquality().equals(other.user, user)) &&
-            (identical(other.orgIds, orgIds) ||
-                const DeepCollectionEquality().equals(other.orgIds, orgIds)) &&
+            (identical(other.orgs, orgs) ||
+                const DeepCollectionEquality().equals(other.orgs, orgs)) &&
             (identical(other.properties, properties) ||
                 const DeepCollectionEquality()
                     .equals(other.properties, properties)) &&
@@ -44612,7 +44741,7 @@ class VerificationRes {
       const DeepCollectionEquality().hash(authToken) ^
       const DeepCollectionEquality().hash(connCounter) ^
       const DeepCollectionEquality().hash(user) ^
-      const DeepCollectionEquality().hash(orgIds) ^
+      const DeepCollectionEquality().hash(orgs) ^
       const DeepCollectionEquality().hash(properties) ^
       const DeepCollectionEquality().hash(code) ^
       runtimeType.hashCode;
@@ -44626,7 +44755,7 @@ extension $VerificationResExtension on VerificationRes {
       String? authToken,
       int? connCounter,
       PlatformUser? user,
-      List<String>? orgIds,
+      List<OrgInfo>? orgs,
       Object? properties,
       int? code}) {
     return VerificationRes(
@@ -44636,7 +44765,7 @@ extension $VerificationResExtension on VerificationRes {
         authToken: authToken ?? this.authToken,
         connCounter: connCounter ?? this.connCounter,
         user: user ?? this.user,
-        orgIds: orgIds ?? this.orgIds,
+        orgs: orgs ?? this.orgs,
         properties: properties ?? this.properties,
         code: code ?? this.code);
   }
@@ -44648,7 +44777,7 @@ extension $VerificationResExtension on VerificationRes {
       Wrapped<String?>? authToken,
       Wrapped<int?>? connCounter,
       Wrapped<PlatformUser?>? user,
-      Wrapped<List<String>?>? orgIds,
+      Wrapped<List<OrgInfo>?>? orgs,
       Wrapped<Object?>? properties,
       Wrapped<int?>? code}) {
     return VerificationRes(
@@ -44659,7 +44788,7 @@ extension $VerificationResExtension on VerificationRes {
         connCounter:
             (connCounter != null ? connCounter.value : this.connCounter),
         user: (user != null ? user.value : this.user),
-        orgIds: (orgIds != null ? orgIds.value : this.orgIds),
+        orgs: (orgs != null ? orgs.value : this.orgs),
         properties: (properties != null ? properties.value : this.properties),
         code: (code != null ? code.value : this.code));
   }
@@ -44713,6 +44842,82 @@ extension $LoginExtension on Login {
   Login copyWithWrapped({Wrapped<String>? userId, Wrapped<String>? password}) {
     return Login(
         userId: (userId != null ? userId.value : this.userId),
+        password: (password != null ? password.value : this.password));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ResetPassword {
+  const ResetPassword({
+    this.userId,
+    this.pinToken,
+    this.pin,
+    this.password,
+  });
+
+  factory ResetPassword.fromJson(Map<String, dynamic> json) =>
+      _$ResetPasswordFromJson(json);
+
+  static const toJsonFactory = _$ResetPasswordToJson;
+  Map<String, dynamic> toJson() => _$ResetPasswordToJson(this);
+
+  @JsonKey(name: 'userId', includeIfNull: false, defaultValue: '')
+  final String? userId;
+  @JsonKey(name: 'pinToken', includeIfNull: false, defaultValue: '')
+  final String? pinToken;
+  @JsonKey(name: 'pin', includeIfNull: false, defaultValue: '')
+  final String? pin;
+  @JsonKey(name: 'password', includeIfNull: false, defaultValue: '')
+  final String? password;
+  static const fromJsonFactory = _$ResetPasswordFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is ResetPassword &&
+            (identical(other.userId, userId) ||
+                const DeepCollectionEquality().equals(other.userId, userId)) &&
+            (identical(other.pinToken, pinToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.pinToken, pinToken)) &&
+            (identical(other.pin, pin) ||
+                const DeepCollectionEquality().equals(other.pin, pin)) &&
+            (identical(other.password, password) ||
+                const DeepCollectionEquality()
+                    .equals(other.password, password)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(userId) ^
+      const DeepCollectionEquality().hash(pinToken) ^
+      const DeepCollectionEquality().hash(pin) ^
+      const DeepCollectionEquality().hash(password) ^
+      runtimeType.hashCode;
+}
+
+extension $ResetPasswordExtension on ResetPassword {
+  ResetPassword copyWith(
+      {String? userId, String? pinToken, String? pin, String? password}) {
+    return ResetPassword(
+        userId: userId ?? this.userId,
+        pinToken: pinToken ?? this.pinToken,
+        pin: pin ?? this.pin,
+        password: password ?? this.password);
+  }
+
+  ResetPassword copyWithWrapped(
+      {Wrapped<String?>? userId,
+      Wrapped<String?>? pinToken,
+      Wrapped<String?>? pin,
+      Wrapped<String?>? password}) {
+    return ResetPassword(
+        userId: (userId != null ? userId.value : this.userId),
+        pinToken: (pinToken != null ? pinToken.value : this.pinToken),
+        pin: (pin != null ? pin.value : this.pin),
         password: (password != null ? password.value : this.password));
   }
 }

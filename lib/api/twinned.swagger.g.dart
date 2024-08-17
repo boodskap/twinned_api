@@ -4219,6 +4219,7 @@ DashboardScreenInfo _$DashboardScreenInfoFromJson(Map<String, dynamic> json) =>
               ?.map((e) => e as String)
               .toList() ??
           [],
+      priority: (json['priority'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$DashboardScreenInfoToJson(DashboardScreenInfo instance) {
@@ -4252,6 +4253,7 @@ Map<String, dynamic> _$DashboardScreenInfoToJson(DashboardScreenInfo instance) {
   val['rows'] = instance.rows.map((e) => e.toJson()).toList();
   writeNotNull('roles', instance.roles);
   writeNotNull('clientIds', instance.clientIds);
+  writeNotNull('priority', instance.priority);
   return val;
 }
 
@@ -4311,6 +4313,7 @@ DashboardScreen _$DashboardScreenFromJson(Map<String, dynamic> json) =>
               ?.map((e) => e as String)
               .toList() ??
           [],
+      priority: (json['priority'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$DashboardScreenToJson(DashboardScreen instance) {
@@ -4351,6 +4354,7 @@ Map<String, dynamic> _$DashboardScreenToJson(DashboardScreen instance) {
   val['rows'] = instance.rows.map((e) => e.toJson()).toList();
   writeNotNull('roles', instance.roles);
   writeNotNull('clientIds', instance.clientIds);
+  writeNotNull('priority', instance.priority);
   return val;
 }
 
@@ -11003,6 +11007,28 @@ Map<String, dynamic> _$PlatformUserToJson(PlatformUser instance) {
   return val;
 }
 
+OrgInfo _$OrgInfoFromJson(Map<String, dynamic> json) => OrgInfo(
+      id: json['id'] as String? ?? '',
+      nane: json['nane'] as String? ?? '',
+      nocodeAuthToken: json['nocodeAuthToken'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$OrgInfoToJson(OrgInfo instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('nane', instance.nane);
+  writeNotNull('nocodeAuthToken', instance.nocodeAuthToken);
+  return val;
+}
+
 VerificationRes _$VerificationResFromJson(Map<String, dynamic> json) =>
     VerificationRes(
       ok: json['ok'] as bool,
@@ -11013,8 +11039,8 @@ VerificationRes _$VerificationResFromJson(Map<String, dynamic> json) =>
       user: json['user'] == null
           ? null
           : PlatformUser.fromJson(json['user'] as Map<String, dynamic>),
-      orgIds: (json['orgIds'] as List<dynamic>?)
-              ?.map((e) => e as String)
+      orgs: (json['orgs'] as List<dynamic>?)
+              ?.map((e) => OrgInfo.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
       properties: json['properties'],
@@ -11037,7 +11063,7 @@ Map<String, dynamic> _$VerificationResToJson(VerificationRes instance) {
   writeNotNull('authToken', instance.authToken);
   writeNotNull('connCounter', instance.connCounter);
   writeNotNull('user', instance.user?.toJson());
-  writeNotNull('orgIds', instance.orgIds);
+  writeNotNull('orgs', instance.orgs?.map((e) => e.toJson()).toList());
   writeNotNull('properties', instance.properties);
   writeNotNull('code', instance.code);
   return val;
@@ -11052,6 +11078,30 @@ Map<String, dynamic> _$LoginToJson(Login instance) => <String, dynamic>{
       'userId': instance.userId,
       'password': instance.password,
     };
+
+ResetPassword _$ResetPasswordFromJson(Map<String, dynamic> json) =>
+    ResetPassword(
+      userId: json['userId'] as String? ?? '',
+      pinToken: json['pinToken'] as String? ?? '',
+      pin: json['pin'] as String? ?? '',
+      password: json['password'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$ResetPasswordToJson(ResetPassword instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('userId', instance.userId);
+  writeNotNull('pinToken', instance.pinToken);
+  writeNotNull('pin', instance.pin);
+  writeNotNull('password', instance.password);
+  return val;
+}
 
 ExportData _$ExportDataFromJson(Map<String, dynamic> json) => ExportData(
       model: DeviceModelInfo.fromJson(json['model'] as Map<String, dynamic>),
