@@ -1225,6 +1225,7 @@ AlarmInfo _$AlarmInfoFromJson(Map<String, dynamic> json) => AlarmInfo(
       description: json['description'] as String? ?? '',
       label: json['label'] as String? ?? '',
       modelId: json['modelId'] as String? ?? '',
+      deviceId: json['deviceId'] as String? ?? '',
       state: (json['state'] as num).toInt(),
       stateIcons: (json['stateIcons'] as List<dynamic>?)
               ?.map((e) => e as String)
@@ -1257,7 +1258,8 @@ Map<String, dynamic> _$AlarmInfoToJson(AlarmInfo instance) {
 
   writeNotNull('description', instance.description);
   writeNotNull('label', instance.label);
-  val['modelId'] = instance.modelId;
+  writeNotNull('modelId', instance.modelId);
+  writeNotNull('deviceId', instance.deviceId);
   val['state'] = instance.state;
   writeNotNull('stateIcons', instance.stateIcons);
   val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
@@ -1272,6 +1274,7 @@ Alarm _$AlarmFromJson(Map<String, dynamic> json) => Alarm(
       description: json['description'] as String? ?? '',
       label: json['label'] as String? ?? '',
       modelId: json['modelId'] as String? ?? '',
+      deviceId: json['deviceId'] as String? ?? '',
       state: (json['state'] as num).toInt(),
       stateIcons: (json['stateIcons'] as List<dynamic>?)
               ?.map((e) => e as String)
@@ -1311,7 +1314,8 @@ Map<String, dynamic> _$AlarmToJson(Alarm instance) {
 
   writeNotNull('description', instance.description);
   writeNotNull('label', instance.label);
-  val['modelId'] = instance.modelId;
+  writeNotNull('modelId', instance.modelId);
+  writeNotNull('deviceId', instance.deviceId);
   val['state'] = instance.state;
   writeNotNull('stateIcons', instance.stateIcons);
   val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
@@ -2669,6 +2673,7 @@ DisplayInfo _$DisplayInfoFromJson(Map<String, dynamic> json) => DisplayInfo(
       description: json['description'] as String? ?? '',
       label: json['label'] as String? ?? '',
       modelId: json['modelId'] as String? ?? '',
+      deviceId: json['deviceId'] as String? ?? '',
       icon: json['icon'] as String? ?? '',
       conditions: (json['conditions'] as List<dynamic>?)
               ?.map(
@@ -2697,7 +2702,8 @@ Map<String, dynamic> _$DisplayInfoToJson(DisplayInfo instance) {
 
   writeNotNull('description', instance.description);
   writeNotNull('label', instance.label);
-  val['modelId'] = instance.modelId;
+  writeNotNull('modelId', instance.modelId);
+  writeNotNull('deviceId', instance.deviceId);
   writeNotNull('icon', instance.icon);
   val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
   writeNotNull('tags', instance.tags);
@@ -2710,6 +2716,7 @@ Display _$DisplayFromJson(Map<String, dynamic> json) => Display(
       description: json['description'] as String? ?? '',
       label: json['label'] as String? ?? '',
       modelId: json['modelId'] as String? ?? '',
+      deviceId: json['deviceId'] as String? ?? '',
       icon: json['icon'] as String? ?? '',
       conditions: (json['conditions'] as List<dynamic>?)
               ?.map(
@@ -2745,7 +2752,8 @@ Map<String, dynamic> _$DisplayToJson(Display instance) {
 
   writeNotNull('description', instance.description);
   writeNotNull('label', instance.label);
-  val['modelId'] = instance.modelId;
+  writeNotNull('modelId', instance.modelId);
+  writeNotNull('deviceId', instance.deviceId);
   writeNotNull('icon', instance.icon);
   val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
   writeNotNull('tags', instance.tags);
@@ -5782,6 +5790,7 @@ Map<String, dynamic> _$FilterMatchGroupToJson(FilterMatchGroup instance) {
 DataFilterInfo _$DataFilterInfoFromJson(Map<String, dynamic> json) =>
     DataFilterInfo(
       modelId: json['modelId'] as String? ?? '',
+      deviceId: json['deviceId'] as String? ?? '',
       name: json['name'] as String? ?? '',
       label: json['label'] as String? ?? '',
       icon: json['icon'] as String? ?? '',
@@ -5796,11 +5805,7 @@ DataFilterInfo _$DataFilterInfoFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$DataFilterInfoToJson(DataFilterInfo instance) {
-  final val = <String, dynamic>{
-    'modelId': instance.modelId,
-    'name': instance.name,
-    'label': instance.label,
-  };
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -5808,6 +5813,10 @@ Map<String, dynamic> _$DataFilterInfoToJson(DataFilterInfo instance) {
     }
   }
 
+  writeNotNull('modelId', instance.modelId);
+  writeNotNull('deviceId', instance.deviceId);
+  val['name'] = instance.name;
+  val['label'] = instance.label;
   writeNotNull('icon', instance.icon);
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
@@ -5817,6 +5826,7 @@ Map<String, dynamic> _$DataFilterInfoToJson(DataFilterInfo instance) {
 
 DataFilter _$DataFilterFromJson(Map<String, dynamic> json) => DataFilter(
       modelId: json['modelId'] as String? ?? '',
+      deviceId: json['deviceId'] as String? ?? '',
       name: json['name'] as String? ?? '',
       label: json['label'] as String? ?? '',
       icon: json['icon'] as String? ?? '',
@@ -5838,11 +5848,7 @@ DataFilter _$DataFilterFromJson(Map<String, dynamic> json) => DataFilter(
     );
 
 Map<String, dynamic> _$DataFilterToJson(DataFilter instance) {
-  final val = <String, dynamic>{
-    'modelId': instance.modelId,
-    'name': instance.name,
-    'label': instance.label,
-  };
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -5850,6 +5856,10 @@ Map<String, dynamic> _$DataFilterToJson(DataFilter instance) {
     }
   }
 
+  writeNotNull('modelId', instance.modelId);
+  writeNotNull('deviceId', instance.deviceId);
+  val['name'] = instance.name;
+  val['label'] = instance.label;
   writeNotNull('icon', instance.icon);
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);

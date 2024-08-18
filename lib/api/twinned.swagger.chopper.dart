@@ -839,6 +839,50 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<DeviceDataArrayRes>> _alarmFilterRecentDeviceData({
+    String? page,
+    String? size,
+    required String? alarmId,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/DeviceData/alarm/filter/${alarmId}');
+    final Map<String, String> $headers = {
+      if (page != null) 'page': page,
+      if (size != null) 'size': size,
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<DeviceDataArrayRes, DeviceDataArrayRes>($request);
+  }
+
+  @override
+  Future<Response<DeviceDataArrayRes>> _eventFilterRecentDeviceData({
+    String? page,
+    String? size,
+    required String? eventId,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/DeviceData/event/filter/${eventId}');
+    final Map<String, String> $headers = {
+      if (page != null) 'page': page,
+      if (size != null) 'size': size,
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<DeviceDataArrayRes, DeviceDataArrayRes>($request);
+  }
+
+  @override
   Future<Response<DeviceViewEntityRes>> _createDeviceView({
     required DeviceViewInfo? body,
     String? apikey,
@@ -2284,12 +2328,14 @@ final class _$Twinned extends Twinned {
   @override
   Future<Response<AlarmArrayRes>> _listAlarms({
     String? modelId,
+    String? deviceId,
     required ListReq? body,
     String? apikey,
   }) {
     final Uri $url = Uri.parse('/Alarm/list');
     final Map<String, String> $headers = {
       if (modelId != null) 'modelId': modelId,
+      if (deviceId != null) 'deviceId': deviceId,
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = body;
@@ -2306,12 +2352,14 @@ final class _$Twinned extends Twinned {
   @override
   Future<Response<AlarmArrayRes>> _searchAlarms({
     String? modelId,
+    String? deviceId,
     required SearchReq? body,
     String? apikey,
   }) {
     final Uri $url = Uri.parse('/Alarm/search');
     final Map<String, String> $headers = {
       if (modelId != null) 'modelId': modelId,
+      if (deviceId != null) 'deviceId': deviceId,
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = body;
@@ -2467,12 +2515,14 @@ final class _$Twinned extends Twinned {
   @override
   Future<Response<DisplayArrayRes>> _listDisplays({
     String? modelId,
+    String? deviceId,
     required ListReq? body,
     String? apikey,
   }) {
     final Uri $url = Uri.parse('/Display/list');
     final Map<String, String> $headers = {
       if (modelId != null) 'modelId': modelId,
+      if (deviceId != null) 'deviceId': deviceId,
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = body;
@@ -2489,12 +2539,14 @@ final class _$Twinned extends Twinned {
   @override
   Future<Response<DisplayArrayRes>> _searchDisplays({
     String? modelId,
+    String? deviceId,
     required SearchReq? body,
     String? apikey,
   }) {
     final Uri $url = Uri.parse('/Display/search');
     final Map<String, String> $headers = {
       if (modelId != null) 'modelId': modelId,
+      if (deviceId != null) 'deviceId': deviceId,
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = body;
@@ -3729,12 +3781,14 @@ final class _$Twinned extends Twinned {
   @override
   Future<Response<DataFilterArrayRes>> _listDataFilters({
     String? modelId,
+    String? deviceId,
     required ListReq? body,
     String? apikey,
   }) {
     final Uri $url = Uri.parse('/DataFilter/list');
     final Map<String, String> $headers = {
       if (modelId != null) 'modelId': modelId,
+      if (deviceId != null) 'deviceId': deviceId,
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = body;
@@ -3751,12 +3805,14 @@ final class _$Twinned extends Twinned {
   @override
   Future<Response<DataFilterArrayRes>> _searchDataFilters({
     String? modelId,
+    String? deviceId,
     required SearchReq? body,
     String? apikey,
   }) {
     final Uri $url = Uri.parse('/DataFilter/search');
     final Map<String, String> $headers = {
       if (modelId != null) 'modelId': modelId,
+      if (deviceId != null) 'deviceId': deviceId,
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = body;
