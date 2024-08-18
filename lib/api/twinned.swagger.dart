@@ -44836,6 +44836,7 @@ class Login {
   const Login({
     required this.userId,
     required this.password,
+    required this.domainKey,
   });
 
   factory Login.fromJson(Map<String, dynamic> json) => _$LoginFromJson(json);
@@ -44847,6 +44848,8 @@ class Login {
   final String userId;
   @JsonKey(name: 'password', includeIfNull: false, defaultValue: '')
   final String password;
+  @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
+  final String domainKey;
   static const fromJsonFactory = _$LoginFromJson;
 
   @override
@@ -44857,7 +44860,10 @@ class Login {
                 const DeepCollectionEquality().equals(other.userId, userId)) &&
             (identical(other.password, password) ||
                 const DeepCollectionEquality()
-                    .equals(other.password, password)));
+                    .equals(other.password, password)) &&
+            (identical(other.domainKey, domainKey) ||
+                const DeepCollectionEquality()
+                    .equals(other.domainKey, domainKey)));
   }
 
   @override
@@ -44867,19 +44873,26 @@ class Login {
   int get hashCode =>
       const DeepCollectionEquality().hash(userId) ^
       const DeepCollectionEquality().hash(password) ^
+      const DeepCollectionEquality().hash(domainKey) ^
       runtimeType.hashCode;
 }
 
 extension $LoginExtension on Login {
-  Login copyWith({String? userId, String? password}) {
+  Login copyWith({String? userId, String? password, String? domainKey}) {
     return Login(
-        userId: userId ?? this.userId, password: password ?? this.password);
+        userId: userId ?? this.userId,
+        password: password ?? this.password,
+        domainKey: domainKey ?? this.domainKey);
   }
 
-  Login copyWithWrapped({Wrapped<String>? userId, Wrapped<String>? password}) {
+  Login copyWithWrapped(
+      {Wrapped<String>? userId,
+      Wrapped<String>? password,
+      Wrapped<String>? domainKey}) {
     return Login(
         userId: (userId != null ? userId.value : this.userId),
-        password: (password != null ? password.value : this.password));
+        password: (password != null ? password.value : this.password),
+        domainKey: (domainKey != null ? domainKey.value : this.domainKey));
   }
 }
 

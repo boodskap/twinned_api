@@ -11068,11 +11068,13 @@ Map<String, dynamic> _$VerificationResToJson(VerificationRes instance) {
 Login _$LoginFromJson(Map<String, dynamic> json) => Login(
       userId: json['userId'] as String? ?? '',
       password: json['password'] as String? ?? '',
+      domainKey: json['domainKey'] as String? ?? '',
     );
 
 Map<String, dynamic> _$LoginToJson(Login instance) => <String, dynamic>{
       'userId': instance.userId,
       'password': instance.password,
+      'domainKey': instance.domainKey,
     };
 
 ResetPassword _$ResetPasswordFromJson(Map<String, dynamic> json) =>

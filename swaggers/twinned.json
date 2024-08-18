@@ -23521,13 +23521,17 @@
       "type": "object",
       "required": [
         "userId",
-        "password"
+        "password",
+        "domainKey"
       ],
       "properties": {
         "userId": {
           "type": "string"
         },
         "password": {
+          "type": "string"
+        },
+        "domainKey": {
           "type": "string"
         }
       }
