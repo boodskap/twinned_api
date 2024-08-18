@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "2.0.1",
+    "version": "2.0.2",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -1955,6 +1955,114 @@
           }
         ],
         "summary": "query data"
+      }
+    },
+    "/DeviceData/alarm/filter/{alarmId}": {
+      "get": {
+        "tags": [
+          "Device Data"
+        ],
+        "summary": "Field filter recent device data",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "alarmFilterRecentDeviceData",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "header",
+            "name": "size",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "alarmId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceDataArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/DeviceData/event/filter/{eventId}": {
+      "get": {
+        "tags": [
+          "Device Data"
+        ],
+        "summary": "Field filter recent device data",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "eventFilterRecentDeviceData",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "header",
+            "name": "size",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "eventId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceDataArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
       }
     },
     "/DeviceView/create": {
@@ -5135,6 +5243,12 @@
             "type": "string"
           },
           {
+            "in": "header",
+            "name": "deviceId",
+            "required": false,
+            "type": "string"
+          },
+          {
             "in": "body",
             "name": "body",
             "required": true,
@@ -5181,6 +5295,12 @@
           {
             "in": "header",
             "name": "modelId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "deviceId",
             "required": false,
             "type": "string"
           },
@@ -5543,6 +5663,12 @@
             "type": "string"
           },
           {
+            "in": "header",
+            "name": "deviceId",
+            "required": false,
+            "type": "string"
+          },
+          {
             "in": "body",
             "name": "body",
             "required": true,
@@ -5589,6 +5715,12 @@
           {
             "in": "header",
             "name": "modelId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "deviceId",
             "required": false,
             "type": "string"
           },
@@ -8371,6 +8503,12 @@
             "type": "string"
           },
           {
+            "in": "header",
+            "name": "deviceId",
+            "required": false,
+            "type": "string"
+          },
+          {
             "in": "body",
             "name": "body",
             "required": true,
@@ -8417,6 +8555,12 @@
           {
             "in": "header",
             "name": "modelId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "deviceId",
             "required": false,
             "type": "string"
           },
@@ -16805,7 +16949,6 @@
       "type": "object",
       "required": [
         "name",
-        "modelId",
         "state",
         "conditions"
       ],
@@ -16820,6 +16963,9 @@
           "type": "string"
         },
         "modelId": {
+          "type": "string"
+        },
+        "deviceId": {
           "type": "string"
         },
         "state": {
@@ -17859,7 +18005,6 @@
       "type": "object",
       "required": [
         "name",
-        "modelId",
         "value",
         "conditions"
       ],
@@ -17874,6 +18019,9 @@
           "type": "string"
         },
         "modelId": {
+          "type": "string"
+        },
+        "deviceId": {
           "type": "string"
         },
         "icon": {
@@ -20090,13 +20238,15 @@
     "DataFilterInfo": {
       "type": "object",
       "required": [
-        "modelId",
         "name",
         "label",
         "matchGroups"
       ],
       "properties": {
         "modelId": {
+          "type": "string"
+        },
+        "deviceId": {
           "type": "string"
         },
         "name": {

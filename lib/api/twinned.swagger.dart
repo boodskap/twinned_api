@@ -1075,6 +1075,70 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
+  ///Field filter recent device data
+  ///@param page
+  ///@param size
+  ///@param alarmId
+  Future<chopper.Response<DeviceDataArrayRes>> alarmFilterRecentDeviceData({
+    int? page,
+    int? size,
+    required String? alarmId,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        DeviceDataArrayRes, () => DeviceDataArrayRes.fromJsonFactory);
+
+    return _alarmFilterRecentDeviceData(
+        page: page?.toString(),
+        size: size?.toString(),
+        alarmId: alarmId,
+        apikey: apikey?.toString());
+  }
+
+  ///Field filter recent device data
+  ///@param page
+  ///@param size
+  ///@param alarmId
+  @Get(path: '/DeviceData/alarm/filter/{alarmId}')
+  Future<chopper.Response<DeviceDataArrayRes>> _alarmFilterRecentDeviceData({
+    @Header('page') String? page,
+    @Header('size') String? size,
+    @Path('alarmId') required String? alarmId,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///Field filter recent device data
+  ///@param page
+  ///@param size
+  ///@param eventId
+  Future<chopper.Response<DeviceDataArrayRes>> eventFilterRecentDeviceData({
+    int? page,
+    int? size,
+    required String? eventId,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        DeviceDataArrayRes, () => DeviceDataArrayRes.fromJsonFactory);
+
+    return _eventFilterRecentDeviceData(
+        page: page?.toString(),
+        size: size?.toString(),
+        eventId: eventId,
+        apikey: apikey?.toString());
+  }
+
+  ///Field filter recent device data
+  ///@param page
+  ///@param size
+  ///@param eventId
+  @Get(path: '/DeviceData/event/filter/{eventId}')
+  Future<chopper.Response<DeviceDataArrayRes>> _eventFilterRecentDeviceData({
+    @Header('page') String? page,
+    @Header('size') String? size,
+    @Path('eventId') required String? eventId,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Create device view
   ///@param body
   Future<chopper.Response<DeviceViewEntityRes>> createDeviceView({
@@ -2671,9 +2735,11 @@ abstract class Twinned extends ChopperService {
 
   ///List alarms
   ///@param modelId
+  ///@param deviceId
   ///@param body
   Future<chopper.Response<AlarmArrayRes>> listAlarms({
     String? modelId,
+    String? deviceId,
     required ListReq? body,
     dynamic apikey,
   }) {
@@ -2682,24 +2748,31 @@ abstract class Twinned extends ChopperService {
         AlarmArrayRes, () => AlarmArrayRes.fromJsonFactory);
 
     return _listAlarms(
-        modelId: modelId?.toString(), body: body, apikey: apikey?.toString());
+        modelId: modelId?.toString(),
+        deviceId: deviceId?.toString(),
+        body: body,
+        apikey: apikey?.toString());
   }
 
   ///List alarms
   ///@param modelId
+  ///@param deviceId
   ///@param body
   @Post(path: '/Alarm/list')
   Future<chopper.Response<AlarmArrayRes>> _listAlarms({
     @Header('modelId') String? modelId,
+    @Header('deviceId') String? deviceId,
     @Body() required ListReq? body,
     @Header('APIKEY') String? apikey,
   });
 
   ///Search alarms
   ///@param modelId
+  ///@param deviceId
   ///@param body
   Future<chopper.Response<AlarmArrayRes>> searchAlarms({
     String? modelId,
+    String? deviceId,
     required SearchReq? body,
     dynamic apikey,
   }) {
@@ -2707,15 +2780,20 @@ abstract class Twinned extends ChopperService {
         AlarmArrayRes, () => AlarmArrayRes.fromJsonFactory);
 
     return _searchAlarms(
-        modelId: modelId?.toString(), body: body, apikey: apikey?.toString());
+        modelId: modelId?.toString(),
+        deviceId: deviceId?.toString(),
+        body: body,
+        apikey: apikey?.toString());
   }
 
   ///Search alarms
   ///@param modelId
+  ///@param deviceId
   ///@param body
   @Post(path: '/Alarm/search')
   Future<chopper.Response<AlarmArrayRes>> _searchAlarms({
     @Header('modelId') String? modelId,
+    @Header('deviceId') String? deviceId,
     @Body() required SearchReq? body,
     @Header('APIKEY') String? apikey,
   });
@@ -2876,9 +2954,11 @@ abstract class Twinned extends ChopperService {
 
   ///List displays
   ///@param modelId
+  ///@param deviceId
   ///@param body
   Future<chopper.Response<DisplayArrayRes>> listDisplays({
     String? modelId,
+    String? deviceId,
     required ListReq? body,
     dynamic apikey,
   }) {
@@ -2887,24 +2967,31 @@ abstract class Twinned extends ChopperService {
         DisplayArrayRes, () => DisplayArrayRes.fromJsonFactory);
 
     return _listDisplays(
-        modelId: modelId?.toString(), body: body, apikey: apikey?.toString());
+        modelId: modelId?.toString(),
+        deviceId: deviceId?.toString(),
+        body: body,
+        apikey: apikey?.toString());
   }
 
   ///List displays
   ///@param modelId
+  ///@param deviceId
   ///@param body
   @Post(path: '/Display/list')
   Future<chopper.Response<DisplayArrayRes>> _listDisplays({
     @Header('modelId') String? modelId,
+    @Header('deviceId') String? deviceId,
     @Body() required ListReq? body,
     @Header('APIKEY') String? apikey,
   });
 
   ///Search displays
   ///@param modelId
+  ///@param deviceId
   ///@param body
   Future<chopper.Response<DisplayArrayRes>> searchDisplays({
     String? modelId,
+    String? deviceId,
     required SearchReq? body,
     dynamic apikey,
   }) {
@@ -2912,15 +2999,20 @@ abstract class Twinned extends ChopperService {
         DisplayArrayRes, () => DisplayArrayRes.fromJsonFactory);
 
     return _searchDisplays(
-        modelId: modelId?.toString(), body: body, apikey: apikey?.toString());
+        modelId: modelId?.toString(),
+        deviceId: deviceId?.toString(),
+        body: body,
+        apikey: apikey?.toString());
   }
 
   ///Search displays
   ///@param modelId
+  ///@param deviceId
   ///@param body
   @Post(path: '/Display/search')
   Future<chopper.Response<DisplayArrayRes>> _searchDisplays({
     @Header('modelId') String? modelId,
+    @Header('deviceId') String? deviceId,
     @Body() required SearchReq? body,
     @Header('APIKEY') String? apikey,
   });
@@ -4302,9 +4394,11 @@ abstract class Twinned extends ChopperService {
 
   ///List dataFilters
   ///@param modelId
+  ///@param deviceId
   ///@param body
   Future<chopper.Response<DataFilterArrayRes>> listDataFilters({
     String? modelId,
+    String? deviceId,
     required ListReq? body,
     dynamic apikey,
   }) {
@@ -4313,24 +4407,31 @@ abstract class Twinned extends ChopperService {
         DataFilterArrayRes, () => DataFilterArrayRes.fromJsonFactory);
 
     return _listDataFilters(
-        modelId: modelId?.toString(), body: body, apikey: apikey?.toString());
+        modelId: modelId?.toString(),
+        deviceId: deviceId?.toString(),
+        body: body,
+        apikey: apikey?.toString());
   }
 
   ///List dataFilters
   ///@param modelId
+  ///@param deviceId
   ///@param body
   @Post(path: '/DataFilter/list')
   Future<chopper.Response<DataFilterArrayRes>> _listDataFilters({
     @Header('modelId') String? modelId,
+    @Header('deviceId') String? deviceId,
     @Body() required ListReq? body,
     @Header('APIKEY') String? apikey,
   });
 
   ///Search dataFilters
   ///@param modelId
+  ///@param deviceId
   ///@param body
   Future<chopper.Response<DataFilterArrayRes>> searchDataFilters({
     String? modelId,
+    String? deviceId,
     required SearchReq? body,
     dynamic apikey,
   }) {
@@ -4338,15 +4439,20 @@ abstract class Twinned extends ChopperService {
         DataFilterArrayRes, () => DataFilterArrayRes.fromJsonFactory);
 
     return _searchDataFilters(
-        modelId: modelId?.toString(), body: body, apikey: apikey?.toString());
+        modelId: modelId?.toString(),
+        deviceId: deviceId?.toString(),
+        body: body,
+        apikey: apikey?.toString());
   }
 
   ///Search dataFilters
   ///@param modelId
+  ///@param deviceId
   ///@param body
   @Post(path: '/DataFilter/search')
   Future<chopper.Response<DataFilterArrayRes>> _searchDataFilters({
     @Header('modelId') String? modelId,
+    @Header('deviceId') String? deviceId,
     @Body() required SearchReq? body,
     @Header('APIKEY') String? apikey,
   });
@@ -12259,7 +12365,8 @@ class AlarmInfo {
     required this.name,
     this.description,
     this.label,
-    required this.modelId,
+    this.modelId,
+    this.deviceId,
     required this.state,
     this.stateIcons,
     required this.conditions,
@@ -12281,7 +12388,9 @@ class AlarmInfo {
   @JsonKey(name: 'label', includeIfNull: false, defaultValue: '')
   final String? label;
   @JsonKey(name: 'modelId', includeIfNull: false, defaultValue: '')
-  final String modelId;
+  final String? modelId;
+  @JsonKey(name: 'deviceId', includeIfNull: false, defaultValue: '')
+  final String? deviceId;
   @JsonKey(name: 'state', includeIfNull: false)
   final int state;
   @JsonKey(name: 'stateIcons', includeIfNull: false, defaultValue: <String>[])
@@ -12313,6 +12422,9 @@ class AlarmInfo {
             (identical(other.modelId, modelId) ||
                 const DeepCollectionEquality()
                     .equals(other.modelId, modelId)) &&
+            (identical(other.deviceId, deviceId) ||
+                const DeepCollectionEquality()
+                    .equals(other.deviceId, deviceId)) &&
             (identical(other.state, state) ||
                 const DeepCollectionEquality().equals(other.state, state)) &&
             (identical(other.stateIcons, stateIcons) ||
@@ -12340,6 +12452,7 @@ class AlarmInfo {
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(label) ^
       const DeepCollectionEquality().hash(modelId) ^
+      const DeepCollectionEquality().hash(deviceId) ^
       const DeepCollectionEquality().hash(state) ^
       const DeepCollectionEquality().hash(stateIcons) ^
       const DeepCollectionEquality().hash(conditions) ^
@@ -12355,6 +12468,7 @@ extension $AlarmInfoExtension on AlarmInfo {
       String? description,
       String? label,
       String? modelId,
+      String? deviceId,
       int? state,
       List<String>? stateIcons,
       List<AlarmMatchGroup>? conditions,
@@ -12366,6 +12480,7 @@ extension $AlarmInfoExtension on AlarmInfo {
         description: description ?? this.description,
         label: label ?? this.label,
         modelId: modelId ?? this.modelId,
+        deviceId: deviceId ?? this.deviceId,
         state: state ?? this.state,
         stateIcons: stateIcons ?? this.stateIcons,
         conditions: conditions ?? this.conditions,
@@ -12378,7 +12493,8 @@ extension $AlarmInfoExtension on AlarmInfo {
       {Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<String?>? label,
-      Wrapped<String>? modelId,
+      Wrapped<String?>? modelId,
+      Wrapped<String?>? deviceId,
       Wrapped<int>? state,
       Wrapped<List<String>?>? stateIcons,
       Wrapped<List<AlarmMatchGroup>>? conditions,
@@ -12391,6 +12507,7 @@ extension $AlarmInfoExtension on AlarmInfo {
             (description != null ? description.value : this.description),
         label: (label != null ? label.value : this.label),
         modelId: (modelId != null ? modelId.value : this.modelId),
+        deviceId: (deviceId != null ? deviceId.value : this.deviceId),
         state: (state != null ? state.value : this.state),
         stateIcons: (stateIcons != null ? stateIcons.value : this.stateIcons),
         conditions: (conditions != null ? conditions.value : this.conditions),
@@ -12408,7 +12525,8 @@ class Alarm {
     required this.name,
     this.description,
     this.label,
-    required this.modelId,
+    this.modelId,
+    this.deviceId,
     required this.state,
     this.stateIcons,
     required this.conditions,
@@ -12436,7 +12554,9 @@ class Alarm {
   @JsonKey(name: 'label', includeIfNull: false, defaultValue: '')
   final String? label;
   @JsonKey(name: 'modelId', includeIfNull: false, defaultValue: '')
-  final String modelId;
+  final String? modelId;
+  @JsonKey(name: 'deviceId', includeIfNull: false, defaultValue: '')
+  final String? deviceId;
   @JsonKey(name: 'state', includeIfNull: false)
   final int state;
   @JsonKey(name: 'stateIcons', includeIfNull: false, defaultValue: <String>[])
@@ -12482,6 +12602,9 @@ class Alarm {
             (identical(other.modelId, modelId) ||
                 const DeepCollectionEquality()
                     .equals(other.modelId, modelId)) &&
+            (identical(other.deviceId, deviceId) ||
+                const DeepCollectionEquality()
+                    .equals(other.deviceId, deviceId)) &&
             (identical(other.state, state) ||
                 const DeepCollectionEquality().equals(other.state, state)) &&
             (identical(other.stateIcons, stateIcons) ||
@@ -12528,6 +12651,7 @@ class Alarm {
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(label) ^
       const DeepCollectionEquality().hash(modelId) ^
+      const DeepCollectionEquality().hash(deviceId) ^
       const DeepCollectionEquality().hash(state) ^
       const DeepCollectionEquality().hash(stateIcons) ^
       const DeepCollectionEquality().hash(conditions) ^
@@ -12550,6 +12674,7 @@ extension $AlarmExtension on Alarm {
       String? description,
       String? label,
       String? modelId,
+      String? deviceId,
       int? state,
       List<String>? stateIcons,
       List<AlarmMatchGroup>? conditions,
@@ -12568,6 +12693,7 @@ extension $AlarmExtension on Alarm {
         description: description ?? this.description,
         label: label ?? this.label,
         modelId: modelId ?? this.modelId,
+        deviceId: deviceId ?? this.deviceId,
         state: state ?? this.state,
         stateIcons: stateIcons ?? this.stateIcons,
         conditions: conditions ?? this.conditions,
@@ -12587,7 +12713,8 @@ extension $AlarmExtension on Alarm {
       {Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<String?>? label,
-      Wrapped<String>? modelId,
+      Wrapped<String?>? modelId,
+      Wrapped<String?>? deviceId,
       Wrapped<int>? state,
       Wrapped<List<String>?>? stateIcons,
       Wrapped<List<AlarmMatchGroup>>? conditions,
@@ -12607,6 +12734,7 @@ extension $AlarmExtension on Alarm {
             (description != null ? description.value : this.description),
         label: (label != null ? label.value : this.label),
         modelId: (modelId != null ? modelId.value : this.modelId),
+        deviceId: (deviceId != null ? deviceId.value : this.deviceId),
         state: (state != null ? state.value : this.state),
         stateIcons: (stateIcons != null ? stateIcons.value : this.stateIcons),
         conditions: (conditions != null ? conditions.value : this.conditions),
@@ -17149,7 +17277,8 @@ class DisplayInfo {
     required this.name,
     this.description,
     this.label,
-    required this.modelId,
+    this.modelId,
+    this.deviceId,
     this.icon,
     required this.conditions,
     this.tags,
@@ -17169,7 +17298,9 @@ class DisplayInfo {
   @JsonKey(name: 'label', includeIfNull: false, defaultValue: '')
   final String? label;
   @JsonKey(name: 'modelId', includeIfNull: false, defaultValue: '')
-  final String modelId;
+  final String? modelId;
+  @JsonKey(name: 'deviceId', includeIfNull: false, defaultValue: '')
+  final String? deviceId;
   @JsonKey(name: 'icon', includeIfNull: false, defaultValue: '')
   final String? icon;
   @JsonKey(
@@ -17197,6 +17328,9 @@ class DisplayInfo {
             (identical(other.modelId, modelId) ||
                 const DeepCollectionEquality()
                     .equals(other.modelId, modelId)) &&
+            (identical(other.deviceId, deviceId) ||
+                const DeepCollectionEquality()
+                    .equals(other.deviceId, deviceId)) &&
             (identical(other.icon, icon) ||
                 const DeepCollectionEquality().equals(other.icon, icon)) &&
             (identical(other.conditions, conditions) ||
@@ -17218,6 +17352,7 @@ class DisplayInfo {
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(label) ^
       const DeepCollectionEquality().hash(modelId) ^
+      const DeepCollectionEquality().hash(deviceId) ^
       const DeepCollectionEquality().hash(icon) ^
       const DeepCollectionEquality().hash(conditions) ^
       const DeepCollectionEquality().hash(tags) ^
@@ -17231,6 +17366,7 @@ extension $DisplayInfoExtension on DisplayInfo {
       String? description,
       String? label,
       String? modelId,
+      String? deviceId,
       String? icon,
       List<DisplayMatchGroup>? conditions,
       List<String>? tags,
@@ -17240,6 +17376,7 @@ extension $DisplayInfoExtension on DisplayInfo {
         description: description ?? this.description,
         label: label ?? this.label,
         modelId: modelId ?? this.modelId,
+        deviceId: deviceId ?? this.deviceId,
         icon: icon ?? this.icon,
         conditions: conditions ?? this.conditions,
         tags: tags ?? this.tags,
@@ -17250,7 +17387,8 @@ extension $DisplayInfoExtension on DisplayInfo {
       {Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<String?>? label,
-      Wrapped<String>? modelId,
+      Wrapped<String?>? modelId,
+      Wrapped<String?>? deviceId,
       Wrapped<String?>? icon,
       Wrapped<List<DisplayMatchGroup>>? conditions,
       Wrapped<List<String>?>? tags,
@@ -17261,6 +17399,7 @@ extension $DisplayInfoExtension on DisplayInfo {
             (description != null ? description.value : this.description),
         label: (label != null ? label.value : this.label),
         modelId: (modelId != null ? modelId.value : this.modelId),
+        deviceId: (deviceId != null ? deviceId.value : this.deviceId),
         icon: (icon != null ? icon.value : this.icon),
         conditions: (conditions != null ? conditions.value : this.conditions),
         tags: (tags != null ? tags.value : this.tags),
@@ -17274,7 +17413,8 @@ class Display {
     required this.name,
     this.description,
     this.label,
-    required this.modelId,
+    this.modelId,
+    this.deviceId,
     this.icon,
     required this.conditions,
     this.tags,
@@ -17301,7 +17441,9 @@ class Display {
   @JsonKey(name: 'label', includeIfNull: false, defaultValue: '')
   final String? label;
   @JsonKey(name: 'modelId', includeIfNull: false, defaultValue: '')
-  final String modelId;
+  final String? modelId;
+  @JsonKey(name: 'deviceId', includeIfNull: false, defaultValue: '')
+  final String? deviceId;
   @JsonKey(name: 'icon', includeIfNull: false, defaultValue: '')
   final String? icon;
   @JsonKey(
@@ -17343,6 +17485,9 @@ class Display {
             (identical(other.modelId, modelId) ||
                 const DeepCollectionEquality()
                     .equals(other.modelId, modelId)) &&
+            (identical(other.deviceId, deviceId) ||
+                const DeepCollectionEquality()
+                    .equals(other.deviceId, deviceId)) &&
             (identical(other.icon, icon) ||
                 const DeepCollectionEquality().equals(other.icon, icon)) &&
             (identical(other.conditions, conditions) ||
@@ -17383,6 +17528,7 @@ class Display {
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(label) ^
       const DeepCollectionEquality().hash(modelId) ^
+      const DeepCollectionEquality().hash(deviceId) ^
       const DeepCollectionEquality().hash(icon) ^
       const DeepCollectionEquality().hash(conditions) ^
       const DeepCollectionEquality().hash(tags) ^
@@ -17403,6 +17549,7 @@ extension $DisplayExtension on Display {
       String? description,
       String? label,
       String? modelId,
+      String? deviceId,
       String? icon,
       List<DisplayMatchGroup>? conditions,
       List<String>? tags,
@@ -17419,6 +17566,7 @@ extension $DisplayExtension on Display {
         description: description ?? this.description,
         label: label ?? this.label,
         modelId: modelId ?? this.modelId,
+        deviceId: deviceId ?? this.deviceId,
         icon: icon ?? this.icon,
         conditions: conditions ?? this.conditions,
         tags: tags ?? this.tags,
@@ -17436,7 +17584,8 @@ extension $DisplayExtension on Display {
       {Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<String?>? label,
-      Wrapped<String>? modelId,
+      Wrapped<String?>? modelId,
+      Wrapped<String?>? deviceId,
       Wrapped<String?>? icon,
       Wrapped<List<DisplayMatchGroup>>? conditions,
       Wrapped<List<String>?>? tags,
@@ -17454,6 +17603,7 @@ extension $DisplayExtension on Display {
             (description != null ? description.value : this.description),
         label: (label != null ? label.value : this.label),
         modelId: (modelId != null ? modelId.value : this.modelId),
+        deviceId: (deviceId != null ? deviceId.value : this.deviceId),
         icon: (icon != null ? icon.value : this.icon),
         conditions: (conditions != null ? conditions.value : this.conditions),
         tags: (tags != null ? tags.value : this.tags),
@@ -27335,7 +27485,8 @@ extension $FilterMatchGroupExtension on FilterMatchGroup {
 @JsonSerializable(explicitToJson: true)
 class DataFilterInfo {
   const DataFilterInfo({
-    required this.modelId,
+    this.modelId,
+    this.deviceId,
     required this.name,
     required this.label,
     this.icon,
@@ -27351,7 +27502,9 @@ class DataFilterInfo {
   Map<String, dynamic> toJson() => _$DataFilterInfoToJson(this);
 
   @JsonKey(name: 'modelId', includeIfNull: false, defaultValue: '')
-  final String modelId;
+  final String? modelId;
+  @JsonKey(name: 'deviceId', includeIfNull: false, defaultValue: '')
+  final String? deviceId;
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
   final String name;
   @JsonKey(name: 'label', includeIfNull: false, defaultValue: '')
@@ -27376,6 +27529,9 @@ class DataFilterInfo {
             (identical(other.modelId, modelId) ||
                 const DeepCollectionEquality()
                     .equals(other.modelId, modelId)) &&
+            (identical(other.deviceId, deviceId) ||
+                const DeepCollectionEquality()
+                    .equals(other.deviceId, deviceId)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.label, label) ||
@@ -27398,6 +27554,7 @@ class DataFilterInfo {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(modelId) ^
+      const DeepCollectionEquality().hash(deviceId) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(label) ^
       const DeepCollectionEquality().hash(icon) ^
@@ -27410,6 +27567,7 @@ class DataFilterInfo {
 extension $DataFilterInfoExtension on DataFilterInfo {
   DataFilterInfo copyWith(
       {String? modelId,
+      String? deviceId,
       String? name,
       String? label,
       String? icon,
@@ -27418,6 +27576,7 @@ extension $DataFilterInfoExtension on DataFilterInfo {
       List<FilterMatchGroup>? matchGroups}) {
     return DataFilterInfo(
         modelId: modelId ?? this.modelId,
+        deviceId: deviceId ?? this.deviceId,
         name: name ?? this.name,
         label: label ?? this.label,
         icon: icon ?? this.icon,
@@ -27427,7 +27586,8 @@ extension $DataFilterInfoExtension on DataFilterInfo {
   }
 
   DataFilterInfo copyWithWrapped(
-      {Wrapped<String>? modelId,
+      {Wrapped<String?>? modelId,
+      Wrapped<String?>? deviceId,
       Wrapped<String>? name,
       Wrapped<String>? label,
       Wrapped<String?>? icon,
@@ -27436,6 +27596,7 @@ extension $DataFilterInfoExtension on DataFilterInfo {
       Wrapped<List<FilterMatchGroup>>? matchGroups}) {
     return DataFilterInfo(
         modelId: (modelId != null ? modelId.value : this.modelId),
+        deviceId: (deviceId != null ? deviceId.value : this.deviceId),
         name: (name != null ? name.value : this.name),
         label: (label != null ? label.value : this.label),
         icon: (icon != null ? icon.value : this.icon),
@@ -27450,7 +27611,8 @@ extension $DataFilterInfoExtension on DataFilterInfo {
 @JsonSerializable(explicitToJson: true)
 class DataFilter {
   const DataFilter({
-    required this.modelId,
+    this.modelId,
+    this.deviceId,
     required this.name,
     required this.label,
     this.icon,
@@ -27473,7 +27635,9 @@ class DataFilter {
   Map<String, dynamic> toJson() => _$DataFilterToJson(this);
 
   @JsonKey(name: 'modelId', includeIfNull: false, defaultValue: '')
-  final String modelId;
+  final String? modelId;
+  @JsonKey(name: 'deviceId', includeIfNull: false, defaultValue: '')
+  final String? deviceId;
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
   final String name;
   @JsonKey(name: 'label', includeIfNull: false, defaultValue: '')
@@ -27512,6 +27676,9 @@ class DataFilter {
             (identical(other.modelId, modelId) ||
                 const DeepCollectionEquality()
                     .equals(other.modelId, modelId)) &&
+            (identical(other.deviceId, deviceId) ||
+                const DeepCollectionEquality()
+                    .equals(other.deviceId, deviceId)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.label, label) ||
@@ -27553,6 +27720,7 @@ class DataFilter {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(modelId) ^
+      const DeepCollectionEquality().hash(deviceId) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(label) ^
       const DeepCollectionEquality().hash(icon) ^
@@ -27572,6 +27740,7 @@ class DataFilter {
 extension $DataFilterExtension on DataFilter {
   DataFilter copyWith(
       {String? modelId,
+      String? deviceId,
       String? name,
       String? label,
       String? icon,
@@ -27587,6 +27756,7 @@ extension $DataFilterExtension on DataFilter {
       int? updatedStamp}) {
     return DataFilter(
         modelId: modelId ?? this.modelId,
+        deviceId: deviceId ?? this.deviceId,
         name: name ?? this.name,
         label: label ?? this.label,
         icon: icon ?? this.icon,
@@ -27603,7 +27773,8 @@ extension $DataFilterExtension on DataFilter {
   }
 
   DataFilter copyWithWrapped(
-      {Wrapped<String>? modelId,
+      {Wrapped<String?>? modelId,
+      Wrapped<String?>? deviceId,
       Wrapped<String>? name,
       Wrapped<String>? label,
       Wrapped<String?>? icon,
@@ -27619,6 +27790,7 @@ extension $DataFilterExtension on DataFilter {
       Wrapped<int>? updatedStamp}) {
     return DataFilter(
         modelId: (modelId != null ? modelId.value : this.modelId),
+        deviceId: (deviceId != null ? deviceId.value : this.deviceId),
         name: (name != null ? name.value : this.name),
         label: (label != null ? label.value : this.label),
         icon: (icon != null ? icon.value : this.icon),
