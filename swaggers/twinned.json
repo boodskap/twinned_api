@@ -7335,6 +7335,12 @@
             "type": "string"
           },
           {
+            "in": "header",
+            "name": "deviceId",
+            "required": false,
+            "type": "string"
+          },
+          {
             "in": "body",
             "name": "body",
             "required": true,
@@ -7381,6 +7387,12 @@
           {
             "in": "header",
             "name": "modelId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "deviceId",
             "required": false,
             "type": "string"
           },
@@ -8678,6 +8690,48 @@
             "apiKey": []
           }
         ]
+      }
+    },
+    "/DataFilter/query/eql": {
+      "post": {
+        "tags": [
+          "DataFilter"
+        ],
+        "description": "query data filter",
+        "operationId": "queryEqlDataFilter",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/DataFilterArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
       }
     },
     "/GeoFence/create": {
@@ -14448,6 +14502,48 @@
         ]
       }
     },
+    "/AssetGroup/query/eql": {
+      "post": {
+        "tags": [
+          "AssetGroup"
+        ],
+        "description": "query asset group",
+        "operationId": "queryEqlAssetGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/AssetGroupArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
+      }
+    },
     "/Report/create": {
       "post": {
         "tags": [
@@ -17220,7 +17316,6 @@
       "type": "object",
       "required": [
         "name",
-        "modelId",
         "state",
         "conditions"
       ],
@@ -17232,6 +17327,9 @@
           "type": "string"
         },
         "modelId": {
+          "type": "string"
+        },
+        "deviceId": {
           "type": "string"
         },
         "icon": {
@@ -20272,6 +20370,12 @@
           "items": {
             "$ref": "#/definitions/FilterMatchGroup"
           }
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -22252,6 +22356,12 @@
         },
         "icon": {
           "type": "string"
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -22708,6 +22818,12 @@
           }
         },
         "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "clientIds": {
           "type": "array",
           "items": {
             "type": "string"

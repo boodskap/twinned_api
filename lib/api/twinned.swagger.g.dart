@@ -1686,6 +1686,7 @@ EventInfo _$EventInfoFromJson(Map<String, dynamic> json) => EventInfo(
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
       modelId: json['modelId'] as String? ?? '',
+      deviceId: json['deviceId'] as String? ?? '',
       icon: json['icon'] as String? ?? '',
       conditions: (json['conditions'] as List<dynamic>?)
               ?.map((e) => MatchGroup.fromJson(e as Map<String, dynamic>))
@@ -1733,7 +1734,8 @@ Map<String, dynamic> _$EventInfoToJson(EventInfo instance) {
   }
 
   writeNotNull('description', instance.description);
-  val['modelId'] = instance.modelId;
+  writeNotNull('modelId', instance.modelId);
+  writeNotNull('deviceId', instance.deviceId);
   writeNotNull('icon', instance.icon);
   val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
   writeNotNull('notificationTemplate', instance.notificationTemplate?.toJson());
@@ -1751,6 +1753,7 @@ Event _$EventFromJson(Map<String, dynamic> json) => Event(
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
       modelId: json['modelId'] as String? ?? '',
+      deviceId: json['deviceId'] as String? ?? '',
       icon: json['icon'] as String? ?? '',
       conditions: (json['conditions'] as List<dynamic>?)
               ?.map((e) => MatchGroup.fromJson(e as Map<String, dynamic>))
@@ -1805,7 +1808,8 @@ Map<String, dynamic> _$EventToJson(Event instance) {
   }
 
   writeNotNull('description', instance.description);
-  val['modelId'] = instance.modelId;
+  writeNotNull('modelId', instance.modelId);
+  writeNotNull('deviceId', instance.deviceId);
   writeNotNull('icon', instance.icon);
   val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
   writeNotNull('notificationTemplate', instance.notificationTemplate?.toJson());
@@ -5802,6 +5806,10 @@ DataFilterInfo _$DataFilterInfoFromJson(Map<String, dynamic> json) =>
               ?.map((e) => FilterMatchGroup.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$DataFilterInfoToJson(DataFilterInfo instance) {
@@ -5821,6 +5829,7 @@ Map<String, dynamic> _$DataFilterInfoToJson(DataFilterInfo instance) {
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
   val['matchGroups'] = instance.matchGroups.map((e) => e.toJson()).toList();
+  writeNotNull('clientIds', instance.clientIds);
   return val;
 }
 
@@ -5836,6 +5845,10 @@ DataFilter _$DataFilterFromJson(Map<String, dynamic> json) => DataFilter(
               [],
       matchGroups: (json['matchGroups'] as List<dynamic>?)
               ?.map((e) => FilterMatchGroup.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
               .toList() ??
           [],
       domainKey: json['domainKey'] as String? ?? '',
@@ -5864,6 +5877,7 @@ Map<String, dynamic> _$DataFilterToJson(DataFilter instance) {
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
   val['matchGroups'] = instance.matchGroups.map((e) => e.toJson()).toList();
+  writeNotNull('clientIds', instance.clientIds);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -9030,6 +9044,10 @@ AssetGroupInfo _$AssetGroupInfoFromJson(Map<String, dynamic> json) =>
               .toList() ??
           [],
       icon: json['icon'] as String? ?? '',
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$AssetGroupInfoToJson(AssetGroupInfo instance) {
@@ -9048,6 +9066,7 @@ Map<String, dynamic> _$AssetGroupInfoToJson(AssetGroupInfo instance) {
   writeNotNull('target', assetGroupInfoTargetToJson(instance.target));
   val['assetIds'] = instance.assetIds;
   writeNotNull('icon', instance.icon);
+  writeNotNull('clientIds', instance.clientIds);
   return val;
 }
 
@@ -9063,6 +9082,10 @@ AssetGroup _$AssetGroupFromJson(Map<String, dynamic> json) => AssetGroup(
               .toList() ??
           [],
       icon: json['icon'] as String? ?? '',
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -9088,6 +9111,7 @@ Map<String, dynamic> _$AssetGroupToJson(AssetGroup instance) {
   writeNotNull('target', assetGroupTargetToJson(instance.target));
   val['assetIds'] = instance.assetIds;
   writeNotNull('icon', instance.icon);
+  writeNotNull('clientIds', instance.clientIds);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -9778,6 +9802,10 @@ FieldFilterInfo _$FieldFilterInfoFromJson(Map<String, dynamic> json) =>
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$FieldFilterInfoToJson(FieldFilterInfo instance) {
@@ -9801,6 +9829,7 @@ Map<String, dynamic> _$FieldFilterInfoToJson(FieldFilterInfo instance) {
   writeNotNull('rightValue', instance.rightValue);
   writeNotNull('values', instance.values);
   writeNotNull('tags', instance.tags);
+  writeNotNull('clientIds', instance.clientIds);
   return val;
 }
 
@@ -9821,6 +9850,10 @@ FieldFilter _$FieldFilterFromJson(Map<String, dynamic> json) => FieldFilter(
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -9851,6 +9884,7 @@ Map<String, dynamic> _$FieldFilterToJson(FieldFilter instance) {
   writeNotNull('rightValue', instance.rightValue);
   writeNotNull('values', instance.values);
   writeNotNull('tags', instance.tags);
+  writeNotNull('clientIds', instance.clientIds);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;

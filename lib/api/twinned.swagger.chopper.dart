@@ -3256,12 +3256,14 @@ final class _$Twinned extends Twinned {
   @override
   Future<Response<EventArrayRes>> _listEvents({
     String? modelId,
+    String? deviceId,
     required ListReq? body,
     String? apikey,
   }) {
     final Uri $url = Uri.parse('/Event/list');
     final Map<String, String> $headers = {
       if (modelId != null) 'modelId': modelId,
+      if (deviceId != null) 'deviceId': deviceId,
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = body;
@@ -3278,12 +3280,14 @@ final class _$Twinned extends Twinned {
   @override
   Future<Response<EventArrayRes>> _searchEvents({
     String? modelId,
+    String? deviceId,
     required SearchReq? body,
     String? apikey,
   }) {
     final Uri $url = Uri.parse('/Event/search');
     final Map<String, String> $headers = {
       if (modelId != null) 'modelId': modelId,
+      if (deviceId != null) 'deviceId': deviceId,
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = body;
@@ -3862,6 +3866,26 @@ final class _$Twinned extends Twinned {
       headers: $headers,
     );
     return client.send<DataFilterEntityRes, DataFilterEntityRes>($request);
+  }
+
+  @override
+  Future<Response<DataFilterArrayRes>> _queryEqlDataFilter({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/DataFilter/query/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<DataFilterArrayRes, DataFilterArrayRes>($request);
   }
 
   @override
@@ -6367,6 +6391,26 @@ final class _$Twinned extends Twinned {
     final Uri $url = Uri.parse('/AssetGroup/list');
     final Map<String, String> $headers = {
       if (myGroups != null) 'myGroups': myGroups,
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<AssetGroupArrayRes, AssetGroupArrayRes>($request);
+  }
+
+  @override
+  Future<Response<AssetGroupArrayRes>> _queryEqlAssetGroup({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/AssetGroup/query/eql');
+    final Map<String, String> $headers = {
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = body;
