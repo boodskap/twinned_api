@@ -6781,17 +6781,24 @@ abstract class Twinned extends ChopperService {
   });
 
   ///get my profile
-  Future<chopper.Response<TwinUserEntityRes>> getMyProfile({dynamic apikey}) {
+  ///@param orgId
+  Future<chopper.Response<TwinUserEntityRes>> getMyProfile({
+    String? orgId,
+    dynamic apikey,
+  }) {
     generatedMapping.putIfAbsent(
         TwinUserEntityRes, () => TwinUserEntityRes.fromJsonFactory);
 
-    return _getMyProfile(apikey: apikey?.toString());
+    return _getMyProfile(orgId: orgId?.toString(), apikey: apikey?.toString());
   }
 
   ///get my profile
+  ///@param orgId
   @Get(path: '/TwinUser/myprofile')
-  Future<chopper.Response<TwinUserEntityRes>> _getMyProfile(
-      {@Header('APIKEY') String? apikey});
+  Future<chopper.Response<TwinUserEntityRes>> _getMyProfile({
+    @Header('orgId') String? orgId,
+    @Header('APIKEY') String? apikey,
+  });
 
   ///reset user password
   ///@param twinUserId
