@@ -5753,9 +5753,13 @@ final class _$Twinned extends Twinned {
   }
 
   @override
-  Future<Response<TwinUserEntityRes>> _getMyProfile({String? apikey}) {
+  Future<Response<TwinUserEntityRes>> _getMyProfile({
+    String? orgId,
+    String? apikey,
+  }) {
     final Uri $url = Uri.parse('/TwinUser/myprofile');
     final Map<String, String> $headers = {
+      if (orgId != null) 'orgId': orgId,
       if (apikey != null) 'APIKEY': apikey,
     };
     final Request $request = Request(

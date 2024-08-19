@@ -13079,7 +13079,14 @@
           "application/json"
         ],
         "operationId": "getMyProfile",
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "orgId",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful operation",
