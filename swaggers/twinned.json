@@ -13066,7 +13066,7 @@
         ]
       }
     },
-    "/TwinUser/myprofile": {
+    "/TwinUser/myprofile/{orgId}": {
       "get": {
         "tags": [
           "Twin User"
@@ -13081,7 +13081,7 @@
         "operationId": "getMyProfile",
         "parameters": [
           {
-            "in": "header",
+            "in": "path",
             "name": "orgId",
             "required": true,
             "type": "string"

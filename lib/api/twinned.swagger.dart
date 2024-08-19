@@ -6783,20 +6783,20 @@ abstract class Twinned extends ChopperService {
   ///get my profile
   ///@param orgId
   Future<chopper.Response<TwinUserEntityRes>> getMyProfile({
-    String? orgId,
+    required String? orgId,
     dynamic apikey,
   }) {
     generatedMapping.putIfAbsent(
         TwinUserEntityRes, () => TwinUserEntityRes.fromJsonFactory);
 
-    return _getMyProfile(orgId: orgId?.toString(), apikey: apikey?.toString());
+    return _getMyProfile(orgId: orgId, apikey: apikey?.toString());
   }
 
   ///get my profile
   ///@param orgId
-  @Get(path: '/TwinUser/myprofile')
+  @Get(path: '/TwinUser/myprofile/{orgId}')
   Future<chopper.Response<TwinUserEntityRes>> _getMyProfile({
-    @Header('orgId') String? orgId,
+    @Path('orgId') required String? orgId,
     @Header('APIKEY') String? apikey,
   });
 
