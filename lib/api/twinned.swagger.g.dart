@@ -5595,6 +5595,10 @@ PreprocessorInfo _$PreprocessorInfoFromJson(Map<String, dynamic> json) =>
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$PreprocessorInfoToJson(PreprocessorInfo instance) {
@@ -5612,6 +5616,7 @@ Map<String, dynamic> _$PreprocessorInfoToJson(PreprocessorInfo instance) {
   writeNotNull('code', instance.code);
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
+  writeNotNull('clientIds', instance.clientIds);
   return val;
 }
 
@@ -5623,6 +5628,10 @@ Preprocessor _$PreprocessorFromJson(Map<String, dynamic> json) => Preprocessor(
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -5647,6 +5656,7 @@ Map<String, dynamic> _$PreprocessorToJson(Preprocessor instance) {
   writeNotNull('code', instance.code);
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
+  writeNotNull('clientIds', instance.clientIds);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -7035,9 +7045,9 @@ FloorInfo _$FloorInfoFromJson(Map<String, dynamic> json) => FloorInfo(
       location: json['location'] == null
           ? null
           : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
-      floorLevel: (json['floorLevel'] as num).toInt(),
-      floorType:
-          FloorInfo.floorInfoFloorTypeFloorTypeFromJson(json['floorType']),
+      floorLevel: (json['floorLevel'] as num?)?.toInt(),
+      floorType: FloorInfo.floorInfoFloorTypeFloorTypeNullableFromJson(
+          json['floorType']),
       clientIds: (json['clientIds'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -7054,11 +7064,7 @@ FloorInfo _$FloorInfoFromJson(Map<String, dynamic> json) => FloorInfo(
     );
 
 Map<String, dynamic> _$FloorInfoToJson(FloorInfo instance) {
-  final val = <String, dynamic>{
-    'premiseId': instance.premiseId,
-    'facilityId': instance.facilityId,
-    'name': instance.name,
-  };
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -7066,14 +7072,18 @@ Map<String, dynamic> _$FloorInfoToJson(FloorInfo instance) {
     }
   }
 
+  writeNotNull('premiseId', instance.premiseId);
+  writeNotNull('facilityId', instance.facilityId);
+  val['name'] = instance.name;
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
   writeNotNull('floorPlan', instance.floorPlan);
   writeNotNull('assets', instance.assets);
   writeNotNull('roles', instance.roles);
   writeNotNull('location', instance.location?.toJson());
-  val['floorLevel'] = instance.floorLevel;
-  writeNotNull('floorType', floorInfoFloorTypeToJson(instance.floorType));
+  writeNotNull('floorLevel', instance.floorLevel);
+  writeNotNull(
+      'floorType', floorInfoFloorTypeNullableToJson(instance.floorType));
   writeNotNull('clientIds', instance.clientIds);
   writeNotNull('reportedStamp', instance.reportedStamp);
   writeNotNull('email', instance.email);
@@ -7106,8 +7116,9 @@ Floor _$FloorFromJson(Map<String, dynamic> json) => Floor(
       location: json['location'] == null
           ? null
           : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
-      floorLevel: (json['floorLevel'] as num).toInt(),
-      floorType: Floor.floorFloorTypeFloorTypeFromJson(json['floorType']),
+      floorLevel: (json['floorLevel'] as num?)?.toInt(),
+      floorType:
+          Floor.floorFloorTypeFloorTypeNullableFromJson(json['floorType']),
       clientIds: (json['clientIds'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -7131,11 +7142,7 @@ Floor _$FloorFromJson(Map<String, dynamic> json) => Floor(
     );
 
 Map<String, dynamic> _$FloorToJson(Floor instance) {
-  final val = <String, dynamic>{
-    'premiseId': instance.premiseId,
-    'facilityId': instance.facilityId,
-    'name': instance.name,
-  };
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -7143,14 +7150,17 @@ Map<String, dynamic> _$FloorToJson(Floor instance) {
     }
   }
 
+  writeNotNull('premiseId', instance.premiseId);
+  writeNotNull('facilityId', instance.facilityId);
+  val['name'] = instance.name;
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
   writeNotNull('floorPlan', instance.floorPlan);
   writeNotNull('assets', instance.assets);
   writeNotNull('roles', instance.roles);
   writeNotNull('location', instance.location?.toJson());
-  val['floorLevel'] = instance.floorLevel;
-  writeNotNull('floorType', floorFloorTypeToJson(instance.floorType));
+  writeNotNull('floorLevel', instance.floorLevel);
+  writeNotNull('floorType', floorFloorTypeNullableToJson(instance.floorType));
   writeNotNull('clientIds', instance.clientIds);
   writeNotNull('reportedStamp', instance.reportedStamp);
   writeNotNull('email', instance.email);
@@ -7311,12 +7321,7 @@ AssetInfo _$AssetInfoFromJson(Map<String, dynamic> json) => AssetInfo(
     );
 
 Map<String, dynamic> _$AssetInfoToJson(AssetInfo instance) {
-  final val = <String, dynamic>{
-    'premiseId': instance.premiseId,
-    'facilityId': instance.facilityId,
-    'floorId': instance.floorId,
-    'name': instance.name,
-  };
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -7324,6 +7329,10 @@ Map<String, dynamic> _$AssetInfoToJson(AssetInfo instance) {
     }
   }
 
+  writeNotNull('premiseId', instance.premiseId);
+  writeNotNull('facilityId', instance.facilityId);
+  writeNotNull('floorId', instance.floorId);
+  val['name'] = instance.name;
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
   writeNotNull('selectedImage', instance.selectedImage);
@@ -7405,12 +7414,7 @@ Asset _$AssetFromJson(Map<String, dynamic> json) => Asset(
     );
 
 Map<String, dynamic> _$AssetToJson(Asset instance) {
-  final val = <String, dynamic>{
-    'premiseId': instance.premiseId,
-    'facilityId': instance.facilityId,
-    'floorId': instance.floorId,
-    'name': instance.name,
-  };
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -7418,6 +7422,10 @@ Map<String, dynamic> _$AssetToJson(Asset instance) {
     }
   }
 
+  writeNotNull('premiseId', instance.premiseId);
+  writeNotNull('facilityId', instance.facilityId);
+  writeNotNull('floorId', instance.floorId);
+  val['name'] = instance.name;
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
   writeNotNull('selectedImage', instance.selectedImage);
@@ -7545,9 +7553,9 @@ Map<String, dynamic> _$AssetArrayResToJson(AssetArrayRes instance) {
 }
 
 FacilityInfo _$FacilityInfoFromJson(Map<String, dynamic> json) => FacilityInfo(
-      premiseId: json['premiseId'] as String? ?? '',
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
+      premiseId: json['premiseId'] as String? ?? '',
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
@@ -7579,7 +7587,6 @@ FacilityInfo _$FacilityInfoFromJson(Map<String, dynamic> json) => FacilityInfo(
 
 Map<String, dynamic> _$FacilityInfoToJson(FacilityInfo instance) {
   final val = <String, dynamic>{
-    'premiseId': instance.premiseId,
     'name': instance.name,
   };
 
@@ -7590,6 +7597,7 @@ Map<String, dynamic> _$FacilityInfoToJson(FacilityInfo instance) {
   }
 
   writeNotNull('description', instance.description);
+  writeNotNull('premiseId', instance.premiseId);
   writeNotNull('tags', instance.tags);
   writeNotNull('selectedImage', instance.selectedImage);
   writeNotNull('images', instance.images);
@@ -7609,9 +7617,9 @@ Map<String, dynamic> _$FacilityInfoToJson(FacilityInfo instance) {
 }
 
 Facility _$FacilityFromJson(Map<String, dynamic> json) => Facility(
-      premiseId: json['premiseId'] as String? ?? '',
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
+      premiseId: json['premiseId'] as String? ?? '',
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
@@ -7650,7 +7658,6 @@ Facility _$FacilityFromJson(Map<String, dynamic> json) => Facility(
 
 Map<String, dynamic> _$FacilityToJson(Facility instance) {
   final val = <String, dynamic>{
-    'premiseId': instance.premiseId,
     'name': instance.name,
   };
 
@@ -7661,6 +7668,7 @@ Map<String, dynamic> _$FacilityToJson(Facility instance) {
   }
 
   writeNotNull('description', instance.description);
+  writeNotNull('premiseId', instance.premiseId);
   writeNotNull('tags', instance.tags);
   writeNotNull('selectedImage', instance.selectedImage);
   writeNotNull('images', instance.images);
@@ -8570,6 +8578,10 @@ ScrappingTableInfo _$ScrappingTableInfoFromJson(Map<String, dynamic> json) =>
               ?.map((e) => Attribute.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$ScrappingTableInfoToJson(ScrappingTableInfo instance) {
@@ -8586,6 +8598,7 @@ Map<String, dynamic> _$ScrappingTableInfoToJson(ScrappingTableInfo instance) {
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
   val['attributes'] = instance.attributes.map((e) => e.toJson()).toList();
+  writeNotNull('clientIds', instance.clientIds);
   return val;
 }
 
@@ -8598,6 +8611,10 @@ ScrappingTable _$ScrappingTableFromJson(Map<String, dynamic> json) =>
               [],
       attributes: (json['attributes'] as List<dynamic>?)
               ?.map((e) => Attribute.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      clientIds: (json['clientIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
               .toList() ??
           [],
       domainKey: json['domainKey'] as String? ?? '',
@@ -8623,6 +8640,7 @@ Map<String, dynamic> _$ScrappingTableToJson(ScrappingTable instance) {
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
   val['attributes'] = instance.attributes.map((e) => e.toJson()).toList();
+  writeNotNull('clientIds', instance.clientIds);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -11144,6 +11162,20 @@ Map<String, dynamic> _$ResetPasswordToJson(ResetPassword instance) {
   writeNotNull('password', instance.password);
   return val;
 }
+
+ReprocessInfo _$ReprocessInfoFromJson(Map<String, dynamic> json) =>
+    ReprocessInfo(
+      hardwareDeviceId: json['hardwareDeviceId'] as String? ?? '',
+      clearHistory: json['clearHistory'] as bool? ?? false,
+      clearStatus: json['clearStatus'] as bool? ?? false,
+    );
+
+Map<String, dynamic> _$ReprocessInfoToJson(ReprocessInfo instance) =>
+    <String, dynamic>{
+      'hardwareDeviceId': instance.hardwareDeviceId,
+      'clearHistory': instance.clearHistory,
+      'clearStatus': instance.clearStatus,
+    };
 
 ExportData _$ExportDataFromJson(Map<String, dynamic> json) => ExportData(
       model: DeviceModelInfo.fromJson(json['model'] as Map<String, dynamic>),

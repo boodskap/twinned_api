@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "2.0.2",
+    "version": "2.0.3",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -2063,6 +2063,48 @@
             "apiKey": []
           }
         ]
+      }
+    },
+    "/DeviceData/reprocess": {
+      "post": {
+        "tags": [
+          "Device Data"
+        ],
+        "description": "reprocess device data",
+        "operationId": "reprocessDeviceData",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReprocessInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/BaseResponse"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "reprocess device data"
       }
     },
     "/DeviceView/create": {
@@ -20253,6 +20295,12 @@
           "items": {
             "type": "string"
           }
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -21153,11 +21201,7 @@
     "FloorInfo": {
       "type": "object",
       "required": [
-        "premiseId",
-        "facilityId",
-        "name",
-        "floorLevel",
-        "floorType"
+        "name"
       ],
       "properties": {
         "premiseId": {
@@ -21312,9 +21356,6 @@
     "AssetInfo": {
       "type": "object",
       "required": [
-        "premiseId",
-        "facilityId",
-        "floorId",
         "name",
         "assetModelId"
       ],
@@ -21457,17 +21498,16 @@
     "FacilityInfo": {
       "type": "object",
       "required": [
-        "premiseId",
         "name"
       ],
       "properties": {
-        "premiseId": {
-          "type": "string"
-        },
         "name": {
           "type": "string"
         },
         "description": {
+          "type": "string"
+        },
+        "premiseId": {
           "type": "string"
         },
         "tags": {
@@ -22095,6 +22135,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Attribute"
+          }
+        },
+        "clientIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
@@ -23823,6 +23869,27 @@
         },
         "password": {
           "type": "string"
+        }
+      }
+    },
+    "ReprocessInfo": {
+      "type": "object",
+      "required": [
+        "hardwareDeviceId",
+        "clearHistory",
+        "clearStatus"
+      ],
+      "properties": {
+        "hardwareDeviceId": {
+          "type": "string"
+        },
+        "clearHistory": {
+          "type": "boolean",
+          "default": false
+        },
+        "clearStatus": {
+          "type": "boolean",
+          "default": false
         }
       }
     },
