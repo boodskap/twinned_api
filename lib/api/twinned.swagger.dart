@@ -1139,6 +1139,28 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
+  ///reprocess device data
+  ///@param body
+  Future<chopper.Response<BaseResponse>> reprocessDeviceData({
+    required ReprocessInfo? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        ReprocessInfo, () => ReprocessInfo.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        BaseResponse, () => BaseResponse.fromJsonFactory);
+
+    return _reprocessDeviceData(body: body, apikey: apikey?.toString());
+  }
+
+  ///reprocess device data
+  ///@param body
+  @Post(path: '/DeviceData/reprocess')
+  Future<chopper.Response<BaseResponse>> _reprocessDeviceData({
+    @Body() required ReprocessInfo? body,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Create device view
   ///@param body
   Future<chopper.Response<DeviceViewEntityRes>> createDeviceView({
@@ -26961,6 +26983,7 @@ class PreprocessorInfo {
     this.code,
     this.description,
     this.tags,
+    this.clientIds,
   });
 
   factory PreprocessorInfo.fromJson(Map<String, dynamic> json) =>
@@ -26979,6 +27002,8 @@ class PreprocessorInfo {
   final String? description;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   static const fromJsonFactory = _$PreprocessorInfoFromJson;
 
   @override
@@ -26996,7 +27021,10 @@ class PreprocessorInfo {
                 const DeepCollectionEquality()
                     .equals(other.description, description)) &&
             (identical(other.tags, tags) ||
-                const DeepCollectionEquality().equals(other.tags, tags)));
+                const DeepCollectionEquality().equals(other.tags, tags)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)));
   }
 
   @override
@@ -27009,6 +27037,7 @@ class PreprocessorInfo {
       const DeepCollectionEquality().hash(code) ^
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(tags) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       runtimeType.hashCode;
 }
 
@@ -27018,13 +27047,15 @@ extension $PreprocessorInfoExtension on PreprocessorInfo {
       String? className,
       String? code,
       String? description,
-      List<String>? tags}) {
+      List<String>? tags,
+      List<String>? clientIds}) {
     return PreprocessorInfo(
         name: name ?? this.name,
         className: className ?? this.className,
         code: code ?? this.code,
         description: description ?? this.description,
-        tags: tags ?? this.tags);
+        tags: tags ?? this.tags,
+        clientIds: clientIds ?? this.clientIds);
   }
 
   PreprocessorInfo copyWithWrapped(
@@ -27032,14 +27063,16 @@ extension $PreprocessorInfoExtension on PreprocessorInfo {
       Wrapped<String>? className,
       Wrapped<String?>? code,
       Wrapped<String?>? description,
-      Wrapped<List<String>?>? tags}) {
+      Wrapped<List<String>?>? tags,
+      Wrapped<List<String>?>? clientIds}) {
     return PreprocessorInfo(
         name: (name != null ? name.value : this.name),
         className: (className != null ? className.value : this.className),
         code: (code != null ? code.value : this.code),
         description:
             (description != null ? description.value : this.description),
-        tags: (tags != null ? tags.value : this.tags));
+        tags: (tags != null ? tags.value : this.tags),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
   }
 }
 
@@ -27051,6 +27084,7 @@ class Preprocessor {
     this.code,
     this.description,
     this.tags,
+    this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -27076,6 +27110,8 @@ class Preprocessor {
   final String? description;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -27108,6 +27144,9 @@ class Preprocessor {
                     .equals(other.description, description)) &&
             (identical(other.tags, tags) ||
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -27139,6 +27178,7 @@ class Preprocessor {
       const DeepCollectionEquality().hash(code) ^
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(tags) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -27156,6 +27196,7 @@ extension $PreprocessorExtension on Preprocessor {
       String? code,
       String? description,
       List<String>? tags,
+      List<String>? clientIds,
       String? domainKey,
       String? id,
       String? rtype,
@@ -27169,6 +27210,7 @@ extension $PreprocessorExtension on Preprocessor {
         code: code ?? this.code,
         description: description ?? this.description,
         tags: tags ?? this.tags,
+        clientIds: clientIds ?? this.clientIds,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -27184,6 +27226,7 @@ extension $PreprocessorExtension on Preprocessor {
       Wrapped<String?>? code,
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
+      Wrapped<List<String>?>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -27198,6 +27241,7 @@ extension $PreprocessorExtension on Preprocessor {
         description:
             (description != null ? description.value : this.description),
         tags: (tags != null ? tags.value : this.tags),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -31504,8 +31548,8 @@ extension $TwinSysConfigEntityResExtension on TwinSysConfigEntityRes {
 @JsonSerializable(explicitToJson: true)
 class FloorInfo {
   const FloorInfo({
-    required this.premiseId,
-    required this.facilityId,
+    this.premiseId,
+    this.facilityId,
     required this.name,
     this.description,
     this.tags,
@@ -31513,8 +31557,8 @@ class FloorInfo {
     this.assets,
     this.roles,
     this.location,
-    required this.floorLevel,
-    required this.floorType,
+    this.floorLevel,
+    this.floorType,
     this.clientIds,
     this.reportedStamp,
     this.email,
@@ -31534,9 +31578,9 @@ class FloorInfo {
   Map<String, dynamic> toJson() => _$FloorInfoToJson(this);
 
   @JsonKey(name: 'premiseId', includeIfNull: false, defaultValue: '')
-  final String premiseId;
+  final String? premiseId;
   @JsonKey(name: 'facilityId', includeIfNull: false, defaultValue: '')
-  final String facilityId;
+  final String? facilityId;
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
   final String name;
   @JsonKey(name: 'description', includeIfNull: false, defaultValue: '')
@@ -31552,17 +31596,18 @@ class FloorInfo {
   @JsonKey(name: 'location', includeIfNull: false)
   final GeoLocation? location;
   @JsonKey(name: 'floorLevel', includeIfNull: false)
-  final int floorLevel;
+  final int? floorLevel;
   @JsonKey(
     name: 'floorType',
     includeIfNull: false,
-    toJson: floorInfoFloorTypeToJson,
-    fromJson: floorInfoFloorTypeFloorTypeFromJson,
+    toJson: floorInfoFloorTypeNullableToJson,
+    fromJson: floorInfoFloorTypeFloorTypeNullableFromJson,
   )
-  final enums.FloorInfoFloorType floorType;
-  static enums.FloorInfoFloorType floorInfoFloorTypeFloorTypeFromJson(
+  final enums.FloorInfoFloorType? floorType;
+  static enums.FloorInfoFloorType? floorInfoFloorTypeFloorTypeNullableFromJson(
           Object? value) =>
-      floorInfoFloorTypeFromJson(value, enums.FloorInfoFloorType.onground);
+      floorInfoFloorTypeNullableFromJson(
+          value, enums.FloorInfoFloorType.onground);
 
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
   final List<String>? clientIds;
@@ -31724,8 +31769,8 @@ extension $FloorInfoExtension on FloorInfo {
   }
 
   FloorInfo copyWithWrapped(
-      {Wrapped<String>? premiseId,
-      Wrapped<String>? facilityId,
+      {Wrapped<String?>? premiseId,
+      Wrapped<String?>? facilityId,
       Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
@@ -31733,8 +31778,8 @@ extension $FloorInfoExtension on FloorInfo {
       Wrapped<List<String>?>? assets,
       Wrapped<List<String>?>? roles,
       Wrapped<GeoLocation?>? location,
-      Wrapped<int>? floorLevel,
-      Wrapped<enums.FloorInfoFloorType>? floorType,
+      Wrapped<int?>? floorLevel,
+      Wrapped<enums.FloorInfoFloorType?>? floorType,
       Wrapped<List<String>?>? clientIds,
       Wrapped<int?>? reportedStamp,
       Wrapped<String?>? email,
@@ -31777,8 +31822,8 @@ extension $FloorInfoExtension on FloorInfo {
 @JsonSerializable(explicitToJson: true)
 class Floor {
   const Floor({
-    required this.premiseId,
-    required this.facilityId,
+    this.premiseId,
+    this.facilityId,
     required this.name,
     this.description,
     this.tags,
@@ -31786,8 +31831,8 @@ class Floor {
     this.assets,
     this.roles,
     this.location,
-    required this.floorLevel,
-    required this.floorType,
+    this.floorLevel,
+    this.floorType,
     this.clientIds,
     this.reportedStamp,
     this.email,
@@ -31813,9 +31858,9 @@ class Floor {
   Map<String, dynamic> toJson() => _$FloorToJson(this);
 
   @JsonKey(name: 'premiseId', includeIfNull: false, defaultValue: '')
-  final String premiseId;
+  final String? premiseId;
   @JsonKey(name: 'facilityId', includeIfNull: false, defaultValue: '')
-  final String facilityId;
+  final String? facilityId;
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
   final String name;
   @JsonKey(name: 'description', includeIfNull: false, defaultValue: '')
@@ -31831,16 +31876,17 @@ class Floor {
   @JsonKey(name: 'location', includeIfNull: false)
   final GeoLocation? location;
   @JsonKey(name: 'floorLevel', includeIfNull: false)
-  final int floorLevel;
+  final int? floorLevel;
   @JsonKey(
     name: 'floorType',
     includeIfNull: false,
-    toJson: floorFloorTypeToJson,
-    fromJson: floorFloorTypeFloorTypeFromJson,
+    toJson: floorFloorTypeNullableToJson,
+    fromJson: floorFloorTypeFloorTypeNullableFromJson,
   )
-  final enums.FloorFloorType floorType;
-  static enums.FloorFloorType floorFloorTypeFloorTypeFromJson(Object? value) =>
-      floorFloorTypeFromJson(value, enums.FloorFloorType.onground);
+  final enums.FloorFloorType? floorType;
+  static enums.FloorFloorType? floorFloorTypeFloorTypeNullableFromJson(
+          Object? value) =>
+      floorFloorTypeNullableFromJson(value, enums.FloorFloorType.onground);
 
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
   final List<String>? clientIds;
@@ -32053,8 +32099,8 @@ extension $FloorExtension on Floor {
   }
 
   Floor copyWithWrapped(
-      {Wrapped<String>? premiseId,
-      Wrapped<String>? facilityId,
+      {Wrapped<String?>? premiseId,
+      Wrapped<String?>? facilityId,
       Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
@@ -32062,8 +32108,8 @@ extension $FloorExtension on Floor {
       Wrapped<List<String>?>? assets,
       Wrapped<List<String>?>? roles,
       Wrapped<GeoLocation?>? location,
-      Wrapped<int>? floorLevel,
-      Wrapped<enums.FloorFloorType>? floorType,
+      Wrapped<int?>? floorLevel,
+      Wrapped<enums.FloorFloorType?>? floorType,
       Wrapped<List<String>?>? clientIds,
       Wrapped<int?>? reportedStamp,
       Wrapped<String?>? email,
@@ -32412,9 +32458,9 @@ extension $FloorArrayResExtension on FloorArrayRes {
 @JsonSerializable(explicitToJson: true)
 class AssetInfo {
   const AssetInfo({
-    required this.premiseId,
-    required this.facilityId,
-    required this.floorId,
+    this.premiseId,
+    this.facilityId,
+    this.floorId,
     required this.name,
     this.description,
     this.tags,
@@ -32436,11 +32482,11 @@ class AssetInfo {
   Map<String, dynamic> toJson() => _$AssetInfoToJson(this);
 
   @JsonKey(name: 'premiseId', includeIfNull: false, defaultValue: '')
-  final String premiseId;
+  final String? premiseId;
   @JsonKey(name: 'facilityId', includeIfNull: false, defaultValue: '')
-  final String facilityId;
+  final String? facilityId;
   @JsonKey(name: 'floorId', includeIfNull: false, defaultValue: '')
-  final String floorId;
+  final String? floorId;
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
   final String name;
   @JsonKey(name: 'description', includeIfNull: false, defaultValue: '')
@@ -32573,9 +32619,9 @@ extension $AssetInfoExtension on AssetInfo {
   }
 
   AssetInfo copyWithWrapped(
-      {Wrapped<String>? premiseId,
-      Wrapped<String>? facilityId,
-      Wrapped<String>? floorId,
+      {Wrapped<String?>? premiseId,
+      Wrapped<String?>? facilityId,
+      Wrapped<String?>? floorId,
       Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
@@ -32661,9 +32707,9 @@ extension $AssetBaseExtension on AssetBase {
 @JsonSerializable(explicitToJson: true)
 class Asset {
   const Asset({
-    required this.premiseId,
-    required this.facilityId,
-    required this.floorId,
+    this.premiseId,
+    this.facilityId,
+    this.floorId,
     required this.name,
     this.description,
     this.tags,
@@ -32692,11 +32738,11 @@ class Asset {
   Map<String, dynamic> toJson() => _$AssetToJson(this);
 
   @JsonKey(name: 'premiseId', includeIfNull: false, defaultValue: '')
-  final String premiseId;
+  final String? premiseId;
   @JsonKey(name: 'facilityId', includeIfNull: false, defaultValue: '')
-  final String facilityId;
+  final String? facilityId;
   @JsonKey(name: 'floorId', includeIfNull: false, defaultValue: '')
-  final String floorId;
+  final String? floorId;
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
   final String name;
   @JsonKey(name: 'description', includeIfNull: false, defaultValue: '')
@@ -32891,9 +32937,9 @@ extension $AssetExtension on Asset {
   }
 
   Asset copyWithWrapped(
-      {Wrapped<String>? premiseId,
-      Wrapped<String>? facilityId,
-      Wrapped<String>? floorId,
+      {Wrapped<String?>? premiseId,
+      Wrapped<String?>? facilityId,
+      Wrapped<String?>? floorId,
       Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
@@ -33242,9 +33288,9 @@ extension $AssetArrayResExtension on AssetArrayRes {
 @JsonSerializable(explicitToJson: true)
 class FacilityInfo {
   const FacilityInfo({
-    required this.premiseId,
     required this.name,
     this.description,
+    this.premiseId,
     this.tags,
     this.selectedImage,
     this.images,
@@ -33268,12 +33314,12 @@ class FacilityInfo {
   static const toJsonFactory = _$FacilityInfoToJson;
   Map<String, dynamic> toJson() => _$FacilityInfoToJson(this);
 
-  @JsonKey(name: 'premiseId', includeIfNull: false, defaultValue: '')
-  final String premiseId;
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
   final String name;
   @JsonKey(name: 'description', includeIfNull: false, defaultValue: '')
   final String? description;
+  @JsonKey(name: 'premiseId', includeIfNull: false, defaultValue: '')
+  final String? premiseId;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
   @JsonKey(name: 'selectedImage', includeIfNull: false)
@@ -33310,14 +33356,14 @@ class FacilityInfo {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other is FacilityInfo &&
-            (identical(other.premiseId, premiseId) ||
-                const DeepCollectionEquality()
-                    .equals(other.premiseId, premiseId)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.description, description) ||
                 const DeepCollectionEquality()
                     .equals(other.description, description)) &&
+            (identical(other.premiseId, premiseId) ||
+                const DeepCollectionEquality()
+                    .equals(other.premiseId, premiseId)) &&
             (identical(other.tags, tags) ||
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.selectedImage, selectedImage) ||
@@ -33363,9 +33409,9 @@ class FacilityInfo {
 
   @override
   int get hashCode =>
-      const DeepCollectionEquality().hash(premiseId) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(description) ^
+      const DeepCollectionEquality().hash(premiseId) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(selectedImage) ^
       const DeepCollectionEquality().hash(images) ^
@@ -33386,9 +33432,9 @@ class FacilityInfo {
 
 extension $FacilityInfoExtension on FacilityInfo {
   FacilityInfo copyWith(
-      {String? premiseId,
-      String? name,
+      {String? name,
       String? description,
+      String? premiseId,
       List<String>? tags,
       int? selectedImage,
       List<String>? images,
@@ -33405,9 +33451,9 @@ extension $FacilityInfoExtension on FacilityInfo {
       String? city,
       String? zipcode}) {
     return FacilityInfo(
-        premiseId: premiseId ?? this.premiseId,
         name: name ?? this.name,
         description: description ?? this.description,
+        premiseId: premiseId ?? this.premiseId,
         tags: tags ?? this.tags,
         selectedImage: selectedImage ?? this.selectedImage,
         images: images ?? this.images,
@@ -33426,9 +33472,9 @@ extension $FacilityInfoExtension on FacilityInfo {
   }
 
   FacilityInfo copyWithWrapped(
-      {Wrapped<String>? premiseId,
-      Wrapped<String>? name,
+      {Wrapped<String>? name,
       Wrapped<String?>? description,
+      Wrapped<String?>? premiseId,
       Wrapped<List<String>?>? tags,
       Wrapped<int?>? selectedImage,
       Wrapped<List<String>?>? images,
@@ -33445,10 +33491,10 @@ extension $FacilityInfoExtension on FacilityInfo {
       Wrapped<String?>? city,
       Wrapped<String?>? zipcode}) {
     return FacilityInfo(
-        premiseId: (premiseId != null ? premiseId.value : this.premiseId),
         name: (name != null ? name.value : this.name),
         description:
             (description != null ? description.value : this.description),
+        premiseId: (premiseId != null ? premiseId.value : this.premiseId),
         tags: (tags != null ? tags.value : this.tags),
         selectedImage:
             (selectedImage != null ? selectedImage.value : this.selectedImage),
@@ -33474,9 +33520,9 @@ extension $FacilityInfoExtension on FacilityInfo {
 @JsonSerializable(explicitToJson: true)
 class Facility {
   const Facility({
-    required this.premiseId,
     required this.name,
     this.description,
+    this.premiseId,
     this.tags,
     this.selectedImage,
     this.images,
@@ -33507,12 +33553,12 @@ class Facility {
   static const toJsonFactory = _$FacilityToJson;
   Map<String, dynamic> toJson() => _$FacilityToJson(this);
 
-  @JsonKey(name: 'premiseId', includeIfNull: false, defaultValue: '')
-  final String premiseId;
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
   final String name;
   @JsonKey(name: 'description', includeIfNull: false, defaultValue: '')
   final String? description;
+  @JsonKey(name: 'premiseId', includeIfNull: false, defaultValue: '')
+  final String? premiseId;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
   @JsonKey(name: 'selectedImage', includeIfNull: false)
@@ -33563,14 +33609,14 @@ class Facility {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other is Facility &&
-            (identical(other.premiseId, premiseId) ||
-                const DeepCollectionEquality()
-                    .equals(other.premiseId, premiseId)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.description, description) ||
                 const DeepCollectionEquality()
                     .equals(other.description, description)) &&
+            (identical(other.premiseId, premiseId) ||
+                const DeepCollectionEquality()
+                    .equals(other.premiseId, premiseId)) &&
             (identical(other.tags, tags) ||
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.selectedImage, selectedImage) ||
@@ -33636,9 +33682,9 @@ class Facility {
 
   @override
   int get hashCode =>
-      const DeepCollectionEquality().hash(premiseId) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(description) ^
+      const DeepCollectionEquality().hash(premiseId) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(selectedImage) ^
       const DeepCollectionEquality().hash(images) ^
@@ -33666,9 +33712,9 @@ class Facility {
 
 extension $FacilityExtension on Facility {
   Facility copyWith(
-      {String? premiseId,
-      String? name,
+      {String? name,
       String? description,
+      String? premiseId,
       List<String>? tags,
       int? selectedImage,
       List<String>? images,
@@ -33692,9 +33738,9 @@ extension $FacilityExtension on Facility {
       String? updatedBy,
       int? updatedStamp}) {
     return Facility(
-        premiseId: premiseId ?? this.premiseId,
         name: name ?? this.name,
         description: description ?? this.description,
+        premiseId: premiseId ?? this.premiseId,
         tags: tags ?? this.tags,
         selectedImage: selectedImage ?? this.selectedImage,
         images: images ?? this.images,
@@ -33720,9 +33766,9 @@ extension $FacilityExtension on Facility {
   }
 
   Facility copyWithWrapped(
-      {Wrapped<String>? premiseId,
-      Wrapped<String>? name,
+      {Wrapped<String>? name,
       Wrapped<String?>? description,
+      Wrapped<String?>? premiseId,
       Wrapped<List<String>?>? tags,
       Wrapped<int?>? selectedImage,
       Wrapped<List<String>?>? images,
@@ -33746,10 +33792,10 @@ extension $FacilityExtension on Facility {
       Wrapped<String>? updatedBy,
       Wrapped<int>? updatedStamp}) {
     return Facility(
-        premiseId: (premiseId != null ? premiseId.value : this.premiseId),
         name: (name != null ? name.value : this.name),
         description:
             (description != null ? description.value : this.description),
+        premiseId: (premiseId != null ? premiseId.value : this.premiseId),
         tags: (tags != null ? tags.value : this.tags),
         selectedImage:
             (selectedImage != null ? selectedImage.value : this.selectedImage),
@@ -36594,6 +36640,7 @@ class ScrappingTableInfo {
     this.description,
     this.tags,
     required this.attributes,
+    this.clientIds,
   });
 
   factory ScrappingTableInfo.fromJson(Map<String, dynamic> json) =>
@@ -36611,6 +36658,8 @@ class ScrappingTableInfo {
   @JsonKey(
       name: 'attributes', includeIfNull: false, defaultValue: <Attribute>[])
   final List<Attribute> attributes;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   static const fromJsonFactory = _$ScrappingTableInfoFromJson;
 
   @override
@@ -36626,7 +36675,10 @@ class ScrappingTableInfo {
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.attributes, attributes) ||
                 const DeepCollectionEquality()
-                    .equals(other.attributes, attributes)));
+                    .equals(other.attributes, attributes)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)));
   }
 
   @override
@@ -36638,6 +36690,7 @@ class ScrappingTableInfo {
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(attributes) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       runtimeType.hashCode;
 }
 
@@ -36646,25 +36699,29 @@ extension $ScrappingTableInfoExtension on ScrappingTableInfo {
       {String? name,
       String? description,
       List<String>? tags,
-      List<Attribute>? attributes}) {
+      List<Attribute>? attributes,
+      List<String>? clientIds}) {
     return ScrappingTableInfo(
         name: name ?? this.name,
         description: description ?? this.description,
         tags: tags ?? this.tags,
-        attributes: attributes ?? this.attributes);
+        attributes: attributes ?? this.attributes,
+        clientIds: clientIds ?? this.clientIds);
   }
 
   ScrappingTableInfo copyWithWrapped(
       {Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
-      Wrapped<List<Attribute>>? attributes}) {
+      Wrapped<List<Attribute>>? attributes,
+      Wrapped<List<String>?>? clientIds}) {
     return ScrappingTableInfo(
         name: (name != null ? name.value : this.name),
         description:
             (description != null ? description.value : this.description),
         tags: (tags != null ? tags.value : this.tags),
-        attributes: (attributes != null ? attributes.value : this.attributes));
+        attributes: (attributes != null ? attributes.value : this.attributes),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
   }
 }
 
@@ -36675,6 +36732,7 @@ class ScrappingTable {
     this.description,
     this.tags,
     required this.attributes,
+    this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -36699,6 +36757,8 @@ class ScrappingTable {
   @JsonKey(
       name: 'attributes', includeIfNull: false, defaultValue: <Attribute>[])
   final List<Attribute> attributes;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -36729,6 +36789,9 @@ class ScrappingTable {
             (identical(other.attributes, attributes) ||
                 const DeepCollectionEquality()
                     .equals(other.attributes, attributes)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -36759,6 +36822,7 @@ class ScrappingTable {
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(attributes) ^
+      const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -36775,6 +36839,7 @@ extension $ScrappingTableExtension on ScrappingTable {
       String? description,
       List<String>? tags,
       List<Attribute>? attributes,
+      List<String>? clientIds,
       String? domainKey,
       String? id,
       String? rtype,
@@ -36787,6 +36852,7 @@ extension $ScrappingTableExtension on ScrappingTable {
         description: description ?? this.description,
         tags: tags ?? this.tags,
         attributes: attributes ?? this.attributes,
+        clientIds: clientIds ?? this.clientIds,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -36801,6 +36867,7 @@ extension $ScrappingTableExtension on ScrappingTable {
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
       Wrapped<List<Attribute>>? attributes,
+      Wrapped<List<String>?>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -36814,6 +36881,7 @@ extension $ScrappingTableExtension on ScrappingTable {
             (description != null ? description.value : this.description),
         tags: (tags != null ? tags.value : this.tags),
         attributes: (attributes != null ? attributes.value : this.attributes),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -45292,6 +45360,78 @@ extension $ResetPasswordExtension on ResetPassword {
         pinToken: (pinToken != null ? pinToken.value : this.pinToken),
         pin: (pin != null ? pin.value : this.pin),
         password: (password != null ? password.value : this.password));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ReprocessInfo {
+  const ReprocessInfo({
+    required this.hardwareDeviceId,
+    required this.clearHistory,
+    required this.clearStatus,
+  });
+
+  factory ReprocessInfo.fromJson(Map<String, dynamic> json) =>
+      _$ReprocessInfoFromJson(json);
+
+  static const toJsonFactory = _$ReprocessInfoToJson;
+  Map<String, dynamic> toJson() => _$ReprocessInfoToJson(this);
+
+  @JsonKey(name: 'hardwareDeviceId', includeIfNull: false, defaultValue: '')
+  final String hardwareDeviceId;
+  @JsonKey(name: 'clearHistory', includeIfNull: false, defaultValue: false)
+  final bool clearHistory;
+  @JsonKey(name: 'clearStatus', includeIfNull: false, defaultValue: false)
+  final bool clearStatus;
+  static const fromJsonFactory = _$ReprocessInfoFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is ReprocessInfo &&
+            (identical(other.hardwareDeviceId, hardwareDeviceId) ||
+                const DeepCollectionEquality()
+                    .equals(other.hardwareDeviceId, hardwareDeviceId)) &&
+            (identical(other.clearHistory, clearHistory) ||
+                const DeepCollectionEquality()
+                    .equals(other.clearHistory, clearHistory)) &&
+            (identical(other.clearStatus, clearStatus) ||
+                const DeepCollectionEquality()
+                    .equals(other.clearStatus, clearStatus)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(hardwareDeviceId) ^
+      const DeepCollectionEquality().hash(clearHistory) ^
+      const DeepCollectionEquality().hash(clearStatus) ^
+      runtimeType.hashCode;
+}
+
+extension $ReprocessInfoExtension on ReprocessInfo {
+  ReprocessInfo copyWith(
+      {String? hardwareDeviceId, bool? clearHistory, bool? clearStatus}) {
+    return ReprocessInfo(
+        hardwareDeviceId: hardwareDeviceId ?? this.hardwareDeviceId,
+        clearHistory: clearHistory ?? this.clearHistory,
+        clearStatus: clearStatus ?? this.clearStatus);
+  }
+
+  ReprocessInfo copyWithWrapped(
+      {Wrapped<String>? hardwareDeviceId,
+      Wrapped<bool>? clearHistory,
+      Wrapped<bool>? clearStatus}) {
+    return ReprocessInfo(
+        hardwareDeviceId: (hardwareDeviceId != null
+            ? hardwareDeviceId.value
+            : this.hardwareDeviceId),
+        clearHistory:
+            (clearHistory != null ? clearHistory.value : this.clearHistory),
+        clearStatus:
+            (clearStatus != null ? clearStatus.value : this.clearStatus));
   }
 }
 

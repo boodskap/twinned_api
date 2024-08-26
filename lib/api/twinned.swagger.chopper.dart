@@ -883,6 +883,26 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<BaseResponse>> _reprocessDeviceData({
+    required ReprocessInfo? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/DeviceData/reprocess');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<BaseResponse, BaseResponse>($request);
+  }
+
+  @override
   Future<Response<DeviceViewEntityRes>> _createDeviceView({
     required DeviceViewInfo? body,
     String? apikey,
