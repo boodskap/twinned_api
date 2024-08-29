@@ -11075,6 +11075,7 @@ OrgInfo _$OrgInfoFromJson(Map<String, dynamic> json) => OrgInfo(
       twinDomainKey: json['twinDomainKey'] as String? ?? '',
       twinAuthToken: json['twinAuthToken'] as String? ?? '',
       user: PlatformUser.fromJson(json['user'] as Map<String, dynamic>),
+      profileId: json['profileId'] as String? ?? '',
     );
 
 Map<String, dynamic> _$OrgInfoToJson(OrgInfo instance) => <String, dynamic>{
@@ -11083,6 +11084,7 @@ Map<String, dynamic> _$OrgInfoToJson(OrgInfo instance) => <String, dynamic>{
       'twinDomainKey': instance.twinDomainKey,
       'twinAuthToken': instance.twinAuthToken,
       'user': instance.user.toJson(),
+      'profileId': instance.profileId,
     };
 
 VerificationRes _$VerificationResFromJson(Map<String, dynamic> json) =>
