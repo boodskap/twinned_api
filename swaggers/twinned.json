@@ -23773,7 +23773,8 @@
         "twinDomainKey",
         "twinAuthToken",
         "user",
-        "profileId"
+        "profileId",
+        "userProfileId"
       ],
       "properties": {
         "id": {
@@ -23792,6 +23793,9 @@
           "$ref": "#/definitions/PlatformUser"
         },
         "profileId": {
+          "type": "string"
+        },
+        "userProfileId": {
           "type": "string"
         }
       }

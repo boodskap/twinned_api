@@ -44996,6 +44996,7 @@ class OrgInfo {
     required this.twinAuthToken,
     required this.user,
     required this.profileId,
+    required this.userProfileId,
   });
 
   factory OrgInfo.fromJson(Map<String, dynamic> json) =>
@@ -45016,6 +45017,8 @@ class OrgInfo {
   final PlatformUser user;
   @JsonKey(name: 'profileId', includeIfNull: false, defaultValue: '')
   final String profileId;
+  @JsonKey(name: 'userProfileId', includeIfNull: false, defaultValue: '')
+  final String userProfileId;
   static const fromJsonFactory = _$OrgInfoFromJson;
 
   @override
@@ -45036,7 +45039,10 @@ class OrgInfo {
                 const DeepCollectionEquality().equals(other.user, user)) &&
             (identical(other.profileId, profileId) ||
                 const DeepCollectionEquality()
-                    .equals(other.profileId, profileId)));
+                    .equals(other.profileId, profileId)) &&
+            (identical(other.userProfileId, userProfileId) ||
+                const DeepCollectionEquality()
+                    .equals(other.userProfileId, userProfileId)));
   }
 
   @override
@@ -45050,6 +45056,7 @@ class OrgInfo {
       const DeepCollectionEquality().hash(twinAuthToken) ^
       const DeepCollectionEquality().hash(user) ^
       const DeepCollectionEquality().hash(profileId) ^
+      const DeepCollectionEquality().hash(userProfileId) ^
       runtimeType.hashCode;
 }
 
@@ -45060,14 +45067,16 @@ extension $OrgInfoExtension on OrgInfo {
       String? twinDomainKey,
       String? twinAuthToken,
       PlatformUser? user,
-      String? profileId}) {
+      String? profileId,
+      String? userProfileId}) {
     return OrgInfo(
         id: id ?? this.id,
         name: name ?? this.name,
         twinDomainKey: twinDomainKey ?? this.twinDomainKey,
         twinAuthToken: twinAuthToken ?? this.twinAuthToken,
         user: user ?? this.user,
-        profileId: profileId ?? this.profileId);
+        profileId: profileId ?? this.profileId,
+        userProfileId: userProfileId ?? this.userProfileId);
   }
 
   OrgInfo copyWithWrapped(
@@ -45076,7 +45085,8 @@ extension $OrgInfoExtension on OrgInfo {
       Wrapped<String>? twinDomainKey,
       Wrapped<String>? twinAuthToken,
       Wrapped<PlatformUser>? user,
-      Wrapped<String>? profileId}) {
+      Wrapped<String>? profileId,
+      Wrapped<String>? userProfileId}) {
     return OrgInfo(
         id: (id != null ? id.value : this.id),
         name: (name != null ? name.value : this.name),
@@ -45085,7 +45095,9 @@ extension $OrgInfoExtension on OrgInfo {
         twinAuthToken:
             (twinAuthToken != null ? twinAuthToken.value : this.twinAuthToken),
         user: (user != null ? user.value : this.user),
-        profileId: (profileId != null ? profileId.value : this.profileId));
+        profileId: (profileId != null ? profileId.value : this.profileId),
+        userProfileId:
+            (userProfileId != null ? userProfileId.value : this.userProfileId));
   }
 }
 
