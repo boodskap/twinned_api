@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "2.0.3",
+    "version": "2.0.4",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -17762,6 +17762,9 @@
         },
         "content": {
           "type": "string"
+        },
+        "isHtml": {
+          "type": "boolean"
         }
       }
     },
@@ -20914,54 +20917,6 @@
         }
       }
     },
-    "ElasticEmailConfig": {
-      "type": "object",
-      "discriminator": "eeConfig",
-      "required": [
-        "fromEmail",
-        "apiKey"
-      ],
-      "properties": {
-        "apiKey": {
-          "type": "string"
-        },
-        "fromEmail": {
-          "type": "string"
-        }
-      }
-    },
-    "TwilioConfig": {
-      "type": "object",
-      "discriminator": "twConfig",
-      "required": [
-        "phoneNumber",
-        "accountSid",
-        "authToken"
-      ],
-      "properties": {
-        "accountSid": {
-          "type": "string"
-        },
-        "authToken": {
-          "type": "string"
-        },
-        "phoneNumber": {
-          "type": "string"
-        }
-      }
-    },
-    "TextLocalConfig": {
-      "type": "object",
-      "discriminator": "tlConfig",
-      "required": [
-        "apiKey"
-      ],
-      "properties": {
-        "apiKey": {
-          "type": "string"
-        }
-      }
-    },
     "GeoapifyConfig": {
       "type": "object",
       "discriminator": "geopConfig",
@@ -21075,33 +21030,32 @@
             "$ref": "#/definitions/LandingPage"
           }
         },
-        "emailProvider": {
-          "type": "string",
-          "enum": [
-            "ELASTICEMAIL"
-          ]
+        "pulseEmailKey": {
+          "type": "string"
         },
-        "smsProvider": {
-          "type": "string",
-          "enum": [
-            "TWILIO",
-            "TEXTLOCAL"
-          ]
+        "pulseSmsKey": {
+          "type": "string"
         },
-        "voiceProvider": {
-          "type": "string",
-          "enum": [
-            "TWILIO"
-          ]
+        "pulseVoiceKey": {
+          "type": "string"
         },
-        "elasticEmailConfig": {
-          "$ref": "#/definitions/ElasticEmailConfig"
+        "pulseWebTrafficKey": {
+          "type": "string"
         },
-        "twilioConfig": {
-          "$ref": "#/definitions/TwilioConfig"
+        "pulseFcmKey": {
+          "type": "string"
         },
-        "textLocalConfig": {
-          "$ref": "#/definitions/TextLocalConfig"
+        "pulseOfflineAlertsKey": {
+          "type": "string"
+        },
+        "pulseWhatsappKey": {
+          "type": "string"
+        },
+        "pulseGeocodingKey": {
+          "type": "string"
+        },
+        "pulseReverseGeocodingKey": {
+          "type": "string"
         },
         "geoapifyConfig": {
           "$ref": "#/definitions/GeoapifyConfig"

@@ -2284,13 +2284,24 @@ EmailTemplate _$EmailTemplateFromJson(Map<String, dynamic> json) =>
     EmailTemplate(
       subject: json['subject'] as String? ?? '',
       content: json['content'] as String? ?? '',
+      isHtml: json['isHtml'] as bool?,
     );
 
-Map<String, dynamic> _$EmailTemplateToJson(EmailTemplate instance) =>
-    <String, dynamic>{
-      'subject': instance.subject,
-      'content': instance.content,
-    };
+Map<String, dynamic> _$EmailTemplateToJson(EmailTemplate instance) {
+  final val = <String, dynamic>{
+    'subject': instance.subject,
+    'content': instance.content,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('isHtml', instance.isHtml);
+  return val;
+}
 
 FCMTemplate _$FCMTemplateFromJson(Map<String, dynamic> json) => FCMTemplate(
       title: json['title'] as String? ?? '',
@@ -6702,41 +6713,6 @@ Map<String, dynamic> _$LandingPageToJson(LandingPage instance) {
   return val;
 }
 
-ElasticEmailConfig _$ElasticEmailConfigFromJson(Map<String, dynamic> json) =>
-    ElasticEmailConfig(
-      apiKey: json['apiKey'] as String? ?? '',
-      fromEmail: json['fromEmail'] as String? ?? '',
-    );
-
-Map<String, dynamic> _$ElasticEmailConfigToJson(ElasticEmailConfig instance) =>
-    <String, dynamic>{
-      'apiKey': instance.apiKey,
-      'fromEmail': instance.fromEmail,
-    };
-
-TwilioConfig _$TwilioConfigFromJson(Map<String, dynamic> json) => TwilioConfig(
-      accountSid: json['accountSid'] as String? ?? '',
-      authToken: json['authToken'] as String? ?? '',
-      phoneNumber: json['phoneNumber'] as String? ?? '',
-    );
-
-Map<String, dynamic> _$TwilioConfigToJson(TwilioConfig instance) =>
-    <String, dynamic>{
-      'accountSid': instance.accountSid,
-      'authToken': instance.authToken,
-      'phoneNumber': instance.phoneNumber,
-    };
-
-TextLocalConfig _$TextLocalConfigFromJson(Map<String, dynamic> json) =>
-    TextLocalConfig(
-      apiKey: json['apiKey'] as String? ?? '',
-    );
-
-Map<String, dynamic> _$TextLocalConfigToJson(TextLocalConfig instance) =>
-    <String, dynamic>{
-      'apiKey': instance.apiKey,
-    };
-
 GeoapifyConfig _$GeoapifyConfigFromJson(Map<String, dynamic> json) =>
     GeoapifyConfig(
       apiKey: json['apiKey'] as String? ?? '',
@@ -6778,22 +6754,16 @@ TwinSysInfo _$TwinSysInfoFromJson(Map<String, dynamic> json) => TwinSysInfo(
               ?.map((e) => LandingPage.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      emailProvider:
-          twinSysInfoEmailProviderNullableFromJson(json['emailProvider']),
-      smsProvider: twinSysInfoSmsProviderNullableFromJson(json['smsProvider']),
-      voiceProvider:
-          twinSysInfoVoiceProviderNullableFromJson(json['voiceProvider']),
-      elasticEmailConfig: json['elasticEmailConfig'] == null
-          ? null
-          : ElasticEmailConfig.fromJson(
-              json['elasticEmailConfig'] as Map<String, dynamic>),
-      twilioConfig: json['twilioConfig'] == null
-          ? null
-          : TwilioConfig.fromJson(json['twilioConfig'] as Map<String, dynamic>),
-      textLocalConfig: json['textLocalConfig'] == null
-          ? null
-          : TextLocalConfig.fromJson(
-              json['textLocalConfig'] as Map<String, dynamic>),
+      pulseEmailKey: json['pulseEmailKey'] as String? ?? '',
+      pulseSmsKey: json['pulseSmsKey'] as String? ?? '',
+      pulseVoiceKey: json['pulseVoiceKey'] as String? ?? '',
+      pulseWebTrafficKey: json['pulseWebTrafficKey'] as String? ?? '',
+      pulseFcmKey: json['pulseFcmKey'] as String? ?? '',
+      pulseOfflineAlertsKey: json['pulseOfflineAlertsKey'] as String? ?? '',
+      pulseWhatsappKey: json['pulseWhatsappKey'] as String? ?? '',
+      pulseGeocodingKey: json['pulseGeocodingKey'] as String? ?? '',
+      pulseReverseGeocodingKey:
+          json['pulseReverseGeocodingKey'] as String? ?? '',
       geoapifyConfig: json['geoapifyConfig'] == null
           ? null
           : GeoapifyConfig.fromJson(
@@ -6844,15 +6814,15 @@ Map<String, dynamic> _$TwinSysInfoToJson(TwinSysInfo instance) {
       'autoApproveSelfRegistration', instance.autoApproveSelfRegistration);
   writeNotNull(
       'landingPages', instance.landingPages?.map((e) => e.toJson()).toList());
-  writeNotNull('emailProvider',
-      twinSysInfoEmailProviderNullableToJson(instance.emailProvider));
-  writeNotNull('smsProvider',
-      twinSysInfoSmsProviderNullableToJson(instance.smsProvider));
-  writeNotNull('voiceProvider',
-      twinSysInfoVoiceProviderNullableToJson(instance.voiceProvider));
-  writeNotNull('elasticEmailConfig', instance.elasticEmailConfig?.toJson());
-  writeNotNull('twilioConfig', instance.twilioConfig?.toJson());
-  writeNotNull('textLocalConfig', instance.textLocalConfig?.toJson());
+  writeNotNull('pulseEmailKey', instance.pulseEmailKey);
+  writeNotNull('pulseSmsKey', instance.pulseSmsKey);
+  writeNotNull('pulseVoiceKey', instance.pulseVoiceKey);
+  writeNotNull('pulseWebTrafficKey', instance.pulseWebTrafficKey);
+  writeNotNull('pulseFcmKey', instance.pulseFcmKey);
+  writeNotNull('pulseOfflineAlertsKey', instance.pulseOfflineAlertsKey);
+  writeNotNull('pulseWhatsappKey', instance.pulseWhatsappKey);
+  writeNotNull('pulseGeocodingKey', instance.pulseGeocodingKey);
+  writeNotNull('pulseReverseGeocodingKey', instance.pulseReverseGeocodingKey);
   writeNotNull('geoapifyConfig', instance.geoapifyConfig?.toJson());
   writeNotNull('enforceRoles', instance.enforceRoles);
   writeNotNull('headerBgColor', instance.headerBgColor);

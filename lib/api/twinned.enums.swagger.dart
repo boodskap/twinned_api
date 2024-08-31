@@ -727,44 +727,6 @@ enum GeoFenceFenceType {
   const GeoFenceFenceType(this.value);
 }
 
-enum TwinSysInfoEmailProvider {
-  @JsonValue(null)
-  swaggerGeneratedUnknown(null),
-
-  @JsonValue('ELASTICEMAIL')
-  elasticemail('ELASTICEMAIL');
-
-  final String? value;
-
-  const TwinSysInfoEmailProvider(this.value);
-}
-
-enum TwinSysInfoSmsProvider {
-  @JsonValue(null)
-  swaggerGeneratedUnknown(null),
-
-  @JsonValue('TWILIO')
-  twilio('TWILIO'),
-  @JsonValue('TEXTLOCAL')
-  textlocal('TEXTLOCAL');
-
-  final String? value;
-
-  const TwinSysInfoSmsProvider(this.value);
-}
-
-enum TwinSysInfoVoiceProvider {
-  @JsonValue(null)
-  swaggerGeneratedUnknown(null),
-
-  @JsonValue('TWILIO')
-  twilio('TWILIO');
-
-  final String? value;
-
-  const TwinSysInfoVoiceProvider(this.value);
-}
-
 enum FloorInfoFloorType {
   @JsonValue(null)
   swaggerGeneratedUnknown(null),

@@ -15739,6 +15739,7 @@ class EmailTemplate {
   const EmailTemplate({
     required this.subject,
     required this.content,
+    this.isHtml,
   });
 
   factory EmailTemplate.fromJson(Map<String, dynamic> json) =>
@@ -15751,6 +15752,8 @@ class EmailTemplate {
   final String subject;
   @JsonKey(name: 'content', includeIfNull: false, defaultValue: '')
   final String content;
+  @JsonKey(name: 'isHtml', includeIfNull: false)
+  final bool? isHtml;
   static const fromJsonFactory = _$EmailTemplateFromJson;
 
   @override
@@ -15761,7 +15764,10 @@ class EmailTemplate {
                 const DeepCollectionEquality()
                     .equals(other.subject, subject)) &&
             (identical(other.content, content) ||
-                const DeepCollectionEquality().equals(other.content, content)));
+                const DeepCollectionEquality()
+                    .equals(other.content, content)) &&
+            (identical(other.isHtml, isHtml) ||
+                const DeepCollectionEquality().equals(other.isHtml, isHtml)));
   }
 
   @override
@@ -15771,20 +15777,26 @@ class EmailTemplate {
   int get hashCode =>
       const DeepCollectionEquality().hash(subject) ^
       const DeepCollectionEquality().hash(content) ^
+      const DeepCollectionEquality().hash(isHtml) ^
       runtimeType.hashCode;
 }
 
 extension $EmailTemplateExtension on EmailTemplate {
-  EmailTemplate copyWith({String? subject, String? content}) {
+  EmailTemplate copyWith({String? subject, String? content, bool? isHtml}) {
     return EmailTemplate(
-        subject: subject ?? this.subject, content: content ?? this.content);
+        subject: subject ?? this.subject,
+        content: content ?? this.content,
+        isHtml: isHtml ?? this.isHtml);
   }
 
   EmailTemplate copyWithWrapped(
-      {Wrapped<String>? subject, Wrapped<String>? content}) {
+      {Wrapped<String>? subject,
+      Wrapped<String>? content,
+      Wrapped<bool?>? isHtml}) {
     return EmailTemplate(
         subject: (subject != null ? subject.value : this.subject),
-        content: (content != null ? content.value : this.content));
+        content: (content != null ? content.value : this.content),
+        isHtml: (isHtml != null ? isHtml.value : this.isHtml));
   }
 }
 
@@ -30382,172 +30394,6 @@ extension $LandingPageExtension on LandingPage {
 }
 
 @JsonSerializable(explicitToJson: true)
-class ElasticEmailConfig {
-  const ElasticEmailConfig({
-    required this.apiKey,
-    required this.fromEmail,
-  });
-
-  factory ElasticEmailConfig.fromJson(Map<String, dynamic> json) =>
-      _$ElasticEmailConfigFromJson(json);
-
-  static const toJsonFactory = _$ElasticEmailConfigToJson;
-  Map<String, dynamic> toJson() => _$ElasticEmailConfigToJson(this);
-
-  @JsonKey(name: 'apiKey', includeIfNull: false, defaultValue: '')
-  final String apiKey;
-  @JsonKey(name: 'fromEmail', includeIfNull: false, defaultValue: '')
-  final String fromEmail;
-  static const fromJsonFactory = _$ElasticEmailConfigFromJson;
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other is ElasticEmailConfig &&
-            (identical(other.apiKey, apiKey) ||
-                const DeepCollectionEquality().equals(other.apiKey, apiKey)) &&
-            (identical(other.fromEmail, fromEmail) ||
-                const DeepCollectionEquality()
-                    .equals(other.fromEmail, fromEmail)));
-  }
-
-  @override
-  String toString() => jsonEncode(this);
-
-  @override
-  int get hashCode =>
-      const DeepCollectionEquality().hash(apiKey) ^
-      const DeepCollectionEquality().hash(fromEmail) ^
-      runtimeType.hashCode;
-}
-
-extension $ElasticEmailConfigExtension on ElasticEmailConfig {
-  ElasticEmailConfig copyWith({String? apiKey, String? fromEmail}) {
-    return ElasticEmailConfig(
-        apiKey: apiKey ?? this.apiKey, fromEmail: fromEmail ?? this.fromEmail);
-  }
-
-  ElasticEmailConfig copyWithWrapped(
-      {Wrapped<String>? apiKey, Wrapped<String>? fromEmail}) {
-    return ElasticEmailConfig(
-        apiKey: (apiKey != null ? apiKey.value : this.apiKey),
-        fromEmail: (fromEmail != null ? fromEmail.value : this.fromEmail));
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class TwilioConfig {
-  const TwilioConfig({
-    required this.accountSid,
-    required this.authToken,
-    required this.phoneNumber,
-  });
-
-  factory TwilioConfig.fromJson(Map<String, dynamic> json) =>
-      _$TwilioConfigFromJson(json);
-
-  static const toJsonFactory = _$TwilioConfigToJson;
-  Map<String, dynamic> toJson() => _$TwilioConfigToJson(this);
-
-  @JsonKey(name: 'accountSid', includeIfNull: false, defaultValue: '')
-  final String accountSid;
-  @JsonKey(name: 'authToken', includeIfNull: false, defaultValue: '')
-  final String authToken;
-  @JsonKey(name: 'phoneNumber', includeIfNull: false, defaultValue: '')
-  final String phoneNumber;
-  static const fromJsonFactory = _$TwilioConfigFromJson;
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other is TwilioConfig &&
-            (identical(other.accountSid, accountSid) ||
-                const DeepCollectionEquality()
-                    .equals(other.accountSid, accountSid)) &&
-            (identical(other.authToken, authToken) ||
-                const DeepCollectionEquality()
-                    .equals(other.authToken, authToken)) &&
-            (identical(other.phoneNumber, phoneNumber) ||
-                const DeepCollectionEquality()
-                    .equals(other.phoneNumber, phoneNumber)));
-  }
-
-  @override
-  String toString() => jsonEncode(this);
-
-  @override
-  int get hashCode =>
-      const DeepCollectionEquality().hash(accountSid) ^
-      const DeepCollectionEquality().hash(authToken) ^
-      const DeepCollectionEquality().hash(phoneNumber) ^
-      runtimeType.hashCode;
-}
-
-extension $TwilioConfigExtension on TwilioConfig {
-  TwilioConfig copyWith(
-      {String? accountSid, String? authToken, String? phoneNumber}) {
-    return TwilioConfig(
-        accountSid: accountSid ?? this.accountSid,
-        authToken: authToken ?? this.authToken,
-        phoneNumber: phoneNumber ?? this.phoneNumber);
-  }
-
-  TwilioConfig copyWithWrapped(
-      {Wrapped<String>? accountSid,
-      Wrapped<String>? authToken,
-      Wrapped<String>? phoneNumber}) {
-    return TwilioConfig(
-        accountSid: (accountSid != null ? accountSid.value : this.accountSid),
-        authToken: (authToken != null ? authToken.value : this.authToken),
-        phoneNumber:
-            (phoneNumber != null ? phoneNumber.value : this.phoneNumber));
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class TextLocalConfig {
-  const TextLocalConfig({
-    required this.apiKey,
-  });
-
-  factory TextLocalConfig.fromJson(Map<String, dynamic> json) =>
-      _$TextLocalConfigFromJson(json);
-
-  static const toJsonFactory = _$TextLocalConfigToJson;
-  Map<String, dynamic> toJson() => _$TextLocalConfigToJson(this);
-
-  @JsonKey(name: 'apiKey', includeIfNull: false, defaultValue: '')
-  final String apiKey;
-  static const fromJsonFactory = _$TextLocalConfigFromJson;
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other is TextLocalConfig &&
-            (identical(other.apiKey, apiKey) ||
-                const DeepCollectionEquality().equals(other.apiKey, apiKey)));
-  }
-
-  @override
-  String toString() => jsonEncode(this);
-
-  @override
-  int get hashCode =>
-      const DeepCollectionEquality().hash(apiKey) ^ runtimeType.hashCode;
-}
-
-extension $TextLocalConfigExtension on TextLocalConfig {
-  TextLocalConfig copyWith({String? apiKey}) {
-    return TextLocalConfig(apiKey: apiKey ?? this.apiKey);
-  }
-
-  TextLocalConfig copyWithWrapped({Wrapped<String>? apiKey}) {
-    return TextLocalConfig(
-        apiKey: (apiKey != null ? apiKey.value : this.apiKey));
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
 class GeoapifyConfig {
   const GeoapifyConfig({
     required this.apiKey,
@@ -30619,12 +30465,15 @@ class TwinSysInfo {
     this.selfRegistrationDomain,
     this.autoApproveSelfRegistration,
     this.landingPages,
-    this.emailProvider,
-    this.smsProvider,
-    this.voiceProvider,
-    this.elasticEmailConfig,
-    this.twilioConfig,
-    this.textLocalConfig,
+    this.pulseEmailKey,
+    this.pulseSmsKey,
+    this.pulseVoiceKey,
+    this.pulseWebTrafficKey,
+    this.pulseFcmKey,
+    this.pulseOfflineAlertsKey,
+    this.pulseWhatsappKey,
+    this.pulseGeocodingKey,
+    this.pulseReverseGeocodingKey,
     this.geoapifyConfig,
     this.enforceRoles,
     this.headerBgColor,
@@ -30699,33 +30548,26 @@ class TwinSysInfo {
   @JsonKey(
       name: 'landingPages', includeIfNull: false, defaultValue: <LandingPage>[])
   final List<LandingPage>? landingPages;
+  @JsonKey(name: 'pulseEmailKey', includeIfNull: false, defaultValue: '')
+  final String? pulseEmailKey;
+  @JsonKey(name: 'pulseSmsKey', includeIfNull: false, defaultValue: '')
+  final String? pulseSmsKey;
+  @JsonKey(name: 'pulseVoiceKey', includeIfNull: false, defaultValue: '')
+  final String? pulseVoiceKey;
+  @JsonKey(name: 'pulseWebTrafficKey', includeIfNull: false, defaultValue: '')
+  final String? pulseWebTrafficKey;
+  @JsonKey(name: 'pulseFcmKey', includeIfNull: false, defaultValue: '')
+  final String? pulseFcmKey;
   @JsonKey(
-    name: 'emailProvider',
-    includeIfNull: false,
-    toJson: twinSysInfoEmailProviderNullableToJson,
-    fromJson: twinSysInfoEmailProviderNullableFromJson,
-  )
-  final enums.TwinSysInfoEmailProvider? emailProvider;
+      name: 'pulseOfflineAlertsKey', includeIfNull: false, defaultValue: '')
+  final String? pulseOfflineAlertsKey;
+  @JsonKey(name: 'pulseWhatsappKey', includeIfNull: false, defaultValue: '')
+  final String? pulseWhatsappKey;
+  @JsonKey(name: 'pulseGeocodingKey', includeIfNull: false, defaultValue: '')
+  final String? pulseGeocodingKey;
   @JsonKey(
-    name: 'smsProvider',
-    includeIfNull: false,
-    toJson: twinSysInfoSmsProviderNullableToJson,
-    fromJson: twinSysInfoSmsProviderNullableFromJson,
-  )
-  final enums.TwinSysInfoSmsProvider? smsProvider;
-  @JsonKey(
-    name: 'voiceProvider',
-    includeIfNull: false,
-    toJson: twinSysInfoVoiceProviderNullableToJson,
-    fromJson: twinSysInfoVoiceProviderNullableFromJson,
-  )
-  final enums.TwinSysInfoVoiceProvider? voiceProvider;
-  @JsonKey(name: 'elasticEmailConfig', includeIfNull: false)
-  final ElasticEmailConfig? elasticEmailConfig;
-  @JsonKey(name: 'twilioConfig', includeIfNull: false)
-  final TwilioConfig? twilioConfig;
-  @JsonKey(name: 'textLocalConfig', includeIfNull: false)
-  final TextLocalConfig? textLocalConfig;
+      name: 'pulseReverseGeocodingKey', includeIfNull: false, defaultValue: '')
+  final String? pulseReverseGeocodingKey;
   @JsonKey(name: 'geoapifyConfig', includeIfNull: false)
   final GeoapifyConfig? geoapifyConfig;
   @JsonKey(name: 'enforceRoles', includeIfNull: false, defaultValue: false)
@@ -30817,12 +30659,15 @@ class TwinSysInfo {
             (identical(other.selfRegistrationDomain, selfRegistrationDomain) || const DeepCollectionEquality().equals(other.selfRegistrationDomain, selfRegistrationDomain)) &&
             (identical(other.autoApproveSelfRegistration, autoApproveSelfRegistration) || const DeepCollectionEquality().equals(other.autoApproveSelfRegistration, autoApproveSelfRegistration)) &&
             (identical(other.landingPages, landingPages) || const DeepCollectionEquality().equals(other.landingPages, landingPages)) &&
-            (identical(other.emailProvider, emailProvider) || const DeepCollectionEquality().equals(other.emailProvider, emailProvider)) &&
-            (identical(other.smsProvider, smsProvider) || const DeepCollectionEquality().equals(other.smsProvider, smsProvider)) &&
-            (identical(other.voiceProvider, voiceProvider) || const DeepCollectionEquality().equals(other.voiceProvider, voiceProvider)) &&
-            (identical(other.elasticEmailConfig, elasticEmailConfig) || const DeepCollectionEquality().equals(other.elasticEmailConfig, elasticEmailConfig)) &&
-            (identical(other.twilioConfig, twilioConfig) || const DeepCollectionEquality().equals(other.twilioConfig, twilioConfig)) &&
-            (identical(other.textLocalConfig, textLocalConfig) || const DeepCollectionEquality().equals(other.textLocalConfig, textLocalConfig)) &&
+            (identical(other.pulseEmailKey, pulseEmailKey) || const DeepCollectionEquality().equals(other.pulseEmailKey, pulseEmailKey)) &&
+            (identical(other.pulseSmsKey, pulseSmsKey) || const DeepCollectionEquality().equals(other.pulseSmsKey, pulseSmsKey)) &&
+            (identical(other.pulseVoiceKey, pulseVoiceKey) || const DeepCollectionEquality().equals(other.pulseVoiceKey, pulseVoiceKey)) &&
+            (identical(other.pulseWebTrafficKey, pulseWebTrafficKey) || const DeepCollectionEquality().equals(other.pulseWebTrafficKey, pulseWebTrafficKey)) &&
+            (identical(other.pulseFcmKey, pulseFcmKey) || const DeepCollectionEquality().equals(other.pulseFcmKey, pulseFcmKey)) &&
+            (identical(other.pulseOfflineAlertsKey, pulseOfflineAlertsKey) || const DeepCollectionEquality().equals(other.pulseOfflineAlertsKey, pulseOfflineAlertsKey)) &&
+            (identical(other.pulseWhatsappKey, pulseWhatsappKey) || const DeepCollectionEquality().equals(other.pulseWhatsappKey, pulseWhatsappKey)) &&
+            (identical(other.pulseGeocodingKey, pulseGeocodingKey) || const DeepCollectionEquality().equals(other.pulseGeocodingKey, pulseGeocodingKey)) &&
+            (identical(other.pulseReverseGeocodingKey, pulseReverseGeocodingKey) || const DeepCollectionEquality().equals(other.pulseReverseGeocodingKey, pulseReverseGeocodingKey)) &&
             (identical(other.geoapifyConfig, geoapifyConfig) || const DeepCollectionEquality().equals(other.geoapifyConfig, geoapifyConfig)) &&
             (identical(other.enforceRoles, enforceRoles) || const DeepCollectionEquality().equals(other.enforceRoles, enforceRoles)) &&
             (identical(other.headerBgColor, headerBgColor) || const DeepCollectionEquality().equals(other.headerBgColor, headerBgColor)) &&
@@ -30864,12 +30709,15 @@ class TwinSysInfo {
       const DeepCollectionEquality().hash(selfRegistrationDomain) ^
       const DeepCollectionEquality().hash(autoApproveSelfRegistration) ^
       const DeepCollectionEquality().hash(landingPages) ^
-      const DeepCollectionEquality().hash(emailProvider) ^
-      const DeepCollectionEquality().hash(smsProvider) ^
-      const DeepCollectionEquality().hash(voiceProvider) ^
-      const DeepCollectionEquality().hash(elasticEmailConfig) ^
-      const DeepCollectionEquality().hash(twilioConfig) ^
-      const DeepCollectionEquality().hash(textLocalConfig) ^
+      const DeepCollectionEquality().hash(pulseEmailKey) ^
+      const DeepCollectionEquality().hash(pulseSmsKey) ^
+      const DeepCollectionEquality().hash(pulseVoiceKey) ^
+      const DeepCollectionEquality().hash(pulseWebTrafficKey) ^
+      const DeepCollectionEquality().hash(pulseFcmKey) ^
+      const DeepCollectionEquality().hash(pulseOfflineAlertsKey) ^
+      const DeepCollectionEquality().hash(pulseWhatsappKey) ^
+      const DeepCollectionEquality().hash(pulseGeocodingKey) ^
+      const DeepCollectionEquality().hash(pulseReverseGeocodingKey) ^
       const DeepCollectionEquality().hash(geoapifyConfig) ^
       const DeepCollectionEquality().hash(enforceRoles) ^
       const DeepCollectionEquality().hash(headerBgColor) ^
@@ -30909,12 +30757,15 @@ extension $TwinSysInfoExtension on TwinSysInfo {
       String? selfRegistrationDomain,
       bool? autoApproveSelfRegistration,
       List<LandingPage>? landingPages,
-      enums.TwinSysInfoEmailProvider? emailProvider,
-      enums.TwinSysInfoSmsProvider? smsProvider,
-      enums.TwinSysInfoVoiceProvider? voiceProvider,
-      ElasticEmailConfig? elasticEmailConfig,
-      TwilioConfig? twilioConfig,
-      TextLocalConfig? textLocalConfig,
+      String? pulseEmailKey,
+      String? pulseSmsKey,
+      String? pulseVoiceKey,
+      String? pulseWebTrafficKey,
+      String? pulseFcmKey,
+      String? pulseOfflineAlertsKey,
+      String? pulseWhatsappKey,
+      String? pulseGeocodingKey,
+      String? pulseReverseGeocodingKey,
       GeoapifyConfig? geoapifyConfig,
       bool? enforceRoles,
       int? headerBgColor,
@@ -30953,12 +30804,17 @@ extension $TwinSysInfoExtension on TwinSysInfo {
         autoApproveSelfRegistration:
             autoApproveSelfRegistration ?? this.autoApproveSelfRegistration,
         landingPages: landingPages ?? this.landingPages,
-        emailProvider: emailProvider ?? this.emailProvider,
-        smsProvider: smsProvider ?? this.smsProvider,
-        voiceProvider: voiceProvider ?? this.voiceProvider,
-        elasticEmailConfig: elasticEmailConfig ?? this.elasticEmailConfig,
-        twilioConfig: twilioConfig ?? this.twilioConfig,
-        textLocalConfig: textLocalConfig ?? this.textLocalConfig,
+        pulseEmailKey: pulseEmailKey ?? this.pulseEmailKey,
+        pulseSmsKey: pulseSmsKey ?? this.pulseSmsKey,
+        pulseVoiceKey: pulseVoiceKey ?? this.pulseVoiceKey,
+        pulseWebTrafficKey: pulseWebTrafficKey ?? this.pulseWebTrafficKey,
+        pulseFcmKey: pulseFcmKey ?? this.pulseFcmKey,
+        pulseOfflineAlertsKey:
+            pulseOfflineAlertsKey ?? this.pulseOfflineAlertsKey,
+        pulseWhatsappKey: pulseWhatsappKey ?? this.pulseWhatsappKey,
+        pulseGeocodingKey: pulseGeocodingKey ?? this.pulseGeocodingKey,
+        pulseReverseGeocodingKey:
+            pulseReverseGeocodingKey ?? this.pulseReverseGeocodingKey,
         geoapifyConfig: geoapifyConfig ?? this.geoapifyConfig,
         enforceRoles: enforceRoles ?? this.enforceRoles,
         headerBgColor: headerBgColor ?? this.headerBgColor,
@@ -30996,12 +30852,15 @@ extension $TwinSysInfoExtension on TwinSysInfo {
       Wrapped<String?>? selfRegistrationDomain,
       Wrapped<bool?>? autoApproveSelfRegistration,
       Wrapped<List<LandingPage>?>? landingPages,
-      Wrapped<enums.TwinSysInfoEmailProvider?>? emailProvider,
-      Wrapped<enums.TwinSysInfoSmsProvider?>? smsProvider,
-      Wrapped<enums.TwinSysInfoVoiceProvider?>? voiceProvider,
-      Wrapped<ElasticEmailConfig?>? elasticEmailConfig,
-      Wrapped<TwilioConfig?>? twilioConfig,
-      Wrapped<TextLocalConfig?>? textLocalConfig,
+      Wrapped<String?>? pulseEmailKey,
+      Wrapped<String?>? pulseSmsKey,
+      Wrapped<String?>? pulseVoiceKey,
+      Wrapped<String?>? pulseWebTrafficKey,
+      Wrapped<String?>? pulseFcmKey,
+      Wrapped<String?>? pulseOfflineAlertsKey,
+      Wrapped<String?>? pulseWhatsappKey,
+      Wrapped<String?>? pulseGeocodingKey,
+      Wrapped<String?>? pulseReverseGeocodingKey,
       Wrapped<GeoapifyConfig?>? geoapifyConfig,
       Wrapped<bool?>? enforceRoles,
       Wrapped<int?>? headerBgColor,
@@ -31064,20 +30923,29 @@ extension $TwinSysInfoExtension on TwinSysInfo {
             : this.autoApproveSelfRegistration),
         landingPages:
             (landingPages != null ? landingPages.value : this.landingPages),
-        emailProvider:
-            (emailProvider != null ? emailProvider.value : this.emailProvider),
-        smsProvider:
-            (smsProvider != null ? smsProvider.value : this.smsProvider),
-        voiceProvider:
-            (voiceProvider != null ? voiceProvider.value : this.voiceProvider),
-        elasticEmailConfig: (elasticEmailConfig != null
-            ? elasticEmailConfig.value
-            : this.elasticEmailConfig),
-        twilioConfig:
-            (twilioConfig != null ? twilioConfig.value : this.twilioConfig),
-        textLocalConfig: (textLocalConfig != null
-            ? textLocalConfig.value
-            : this.textLocalConfig),
+        pulseEmailKey:
+            (pulseEmailKey != null ? pulseEmailKey.value : this.pulseEmailKey),
+        pulseSmsKey:
+            (pulseSmsKey != null ? pulseSmsKey.value : this.pulseSmsKey),
+        pulseVoiceKey:
+            (pulseVoiceKey != null ? pulseVoiceKey.value : this.pulseVoiceKey),
+        pulseWebTrafficKey: (pulseWebTrafficKey != null
+            ? pulseWebTrafficKey.value
+            : this.pulseWebTrafficKey),
+        pulseFcmKey:
+            (pulseFcmKey != null ? pulseFcmKey.value : this.pulseFcmKey),
+        pulseOfflineAlertsKey: (pulseOfflineAlertsKey != null
+            ? pulseOfflineAlertsKey.value
+            : this.pulseOfflineAlertsKey),
+        pulseWhatsappKey: (pulseWhatsappKey != null
+            ? pulseWhatsappKey.value
+            : this.pulseWhatsappKey),
+        pulseGeocodingKey: (pulseGeocodingKey != null
+            ? pulseGeocodingKey.value
+            : this.pulseGeocodingKey),
+        pulseReverseGeocodingKey: (pulseReverseGeocodingKey != null
+            ? pulseReverseGeocodingKey.value
+            : this.pulseReverseGeocodingKey),
         geoapifyConfig: (geoapifyConfig != null
             ? geoapifyConfig.value
             : this.geoapifyConfig),
@@ -48195,224 +48063,6 @@ List<enums.GeoFenceFenceType>? geoFenceFenceTypeNullableListFromJson(
 
   return geoFenceFenceType
       .map((e) => geoFenceFenceTypeFromJson(e.toString()))
-      .toList();
-}
-
-String? twinSysInfoEmailProviderNullableToJson(
-    enums.TwinSysInfoEmailProvider? twinSysInfoEmailProvider) {
-  return twinSysInfoEmailProvider?.value;
-}
-
-String? twinSysInfoEmailProviderToJson(
-    enums.TwinSysInfoEmailProvider twinSysInfoEmailProvider) {
-  return twinSysInfoEmailProvider.value;
-}
-
-enums.TwinSysInfoEmailProvider twinSysInfoEmailProviderFromJson(
-  Object? twinSysInfoEmailProvider, [
-  enums.TwinSysInfoEmailProvider? defaultValue,
-]) {
-  return enums.TwinSysInfoEmailProvider.values
-          .firstWhereOrNull((e) => e.value == twinSysInfoEmailProvider) ??
-      defaultValue ??
-      enums.TwinSysInfoEmailProvider.swaggerGeneratedUnknown;
-}
-
-enums.TwinSysInfoEmailProvider? twinSysInfoEmailProviderNullableFromJson(
-  Object? twinSysInfoEmailProvider, [
-  enums.TwinSysInfoEmailProvider? defaultValue,
-]) {
-  if (twinSysInfoEmailProvider == null) {
-    return null;
-  }
-  return enums.TwinSysInfoEmailProvider.values
-          .firstWhereOrNull((e) => e.value == twinSysInfoEmailProvider) ??
-      defaultValue;
-}
-
-String twinSysInfoEmailProviderExplodedListToJson(
-    List<enums.TwinSysInfoEmailProvider>? twinSysInfoEmailProvider) {
-  return twinSysInfoEmailProvider?.map((e) => e.value!).join(',') ?? '';
-}
-
-List<String> twinSysInfoEmailProviderListToJson(
-    List<enums.TwinSysInfoEmailProvider>? twinSysInfoEmailProvider) {
-  if (twinSysInfoEmailProvider == null) {
-    return [];
-  }
-
-  return twinSysInfoEmailProvider.map((e) => e.value!).toList();
-}
-
-List<enums.TwinSysInfoEmailProvider> twinSysInfoEmailProviderListFromJson(
-  List? twinSysInfoEmailProvider, [
-  List<enums.TwinSysInfoEmailProvider>? defaultValue,
-]) {
-  if (twinSysInfoEmailProvider == null) {
-    return defaultValue ?? [];
-  }
-
-  return twinSysInfoEmailProvider
-      .map((e) => twinSysInfoEmailProviderFromJson(e.toString()))
-      .toList();
-}
-
-List<enums.TwinSysInfoEmailProvider>?
-    twinSysInfoEmailProviderNullableListFromJson(
-  List? twinSysInfoEmailProvider, [
-  List<enums.TwinSysInfoEmailProvider>? defaultValue,
-]) {
-  if (twinSysInfoEmailProvider == null) {
-    return defaultValue;
-  }
-
-  return twinSysInfoEmailProvider
-      .map((e) => twinSysInfoEmailProviderFromJson(e.toString()))
-      .toList();
-}
-
-String? twinSysInfoSmsProviderNullableToJson(
-    enums.TwinSysInfoSmsProvider? twinSysInfoSmsProvider) {
-  return twinSysInfoSmsProvider?.value;
-}
-
-String? twinSysInfoSmsProviderToJson(
-    enums.TwinSysInfoSmsProvider twinSysInfoSmsProvider) {
-  return twinSysInfoSmsProvider.value;
-}
-
-enums.TwinSysInfoSmsProvider twinSysInfoSmsProviderFromJson(
-  Object? twinSysInfoSmsProvider, [
-  enums.TwinSysInfoSmsProvider? defaultValue,
-]) {
-  return enums.TwinSysInfoSmsProvider.values
-          .firstWhereOrNull((e) => e.value == twinSysInfoSmsProvider) ??
-      defaultValue ??
-      enums.TwinSysInfoSmsProvider.swaggerGeneratedUnknown;
-}
-
-enums.TwinSysInfoSmsProvider? twinSysInfoSmsProviderNullableFromJson(
-  Object? twinSysInfoSmsProvider, [
-  enums.TwinSysInfoSmsProvider? defaultValue,
-]) {
-  if (twinSysInfoSmsProvider == null) {
-    return null;
-  }
-  return enums.TwinSysInfoSmsProvider.values
-          .firstWhereOrNull((e) => e.value == twinSysInfoSmsProvider) ??
-      defaultValue;
-}
-
-String twinSysInfoSmsProviderExplodedListToJson(
-    List<enums.TwinSysInfoSmsProvider>? twinSysInfoSmsProvider) {
-  return twinSysInfoSmsProvider?.map((e) => e.value!).join(',') ?? '';
-}
-
-List<String> twinSysInfoSmsProviderListToJson(
-    List<enums.TwinSysInfoSmsProvider>? twinSysInfoSmsProvider) {
-  if (twinSysInfoSmsProvider == null) {
-    return [];
-  }
-
-  return twinSysInfoSmsProvider.map((e) => e.value!).toList();
-}
-
-List<enums.TwinSysInfoSmsProvider> twinSysInfoSmsProviderListFromJson(
-  List? twinSysInfoSmsProvider, [
-  List<enums.TwinSysInfoSmsProvider>? defaultValue,
-]) {
-  if (twinSysInfoSmsProvider == null) {
-    return defaultValue ?? [];
-  }
-
-  return twinSysInfoSmsProvider
-      .map((e) => twinSysInfoSmsProviderFromJson(e.toString()))
-      .toList();
-}
-
-List<enums.TwinSysInfoSmsProvider>? twinSysInfoSmsProviderNullableListFromJson(
-  List? twinSysInfoSmsProvider, [
-  List<enums.TwinSysInfoSmsProvider>? defaultValue,
-]) {
-  if (twinSysInfoSmsProvider == null) {
-    return defaultValue;
-  }
-
-  return twinSysInfoSmsProvider
-      .map((e) => twinSysInfoSmsProviderFromJson(e.toString()))
-      .toList();
-}
-
-String? twinSysInfoVoiceProviderNullableToJson(
-    enums.TwinSysInfoVoiceProvider? twinSysInfoVoiceProvider) {
-  return twinSysInfoVoiceProvider?.value;
-}
-
-String? twinSysInfoVoiceProviderToJson(
-    enums.TwinSysInfoVoiceProvider twinSysInfoVoiceProvider) {
-  return twinSysInfoVoiceProvider.value;
-}
-
-enums.TwinSysInfoVoiceProvider twinSysInfoVoiceProviderFromJson(
-  Object? twinSysInfoVoiceProvider, [
-  enums.TwinSysInfoVoiceProvider? defaultValue,
-]) {
-  return enums.TwinSysInfoVoiceProvider.values
-          .firstWhereOrNull((e) => e.value == twinSysInfoVoiceProvider) ??
-      defaultValue ??
-      enums.TwinSysInfoVoiceProvider.swaggerGeneratedUnknown;
-}
-
-enums.TwinSysInfoVoiceProvider? twinSysInfoVoiceProviderNullableFromJson(
-  Object? twinSysInfoVoiceProvider, [
-  enums.TwinSysInfoVoiceProvider? defaultValue,
-]) {
-  if (twinSysInfoVoiceProvider == null) {
-    return null;
-  }
-  return enums.TwinSysInfoVoiceProvider.values
-          .firstWhereOrNull((e) => e.value == twinSysInfoVoiceProvider) ??
-      defaultValue;
-}
-
-String twinSysInfoVoiceProviderExplodedListToJson(
-    List<enums.TwinSysInfoVoiceProvider>? twinSysInfoVoiceProvider) {
-  return twinSysInfoVoiceProvider?.map((e) => e.value!).join(',') ?? '';
-}
-
-List<String> twinSysInfoVoiceProviderListToJson(
-    List<enums.TwinSysInfoVoiceProvider>? twinSysInfoVoiceProvider) {
-  if (twinSysInfoVoiceProvider == null) {
-    return [];
-  }
-
-  return twinSysInfoVoiceProvider.map((e) => e.value!).toList();
-}
-
-List<enums.TwinSysInfoVoiceProvider> twinSysInfoVoiceProviderListFromJson(
-  List? twinSysInfoVoiceProvider, [
-  List<enums.TwinSysInfoVoiceProvider>? defaultValue,
-]) {
-  if (twinSysInfoVoiceProvider == null) {
-    return defaultValue ?? [];
-  }
-
-  return twinSysInfoVoiceProvider
-      .map((e) => twinSysInfoVoiceProviderFromJson(e.toString()))
-      .toList();
-}
-
-List<enums.TwinSysInfoVoiceProvider>?
-    twinSysInfoVoiceProviderNullableListFromJson(
-  List? twinSysInfoVoiceProvider, [
-  List<enums.TwinSysInfoVoiceProvider>? defaultValue,
-]) {
-  if (twinSysInfoVoiceProvider == null) {
-    return defaultValue;
-  }
-
-  return twinSysInfoVoiceProvider
-      .map((e) => twinSysInfoVoiceProviderFromJson(e.toString()))
       .toList();
 }
 
