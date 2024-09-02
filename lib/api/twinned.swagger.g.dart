@@ -1687,6 +1687,10 @@ EventInfo _$EventInfoFromJson(Map<String, dynamic> json) => EventInfo(
       description: json['description'] as String? ?? '',
       modelId: json['modelId'] as String? ?? '',
       deviceId: json['deviceId'] as String? ?? '',
+      asswtId: json['asswtId'] as String? ?? '',
+      premiseId: json['premiseId'] as String? ?? '',
+      facilityId: json['facilityId'] as String? ?? '',
+      floorId: json['floorId'] as String? ?? '',
       icon: json['icon'] as String? ?? '',
       conditions: (json['conditions'] as List<dynamic>?)
               ?.map((e) => MatchGroup.fromJson(e as Map<String, dynamic>))
@@ -1736,6 +1740,10 @@ Map<String, dynamic> _$EventInfoToJson(EventInfo instance) {
   writeNotNull('description', instance.description);
   writeNotNull('modelId', instance.modelId);
   writeNotNull('deviceId', instance.deviceId);
+  writeNotNull('asswtId', instance.asswtId);
+  writeNotNull('premiseId', instance.premiseId);
+  writeNotNull('facilityId', instance.facilityId);
+  writeNotNull('floorId', instance.floorId);
   writeNotNull('icon', instance.icon);
   val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
   writeNotNull('notificationTemplate', instance.notificationTemplate?.toJson());
@@ -1754,6 +1762,10 @@ Event _$EventFromJson(Map<String, dynamic> json) => Event(
       description: json['description'] as String? ?? '',
       modelId: json['modelId'] as String? ?? '',
       deviceId: json['deviceId'] as String? ?? '',
+      asswtId: json['asswtId'] as String? ?? '',
+      premiseId: json['premiseId'] as String? ?? '',
+      facilityId: json['facilityId'] as String? ?? '',
+      floorId: json['floorId'] as String? ?? '',
       icon: json['icon'] as String? ?? '',
       conditions: (json['conditions'] as List<dynamic>?)
               ?.map((e) => MatchGroup.fromJson(e as Map<String, dynamic>))
@@ -1810,6 +1822,10 @@ Map<String, dynamic> _$EventToJson(Event instance) {
   writeNotNull('description', instance.description);
   writeNotNull('modelId', instance.modelId);
   writeNotNull('deviceId', instance.deviceId);
+  writeNotNull('asswtId', instance.asswtId);
+  writeNotNull('premiseId', instance.premiseId);
+  writeNotNull('facilityId', instance.facilityId);
+  writeNotNull('floorId', instance.floorId);
   writeNotNull('icon', instance.icon);
   val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
   writeNotNull('notificationTemplate', instance.notificationTemplate?.toJson());
@@ -4814,7 +4830,7 @@ TriggeredEvent _$TriggeredEventFromJson(Map<String, dynamic> json) =>
       userId: json['userId'] as String? ?? '',
       eventType: triggeredEventEventTypeFromJson(json['eventType']),
       deliveryStatus:
-          triggeredEventDeliveryStatusFromJson(json['deliveryStatus']),
+          triggeredEventDeliveryStatusNullableFromJson(json['deliveryStatus']),
       deliveryErrors: (json['deliveryErrors'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -4824,10 +4840,10 @@ TriggeredEvent _$TriggeredEventFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
-      createdStamp: (json['createdStamp'] as num).toInt(),
+      createdStamp: (json['createdStamp'] as num?)?.toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num?)?.toInt(),
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
@@ -4846,9 +4862,6 @@ TriggeredEvent _$TriggeredEventFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$TriggeredEventToJson(TriggeredEvent instance) {
   final val = <String, dynamic>{
     'eventId': instance.eventId,
-    'modelId': instance.modelId,
-    'deviceId': instance.deviceId,
-    'hardwareDeviceId': instance.hardwareDeviceId,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -4857,6 +4870,9 @@ Map<String, dynamic> _$TriggeredEventToJson(TriggeredEvent instance) {
     }
   }
 
+  writeNotNull('modelId', instance.modelId);
+  writeNotNull('deviceId', instance.deviceId);
+  writeNotNull('hardwareDeviceId', instance.hardwareDeviceId);
   writeNotNull('notificationTitle', instance.notificationTitle);
   writeNotNull('notificationContent', instance.notificationContent);
   writeNotNull('emailSubject', instance.emailSubject);
@@ -4866,20 +4882,20 @@ Map<String, dynamic> _$TriggeredEventToJson(TriggeredEvent instance) {
   writeNotNull('fcmContent', instance.fcmContent);
   writeNotNull('voiceMessage', instance.voiceMessage);
   writeNotNull('icon', instance.icon);
-  val['userId'] = instance.userId;
+  writeNotNull('userId', instance.userId);
   writeNotNull('eventType', triggeredEventEventTypeToJson(instance.eventType));
   writeNotNull('deliveryStatus',
-      triggeredEventDeliveryStatusToJson(instance.deliveryStatus));
+      triggeredEventDeliveryStatusNullableToJson(instance.deliveryStatus));
   writeNotNull('deliveryErrors', instance.deliveryErrors);
   writeNotNull('deviceIcon', instance.deviceIcon);
-  val['domainKey'] = instance.domainKey;
-  val['id'] = instance.id;
-  val['name'] = instance.name;
-  val['rtype'] = instance.rtype;
-  val['createdStamp'] = instance.createdStamp;
-  val['createdBy'] = instance.createdBy;
-  val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
+  writeNotNull('domainKey', instance.domainKey);
+  writeNotNull('id', instance.id);
+  writeNotNull('name', instance.name);
+  writeNotNull('rtype', instance.rtype);
+  writeNotNull('createdStamp', instance.createdStamp);
+  writeNotNull('createdBy', instance.createdBy);
+  writeNotNull('updatedBy', instance.updatedBy);
+  writeNotNull('updatedStamp', instance.updatedStamp);
   writeNotNull('tags', instance.tags);
   writeNotNull('modelName', instance.modelName);
   writeNotNull('deviceName', instance.deviceName);

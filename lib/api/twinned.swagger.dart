@@ -3975,6 +3975,89 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
+  ///Search triggered events
+  ///@param eventId
+  ///@param userId
+  ///@param modelId
+  ///@param deviceId
+  ///@param assetId
+  ///@param premiseId
+  ///@param facilityId
+  ///@param floorId
+  ///@param body
+  Future<chopper.Response<TriggeredEventArrayRes>> searchTriggeredEvents({
+    String? eventId,
+    String? userId,
+    String? modelId,
+    String? deviceId,
+    String? assetId,
+    String? premiseId,
+    String? facilityId,
+    String? floorId,
+    required SearchReq? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        TriggeredEventArrayRes, () => TriggeredEventArrayRes.fromJsonFactory);
+
+    return _searchTriggeredEvents(
+        eventId: eventId?.toString(),
+        userId: userId?.toString(),
+        modelId: modelId?.toString(),
+        deviceId: deviceId?.toString(),
+        assetId: assetId?.toString(),
+        premiseId: premiseId?.toString(),
+        facilityId: facilityId?.toString(),
+        floorId: floorId?.toString(),
+        body: body,
+        apikey: apikey?.toString());
+  }
+
+  ///Search triggered events
+  ///@param eventId
+  ///@param userId
+  ///@param modelId
+  ///@param deviceId
+  ///@param assetId
+  ///@param premiseId
+  ///@param facilityId
+  ///@param floorId
+  ///@param body
+  @Post(path: '/Event/search/triggered')
+  Future<chopper.Response<TriggeredEventArrayRes>> _searchTriggeredEvents({
+    @Header('eventId') String? eventId,
+    @Header('userId') String? userId,
+    @Header('modelId') String? modelId,
+    @Header('deviceId') String? deviceId,
+    @Header('assetId') String? assetId,
+    @Header('premiseId') String? premiseId,
+    @Header('facilityId') String? facilityId,
+    @Header('floorId') String? floorId,
+    @Body() required SearchReq? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///query data
+  ///@param body
+  Future<chopper.Response<TriggeredEventArrayRes>> queryTriggeredEqlEvent({
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        TriggeredEventArrayRes, () => TriggeredEventArrayRes.fromJsonFactory);
+
+    return _queryTriggeredEqlEvent(body: body, apikey: apikey?.toString());
+  }
+
+  ///query data
+  ///@param body
+  @Post(path: '/Event/query/triggered/eql')
+  Future<chopper.Response<TriggeredEventArrayRes>> _queryTriggeredEqlEvent({
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Create trigger
   ///@param body
   Future<chopper.Response<TriggerEntityRes>> createTrigger({
@@ -13886,6 +13969,10 @@ class EventInfo {
     this.description,
     this.modelId,
     this.deviceId,
+    this.asswtId,
+    this.premiseId,
+    this.facilityId,
+    this.floorId,
     this.icon,
     required this.conditions,
     this.notificationTemplate,
@@ -13912,6 +13999,14 @@ class EventInfo {
   final String? modelId;
   @JsonKey(name: 'deviceId', includeIfNull: false, defaultValue: '')
   final String? deviceId;
+  @JsonKey(name: 'asswtId', includeIfNull: false, defaultValue: '')
+  final String? asswtId;
+  @JsonKey(name: 'premiseId', includeIfNull: false, defaultValue: '')
+  final String? premiseId;
+  @JsonKey(name: 'facilityId', includeIfNull: false, defaultValue: '')
+  final String? facilityId;
+  @JsonKey(name: 'floorId', includeIfNull: false, defaultValue: '')
+  final String? floorId;
   @JsonKey(name: 'icon', includeIfNull: false, defaultValue: '')
   final String? icon;
   @JsonKey(
@@ -13950,6 +14045,18 @@ class EventInfo {
             (identical(other.deviceId, deviceId) ||
                 const DeepCollectionEquality()
                     .equals(other.deviceId, deviceId)) &&
+            (identical(other.asswtId, asswtId) ||
+                const DeepCollectionEquality()
+                    .equals(other.asswtId, asswtId)) &&
+            (identical(other.premiseId, premiseId) ||
+                const DeepCollectionEquality()
+                    .equals(other.premiseId, premiseId)) &&
+            (identical(other.facilityId, facilityId) ||
+                const DeepCollectionEquality()
+                    .equals(other.facilityId, facilityId)) &&
+            (identical(other.floorId, floorId) ||
+                const DeepCollectionEquality()
+                    .equals(other.floorId, floorId)) &&
             (identical(other.icon, icon) ||
                 const DeepCollectionEquality().equals(other.icon, icon)) &&
             (identical(other.conditions, conditions) ||
@@ -13988,6 +14095,10 @@ class EventInfo {
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(modelId) ^
       const DeepCollectionEquality().hash(deviceId) ^
+      const DeepCollectionEquality().hash(asswtId) ^
+      const DeepCollectionEquality().hash(premiseId) ^
+      const DeepCollectionEquality().hash(facilityId) ^
+      const DeepCollectionEquality().hash(floorId) ^
       const DeepCollectionEquality().hash(icon) ^
       const DeepCollectionEquality().hash(conditions) ^
       const DeepCollectionEquality().hash(notificationTemplate) ^
@@ -14007,6 +14118,10 @@ extension $EventInfoExtension on EventInfo {
       String? description,
       String? modelId,
       String? deviceId,
+      String? asswtId,
+      String? premiseId,
+      String? facilityId,
+      String? floorId,
       String? icon,
       List<MatchGroup>? conditions,
       NotificationTemplate? notificationTemplate,
@@ -14022,6 +14137,10 @@ extension $EventInfoExtension on EventInfo {
         description: description ?? this.description,
         modelId: modelId ?? this.modelId,
         deviceId: deviceId ?? this.deviceId,
+        asswtId: asswtId ?? this.asswtId,
+        premiseId: premiseId ?? this.premiseId,
+        facilityId: facilityId ?? this.facilityId,
+        floorId: floorId ?? this.floorId,
         icon: icon ?? this.icon,
         conditions: conditions ?? this.conditions,
         notificationTemplate: notificationTemplate ?? this.notificationTemplate,
@@ -14039,6 +14158,10 @@ extension $EventInfoExtension on EventInfo {
       Wrapped<String?>? description,
       Wrapped<String?>? modelId,
       Wrapped<String?>? deviceId,
+      Wrapped<String?>? asswtId,
+      Wrapped<String?>? premiseId,
+      Wrapped<String?>? facilityId,
+      Wrapped<String?>? floorId,
       Wrapped<String?>? icon,
       Wrapped<List<MatchGroup>>? conditions,
       Wrapped<NotificationTemplate?>? notificationTemplate,
@@ -14055,6 +14178,10 @@ extension $EventInfoExtension on EventInfo {
             (description != null ? description.value : this.description),
         modelId: (modelId != null ? modelId.value : this.modelId),
         deviceId: (deviceId != null ? deviceId.value : this.deviceId),
+        asswtId: (asswtId != null ? asswtId.value : this.asswtId),
+        premiseId: (premiseId != null ? premiseId.value : this.premiseId),
+        facilityId: (facilityId != null ? facilityId.value : this.facilityId),
+        floorId: (floorId != null ? floorId.value : this.floorId),
         icon: (icon != null ? icon.value : this.icon),
         conditions: (conditions != null ? conditions.value : this.conditions),
         notificationTemplate: (notificationTemplate != null
@@ -14081,6 +14208,10 @@ class Event {
     this.description,
     this.modelId,
     this.deviceId,
+    this.asswtId,
+    this.premiseId,
+    this.facilityId,
+    this.floorId,
     this.icon,
     required this.conditions,
     this.notificationTemplate,
@@ -14113,6 +14244,14 @@ class Event {
   final String? modelId;
   @JsonKey(name: 'deviceId', includeIfNull: false, defaultValue: '')
   final String? deviceId;
+  @JsonKey(name: 'asswtId', includeIfNull: false, defaultValue: '')
+  final String? asswtId;
+  @JsonKey(name: 'premiseId', includeIfNull: false, defaultValue: '')
+  final String? premiseId;
+  @JsonKey(name: 'facilityId', includeIfNull: false, defaultValue: '')
+  final String? facilityId;
+  @JsonKey(name: 'floorId', includeIfNull: false, defaultValue: '')
+  final String? floorId;
   @JsonKey(name: 'icon', includeIfNull: false, defaultValue: '')
   final String? icon;
   @JsonKey(
@@ -14165,6 +14304,18 @@ class Event {
             (identical(other.deviceId, deviceId) ||
                 const DeepCollectionEquality()
                     .equals(other.deviceId, deviceId)) &&
+            (identical(other.asswtId, asswtId) ||
+                const DeepCollectionEquality()
+                    .equals(other.asswtId, asswtId)) &&
+            (identical(other.premiseId, premiseId) ||
+                const DeepCollectionEquality()
+                    .equals(other.premiseId, premiseId)) &&
+            (identical(other.facilityId, facilityId) ||
+                const DeepCollectionEquality()
+                    .equals(other.facilityId, facilityId)) &&
+            (identical(other.floorId, floorId) ||
+                const DeepCollectionEquality()
+                    .equals(other.floorId, floorId)) &&
             (identical(other.icon, icon) ||
                 const DeepCollectionEquality().equals(other.icon, icon)) &&
             (identical(other.conditions, conditions) ||
@@ -14209,8 +14360,7 @@ class Event {
                 const DeepCollectionEquality()
                     .equals(other.updatedBy, updatedBy)) &&
             (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)));
   }
 
   @override
@@ -14222,6 +14372,10 @@ class Event {
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(modelId) ^
       const DeepCollectionEquality().hash(deviceId) ^
+      const DeepCollectionEquality().hash(asswtId) ^
+      const DeepCollectionEquality().hash(premiseId) ^
+      const DeepCollectionEquality().hash(facilityId) ^
+      const DeepCollectionEquality().hash(floorId) ^
       const DeepCollectionEquality().hash(icon) ^
       const DeepCollectionEquality().hash(conditions) ^
       const DeepCollectionEquality().hash(notificationTemplate) ^
@@ -14248,6 +14402,10 @@ extension $EventExtension on Event {
       String? description,
       String? modelId,
       String? deviceId,
+      String? asswtId,
+      String? premiseId,
+      String? facilityId,
+      String? floorId,
       String? icon,
       List<MatchGroup>? conditions,
       NotificationTemplate? notificationTemplate,
@@ -14270,6 +14428,10 @@ extension $EventExtension on Event {
         description: description ?? this.description,
         modelId: modelId ?? this.modelId,
         deviceId: deviceId ?? this.deviceId,
+        asswtId: asswtId ?? this.asswtId,
+        premiseId: premiseId ?? this.premiseId,
+        facilityId: facilityId ?? this.facilityId,
+        floorId: floorId ?? this.floorId,
         icon: icon ?? this.icon,
         conditions: conditions ?? this.conditions,
         notificationTemplate: notificationTemplate ?? this.notificationTemplate,
@@ -14294,6 +14456,10 @@ extension $EventExtension on Event {
       Wrapped<String?>? description,
       Wrapped<String?>? modelId,
       Wrapped<String?>? deviceId,
+      Wrapped<String?>? asswtId,
+      Wrapped<String?>? premiseId,
+      Wrapped<String?>? facilityId,
+      Wrapped<String?>? floorId,
       Wrapped<String?>? icon,
       Wrapped<List<MatchGroup>>? conditions,
       Wrapped<NotificationTemplate?>? notificationTemplate,
@@ -14317,6 +14483,10 @@ extension $EventExtension on Event {
             (description != null ? description.value : this.description),
         modelId: (modelId != null ? modelId.value : this.modelId),
         deviceId: (deviceId != null ? deviceId.value : this.deviceId),
+        asswtId: (asswtId != null ? asswtId.value : this.asswtId),
+        premiseId: (premiseId != null ? premiseId.value : this.premiseId),
+        facilityId: (facilityId != null ? facilityId.value : this.facilityId),
+        floorId: (floorId != null ? floorId.value : this.floorId),
         icon: (icon != null ? icon.value : this.icon),
         conditions: (conditions != null ? conditions.value : this.conditions),
         notificationTemplate: (notificationTemplate != null
@@ -24215,9 +24385,9 @@ extension $EventRegistrationArrayResExtension on EventRegistrationArrayRes {
 class TriggeredEvent {
   const TriggeredEvent({
     required this.eventId,
-    required this.modelId,
-    required this.deviceId,
-    required this.hardwareDeviceId,
+    this.modelId,
+    this.deviceId,
+    this.hardwareDeviceId,
     this.notificationTitle,
     this.notificationContent,
     this.emailSubject,
@@ -24227,19 +24397,19 @@ class TriggeredEvent {
     this.fcmContent,
     this.voiceMessage,
     this.icon,
-    required this.userId,
+    this.userId,
     required this.eventType,
-    required this.deliveryStatus,
+    this.deliveryStatus,
     this.deliveryErrors,
     this.deviceIcon,
-    required this.domainKey,
-    required this.id,
-    required this.name,
-    required this.rtype,
-    required this.createdStamp,
-    required this.createdBy,
-    required this.updatedBy,
-    required this.updatedStamp,
+    this.domainKey,
+    this.id,
+    this.name,
+    this.rtype,
+    this.createdStamp,
+    this.createdBy,
+    this.updatedBy,
+    this.updatedStamp,
     this.tags,
     this.modelName,
     this.deviceName,
@@ -24262,11 +24432,11 @@ class TriggeredEvent {
   @JsonKey(name: 'eventId', includeIfNull: false, defaultValue: '')
   final String eventId;
   @JsonKey(name: 'modelId', includeIfNull: false, defaultValue: '')
-  final String modelId;
+  final String? modelId;
   @JsonKey(name: 'deviceId', includeIfNull: false, defaultValue: '')
-  final String deviceId;
+  final String? deviceId;
   @JsonKey(name: 'hardwareDeviceId', includeIfNull: false, defaultValue: '')
-  final String hardwareDeviceId;
+  final String? hardwareDeviceId;
   @JsonKey(name: 'notificationTitle', includeIfNull: false, defaultValue: '')
   final String? notificationTitle;
   @JsonKey(name: 'notificationContent', includeIfNull: false, defaultValue: '')
@@ -24286,7 +24456,7 @@ class TriggeredEvent {
   @JsonKey(name: 'icon', includeIfNull: false, defaultValue: '')
   final String? icon;
   @JsonKey(name: 'userId', includeIfNull: false, defaultValue: '')
-  final String userId;
+  final String? userId;
   @JsonKey(
     name: 'eventType',
     includeIfNull: false,
@@ -24297,31 +24467,31 @@ class TriggeredEvent {
   @JsonKey(
     name: 'deliveryStatus',
     includeIfNull: false,
-    toJson: triggeredEventDeliveryStatusToJson,
-    fromJson: triggeredEventDeliveryStatusFromJson,
+    toJson: triggeredEventDeliveryStatusNullableToJson,
+    fromJson: triggeredEventDeliveryStatusNullableFromJson,
   )
-  final enums.TriggeredEventDeliveryStatus deliveryStatus;
+  final enums.TriggeredEventDeliveryStatus? deliveryStatus;
   @JsonKey(
       name: 'deliveryErrors', includeIfNull: false, defaultValue: <String>[])
   final List<String>? deliveryErrors;
   @JsonKey(name: 'deviceIcon', includeIfNull: false, defaultValue: '')
   final String? deviceIcon;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
-  final String domainKey;
+  final String? domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
-  final String id;
+  final String? id;
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
-  final String name;
+  final String? name;
   @JsonKey(name: 'rtype', includeIfNull: false, defaultValue: '')
-  final String rtype;
+  final String? rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
-  final int createdStamp;
+  final int? createdStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
-  final String createdBy;
+  final String? createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
-  final String updatedBy;
+  final String? updatedBy;
   @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
+  final int? updatedStamp;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
   @JsonKey(name: 'modelName', includeIfNull: false, defaultValue: '')
@@ -24558,9 +24728,9 @@ extension $TriggeredEventExtension on TriggeredEvent {
 
   TriggeredEvent copyWithWrapped(
       {Wrapped<String>? eventId,
-      Wrapped<String>? modelId,
-      Wrapped<String>? deviceId,
-      Wrapped<String>? hardwareDeviceId,
+      Wrapped<String?>? modelId,
+      Wrapped<String?>? deviceId,
+      Wrapped<String?>? hardwareDeviceId,
       Wrapped<String?>? notificationTitle,
       Wrapped<String?>? notificationContent,
       Wrapped<String?>? emailSubject,
@@ -24570,19 +24740,19 @@ extension $TriggeredEventExtension on TriggeredEvent {
       Wrapped<String?>? fcmContent,
       Wrapped<String?>? voiceMessage,
       Wrapped<String?>? icon,
-      Wrapped<String>? userId,
+      Wrapped<String?>? userId,
       Wrapped<enums.TriggeredEventEventType>? eventType,
-      Wrapped<enums.TriggeredEventDeliveryStatus>? deliveryStatus,
+      Wrapped<enums.TriggeredEventDeliveryStatus?>? deliveryStatus,
       Wrapped<List<String>?>? deliveryErrors,
       Wrapped<String?>? deviceIcon,
-      Wrapped<String>? domainKey,
-      Wrapped<String>? id,
-      Wrapped<String>? name,
-      Wrapped<String>? rtype,
-      Wrapped<int>? createdStamp,
-      Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp,
+      Wrapped<String?>? domainKey,
+      Wrapped<String?>? id,
+      Wrapped<String?>? name,
+      Wrapped<String?>? rtype,
+      Wrapped<int?>? createdStamp,
+      Wrapped<String?>? createdBy,
+      Wrapped<String?>? updatedBy,
+      Wrapped<int?>? updatedStamp,
       Wrapped<List<String>?>? tags,
       Wrapped<String?>? modelName,
       Wrapped<String?>? deviceName,

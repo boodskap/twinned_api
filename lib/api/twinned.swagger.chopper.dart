@@ -3400,6 +3400,64 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<TriggeredEventArrayRes>> _searchTriggeredEvents({
+    String? eventId,
+    String? userId,
+    String? modelId,
+    String? deviceId,
+    String? assetId,
+    String? premiseId,
+    String? facilityId,
+    String? floorId,
+    required SearchReq? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Event/search/triggered');
+    final Map<String, String> $headers = {
+      if (eventId != null) 'eventId': eventId,
+      if (userId != null) 'userId': userId,
+      if (modelId != null) 'modelId': modelId,
+      if (deviceId != null) 'deviceId': deviceId,
+      if (assetId != null) 'assetId': assetId,
+      if (premiseId != null) 'premiseId': premiseId,
+      if (facilityId != null) 'facilityId': facilityId,
+      if (floorId != null) 'floorId': floorId,
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client
+        .send<TriggeredEventArrayRes, TriggeredEventArrayRes>($request);
+  }
+
+  @override
+  Future<Response<TriggeredEventArrayRes>> _queryTriggeredEqlEvent({
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/Event/query/triggered/eql');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client
+        .send<TriggeredEventArrayRes, TriggeredEventArrayRes>($request);
+  }
+
+  @override
   Future<Response<TriggerEntityRes>> _createTrigger({
     required TriggerInfo? body,
     String? apikey,

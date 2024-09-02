@@ -7640,6 +7640,140 @@
         "summary": "query data"
       }
     },
+    "/Event/search/triggered": {
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "summary": "Search triggered events",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "searchTriggeredEvents",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "eventId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "userId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "modelId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "deviceId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "assetId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "premiseId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "facilityId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "floorId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/TriggeredEventArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/Event/query/triggered/eql": {
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "description": "query triggered event",
+        "operationId": "queryTriggeredEqlEvent",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/TriggeredEventArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "query data"
+      }
+    },
     "/Trigger/create": {
       "post": {
         "tags": [
@@ -17381,6 +17515,18 @@
         "deviceId": {
           "type": "string"
         },
+        "asswtId": {
+          "type": "string"
+        },
+        "premiseId": {
+          "type": "string"
+        },
+        "facilityId": {
+          "type": "string"
+        },
+        "floorId": {
+          "type": "string"
+        },
         "icon": {
           "type": "string"
         },
@@ -19678,20 +19824,7 @@
       "type": "object",
       "required": [
         "eventId",
-        "modelId",
-        "deviceId",
-        "hardwareDeviceId",
-        "eventType",
-        "deliveryStatus",
-        "domainKey",
-        "userId",
-        "id",
-        "name",
-        "rtype",
-        "createdStamp",
-        "updatedStamp",
-        "createdBy",
-        "updatedBy"
+        "eventType"
       ],
       "properties": {
         "eventId": {
