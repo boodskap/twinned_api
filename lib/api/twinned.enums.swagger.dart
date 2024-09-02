@@ -185,6 +185,50 @@ enum ControlCommandFixedType {
   const ControlCommandFixedType(this.value);
 }
 
+enum EventInfoSourceType {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('MODEL')
+  model('MODEL'),
+  @JsonValue('DEVICE')
+  device('DEVICE'),
+  @JsonValue('ASSET')
+  asset('ASSET'),
+  @JsonValue('PREMISE')
+  premise('PREMISE'),
+  @JsonValue('FACILITY')
+  facility('FACILITY'),
+  @JsonValue('FLOOR')
+  floor('FLOOR');
+
+  final String? value;
+
+  const EventInfoSourceType(this.value);
+}
+
+enum EventSourceType {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('MODEL')
+  model('MODEL'),
+  @JsonValue('DEVICE')
+  device('DEVICE'),
+  @JsonValue('ASSET')
+  asset('ASSET'),
+  @JsonValue('PREMISE')
+  premise('PREMISE'),
+  @JsonValue('FACILITY')
+  facility('FACILITY'),
+  @JsonValue('FLOOR')
+  floor('FLOOR');
+
+  final String? value;
+
+  const EventSourceType(this.value);
+}
+
 enum HttpConfigProtocol {
   @JsonValue(null)
   swaggerGeneratedUnknown(null),
@@ -627,6 +671,28 @@ enum TriggeredEventDeliveryStatus {
   final String? value;
 
   const TriggeredEventDeliveryStatus(this.value);
+}
+
+enum TriggeredEventSourceType {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('MODEL')
+  model('MODEL'),
+  @JsonValue('DEVICE')
+  device('DEVICE'),
+  @JsonValue('ASSET')
+  asset('ASSET'),
+  @JsonValue('PREMISE')
+  premise('PREMISE'),
+  @JsonValue('FACILITY')
+  facility('FACILITY'),
+  @JsonValue('FLOOR')
+  floor('FLOOR');
+
+  final String? value;
+
+  const TriggeredEventSourceType(this.value);
 }
 
 enum ScreenWidgetInfoTarget {

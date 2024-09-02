@@ -13983,6 +13983,7 @@ class EventInfo {
     this.tags,
     this.roles,
     this.clientIds,
+    this.sourceType,
   });
 
   factory EventInfo.fromJson(Map<String, dynamic> json) =>
@@ -14028,6 +14029,13 @@ class EventInfo {
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
   final List<String>? clientIds;
+  @JsonKey(
+    name: 'sourceType',
+    includeIfNull: false,
+    toJson: eventInfoSourceTypeNullableToJson,
+    fromJson: eventInfoSourceTypeNullableFromJson,
+  )
+  final enums.EventInfoSourceType? sourceType;
   static const fromJsonFactory = _$EventInfoFromJson;
 
   @override
@@ -14083,7 +14091,10 @@ class EventInfo {
                 const DeepCollectionEquality().equals(other.roles, roles)) &&
             (identical(other.clientIds, clientIds) ||
                 const DeepCollectionEquality()
-                    .equals(other.clientIds, clientIds)));
+                    .equals(other.clientIds, clientIds)) &&
+            (identical(other.sourceType, sourceType) ||
+                const DeepCollectionEquality()
+                    .equals(other.sourceType, sourceType)));
   }
 
   @override
@@ -14109,6 +14120,7 @@ class EventInfo {
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(clientIds) ^
+      const DeepCollectionEquality().hash(sourceType) ^
       runtimeType.hashCode;
 }
 
@@ -14131,7 +14143,8 @@ extension $EventInfoExtension on EventInfo {
       VoiceTemplate? voiceTemplate,
       List<String>? tags,
       List<String>? roles,
-      List<String>? clientIds}) {
+      List<String>? clientIds,
+      enums.EventInfoSourceType? sourceType}) {
     return EventInfo(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -14150,7 +14163,8 @@ extension $EventInfoExtension on EventInfo {
         voiceTemplate: voiceTemplate ?? this.voiceTemplate,
         tags: tags ?? this.tags,
         roles: roles ?? this.roles,
-        clientIds: clientIds ?? this.clientIds);
+        clientIds: clientIds ?? this.clientIds,
+        sourceType: sourceType ?? this.sourceType);
   }
 
   EventInfo copyWithWrapped(
@@ -14171,7 +14185,8 @@ extension $EventInfoExtension on EventInfo {
       Wrapped<VoiceTemplate?>? voiceTemplate,
       Wrapped<List<String>?>? tags,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds}) {
+      Wrapped<List<String>?>? clientIds,
+      Wrapped<enums.EventInfoSourceType?>? sourceType}) {
     return EventInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -14197,7 +14212,8 @@ extension $EventInfoExtension on EventInfo {
             (voiceTemplate != null ? voiceTemplate.value : this.voiceTemplate),
         tags: (tags != null ? tags.value : this.tags),
         roles: (roles != null ? roles.value : this.roles),
-        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
+        sourceType: (sourceType != null ? sourceType.value : this.sourceType));
   }
 }
 
@@ -14222,6 +14238,7 @@ class Event {
     this.tags,
     this.roles,
     this.clientIds,
+    this.sourceType,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -14273,6 +14290,13 @@ class Event {
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
   final List<String>? clientIds;
+  @JsonKey(
+    name: 'sourceType',
+    includeIfNull: false,
+    toJson: eventSourceTypeNullableToJson,
+    fromJson: eventSourceTypeNullableFromJson,
+  )
+  final enums.EventSourceType? sourceType;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -14343,6 +14367,9 @@ class Event {
             (identical(other.clientIds, clientIds) ||
                 const DeepCollectionEquality()
                     .equals(other.clientIds, clientIds)) &&
+            (identical(other.sourceType, sourceType) ||
+                const DeepCollectionEquality()
+                    .equals(other.sourceType, sourceType)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -14357,10 +14384,8 @@ class Event {
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)));
+                const DeepCollectionEquality().equals(other.updatedBy, updatedBy)) &&
+            (identical(other.updatedStamp, updatedStamp) || const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)));
   }
 
   @override
@@ -14386,6 +14411,7 @@ class Event {
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(clientIds) ^
+      const DeepCollectionEquality().hash(sourceType) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -14416,6 +14442,7 @@ extension $EventExtension on Event {
       List<String>? tags,
       List<String>? roles,
       List<String>? clientIds,
+      enums.EventSourceType? sourceType,
       String? domainKey,
       String? id,
       String? rtype,
@@ -14442,6 +14469,7 @@ extension $EventExtension on Event {
         tags: tags ?? this.tags,
         roles: roles ?? this.roles,
         clientIds: clientIds ?? this.clientIds,
+        sourceType: sourceType ?? this.sourceType,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -14470,6 +14498,7 @@ extension $EventExtension on Event {
       Wrapped<List<String>?>? tags,
       Wrapped<List<String>?>? roles,
       Wrapped<List<String>?>? clientIds,
+      Wrapped<enums.EventSourceType?>? sourceType,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -14503,6 +14532,7 @@ extension $EventExtension on Event {
         tags: (tags != null ? tags.value : this.tags),
         roles: (roles != null ? roles.value : this.roles),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
+        sourceType: (sourceType != null ? sourceType.value : this.sourceType),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -24421,6 +24451,7 @@ class TriggeredEvent {
     this.facilityName,
     this.floorId,
     this.floorName,
+    this.sourceType,
   });
 
   factory TriggeredEvent.fromJson(Map<String, dynamic> json) =>
@@ -24514,6 +24545,13 @@ class TriggeredEvent {
   final String? floorId;
   @JsonKey(name: 'floorName', includeIfNull: false, defaultValue: '')
   final String? floorName;
+  @JsonKey(
+    name: 'sourceType',
+    includeIfNull: false,
+    toJson: triggeredEventSourceTypeNullableToJson,
+    fromJson: triggeredEventSourceTypeNullableFromJson,
+  )
+  final enums.TriggeredEventSourceType? sourceType;
   static const fromJsonFactory = _$TriggeredEventFromJson;
 
   @override
@@ -24599,7 +24637,8 @@ class TriggeredEvent {
             (identical(other.facilityId, facilityId) || const DeepCollectionEquality().equals(other.facilityId, facilityId)) &&
             (identical(other.facilityName, facilityName) || const DeepCollectionEquality().equals(other.facilityName, facilityName)) &&
             (identical(other.floorId, floorId) || const DeepCollectionEquality().equals(other.floorId, floorId)) &&
-            (identical(other.floorName, floorName) || const DeepCollectionEquality().equals(other.floorName, floorName)));
+            (identical(other.floorName, floorName) || const DeepCollectionEquality().equals(other.floorName, floorName)) &&
+            (identical(other.sourceType, sourceType) || const DeepCollectionEquality().equals(other.sourceType, sourceType)));
   }
 
   @override
@@ -24644,6 +24683,7 @@ class TriggeredEvent {
       const DeepCollectionEquality().hash(facilityName) ^
       const DeepCollectionEquality().hash(floorId) ^
       const DeepCollectionEquality().hash(floorName) ^
+      const DeepCollectionEquality().hash(sourceType) ^
       runtimeType.hashCode;
 }
 
@@ -24685,7 +24725,8 @@ extension $TriggeredEventExtension on TriggeredEvent {
       String? facilityId,
       String? facilityName,
       String? floorId,
-      String? floorName}) {
+      String? floorName,
+      enums.TriggeredEventSourceType? sourceType}) {
     return TriggeredEvent(
         eventId: eventId ?? this.eventId,
         modelId: modelId ?? this.modelId,
@@ -24723,7 +24764,8 @@ extension $TriggeredEventExtension on TriggeredEvent {
         facilityId: facilityId ?? this.facilityId,
         facilityName: facilityName ?? this.facilityName,
         floorId: floorId ?? this.floorId,
-        floorName: floorName ?? this.floorName);
+        floorName: floorName ?? this.floorName,
+        sourceType: sourceType ?? this.sourceType);
   }
 
   TriggeredEvent copyWithWrapped(
@@ -24763,7 +24805,8 @@ extension $TriggeredEventExtension on TriggeredEvent {
       Wrapped<String?>? facilityId,
       Wrapped<String?>? facilityName,
       Wrapped<String?>? floorId,
-      Wrapped<String?>? floorName}) {
+      Wrapped<String?>? floorName,
+      Wrapped<enums.TriggeredEventSourceType?>? sourceType}) {
     return TriggeredEvent(
         eventId: (eventId != null ? eventId.value : this.eventId),
         modelId: (modelId != null ? modelId.value : this.modelId),
@@ -24818,7 +24861,8 @@ extension $TriggeredEventExtension on TriggeredEvent {
         facilityName:
             (facilityName != null ? facilityName.value : this.facilityName),
         floorId: (floorId != null ? floorId.value : this.floorId),
-        floorName: (floorName != null ? floorName.value : this.floorName));
+        floorName: (floorName != null ? floorName.value : this.floorName),
+        sourceType: (sourceType != null ? sourceType.value : this.sourceType));
   }
 }
 
@@ -46281,6 +46325,148 @@ List<enums.ControlCommandFixedType>?
       .toList();
 }
 
+String? eventInfoSourceTypeNullableToJson(
+    enums.EventInfoSourceType? eventInfoSourceType) {
+  return eventInfoSourceType?.value;
+}
+
+String? eventInfoSourceTypeToJson(
+    enums.EventInfoSourceType eventInfoSourceType) {
+  return eventInfoSourceType.value;
+}
+
+enums.EventInfoSourceType eventInfoSourceTypeFromJson(
+  Object? eventInfoSourceType, [
+  enums.EventInfoSourceType? defaultValue,
+]) {
+  return enums.EventInfoSourceType.values
+          .firstWhereOrNull((e) => e.value == eventInfoSourceType) ??
+      defaultValue ??
+      enums.EventInfoSourceType.swaggerGeneratedUnknown;
+}
+
+enums.EventInfoSourceType? eventInfoSourceTypeNullableFromJson(
+  Object? eventInfoSourceType, [
+  enums.EventInfoSourceType? defaultValue,
+]) {
+  if (eventInfoSourceType == null) {
+    return null;
+  }
+  return enums.EventInfoSourceType.values
+          .firstWhereOrNull((e) => e.value == eventInfoSourceType) ??
+      defaultValue;
+}
+
+String eventInfoSourceTypeExplodedListToJson(
+    List<enums.EventInfoSourceType>? eventInfoSourceType) {
+  return eventInfoSourceType?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> eventInfoSourceTypeListToJson(
+    List<enums.EventInfoSourceType>? eventInfoSourceType) {
+  if (eventInfoSourceType == null) {
+    return [];
+  }
+
+  return eventInfoSourceType.map((e) => e.value!).toList();
+}
+
+List<enums.EventInfoSourceType> eventInfoSourceTypeListFromJson(
+  List? eventInfoSourceType, [
+  List<enums.EventInfoSourceType>? defaultValue,
+]) {
+  if (eventInfoSourceType == null) {
+    return defaultValue ?? [];
+  }
+
+  return eventInfoSourceType
+      .map((e) => eventInfoSourceTypeFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.EventInfoSourceType>? eventInfoSourceTypeNullableListFromJson(
+  List? eventInfoSourceType, [
+  List<enums.EventInfoSourceType>? defaultValue,
+]) {
+  if (eventInfoSourceType == null) {
+    return defaultValue;
+  }
+
+  return eventInfoSourceType
+      .map((e) => eventInfoSourceTypeFromJson(e.toString()))
+      .toList();
+}
+
+String? eventSourceTypeNullableToJson(enums.EventSourceType? eventSourceType) {
+  return eventSourceType?.value;
+}
+
+String? eventSourceTypeToJson(enums.EventSourceType eventSourceType) {
+  return eventSourceType.value;
+}
+
+enums.EventSourceType eventSourceTypeFromJson(
+  Object? eventSourceType, [
+  enums.EventSourceType? defaultValue,
+]) {
+  return enums.EventSourceType.values
+          .firstWhereOrNull((e) => e.value == eventSourceType) ??
+      defaultValue ??
+      enums.EventSourceType.swaggerGeneratedUnknown;
+}
+
+enums.EventSourceType? eventSourceTypeNullableFromJson(
+  Object? eventSourceType, [
+  enums.EventSourceType? defaultValue,
+]) {
+  if (eventSourceType == null) {
+    return null;
+  }
+  return enums.EventSourceType.values
+          .firstWhereOrNull((e) => e.value == eventSourceType) ??
+      defaultValue;
+}
+
+String eventSourceTypeExplodedListToJson(
+    List<enums.EventSourceType>? eventSourceType) {
+  return eventSourceType?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> eventSourceTypeListToJson(
+    List<enums.EventSourceType>? eventSourceType) {
+  if (eventSourceType == null) {
+    return [];
+  }
+
+  return eventSourceType.map((e) => e.value!).toList();
+}
+
+List<enums.EventSourceType> eventSourceTypeListFromJson(
+  List? eventSourceType, [
+  List<enums.EventSourceType>? defaultValue,
+]) {
+  if (eventSourceType == null) {
+    return defaultValue ?? [];
+  }
+
+  return eventSourceType
+      .map((e) => eventSourceTypeFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.EventSourceType>? eventSourceTypeNullableListFromJson(
+  List? eventSourceType, [
+  List<enums.EventSourceType>? defaultValue,
+]) {
+  if (eventSourceType == null) {
+    return defaultValue;
+  }
+
+  return eventSourceType
+      .map((e) => eventSourceTypeFromJson(e.toString()))
+      .toList();
+}
+
 String? httpConfigProtocolNullableToJson(
     enums.HttpConfigProtocol? httpConfigProtocol) {
   return httpConfigProtocol?.value;
@@ -47874,6 +48060,79 @@ List<enums.TriggeredEventDeliveryStatus>?
 
   return triggeredEventDeliveryStatus
       .map((e) => triggeredEventDeliveryStatusFromJson(e.toString()))
+      .toList();
+}
+
+String? triggeredEventSourceTypeNullableToJson(
+    enums.TriggeredEventSourceType? triggeredEventSourceType) {
+  return triggeredEventSourceType?.value;
+}
+
+String? triggeredEventSourceTypeToJson(
+    enums.TriggeredEventSourceType triggeredEventSourceType) {
+  return triggeredEventSourceType.value;
+}
+
+enums.TriggeredEventSourceType triggeredEventSourceTypeFromJson(
+  Object? triggeredEventSourceType, [
+  enums.TriggeredEventSourceType? defaultValue,
+]) {
+  return enums.TriggeredEventSourceType.values
+          .firstWhereOrNull((e) => e.value == triggeredEventSourceType) ??
+      defaultValue ??
+      enums.TriggeredEventSourceType.swaggerGeneratedUnknown;
+}
+
+enums.TriggeredEventSourceType? triggeredEventSourceTypeNullableFromJson(
+  Object? triggeredEventSourceType, [
+  enums.TriggeredEventSourceType? defaultValue,
+]) {
+  if (triggeredEventSourceType == null) {
+    return null;
+  }
+  return enums.TriggeredEventSourceType.values
+          .firstWhereOrNull((e) => e.value == triggeredEventSourceType) ??
+      defaultValue;
+}
+
+String triggeredEventSourceTypeExplodedListToJson(
+    List<enums.TriggeredEventSourceType>? triggeredEventSourceType) {
+  return triggeredEventSourceType?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> triggeredEventSourceTypeListToJson(
+    List<enums.TriggeredEventSourceType>? triggeredEventSourceType) {
+  if (triggeredEventSourceType == null) {
+    return [];
+  }
+
+  return triggeredEventSourceType.map((e) => e.value!).toList();
+}
+
+List<enums.TriggeredEventSourceType> triggeredEventSourceTypeListFromJson(
+  List? triggeredEventSourceType, [
+  List<enums.TriggeredEventSourceType>? defaultValue,
+]) {
+  if (triggeredEventSourceType == null) {
+    return defaultValue ?? [];
+  }
+
+  return triggeredEventSourceType
+      .map((e) => triggeredEventSourceTypeFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.TriggeredEventSourceType>?
+    triggeredEventSourceTypeNullableListFromJson(
+  List? triggeredEventSourceType, [
+  List<enums.TriggeredEventSourceType>? defaultValue,
+]) {
+  if (triggeredEventSourceType == null) {
+    return defaultValue;
+  }
+
+  return triggeredEventSourceType
+      .map((e) => triggeredEventSourceTypeFromJson(e.toString()))
       .toList();
 }
 

@@ -17568,6 +17568,17 @@
           "items": {
             "type": "string"
           }
+        },
+        "sourceType": {
+          "type": "string",
+          "enum": [
+            "MODEL",
+            "DEVICE",
+            "ASSET",
+            "PREMISE",
+            "FACILITY",
+            "FLOOR"
+          ]
         }
       }
     },
@@ -19958,6 +19969,17 @@
         },
         "floorName": {
           "type": "string"
+        },
+        "sourceType": {
+          "type": "string",
+          "enum": [
+            "MODEL",
+            "DEVICE",
+            "ASSET",
+            "PREMISE",
+            "FACILITY",
+            "FLOOR"
+          ]
         }
       }
     },

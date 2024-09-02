@@ -1724,6 +1724,7 @@ EventInfo _$EventInfoFromJson(Map<String, dynamic> json) => EventInfo(
               ?.map((e) => e as String)
               .toList() ??
           [],
+      sourceType: eventInfoSourceTypeNullableFromJson(json['sourceType']),
     );
 
 Map<String, dynamic> _$EventInfoToJson(EventInfo instance) {
@@ -1754,6 +1755,8 @@ Map<String, dynamic> _$EventInfoToJson(EventInfo instance) {
   writeNotNull('tags', instance.tags);
   writeNotNull('roles', instance.roles);
   writeNotNull('clientIds', instance.clientIds);
+  writeNotNull(
+      'sourceType', eventInfoSourceTypeNullableToJson(instance.sourceType));
   return val;
 }
 
@@ -1799,6 +1802,7 @@ Event _$EventFromJson(Map<String, dynamic> json) => Event(
               ?.map((e) => e as String)
               .toList() ??
           [],
+      sourceType: eventSourceTypeNullableFromJson(json['sourceType']),
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -1836,6 +1840,8 @@ Map<String, dynamic> _$EventToJson(Event instance) {
   writeNotNull('tags', instance.tags);
   writeNotNull('roles', instance.roles);
   writeNotNull('clientIds', instance.clientIds);
+  writeNotNull(
+      'sourceType', eventSourceTypeNullableToJson(instance.sourceType));
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -4857,6 +4863,7 @@ TriggeredEvent _$TriggeredEventFromJson(Map<String, dynamic> json) =>
       facilityName: json['facilityName'] as String? ?? '',
       floorId: json['floorId'] as String? ?? '',
       floorName: json['floorName'] as String? ?? '',
+      sourceType: triggeredEventSourceTypeNullableFromJson(json['sourceType']),
     );
 
 Map<String, dynamic> _$TriggeredEventToJson(TriggeredEvent instance) {
@@ -4907,6 +4914,8 @@ Map<String, dynamic> _$TriggeredEventToJson(TriggeredEvent instance) {
   writeNotNull('facilityName', instance.facilityName);
   writeNotNull('floorId', instance.floorId);
   writeNotNull('floorName', instance.floorName);
+  writeNotNull('sourceType',
+      triggeredEventSourceTypeNullableToJson(instance.sourceType));
   return val;
 }
 
