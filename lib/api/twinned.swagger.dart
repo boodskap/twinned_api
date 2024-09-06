@@ -389,6 +389,28 @@ abstract class Twinned extends ChopperService {
     @Body() required ResetPassword? body,
   });
 
+  ///Query using EQL
+  ///@param eql
+  Future<chopper.Response<GenericQueryRes>> queryGeneric({
+    required GenericQueryReq? eql,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        GenericQueryReq, () => GenericQueryReq.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        GenericQueryRes, () => GenericQueryRes.fromJsonFactory);
+
+    return _queryGeneric(eql: eql, apikey: apikey?.toString());
+  }
+
+  ///Query using EQL
+  ///@param eql
+  @Post(path: '/IoT/query/generic')
+  Future<chopper.Response<GenericQueryRes>> _queryGeneric({
+    @Body() required GenericQueryReq? eql,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Get the most recent data for this device
   ///@param deviceId
   ///@param isHardwareDevice
@@ -45541,6 +45563,227 @@ extension $ReprocessInfoExtension on ReprocessInfo {
 }
 
 @JsonSerializable(explicitToJson: true)
+class GenericQueryReq {
+  const GenericQueryReq({
+    required this.eql,
+    this.isMessage,
+    this.protocol,
+    this.extraPath,
+  });
+
+  factory GenericQueryReq.fromJson(Map<String, dynamic> json) =>
+      _$GenericQueryReqFromJson(json);
+
+  static const toJsonFactory = _$GenericQueryReqToJson;
+  Map<String, dynamic> toJson() => _$GenericQueryReqToJson(this);
+
+  @JsonKey(name: 'eql', includeIfNull: false)
+  final Object eql;
+  @JsonKey(name: 'isMessage', includeIfNull: false, defaultValue: false)
+  final bool? isMessage;
+  @JsonKey(
+    name: 'protocol',
+    includeIfNull: false,
+    toJson: genericQueryReqProtocolNullableToJson,
+    fromJson: genericQueryReqProtocolProtocolNullableFromJson,
+  )
+  final enums.GenericQueryReqProtocol? protocol;
+  static enums.GenericQueryReqProtocol?
+      genericQueryReqProtocolProtocolNullableFromJson(Object? value) =>
+          genericQueryReqProtocolNullableFromJson(
+              value, enums.GenericQueryReqProtocol.post);
+
+  @JsonKey(name: 'extraPath', includeIfNull: false, defaultValue: '')
+  final String? extraPath;
+  static const fromJsonFactory = _$GenericQueryReqFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is GenericQueryReq &&
+            (identical(other.eql, eql) ||
+                const DeepCollectionEquality().equals(other.eql, eql)) &&
+            (identical(other.isMessage, isMessage) ||
+                const DeepCollectionEquality()
+                    .equals(other.isMessage, isMessage)) &&
+            (identical(other.protocol, protocol) ||
+                const DeepCollectionEquality()
+                    .equals(other.protocol, protocol)) &&
+            (identical(other.extraPath, extraPath) ||
+                const DeepCollectionEquality()
+                    .equals(other.extraPath, extraPath)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(eql) ^
+      const DeepCollectionEquality().hash(isMessage) ^
+      const DeepCollectionEquality().hash(protocol) ^
+      const DeepCollectionEquality().hash(extraPath) ^
+      runtimeType.hashCode;
+}
+
+extension $GenericQueryReqExtension on GenericQueryReq {
+  GenericQueryReq copyWith(
+      {Object? eql,
+      bool? isMessage,
+      enums.GenericQueryReqProtocol? protocol,
+      String? extraPath}) {
+    return GenericQueryReq(
+        eql: eql ?? this.eql,
+        isMessage: isMessage ?? this.isMessage,
+        protocol: protocol ?? this.protocol,
+        extraPath: extraPath ?? this.extraPath);
+  }
+
+  GenericQueryReq copyWithWrapped(
+      {Wrapped<Object>? eql,
+      Wrapped<bool?>? isMessage,
+      Wrapped<enums.GenericQueryReqProtocol?>? protocol,
+      Wrapped<String?>? extraPath}) {
+    return GenericQueryReq(
+        eql: (eql != null ? eql.value : this.eql),
+        isMessage: (isMessage != null ? isMessage.value : this.isMessage),
+        protocol: (protocol != null ? protocol.value : this.protocol),
+        extraPath: (extraPath != null ? extraPath.value : this.extraPath));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class GenericQueryBaseRes {
+  const GenericQueryBaseRes({
+    this.result,
+  });
+
+  factory GenericQueryBaseRes.fromJson(Map<String, dynamic> json) =>
+      _$GenericQueryBaseResFromJson(json);
+
+  static const toJsonFactory = _$GenericQueryBaseResToJson;
+  Map<String, dynamic> toJson() => _$GenericQueryBaseResToJson(this);
+
+  @JsonKey(name: 'result', includeIfNull: false)
+  final Object? result;
+  static const fromJsonFactory = _$GenericQueryBaseResFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is GenericQueryBaseRes &&
+            (identical(other.result, result) ||
+                const DeepCollectionEquality().equals(other.result, result)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(result) ^ runtimeType.hashCode;
+}
+
+extension $GenericQueryBaseResExtension on GenericQueryBaseRes {
+  GenericQueryBaseRes copyWith({Object? result}) {
+    return GenericQueryBaseRes(result: result ?? this.result);
+  }
+
+  GenericQueryBaseRes copyWithWrapped({Wrapped<Object?>? result}) {
+    return GenericQueryBaseRes(
+        result: (result != null ? result.value : this.result));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class GenericQueryRes {
+  const GenericQueryRes({
+    this.result,
+    required this.ok,
+    this.msg,
+    this.trace,
+    this.errorCode,
+  });
+
+  factory GenericQueryRes.fromJson(Map<String, dynamic> json) =>
+      _$GenericQueryResFromJson(json);
+
+  static const toJsonFactory = _$GenericQueryResToJson;
+  Map<String, dynamic> toJson() => _$GenericQueryResToJson(this);
+
+  @JsonKey(name: 'result', includeIfNull: false)
+  final Object? result;
+  @JsonKey(name: 'ok', includeIfNull: false)
+  final bool ok;
+  @JsonKey(name: 'msg', includeIfNull: false, defaultValue: '')
+  final String? msg;
+  @JsonKey(name: 'trace', includeIfNull: false, defaultValue: '')
+  final String? trace;
+  @JsonKey(name: 'errorCode', includeIfNull: false, defaultValue: '')
+  final String? errorCode;
+  static const fromJsonFactory = _$GenericQueryResFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is GenericQueryRes &&
+            (identical(other.result, result) ||
+                const DeepCollectionEquality().equals(other.result, result)) &&
+            (identical(other.ok, ok) ||
+                const DeepCollectionEquality().equals(other.ok, ok)) &&
+            (identical(other.msg, msg) ||
+                const DeepCollectionEquality().equals(other.msg, msg)) &&
+            (identical(other.trace, trace) ||
+                const DeepCollectionEquality().equals(other.trace, trace)) &&
+            (identical(other.errorCode, errorCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.errorCode, errorCode)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(result) ^
+      const DeepCollectionEquality().hash(ok) ^
+      const DeepCollectionEquality().hash(msg) ^
+      const DeepCollectionEquality().hash(trace) ^
+      const DeepCollectionEquality().hash(errorCode) ^
+      runtimeType.hashCode;
+}
+
+extension $GenericQueryResExtension on GenericQueryRes {
+  GenericQueryRes copyWith(
+      {Object? result,
+      bool? ok,
+      String? msg,
+      String? trace,
+      String? errorCode}) {
+    return GenericQueryRes(
+        result: result ?? this.result,
+        ok: ok ?? this.ok,
+        msg: msg ?? this.msg,
+        trace: trace ?? this.trace,
+        errorCode: errorCode ?? this.errorCode);
+  }
+
+  GenericQueryRes copyWithWrapped(
+      {Wrapped<Object?>? result,
+      Wrapped<bool>? ok,
+      Wrapped<String?>? msg,
+      Wrapped<String?>? trace,
+      Wrapped<String?>? errorCode}) {
+    return GenericQueryRes(
+        result: (result != null ? result.value : this.result),
+        ok: (ok != null ? ok.value : this.ok),
+        msg: (msg != null ? msg.value : this.msg),
+        trace: (trace != null ? trace.value : this.trace),
+        errorCode: (errorCode != null ? errorCode.value : this.errorCode));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class ExportData {
   const ExportData({
     required this.model,
@@ -49209,6 +49452,79 @@ List<enums.FieldFilterCondition>? fieldFilterConditionNullableListFromJson(
 
   return fieldFilterCondition
       .map((e) => fieldFilterConditionFromJson(e.toString()))
+      .toList();
+}
+
+String? genericQueryReqProtocolNullableToJson(
+    enums.GenericQueryReqProtocol? genericQueryReqProtocol) {
+  return genericQueryReqProtocol?.value;
+}
+
+String? genericQueryReqProtocolToJson(
+    enums.GenericQueryReqProtocol genericQueryReqProtocol) {
+  return genericQueryReqProtocol.value;
+}
+
+enums.GenericQueryReqProtocol genericQueryReqProtocolFromJson(
+  Object? genericQueryReqProtocol, [
+  enums.GenericQueryReqProtocol? defaultValue,
+]) {
+  return enums.GenericQueryReqProtocol.values
+          .firstWhereOrNull((e) => e.value == genericQueryReqProtocol) ??
+      defaultValue ??
+      enums.GenericQueryReqProtocol.swaggerGeneratedUnknown;
+}
+
+enums.GenericQueryReqProtocol? genericQueryReqProtocolNullableFromJson(
+  Object? genericQueryReqProtocol, [
+  enums.GenericQueryReqProtocol? defaultValue,
+]) {
+  if (genericQueryReqProtocol == null) {
+    return null;
+  }
+  return enums.GenericQueryReqProtocol.values
+          .firstWhereOrNull((e) => e.value == genericQueryReqProtocol) ??
+      defaultValue;
+}
+
+String genericQueryReqProtocolExplodedListToJson(
+    List<enums.GenericQueryReqProtocol>? genericQueryReqProtocol) {
+  return genericQueryReqProtocol?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> genericQueryReqProtocolListToJson(
+    List<enums.GenericQueryReqProtocol>? genericQueryReqProtocol) {
+  if (genericQueryReqProtocol == null) {
+    return [];
+  }
+
+  return genericQueryReqProtocol.map((e) => e.value!).toList();
+}
+
+List<enums.GenericQueryReqProtocol> genericQueryReqProtocolListFromJson(
+  List? genericQueryReqProtocol, [
+  List<enums.GenericQueryReqProtocol>? defaultValue,
+]) {
+  if (genericQueryReqProtocol == null) {
+    return defaultValue ?? [];
+  }
+
+  return genericQueryReqProtocol
+      .map((e) => genericQueryReqProtocolFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.GenericQueryReqProtocol>?
+    genericQueryReqProtocolNullableListFromJson(
+  List? genericQueryReqProtocol, [
+  List<enums.GenericQueryReqProtocol>? defaultValue,
+]) {
+  if (genericQueryReqProtocol == null) {
+    return defaultValue;
+  }
+
+  return genericQueryReqProtocol
+      .map((e) => genericQueryReqProtocolFromJson(e.toString()))
       .toList();
 }
 

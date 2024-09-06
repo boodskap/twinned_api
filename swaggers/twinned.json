@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "2.0.4",
+    "version": "2.0.5",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -699,6 +699,50 @@
             }
           }
         }
+      }
+    },
+    "/IoT/query/generic": {
+      "post": {
+        "tags": [
+          "IoT"
+        ],
+        "summary": "Query using EQL",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "queryGeneric",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "eql",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenericQueryReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/GenericQueryRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
       }
     },
     "/DeviceData/get/{deviceId}": {
@@ -24009,6 +24053,53 @@
           "default": false
         }
       }
+    },
+    "GenericQueryReq": {
+      "type": "object",
+      "required": [
+        "eql"
+      ],
+      "properties": {
+        "eql": {
+          "type": "object"
+        },
+        "isMessage": {
+          "type": "boolean",
+          "default": false
+        },
+        "protocol": {
+          "type": "string",
+          "default": "POST",
+          "enum": [
+            "POST",
+            "GET",
+            "PUT",
+            "DELETE"
+          ]
+        },
+        "extraPath": {
+          "type": "string",
+          "default": "/_search"
+        }
+      }
+    },
+    "GenericQueryBaseRes": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "object"
+        }
+      }
+    },
+    "GenericQueryRes": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GenericQueryBaseRes"
+        },
+        {
+          "$ref": "#/definitions/BaseResponse"
+        }
+      ]
     },
     "ExportData": {
       "type": "object",

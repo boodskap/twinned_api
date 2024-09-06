@@ -321,6 +321,26 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<GenericQueryRes>> _queryGeneric({
+    required GenericQueryReq? eql,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/IoT/query/generic');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = eql;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<GenericQueryRes, GenericQueryRes>($request);
+  }
+
+  @override
   Future<Response<DeviceDataEntityRes>> _getDeviceData({
     required String? deviceId,
     String? isHardwareDevice,

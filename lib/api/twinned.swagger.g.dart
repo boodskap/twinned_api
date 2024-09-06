@@ -11176,6 +11176,77 @@ Map<String, dynamic> _$ReprocessInfoToJson(ReprocessInfo instance) =>
       'clearStatus': instance.clearStatus,
     };
 
+GenericQueryReq _$GenericQueryReqFromJson(Map<String, dynamic> json) =>
+    GenericQueryReq(
+      eql: json['eql'] as Object,
+      isMessage: json['isMessage'] as bool? ?? false,
+      protocol: GenericQueryReq.genericQueryReqProtocolProtocolNullableFromJson(
+          json['protocol']),
+      extraPath: json['extraPath'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$GenericQueryReqToJson(GenericQueryReq instance) {
+  final val = <String, dynamic>{
+    'eql': instance.eql,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('isMessage', instance.isMessage);
+  writeNotNull(
+      'protocol', genericQueryReqProtocolNullableToJson(instance.protocol));
+  writeNotNull('extraPath', instance.extraPath);
+  return val;
+}
+
+GenericQueryBaseRes _$GenericQueryBaseResFromJson(Map<String, dynamic> json) =>
+    GenericQueryBaseRes(
+      result: json['result'],
+    );
+
+Map<String, dynamic> _$GenericQueryBaseResToJson(GenericQueryBaseRes instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('result', instance.result);
+  return val;
+}
+
+GenericQueryRes _$GenericQueryResFromJson(Map<String, dynamic> json) =>
+    GenericQueryRes(
+      result: json['result'],
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$GenericQueryResToJson(GenericQueryRes instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('result', instance.result);
+  val['ok'] = instance.ok;
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  return val;
+}
+
 ExportData _$ExportDataFromJson(Map<String, dynamic> json) => ExportData(
       model: DeviceModelInfo.fromJson(json['model'] as Map<String, dynamic>),
       conditions: (json['conditions'] as List<dynamic>?)

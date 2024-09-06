@@ -983,6 +983,24 @@ enum FieldFilterCondition {
   const FieldFilterCondition(this.value);
 }
 
+enum GenericQueryReqProtocol {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('POST')
+  post('POST'),
+  @JsonValue('GET')
+  $get('GET'),
+  @JsonValue('PUT')
+  put('PUT'),
+  @JsonValue('DELETE')
+  delete('DELETE');
+
+  final String? value;
+
+  const GenericQueryReqProtocol(this.value);
+}
+
 enum IoTTwinTagsGetEntityTypeGetEntityType {
   @JsonValue(null)
   swaggerGeneratedUnknown(null),
