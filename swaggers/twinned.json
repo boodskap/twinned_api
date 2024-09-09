@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "2.0.5",
+    "version": "2.0.6",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -16383,7 +16383,6 @@
       "required": [
         "domainKey",
         "id",
-        "name",
         "rtype",
         "createdStamp",
         "updatedStamp",
@@ -16397,13 +16396,14 @@
         "id": {
           "type": "string"
         },
-        "name": {
-          "type": "string"
-        },
         "rtype": {
           "type": "string"
         },
         "createdStamp": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "updatedStamp": {
           "type": "integer",
           "format": "int64"
         },
@@ -16412,16 +16412,6 @@
         },
         "updatedBy": {
           "type": "string"
-        },
-        "updatedStamp": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
@@ -17559,7 +17549,7 @@
         "deviceId": {
           "type": "string"
         },
-        "asswtId": {
+        "assetId": {
           "type": "string"
         },
         "premiseId": {
@@ -17623,6 +17613,15 @@
             "FACILITY",
             "FLOOR"
           ]
+        },
+        "isPulseGroup": {
+          "type": "boolean"
+        },
+        "pulseGroupId": {
+          "type": "string"
+        },
+        "pulseTemplateId": {
+          "type": "string"
         }
       }
     },
@@ -18098,6 +18097,12 @@
         },
         "premiseId": {
           "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -19766,6 +19771,9 @@
           "type": "boolean"
         },
         "emailId": {
+          "type": "string"
+        },
+        "countryCode": {
           "type": "string"
         },
         "phoneNumber": {

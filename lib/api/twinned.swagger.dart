@@ -8494,13 +8494,11 @@ class BaseEntity {
   const BaseEntity({
     required this.domainKey,
     required this.id,
-    required this.name,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
-    this.tags,
   });
 
   factory BaseEntity.fromJson(Map<String, dynamic> json) =>
@@ -8513,20 +8511,16 @@ class BaseEntity {
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
   final String id;
-  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
-  final String name;
   @JsonKey(name: 'rtype', includeIfNull: false, defaultValue: '')
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
-  @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? tags;
   static const fromJsonFactory = _$BaseEntityFromJson;
 
   @override
@@ -8538,24 +8532,20 @@ class BaseEntity {
                     .equals(other.domainKey, domainKey)) &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.rtype, rtype) ||
                 const DeepCollectionEquality().equals(other.rtype, rtype)) &&
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)) &&
-            (identical(other.tags, tags) ||
-                const DeepCollectionEquality().equals(other.tags, tags)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -8565,13 +8555,11 @@ class BaseEntity {
   int get hashCode =>
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
-      const DeepCollectionEquality().hash(tags) ^
       runtimeType.hashCode;
 }
 
@@ -8579,47 +8567,39 @@ extension $BaseEntityExtension on BaseEntity {
   BaseEntity copyWith(
       {String? domainKey,
       String? id,
-      String? name,
       String? rtype,
       int? createdStamp,
-      String? createdBy,
-      String? updatedBy,
       int? updatedStamp,
-      List<String>? tags}) {
+      String? createdBy,
+      String? updatedBy}) {
     return BaseEntity(
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
-        name: name ?? this.name,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
-        createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
         updatedStamp: updatedStamp ?? this.updatedStamp,
-        tags: tags ?? this.tags);
+        createdBy: createdBy ?? this.createdBy,
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   BaseEntity copyWithWrapped(
       {Wrapped<String>? domainKey,
       Wrapped<String>? id,
-      Wrapped<String>? name,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
-      Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
       Wrapped<int>? updatedStamp,
-      Wrapped<List<String>?>? tags}) {
+      Wrapped<String>? createdBy,
+      Wrapped<String>? updatedBy}) {
     return BaseEntity(
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
-        name: (name != null ? name.value : this.name),
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
             (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
-        tags: (tags != null ? tags.value : this.tags));
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -9901,9 +9881,9 @@ class DeviceModel {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory DeviceModel.fromJson(Map<String, dynamic> json) =>
@@ -9968,12 +9948,12 @@ class DeviceModel {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$DeviceModelFromJson;
 
   @override
@@ -10048,9 +10028,9 @@ class DeviceModel {
                 const DeepCollectionEquality().equals(other.rtype, rtype)) &&
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality().equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) || const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) || const DeepCollectionEquality().equals(other.createdBy, createdBy)) &&
-            (identical(other.updatedBy, updatedBy) || const DeepCollectionEquality().equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) || const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)));
+            (identical(other.updatedBy, updatedBy) || const DeepCollectionEquality().equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -10084,9 +10064,9 @@ class DeviceModel {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -10118,9 +10098,9 @@ extension $DeviceModelExtension on DeviceModel {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return DeviceModel(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -10149,9 +10129,9 @@ extension $DeviceModelExtension on DeviceModel {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   DeviceModel copyWithWrapped(
@@ -10181,9 +10161,9 @@ extension $DeviceModelExtension on DeviceModel {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return DeviceModel(
         name: (name != null ? name.value : this.name),
         description:
@@ -10224,10 +10204,10 @@ extension $DeviceModelExtension on DeviceModel {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -10994,9 +10974,9 @@ class Device {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory Device.fromJson(Map<String, dynamic> json) => _$DeviceFromJson(json);
@@ -11075,12 +11055,12 @@ class Device {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$DeviceFromJson;
 
   @override
@@ -11165,9 +11145,9 @@ class Device {
             (identical(other.id, id) || const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.rtype, rtype) || const DeepCollectionEquality().equals(other.rtype, rtype)) &&
             (identical(other.createdStamp, createdStamp) || const DeepCollectionEquality().equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) || const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) || const DeepCollectionEquality().equals(other.createdBy, createdBy)) &&
-            (identical(other.updatedBy, updatedBy) || const DeepCollectionEquality().equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) || const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)));
+            (identical(other.updatedBy, updatedBy) || const DeepCollectionEquality().equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -11210,9 +11190,9 @@ class Device {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -11253,9 +11233,9 @@ extension $DeviceExtension on Device {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return Device(
         apiKey: apiKey ?? this.apiKey,
         reportedStamp: reportedStamp ?? this.reportedStamp,
@@ -11292,9 +11272,9 @@ extension $DeviceExtension on Device {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   Device copyWithWrapped(
@@ -11333,9 +11313,9 @@ extension $DeviceExtension on Device {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return Device(
         apiKey: (apiKey != null ? apiKey.value : this.apiKey),
         reportedStamp:
@@ -11385,10 +11365,10 @@ extension $DeviceExtension on Device {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -11870,9 +11850,9 @@ class Condition {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory Condition.fromJson(Map<String, dynamic> json) =>
@@ -11918,12 +11898,12 @@ class Condition {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$ConditionFromJson;
 
   @override
@@ -11970,15 +11950,15 @@ class Condition {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -12002,9 +11982,9 @@ class Condition {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -12026,9 +12006,9 @@ extension $ConditionExtension on Condition {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return Condition(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -12046,9 +12026,9 @@ extension $ConditionExtension on Condition {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   Condition copyWithWrapped(
@@ -12068,9 +12048,9 @@ extension $ConditionExtension on Condition {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return Condition(
         name: (name != null ? name.value : this.name),
         description:
@@ -12090,10 +12070,10 @@ extension $ConditionExtension on Condition {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -12727,9 +12707,9 @@ class Alarm {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory Alarm.fromJson(Map<String, dynamic> json) => _$AlarmFromJson(json);
@@ -12770,12 +12750,12 @@ class Alarm {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$AlarmFromJson;
 
   @override
@@ -12821,15 +12801,15 @@ class Alarm {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -12852,9 +12832,9 @@ class Alarm {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -12875,9 +12855,9 @@ extension $AlarmExtension on Alarm {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return Alarm(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -12894,9 +12874,9 @@ extension $AlarmExtension on Alarm {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   Alarm copyWithWrapped(
@@ -12915,9 +12895,9 @@ extension $AlarmExtension on Alarm {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return Alarm(
         name: (name != null ? name.value : this.name),
         description:
@@ -12938,10 +12918,10 @@ extension $AlarmExtension on Alarm {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -13499,9 +13479,9 @@ class Control {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory Control.fromJson(Map<String, dynamic> json) =>
@@ -13537,12 +13517,12 @@ class Control {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$ControlFromJson;
 
   @override
@@ -13582,15 +13562,15 @@ class Control {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -13611,9 +13591,9 @@ class Control {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -13632,9 +13612,9 @@ extension $ControlExtension on Control {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return Control(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -13649,9 +13629,9 @@ extension $ControlExtension on Control {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   Control copyWithWrapped(
@@ -13668,9 +13648,9 @@ extension $ControlExtension on Control {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return Control(
         name: (name != null ? name.value : this.name),
         description:
@@ -13687,10 +13667,10 @@ extension $ControlExtension on Control {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -13991,7 +13971,7 @@ class EventInfo {
     this.description,
     this.modelId,
     this.deviceId,
-    this.asswtId,
+    this.assetId,
     this.premiseId,
     this.facilityId,
     this.floorId,
@@ -14006,6 +13986,9 @@ class EventInfo {
     this.roles,
     this.clientIds,
     this.sourceType,
+    this.isPulseGroup,
+    this.pulseGroupId,
+    this.pulseTemplateId,
   });
 
   factory EventInfo.fromJson(Map<String, dynamic> json) =>
@@ -14022,8 +14005,8 @@ class EventInfo {
   final String? modelId;
   @JsonKey(name: 'deviceId', includeIfNull: false, defaultValue: '')
   final String? deviceId;
-  @JsonKey(name: 'asswtId', includeIfNull: false, defaultValue: '')
-  final String? asswtId;
+  @JsonKey(name: 'assetId', includeIfNull: false, defaultValue: '')
+  final String? assetId;
   @JsonKey(name: 'premiseId', includeIfNull: false, defaultValue: '')
   final String? premiseId;
   @JsonKey(name: 'facilityId', includeIfNull: false, defaultValue: '')
@@ -14058,6 +14041,12 @@ class EventInfo {
     fromJson: eventInfoSourceTypeNullableFromJson,
   )
   final enums.EventInfoSourceType? sourceType;
+  @JsonKey(name: 'isPulseGroup', includeIfNull: false)
+  final bool? isPulseGroup;
+  @JsonKey(name: 'pulseGroupId', includeIfNull: false, defaultValue: '')
+  final String? pulseGroupId;
+  @JsonKey(name: 'pulseTemplateId', includeIfNull: false, defaultValue: '')
+  final String? pulseTemplateId;
   static const fromJsonFactory = _$EventInfoFromJson;
 
   @override
@@ -14075,284 +14064,9 @@ class EventInfo {
             (identical(other.deviceId, deviceId) ||
                 const DeepCollectionEquality()
                     .equals(other.deviceId, deviceId)) &&
-            (identical(other.asswtId, asswtId) ||
+            (identical(other.assetId, assetId) ||
                 const DeepCollectionEquality()
-                    .equals(other.asswtId, asswtId)) &&
-            (identical(other.premiseId, premiseId) ||
-                const DeepCollectionEquality()
-                    .equals(other.premiseId, premiseId)) &&
-            (identical(other.facilityId, facilityId) ||
-                const DeepCollectionEquality()
-                    .equals(other.facilityId, facilityId)) &&
-            (identical(other.floorId, floorId) ||
-                const DeepCollectionEquality()
-                    .equals(other.floorId, floorId)) &&
-            (identical(other.icon, icon) ||
-                const DeepCollectionEquality().equals(other.icon, icon)) &&
-            (identical(other.conditions, conditions) ||
-                const DeepCollectionEquality()
-                    .equals(other.conditions, conditions)) &&
-            (identical(other.notificationTemplate, notificationTemplate) ||
-                const DeepCollectionEquality().equals(
-                    other.notificationTemplate, notificationTemplate)) &&
-            (identical(other.emailTemplate, emailTemplate) ||
-                const DeepCollectionEquality()
-                    .equals(other.emailTemplate, emailTemplate)) &&
-            (identical(other.smsTemplate, smsTemplate) ||
-                const DeepCollectionEquality()
-                    .equals(other.smsTemplate, smsTemplate)) &&
-            (identical(other.fcmTemplate, fcmTemplate) ||
-                const DeepCollectionEquality()
-                    .equals(other.fcmTemplate, fcmTemplate)) &&
-            (identical(other.voiceTemplate, voiceTemplate) ||
-                const DeepCollectionEquality()
-                    .equals(other.voiceTemplate, voiceTemplate)) &&
-            (identical(other.tags, tags) ||
-                const DeepCollectionEquality().equals(other.tags, tags)) &&
-            (identical(other.roles, roles) ||
-                const DeepCollectionEquality().equals(other.roles, roles)) &&
-            (identical(other.clientIds, clientIds) ||
-                const DeepCollectionEquality()
-                    .equals(other.clientIds, clientIds)) &&
-            (identical(other.sourceType, sourceType) ||
-                const DeepCollectionEquality()
-                    .equals(other.sourceType, sourceType)));
-  }
-
-  @override
-  String toString() => jsonEncode(this);
-
-  @override
-  int get hashCode =>
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(description) ^
-      const DeepCollectionEquality().hash(modelId) ^
-      const DeepCollectionEquality().hash(deviceId) ^
-      const DeepCollectionEquality().hash(asswtId) ^
-      const DeepCollectionEquality().hash(premiseId) ^
-      const DeepCollectionEquality().hash(facilityId) ^
-      const DeepCollectionEquality().hash(floorId) ^
-      const DeepCollectionEquality().hash(icon) ^
-      const DeepCollectionEquality().hash(conditions) ^
-      const DeepCollectionEquality().hash(notificationTemplate) ^
-      const DeepCollectionEquality().hash(emailTemplate) ^
-      const DeepCollectionEquality().hash(smsTemplate) ^
-      const DeepCollectionEquality().hash(fcmTemplate) ^
-      const DeepCollectionEquality().hash(voiceTemplate) ^
-      const DeepCollectionEquality().hash(tags) ^
-      const DeepCollectionEquality().hash(roles) ^
-      const DeepCollectionEquality().hash(clientIds) ^
-      const DeepCollectionEquality().hash(sourceType) ^
-      runtimeType.hashCode;
-}
-
-extension $EventInfoExtension on EventInfo {
-  EventInfo copyWith(
-      {String? name,
-      String? description,
-      String? modelId,
-      String? deviceId,
-      String? asswtId,
-      String? premiseId,
-      String? facilityId,
-      String? floorId,
-      String? icon,
-      List<MatchGroup>? conditions,
-      NotificationTemplate? notificationTemplate,
-      EmailTemplate? emailTemplate,
-      SMSTemplate? smsTemplate,
-      FCMTemplate? fcmTemplate,
-      VoiceTemplate? voiceTemplate,
-      List<String>? tags,
-      List<String>? roles,
-      List<String>? clientIds,
-      enums.EventInfoSourceType? sourceType}) {
-    return EventInfo(
-        name: name ?? this.name,
-        description: description ?? this.description,
-        modelId: modelId ?? this.modelId,
-        deviceId: deviceId ?? this.deviceId,
-        asswtId: asswtId ?? this.asswtId,
-        premiseId: premiseId ?? this.premiseId,
-        facilityId: facilityId ?? this.facilityId,
-        floorId: floorId ?? this.floorId,
-        icon: icon ?? this.icon,
-        conditions: conditions ?? this.conditions,
-        notificationTemplate: notificationTemplate ?? this.notificationTemplate,
-        emailTemplate: emailTemplate ?? this.emailTemplate,
-        smsTemplate: smsTemplate ?? this.smsTemplate,
-        fcmTemplate: fcmTemplate ?? this.fcmTemplate,
-        voiceTemplate: voiceTemplate ?? this.voiceTemplate,
-        tags: tags ?? this.tags,
-        roles: roles ?? this.roles,
-        clientIds: clientIds ?? this.clientIds,
-        sourceType: sourceType ?? this.sourceType);
-  }
-
-  EventInfo copyWithWrapped(
-      {Wrapped<String>? name,
-      Wrapped<String?>? description,
-      Wrapped<String?>? modelId,
-      Wrapped<String?>? deviceId,
-      Wrapped<String?>? asswtId,
-      Wrapped<String?>? premiseId,
-      Wrapped<String?>? facilityId,
-      Wrapped<String?>? floorId,
-      Wrapped<String?>? icon,
-      Wrapped<List<MatchGroup>>? conditions,
-      Wrapped<NotificationTemplate?>? notificationTemplate,
-      Wrapped<EmailTemplate?>? emailTemplate,
-      Wrapped<SMSTemplate?>? smsTemplate,
-      Wrapped<FCMTemplate?>? fcmTemplate,
-      Wrapped<VoiceTemplate?>? voiceTemplate,
-      Wrapped<List<String>?>? tags,
-      Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds,
-      Wrapped<enums.EventInfoSourceType?>? sourceType}) {
-    return EventInfo(
-        name: (name != null ? name.value : this.name),
-        description:
-            (description != null ? description.value : this.description),
-        modelId: (modelId != null ? modelId.value : this.modelId),
-        deviceId: (deviceId != null ? deviceId.value : this.deviceId),
-        asswtId: (asswtId != null ? asswtId.value : this.asswtId),
-        premiseId: (premiseId != null ? premiseId.value : this.premiseId),
-        facilityId: (facilityId != null ? facilityId.value : this.facilityId),
-        floorId: (floorId != null ? floorId.value : this.floorId),
-        icon: (icon != null ? icon.value : this.icon),
-        conditions: (conditions != null ? conditions.value : this.conditions),
-        notificationTemplate: (notificationTemplate != null
-            ? notificationTemplate.value
-            : this.notificationTemplate),
-        emailTemplate:
-            (emailTemplate != null ? emailTemplate.value : this.emailTemplate),
-        smsTemplate:
-            (smsTemplate != null ? smsTemplate.value : this.smsTemplate),
-        fcmTemplate:
-            (fcmTemplate != null ? fcmTemplate.value : this.fcmTemplate),
-        voiceTemplate:
-            (voiceTemplate != null ? voiceTemplate.value : this.voiceTemplate),
-        tags: (tags != null ? tags.value : this.tags),
-        roles: (roles != null ? roles.value : this.roles),
-        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
-        sourceType: (sourceType != null ? sourceType.value : this.sourceType));
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class Event {
-  const Event({
-    required this.name,
-    this.description,
-    this.modelId,
-    this.deviceId,
-    this.asswtId,
-    this.premiseId,
-    this.facilityId,
-    this.floorId,
-    this.icon,
-    required this.conditions,
-    this.notificationTemplate,
-    this.emailTemplate,
-    this.smsTemplate,
-    this.fcmTemplate,
-    this.voiceTemplate,
-    this.tags,
-    this.roles,
-    this.clientIds,
-    this.sourceType,
-    required this.domainKey,
-    required this.id,
-    required this.rtype,
-    required this.createdStamp,
-    required this.createdBy,
-    required this.updatedBy,
-    required this.updatedStamp,
-  });
-
-  factory Event.fromJson(Map<String, dynamic> json) => _$EventFromJson(json);
-
-  static const toJsonFactory = _$EventToJson;
-  Map<String, dynamic> toJson() => _$EventToJson(this);
-
-  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
-  final String name;
-  @JsonKey(name: 'description', includeIfNull: false, defaultValue: '')
-  final String? description;
-  @JsonKey(name: 'modelId', includeIfNull: false, defaultValue: '')
-  final String? modelId;
-  @JsonKey(name: 'deviceId', includeIfNull: false, defaultValue: '')
-  final String? deviceId;
-  @JsonKey(name: 'asswtId', includeIfNull: false, defaultValue: '')
-  final String? asswtId;
-  @JsonKey(name: 'premiseId', includeIfNull: false, defaultValue: '')
-  final String? premiseId;
-  @JsonKey(name: 'facilityId', includeIfNull: false, defaultValue: '')
-  final String? facilityId;
-  @JsonKey(name: 'floorId', includeIfNull: false, defaultValue: '')
-  final String? floorId;
-  @JsonKey(name: 'icon', includeIfNull: false, defaultValue: '')
-  final String? icon;
-  @JsonKey(
-      name: 'conditions', includeIfNull: false, defaultValue: <MatchGroup>[])
-  final List<MatchGroup> conditions;
-  @JsonKey(name: 'notificationTemplate', includeIfNull: false)
-  final NotificationTemplate? notificationTemplate;
-  @JsonKey(name: 'emailTemplate', includeIfNull: false)
-  final EmailTemplate? emailTemplate;
-  @JsonKey(name: 'smsTemplate', includeIfNull: false)
-  final SMSTemplate? smsTemplate;
-  @JsonKey(name: 'fcmTemplate', includeIfNull: false)
-  final FCMTemplate? fcmTemplate;
-  @JsonKey(name: 'voiceTemplate', includeIfNull: false)
-  final VoiceTemplate? voiceTemplate;
-  @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? tags;
-  @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? roles;
-  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
-  @JsonKey(
-    name: 'sourceType',
-    includeIfNull: false,
-    toJson: eventSourceTypeNullableToJson,
-    fromJson: eventSourceTypeNullableFromJson,
-  )
-  final enums.EventSourceType? sourceType;
-  @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
-  final String domainKey;
-  @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
-  final String id;
-  @JsonKey(name: 'rtype', includeIfNull: false, defaultValue: '')
-  final String rtype;
-  @JsonKey(name: 'createdStamp', includeIfNull: false)
-  final int createdStamp;
-  @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
-  final String createdBy;
-  @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
-  final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
-  static const fromJsonFactory = _$EventFromJson;
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other is Event &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.description, description) ||
-                const DeepCollectionEquality()
-                    .equals(other.description, description)) &&
-            (identical(other.modelId, modelId) ||
-                const DeepCollectionEquality()
-                    .equals(other.modelId, modelId)) &&
-            (identical(other.deviceId, deviceId) ||
-                const DeepCollectionEquality()
-                    .equals(other.deviceId, deviceId)) &&
-            (identical(other.asswtId, asswtId) ||
-                const DeepCollectionEquality()
-                    .equals(other.asswtId, asswtId)) &&
+                    .equals(other.assetId, assetId)) &&
             (identical(other.premiseId, premiseId) ||
                 const DeepCollectionEquality()
                     .equals(other.premiseId, premiseId)) &&
@@ -14392,22 +14106,15 @@ class Event {
             (identical(other.sourceType, sourceType) ||
                 const DeepCollectionEquality()
                     .equals(other.sourceType, sourceType)) &&
-            (identical(other.domainKey, domainKey) ||
+            (identical(other.isPulseGroup, isPulseGroup) ||
                 const DeepCollectionEquality()
-                    .equals(other.domainKey, domainKey)) &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.rtype, rtype) ||
-                const DeepCollectionEquality().equals(other.rtype, rtype)) &&
-            (identical(other.createdStamp, createdStamp) ||
+                    .equals(other.isPulseGroup, isPulseGroup)) &&
+            (identical(other.pulseGroupId, pulseGroupId) ||
                 const DeepCollectionEquality()
-                    .equals(other.createdStamp, createdStamp)) &&
-            (identical(other.createdBy, createdBy) ||
+                    .equals(other.pulseGroupId, pulseGroupId)) &&
+            (identical(other.pulseTemplateId, pulseTemplateId) ||
                 const DeepCollectionEquality()
-                    .equals(other.createdBy, createdBy)) &&
-            (identical(other.updatedBy, updatedBy) ||
-                const DeepCollectionEquality().equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) || const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.pulseTemplateId, pulseTemplateId)));
   }
 
   @override
@@ -14419,7 +14126,7 @@ class Event {
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(modelId) ^
       const DeepCollectionEquality().hash(deviceId) ^
-      const DeepCollectionEquality().hash(asswtId) ^
+      const DeepCollectionEquality().hash(assetId) ^
       const DeepCollectionEquality().hash(premiseId) ^
       const DeepCollectionEquality().hash(facilityId) ^
       const DeepCollectionEquality().hash(floorId) ^
@@ -14434,23 +14141,19 @@ class Event {
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(sourceType) ^
-      const DeepCollectionEquality().hash(domainKey) ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(rtype) ^
-      const DeepCollectionEquality().hash(createdStamp) ^
-      const DeepCollectionEquality().hash(createdBy) ^
-      const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
+      const DeepCollectionEquality().hash(isPulseGroup) ^
+      const DeepCollectionEquality().hash(pulseGroupId) ^
+      const DeepCollectionEquality().hash(pulseTemplateId) ^
       runtimeType.hashCode;
 }
 
-extension $EventExtension on Event {
-  Event copyWith(
+extension $EventInfoExtension on EventInfo {
+  EventInfo copyWith(
       {String? name,
       String? description,
       String? modelId,
       String? deviceId,
-      String? asswtId,
+      String? assetId,
       String? premiseId,
       String? facilityId,
       String? floorId,
@@ -14464,20 +14167,16 @@ extension $EventExtension on Event {
       List<String>? tags,
       List<String>? roles,
       List<String>? clientIds,
-      enums.EventSourceType? sourceType,
-      String? domainKey,
-      String? id,
-      String? rtype,
-      int? createdStamp,
-      String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
-    return Event(
+      enums.EventInfoSourceType? sourceType,
+      bool? isPulseGroup,
+      String? pulseGroupId,
+      String? pulseTemplateId}) {
+    return EventInfo(
         name: name ?? this.name,
         description: description ?? this.description,
         modelId: modelId ?? this.modelId,
         deviceId: deviceId ?? this.deviceId,
-        asswtId: asswtId ?? this.asswtId,
+        assetId: assetId ?? this.assetId,
         premiseId: premiseId ?? this.premiseId,
         facilityId: facilityId ?? this.facilityId,
         floorId: floorId ?? this.floorId,
@@ -14492,21 +14191,17 @@ extension $EventExtension on Event {
         roles: roles ?? this.roles,
         clientIds: clientIds ?? this.clientIds,
         sourceType: sourceType ?? this.sourceType,
-        domainKey: domainKey ?? this.domainKey,
-        id: id ?? this.id,
-        rtype: rtype ?? this.rtype,
-        createdStamp: createdStamp ?? this.createdStamp,
-        createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        isPulseGroup: isPulseGroup ?? this.isPulseGroup,
+        pulseGroupId: pulseGroupId ?? this.pulseGroupId,
+        pulseTemplateId: pulseTemplateId ?? this.pulseTemplateId);
   }
 
-  Event copyWithWrapped(
+  EventInfo copyWithWrapped(
       {Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<String?>? modelId,
       Wrapped<String?>? deviceId,
-      Wrapped<String?>? asswtId,
+      Wrapped<String?>? assetId,
       Wrapped<String?>? premiseId,
       Wrapped<String?>? facilityId,
       Wrapped<String?>? floorId,
@@ -14520,21 +14215,17 @@ extension $EventExtension on Event {
       Wrapped<List<String>?>? tags,
       Wrapped<List<String>?>? roles,
       Wrapped<List<String>?>? clientIds,
-      Wrapped<enums.EventSourceType?>? sourceType,
-      Wrapped<String>? domainKey,
-      Wrapped<String>? id,
-      Wrapped<String>? rtype,
-      Wrapped<int>? createdStamp,
-      Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
-    return Event(
+      Wrapped<enums.EventInfoSourceType?>? sourceType,
+      Wrapped<bool?>? isPulseGroup,
+      Wrapped<String?>? pulseGroupId,
+      Wrapped<String?>? pulseTemplateId}) {
+    return EventInfo(
         name: (name != null ? name.value : this.name),
         description:
             (description != null ? description.value : this.description),
         modelId: (modelId != null ? modelId.value : this.modelId),
         deviceId: (deviceId != null ? deviceId.value : this.deviceId),
-        asswtId: (asswtId != null ? asswtId.value : this.asswtId),
+        assetId: (assetId != null ? assetId.value : this.assetId),
         premiseId: (premiseId != null ? premiseId.value : this.premiseId),
         facilityId: (facilityId != null ? facilityId.value : this.facilityId),
         floorId: (floorId != null ? floorId.value : this.floorId),
@@ -14555,15 +14246,372 @@ extension $EventExtension on Event {
         roles: (roles != null ? roles.value : this.roles),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         sourceType: (sourceType != null ? sourceType.value : this.sourceType),
+        isPulseGroup:
+            (isPulseGroup != null ? isPulseGroup.value : this.isPulseGroup),
+        pulseGroupId:
+            (pulseGroupId != null ? pulseGroupId.value : this.pulseGroupId),
+        pulseTemplateId: (pulseTemplateId != null
+            ? pulseTemplateId.value
+            : this.pulseTemplateId));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class Event {
+  const Event({
+    required this.name,
+    this.description,
+    this.modelId,
+    this.deviceId,
+    this.assetId,
+    this.premiseId,
+    this.facilityId,
+    this.floorId,
+    this.icon,
+    required this.conditions,
+    this.notificationTemplate,
+    this.emailTemplate,
+    this.smsTemplate,
+    this.fcmTemplate,
+    this.voiceTemplate,
+    this.tags,
+    this.roles,
+    this.clientIds,
+    this.sourceType,
+    this.isPulseGroup,
+    this.pulseGroupId,
+    this.pulseTemplateId,
+    required this.domainKey,
+    required this.id,
+    required this.rtype,
+    required this.createdStamp,
+    required this.updatedStamp,
+    required this.createdBy,
+    required this.updatedBy,
+  });
+
+  factory Event.fromJson(Map<String, dynamic> json) => _$EventFromJson(json);
+
+  static const toJsonFactory = _$EventToJson;
+  Map<String, dynamic> toJson() => _$EventToJson(this);
+
+  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
+  final String name;
+  @JsonKey(name: 'description', includeIfNull: false, defaultValue: '')
+  final String? description;
+  @JsonKey(name: 'modelId', includeIfNull: false, defaultValue: '')
+  final String? modelId;
+  @JsonKey(name: 'deviceId', includeIfNull: false, defaultValue: '')
+  final String? deviceId;
+  @JsonKey(name: 'assetId', includeIfNull: false, defaultValue: '')
+  final String? assetId;
+  @JsonKey(name: 'premiseId', includeIfNull: false, defaultValue: '')
+  final String? premiseId;
+  @JsonKey(name: 'facilityId', includeIfNull: false, defaultValue: '')
+  final String? facilityId;
+  @JsonKey(name: 'floorId', includeIfNull: false, defaultValue: '')
+  final String? floorId;
+  @JsonKey(name: 'icon', includeIfNull: false, defaultValue: '')
+  final String? icon;
+  @JsonKey(
+      name: 'conditions', includeIfNull: false, defaultValue: <MatchGroup>[])
+  final List<MatchGroup> conditions;
+  @JsonKey(name: 'notificationTemplate', includeIfNull: false)
+  final NotificationTemplate? notificationTemplate;
+  @JsonKey(name: 'emailTemplate', includeIfNull: false)
+  final EmailTemplate? emailTemplate;
+  @JsonKey(name: 'smsTemplate', includeIfNull: false)
+  final SMSTemplate? smsTemplate;
+  @JsonKey(name: 'fcmTemplate', includeIfNull: false)
+  final FCMTemplate? fcmTemplate;
+  @JsonKey(name: 'voiceTemplate', includeIfNull: false)
+  final VoiceTemplate? voiceTemplate;
+  @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? tags;
+  @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? roles;
+  @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? clientIds;
+  @JsonKey(
+    name: 'sourceType',
+    includeIfNull: false,
+    toJson: eventSourceTypeNullableToJson,
+    fromJson: eventSourceTypeNullableFromJson,
+  )
+  final enums.EventSourceType? sourceType;
+  @JsonKey(name: 'isPulseGroup', includeIfNull: false)
+  final bool? isPulseGroup;
+  @JsonKey(name: 'pulseGroupId', includeIfNull: false, defaultValue: '')
+  final String? pulseGroupId;
+  @JsonKey(name: 'pulseTemplateId', includeIfNull: false, defaultValue: '')
+  final String? pulseTemplateId;
+  @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
+  final String domainKey;
+  @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
+  final String id;
+  @JsonKey(name: 'rtype', includeIfNull: false, defaultValue: '')
+  final String rtype;
+  @JsonKey(name: 'createdStamp', includeIfNull: false)
+  final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
+  @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
+  final String createdBy;
+  @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
+  final String updatedBy;
+  static const fromJsonFactory = _$EventFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is Event &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.description, description) ||
+                const DeepCollectionEquality()
+                    .equals(other.description, description)) &&
+            (identical(other.modelId, modelId) ||
+                const DeepCollectionEquality()
+                    .equals(other.modelId, modelId)) &&
+            (identical(other.deviceId, deviceId) ||
+                const DeepCollectionEquality()
+                    .equals(other.deviceId, deviceId)) &&
+            (identical(other.assetId, assetId) ||
+                const DeepCollectionEquality()
+                    .equals(other.assetId, assetId)) &&
+            (identical(other.premiseId, premiseId) ||
+                const DeepCollectionEquality()
+                    .equals(other.premiseId, premiseId)) &&
+            (identical(other.facilityId, facilityId) ||
+                const DeepCollectionEquality()
+                    .equals(other.facilityId, facilityId)) &&
+            (identical(other.floorId, floorId) ||
+                const DeepCollectionEquality()
+                    .equals(other.floorId, floorId)) &&
+            (identical(other.icon, icon) ||
+                const DeepCollectionEquality().equals(other.icon, icon)) &&
+            (identical(other.conditions, conditions) ||
+                const DeepCollectionEquality()
+                    .equals(other.conditions, conditions)) &&
+            (identical(other.notificationTemplate, notificationTemplate) ||
+                const DeepCollectionEquality().equals(
+                    other.notificationTemplate, notificationTemplate)) &&
+            (identical(other.emailTemplate, emailTemplate) ||
+                const DeepCollectionEquality()
+                    .equals(other.emailTemplate, emailTemplate)) &&
+            (identical(other.smsTemplate, smsTemplate) ||
+                const DeepCollectionEquality()
+                    .equals(other.smsTemplate, smsTemplate)) &&
+            (identical(other.fcmTemplate, fcmTemplate) ||
+                const DeepCollectionEquality()
+                    .equals(other.fcmTemplate, fcmTemplate)) &&
+            (identical(other.voiceTemplate, voiceTemplate) ||
+                const DeepCollectionEquality()
+                    .equals(other.voiceTemplate, voiceTemplate)) &&
+            (identical(other.tags, tags) ||
+                const DeepCollectionEquality().equals(other.tags, tags)) &&
+            (identical(other.roles, roles) ||
+                const DeepCollectionEquality().equals(other.roles, roles)) &&
+            (identical(other.clientIds, clientIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientIds, clientIds)) &&
+            (identical(other.sourceType, sourceType) ||
+                const DeepCollectionEquality()
+                    .equals(other.sourceType, sourceType)) &&
+            (identical(other.isPulseGroup, isPulseGroup) ||
+                const DeepCollectionEquality()
+                    .equals(other.isPulseGroup, isPulseGroup)) &&
+            (identical(other.pulseGroupId, pulseGroupId) ||
+                const DeepCollectionEquality()
+                    .equals(other.pulseGroupId, pulseGroupId)) &&
+            (identical(other.pulseTemplateId, pulseTemplateId) ||
+                const DeepCollectionEquality()
+                    .equals(other.pulseTemplateId, pulseTemplateId)) &&
+            (identical(other.domainKey, domainKey) ||
+                const DeepCollectionEquality()
+                    .equals(other.domainKey, domainKey)) &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.rtype, rtype) || const DeepCollectionEquality().equals(other.rtype, rtype)) &&
+            (identical(other.createdStamp, createdStamp) || const DeepCollectionEquality().equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) || const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)) &&
+            (identical(other.createdBy, createdBy) || const DeepCollectionEquality().equals(other.createdBy, createdBy)) &&
+            (identical(other.updatedBy, updatedBy) || const DeepCollectionEquality().equals(other.updatedBy, updatedBy)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(description) ^
+      const DeepCollectionEquality().hash(modelId) ^
+      const DeepCollectionEquality().hash(deviceId) ^
+      const DeepCollectionEquality().hash(assetId) ^
+      const DeepCollectionEquality().hash(premiseId) ^
+      const DeepCollectionEquality().hash(facilityId) ^
+      const DeepCollectionEquality().hash(floorId) ^
+      const DeepCollectionEquality().hash(icon) ^
+      const DeepCollectionEquality().hash(conditions) ^
+      const DeepCollectionEquality().hash(notificationTemplate) ^
+      const DeepCollectionEquality().hash(emailTemplate) ^
+      const DeepCollectionEquality().hash(smsTemplate) ^
+      const DeepCollectionEquality().hash(fcmTemplate) ^
+      const DeepCollectionEquality().hash(voiceTemplate) ^
+      const DeepCollectionEquality().hash(tags) ^
+      const DeepCollectionEquality().hash(roles) ^
+      const DeepCollectionEquality().hash(clientIds) ^
+      const DeepCollectionEquality().hash(sourceType) ^
+      const DeepCollectionEquality().hash(isPulseGroup) ^
+      const DeepCollectionEquality().hash(pulseGroupId) ^
+      const DeepCollectionEquality().hash(pulseTemplateId) ^
+      const DeepCollectionEquality().hash(domainKey) ^
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(rtype) ^
+      const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
+      const DeepCollectionEquality().hash(createdBy) ^
+      const DeepCollectionEquality().hash(updatedBy) ^
+      runtimeType.hashCode;
+}
+
+extension $EventExtension on Event {
+  Event copyWith(
+      {String? name,
+      String? description,
+      String? modelId,
+      String? deviceId,
+      String? assetId,
+      String? premiseId,
+      String? facilityId,
+      String? floorId,
+      String? icon,
+      List<MatchGroup>? conditions,
+      NotificationTemplate? notificationTemplate,
+      EmailTemplate? emailTemplate,
+      SMSTemplate? smsTemplate,
+      FCMTemplate? fcmTemplate,
+      VoiceTemplate? voiceTemplate,
+      List<String>? tags,
+      List<String>? roles,
+      List<String>? clientIds,
+      enums.EventSourceType? sourceType,
+      bool? isPulseGroup,
+      String? pulseGroupId,
+      String? pulseTemplateId,
+      String? domainKey,
+      String? id,
+      String? rtype,
+      int? createdStamp,
+      int? updatedStamp,
+      String? createdBy,
+      String? updatedBy}) {
+    return Event(
+        name: name ?? this.name,
+        description: description ?? this.description,
+        modelId: modelId ?? this.modelId,
+        deviceId: deviceId ?? this.deviceId,
+        assetId: assetId ?? this.assetId,
+        premiseId: premiseId ?? this.premiseId,
+        facilityId: facilityId ?? this.facilityId,
+        floorId: floorId ?? this.floorId,
+        icon: icon ?? this.icon,
+        conditions: conditions ?? this.conditions,
+        notificationTemplate: notificationTemplate ?? this.notificationTemplate,
+        emailTemplate: emailTemplate ?? this.emailTemplate,
+        smsTemplate: smsTemplate ?? this.smsTemplate,
+        fcmTemplate: fcmTemplate ?? this.fcmTemplate,
+        voiceTemplate: voiceTemplate ?? this.voiceTemplate,
+        tags: tags ?? this.tags,
+        roles: roles ?? this.roles,
+        clientIds: clientIds ?? this.clientIds,
+        sourceType: sourceType ?? this.sourceType,
+        isPulseGroup: isPulseGroup ?? this.isPulseGroup,
+        pulseGroupId: pulseGroupId ?? this.pulseGroupId,
+        pulseTemplateId: pulseTemplateId ?? this.pulseTemplateId,
+        domainKey: domainKey ?? this.domainKey,
+        id: id ?? this.id,
+        rtype: rtype ?? this.rtype,
+        createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
+        createdBy: createdBy ?? this.createdBy,
+        updatedBy: updatedBy ?? this.updatedBy);
+  }
+
+  Event copyWithWrapped(
+      {Wrapped<String>? name,
+      Wrapped<String?>? description,
+      Wrapped<String?>? modelId,
+      Wrapped<String?>? deviceId,
+      Wrapped<String?>? assetId,
+      Wrapped<String?>? premiseId,
+      Wrapped<String?>? facilityId,
+      Wrapped<String?>? floorId,
+      Wrapped<String?>? icon,
+      Wrapped<List<MatchGroup>>? conditions,
+      Wrapped<NotificationTemplate?>? notificationTemplate,
+      Wrapped<EmailTemplate?>? emailTemplate,
+      Wrapped<SMSTemplate?>? smsTemplate,
+      Wrapped<FCMTemplate?>? fcmTemplate,
+      Wrapped<VoiceTemplate?>? voiceTemplate,
+      Wrapped<List<String>?>? tags,
+      Wrapped<List<String>?>? roles,
+      Wrapped<List<String>?>? clientIds,
+      Wrapped<enums.EventSourceType?>? sourceType,
+      Wrapped<bool?>? isPulseGroup,
+      Wrapped<String?>? pulseGroupId,
+      Wrapped<String?>? pulseTemplateId,
+      Wrapped<String>? domainKey,
+      Wrapped<String>? id,
+      Wrapped<String>? rtype,
+      Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
+      Wrapped<String>? createdBy,
+      Wrapped<String>? updatedBy}) {
+    return Event(
+        name: (name != null ? name.value : this.name),
+        description:
+            (description != null ? description.value : this.description),
+        modelId: (modelId != null ? modelId.value : this.modelId),
+        deviceId: (deviceId != null ? deviceId.value : this.deviceId),
+        assetId: (assetId != null ? assetId.value : this.assetId),
+        premiseId: (premiseId != null ? premiseId.value : this.premiseId),
+        facilityId: (facilityId != null ? facilityId.value : this.facilityId),
+        floorId: (floorId != null ? floorId.value : this.floorId),
+        icon: (icon != null ? icon.value : this.icon),
+        conditions: (conditions != null ? conditions.value : this.conditions),
+        notificationTemplate: (notificationTemplate != null
+            ? notificationTemplate.value
+            : this.notificationTemplate),
+        emailTemplate:
+            (emailTemplate != null ? emailTemplate.value : this.emailTemplate),
+        smsTemplate:
+            (smsTemplate != null ? smsTemplate.value : this.smsTemplate),
+        fcmTemplate:
+            (fcmTemplate != null ? fcmTemplate.value : this.fcmTemplate),
+        voiceTemplate:
+            (voiceTemplate != null ? voiceTemplate.value : this.voiceTemplate),
+        tags: (tags != null ? tags.value : this.tags),
+        roles: (roles != null ? roles.value : this.roles),
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
+        sourceType: (sourceType != null ? sourceType.value : this.sourceType),
+        isPulseGroup:
+            (isPulseGroup != null ? isPulseGroup.value : this.isPulseGroup),
+        pulseGroupId:
+            (pulseGroupId != null ? pulseGroupId.value : this.pulseGroupId),
+        pulseTemplateId: (pulseTemplateId != null
+            ? pulseTemplateId.value
+            : this.pulseTemplateId),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -15436,9 +15484,9 @@ class Trigger {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory Trigger.fromJson(Map<String, dynamic> json) =>
@@ -15471,12 +15519,12 @@ class Trigger {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$TriggerFromJson;
 
   @override
@@ -15511,15 +15559,15 @@ class Trigger {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -15538,9 +15586,9 @@ class Trigger {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -15557,9 +15605,9 @@ extension $TriggerExtension on Trigger {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return Trigger(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -15572,9 +15620,9 @@ extension $TriggerExtension on Trigger {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   Trigger copyWithWrapped(
@@ -15589,9 +15637,9 @@ extension $TriggerExtension on Trigger {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return Trigger(
         name: (name != null ? name.value : this.name),
         description:
@@ -15606,10 +15654,10 @@ extension $TriggerExtension on Trigger {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -16183,6 +16231,7 @@ class ImageFileInfo {
     this.floorId,
     this.userId,
     this.premiseId,
+    this.tags,
   });
 
   factory ImageFileInfo.fromJson(Map<String, dynamic> json) =>
@@ -16239,6 +16288,8 @@ class ImageFileInfo {
   final String? userId;
   @JsonKey(name: 'premiseId', includeIfNull: false, defaultValue: '')
   final String? premiseId;
+  @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? tags;
   static const fromJsonFactory = _$ImageFileInfoFromJson;
 
   @override
@@ -16299,7 +16350,9 @@ class ImageFileInfo {
                 const DeepCollectionEquality().equals(other.userId, userId)) &&
             (identical(other.premiseId, premiseId) ||
                 const DeepCollectionEquality()
-                    .equals(other.premiseId, premiseId)));
+                    .equals(other.premiseId, premiseId)) &&
+            (identical(other.tags, tags) ||
+                const DeepCollectionEquality().equals(other.tags, tags)));
   }
 
   @override
@@ -16326,6 +16379,7 @@ class ImageFileInfo {
       const DeepCollectionEquality().hash(floorId) ^
       const DeepCollectionEquality().hash(userId) ^
       const DeepCollectionEquality().hash(premiseId) ^
+      const DeepCollectionEquality().hash(tags) ^
       runtimeType.hashCode;
 }
 
@@ -16349,7 +16403,8 @@ extension $ImageFileInfoExtension on ImageFileInfo {
       String? facilityId,
       String? floorId,
       String? userId,
-      String? premiseId}) {
+      String? premiseId,
+      List<String>? tags}) {
     return ImageFileInfo(
         imageType: imageType ?? this.imageType,
         imageTarget: imageTarget ?? this.imageTarget,
@@ -16369,7 +16424,8 @@ extension $ImageFileInfoExtension on ImageFileInfo {
         facilityId: facilityId ?? this.facilityId,
         floorId: floorId ?? this.floorId,
         userId: userId ?? this.userId,
-        premiseId: premiseId ?? this.premiseId);
+        premiseId: premiseId ?? this.premiseId,
+        tags: tags ?? this.tags);
   }
 
   ImageFileInfo copyWithWrapped(
@@ -16391,7 +16447,8 @@ extension $ImageFileInfoExtension on ImageFileInfo {
       Wrapped<String?>? facilityId,
       Wrapped<String?>? floorId,
       Wrapped<String?>? userId,
-      Wrapped<String?>? premiseId}) {
+      Wrapped<String?>? premiseId,
+      Wrapped<List<String>?>? tags}) {
     return ImageFileInfo(
         imageType: (imageType != null ? imageType.value : this.imageType),
         imageTarget:
@@ -16414,7 +16471,8 @@ extension $ImageFileInfoExtension on ImageFileInfo {
         facilityId: (facilityId != null ? facilityId.value : this.facilityId),
         floorId: (floorId != null ? floorId.value : this.floorId),
         userId: (userId != null ? userId.value : this.userId),
-        premiseId: (premiseId != null ? premiseId.value : this.premiseId));
+        premiseId: (premiseId != null ? premiseId.value : this.premiseId),
+        tags: (tags != null ? tags.value : this.tags));
   }
 }
 
@@ -16485,15 +16543,15 @@ class ImageFile {
     this.floorId,
     this.userId,
     this.premiseId,
+    this.tags,
     required this.contentType,
     required this.domainKey,
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
-    this.tags,
   });
 
   factory ImageFile.fromJson(Map<String, dynamic> json) =>
@@ -16550,6 +16608,8 @@ class ImageFile {
   final String? userId;
   @JsonKey(name: 'premiseId', includeIfNull: false, defaultValue: '')
   final String? premiseId;
+  @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? tags;
   @JsonKey(name: 'contentType', includeIfNull: false, defaultValue: '')
   final String contentType;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
@@ -16560,14 +16620,12 @@ class ImageFile {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
-  @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? tags;
   static const fromJsonFactory = _$ImageFileFromJson;
 
   @override
@@ -16629,6 +16687,8 @@ class ImageFile {
             (identical(other.premiseId, premiseId) ||
                 const DeepCollectionEquality()
                     .equals(other.premiseId, premiseId)) &&
+            (identical(other.tags, tags) ||
+                const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.contentType, contentType) ||
                 const DeepCollectionEquality()
                     .equals(other.contentType, contentType)) &&
@@ -16639,12 +16699,10 @@ class ImageFile {
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.rtype, rtype) ||
                 const DeepCollectionEquality().equals(other.rtype, rtype)) &&
-            (identical(other.createdStamp, createdStamp) ||
-                const DeepCollectionEquality().equals(other.createdStamp, createdStamp)) &&
-            (identical(other.createdBy, createdBy) || const DeepCollectionEquality().equals(other.createdBy, createdBy)) &&
-            (identical(other.updatedBy, updatedBy) || const DeepCollectionEquality().equals(other.updatedBy, updatedBy)) &&
+            (identical(other.createdStamp, createdStamp) || const DeepCollectionEquality().equals(other.createdStamp, createdStamp)) &&
             (identical(other.updatedStamp, updatedStamp) || const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)) &&
-            (identical(other.tags, tags) || const DeepCollectionEquality().equals(other.tags, tags)));
+            (identical(other.createdBy, createdBy) || const DeepCollectionEquality().equals(other.createdBy, createdBy)) &&
+            (identical(other.updatedBy, updatedBy) || const DeepCollectionEquality().equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -16671,15 +16729,15 @@ class ImageFile {
       const DeepCollectionEquality().hash(floorId) ^
       const DeepCollectionEquality().hash(userId) ^
       const DeepCollectionEquality().hash(premiseId) ^
+      const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(contentType) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
-      const DeepCollectionEquality().hash(tags) ^
       runtimeType.hashCode;
 }
 
@@ -16704,15 +16762,15 @@ extension $ImageFileExtension on ImageFile {
       String? floorId,
       String? userId,
       String? premiseId,
+      List<String>? tags,
       String? contentType,
       String? domainKey,
       String? id,
       String? rtype,
       int? createdStamp,
-      String? createdBy,
-      String? updatedBy,
       int? updatedStamp,
-      List<String>? tags}) {
+      String? createdBy,
+      String? updatedBy}) {
     return ImageFile(
         imageType: imageType ?? this.imageType,
         imageTarget: imageTarget ?? this.imageTarget,
@@ -16733,15 +16791,15 @@ extension $ImageFileExtension on ImageFile {
         floorId: floorId ?? this.floorId,
         userId: userId ?? this.userId,
         premiseId: premiseId ?? this.premiseId,
+        tags: tags ?? this.tags,
         contentType: contentType ?? this.contentType,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
-        createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
         updatedStamp: updatedStamp ?? this.updatedStamp,
-        tags: tags ?? this.tags);
+        createdBy: createdBy ?? this.createdBy,
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   ImageFile copyWithWrapped(
@@ -16764,15 +16822,15 @@ extension $ImageFileExtension on ImageFile {
       Wrapped<String?>? floorId,
       Wrapped<String?>? userId,
       Wrapped<String?>? premiseId,
+      Wrapped<List<String>?>? tags,
       Wrapped<String>? contentType,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
-      Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
       Wrapped<int>? updatedStamp,
-      Wrapped<List<String>?>? tags}) {
+      Wrapped<String>? createdBy,
+      Wrapped<String>? updatedBy}) {
     return ImageFile(
         imageType: (imageType != null ? imageType.value : this.imageType),
         imageTarget:
@@ -16796,6 +16854,7 @@ extension $ImageFileExtension on ImageFile {
         floorId: (floorId != null ? floorId.value : this.floorId),
         userId: (userId != null ? userId.value : this.userId),
         premiseId: (premiseId != null ? premiseId.value : this.premiseId),
+        tags: (tags != null ? tags.value : this.tags),
         contentType:
             (contentType != null ? contentType.value : this.contentType),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
@@ -16803,11 +16862,10 @@ extension $ImageFileExtension on ImageFile {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
             (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
-        tags: (tags != null ? tags.value : this.tags));
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -17764,9 +17822,9 @@ class Display {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory Display.fromJson(Map<String, dynamic> json) =>
@@ -17804,12 +17862,12 @@ class Display {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$DisplayFromJson;
 
   @override
@@ -17849,15 +17907,15 @@ class Display {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -17878,9 +17936,9 @@ class Display {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -17899,9 +17957,9 @@ extension $DisplayExtension on Display {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return Display(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -17916,9 +17974,9 @@ extension $DisplayExtension on Display {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   Display copyWithWrapped(
@@ -17935,9 +17993,9 @@ extension $DisplayExtension on Display {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return Display(
         name: (name != null ? name.value : this.name),
         description:
@@ -17954,10 +18012,10 @@ extension $DisplayExtension on Display {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -18711,9 +18769,9 @@ class DeviceView {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory DeviceView.fromJson(Map<String, dynamic> json) =>
@@ -18790,12 +18848,12 @@ class DeviceView {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$DeviceViewFromJson;
 
   @override
@@ -18862,15 +18920,15 @@ class DeviceView {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -18902,9 +18960,9 @@ class DeviceView {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -18934,9 +18992,9 @@ extension $DeviceViewExtension on DeviceView {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return DeviceView(
         modelId: modelId ?? this.modelId,
         name: name ?? this.name,
@@ -18962,9 +19020,9 @@ extension $DeviceViewExtension on DeviceView {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   DeviceView copyWithWrapped(
@@ -18992,9 +19050,9 @@ extension $DeviceViewExtension on DeviceView {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return DeviceView(
         modelId: (modelId != null ? modelId.value : this.modelId),
         name: (name != null ? name.value : this.name),
@@ -19024,10 +19082,10 @@ extension $DeviceViewExtension on DeviceView {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -21017,13 +21075,12 @@ class DashboardMenuGroup {
   const DashboardMenuGroup({
     required this.domainKey,
     required this.id,
-    required this.name,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
-    this.tags,
+    required this.name,
     required this.displayName,
     this.description,
     this.icon,
@@ -21031,6 +21088,7 @@ class DashboardMenuGroup {
     required this.webSupported,
     required this.tabletSupported,
     required this.mobileSupported,
+    this.tags,
     this.roles,
     this.clientIds,
     required this.menus,
@@ -21046,20 +21104,18 @@ class DashboardMenuGroup {
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
   final String id;
-  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
-  final String name;
   @JsonKey(name: 'rtype', includeIfNull: false, defaultValue: '')
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
-  @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? tags;
+  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
+  final String name;
   @JsonKey(name: 'displayName', includeIfNull: false, defaultValue: '')
   final String displayName;
   @JsonKey(name: 'description', includeIfNull: false, defaultValue: '')
@@ -21074,6 +21130,8 @@ class DashboardMenuGroup {
   final bool tabletSupported;
   @JsonKey(name: 'mobileSupported', includeIfNull: false, defaultValue: true)
   final bool mobileSupported;
+  @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? tags;
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
@@ -21091,24 +21149,22 @@ class DashboardMenuGroup {
                     .equals(other.domainKey, domainKey)) &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.rtype, rtype) ||
                 const DeepCollectionEquality().equals(other.rtype, rtype)) &&
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
                     .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)) &&
-            (identical(other.tags, tags) ||
-                const DeepCollectionEquality().equals(other.tags, tags)) &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.displayName, displayName) ||
                 const DeepCollectionEquality()
                     .equals(other.displayName, displayName)) &&
@@ -21128,6 +21184,8 @@ class DashboardMenuGroup {
             (identical(other.mobileSupported, mobileSupported) ||
                 const DeepCollectionEquality()
                     .equals(other.mobileSupported, mobileSupported)) &&
+            (identical(other.tags, tags) ||
+                const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.roles, roles) ||
                 const DeepCollectionEquality().equals(other.roles, roles)) &&
             (identical(other.clientIds, clientIds) ||
@@ -21144,13 +21202,12 @@ class DashboardMenuGroup {
   int get hashCode =>
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
-      const DeepCollectionEquality().hash(tags) ^
+      const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(displayName) ^
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(icon) ^
@@ -21158,6 +21215,7 @@ class DashboardMenuGroup {
       const DeepCollectionEquality().hash(webSupported) ^
       const DeepCollectionEquality().hash(tabletSupported) ^
       const DeepCollectionEquality().hash(mobileSupported) ^
+      const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(menus) ^
@@ -21168,13 +21226,12 @@ extension $DashboardMenuGroupExtension on DashboardMenuGroup {
   DashboardMenuGroup copyWith(
       {String? domainKey,
       String? id,
-      String? name,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
       String? updatedBy,
-      int? updatedStamp,
-      List<String>? tags,
+      String? name,
       String? displayName,
       String? description,
       String? icon,
@@ -21182,19 +21239,19 @@ extension $DashboardMenuGroupExtension on DashboardMenuGroup {
       bool? webSupported,
       bool? tabletSupported,
       bool? mobileSupported,
+      List<String>? tags,
       List<String>? roles,
       List<String>? clientIds,
       List<DashboardMenu>? menus}) {
     return DashboardMenuGroup(
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
-        name: name ?? this.name,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
         updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp,
-        tags: tags ?? this.tags,
+        name: name ?? this.name,
         displayName: displayName ?? this.displayName,
         description: description ?? this.description,
         icon: icon ?? this.icon,
@@ -21202,6 +21259,7 @@ extension $DashboardMenuGroupExtension on DashboardMenuGroup {
         webSupported: webSupported ?? this.webSupported,
         tabletSupported: tabletSupported ?? this.tabletSupported,
         mobileSupported: mobileSupported ?? this.mobileSupported,
+        tags: tags ?? this.tags,
         roles: roles ?? this.roles,
         clientIds: clientIds ?? this.clientIds,
         menus: menus ?? this.menus);
@@ -21210,13 +21268,12 @@ extension $DashboardMenuGroupExtension on DashboardMenuGroup {
   DashboardMenuGroup copyWithWrapped(
       {Wrapped<String>? domainKey,
       Wrapped<String>? id,
-      Wrapped<String>? name,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
       Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp,
-      Wrapped<List<String>?>? tags,
+      Wrapped<String>? name,
       Wrapped<String>? displayName,
       Wrapped<String?>? description,
       Wrapped<String?>? icon,
@@ -21224,21 +21281,21 @@ extension $DashboardMenuGroupExtension on DashboardMenuGroup {
       Wrapped<bool>? webSupported,
       Wrapped<bool>? tabletSupported,
       Wrapped<bool>? mobileSupported,
+      Wrapped<List<String>?>? tags,
       Wrapped<List<String>?>? roles,
       Wrapped<List<String>?>? clientIds,
       Wrapped<List<DashboardMenu>>? menus}) {
     return DashboardMenuGroup(
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
-        name: (name != null ? name.value : this.name),
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
             (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
-        tags: (tags != null ? tags.value : this.tags),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
+        name: (name != null ? name.value : this.name),
         displayName:
             (displayName != null ? displayName.value : this.displayName),
         description:
@@ -21253,6 +21310,7 @@ extension $DashboardMenuGroupExtension on DashboardMenuGroup {
         mobileSupported: (mobileSupported != null
             ? mobileSupported.value
             : this.mobileSupported),
+        tags: (tags != null ? tags.value : this.tags),
         roles: (roles != null ? roles.value : this.roles),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         menus: (menus != null ? menus.value : this.menus));
@@ -22871,16 +22929,16 @@ class DashboardScreen {
   const DashboardScreen({
     required this.domainKey,
     required this.id,
-    required this.name,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
-    this.tags,
+    required this.name,
     this.description,
     this.bannerImage,
     this.spacing,
+    this.tags,
     this.bgColor,
     this.bgImage,
     this.mainAxisAlignment,
@@ -22910,26 +22968,26 @@ class DashboardScreen {
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
   final String id;
-  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
-  final String name;
   @JsonKey(name: 'rtype', includeIfNull: false, defaultValue: '')
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
-  @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? tags;
+  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
+  final String name;
   @JsonKey(name: 'description', includeIfNull: false, defaultValue: '')
   final String? description;
   @JsonKey(name: 'bannerImage', includeIfNull: false, defaultValue: '')
   final String? bannerImage;
   @JsonKey(name: 'spacing', includeIfNull: false)
   final double? spacing;
+  @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? tags;
   @JsonKey(name: 'bgColor', includeIfNull: false)
   final int? bgColor;
   @JsonKey(name: 'bgImage', includeIfNull: false, defaultValue: '')
@@ -22975,24 +23033,22 @@ class DashboardScreen {
                     .equals(other.domainKey, domainKey)) &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.rtype, rtype) ||
                 const DeepCollectionEquality().equals(other.rtype, rtype)) &&
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
                     .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)) &&
-            (identical(other.tags, tags) ||
-                const DeepCollectionEquality().equals(other.tags, tags)) &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.description, description) ||
                 const DeepCollectionEquality()
                     .equals(other.description, description)) &&
@@ -23002,6 +23058,8 @@ class DashboardScreen {
             (identical(other.spacing, spacing) ||
                 const DeepCollectionEquality()
                     .equals(other.spacing, spacing)) &&
+            (identical(other.tags, tags) ||
+                const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.bgColor, bgColor) ||
                 const DeepCollectionEquality()
                     .equals(other.bgColor, bgColor)) &&
@@ -23051,16 +23109,16 @@ class DashboardScreen {
   int get hashCode =>
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
-      const DeepCollectionEquality().hash(tags) ^
+      const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(bannerImage) ^
       const DeepCollectionEquality().hash(spacing) ^
+      const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(bgColor) ^
       const DeepCollectionEquality().hash(bgImage) ^
       const DeepCollectionEquality().hash(mainAxisAlignment) ^
@@ -23085,16 +23143,16 @@ extension $DashboardScreenExtension on DashboardScreen {
   DashboardScreen copyWith(
       {String? domainKey,
       String? id,
-      String? name,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
       String? updatedBy,
-      int? updatedStamp,
-      List<String>? tags,
+      String? name,
       String? description,
       String? bannerImage,
       double? spacing,
+      List<String>? tags,
       int? bgColor,
       String? bgImage,
       String? mainAxisAlignment,
@@ -23115,16 +23173,16 @@ extension $DashboardScreenExtension on DashboardScreen {
     return DashboardScreen(
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
-        name: name ?? this.name,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
         updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp,
-        tags: tags ?? this.tags,
+        name: name ?? this.name,
         description: description ?? this.description,
         bannerImage: bannerImage ?? this.bannerImage,
         spacing: spacing ?? this.spacing,
+        tags: tags ?? this.tags,
         bgColor: bgColor ?? this.bgColor,
         bgImage: bgImage ?? this.bgImage,
         mainAxisAlignment: mainAxisAlignment ?? this.mainAxisAlignment,
@@ -23147,16 +23205,16 @@ extension $DashboardScreenExtension on DashboardScreen {
   DashboardScreen copyWithWrapped(
       {Wrapped<String>? domainKey,
       Wrapped<String>? id,
-      Wrapped<String>? name,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
       Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp,
-      Wrapped<List<String>?>? tags,
+      Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<String?>? bannerImage,
       Wrapped<double?>? spacing,
+      Wrapped<List<String>?>? tags,
       Wrapped<int?>? bgColor,
       Wrapped<String?>? bgImage,
       Wrapped<String?>? mainAxisAlignment,
@@ -23177,20 +23235,20 @@ extension $DashboardScreenExtension on DashboardScreen {
     return DashboardScreen(
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
-        name: (name != null ? name.value : this.name),
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
             (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
-        tags: (tags != null ? tags.value : this.tags),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
+        name: (name != null ? name.value : this.name),
         description:
             (description != null ? description.value : this.description),
         bannerImage:
             (bannerImage != null ? bannerImage.value : this.bannerImage),
         spacing: (spacing != null ? spacing.value : this.spacing),
+        tags: (tags != null ? tags.value : this.tags),
         bgColor: (bgColor != null ? bgColor.value : this.bgColor),
         bgImage: (bgImage != null ? bgImage.value : this.bgImage),
         mainAxisAlignment: (mainAxisAlignment != null
@@ -23661,6 +23719,7 @@ class EventRegistrationInfo {
     this.voice,
     this.fcm,
     this.emailId,
+    this.countryCode,
     this.phoneNumber,
     this.name,
     this.targetDeviceIds,
@@ -23689,6 +23748,8 @@ class EventRegistrationInfo {
   final bool? fcm;
   @JsonKey(name: 'emailId', includeIfNull: false, defaultValue: '')
   final String? emailId;
+  @JsonKey(name: 'countryCode', includeIfNull: false, defaultValue: '')
+  final String? countryCode;
   @JsonKey(name: 'phoneNumber', includeIfNull: false, defaultValue: '')
   final String? phoneNumber;
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
@@ -23725,6 +23786,9 @@ class EventRegistrationInfo {
             (identical(other.emailId, emailId) ||
                 const DeepCollectionEquality()
                     .equals(other.emailId, emailId)) &&
+            (identical(other.countryCode, countryCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryCode, countryCode)) &&
             (identical(other.phoneNumber, phoneNumber) ||
                 const DeepCollectionEquality()
                     .equals(other.phoneNumber, phoneNumber)) &&
@@ -23754,6 +23818,7 @@ class EventRegistrationInfo {
       const DeepCollectionEquality().hash(voice) ^
       const DeepCollectionEquality().hash(fcm) ^
       const DeepCollectionEquality().hash(emailId) ^
+      const DeepCollectionEquality().hash(countryCode) ^
       const DeepCollectionEquality().hash(phoneNumber) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(targetDeviceIds) ^
@@ -23772,6 +23837,7 @@ extension $EventRegistrationInfoExtension on EventRegistrationInfo {
       bool? voice,
       bool? fcm,
       String? emailId,
+      String? countryCode,
       String? phoneNumber,
       String? name,
       List<String>? targetDeviceIds,
@@ -23786,6 +23852,7 @@ extension $EventRegistrationInfoExtension on EventRegistrationInfo {
         voice: voice ?? this.voice,
         fcm: fcm ?? this.fcm,
         emailId: emailId ?? this.emailId,
+        countryCode: countryCode ?? this.countryCode,
         phoneNumber: phoneNumber ?? this.phoneNumber,
         name: name ?? this.name,
         targetDeviceIds: targetDeviceIds ?? this.targetDeviceIds,
@@ -23802,6 +23869,7 @@ extension $EventRegistrationInfoExtension on EventRegistrationInfo {
       Wrapped<bool?>? voice,
       Wrapped<bool?>? fcm,
       Wrapped<String?>? emailId,
+      Wrapped<String?>? countryCode,
       Wrapped<String?>? phoneNumber,
       Wrapped<String?>? name,
       Wrapped<List<String>?>? targetDeviceIds,
@@ -23817,6 +23885,8 @@ extension $EventRegistrationInfoExtension on EventRegistrationInfo {
         voice: (voice != null ? voice.value : this.voice),
         fcm: (fcm != null ? fcm.value : this.fcm),
         emailId: (emailId != null ? emailId.value : this.emailId),
+        countryCode:
+            (countryCode != null ? countryCode.value : this.countryCode),
         phoneNumber:
             (phoneNumber != null ? phoneNumber.value : this.phoneNumber),
         name: (name != null ? name.value : this.name),
@@ -23877,13 +23947,11 @@ class EventRegistration {
   const EventRegistration({
     required this.domainKey,
     required this.id,
-    required this.name,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
-    this.tags,
     required this.eventId,
     this.notification,
     this.email,
@@ -23891,8 +23959,11 @@ class EventRegistration {
     this.voice,
     this.fcm,
     this.emailId,
+    this.countryCode,
     this.phoneNumber,
+    this.name,
     this.targetDeviceIds,
+    this.tags,
     this.roles,
     this.clientIds,
     required this.userId,
@@ -23908,20 +23979,16 @@ class EventRegistration {
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
   final String id;
-  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
-  final String name;
   @JsonKey(name: 'rtype', includeIfNull: false, defaultValue: '')
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
-  @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? tags;
   @JsonKey(name: 'eventId', includeIfNull: false, defaultValue: '')
   final String eventId;
   @JsonKey(name: 'notification', includeIfNull: false)
@@ -23936,11 +24003,17 @@ class EventRegistration {
   final bool? fcm;
   @JsonKey(name: 'emailId', includeIfNull: false, defaultValue: '')
   final String? emailId;
+  @JsonKey(name: 'countryCode', includeIfNull: false, defaultValue: '')
+  final String? countryCode;
   @JsonKey(name: 'phoneNumber', includeIfNull: false, defaultValue: '')
   final String? phoneNumber;
+  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
+  final String? name;
   @JsonKey(
       name: 'targetDeviceIds', includeIfNull: false, defaultValue: <String>[])
   final List<String>? targetDeviceIds;
+  @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
+  final List<String>? tags;
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
@@ -23958,24 +24031,20 @@ class EventRegistration {
                     .equals(other.domainKey, domainKey)) &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.rtype, rtype) ||
                 const DeepCollectionEquality().equals(other.rtype, rtype)) &&
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
                     .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)) &&
-            (identical(other.tags, tags) ||
-                const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.eventId, eventId) ||
                 const DeepCollectionEquality()
                     .equals(other.eventId, eventId)) &&
@@ -23993,12 +24062,19 @@ class EventRegistration {
             (identical(other.emailId, emailId) ||
                 const DeepCollectionEquality()
                     .equals(other.emailId, emailId)) &&
+            (identical(other.countryCode, countryCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryCode, countryCode)) &&
             (identical(other.phoneNumber, phoneNumber) ||
                 const DeepCollectionEquality()
                     .equals(other.phoneNumber, phoneNumber)) &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.targetDeviceIds, targetDeviceIds) ||
                 const DeepCollectionEquality()
                     .equals(other.targetDeviceIds, targetDeviceIds)) &&
+            (identical(other.tags, tags) ||
+                const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.roles, roles) ||
                 const DeepCollectionEquality().equals(other.roles, roles)) &&
             (identical(other.clientIds, clientIds) ||
@@ -24015,13 +24091,11 @@ class EventRegistration {
   int get hashCode =>
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
-      const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(eventId) ^
       const DeepCollectionEquality().hash(notification) ^
       const DeepCollectionEquality().hash(email) ^
@@ -24029,8 +24103,11 @@ class EventRegistration {
       const DeepCollectionEquality().hash(voice) ^
       const DeepCollectionEquality().hash(fcm) ^
       const DeepCollectionEquality().hash(emailId) ^
+      const DeepCollectionEquality().hash(countryCode) ^
       const DeepCollectionEquality().hash(phoneNumber) ^
+      const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(targetDeviceIds) ^
+      const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(userId) ^
@@ -24041,13 +24118,11 @@ extension $EventRegistrationExtension on EventRegistration {
   EventRegistration copyWith(
       {String? domainKey,
       String? id,
-      String? name,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
       String? updatedBy,
-      int? updatedStamp,
-      List<String>? tags,
       String? eventId,
       bool? notification,
       bool? email,
@@ -24055,21 +24130,22 @@ extension $EventRegistrationExtension on EventRegistration {
       bool? voice,
       bool? fcm,
       String? emailId,
+      String? countryCode,
       String? phoneNumber,
+      String? name,
       List<String>? targetDeviceIds,
+      List<String>? tags,
       List<String>? roles,
       List<String>? clientIds,
       String? userId}) {
     return EventRegistration(
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
-        name: name ?? this.name,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
         updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp,
-        tags: tags ?? this.tags,
         eventId: eventId ?? this.eventId,
         notification: notification ?? this.notification,
         email: email ?? this.email,
@@ -24077,8 +24153,11 @@ extension $EventRegistrationExtension on EventRegistration {
         voice: voice ?? this.voice,
         fcm: fcm ?? this.fcm,
         emailId: emailId ?? this.emailId,
+        countryCode: countryCode ?? this.countryCode,
         phoneNumber: phoneNumber ?? this.phoneNumber,
+        name: name ?? this.name,
         targetDeviceIds: targetDeviceIds ?? this.targetDeviceIds,
+        tags: tags ?? this.tags,
         roles: roles ?? this.roles,
         clientIds: clientIds ?? this.clientIds,
         userId: userId ?? this.userId);
@@ -24087,13 +24166,11 @@ extension $EventRegistrationExtension on EventRegistration {
   EventRegistration copyWithWrapped(
       {Wrapped<String>? domainKey,
       Wrapped<String>? id,
-      Wrapped<String>? name,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
       Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp,
-      Wrapped<List<String>?>? tags,
       Wrapped<String>? eventId,
       Wrapped<bool?>? notification,
       Wrapped<bool?>? email,
@@ -24101,23 +24178,24 @@ extension $EventRegistrationExtension on EventRegistration {
       Wrapped<bool?>? voice,
       Wrapped<bool?>? fcm,
       Wrapped<String?>? emailId,
+      Wrapped<String?>? countryCode,
       Wrapped<String?>? phoneNumber,
+      Wrapped<String?>? name,
       Wrapped<List<String>?>? targetDeviceIds,
+      Wrapped<List<String>?>? tags,
       Wrapped<List<String>?>? roles,
       Wrapped<List<String>?>? clientIds,
       Wrapped<String>? userId}) {
     return EventRegistration(
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
-        name: (name != null ? name.value : this.name),
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
             (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
-        tags: (tags != null ? tags.value : this.tags),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         eventId: (eventId != null ? eventId.value : this.eventId),
         notification:
             (notification != null ? notification.value : this.notification),
@@ -24126,11 +24204,15 @@ extension $EventRegistrationExtension on EventRegistration {
         voice: (voice != null ? voice.value : this.voice),
         fcm: (fcm != null ? fcm.value : this.fcm),
         emailId: (emailId != null ? emailId.value : this.emailId),
+        countryCode:
+            (countryCode != null ? countryCode.value : this.countryCode),
         phoneNumber:
             (phoneNumber != null ? phoneNumber.value : this.phoneNumber),
+        name: (name != null ? name.value : this.name),
         targetDeviceIds: (targetDeviceIds != null
             ? targetDeviceIds.value
             : this.targetDeviceIds),
+        tags: (tags != null ? tags.value : this.tags),
         roles: (roles != null ? roles.value : this.roles),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         userId: (userId != null ? userId.value : this.userId));
@@ -25702,9 +25784,9 @@ class DisplayWidget {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory DisplayWidget.fromJson(Map<String, dynamic> json) =>
@@ -25737,12 +25819,12 @@ class DisplayWidget {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$DisplayWidgetFromJson;
 
   @override
@@ -25780,15 +25862,15 @@ class DisplayWidget {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -25808,9 +25890,9 @@ class DisplayWidget {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -25828,9 +25910,9 @@ extension $DisplayWidgetExtension on DisplayWidget {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return DisplayWidget(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -25844,9 +25926,9 @@ extension $DisplayWidgetExtension on DisplayWidget {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   DisplayWidget copyWithWrapped(
@@ -25862,9 +25944,9 @@ extension $DisplayWidgetExtension on DisplayWidget {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return DisplayWidget(
         name: (name != null ? name.value : this.name),
         description:
@@ -25880,10 +25962,10 @@ extension $DisplayWidgetExtension on DisplayWidget {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -26335,9 +26417,9 @@ class ScreenWidget {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory ScreenWidget.fromJson(Map<String, dynamic> json) =>
@@ -26377,12 +26459,12 @@ class ScreenWidget {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$ScreenWidgetFromJson;
 
   @override
@@ -26422,15 +26504,15 @@ class ScreenWidget {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -26451,9 +26533,9 @@ class ScreenWidget {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -26472,9 +26554,9 @@ extension $ScreenWidgetExtension on ScreenWidget {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return ScreenWidget(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -26489,9 +26571,9 @@ extension $ScreenWidgetExtension on ScreenWidget {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   ScreenWidget copyWithWrapped(
@@ -26508,9 +26590,9 @@ extension $ScreenWidgetExtension on ScreenWidget {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return ScreenWidget(
         name: (name != null ? name.value : this.name),
         description:
@@ -26527,10 +26609,10 @@ extension $ScreenWidgetExtension on ScreenWidget {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -27337,9 +27419,9 @@ class Preprocessor {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory Preprocessor.fromJson(Map<String, dynamic> json) =>
@@ -27368,12 +27450,12 @@ class Preprocessor {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$PreprocessorFromJson;
 
   @override
@@ -27405,15 +27487,15 @@ class Preprocessor {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -27431,9 +27513,9 @@ class Preprocessor {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -27449,9 +27531,9 @@ extension $PreprocessorExtension on Preprocessor {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return Preprocessor(
         name: name ?? this.name,
         className: className ?? this.className,
@@ -27463,9 +27545,9 @@ extension $PreprocessorExtension on Preprocessor {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   Preprocessor copyWithWrapped(
@@ -27479,9 +27561,9 @@ extension $PreprocessorExtension on Preprocessor {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return Preprocessor(
         name: (name != null ? name.value : this.name),
         className: (className != null ? className.value : this.className),
@@ -27495,10 +27577,10 @@ extension $PreprocessorExtension on Preprocessor {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -28012,9 +28094,9 @@ class DataFilter {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory DataFilter.fromJson(Map<String, dynamic> json) =>
@@ -28052,12 +28134,12 @@ class DataFilter {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$DataFilterFromJson;
 
   @override
@@ -28097,15 +28179,15 @@ class DataFilter {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -28126,9 +28208,9 @@ class DataFilter {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -28147,9 +28229,9 @@ extension $DataFilterExtension on DataFilter {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return DataFilter(
         modelId: modelId ?? this.modelId,
         deviceId: deviceId ?? this.deviceId,
@@ -28164,9 +28246,9 @@ extension $DataFilterExtension on DataFilter {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   DataFilter copyWithWrapped(
@@ -28183,9 +28265,9 @@ extension $DataFilterExtension on DataFilter {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return DataFilter(
         modelId: (modelId != null ? modelId.value : this.modelId),
         deviceId: (deviceId != null ? deviceId.value : this.deviceId),
@@ -28203,10 +28285,10 @@ extension $DataFilterExtension on DataFilter {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -28758,9 +28840,9 @@ class GeoFence {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory GeoFence.fromJson(Map<String, dynamic> json) =>
@@ -28812,12 +28894,12 @@ class GeoFence {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$GeoFenceFromJson;
 
   @override
@@ -28872,15 +28954,15 @@ class GeoFence {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -28907,9 +28989,9 @@ class GeoFence {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -28934,9 +29016,9 @@ extension $GeoFenceExtension on GeoFence {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return GeoFence(
         name: name ?? this.name,
         label: label ?? this.label,
@@ -28957,9 +29039,9 @@ extension $GeoFenceExtension on GeoFence {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   GeoFence copyWithWrapped(
@@ -28982,9 +29064,9 @@ extension $GeoFenceExtension on GeoFence {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return GeoFence(
         name: (name != null ? name.value : this.name),
         label: (label != null ? label.value : this.label),
@@ -29008,10 +29090,10 @@ extension $GeoFenceExtension on GeoFence {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -29521,9 +29603,9 @@ class AnalyticsScreen {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory AnalyticsScreen.fromJson(Map<String, dynamic> json) =>
@@ -29554,12 +29636,12 @@ class AnalyticsScreen {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$AnalyticsScreenFromJson;
 
   @override
@@ -29592,15 +29674,15 @@ class AnalyticsScreen {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -29619,9 +29701,9 @@ class AnalyticsScreen {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -29638,9 +29720,9 @@ extension $AnalyticsScreenExtension on AnalyticsScreen {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return AnalyticsScreen(
         name: name ?? this.name,
         label: label ?? this.label,
@@ -29653,9 +29735,9 @@ extension $AnalyticsScreenExtension on AnalyticsScreen {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   AnalyticsScreen copyWithWrapped(
@@ -29670,9 +29752,9 @@ extension $AnalyticsScreenExtension on AnalyticsScreen {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return AnalyticsScreen(
         name: (name != null ? name.value : this.name),
         label: (label != null ? label.value : this.label),
@@ -29688,10 +29770,10 @@ extension $AnalyticsScreenExtension on AnalyticsScreen {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -31380,13 +31462,11 @@ class TwinSysConfig {
     this.info,
     required this.domainKey,
     required this.id,
-    required this.name,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
-    this.tags,
   });
 
   factory TwinSysConfig.fromJson(Map<String, dynamic> json) =>
@@ -31401,20 +31481,16 @@ class TwinSysConfig {
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
   final String id;
-  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
-  final String name;
   @JsonKey(name: 'rtype', includeIfNull: false, defaultValue: '')
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
-  @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? tags;
   static const fromJsonFactory = _$TwinSysConfigFromJson;
 
   @override
@@ -31428,24 +31504,20 @@ class TwinSysConfig {
                     .equals(other.domainKey, domainKey)) &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.rtype, rtype) ||
                 const DeepCollectionEquality().equals(other.rtype, rtype)) &&
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)) &&
-            (identical(other.tags, tags) ||
-                const DeepCollectionEquality().equals(other.tags, tags)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -31456,13 +31528,11 @@ class TwinSysConfig {
       const DeepCollectionEquality().hash(info) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
-      const DeepCollectionEquality().hash(tags) ^
       runtimeType.hashCode;
 }
 
@@ -31471,50 +31541,42 @@ extension $TwinSysConfigExtension on TwinSysConfig {
       {TwinSysInfo? info,
       String? domainKey,
       String? id,
-      String? name,
       String? rtype,
       int? createdStamp,
-      String? createdBy,
-      String? updatedBy,
       int? updatedStamp,
-      List<String>? tags}) {
+      String? createdBy,
+      String? updatedBy}) {
     return TwinSysConfig(
         info: info ?? this.info,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
-        name: name ?? this.name,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
-        createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
         updatedStamp: updatedStamp ?? this.updatedStamp,
-        tags: tags ?? this.tags);
+        createdBy: createdBy ?? this.createdBy,
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   TwinSysConfig copyWithWrapped(
       {Wrapped<TwinSysInfo?>? info,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
-      Wrapped<String>? name,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
-      Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
       Wrapped<int>? updatedStamp,
-      Wrapped<List<String>?>? tags}) {
+      Wrapped<String>? createdBy,
+      Wrapped<String>? updatedBy}) {
     return TwinSysConfig(
         info: (info != null ? info.value : this.info),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
-        name: (name != null ? name.value : this.name),
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
             (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
-        tags: (tags != null ? tags.value : this.tags));
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -31951,9 +32013,9 @@ class Floor {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory Floor.fromJson(Map<String, dynamic> json) => _$FloorFromJson(json);
@@ -32020,12 +32082,12 @@ class Floor {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$FloorFromJson;
 
   @override
@@ -32098,11 +32160,11 @@ class Floor {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
-            (identical(other.createdBy, createdBy) ||
+            (identical(other.updatedStamp, updatedStamp) ||
                 const DeepCollectionEquality()
-                    .equals(other.createdBy, createdBy)) &&
-            (identical(other.updatedBy, updatedBy) || const DeepCollectionEquality().equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) || const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedStamp, updatedStamp)) &&
+            (identical(other.createdBy, createdBy) || const DeepCollectionEquality().equals(other.createdBy, createdBy)) &&
+            (identical(other.updatedBy, updatedBy) || const DeepCollectionEquality().equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -32135,9 +32197,9 @@ class Floor {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -32168,9 +32230,9 @@ extension $FloorExtension on Floor {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return Floor(
         premiseId: premiseId ?? this.premiseId,
         facilityId: facilityId ?? this.facilityId,
@@ -32197,9 +32259,9 @@ extension $FloorExtension on Floor {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   Floor copyWithWrapped(
@@ -32228,9 +32290,9 @@ extension $FloorExtension on Floor {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return Floor(
         premiseId: (premiseId != null ? premiseId.value : this.premiseId),
         facilityId: (facilityId != null ? facilityId.value : this.facilityId),
@@ -32262,10 +32324,10 @@ extension $FloorExtension on Floor {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -32831,9 +32893,9 @@ class Asset {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory Asset.fromJson(Map<String, dynamic> json) => _$AssetFromJson(json);
@@ -32881,12 +32943,12 @@ class Asset {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$AssetFromJson;
 
   @override
@@ -32947,15 +33009,15 @@ class Asset {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -32983,9 +33045,9 @@ class Asset {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -33011,9 +33073,9 @@ extension $AssetExtension on Asset {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return Asset(
         premiseId: premiseId ?? this.premiseId,
         facilityId: facilityId ?? this.facilityId,
@@ -33035,9 +33097,9 @@ extension $AssetExtension on Asset {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   Asset copyWithWrapped(
@@ -33061,9 +33123,9 @@ extension $AssetExtension on Asset {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return Asset(
         premiseId: (premiseId != null ? premiseId.value : this.premiseId),
         facilityId: (facilityId != null ? facilityId.value : this.facilityId),
@@ -33092,10 +33154,10 @@ extension $AssetExtension on Asset {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -33646,9 +33708,9 @@ class Facility {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory Facility.fromJson(Map<String, dynamic> json) =>
@@ -33701,12 +33763,12 @@ class Facility {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$FacilityFromJson;
 
   @override
@@ -33770,15 +33832,15 @@ class Facility {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -33808,9 +33870,9 @@ class Facility {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -33838,9 +33900,9 @@ extension $FacilityExtension on Facility {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return Facility(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -33864,9 +33926,9 @@ extension $FacilityExtension on Facility {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   Facility copyWithWrapped(
@@ -33892,9 +33954,9 @@ extension $FacilityExtension on Facility {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return Facility(
         name: (name != null ? name.value : this.name),
         description:
@@ -33924,10 +33986,10 @@ extension $FacilityExtension on Facility {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -34534,9 +34596,9 @@ class TwinUser {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory TwinUser.fromJson(Map<String, dynamic> json) =>
@@ -34592,12 +34654,12 @@ class TwinUser {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$TwinUserFromJson;
 
   @override
@@ -34664,14 +34726,14 @@ class TwinUser {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)));
+                const DeepCollectionEquality().equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -34702,9 +34764,9 @@ class TwinUser {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -34733,9 +34795,9 @@ extension $TwinUserExtension on TwinUser {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return TwinUser(
         name: name ?? this.name,
         email: email ?? this.email,
@@ -34760,9 +34822,9 @@ extension $TwinUserExtension on TwinUser {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   TwinUser copyWithWrapped(
@@ -34789,9 +34851,9 @@ extension $TwinUserExtension on TwinUser {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return TwinUser(
         name: (name != null ? name.value : this.name),
         email: (email != null ? email.value : this.email),
@@ -34826,10 +34888,10 @@ extension $TwinUserExtension on TwinUser {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -35215,9 +35277,9 @@ class Role {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory Role.fromJson(Map<String, dynamic> json) => _$RoleFromJson(json);
@@ -35241,12 +35303,12 @@ class Role {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$RoleFromJson;
 
   @override
@@ -35273,15 +35335,15 @@ class Role {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -35297,9 +35359,9 @@ class Role {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -35313,9 +35375,9 @@ extension $RoleExtension on Role {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return Role(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -35325,9 +35387,9 @@ extension $RoleExtension on Role {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   Role copyWithWrapped(
@@ -35339,9 +35401,9 @@ extension $RoleExtension on Role {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return Role(
         name: (name != null ? name.value : this.name),
         description:
@@ -35353,10 +35415,10 @@ extension $RoleExtension on Role {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -35891,9 +35953,9 @@ class Premise {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory Premise.fromJson(Map<String, dynamic> json) =>
@@ -35944,12 +36006,12 @@ class Premise {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$PremiseFromJson;
 
   @override
@@ -36010,15 +36072,15 @@ class Premise {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -36047,9 +36109,9 @@ class Premise {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -36076,9 +36138,9 @@ extension $PremiseExtension on Premise {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return Premise(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -36101,9 +36163,9 @@ extension $PremiseExtension on Premise {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   Premise copyWithWrapped(
@@ -36128,9 +36190,9 @@ extension $PremiseExtension on Premise {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return Premise(
         name: (name != null ? name.value : this.name),
         description:
@@ -36159,10 +36221,10 @@ extension $PremiseExtension on Premise {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -36841,9 +36903,9 @@ class ScrappingTable {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory ScrappingTable.fromJson(Map<String, dynamic> json) =>
@@ -36871,12 +36933,12 @@ class ScrappingTable {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$ScrappingTableFromJson;
 
   @override
@@ -36906,15 +36968,15 @@ class ScrappingTable {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -36931,9 +36993,9 @@ class ScrappingTable {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -36948,9 +37010,9 @@ extension $ScrappingTableExtension on ScrappingTable {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return ScrappingTable(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -36961,9 +37023,9 @@ extension $ScrappingTableExtension on ScrappingTable {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   ScrappingTable copyWithWrapped(
@@ -36976,9 +37038,9 @@ extension $ScrappingTableExtension on ScrappingTable {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return ScrappingTable(
         name: (name != null ? name.value : this.name),
         description:
@@ -36991,10 +37053,10 @@ extension $ScrappingTableExtension on ScrappingTable {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -38244,9 +38306,9 @@ class AssetGroup {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory AssetGroup.fromJson(Map<String, dynamic> json) =>
@@ -38282,12 +38344,12 @@ class AssetGroup {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$AssetGroupFromJson;
 
   @override
@@ -38321,15 +38383,15 @@ class AssetGroup {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -38348,9 +38410,9 @@ class AssetGroup {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -38367,9 +38429,9 @@ extension $AssetGroupExtension on AssetGroup {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return AssetGroup(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -38382,9 +38444,9 @@ extension $AssetGroupExtension on AssetGroup {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   AssetGroup copyWithWrapped(
@@ -38399,9 +38461,9 @@ extension $AssetGroupExtension on AssetGroup {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return AssetGroup(
         name: (name != null ? name.value : this.name),
         description:
@@ -38416,10 +38478,10 @@ extension $AssetGroupExtension on AssetGroup {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -38944,9 +39006,9 @@ class Report {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory Report.fromJson(Map<String, dynamic> json) => _$ReportFromJson(json);
@@ -38992,12 +39054,12 @@ class Report {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$ReportFromJson;
 
   @override
@@ -39054,15 +39116,15 @@ class Report {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -39089,9 +39151,9 @@ class Report {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -39116,9 +39178,9 @@ extension $ReportExtension on Report {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return Report(
         modelId: modelId ?? this.modelId,
         name: name ?? this.name,
@@ -39139,9 +39201,9 @@ extension $ReportExtension on Report {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   Report copyWithWrapped(
@@ -39164,9 +39226,9 @@ extension $ReportExtension on Report {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return Report(
         modelId: (modelId != null ? modelId.value : this.modelId),
         name: (name != null ? name.value : this.name),
@@ -39198,10 +39260,10 @@ extension $ReportExtension on Report {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -39849,9 +39911,9 @@ class AssetModel {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory AssetModel.fromJson(Map<String, dynamic> json) =>
@@ -39897,12 +39959,12 @@ class AssetModel {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$AssetModelFromJson;
 
   @override
@@ -39953,15 +40015,15 @@ class AssetModel {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -39986,9 +40048,9 @@ class AssetModel {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -40011,9 +40073,9 @@ extension $AssetModelExtension on AssetModel {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return AssetModel(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -40032,9 +40094,9 @@ extension $AssetModelExtension on AssetModel {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   AssetModel copyWithWrapped(
@@ -40055,9 +40117,9 @@ extension $AssetModelExtension on AssetModel {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return AssetModel(
         name: (name != null ? name.value : this.name),
         description:
@@ -40083,10 +40145,10 @@ extension $AssetModelExtension on AssetModel {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -40723,9 +40785,9 @@ class FieldFilter {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory FieldFilter.fromJson(Map<String, dynamic> json) =>
@@ -40776,12 +40838,12 @@ class FieldFilter {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$FieldFilterFromJson;
 
   @override
@@ -40828,15 +40890,15 @@ class FieldFilter {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -40860,9 +40922,9 @@ class FieldFilter {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -40884,9 +40946,9 @@ extension $FieldFilterExtension on FieldFilter {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return FieldFilter(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -40904,9 +40966,9 @@ extension $FieldFilterExtension on FieldFilter {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   FieldFilter copyWithWrapped(
@@ -40926,9 +40988,9 @@ extension $FieldFilterExtension on FieldFilter {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return FieldFilter(
         name: (name != null ? name.value : this.name),
         description:
@@ -40948,10 +41010,10 @@ extension $FieldFilterExtension on FieldFilter {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -41708,9 +41770,9 @@ class Client {
     required this.id,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
   });
 
   factory Client.fromJson(Map<String, dynamic> json) => _$ClientFromJson(json);
@@ -41752,12 +41814,12 @@ class Client {
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
   static const fromJsonFactory = _$ClientFromJson;
 
   @override
@@ -41807,15 +41869,15 @@ class Client {
             (identical(other.createdStamp, createdStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) ||
                 const DeepCollectionEquality()
                     .equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -41840,9 +41902,9 @@ class Client {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
       runtimeType.hashCode;
 }
 
@@ -41865,9 +41927,9 @@ extension $ClientExtension on Client {
       String? id,
       String? rtype,
       int? createdStamp,
+      int? updatedStamp,
       String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
+      String? updatedBy}) {
     return Client(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -41886,9 +41948,9 @@ extension $ClientExtension on Client {
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
         createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   Client copyWithWrapped(
@@ -41909,9 +41971,9 @@ extension $ClientExtension on Client {
       Wrapped<String>? id,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
       Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
-      Wrapped<int>? updatedStamp}) {
+      Wrapped<String>? updatedBy}) {
     return Client(
         name: (name != null ? name.value : this.name),
         description:
@@ -41934,10 +41996,10 @@ extension $ClientExtension on Client {
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 
@@ -43806,13 +43868,11 @@ class OrgPlan {
     this.currencySumbol,
     required this.domainKey,
     required this.id,
-    required this.name,
     required this.rtype,
     required this.createdStamp,
+    required this.updatedStamp,
     required this.createdBy,
     required this.updatedBy,
-    required this.updatedStamp,
-    this.tags,
   });
 
   factory OrgPlan.fromJson(Map<String, dynamic> json) =>
@@ -43895,20 +43955,16 @@ class OrgPlan {
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
   final String id;
-  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
-  final String name;
   @JsonKey(name: 'rtype', includeIfNull: false, defaultValue: '')
   final String rtype;
   @JsonKey(name: 'createdStamp', includeIfNull: false)
   final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
   @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
   final String createdBy;
   @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
   final String updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int updatedStamp;
-  @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? tags;
   static const fromJsonFactory = _$OrgPlanFromJson;
 
   @override
@@ -43994,13 +44050,11 @@ class OrgPlan {
             (identical(other.currencySumbol, currencySumbol) || const DeepCollectionEquality().equals(other.currencySumbol, currencySumbol)) &&
             (identical(other.domainKey, domainKey) || const DeepCollectionEquality().equals(other.domainKey, domainKey)) &&
             (identical(other.id, id) || const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.name, name) || const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.rtype, rtype) || const DeepCollectionEquality().equals(other.rtype, rtype)) &&
             (identical(other.createdStamp, createdStamp) || const DeepCollectionEquality().equals(other.createdStamp, createdStamp)) &&
-            (identical(other.createdBy, createdBy) || const DeepCollectionEquality().equals(other.createdBy, createdBy)) &&
-            (identical(other.updatedBy, updatedBy) || const DeepCollectionEquality().equals(other.updatedBy, updatedBy)) &&
             (identical(other.updatedStamp, updatedStamp) || const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)) &&
-            (identical(other.tags, tags) || const DeepCollectionEquality().equals(other.tags, tags)));
+            (identical(other.createdBy, createdBy) || const DeepCollectionEquality().equals(other.createdBy, createdBy)) &&
+            (identical(other.updatedBy, updatedBy) || const DeepCollectionEquality().equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -44045,13 +44099,11 @@ class OrgPlan {
       const DeepCollectionEquality().hash(currencySumbol) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(rtype) ^
       const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
       const DeepCollectionEquality().hash(createdBy) ^
       const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
-      const DeepCollectionEquality().hash(tags) ^
       runtimeType.hashCode;
 }
 
@@ -44094,13 +44146,11 @@ extension $OrgPlanExtension on OrgPlan {
       String? currencySumbol,
       String? domainKey,
       String? id,
-      String? name,
       String? rtype,
       int? createdStamp,
-      String? createdBy,
-      String? updatedBy,
       int? updatedStamp,
-      List<String>? tags}) {
+      String? createdBy,
+      String? updatedBy}) {
     return OrgPlan(
         orgId: orgId ?? this.orgId,
         planId: planId ?? this.planId,
@@ -44143,13 +44193,11 @@ extension $OrgPlanExtension on OrgPlan {
         currencySumbol: currencySumbol ?? this.currencySumbol,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
-        name: name ?? this.name,
         rtype: rtype ?? this.rtype,
         createdStamp: createdStamp ?? this.createdStamp,
-        createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
         updatedStamp: updatedStamp ?? this.updatedStamp,
-        tags: tags ?? this.tags);
+        createdBy: createdBy ?? this.createdBy,
+        updatedBy: updatedBy ?? this.updatedBy);
   }
 
   OrgPlan copyWithWrapped(
@@ -44190,13 +44238,11 @@ extension $OrgPlanExtension on OrgPlan {
       Wrapped<String?>? currencySumbol,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
-      Wrapped<String>? name,
       Wrapped<String>? rtype,
       Wrapped<int>? createdStamp,
-      Wrapped<String>? createdBy,
-      Wrapped<String>? updatedBy,
       Wrapped<int>? updatedStamp,
-      Wrapped<List<String>?>? tags}) {
+      Wrapped<String>? createdBy,
+      Wrapped<String>? updatedBy}) {
     return OrgPlan(
         orgId: (orgId != null ? orgId.value : this.orgId),
         planId: (planId != null ? planId.value : this.planId),
@@ -44289,15 +44335,13 @@ extension $OrgPlanExtension on OrgPlan {
             : this.currencySumbol),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
-        name: (name != null ? name.value : this.name),
         rtype: (rtype != null ? rtype.value : this.rtype),
         createdStamp:
             (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
         updatedStamp:
             (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
-        tags: (tags != null ? tags.value : this.tags));
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
   }
 }
 

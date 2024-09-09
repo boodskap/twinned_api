@@ -33,38 +33,23 @@ Map<String, dynamic> _$BaseResponseToJson(BaseResponse instance) {
 BaseEntity _$BaseEntityFromJson(Map<String, dynamic> json) => BaseEntity(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
-      tags:
-          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-              [],
     );
 
-Map<String, dynamic> _$BaseEntityToJson(BaseEntity instance) {
-  final val = <String, dynamic>{
-    'domainKey': instance.domainKey,
-    'id': instance.id,
-    'name': instance.name,
-    'rtype': instance.rtype,
-    'createdStamp': instance.createdStamp,
-    'createdBy': instance.createdBy,
-    'updatedBy': instance.updatedBy,
-    'updatedStamp': instance.updatedStamp,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('tags', instance.tags);
-  return val;
-}
+Map<String, dynamic> _$BaseEntityToJson(BaseEntity instance) =>
+    <String, dynamic>{
+      'domainKey': instance.domainKey,
+      'id': instance.id,
+      'rtype': instance.rtype,
+      'createdStamp': instance.createdStamp,
+      'updatedStamp': instance.updatedStamp,
+      'createdBy': instance.createdBy,
+      'updatedBy': instance.updatedBy,
+    };
 
 DisplayableEntity _$DisplayableEntityFromJson(Map<String, dynamic> json) =>
     DisplayableEntity(
@@ -461,9 +446,9 @@ DeviceModel _$DeviceModelFromJson(Map<String, dynamic> json) => DeviceModel(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$DeviceModelToJson(DeviceModel instance) {
@@ -503,9 +488,9 @@ Map<String, dynamic> _$DeviceModelToJson(DeviceModel instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -792,9 +777,9 @@ Device _$DeviceFromJson(Map<String, dynamic> json) => Device(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$DeviceToJson(Device instance) {
@@ -843,9 +828,9 @@ Map<String, dynamic> _$DeviceToJson(Device instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -1027,9 +1012,9 @@ Condition _$ConditionFromJson(Map<String, dynamic> json) => Condition(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$ConditionToJson(Condition instance) {
@@ -1058,9 +1043,9 @@ Map<String, dynamic> _$ConditionToJson(Condition instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -1296,9 +1281,9 @@ Alarm _$AlarmFromJson(Map<String, dynamic> json) => Alarm(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$AlarmToJson(Alarm instance) {
@@ -1326,9 +1311,9 @@ Map<String, dynamic> _$AlarmToJson(Alarm instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -1543,9 +1528,9 @@ Control _$ControlFromJson(Map<String, dynamic> json) => Control(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$ControlToJson(Control instance) {
@@ -1571,9 +1556,9 @@ Map<String, dynamic> _$ControlToJson(Control instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -1687,7 +1672,7 @@ EventInfo _$EventInfoFromJson(Map<String, dynamic> json) => EventInfo(
       description: json['description'] as String? ?? '',
       modelId: json['modelId'] as String? ?? '',
       deviceId: json['deviceId'] as String? ?? '',
-      asswtId: json['asswtId'] as String? ?? '',
+      assetId: json['assetId'] as String? ?? '',
       premiseId: json['premiseId'] as String? ?? '',
       facilityId: json['facilityId'] as String? ?? '',
       floorId: json['floorId'] as String? ?? '',
@@ -1725,6 +1710,9 @@ EventInfo _$EventInfoFromJson(Map<String, dynamic> json) => EventInfo(
               .toList() ??
           [],
       sourceType: eventInfoSourceTypeNullableFromJson(json['sourceType']),
+      isPulseGroup: json['isPulseGroup'] as bool?,
+      pulseGroupId: json['pulseGroupId'] as String? ?? '',
+      pulseTemplateId: json['pulseTemplateId'] as String? ?? '',
     );
 
 Map<String, dynamic> _$EventInfoToJson(EventInfo instance) {
@@ -1741,7 +1729,7 @@ Map<String, dynamic> _$EventInfoToJson(EventInfo instance) {
   writeNotNull('description', instance.description);
   writeNotNull('modelId', instance.modelId);
   writeNotNull('deviceId', instance.deviceId);
-  writeNotNull('asswtId', instance.asswtId);
+  writeNotNull('assetId', instance.assetId);
   writeNotNull('premiseId', instance.premiseId);
   writeNotNull('facilityId', instance.facilityId);
   writeNotNull('floorId', instance.floorId);
@@ -1757,6 +1745,9 @@ Map<String, dynamic> _$EventInfoToJson(EventInfo instance) {
   writeNotNull('clientIds', instance.clientIds);
   writeNotNull(
       'sourceType', eventInfoSourceTypeNullableToJson(instance.sourceType));
+  writeNotNull('isPulseGroup', instance.isPulseGroup);
+  writeNotNull('pulseGroupId', instance.pulseGroupId);
+  writeNotNull('pulseTemplateId', instance.pulseTemplateId);
   return val;
 }
 
@@ -1765,7 +1756,7 @@ Event _$EventFromJson(Map<String, dynamic> json) => Event(
       description: json['description'] as String? ?? '',
       modelId: json['modelId'] as String? ?? '',
       deviceId: json['deviceId'] as String? ?? '',
-      asswtId: json['asswtId'] as String? ?? '',
+      assetId: json['assetId'] as String? ?? '',
       premiseId: json['premiseId'] as String? ?? '',
       facilityId: json['facilityId'] as String? ?? '',
       floorId: json['floorId'] as String? ?? '',
@@ -1803,13 +1794,16 @@ Event _$EventFromJson(Map<String, dynamic> json) => Event(
               .toList() ??
           [],
       sourceType: eventSourceTypeNullableFromJson(json['sourceType']),
+      isPulseGroup: json['isPulseGroup'] as bool?,
+      pulseGroupId: json['pulseGroupId'] as String? ?? '',
+      pulseTemplateId: json['pulseTemplateId'] as String? ?? '',
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$EventToJson(Event instance) {
@@ -1826,7 +1820,7 @@ Map<String, dynamic> _$EventToJson(Event instance) {
   writeNotNull('description', instance.description);
   writeNotNull('modelId', instance.modelId);
   writeNotNull('deviceId', instance.deviceId);
-  writeNotNull('asswtId', instance.asswtId);
+  writeNotNull('assetId', instance.assetId);
   writeNotNull('premiseId', instance.premiseId);
   writeNotNull('facilityId', instance.facilityId);
   writeNotNull('floorId', instance.floorId);
@@ -1842,13 +1836,16 @@ Map<String, dynamic> _$EventToJson(Event instance) {
   writeNotNull('clientIds', instance.clientIds);
   writeNotNull(
       'sourceType', eventSourceTypeNullableToJson(instance.sourceType));
+  writeNotNull('isPulseGroup', instance.isPulseGroup);
+  writeNotNull('pulseGroupId', instance.pulseGroupId);
+  writeNotNull('pulseTemplateId', instance.pulseTemplateId);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -2151,9 +2148,9 @@ Trigger _$TriggerFromJson(Map<String, dynamic> json) => Trigger(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$TriggerToJson(Trigger instance) {
@@ -2177,9 +2174,9 @@ Map<String, dynamic> _$TriggerToJson(Trigger instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -2376,6 +2373,9 @@ ImageFileInfo _$ImageFileInfoFromJson(Map<String, dynamic> json) =>
       floorId: json['floorId'] as String? ?? '',
       userId: json['userId'] as String? ?? '',
       premiseId: json['premiseId'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
     );
 
 Map<String, dynamic> _$ImageFileInfoToJson(ImageFileInfo instance) {
@@ -2407,6 +2407,7 @@ Map<String, dynamic> _$ImageFileInfoToJson(ImageFileInfo instance) {
   writeNotNull('floorId', instance.floorId);
   writeNotNull('userId', instance.userId);
   writeNotNull('premiseId', instance.premiseId);
+  writeNotNull('tags', instance.tags);
   return val;
 }
 
@@ -2440,17 +2441,17 @@ ImageFile _$ImageFileFromJson(Map<String, dynamic> json) => ImageFile(
       floorId: json['floorId'] as String? ?? '',
       userId: json['userId'] as String? ?? '',
       premiseId: json['premiseId'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
       contentType: json['contentType'] as String? ?? '',
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
-      tags:
-          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-              [],
     );
 
 Map<String, dynamic> _$ImageFileToJson(ImageFile instance) {
@@ -2481,15 +2482,15 @@ Map<String, dynamic> _$ImageFileToJson(ImageFile instance) {
   writeNotNull('floorId', instance.floorId);
   writeNotNull('userId', instance.userId);
   writeNotNull('premiseId', instance.premiseId);
+  writeNotNull('tags', instance.tags);
   val['contentType'] = instance.contentType;
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
-  writeNotNull('tags', instance.tags);
   return val;
 }
 
@@ -2771,9 +2772,9 @@ Display _$DisplayFromJson(Map<String, dynamic> json) => Display(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$DisplayToJson(Display instance) {
@@ -2799,9 +2800,9 @@ Map<String, dynamic> _$DisplayToJson(Display instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -3092,9 +3093,9 @@ DeviceView _$DeviceViewFromJson(Map<String, dynamic> json) => DeviceView(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$DeviceViewToJson(DeviceView instance) {
@@ -3133,9 +3134,9 @@ Map<String, dynamic> _$DeviceViewToJson(DeviceView instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -3717,15 +3718,12 @@ DashboardMenuGroup _$DashboardMenuGroupFromJson(Map<String, dynamic> json) =>
     DashboardMenuGroup(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
-      tags:
-          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-              [],
+      name: json['name'] as String? ?? '',
       displayName: json['displayName'] as String? ?? '',
       description: json['description'] as String? ?? '',
       icon: json['icon'] as String? ?? '',
@@ -3733,6 +3731,9 @@ DashboardMenuGroup _$DashboardMenuGroupFromJson(Map<String, dynamic> json) =>
       webSupported: json['webSupported'] as bool? ?? true,
       tabletSupported: json['tabletSupported'] as bool? ?? true,
       mobileSupported: json['mobileSupported'] as bool? ?? true,
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
       roles:
           (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
@@ -3750,12 +3751,13 @@ Map<String, dynamic> _$DashboardMenuGroupToJson(DashboardMenuGroup instance) {
   final val = <String, dynamic>{
     'domainKey': instance.domainKey,
     'id': instance.id,
-    'name': instance.name,
     'rtype': instance.rtype,
     'createdStamp': instance.createdStamp,
+    'updatedStamp': instance.updatedStamp,
     'createdBy': instance.createdBy,
     'updatedBy': instance.updatedBy,
-    'updatedStamp': instance.updatedStamp,
+    'name': instance.name,
+    'displayName': instance.displayName,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -3764,14 +3766,13 @@ Map<String, dynamic> _$DashboardMenuGroupToJson(DashboardMenuGroup instance) {
     }
   }
 
-  writeNotNull('tags', instance.tags);
-  val['displayName'] = instance.displayName;
   writeNotNull('description', instance.description);
   writeNotNull('icon', instance.icon);
   writeNotNull('order', instance.order);
   val['webSupported'] = instance.webSupported;
   val['tabletSupported'] = instance.tabletSupported;
   val['mobileSupported'] = instance.mobileSupported;
+  writeNotNull('tags', instance.tags);
   writeNotNull('roles', instance.roles);
   writeNotNull('clientIds', instance.clientIds);
   val['menus'] = instance.menus.map((e) => e.toJson()).toList();
@@ -4306,18 +4307,18 @@ DashboardScreen _$DashboardScreenFromJson(Map<String, dynamic> json) =>
     DashboardScreen(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
-      tags:
-          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-              [],
+      name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
       bannerImage: json['bannerImage'] as String? ?? '',
       spacing: (json['spacing'] as num?)?.toDouble(),
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
       bgColor: (json['bgColor'] as num?)?.toInt(),
       bgImage: json['bgImage'] as String? ?? '',
       mainAxisAlignment: json['mainAxisAlignment'] as String? ?? '',
@@ -4365,12 +4366,12 @@ Map<String, dynamic> _$DashboardScreenToJson(DashboardScreen instance) {
   final val = <String, dynamic>{
     'domainKey': instance.domainKey,
     'id': instance.id,
-    'name': instance.name,
     'rtype': instance.rtype,
     'createdStamp': instance.createdStamp,
+    'updatedStamp': instance.updatedStamp,
     'createdBy': instance.createdBy,
     'updatedBy': instance.updatedBy,
-    'updatedStamp': instance.updatedStamp,
+    'name': instance.name,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -4379,10 +4380,10 @@ Map<String, dynamic> _$DashboardScreenToJson(DashboardScreen instance) {
     }
   }
 
-  writeNotNull('tags', instance.tags);
   writeNotNull('description', instance.description);
   writeNotNull('bannerImage', instance.bannerImage);
   writeNotNull('spacing', instance.spacing);
+  writeNotNull('tags', instance.tags);
   writeNotNull('bgColor', instance.bgColor);
   writeNotNull('bgImage', instance.bgImage);
   writeNotNull('mainAxisAlignment', instance.mainAxisAlignment);
@@ -4576,6 +4577,7 @@ EventRegistrationInfo _$EventRegistrationInfoFromJson(
       voice: json['voice'] as bool?,
       fcm: json['fcm'] as bool?,
       emailId: json['emailId'] as String? ?? '',
+      countryCode: json['countryCode'] as String? ?? '',
       phoneNumber: json['phoneNumber'] as String? ?? '',
       name: json['name'] as String? ?? '',
       targetDeviceIds: (json['targetDeviceIds'] as List<dynamic>?)
@@ -4612,6 +4614,7 @@ Map<String, dynamic> _$EventRegistrationInfoToJson(
   writeNotNull('voice', instance.voice);
   writeNotNull('fcm', instance.fcm);
   writeNotNull('emailId', instance.emailId);
+  writeNotNull('countryCode', instance.countryCode);
   writeNotNull('phoneNumber', instance.phoneNumber);
   writeNotNull('name', instance.name);
   writeNotNull('targetDeviceIds', instance.targetDeviceIds);
@@ -4637,15 +4640,11 @@ EventRegistration _$EventRegistrationFromJson(Map<String, dynamic> json) =>
     EventRegistration(
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
-      tags:
-          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-              [],
       eventId: json['eventId'] as String? ?? '',
       notification: json['notification'] as bool?,
       email: json['email'] as bool?,
@@ -4653,11 +4652,16 @@ EventRegistration _$EventRegistrationFromJson(Map<String, dynamic> json) =>
       voice: json['voice'] as bool?,
       fcm: json['fcm'] as bool?,
       emailId: json['emailId'] as String? ?? '',
+      countryCode: json['countryCode'] as String? ?? '',
       phoneNumber: json['phoneNumber'] as String? ?? '',
+      name: json['name'] as String? ?? '',
       targetDeviceIds: (json['targetDeviceIds'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           [],
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
       roles:
           (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
@@ -4672,12 +4676,12 @@ Map<String, dynamic> _$EventRegistrationToJson(EventRegistration instance) {
   final val = <String, dynamic>{
     'domainKey': instance.domainKey,
     'id': instance.id,
-    'name': instance.name,
     'rtype': instance.rtype,
     'createdStamp': instance.createdStamp,
+    'updatedStamp': instance.updatedStamp,
     'createdBy': instance.createdBy,
     'updatedBy': instance.updatedBy,
-    'updatedStamp': instance.updatedStamp,
+    'eventId': instance.eventId,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -4686,16 +4690,17 @@ Map<String, dynamic> _$EventRegistrationToJson(EventRegistration instance) {
     }
   }
 
-  writeNotNull('tags', instance.tags);
-  val['eventId'] = instance.eventId;
   writeNotNull('notification', instance.notification);
   writeNotNull('email', instance.email);
   writeNotNull('sms', instance.sms);
   writeNotNull('voice', instance.voice);
   writeNotNull('fcm', instance.fcm);
   writeNotNull('emailId', instance.emailId);
+  writeNotNull('countryCode', instance.countryCode);
   writeNotNull('phoneNumber', instance.phoneNumber);
+  writeNotNull('name', instance.name);
   writeNotNull('targetDeviceIds', instance.targetDeviceIds);
+  writeNotNull('tags', instance.tags);
   writeNotNull('roles', instance.roles);
   writeNotNull('clientIds', instance.clientIds);
   val['userId'] = instance.userId;
@@ -5173,9 +5178,9 @@ DisplayWidget _$DisplayWidgetFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$DisplayWidgetToJson(DisplayWidget instance) {
@@ -5200,9 +5205,9 @@ Map<String, dynamic> _$DisplayWidgetToJson(DisplayWidget instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -5375,9 +5380,9 @@ ScreenWidget _$ScreenWidgetFromJson(Map<String, dynamic> json) => ScreenWidget(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$ScreenWidgetToJson(ScreenWidget instance) {
@@ -5403,9 +5408,9 @@ Map<String, dynamic> _$ScreenWidgetToJson(ScreenWidget instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -5672,9 +5677,9 @@ Preprocessor _$PreprocessorFromJson(Map<String, dynamic> json) => Preprocessor(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$PreprocessorToJson(Preprocessor instance) {
@@ -5697,9 +5702,9 @@ Map<String, dynamic> _$PreprocessorToJson(Preprocessor instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -5901,9 +5906,9 @@ DataFilter _$DataFilterFromJson(Map<String, dynamic> json) => DataFilter(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$DataFilterToJson(DataFilter instance) {
@@ -5928,9 +5933,9 @@ Map<String, dynamic> _$DataFilterToJson(DataFilter instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -6157,9 +6162,9 @@ GeoFence _$GeoFenceFromJson(Map<String, dynamic> json) => GeoFence(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$GeoFenceToJson(GeoFence instance) {
@@ -6191,9 +6196,9 @@ Map<String, dynamic> _$GeoFenceToJson(GeoFence instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -6386,9 +6391,9 @@ AnalyticsScreen _$AnalyticsScreenFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$AnalyticsScreenToJson(AnalyticsScreen instance) {
@@ -6412,9 +6417,9 @@ Map<String, dynamic> _$AnalyticsScreenToJson(AnalyticsScreen instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -6937,15 +6942,11 @@ TwinSysConfig _$TwinSysConfigFromJson(Map<String, dynamic> json) =>
           : TwinSysInfo.fromJson(json['info'] as Map<String, dynamic>),
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
-      tags:
-          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-              [],
     );
 
 Map<String, dynamic> _$TwinSysConfigToJson(TwinSysConfig instance) {
@@ -6960,13 +6961,11 @@ Map<String, dynamic> _$TwinSysConfigToJson(TwinSysConfig instance) {
   writeNotNull('info', instance.info?.toJson());
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
-  val['name'] = instance.name;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
-  writeNotNull('tags', instance.tags);
   return val;
 }
 
@@ -7131,9 +7130,9 @@ Floor _$FloorFromJson(Map<String, dynamic> json) => Floor(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$FloorToJson(Floor instance) {
@@ -7170,9 +7169,9 @@ Map<String, dynamic> _$FloorToJson(Floor instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -7403,9 +7402,9 @@ Asset _$AssetFromJson(Map<String, dynamic> json) => Asset(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$AssetToJson(Asset instance) {
@@ -7437,9 +7436,9 @@ Map<String, dynamic> _$AssetToJson(Asset instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -7646,9 +7645,9 @@ Facility _$FacilityFromJson(Map<String, dynamic> json) => Facility(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$FacilityToJson(Facility instance) {
@@ -7683,9 +7682,9 @@ Map<String, dynamic> _$FacilityToJson(Facility instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -7914,9 +7913,9 @@ TwinUser _$TwinUserFromJson(Map<String, dynamic> json) => TwinUser(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$TwinUserToJson(TwinUser instance) {
@@ -7952,9 +7951,9 @@ Map<String, dynamic> _$TwinUserToJson(TwinUser instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -8107,9 +8106,9 @@ Role _$RoleFromJson(Map<String, dynamic> json) => Role(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$RoleToJson(Role instance) {
@@ -8130,9 +8129,9 @@ Map<String, dynamic> _$RoleToJson(Role instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -8335,9 +8334,9 @@ Premise _$PremiseFromJson(Map<String, dynamic> json) => Premise(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$PremiseToJson(Premise instance) {
@@ -8371,9 +8370,9 @@ Map<String, dynamic> _$PremiseToJson(Premise instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -8616,9 +8615,9 @@ ScrappingTable _$ScrappingTableFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$ScrappingTableToJson(ScrappingTable instance) {
@@ -8640,9 +8639,9 @@ Map<String, dynamic> _$ScrappingTableToJson(ScrappingTable instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -9103,9 +9102,9 @@ AssetGroup _$AssetGroupFromJson(Map<String, dynamic> json) => AssetGroup(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$AssetGroupToJson(AssetGroup instance) {
@@ -9129,9 +9128,9 @@ Map<String, dynamic> _$AssetGroupToJson(AssetGroup instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -9323,9 +9322,9 @@ Report _$ReportFromJson(Map<String, dynamic> json) => Report(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$ReportToJson(Report instance) {
@@ -9357,9 +9356,9 @@ Map<String, dynamic> _$ReportToJson(Report instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -9607,9 +9606,9 @@ AssetModel _$AssetModelFromJson(Map<String, dynamic> json) => AssetModel(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$AssetModelToJson(AssetModel instance) {
@@ -9640,9 +9639,9 @@ Map<String, dynamic> _$AssetModelToJson(AssetModel instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -9871,9 +9870,9 @@ FieldFilter _$FieldFilterFromJson(Map<String, dynamic> json) => FieldFilter(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$FieldFilterToJson(FieldFilter instance) {
@@ -9902,9 +9901,9 @@ Map<String, dynamic> _$FieldFilterToJson(FieldFilter instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -10167,9 +10166,9 @@ Client _$ClientFromJson(Map<String, dynamic> json) => Client(
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
     );
 
 Map<String, dynamic> _$ClientToJson(Client instance) {
@@ -10199,9 +10198,9 @@ Map<String, dynamic> _$ClientToJson(Client instance) {
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
   return val;
 }
 
@@ -10750,15 +10749,11 @@ OrgPlan _$OrgPlanFromJson(Map<String, dynamic> json) => OrgPlan(
       currencySumbol: json['currencySumbol'] as String? ?? '',
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
       createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
       createdBy: json['createdBy'] as String? ?? '',
       updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num).toInt(),
-      tags:
-          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-              [],
     );
 
 Map<String, dynamic> _$OrgPlanToJson(OrgPlan instance) {
@@ -10808,13 +10803,11 @@ Map<String, dynamic> _$OrgPlanToJson(OrgPlan instance) {
   writeNotNull('currencySumbol', instance.currencySumbol);
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
-  val['name'] = instance.name;
   val['rtype'] = instance.rtype;
   val['createdStamp'] = instance.createdStamp;
+  val['updatedStamp'] = instance.updatedStamp;
   val['createdBy'] = instance.createdBy;
   val['updatedBy'] = instance.updatedBy;
-  val['updatedStamp'] = instance.updatedStamp;
-  writeNotNull('tags', instance.tags);
   return val;
 }
 
