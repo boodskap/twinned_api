@@ -923,6 +923,26 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<DeviceDataArrayRes>> _listNonReporting({
+    required NonReportingReq? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/DeviceData/list/nonreporting');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<DeviceDataArrayRes, DeviceDataArrayRes>($request);
+  }
+
+  @override
   Future<Response<DeviceViewEntityRes>> _createDeviceView({
     required DeviceViewInfo? body,
     String? apikey,

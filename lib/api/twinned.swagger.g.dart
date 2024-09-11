@@ -11173,6 +11173,7 @@ GenericQueryReq _$GenericQueryReqFromJson(Map<String, dynamic> json) =>
     GenericQueryReq(
       eql: json['eql'] as Object,
       isMessage: json['isMessage'] as bool? ?? false,
+      specId: (json['specId'] as num?)?.toInt(),
       protocol: GenericQueryReq.genericQueryReqProtocolProtocolNullableFromJson(
           json['protocol']),
       extraPath: json['extraPath'] as String? ?? '',
@@ -11190,6 +11191,7 @@ Map<String, dynamic> _$GenericQueryReqToJson(GenericQueryReq instance) {
   }
 
   writeNotNull('isMessage', instance.isMessage);
+  writeNotNull('specId', instance.specId);
   writeNotNull(
       'protocol', genericQueryReqProtocolNullableToJson(instance.protocol));
   writeNotNull('extraPath', instance.extraPath);
@@ -11237,6 +11239,30 @@ Map<String, dynamic> _$GenericQueryResToJson(GenericQueryRes instance) {
   writeNotNull('msg', instance.msg);
   writeNotNull('trace', instance.trace);
   writeNotNull('errorCode', instance.errorCode);
+  return val;
+}
+
+NonReportingReq _$NonReportingReqFromJson(Map<String, dynamic> json) =>
+    NonReportingReq(
+      intervalHours: (json['intervalHours'] as num?)?.toInt(),
+      timeZone: json['timeZone'] as String? ?? '',
+      clientId: json['clientId'] as String? ?? '',
+      size: (json['size'] as num?)?.toInt(),
+    );
+
+Map<String, dynamic> _$NonReportingReqToJson(NonReportingReq instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('intervalHours', instance.intervalHours);
+  writeNotNull('timeZone', instance.timeZone);
+  writeNotNull('clientId', instance.clientId);
+  writeNotNull('size', instance.size);
   return val;
 }
 

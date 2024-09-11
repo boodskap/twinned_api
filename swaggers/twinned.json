@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "2.0.6",
+    "version": "2.0.7",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -2149,6 +2149,51 @@
           }
         ],
         "summary": "reprocess device data"
+      }
+    },
+    "/DeviceData/list/nonreporting": {
+      "post": {
+        "tags": [
+          "Device Data"
+        ],
+        "description": "list non reporting",
+        "summary": "list non reporting",
+        "operationId": "listNonReporting",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NonReportingReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceDataArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
       }
     },
     "/DeviceView/create": {
@@ -24075,6 +24120,11 @@
           "type": "boolean",
           "default": false
         },
+        "specId": {
+          "type": "integer",
+          "format": "int64",
+          "default": 0
+        },
         "protocol": {
           "type": "string",
           "default": "POST",
@@ -24108,6 +24158,26 @@
           "$ref": "#/definitions/BaseResponse"
         }
       ]
+    },
+    "NonReportingReq": {
+      "type": "object",
+      "properties": {
+        "intervalHours": {
+          "type": "integer",
+          "default": 24
+        },
+        "timeZone": {
+          "type": "string",
+          "default": "GMT"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer",
+          "default": 1000
+        }
+      }
     },
     "ExportData": {
       "type": "object",

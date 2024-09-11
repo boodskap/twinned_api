@@ -1183,6 +1183,28 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
+  ///list non reporting
+  ///@param body
+  Future<chopper.Response<DeviceDataArrayRes>> listNonReporting({
+    required NonReportingReq? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        NonReportingReq, () => NonReportingReq.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        DeviceDataArrayRes, () => DeviceDataArrayRes.fromJsonFactory);
+
+    return _listNonReporting(body: body, apikey: apikey?.toString());
+  }
+
+  ///list non reporting
+  ///@param body
+  @Post(path: '/DeviceData/list/nonreporting')
+  Future<chopper.Response<DeviceDataArrayRes>> _listNonReporting({
+    @Body() required NonReportingReq? body,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Create device view
   ///@param body
   Future<chopper.Response<DeviceViewEntityRes>> createDeviceView({
@@ -45611,6 +45633,7 @@ class GenericQueryReq {
   const GenericQueryReq({
     required this.eql,
     this.isMessage,
+    this.specId,
     this.protocol,
     this.extraPath,
   });
@@ -45625,6 +45648,8 @@ class GenericQueryReq {
   final Object eql;
   @JsonKey(name: 'isMessage', includeIfNull: false, defaultValue: false)
   final bool? isMessage;
+  @JsonKey(name: 'specId', includeIfNull: false)
+  final int? specId;
   @JsonKey(
     name: 'protocol',
     includeIfNull: false,
@@ -45650,6 +45675,8 @@ class GenericQueryReq {
             (identical(other.isMessage, isMessage) ||
                 const DeepCollectionEquality()
                     .equals(other.isMessage, isMessage)) &&
+            (identical(other.specId, specId) ||
+                const DeepCollectionEquality().equals(other.specId, specId)) &&
             (identical(other.protocol, protocol) ||
                 const DeepCollectionEquality()
                     .equals(other.protocol, protocol)) &&
@@ -45665,6 +45692,7 @@ class GenericQueryReq {
   int get hashCode =>
       const DeepCollectionEquality().hash(eql) ^
       const DeepCollectionEquality().hash(isMessage) ^
+      const DeepCollectionEquality().hash(specId) ^
       const DeepCollectionEquality().hash(protocol) ^
       const DeepCollectionEquality().hash(extraPath) ^
       runtimeType.hashCode;
@@ -45674,11 +45702,13 @@ extension $GenericQueryReqExtension on GenericQueryReq {
   GenericQueryReq copyWith(
       {Object? eql,
       bool? isMessage,
+      int? specId,
       enums.GenericQueryReqProtocol? protocol,
       String? extraPath}) {
     return GenericQueryReq(
         eql: eql ?? this.eql,
         isMessage: isMessage ?? this.isMessage,
+        specId: specId ?? this.specId,
         protocol: protocol ?? this.protocol,
         extraPath: extraPath ?? this.extraPath);
   }
@@ -45686,11 +45716,13 @@ extension $GenericQueryReqExtension on GenericQueryReq {
   GenericQueryReq copyWithWrapped(
       {Wrapped<Object>? eql,
       Wrapped<bool?>? isMessage,
+      Wrapped<int?>? specId,
       Wrapped<enums.GenericQueryReqProtocol?>? protocol,
       Wrapped<String?>? extraPath}) {
     return GenericQueryReq(
         eql: (eql != null ? eql.value : this.eql),
         isMessage: (isMessage != null ? isMessage.value : this.isMessage),
+        specId: (specId != null ? specId.value : this.specId),
         protocol: (protocol != null ? protocol.value : this.protocol),
         extraPath: (extraPath != null ? extraPath.value : this.extraPath));
   }
@@ -45824,6 +45856,84 @@ extension $GenericQueryResExtension on GenericQueryRes {
         msg: (msg != null ? msg.value : this.msg),
         trace: (trace != null ? trace.value : this.trace),
         errorCode: (errorCode != null ? errorCode.value : this.errorCode));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class NonReportingReq {
+  const NonReportingReq({
+    this.intervalHours,
+    this.timeZone,
+    this.clientId,
+    this.size,
+  });
+
+  factory NonReportingReq.fromJson(Map<String, dynamic> json) =>
+      _$NonReportingReqFromJson(json);
+
+  static const toJsonFactory = _$NonReportingReqToJson;
+  Map<String, dynamic> toJson() => _$NonReportingReqToJson(this);
+
+  @JsonKey(name: 'intervalHours', includeIfNull: false)
+  final int? intervalHours;
+  @JsonKey(name: 'timeZone', includeIfNull: false, defaultValue: '')
+  final String? timeZone;
+  @JsonKey(name: 'clientId', includeIfNull: false, defaultValue: '')
+  final String? clientId;
+  @JsonKey(name: 'size', includeIfNull: false)
+  final int? size;
+  static const fromJsonFactory = _$NonReportingReqFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is NonReportingReq &&
+            (identical(other.intervalHours, intervalHours) ||
+                const DeepCollectionEquality()
+                    .equals(other.intervalHours, intervalHours)) &&
+            (identical(other.timeZone, timeZone) ||
+                const DeepCollectionEquality()
+                    .equals(other.timeZone, timeZone)) &&
+            (identical(other.clientId, clientId) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientId, clientId)) &&
+            (identical(other.size, size) ||
+                const DeepCollectionEquality().equals(other.size, size)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(intervalHours) ^
+      const DeepCollectionEquality().hash(timeZone) ^
+      const DeepCollectionEquality().hash(clientId) ^
+      const DeepCollectionEquality().hash(size) ^
+      runtimeType.hashCode;
+}
+
+extension $NonReportingReqExtension on NonReportingReq {
+  NonReportingReq copyWith(
+      {int? intervalHours, String? timeZone, String? clientId, int? size}) {
+    return NonReportingReq(
+        intervalHours: intervalHours ?? this.intervalHours,
+        timeZone: timeZone ?? this.timeZone,
+        clientId: clientId ?? this.clientId,
+        size: size ?? this.size);
+  }
+
+  NonReportingReq copyWithWrapped(
+      {Wrapped<int?>? intervalHours,
+      Wrapped<String?>? timeZone,
+      Wrapped<String?>? clientId,
+      Wrapped<int?>? size}) {
+    return NonReportingReq(
+        intervalHours:
+            (intervalHours != null ? intervalHours.value : this.intervalHours),
+        timeZone: (timeZone != null ? timeZone.value : this.timeZone),
+        clientId: (clientId != null ? clientId.value : this.clientId),
+        size: (size != null ? size.value : this.size));
   }
 }
 
