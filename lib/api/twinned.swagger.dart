@@ -411,6 +411,28 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
+  ///Unregister account
+  ///@param body
+  Future<chopper.Response<BaseResponse>> unregisterAccount({
+    required UnregisterAccount? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        UnregisterAccount, () => UnregisterAccount.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        BaseResponse, () => BaseResponse.fromJsonFactory);
+
+    return _unregisterAccount(body: body, apikey: apikey?.toString());
+  }
+
+  ///Unregister account
+  ///@param body
+  @Post(path: '/IoT/twin/unregister')
+  Future<chopper.Response<BaseResponse>> _unregisterAccount({
+    @Body() required UnregisterAccount? body,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///Get the most recent data for this device
   ///@param deviceId
   ///@param isHardwareDevice
@@ -9609,7 +9631,7 @@ class DeviceModelInfo {
     this.makePublic,
     this.scrappingTableConfigs,
     this.roles,
-    this.clientIds,
+    required this.clientIds,
   });
 
   factory DeviceModelInfo.fromJson(Map<String, dynamic> json) =>
@@ -9665,7 +9687,7 @@ class DeviceModelInfo {
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   static const fromJsonFactory = _$DeviceModelInfoFromJson;
 
   @override
@@ -9835,7 +9857,7 @@ extension $DeviceModelInfoExtension on DeviceModelInfo {
       Wrapped<bool?>? makePublic,
       Wrapped<List<ScrappingTableConfig>?>? scrappingTableConfigs,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds}) {
+      Wrapped<List<String>>? clientIds}) {
     return DeviceModelInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -9898,7 +9920,7 @@ class DeviceModel {
     this.makePublic,
     this.scrappingTableConfigs,
     this.roles,
-    this.clientIds,
+    required this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -9961,7 +9983,7 @@ class DeviceModel {
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -10178,7 +10200,7 @@ extension $DeviceModelExtension on DeviceModel {
       Wrapped<bool?>? makePublic,
       Wrapped<List<ScrappingTableConfig>?>? scrappingTableConfigs,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -10545,7 +10567,7 @@ class DeviceInfo {
     this.geolocation,
     this.customWidget,
     this.reportedStamp,
-    this.clientIds,
+    required this.clientIds,
     this.parameters,
   });
 
@@ -10590,7 +10612,7 @@ class DeviceInfo {
   @JsonKey(name: 'reportedStamp', includeIfNull: false)
   final int? reportedStamp;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(
       name: 'parameters', includeIfNull: false, defaultValue: <Parameter>[])
   final List<Parameter>? parameters;
@@ -10743,7 +10765,7 @@ extension $DeviceInfoExtension on DeviceInfo {
       Wrapped<GeoLocation?>? geolocation,
       Wrapped<CustomWidget?>? customWidget,
       Wrapped<int?>? reportedStamp,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<List<Parameter>?>? parameters}) {
     return DeviceInfo(
         name: (name != null ? name.value : this.name),
@@ -10990,7 +11012,7 @@ class Device {
     this.movable,
     this.geolocation,
     this.customWidget,
-    this.clientIds,
+    required this.clientIds,
     this.parameters,
     required this.domainKey,
     required this.id,
@@ -11065,7 +11087,7 @@ class Device {
   @JsonKey(name: 'customWidget', includeIfNull: false)
   final CustomWidget? customWidget;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(
       name: 'parameters', includeIfNull: false, defaultValue: <Parameter>[])
   final List<Parameter>? parameters;
@@ -11329,7 +11351,7 @@ extension $DeviceExtension on Device {
       Wrapped<bool?>? movable,
       Wrapped<GeoLocation?>? geolocation,
       Wrapped<CustomWidget?>? customWidget,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<List<Parameter>?>? parameters,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
@@ -11698,7 +11720,7 @@ class ConditionInfo {
     this.rightValue,
     this.values,
     this.tags,
-    this.clientIds,
+    required this.clientIds,
   });
 
   factory ConditionInfo.fromJson(Map<String, dynamic> json) =>
@@ -11735,7 +11757,7 @@ class ConditionInfo {
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   static const fromJsonFactory = _$ConditionInfoFromJson;
 
   @override
@@ -11835,7 +11857,7 @@ extension $ConditionInfoExtension on ConditionInfo {
       Wrapped<String?>? rightValue,
       Wrapped<List<String>?>? values,
       Wrapped<List<String>?>? tags,
-      Wrapped<List<String>?>? clientIds}) {
+      Wrapped<List<String>>? clientIds}) {
     return ConditionInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -11867,7 +11889,7 @@ class Condition {
     this.rightValue,
     this.values,
     this.tags,
-    this.clientIds,
+    required this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -11911,7 +11933,7 @@ class Condition {
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -12065,7 +12087,7 @@ extension $ConditionExtension on Condition {
       Wrapped<String?>? rightValue,
       Wrapped<List<String>?>? values,
       Wrapped<List<String>?>? tags,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -12564,7 +12586,7 @@ class AlarmInfo {
     required this.conditions,
     this.tags,
     this.showOnlyIfMatched,
-    this.clientIds,
+    required this.clientIds,
   });
 
   factory AlarmInfo.fromJson(Map<String, dynamic> json) =>
@@ -12597,7 +12619,7 @@ class AlarmInfo {
   @JsonKey(name: 'showOnlyIfMatched', includeIfNull: false)
   final bool? showOnlyIfMatched;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   static const fromJsonFactory = _$AlarmInfoFromJson;
 
   @override
@@ -12692,7 +12714,7 @@ extension $AlarmInfoExtension on AlarmInfo {
       Wrapped<List<AlarmMatchGroup>>? conditions,
       Wrapped<List<String>?>? tags,
       Wrapped<bool?>? showOnlyIfMatched,
-      Wrapped<List<String>?>? clientIds}) {
+      Wrapped<List<String>>? clientIds}) {
     return AlarmInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -12724,7 +12746,7 @@ class Alarm {
     required this.conditions,
     this.tags,
     this.showOnlyIfMatched,
-    this.clientIds,
+    required this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -12763,7 +12785,7 @@ class Alarm {
   @JsonKey(name: 'showOnlyIfMatched', includeIfNull: false)
   final bool? showOnlyIfMatched;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -12912,7 +12934,7 @@ extension $AlarmExtension on Alarm {
       Wrapped<List<AlarmMatchGroup>>? conditions,
       Wrapped<List<String>?>? tags,
       Wrapped<bool?>? showOnlyIfMatched,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -13362,7 +13384,7 @@ class ControlInfo {
     this.tags,
     this.commands,
     this.roles,
-    this.clientIds,
+    required this.clientIds,
   });
 
   factory ControlInfo.fromJson(Map<String, dynamic> json) =>
@@ -13389,7 +13411,7 @@ class ControlInfo {
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   static const fromJsonFactory = _$ControlInfoFromJson;
 
   @override
@@ -13470,7 +13492,7 @@ extension $ControlInfoExtension on ControlInfo {
       Wrapped<List<String>?>? tags,
       Wrapped<List<ControlCommand>?>? commands,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds}) {
+      Wrapped<List<String>>? clientIds}) {
     return ControlInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -13496,7 +13518,7 @@ class Control {
     this.tags,
     this.commands,
     this.roles,
-    this.clientIds,
+    required this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -13530,7 +13552,7 @@ class Control {
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -13665,7 +13687,7 @@ extension $ControlExtension on Control {
       Wrapped<List<String>?>? tags,
       Wrapped<List<ControlCommand>?>? commands,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -14006,7 +14028,7 @@ class EventInfo {
     this.voiceTemplate,
     this.tags,
     this.roles,
-    this.clientIds,
+    required this.clientIds,
     this.sourceType,
     this.isPulseGroup,
     this.pulseGroupId,
@@ -14055,7 +14077,7 @@ class EventInfo {
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(
     name: 'sourceType',
     includeIfNull: false,
@@ -14236,7 +14258,7 @@ extension $EventInfoExtension on EventInfo {
       Wrapped<VoiceTemplate?>? voiceTemplate,
       Wrapped<List<String>?>? tags,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<enums.EventInfoSourceType?>? sourceType,
       Wrapped<bool?>? isPulseGroup,
       Wrapped<String?>? pulseGroupId,
@@ -14298,7 +14320,7 @@ class Event {
     this.voiceTemplate,
     this.tags,
     this.roles,
-    this.clientIds,
+    required this.clientIds,
     this.sourceType,
     this.isPulseGroup,
     this.pulseGroupId,
@@ -14353,7 +14375,7 @@ class Event {
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(
     name: 'sourceType',
     includeIfNull: false,
@@ -14579,7 +14601,7 @@ extension $EventExtension on Event {
       Wrapped<VoiceTemplate?>? voiceTemplate,
       Wrapped<List<String>?>? tags,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<enums.EventSourceType?>? sourceType,
       Wrapped<bool?>? isPulseGroup,
       Wrapped<String?>? pulseGroupId,
@@ -17703,7 +17725,7 @@ class DisplayInfo {
     this.icon,
     required this.conditions,
     this.tags,
-    this.clientIds,
+    required this.clientIds,
   });
 
   factory DisplayInfo.fromJson(Map<String, dynamic> json) =>
@@ -17732,7 +17754,7 @@ class DisplayInfo {
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   static const fromJsonFactory = _$DisplayInfoFromJson;
 
   @override
@@ -17813,7 +17835,7 @@ extension $DisplayInfoExtension on DisplayInfo {
       Wrapped<String?>? icon,
       Wrapped<List<DisplayMatchGroup>>? conditions,
       Wrapped<List<String>?>? tags,
-      Wrapped<List<String>?>? clientIds}) {
+      Wrapped<List<String>>? clientIds}) {
     return DisplayInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -17839,7 +17861,7 @@ class Display {
     this.icon,
     required this.conditions,
     this.tags,
-    this.clientIds,
+    required this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -17875,7 +17897,7 @@ class Display {
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -18010,7 +18032,7 @@ extension $DisplayExtension on Display {
       Wrapped<String?>? icon,
       Wrapped<List<DisplayMatchGroup>>? conditions,
       Wrapped<List<String>?>? tags,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -18515,7 +18537,7 @@ class DeviceViewInfo {
     this.infoPosition,
     this.border,
     this.roles,
-    this.clientIds,
+    required this.clientIds,
   });
 
   factory DeviceViewInfo.fromJson(Map<String, dynamic> json) =>
@@ -18584,7 +18606,7 @@ class DeviceViewInfo {
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   static const fromJsonFactory = _$DeviceViewInfoFromJson;
 
   @override
@@ -18736,7 +18758,7 @@ extension $DeviceViewInfoExtension on DeviceViewInfo {
       Wrapped<enums.DeviceViewInfoInfoPosition?>? infoPosition,
       Wrapped<enums.DeviceViewInfoBorder?>? border,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds}) {
+      Wrapped<List<String>>? clientIds}) {
     return DeviceViewInfo(
         modelId: (modelId != null ? modelId.value : this.modelId),
         name: (name != null ? name.value : this.name),
@@ -18786,7 +18808,7 @@ class DeviceView {
     this.infoPosition,
     this.border,
     this.roles,
-    this.clientIds,
+    required this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -18861,7 +18883,7 @@ class DeviceView {
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -19067,7 +19089,7 @@ extension $DeviceViewExtension on DeviceView {
       Wrapped<enums.DeviceViewInfoPosition?>? infoPosition,
       Wrapped<enums.DeviceViewBorder?>? border,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -20935,7 +20957,7 @@ class DashboardMenuGroupInfo {
     required this.mobileSupported,
     this.tags,
     this.roles,
-    this.clientIds,
+    required this.clientIds,
     required this.menus,
   });
 
@@ -20966,7 +20988,7 @@ class DashboardMenuGroupInfo {
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'menus', includeIfNull: false, defaultValue: <DashboardMenu>[])
   final List<DashboardMenu> menus;
   static const fromJsonFactory = _$DashboardMenuGroupInfoFromJson;
@@ -21067,7 +21089,7 @@ extension $DashboardMenuGroupInfoExtension on DashboardMenuGroupInfo {
       Wrapped<bool>? mobileSupported,
       Wrapped<List<String>?>? tags,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<List<DashboardMenu>>? menus}) {
     return DashboardMenuGroupInfo(
         name: (name != null ? name.value : this.name),
@@ -21112,7 +21134,7 @@ class DashboardMenuGroup {
     required this.mobileSupported,
     this.tags,
     this.roles,
-    this.clientIds,
+    required this.clientIds,
     required this.menus,
   });
 
@@ -21157,7 +21179,7 @@ class DashboardMenuGroup {
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'menus', includeIfNull: false, defaultValue: <DashboardMenu>[])
   final List<DashboardMenu> menus;
   static const fromJsonFactory = _$DashboardMenuGroupFromJson;
@@ -21305,7 +21327,7 @@ extension $DashboardMenuGroupExtension on DashboardMenuGroup {
       Wrapped<bool>? mobileSupported,
       Wrapped<List<String>?>? tags,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<List<DashboardMenu>>? menus}) {
     return DashboardMenuGroup(
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
@@ -22677,7 +22699,7 @@ class DashboardScreenInfo {
     this.marginConfig,
     required this.rows,
     this.roles,
-    this.clientIds,
+    required this.clientIds,
     this.priority,
   });
 
@@ -22728,7 +22750,7 @@ class DashboardScreenInfo {
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'priority', includeIfNull: false)
   final int? priority;
   static const fromJsonFactory = _$DashboardScreenInfoFromJson;
@@ -22901,7 +22923,7 @@ extension $DashboardScreenInfoExtension on DashboardScreenInfo {
       Wrapped<PaddingConfig?>? marginConfig,
       Wrapped<List<ScreenRow>>? rows,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<int?>? priority}) {
     return DashboardScreenInfo(
         name: (name != null ? name.value : this.name),
@@ -22976,7 +22998,7 @@ class DashboardScreen {
     this.marginConfig,
     required this.rows,
     this.roles,
-    this.clientIds,
+    required this.clientIds,
     this.priority,
   });
 
@@ -23041,7 +23063,7 @@ class DashboardScreen {
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'priority', includeIfNull: false)
   final int? priority;
   static const fromJsonFactory = _$DashboardScreenFromJson;
@@ -23252,7 +23274,7 @@ extension $DashboardScreenExtension on DashboardScreen {
       Wrapped<PaddingConfig?>? marginConfig,
       Wrapped<List<ScreenRow>>? rows,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<int?>? priority}) {
     return DashboardScreen(
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
@@ -23747,7 +23769,7 @@ class EventRegistrationInfo {
     this.targetDeviceIds,
     this.tags,
     this.roles,
-    this.clientIds,
+    required this.clientIds,
   });
 
   factory EventRegistrationInfo.fromJson(Map<String, dynamic> json) =>
@@ -23784,7 +23806,7 @@ class EventRegistrationInfo {
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   static const fromJsonFactory = _$EventRegistrationInfoFromJson;
 
   @override
@@ -23897,7 +23919,7 @@ extension $EventRegistrationInfoExtension on EventRegistrationInfo {
       Wrapped<List<String>?>? targetDeviceIds,
       Wrapped<List<String>?>? tags,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds}) {
+      Wrapped<List<String>>? clientIds}) {
     return EventRegistrationInfo(
         eventId: (eventId != null ? eventId.value : this.eventId),
         notification:
@@ -23987,7 +24009,7 @@ class EventRegistration {
     this.targetDeviceIds,
     this.tags,
     this.roles,
-    this.clientIds,
+    required this.clientIds,
     required this.userId,
   });
 
@@ -24039,7 +24061,7 @@ class EventRegistration {
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'userId', includeIfNull: false, defaultValue: '')
   final String userId;
   static const fromJsonFactory = _$EventRegistrationFromJson;
@@ -24206,7 +24228,7 @@ extension $EventRegistrationExtension on EventRegistration {
       Wrapped<List<String>?>? targetDeviceIds,
       Wrapped<List<String>?>? tags,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<String>? userId}) {
     return EventRegistration(
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
@@ -26296,7 +26318,7 @@ class ScreenWidgetInfo {
     required this.widgetType,
     required this.attributes,
     this.target,
-    this.clientIds,
+    required this.clientIds,
   });
 
   factory ScreenWidgetInfo.fromJson(Map<String, dynamic> json) =>
@@ -26327,7 +26349,7 @@ class ScreenWidgetInfo {
   )
   final enums.ScreenWidgetInfoTarget? target;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   static const fromJsonFactory = _$ScreenWidgetInfoFromJson;
 
   @override
@@ -26408,7 +26430,7 @@ extension $ScreenWidgetInfoExtension on ScreenWidgetInfo {
       Wrapped<String>? widgetType,
       Wrapped<Object>? attributes,
       Wrapped<enums.ScreenWidgetInfoTarget?>? target,
-      Wrapped<List<String>?>? clientIds}) {
+      Wrapped<List<String>>? clientIds}) {
     return ScreenWidgetInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -26434,7 +26456,7 @@ class ScreenWidget {
     required this.widgetType,
     required this.attributes,
     this.target,
-    this.clientIds,
+    required this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -26472,7 +26494,7 @@ class ScreenWidget {
   )
   final enums.ScreenWidgetTarget? target;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -26607,7 +26629,7 @@ extension $ScreenWidgetExtension on ScreenWidget {
       Wrapped<String>? widgetType,
       Wrapped<Object>? attributes,
       Wrapped<enums.ScreenWidgetTarget?>? target,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -27335,7 +27357,7 @@ class PreprocessorInfo {
     this.code,
     this.description,
     this.tags,
-    this.clientIds,
+    required this.clientIds,
   });
 
   factory PreprocessorInfo.fromJson(Map<String, dynamic> json) =>
@@ -27355,7 +27377,7 @@ class PreprocessorInfo {
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   static const fromJsonFactory = _$PreprocessorInfoFromJson;
 
   @override
@@ -27416,7 +27438,7 @@ extension $PreprocessorInfoExtension on PreprocessorInfo {
       Wrapped<String?>? code,
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
-      Wrapped<List<String>?>? clientIds}) {
+      Wrapped<List<String>>? clientIds}) {
     return PreprocessorInfo(
         name: (name != null ? name.value : this.name),
         className: (className != null ? className.value : this.className),
@@ -27436,7 +27458,7 @@ class Preprocessor {
     this.code,
     this.description,
     this.tags,
-    this.clientIds,
+    required this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -27463,7 +27485,7 @@ class Preprocessor {
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -27578,7 +27600,7 @@ extension $PreprocessorExtension on Preprocessor {
       Wrapped<String?>? code,
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -27974,7 +27996,7 @@ class DataFilterInfo {
     this.description,
     this.tags,
     required this.matchGroups,
-    this.clientIds,
+    required this.clientIds,
   });
 
   factory DataFilterInfo.fromJson(Map<String, dynamic> json) =>
@@ -28003,7 +28025,7 @@ class DataFilterInfo {
       defaultValue: <FilterMatchGroup>[])
   final List<FilterMatchGroup> matchGroups;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   static const fromJsonFactory = _$DataFilterInfoFromJson;
 
   @override
@@ -28084,7 +28106,7 @@ extension $DataFilterInfoExtension on DataFilterInfo {
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
       Wrapped<List<FilterMatchGroup>>? matchGroups,
-      Wrapped<List<String>?>? clientIds}) {
+      Wrapped<List<String>>? clientIds}) {
     return DataFilterInfo(
         modelId: (modelId != null ? modelId.value : this.modelId),
         deviceId: (deviceId != null ? deviceId.value : this.deviceId),
@@ -28111,7 +28133,7 @@ class DataFilter {
     this.description,
     this.tags,
     required this.matchGroups,
-    this.clientIds,
+    required this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -28147,7 +28169,7 @@ class DataFilter {
       defaultValue: <FilterMatchGroup>[])
   final List<FilterMatchGroup> matchGroups;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -28282,7 +28304,7 @@ extension $DataFilterExtension on DataFilter {
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
       Wrapped<List<FilterMatchGroup>>? matchGroups,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -28622,7 +28644,7 @@ class GeoFenceInfo {
     this.multiline,
     this.multipolygon,
     this.circle,
-    this.clientIds,
+    required this.clientIds,
   });
 
   factory GeoFenceInfo.fromJson(Map<String, dynamic> json) =>
@@ -28663,7 +28685,7 @@ class GeoFenceInfo {
   @JsonKey(name: 'circle', includeIfNull: false)
   final GeoCircle? circle;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   static const fromJsonFactory = _$GeoFenceInfoFromJson;
 
   @override
@@ -28777,7 +28799,7 @@ extension $GeoFenceInfoExtension on GeoFenceInfo {
       Wrapped<GeoMultiLine?>? multiline,
       Wrapped<GeoMultiPolygon?>? multipolygon,
       Wrapped<GeoCircle?>? circle,
-      Wrapped<List<String>?>? clientIds}) {
+      Wrapped<List<String>>? clientIds}) {
     return GeoFenceInfo(
         name: (name != null ? name.value : this.name),
         label: (label != null ? label.value : this.label),
@@ -28856,7 +28878,7 @@ class GeoFence {
     this.multiline,
     this.multipolygon,
     this.circle,
-    this.clientIds,
+    required this.clientIds,
     required this.fence,
     required this.domainKey,
     required this.id,
@@ -28905,7 +28927,7 @@ class GeoFence {
   @JsonKey(name: 'circle', includeIfNull: false)
   final GeoCircle? circle;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'fence', includeIfNull: false)
   final Object fence;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
@@ -29080,7 +29102,7 @@ extension $GeoFenceExtension on GeoFence {
       Wrapped<GeoMultiLine?>? multiline,
       Wrapped<GeoMultiPolygon?>? multipolygon,
       Wrapped<GeoCircle?>? circle,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<Object>? fence,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
@@ -31747,7 +31769,7 @@ class FloorInfo {
     this.location,
     this.floorLevel,
     this.floorType,
-    this.clientIds,
+    required this.clientIds,
     this.reportedStamp,
     this.email,
     this.phone,
@@ -31798,7 +31820,7 @@ class FloorInfo {
           value, enums.FloorInfoFloorType.onground);
 
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'reportedStamp', includeIfNull: false)
   final int? reportedStamp;
   @JsonKey(name: 'email', includeIfNull: false, defaultValue: '')
@@ -31968,7 +31990,7 @@ extension $FloorInfoExtension on FloorInfo {
       Wrapped<GeoLocation?>? location,
       Wrapped<int?>? floorLevel,
       Wrapped<enums.FloorInfoFloorType?>? floorType,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<int?>? reportedStamp,
       Wrapped<String?>? email,
       Wrapped<String?>? phone,
@@ -32021,7 +32043,7 @@ class Floor {
     this.location,
     this.floorLevel,
     this.floorType,
-    this.clientIds,
+    required this.clientIds,
     this.reportedStamp,
     this.email,
     this.phone,
@@ -32077,7 +32099,7 @@ class Floor {
       floorFloorTypeNullableFromJson(value, enums.FloorFloorType.onground);
 
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'reportedStamp', includeIfNull: false)
   final int? reportedStamp;
   @JsonKey(name: 'email', includeIfNull: false, defaultValue: '')
@@ -32298,7 +32320,7 @@ extension $FloorExtension on Floor {
       Wrapped<GeoLocation?>? location,
       Wrapped<int?>? floorLevel,
       Wrapped<enums.FloorFloorType?>? floorType,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<int?>? reportedStamp,
       Wrapped<String?>? email,
       Wrapped<String?>? phone,
@@ -32659,7 +32681,7 @@ class AssetInfo {
     this.location,
     this.position,
     required this.assetModelId,
-    this.clientIds,
+    required this.clientIds,
     this.reportedStamp,
   });
 
@@ -32696,7 +32718,7 @@ class AssetInfo {
   @JsonKey(name: 'assetModelId', includeIfNull: false, defaultValue: '')
   final String assetModelId;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'reportedStamp', includeIfNull: false)
   final int? reportedStamp;
   static const fromJsonFactory = _$AssetInfoFromJson;
@@ -32820,7 +32842,7 @@ extension $AssetInfoExtension on AssetInfo {
       Wrapped<GeoLocation?>? location,
       Wrapped<ScreenPosition?>? position,
       Wrapped<String>? assetModelId,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<int?>? reportedStamp}) {
     return AssetInfo(
         premiseId: (premiseId != null ? premiseId.value : this.premiseId),
@@ -32908,7 +32930,7 @@ class Asset {
     this.location,
     this.position,
     required this.assetModelId,
-    this.clientIds,
+    required this.clientIds,
     this.reportedStamp,
     this.currentLocation,
     required this.domainKey,
@@ -32952,7 +32974,7 @@ class Asset {
   @JsonKey(name: 'assetModelId', includeIfNull: false, defaultValue: '')
   final String assetModelId;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'reportedStamp', includeIfNull: false)
   final int? reportedStamp;
   @JsonKey(name: 'currentLocation', includeIfNull: false)
@@ -33138,7 +33160,7 @@ extension $AssetExtension on Asset {
       Wrapped<GeoLocation?>? location,
       Wrapped<ScreenPosition?>? position,
       Wrapped<String>? assetModelId,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<int?>? reportedStamp,
       Wrapped<GeoLocation?>? currentLocation,
       Wrapped<String>? domainKey,
@@ -33484,7 +33506,7 @@ class FacilityInfo {
     this.images,
     this.roles,
     this.location,
-    this.clientIds,
+    required this.clientIds,
     this.reportedStamp,
     this.email,
     this.phone,
@@ -33519,7 +33541,7 @@ class FacilityInfo {
   @JsonKey(name: 'location', includeIfNull: false)
   final GeoLocation? location;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'reportedStamp', includeIfNull: false)
   final int? reportedStamp;
   @JsonKey(name: 'email', includeIfNull: false, defaultValue: '')
@@ -33668,7 +33690,7 @@ extension $FacilityInfoExtension on FacilityInfo {
       Wrapped<List<String>?>? images,
       Wrapped<List<String>?>? roles,
       Wrapped<GeoLocation?>? location,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<int?>? reportedStamp,
       Wrapped<String?>? email,
       Wrapped<String?>? phone,
@@ -33716,7 +33738,7 @@ class Facility {
     this.images,
     this.roles,
     this.location,
-    this.clientIds,
+    required this.clientIds,
     this.reportedStamp,
     this.email,
     this.phone,
@@ -33758,7 +33780,7 @@ class Facility {
   @JsonKey(name: 'location', includeIfNull: false)
   final GeoLocation? location;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'reportedStamp', includeIfNull: false)
   final int? reportedStamp;
   @JsonKey(name: 'email', includeIfNull: false, defaultValue: '')
@@ -33962,7 +33984,7 @@ extension $FacilityExtension on Facility {
       Wrapped<List<String>?>? images,
       Wrapped<List<String>?>? roles,
       Wrapped<GeoLocation?>? location,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<int?>? reportedStamp,
       Wrapped<String?>? email,
       Wrapped<String?>? phone,
@@ -34324,7 +34346,7 @@ class TwinUserInfo {
     this.images,
     this.roles,
     this.userState,
-    this.clientIds,
+    required this.clientIds,
   });
 
   factory TwinUserInfo.fromJson(Map<String, dynamic> json) =>
@@ -34364,7 +34386,7 @@ class TwinUserInfo {
   @JsonKey(name: 'userState', includeIfNull: false)
   final int? userState;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   static const fromJsonFactory = _$TwinUserInfoFromJson;
 
   @override
@@ -34491,7 +34513,7 @@ extension $TwinUserInfoExtension on TwinUserInfo {
       Wrapped<List<String>?>? images,
       Wrapped<List<String>?>? roles,
       Wrapped<int?>? userState,
-      Wrapped<List<String>?>? clientIds}) {
+      Wrapped<List<String>>? clientIds}) {
     return TwinUserInfo(
         name: (name != null ? name.value : this.name),
         email: (email != null ? email.value : this.email),
@@ -34610,7 +34632,7 @@ class TwinUser {
     this.images,
     this.roles,
     this.userState,
-    this.clientIds,
+    required this.clientIds,
     this.stripeCustomerId,
     this.stripeSubscriptionId,
     this.platformRoles,
@@ -34660,7 +34682,7 @@ class TwinUser {
   @JsonKey(name: 'userState', includeIfNull: false)
   final int? userState;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'stripeCustomerId', includeIfNull: false, defaultValue: '')
   final String? stripeCustomerId;
   @JsonKey(name: 'stripeSubscriptionId', includeIfNull: false, defaultValue: '')
@@ -34865,7 +34887,7 @@ extension $TwinUserExtension on TwinUser {
       Wrapped<List<String>?>? images,
       Wrapped<List<String>?>? roles,
       Wrapped<int?>? userState,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<String?>? stripeCustomerId,
       Wrapped<String?>? stripeSubscriptionId,
       Wrapped<List<String>?>? platformRoles,
@@ -35214,7 +35236,7 @@ class RoleInfo {
     required this.name,
     this.description,
     this.tags,
-    this.clientIds,
+    required this.clientIds,
   });
 
   factory RoleInfo.fromJson(Map<String, dynamic> json) =>
@@ -35230,7 +35252,7 @@ class RoleInfo {
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   static const fromJsonFactory = _$RoleInfoFromJson;
 
   @override
@@ -35278,7 +35300,7 @@ extension $RoleInfoExtension on RoleInfo {
       {Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
-      Wrapped<List<String>?>? clientIds}) {
+      Wrapped<List<String>>? clientIds}) {
     return RoleInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -35294,7 +35316,7 @@ class Role {
     required this.name,
     this.description,
     this.tags,
-    this.clientIds,
+    required this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -35316,7 +35338,7 @@ class Role {
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -35418,7 +35440,7 @@ extension $RoleExtension on Role {
       {Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -35740,7 +35762,7 @@ class PremiseInfo {
     this.images,
     this.location,
     this.roles,
-    this.clientIds,
+    required this.clientIds,
     this.reportedStamp,
     this.email,
     this.phone,
@@ -35773,7 +35795,7 @@ class PremiseInfo {
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'reportedStamp', includeIfNull: false)
   final int? reportedStamp;
   @JsonKey(name: 'email', includeIfNull: false, defaultValue: '')
@@ -35915,7 +35937,7 @@ extension $PremiseInfoExtension on PremiseInfo {
       Wrapped<List<String>?>? images,
       Wrapped<GeoLocation?>? location,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<int?>? reportedStamp,
       Wrapped<String?>? email,
       Wrapped<String?>? phone,
@@ -35961,7 +35983,7 @@ class Premise {
     this.images,
     this.location,
     this.roles,
-    this.clientIds,
+    required this.clientIds,
     this.reportedStamp,
     this.email,
     this.phone,
@@ -36001,7 +36023,7 @@ class Premise {
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'reportedStamp', includeIfNull: false)
   final int? reportedStamp;
   @JsonKey(name: 'email', includeIfNull: false, defaultValue: '')
@@ -36198,7 +36220,7 @@ extension $PremiseExtension on Premise {
       Wrapped<List<String>?>? images,
       Wrapped<GeoLocation?>? location,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<int?>? reportedStamp,
       Wrapped<String?>? email,
       Wrapped<String?>? phone,
@@ -36828,7 +36850,7 @@ class ScrappingTableInfo {
     this.description,
     this.tags,
     required this.attributes,
-    this.clientIds,
+    required this.clientIds,
   });
 
   factory ScrappingTableInfo.fromJson(Map<String, dynamic> json) =>
@@ -36847,7 +36869,7 @@ class ScrappingTableInfo {
       name: 'attributes', includeIfNull: false, defaultValue: <Attribute>[])
   final List<Attribute> attributes;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   static const fromJsonFactory = _$ScrappingTableInfoFromJson;
 
   @override
@@ -36902,7 +36924,7 @@ extension $ScrappingTableInfoExtension on ScrappingTableInfo {
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
       Wrapped<List<Attribute>>? attributes,
-      Wrapped<List<String>?>? clientIds}) {
+      Wrapped<List<String>>? clientIds}) {
     return ScrappingTableInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -36920,7 +36942,7 @@ class ScrappingTable {
     this.description,
     this.tags,
     required this.attributes,
-    this.clientIds,
+    required this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -36946,7 +36968,7 @@ class ScrappingTable {
       name: 'attributes', includeIfNull: false, defaultValue: <Attribute>[])
   final List<Attribute> attributes;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -37055,7 +37077,7 @@ extension $ScrappingTableExtension on ScrappingTable {
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
       Wrapped<List<Attribute>>? attributes,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -38207,7 +38229,7 @@ class AssetGroupInfo {
     required this.target,
     required this.assetIds,
     this.icon,
-    this.clientIds,
+    required this.clientIds,
   });
 
   factory AssetGroupInfo.fromJson(Map<String, dynamic> json) =>
@@ -38234,7 +38256,7 @@ class AssetGroupInfo {
   @JsonKey(name: 'icon', includeIfNull: false, defaultValue: '')
   final String? icon;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   static const fromJsonFactory = _$AssetGroupInfoFromJson;
 
   @override
@@ -38301,7 +38323,7 @@ extension $AssetGroupInfoExtension on AssetGroupInfo {
       Wrapped<enums.AssetGroupInfoTarget>? target,
       Wrapped<List<String>>? assetIds,
       Wrapped<String?>? icon,
-      Wrapped<List<String>?>? clientIds}) {
+      Wrapped<List<String>>? clientIds}) {
     return AssetGroupInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -38323,7 +38345,7 @@ class AssetGroup {
     required this.target,
     required this.assetIds,
     this.icon,
-    this.clientIds,
+    required this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -38357,7 +38379,7 @@ class AssetGroup {
   @JsonKey(name: 'icon', includeIfNull: false, defaultValue: '')
   final String? icon;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -38478,7 +38500,7 @@ extension $AssetGroupExtension on AssetGroup {
       Wrapped<enums.AssetGroupTarget>? target,
       Wrapped<List<String>>? assetIds,
       Wrapped<String?>? icon,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -38816,7 +38838,7 @@ class ReportInfo {
     this.dateFormat,
     this.tz,
     required this.fields,
-    this.clientIds,
+    required this.clientIds,
   });
 
   factory ReportInfo.fromJson(Map<String, dynamic> json) =>
@@ -38854,7 +38876,7 @@ class ReportInfo {
   @JsonKey(name: 'fields', includeIfNull: false, defaultValue: <String>[])
   final List<String> fields;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   static const fromJsonFactory = _$ReportInfoFromJson;
 
   @override
@@ -38976,7 +38998,7 @@ extension $ReportInfoExtension on ReportInfo {
       Wrapped<String?>? dateFormat,
       Wrapped<String?>? tz,
       Wrapped<List<String>>? fields,
-      Wrapped<List<String>?>? clientIds}) {
+      Wrapped<List<String>>? clientIds}) {
     return ReportInfo(
         modelId: (modelId != null ? modelId.value : this.modelId),
         name: (name != null ? name.value : this.name),
@@ -39023,7 +39045,7 @@ class Report {
     this.dateFormat,
     this.tz,
     required this.fields,
-    this.clientIds,
+    required this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -39067,7 +39089,7 @@ class Report {
   @JsonKey(name: 'fields', includeIfNull: false, defaultValue: <String>[])
   final List<String> fields;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -39243,7 +39265,7 @@ extension $ReportExtension on Report {
       Wrapped<String?>? dateFormat,
       Wrapped<String?>? tz,
       Wrapped<List<String>>? fields,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -39744,7 +39766,7 @@ class AssetModelInfo {
     this.movable,
     this.allowedDeviceModels,
     this.roles,
-    this.clientIds,
+    required this.clientIds,
   });
 
   factory AssetModelInfo.fromJson(Map<String, dynamic> json) =>
@@ -39781,7 +39803,7 @@ class AssetModelInfo {
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   static const fromJsonFactory = _$AssetModelInfoFromJson;
 
   @override
@@ -39889,7 +39911,7 @@ extension $AssetModelInfoExtension on AssetModelInfo {
       Wrapped<bool?>? movable,
       Wrapped<List<AssetDeviceModel>?>? allowedDeviceModels,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds}) {
+      Wrapped<List<String>>? clientIds}) {
     return AssetModelInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -39928,7 +39950,7 @@ class AssetModel {
     this.movable,
     this.allowedDeviceModels,
     this.roles,
-    this.clientIds,
+    required this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -39972,7 +39994,7 @@ class AssetModel {
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -40134,7 +40156,7 @@ extension $AssetModelExtension on AssetModel {
       Wrapped<bool?>? movable,
       Wrapped<List<AssetDeviceModel>?>? allowedDeviceModels,
       Wrapped<List<String>?>? roles,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -40628,7 +40650,7 @@ class FieldFilterInfo {
     this.rightValue,
     this.values,
     this.tags,
-    this.clientIds,
+    required this.clientIds,
   });
 
   factory FieldFilterInfo.fromJson(Map<String, dynamic> json) =>
@@ -40670,7 +40692,7 @@ class FieldFilterInfo {
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   static const fromJsonFactory = _$FieldFilterInfoFromJson;
 
   @override
@@ -40770,7 +40792,7 @@ extension $FieldFilterInfoExtension on FieldFilterInfo {
       Wrapped<String?>? rightValue,
       Wrapped<List<String>?>? values,
       Wrapped<List<String>?>? tags,
-      Wrapped<List<String>?>? clientIds}) {
+      Wrapped<List<String>>? clientIds}) {
     return FieldFilterInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -40802,7 +40824,7 @@ class FieldFilter {
     this.rightValue,
     this.values,
     this.tags,
-    this.clientIds,
+    required this.clientIds,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -40851,7 +40873,7 @@ class FieldFilter {
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? clientIds;
+  final List<String> clientIds;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -41005,7 +41027,7 @@ extension $FieldFilterExtension on FieldFilter {
       Wrapped<String?>? rightValue,
       Wrapped<List<String>?>? values,
       Wrapped<List<String>?>? tags,
-      Wrapped<List<String>?>? clientIds,
+      Wrapped<List<String>>? clientIds,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -45934,6 +45956,60 @@ extension $NonReportingReqExtension on NonReportingReq {
         timeZone: (timeZone != null ? timeZone.value : this.timeZone),
         clientId: (clientId != null ? clientId.value : this.clientId),
         size: (size != null ? size.value : this.size));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class UnregisterAccount {
+  const UnregisterAccount({
+    required this.reason,
+    required this.password,
+  });
+
+  factory UnregisterAccount.fromJson(Map<String, dynamic> json) =>
+      _$UnregisterAccountFromJson(json);
+
+  static const toJsonFactory = _$UnregisterAccountToJson;
+  Map<String, dynamic> toJson() => _$UnregisterAccountToJson(this);
+
+  @JsonKey(name: 'reason', includeIfNull: false, defaultValue: '')
+  final String reason;
+  @JsonKey(name: 'password', includeIfNull: false, defaultValue: '')
+  final String password;
+  static const fromJsonFactory = _$UnregisterAccountFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is UnregisterAccount &&
+            (identical(other.reason, reason) ||
+                const DeepCollectionEquality().equals(other.reason, reason)) &&
+            (identical(other.password, password) ||
+                const DeepCollectionEquality()
+                    .equals(other.password, password)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(reason) ^
+      const DeepCollectionEquality().hash(password) ^
+      runtimeType.hashCode;
+}
+
+extension $UnregisterAccountExtension on UnregisterAccount {
+  UnregisterAccount copyWith({String? reason, String? password}) {
+    return UnregisterAccount(
+        reason: reason ?? this.reason, password: password ?? this.password);
+  }
+
+  UnregisterAccount copyWithWrapped(
+      {Wrapped<String>? reason, Wrapped<String>? password}) {
+    return UnregisterAccount(
+        reason: (reason != null ? reason.value : this.reason),
+        password: (password != null ? password.value : this.password));
   }
 }
 

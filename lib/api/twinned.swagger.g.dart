@@ -393,7 +393,7 @@ Map<String, dynamic> _$DeviceModelInfoToJson(DeviceModelInfo instance) {
   writeNotNull('scrappingTableConfigs',
       instance.scrappingTableConfigs?.map((e) => e.toJson()).toList());
   writeNotNull('roles', instance.roles);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   return val;
 }
 
@@ -483,7 +483,7 @@ Map<String, dynamic> _$DeviceModelToJson(DeviceModel instance) {
   writeNotNull('scrappingTableConfigs',
       instance.scrappingTableConfigs?.map((e) => e.toJson()).toList());
   writeNotNull('roles', instance.roles);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -669,7 +669,7 @@ Map<String, dynamic> _$DeviceInfoToJson(DeviceInfo instance) {
   writeNotNull('geolocation', instance.geolocation?.toJson());
   writeNotNull('customWidget', instance.customWidget?.toJson());
   writeNotNull('reportedStamp', instance.reportedStamp);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   writeNotNull(
       'parameters', instance.parameters?.map((e) => e.toJson()).toList());
   return val;
@@ -821,7 +821,7 @@ Map<String, dynamic> _$DeviceToJson(Device instance) {
   writeNotNull('movable', instance.movable);
   writeNotNull('geolocation', instance.geolocation?.toJson());
   writeNotNull('customWidget', instance.customWidget?.toJson());
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   writeNotNull(
       'parameters', instance.parameters?.map((e) => e.toJson()).toList());
   val['domainKey'] = instance.domainKey;
@@ -983,7 +983,7 @@ Map<String, dynamic> _$ConditionInfoToJson(ConditionInfo instance) {
   writeNotNull('rightValue', instance.rightValue);
   writeNotNull('values', instance.values);
   writeNotNull('tags', instance.tags);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   return val;
 }
 
@@ -1038,7 +1038,7 @@ Map<String, dynamic> _$ConditionToJson(Condition instance) {
   writeNotNull('rightValue', instance.rightValue);
   writeNotNull('values', instance.values);
   writeNotNull('tags', instance.tags);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -1250,7 +1250,7 @@ Map<String, dynamic> _$AlarmInfoToJson(AlarmInfo instance) {
   val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
   writeNotNull('tags', instance.tags);
   writeNotNull('showOnlyIfMatched', instance.showOnlyIfMatched);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   return val;
 }
 
@@ -1306,7 +1306,7 @@ Map<String, dynamic> _$AlarmToJson(Alarm instance) {
   val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
   writeNotNull('tags', instance.tags);
   writeNotNull('showOnlyIfMatched', instance.showOnlyIfMatched);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -1497,7 +1497,7 @@ Map<String, dynamic> _$ControlInfoToJson(ControlInfo instance) {
   writeNotNull('tags', instance.tags);
   writeNotNull('commands', instance.commands?.map((e) => e.toJson()).toList());
   writeNotNull('roles', instance.roles);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   return val;
 }
 
@@ -1551,7 +1551,7 @@ Map<String, dynamic> _$ControlToJson(Control instance) {
   writeNotNull('tags', instance.tags);
   writeNotNull('commands', instance.commands?.map((e) => e.toJson()).toList());
   writeNotNull('roles', instance.roles);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -1742,7 +1742,7 @@ Map<String, dynamic> _$EventInfoToJson(EventInfo instance) {
   writeNotNull('voiceTemplate', instance.voiceTemplate?.toJson());
   writeNotNull('tags', instance.tags);
   writeNotNull('roles', instance.roles);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   writeNotNull(
       'sourceType', eventInfoSourceTypeNullableToJson(instance.sourceType));
   writeNotNull('isPulseGroup', instance.isPulseGroup);
@@ -1833,7 +1833,7 @@ Map<String, dynamic> _$EventToJson(Event instance) {
   writeNotNull('voiceTemplate', instance.voiceTemplate?.toJson());
   writeNotNull('tags', instance.tags);
   writeNotNull('roles', instance.roles);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   writeNotNull(
       'sourceType', eventSourceTypeNullableToJson(instance.sourceType));
   writeNotNull('isPulseGroup', instance.isPulseGroup);
@@ -2745,7 +2745,7 @@ Map<String, dynamic> _$DisplayInfoToJson(DisplayInfo instance) {
   writeNotNull('icon', instance.icon);
   val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
   writeNotNull('tags', instance.tags);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   return val;
 }
 
@@ -2795,7 +2795,7 @@ Map<String, dynamic> _$DisplayToJson(Display instance) {
   writeNotNull('icon', instance.icon);
   val['conditions'] = instance.conditions.map((e) => e.toJson()).toList();
   writeNotNull('tags', instance.tags);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -3040,7 +3040,7 @@ Map<String, dynamic> _$DeviceViewInfoToJson(DeviceViewInfo instance) {
       deviceViewInfoInfoPositionNullableToJson(instance.infoPosition));
   writeNotNull('border', deviceViewInfoBorderNullableToJson(instance.border));
   writeNotNull('roles', instance.roles);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   return val;
 }
 
@@ -3129,7 +3129,7 @@ Map<String, dynamic> _$DeviceViewToJson(DeviceView instance) {
       deviceViewInfoPositionNullableToJson(instance.infoPosition));
   writeNotNull('border', deviceViewBorderNullableToJson(instance.border));
   writeNotNull('roles', instance.roles);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -3709,7 +3709,7 @@ Map<String, dynamic> _$DashboardMenuGroupInfoToJson(
   val['mobileSupported'] = instance.mobileSupported;
   writeNotNull('tags', instance.tags);
   writeNotNull('roles', instance.roles);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   val['menus'] = instance.menus.map((e) => e.toJson()).toList();
   return val;
 }
@@ -3774,7 +3774,7 @@ Map<String, dynamic> _$DashboardMenuGroupToJson(DashboardMenuGroup instance) {
   val['mobileSupported'] = instance.mobileSupported;
   writeNotNull('tags', instance.tags);
   writeNotNull('roles', instance.roles);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   val['menus'] = instance.menus.map((e) => e.toJson()).toList();
   return val;
 }
@@ -4298,7 +4298,7 @@ Map<String, dynamic> _$DashboardScreenInfoToJson(DashboardScreenInfo instance) {
   writeNotNull('marginConfig', instance.marginConfig?.toJson());
   val['rows'] = instance.rows.map((e) => e.toJson()).toList();
   writeNotNull('roles', instance.roles);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   writeNotNull('priority', instance.priority);
   return val;
 }
@@ -4399,7 +4399,7 @@ Map<String, dynamic> _$DashboardScreenToJson(DashboardScreen instance) {
   writeNotNull('marginConfig', instance.marginConfig?.toJson());
   val['rows'] = instance.rows.map((e) => e.toJson()).toList();
   writeNotNull('roles', instance.roles);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   writeNotNull('priority', instance.priority);
   return val;
 }
@@ -4620,7 +4620,7 @@ Map<String, dynamic> _$EventRegistrationInfoToJson(
   writeNotNull('targetDeviceIds', instance.targetDeviceIds);
   writeNotNull('tags', instance.tags);
   writeNotNull('roles', instance.roles);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   return val;
 }
 
@@ -4702,7 +4702,7 @@ Map<String, dynamic> _$EventRegistrationToJson(EventRegistration instance) {
   writeNotNull('targetDeviceIds', instance.targetDeviceIds);
   writeNotNull('tags', instance.tags);
   writeNotNull('roles', instance.roles);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   val['userId'] = instance.userId;
   return val;
 }
@@ -5357,7 +5357,7 @@ Map<String, dynamic> _$ScreenWidgetInfoToJson(ScreenWidgetInfo instance) {
   val['widgetType'] = instance.widgetType;
   val['attributes'] = instance.attributes;
   writeNotNull('target', screenWidgetInfoTargetNullableToJson(instance.target));
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   return val;
 }
 
@@ -5403,7 +5403,7 @@ Map<String, dynamic> _$ScreenWidgetToJson(ScreenWidget instance) {
   val['widgetType'] = instance.widgetType;
   val['attributes'] = instance.attributes;
   writeNotNull('target', screenWidgetTargetNullableToJson(instance.target));
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -5657,7 +5657,7 @@ Map<String, dynamic> _$PreprocessorInfoToJson(PreprocessorInfo instance) {
   writeNotNull('code', instance.code);
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   return val;
 }
 
@@ -5697,7 +5697,7 @@ Map<String, dynamic> _$PreprocessorToJson(Preprocessor instance) {
   writeNotNull('code', instance.code);
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -5880,7 +5880,7 @@ Map<String, dynamic> _$DataFilterInfoToJson(DataFilterInfo instance) {
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
   val['matchGroups'] = instance.matchGroups.map((e) => e.toJson()).toList();
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   return val;
 }
 
@@ -5928,7 +5928,7 @@ Map<String, dynamic> _$DataFilterToJson(DataFilter instance) {
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
   val['matchGroups'] = instance.matchGroups.map((e) => e.toJson()).toList();
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -6107,7 +6107,7 @@ Map<String, dynamic> _$GeoFenceInfoToJson(GeoFenceInfo instance) {
   writeNotNull('multiline', instance.multiline?.toJson());
   writeNotNull('multipolygon', instance.multipolygon?.toJson());
   writeNotNull('circle', instance.circle?.toJson());
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   return val;
 }
 
@@ -6190,7 +6190,7 @@ Map<String, dynamic> _$GeoFenceToJson(GeoFence instance) {
   writeNotNull('multiline', instance.multiline?.toJson());
   writeNotNull('multipolygon', instance.multipolygon?.toJson());
   writeNotNull('circle', instance.circle?.toJson());
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   val['fence'] = instance.fence;
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
@@ -7078,7 +7078,7 @@ Map<String, dynamic> _$FloorInfoToJson(FloorInfo instance) {
   writeNotNull('floorLevel', instance.floorLevel);
   writeNotNull(
       'floorType', floorInfoFloorTypeNullableToJson(instance.floorType));
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   writeNotNull('reportedStamp', instance.reportedStamp);
   writeNotNull('email', instance.email);
   writeNotNull('phone', instance.phone);
@@ -7155,7 +7155,7 @@ Map<String, dynamic> _$FloorToJson(Floor instance) {
   writeNotNull('location', instance.location?.toJson());
   writeNotNull('floorLevel', instance.floorLevel);
   writeNotNull('floorType', floorFloorTypeNullableToJson(instance.floorType));
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   writeNotNull('reportedStamp', instance.reportedStamp);
   writeNotNull('email', instance.email);
   writeNotNull('phone', instance.phone);
@@ -7336,7 +7336,7 @@ Map<String, dynamic> _$AssetInfoToJson(AssetInfo instance) {
   writeNotNull('location', instance.location?.toJson());
   writeNotNull('position', instance.position?.toJson());
   val['assetModelId'] = instance.assetModelId;
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   writeNotNull('reportedStamp', instance.reportedStamp);
   return val;
 }
@@ -7429,7 +7429,7 @@ Map<String, dynamic> _$AssetToJson(Asset instance) {
   writeNotNull('location', instance.location?.toJson());
   writeNotNull('position', instance.position?.toJson());
   val['assetModelId'] = instance.assetModelId;
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   writeNotNull('reportedStamp', instance.reportedStamp);
   writeNotNull('currentLocation', instance.currentLocation?.toJson());
   val['domainKey'] = instance.domainKey;
@@ -7597,7 +7597,7 @@ Map<String, dynamic> _$FacilityInfoToJson(FacilityInfo instance) {
   writeNotNull('images', instance.images);
   writeNotNull('roles', instance.roles);
   writeNotNull('location', instance.location?.toJson());
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   writeNotNull('reportedStamp', instance.reportedStamp);
   writeNotNull('email', instance.email);
   writeNotNull('phone', instance.phone);
@@ -7668,7 +7668,7 @@ Map<String, dynamic> _$FacilityToJson(Facility instance) {
   writeNotNull('images', instance.images);
   writeNotNull('roles', instance.roles);
   writeNotNull('location', instance.location?.toJson());
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   writeNotNull('reportedStamp', instance.reportedStamp);
   writeNotNull('email', instance.email);
   writeNotNull('phone', instance.phone);
@@ -7848,7 +7848,7 @@ Map<String, dynamic> _$TwinUserInfoToJson(TwinUserInfo instance) {
   writeNotNull('images', instance.images);
   writeNotNull('roles', instance.roles);
   writeNotNull('userState', instance.userState);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   return val;
 }
 
@@ -7943,7 +7943,7 @@ Map<String, dynamic> _$TwinUserToJson(TwinUser instance) {
   writeNotNull('images', instance.images);
   writeNotNull('roles', instance.roles);
   writeNotNull('userState', instance.userState);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   writeNotNull('stripeCustomerId', instance.stripeCustomerId);
   writeNotNull('stripeSubscriptionId', instance.stripeSubscriptionId);
   writeNotNull('platformRoles', instance.platformRoles);
@@ -8088,7 +8088,7 @@ Map<String, dynamic> _$RoleInfoToJson(RoleInfo instance) {
 
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   return val;
 }
 
@@ -8124,7 +8124,7 @@ Map<String, dynamic> _$RoleToJson(Role instance) {
 
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -8287,7 +8287,7 @@ Map<String, dynamic> _$PremiseInfoToJson(PremiseInfo instance) {
   writeNotNull('images', instance.images);
   writeNotNull('location', instance.location?.toJson());
   writeNotNull('roles', instance.roles);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   writeNotNull('reportedStamp', instance.reportedStamp);
   writeNotNull('email', instance.email);
   writeNotNull('phone', instance.phone);
@@ -8356,7 +8356,7 @@ Map<String, dynamic> _$PremiseToJson(Premise instance) {
   writeNotNull('images', instance.images);
   writeNotNull('location', instance.location?.toJson());
   writeNotNull('roles', instance.roles);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   writeNotNull('reportedStamp', instance.reportedStamp);
   writeNotNull('email', instance.email);
   writeNotNull('phone', instance.phone);
@@ -8592,7 +8592,7 @@ Map<String, dynamic> _$ScrappingTableInfoToJson(ScrappingTableInfo instance) {
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
   val['attributes'] = instance.attributes.map((e) => e.toJson()).toList();
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   return val;
 }
 
@@ -8634,7 +8634,7 @@ Map<String, dynamic> _$ScrappingTableToJson(ScrappingTable instance) {
   writeNotNull('description', instance.description);
   writeNotNull('tags', instance.tags);
   val['attributes'] = instance.attributes.map((e) => e.toJson()).toList();
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -9078,7 +9078,7 @@ Map<String, dynamic> _$AssetGroupInfoToJson(AssetGroupInfo instance) {
   writeNotNull('target', assetGroupInfoTargetToJson(instance.target));
   val['assetIds'] = instance.assetIds;
   writeNotNull('icon', instance.icon);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   return val;
 }
 
@@ -9123,7 +9123,7 @@ Map<String, dynamic> _$AssetGroupToJson(AssetGroup instance) {
   writeNotNull('target', assetGroupTargetToJson(instance.target));
   val['assetIds'] = instance.assetIds;
   writeNotNull('icon', instance.icon);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -9290,7 +9290,7 @@ Map<String, dynamic> _$ReportInfoToJson(ReportInfo instance) {
   writeNotNull('dateFormat', instance.dateFormat);
   writeNotNull('tz', instance.tz);
   val['fields'] = instance.fields;
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   return val;
 }
 
@@ -9351,7 +9351,7 @@ Map<String, dynamic> _$ReportToJson(Report instance) {
   writeNotNull('dateFormat', instance.dateFormat);
   writeNotNull('tz', instance.tz);
   val['fields'] = instance.fields;
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -9568,7 +9568,7 @@ Map<String, dynamic> _$AssetModelInfoToJson(AssetModelInfo instance) {
   writeNotNull('allowedDeviceModels',
       instance.allowedDeviceModels?.map((e) => e.toJson()).toList());
   writeNotNull('roles', instance.roles);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   return val;
 }
 
@@ -9634,7 +9634,7 @@ Map<String, dynamic> _$AssetModelToJson(AssetModel instance) {
   writeNotNull('allowedDeviceModels',
       instance.allowedDeviceModels?.map((e) => e.toJson()).toList());
   writeNotNull('roles', instance.roles);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -9841,7 +9841,7 @@ Map<String, dynamic> _$FieldFilterInfoToJson(FieldFilterInfo instance) {
   writeNotNull('rightValue', instance.rightValue);
   writeNotNull('values', instance.values);
   writeNotNull('tags', instance.tags);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   return val;
 }
 
@@ -9896,7 +9896,7 @@ Map<String, dynamic> _$FieldFilterToJson(FieldFilter instance) {
   writeNotNull('rightValue', instance.rightValue);
   writeNotNull('values', instance.values);
   writeNotNull('tags', instance.tags);
-  writeNotNull('clientIds', instance.clientIds);
+  val['clientIds'] = instance.clientIds;
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -11265,6 +11265,18 @@ Map<String, dynamic> _$NonReportingReqToJson(NonReportingReq instance) {
   writeNotNull('size', instance.size);
   return val;
 }
+
+UnregisterAccount _$UnregisterAccountFromJson(Map<String, dynamic> json) =>
+    UnregisterAccount(
+      reason: json['reason'] as String? ?? '',
+      password: json['password'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$UnregisterAccountToJson(UnregisterAccount instance) =>
+    <String, dynamic>{
+      'reason': instance.reason,
+      'password': instance.password,
+    };
 
 ExportData _$ExportDataFromJson(Map<String, dynamic> json) => ExportData(
       model: DeviceModelInfo.fromJson(json['model'] as Map<String, dynamic>),

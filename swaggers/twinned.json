@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "2.0.7",
+    "version": "2.0.8",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -736,6 +736,45 @@
           },
           "417": {
             "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/IoT/twin/unregister": {
+      "post": {
+        "tags": [
+          "IoT"
+        ],
+        "summary": "Unregister account",
+        "description": "Unregister account",
+        "operationId": "unregisterAccount",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnregisterAccount"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BaseResponse"
+            }
           }
         },
         "security": [
@@ -16751,7 +16790,8 @@
         "make",
         "model",
         "version",
-        "parameters"
+        "parameters",
+        "clientIds"
       ],
       "properties": {
         "name": {
@@ -16919,7 +16959,8 @@
       "required": [
         "name",
         "modelId",
-        "deviceId"
+        "deviceId",
+        "clientIds"
       ],
       "properties": {
         "name": {
@@ -17122,7 +17163,8 @@
         "name",
         "modelId",
         "field",
-        "condition"
+        "condition",
+        "clientIds"
       ],
       "properties": {
         "name": {
@@ -17308,7 +17350,8 @@
       "required": [
         "name",
         "state",
-        "conditions"
+        "conditions",
+        "clientIds"
       ],
       "properties": {
         "name": {
@@ -17465,7 +17508,8 @@
         "name",
         "modelId",
         "state",
-        "type"
+        "type",
+        "clientIds"
       ],
       "properties": {
         "name": {
@@ -17579,7 +17623,8 @@
       "required": [
         "name",
         "state",
-        "conditions"
+        "conditions",
+        "clientIds"
       ],
       "properties": {
         "name": {
@@ -18407,7 +18452,8 @@
       "required": [
         "name",
         "value",
-        "conditions"
+        "conditions",
+        "clientIds"
       ],
       "properties": {
         "name": {
@@ -18566,7 +18612,8 @@
       "type": "object",
       "required": [
         "modelId",
-        "name"
+        "name",
+        "clientIds"
       ],
       "properties": {
         "modelId": {
@@ -19208,7 +19255,8 @@
         "webSupported",
         "tabletSupported",
         "mobileSupported",
-        "menus"
+        "menus",
+        "clientIds"
       ],
       "properties": {
         "name": {
@@ -19626,7 +19674,8 @@
       "required": [
         "name",
         "title",
-        "rows"
+        "rows",
+        "clientIds"
       ],
       "properties": {
         "name": {
@@ -19794,7 +19843,8 @@
     "EventRegistrationInfo": {
       "type": "object",
       "required": [
-        "eventId"
+        "eventId",
+        "clientIds"
       ],
       "properties": {
         "eventId": {
@@ -20299,7 +20349,8 @@
       "required": [
         "name",
         "widgetType",
-        "attributes"
+        "attributes",
+        "clientIds"
       ],
       "properties": {
         "name": {
@@ -20530,7 +20581,8 @@
       "type": "object",
       "required": [
         "name",
-        "className"
+        "className",
+        "clientIds"
       ],
       "properties": {
         "name": {
@@ -20648,7 +20700,8 @@
       "required": [
         "name",
         "label",
-        "matchGroups"
+        "matchGroups",
+        "clientIds"
       ],
       "properties": {
         "modelId": {
@@ -20755,7 +20808,8 @@
       "required": [
         "name",
         "label",
-        "fenceType"
+        "fenceType",
+        "clientIds"
       ],
       "properties": {
         "name": {
@@ -21407,7 +21461,8 @@
     "FloorInfo": {
       "type": "object",
       "required": [
-        "name"
+        "name",
+        "clientIds"
       ],
       "properties": {
         "premiseId": {
@@ -21563,7 +21618,8 @@
       "type": "object",
       "required": [
         "name",
-        "assetModelId"
+        "assetModelId",
+        "clientIds"
       ],
       "properties": {
         "premiseId": {
@@ -21704,7 +21760,8 @@
     "FacilityInfo": {
       "type": "object",
       "required": [
-        "name"
+        "name",
+        "clientIds"
       ],
       "properties": {
         "name": {
@@ -21844,7 +21901,8 @@
       "type": "object",
       "required": [
         "name",
-        "email"
+        "email",
+        "clientIds"
       ],
       "properties": {
         "name": {
@@ -21997,7 +22055,8 @@
     "RoleInfo": {
       "type": "object",
       "required": [
-        "name"
+        "name",
+        "clientIds"
       ],
       "properties": {
         "name": {
@@ -22084,7 +22143,8 @@
     "PremiseInfo": {
       "type": "object",
       "required": [
-        "name"
+        "name",
+        "clientIds"
       ],
       "properties": {
         "name": {
@@ -22322,7 +22382,8 @@
       "type": "object",
       "required": [
         "name",
-        "attributes"
+        "attributes",
+        "clientIds"
       ],
       "properties": {
         "name": {
@@ -22585,7 +22646,8 @@
       "required": [
         "name",
         "target",
-        "assetIds"
+        "assetIds",
+        "clientIds"
       ],
       "properties": {
         "name": {
@@ -22690,7 +22752,8 @@
       "required": [
         "modelId",
         "name",
-        "fields"
+        "fields",
+        "clientIds"
       ],
       "properties": {
         "modelId": {
@@ -22856,7 +22919,8 @@
     "AssetModelInfo": {
       "type": "object",
       "required": [
-        "name"
+        "name",
+        "clientIds"
       ],
       "properties": {
         "name": {
@@ -23022,7 +23086,8 @@
         "name",
         "field",
         "fieldType",
-        "condition"
+        "condition",
+        "clientIds"
       ],
       "properties": {
         "name": {
@@ -24176,6 +24241,21 @@
         "size": {
           "type": "integer",
           "default": 1000
+        }
+      }
+    },
+    "UnregisterAccount": {
+      "type": "object",
+      "required": [
+        "reason",
+        "password"
+      ],
+      "properties": {
+        "reason": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
         }
       }
     },
