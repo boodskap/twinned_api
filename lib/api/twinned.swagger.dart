@@ -7667,6 +7667,31 @@ abstract class Twinned extends ChopperService {
     @Header('APIKEY') String? apikey,
   });
 
+  ///Search Asset Groups
+  ///@param myGroups
+  ///@param body
+  Future<chopper.Response<AssetGroupArrayRes>> searchAssetGroups({
+    bool? myGroups,
+    required SearchReq? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        AssetGroupArrayRes, () => AssetGroupArrayRes.fromJsonFactory);
+
+    return _searchAssetGroups(
+        myGroups: myGroups?.toString(), body: body, apikey: apikey?.toString());
+  }
+
+  ///Search Asset Groups
+  ///@param myGroups
+  ///@param body
+  @Post(path: '/AssetGroup/search')
+  Future<chopper.Response<AssetGroupArrayRes>> _searchAssetGroups({
+    @Header('myGroups') String? myGroups,
+    @Body() required SearchReq? body,
+    @Header('APIKEY') String? apikey,
+  });
+
   ///query data
   ///@param body
   Future<chopper.Response<AssetGroupArrayRes>> queryEqlAssetGroup({
@@ -43045,6 +43070,7 @@ class Usage {
     required this.availablePooledDataPoints,
     required this.availableDataPoints,
     this.availableDeviceModels,
+    required this.availableModelParameters,
     required this.availableDevices,
     required this.availableUsers,
     required this.availableClients,
@@ -43076,6 +43102,8 @@ class Usage {
   final int availableDataPoints;
   @JsonKey(name: 'availableDeviceModels', includeIfNull: false)
   final int? availableDeviceModels;
+  @JsonKey(name: 'availableModelParameters', includeIfNull: false)
+  final int availableModelParameters;
   @JsonKey(name: 'availableDevices', includeIfNull: false)
   final int availableDevices;
   @JsonKey(name: 'availableUsers', includeIfNull: false)
@@ -43122,6 +43150,10 @@ class Usage {
             (identical(other.availableDeviceModels, availableDeviceModels) ||
                 const DeepCollectionEquality().equals(
                     other.availableDeviceModels, availableDeviceModels)) &&
+            (identical(other.availableModelParameters, availableModelParameters) ||
+                const DeepCollectionEquality().equals(
+                    other.availableModelParameters,
+                    availableModelParameters)) &&
             (identical(other.availableDevices, availableDevices) ||
                 const DeepCollectionEquality()
                     .equals(other.availableDevices, availableDevices)) &&
@@ -43151,6 +43183,7 @@ class Usage {
       const DeepCollectionEquality().hash(availablePooledDataPoints) ^
       const DeepCollectionEquality().hash(availableDataPoints) ^
       const DeepCollectionEquality().hash(availableDeviceModels) ^
+      const DeepCollectionEquality().hash(availableModelParameters) ^
       const DeepCollectionEquality().hash(availableDevices) ^
       const DeepCollectionEquality().hash(availableUsers) ^
       const DeepCollectionEquality().hash(availableClients) ^
@@ -43170,6 +43203,7 @@ extension $UsageExtension on Usage {
       int? availablePooledDataPoints,
       int? availableDataPoints,
       int? availableDeviceModels,
+      int? availableModelParameters,
       int? availableDevices,
       int? availableUsers,
       int? availableClients,
@@ -43187,6 +43221,8 @@ extension $UsageExtension on Usage {
         availableDataPoints: availableDataPoints ?? this.availableDataPoints,
         availableDeviceModels:
             availableDeviceModels ?? this.availableDeviceModels,
+        availableModelParameters:
+            availableModelParameters ?? this.availableModelParameters,
         availableDevices: availableDevices ?? this.availableDevices,
         availableUsers: availableUsers ?? this.availableUsers,
         availableClients: availableClients ?? this.availableClients,
@@ -43204,6 +43240,7 @@ extension $UsageExtension on Usage {
       Wrapped<int>? availablePooledDataPoints,
       Wrapped<int>? availableDataPoints,
       Wrapped<int?>? availableDeviceModels,
+      Wrapped<int>? availableModelParameters,
       Wrapped<int>? availableDevices,
       Wrapped<int>? availableUsers,
       Wrapped<int>? availableClients,
@@ -43235,6 +43272,9 @@ extension $UsageExtension on Usage {
         availableDeviceModels: (availableDeviceModels != null
             ? availableDeviceModels.value
             : this.availableDeviceModels),
+        availableModelParameters: (availableModelParameters != null
+            ? availableModelParameters.value
+            : this.availableModelParameters),
         availableDevices: (availableDevices != null
             ? availableDevices.value
             : this.availableDevices),

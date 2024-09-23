@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "2.0.8",
+    "version": "2.1.0",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -14813,6 +14813,56 @@
         ]
       }
     },
+    "/AssetGroup/search": {
+      "post": {
+        "tags": [
+          "AssetGroup"
+        ],
+        "summary": "Search Asset Groups",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "searchAssetGroups",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "myGroups",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/AssetGroupArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
     "/AssetGroup/query/eql": {
       "post": {
         "tags": [
@@ -23553,7 +23603,6 @@
         "usedPooledDataPoints",
         "usedDataPoints",
         "usedDeviceModels",
-        "usedModelParameters",
         "usedDevices",
         "usedUsers",
         "usedClients",
@@ -23561,6 +23610,7 @@
         "availablePooledDataPoints",
         "availableDataPoints",
         "availabledDeviceModels",
+        "availableModelParameters",
         "availableDevices",
         "availableUsers",
         "availableClients",
@@ -23604,6 +23654,10 @@
           "format": "int64"
         },
         "availableDeviceModels": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "availableModelParameters": {
           "type": "integer",
           "format": "int64"
         },

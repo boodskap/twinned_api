@@ -6546,6 +6546,28 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<AssetGroupArrayRes>> _searchAssetGroups({
+    String? myGroups,
+    required SearchReq? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/AssetGroup/search');
+    final Map<String, String> $headers = {
+      if (myGroups != null) 'myGroups': myGroups,
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<AssetGroupArrayRes, AssetGroupArrayRes>($request);
+  }
+
+  @override
   Future<Response<AssetGroupArrayRes>> _queryEqlAssetGroup({
     required EqlSearch? body,
     String? apikey,

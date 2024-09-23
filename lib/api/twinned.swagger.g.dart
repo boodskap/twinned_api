@@ -10526,6 +10526,8 @@ Usage _$UsageFromJson(Map<String, dynamic> json) => Usage(
           (json['availablePooledDataPoints'] as num).toInt(),
       availableDataPoints: (json['availableDataPoints'] as num).toInt(),
       availableDeviceModels: (json['availableDeviceModels'] as num?)?.toInt(),
+      availableModelParameters:
+          (json['availableModelParameters'] as num).toInt(),
       availableDevices: (json['availableDevices'] as num).toInt(),
       availableUsers: (json['availableUsers'] as num).toInt(),
       availableClients: (json['availableClients'] as num).toInt(),
@@ -10552,6 +10554,7 @@ Map<String, dynamic> _$UsageToJson(Usage instance) {
   }
 
   writeNotNull('availableDeviceModels', instance.availableDeviceModels);
+  val['availableModelParameters'] = instance.availableModelParameters;
   val['availableDevices'] = instance.availableDevices;
   val['availableUsers'] = instance.availableUsers;
   val['availableClients'] = instance.availableClients;
