@@ -3923,14 +3923,14 @@ final class _$Twinned extends Twinned {
   @override
   Future<Response<DataFilterArrayRes>> _listDataFilters({
     String? modelId,
-    String? deviceId,
+    String? myFilters,
     required ListReq? body,
     String? apikey,
   }) {
     final Uri $url = Uri.parse('/DataFilter/list');
     final Map<String, String> $headers = {
       if (modelId != null) 'modelId': modelId,
-      if (deviceId != null) 'deviceId': deviceId,
+      if (myFilters != null) 'myFilters': myFilters,
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = body;
@@ -3947,14 +3947,14 @@ final class _$Twinned extends Twinned {
   @override
   Future<Response<DataFilterArrayRes>> _searchDataFilters({
     String? modelId,
-    String? deviceId,
+    String? myFilters,
     required SearchReq? body,
     String? apikey,
   }) {
     final Uri $url = Uri.parse('/DataFilter/search');
     final Map<String, String> $headers = {
       if (modelId != null) 'modelId': modelId,
-      if (deviceId != null) 'deviceId': deviceId,
+      if (myFilters != null) 'myFilters': myFilters,
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = body;
@@ -6972,11 +6972,13 @@ final class _$Twinned extends Twinned {
 
   @override
   Future<Response<FieldFilterArrayRes>> _listFieldFilters({
+    String? myFilters,
     required ListReq? body,
     String? apikey,
   }) {
     final Uri $url = Uri.parse('/FieldFilter/list');
     final Map<String, String> $headers = {
+      if (myFilters != null) 'myFilters': myFilters,
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = body;
@@ -6992,11 +6994,13 @@ final class _$Twinned extends Twinned {
 
   @override
   Future<Response<FieldFilterArrayRes>> _searchFieldFilters({
+    String? myFilters,
     required SearchReq? body,
     String? apikey,
   }) {
     final Uri $url = Uri.parse('/FieldFilter/search');
     final Map<String, String> $headers = {
+      if (myFilters != null) 'myFilters': myFilters,
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = body;

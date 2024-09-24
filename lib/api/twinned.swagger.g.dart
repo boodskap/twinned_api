@@ -5845,7 +5845,6 @@ Map<String, dynamic> _$FilterMatchGroupToJson(FilterMatchGroup instance) {
 DataFilterInfo _$DataFilterInfoFromJson(Map<String, dynamic> json) =>
     DataFilterInfo(
       modelId: json['modelId'] as String? ?? '',
-      deviceId: json['deviceId'] as String? ?? '',
       name: json['name'] as String? ?? '',
       label: json['label'] as String? ?? '',
       icon: json['icon'] as String? ?? '',
@@ -5861,6 +5860,7 @@ DataFilterInfo _$DataFilterInfoFromJson(Map<String, dynamic> json) =>
               ?.map((e) => e as String)
               .toList() ??
           [],
+      target: dataFilterInfoTargetFromJson(json['target']),
     );
 
 Map<String, dynamic> _$DataFilterInfoToJson(DataFilterInfo instance) {
@@ -5873,7 +5873,6 @@ Map<String, dynamic> _$DataFilterInfoToJson(DataFilterInfo instance) {
   }
 
   writeNotNull('modelId', instance.modelId);
-  writeNotNull('deviceId', instance.deviceId);
   val['name'] = instance.name;
   val['label'] = instance.label;
   writeNotNull('icon', instance.icon);
@@ -5881,12 +5880,12 @@ Map<String, dynamic> _$DataFilterInfoToJson(DataFilterInfo instance) {
   writeNotNull('tags', instance.tags);
   val['matchGroups'] = instance.matchGroups.map((e) => e.toJson()).toList();
   val['clientIds'] = instance.clientIds;
+  writeNotNull('target', dataFilterInfoTargetToJson(instance.target));
   return val;
 }
 
 DataFilter _$DataFilterFromJson(Map<String, dynamic> json) => DataFilter(
       modelId: json['modelId'] as String? ?? '',
-      deviceId: json['deviceId'] as String? ?? '',
       name: json['name'] as String? ?? '',
       label: json['label'] as String? ?? '',
       icon: json['icon'] as String? ?? '',
@@ -5902,6 +5901,7 @@ DataFilter _$DataFilterFromJson(Map<String, dynamic> json) => DataFilter(
               ?.map((e) => e as String)
               .toList() ??
           [],
+      target: dataFilterTargetFromJson(json['target']),
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -5921,7 +5921,6 @@ Map<String, dynamic> _$DataFilterToJson(DataFilter instance) {
   }
 
   writeNotNull('modelId', instance.modelId);
-  writeNotNull('deviceId', instance.deviceId);
   val['name'] = instance.name;
   val['label'] = instance.label;
   writeNotNull('icon', instance.icon);
@@ -5929,6 +5928,7 @@ Map<String, dynamic> _$DataFilterToJson(DataFilter instance) {
   writeNotNull('tags', instance.tags);
   val['matchGroups'] = instance.matchGroups.map((e) => e.toJson()).toList();
   val['clientIds'] = instance.clientIds;
+  writeNotNull('target', dataFilterTargetToJson(instance.target));
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -9818,6 +9818,7 @@ FieldFilterInfo _$FieldFilterInfoFromJson(Map<String, dynamic> json) =>
               ?.map((e) => e as String)
               .toList() ??
           [],
+      target: fieldFilterInfoTargetFromJson(json['target']),
     );
 
 Map<String, dynamic> _$FieldFilterInfoToJson(FieldFilterInfo instance) {
@@ -9842,6 +9843,7 @@ Map<String, dynamic> _$FieldFilterInfoToJson(FieldFilterInfo instance) {
   writeNotNull('values', instance.values);
   writeNotNull('tags', instance.tags);
   val['clientIds'] = instance.clientIds;
+  writeNotNull('target', fieldFilterInfoTargetToJson(instance.target));
   return val;
 }
 
@@ -9866,6 +9868,7 @@ FieldFilter _$FieldFilterFromJson(Map<String, dynamic> json) => FieldFilter(
               ?.map((e) => e as String)
               .toList() ??
           [],
+      target: fieldFilterTargetFromJson(json['target']),
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -9897,6 +9900,7 @@ Map<String, dynamic> _$FieldFilterToJson(FieldFilter instance) {
   writeNotNull('values', instance.values);
   writeNotNull('tags', instance.tags);
   val['clientIds'] = instance.clientIds;
+  writeNotNull('target', fieldFilterTargetToJson(instance.target));
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;

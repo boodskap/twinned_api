@@ -8820,9 +8820,9 @@
           },
           {
             "in": "header",
-            "name": "deviceId",
+            "name": "myFilters",
             "required": false,
-            "type": "string"
+            "type": "boolean"
           },
           {
             "in": "body",
@@ -8876,9 +8876,9 @@
           },
           {
             "in": "header",
-            "name": "deviceId",
+            "name": "myFilters",
             "required": false,
-            "type": "string"
+            "type": "boolean"
           },
           {
             "in": "body",
@@ -15774,6 +15774,12 @@
         "operationId": "listFieldFilters",
         "parameters": [
           {
+            "in": "header",
+            "name": "myFilters",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "in": "body",
             "name": "body",
             "required": true,
@@ -15817,6 +15823,12 @@
         ],
         "operationId": "searchFieldFilters",
         "parameters": [
+          {
+            "in": "header",
+            "name": "myFilters",
+            "required": false,
+            "type": "boolean"
+          },
           {
             "in": "body",
             "name": "body",
@@ -20751,13 +20763,11 @@
         "name",
         "label",
         "matchGroups",
-        "clientIds"
+        "clientIds",
+        "target"
       ],
       "properties": {
         "modelId": {
-          "type": "string"
-        },
-        "deviceId": {
           "type": "string"
         },
         "name": {
@@ -20789,6 +20799,13 @@
           "items": {
             "type": "string"
           }
+        },
+        "target": {
+          "type": "string",
+          "enum": [
+            "USER",
+            "APP"
+          ]
         }
       }
     },
@@ -23137,7 +23154,8 @@
         "field",
         "fieldType",
         "condition",
-        "clientIds"
+        "clientIds",
+        "target"
       ],
       "properties": {
         "name": {
@@ -23202,6 +23220,13 @@
           "items": {
             "type": "string"
           }
+        },
+        "target": {
+          "type": "string",
+          "enum": [
+            "USER",
+            "APP"
+          ]
         }
       }
     },

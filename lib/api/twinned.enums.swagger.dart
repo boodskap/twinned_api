@@ -741,6 +741,34 @@ enum FilterMatchGroupMatchType {
   const FilterMatchGroupMatchType(this.value);
 }
 
+enum DataFilterInfoTarget {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('USER')
+  user('USER'),
+  @JsonValue('APP')
+  app('APP');
+
+  final String? value;
+
+  const DataFilterInfoTarget(this.value);
+}
+
+enum DataFilterTarget {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('USER')
+  user('USER'),
+  @JsonValue('APP')
+  app('APP');
+
+  final String? value;
+
+  const DataFilterTarget(this.value);
+}
+
 enum GeoFenceInfoFenceType {
   @JsonValue(null)
   swaggerGeneratedUnknown(null),
@@ -935,6 +963,20 @@ enum FieldFilterInfoCondition {
   const FieldFilterInfoCondition(this.value);
 }
 
+enum FieldFilterInfoTarget {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('USER')
+  user('USER'),
+  @JsonValue('APP')
+  app('APP');
+
+  final String? value;
+
+  const FieldFilterInfoTarget(this.value);
+}
+
 enum FieldFilterFieldType {
   @JsonValue(null)
   swaggerGeneratedUnknown(null),
@@ -981,6 +1023,20 @@ enum FieldFilterCondition {
   final String? value;
 
   const FieldFilterCondition(this.value);
+}
+
+enum FieldFilterTarget {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('USER')
+  user('USER'),
+  @JsonValue('APP')
+  app('APP');
+
+  final String? value;
+
+  const FieldFilterTarget(this.value);
 }
 
 enum GenericQueryReqProtocol {

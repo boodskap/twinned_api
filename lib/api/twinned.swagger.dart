@@ -4579,11 +4579,11 @@ abstract class Twinned extends ChopperService {
 
   ///List dataFilters
   ///@param modelId
-  ///@param deviceId
+  ///@param myFilters
   ///@param body
   Future<chopper.Response<DataFilterArrayRes>> listDataFilters({
     String? modelId,
-    String? deviceId,
+    bool? myFilters,
     required ListReq? body,
     dynamic apikey,
   }) {
@@ -4593,30 +4593,30 @@ abstract class Twinned extends ChopperService {
 
     return _listDataFilters(
         modelId: modelId?.toString(),
-        deviceId: deviceId?.toString(),
+        myFilters: myFilters?.toString(),
         body: body,
         apikey: apikey?.toString());
   }
 
   ///List dataFilters
   ///@param modelId
-  ///@param deviceId
+  ///@param myFilters
   ///@param body
   @Post(path: '/DataFilter/list')
   Future<chopper.Response<DataFilterArrayRes>> _listDataFilters({
     @Header('modelId') String? modelId,
-    @Header('deviceId') String? deviceId,
+    @Header('myFilters') String? myFilters,
     @Body() required ListReq? body,
     @Header('APIKEY') String? apikey,
   });
 
   ///Search dataFilters
   ///@param modelId
-  ///@param deviceId
+  ///@param myFilters
   ///@param body
   Future<chopper.Response<DataFilterArrayRes>> searchDataFilters({
     String? modelId,
-    String? deviceId,
+    bool? myFilters,
     required SearchReq? body,
     dynamic apikey,
   }) {
@@ -4625,19 +4625,19 @@ abstract class Twinned extends ChopperService {
 
     return _searchDataFilters(
         modelId: modelId?.toString(),
-        deviceId: deviceId?.toString(),
+        myFilters: myFilters?.toString(),
         body: body,
         apikey: apikey?.toString());
   }
 
   ///Search dataFilters
   ///@param modelId
-  ///@param deviceId
+  ///@param myFilters
   ///@param body
   @Post(path: '/DataFilter/search')
   Future<chopper.Response<DataFilterArrayRes>> _searchDataFilters({
     @Header('modelId') String? modelId,
-    @Header('deviceId') String? deviceId,
+    @Header('myFilters') String? myFilters,
     @Body() required SearchReq? body,
     @Header('APIKEY') String? apikey,
   });
@@ -8142,8 +8142,10 @@ abstract class Twinned extends ChopperService {
   });
 
   ///List field filters
+  ///@param myFilters
   ///@param body
   Future<chopper.Response<FieldFilterArrayRes>> listFieldFilters({
+    bool? myFilters,
     required ListReq? body,
     dynamic apikey,
   }) {
@@ -8151,33 +8153,45 @@ abstract class Twinned extends ChopperService {
     generatedMapping.putIfAbsent(
         FieldFilterArrayRes, () => FieldFilterArrayRes.fromJsonFactory);
 
-    return _listFieldFilters(body: body, apikey: apikey?.toString());
+    return _listFieldFilters(
+        myFilters: myFilters?.toString(),
+        body: body,
+        apikey: apikey?.toString());
   }
 
   ///List field filters
+  ///@param myFilters
   ///@param body
   @Post(path: '/FieldFilter/list')
   Future<chopper.Response<FieldFilterArrayRes>> _listFieldFilters({
+    @Header('myFilters') String? myFilters,
     @Body() required ListReq? body,
     @Header('APIKEY') String? apikey,
   });
 
   ///Search field filters
+  ///@param myFilters
   ///@param body
   Future<chopper.Response<FieldFilterArrayRes>> searchFieldFilters({
+    bool? myFilters,
     required SearchReq? body,
     dynamic apikey,
   }) {
     generatedMapping.putIfAbsent(
         FieldFilterArrayRes, () => FieldFilterArrayRes.fromJsonFactory);
 
-    return _searchFieldFilters(body: body, apikey: apikey?.toString());
+    return _searchFieldFilters(
+        myFilters: myFilters?.toString(),
+        body: body,
+        apikey: apikey?.toString());
   }
 
   ///Search field filters
+  ///@param myFilters
   ///@param body
   @Post(path: '/FieldFilter/search')
   Future<chopper.Response<FieldFilterArrayRes>> _searchFieldFilters({
+    @Header('myFilters') String? myFilters,
     @Body() required SearchReq? body,
     @Header('APIKEY') String? apikey,
   });
@@ -28014,7 +28028,6 @@ extension $FilterMatchGroupExtension on FilterMatchGroup {
 class DataFilterInfo {
   const DataFilterInfo({
     this.modelId,
-    this.deviceId,
     required this.name,
     required this.label,
     this.icon,
@@ -28022,6 +28035,7 @@ class DataFilterInfo {
     this.tags,
     required this.matchGroups,
     required this.clientIds,
+    required this.target,
   });
 
   factory DataFilterInfo.fromJson(Map<String, dynamic> json) =>
@@ -28032,8 +28046,6 @@ class DataFilterInfo {
 
   @JsonKey(name: 'modelId', includeIfNull: false, defaultValue: '')
   final String? modelId;
-  @JsonKey(name: 'deviceId', includeIfNull: false, defaultValue: '')
-  final String? deviceId;
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
   final String name;
   @JsonKey(name: 'label', includeIfNull: false, defaultValue: '')
@@ -28051,6 +28063,13 @@ class DataFilterInfo {
   final List<FilterMatchGroup> matchGroups;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
   final List<String> clientIds;
+  @JsonKey(
+    name: 'target',
+    includeIfNull: false,
+    toJson: dataFilterInfoTargetToJson,
+    fromJson: dataFilterInfoTargetFromJson,
+  )
+  final enums.DataFilterInfoTarget target;
   static const fromJsonFactory = _$DataFilterInfoFromJson;
 
   @override
@@ -28060,9 +28079,6 @@ class DataFilterInfo {
             (identical(other.modelId, modelId) ||
                 const DeepCollectionEquality()
                     .equals(other.modelId, modelId)) &&
-            (identical(other.deviceId, deviceId) ||
-                const DeepCollectionEquality()
-                    .equals(other.deviceId, deviceId)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.label, label) ||
@@ -28079,7 +28095,9 @@ class DataFilterInfo {
                     .equals(other.matchGroups, matchGroups)) &&
             (identical(other.clientIds, clientIds) ||
                 const DeepCollectionEquality()
-                    .equals(other.clientIds, clientIds)));
+                    .equals(other.clientIds, clientIds)) &&
+            (identical(other.target, target) ||
+                const DeepCollectionEquality().equals(other.target, target)));
   }
 
   @override
@@ -28088,7 +28106,6 @@ class DataFilterInfo {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(modelId) ^
-      const DeepCollectionEquality().hash(deviceId) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(label) ^
       const DeepCollectionEquality().hash(icon) ^
@@ -28096,45 +28113,45 @@ class DataFilterInfo {
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(matchGroups) ^
       const DeepCollectionEquality().hash(clientIds) ^
+      const DeepCollectionEquality().hash(target) ^
       runtimeType.hashCode;
 }
 
 extension $DataFilterInfoExtension on DataFilterInfo {
   DataFilterInfo copyWith(
       {String? modelId,
-      String? deviceId,
       String? name,
       String? label,
       String? icon,
       String? description,
       List<String>? tags,
       List<FilterMatchGroup>? matchGroups,
-      List<String>? clientIds}) {
+      List<String>? clientIds,
+      enums.DataFilterInfoTarget? target}) {
     return DataFilterInfo(
         modelId: modelId ?? this.modelId,
-        deviceId: deviceId ?? this.deviceId,
         name: name ?? this.name,
         label: label ?? this.label,
         icon: icon ?? this.icon,
         description: description ?? this.description,
         tags: tags ?? this.tags,
         matchGroups: matchGroups ?? this.matchGroups,
-        clientIds: clientIds ?? this.clientIds);
+        clientIds: clientIds ?? this.clientIds,
+        target: target ?? this.target);
   }
 
   DataFilterInfo copyWithWrapped(
       {Wrapped<String?>? modelId,
-      Wrapped<String?>? deviceId,
       Wrapped<String>? name,
       Wrapped<String>? label,
       Wrapped<String?>? icon,
       Wrapped<String?>? description,
       Wrapped<List<String>?>? tags,
       Wrapped<List<FilterMatchGroup>>? matchGroups,
-      Wrapped<List<String>>? clientIds}) {
+      Wrapped<List<String>>? clientIds,
+      Wrapped<enums.DataFilterInfoTarget>? target}) {
     return DataFilterInfo(
         modelId: (modelId != null ? modelId.value : this.modelId),
-        deviceId: (deviceId != null ? deviceId.value : this.deviceId),
         name: (name != null ? name.value : this.name),
         label: (label != null ? label.value : this.label),
         icon: (icon != null ? icon.value : this.icon),
@@ -28143,7 +28160,8 @@ extension $DataFilterInfoExtension on DataFilterInfo {
         tags: (tags != null ? tags.value : this.tags),
         matchGroups:
             (matchGroups != null ? matchGroups.value : this.matchGroups),
-        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
+        target: (target != null ? target.value : this.target));
   }
 }
 
@@ -28151,7 +28169,6 @@ extension $DataFilterInfoExtension on DataFilterInfo {
 class DataFilter {
   const DataFilter({
     this.modelId,
-    this.deviceId,
     required this.name,
     required this.label,
     this.icon,
@@ -28159,6 +28176,7 @@ class DataFilter {
     this.tags,
     required this.matchGroups,
     required this.clientIds,
+    required this.target,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -28176,8 +28194,6 @@ class DataFilter {
 
   @JsonKey(name: 'modelId', includeIfNull: false, defaultValue: '')
   final String? modelId;
-  @JsonKey(name: 'deviceId', includeIfNull: false, defaultValue: '')
-  final String? deviceId;
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
   final String name;
   @JsonKey(name: 'label', includeIfNull: false, defaultValue: '')
@@ -28195,6 +28211,13 @@ class DataFilter {
   final List<FilterMatchGroup> matchGroups;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
   final List<String> clientIds;
+  @JsonKey(
+    name: 'target',
+    includeIfNull: false,
+    toJson: dataFilterTargetToJson,
+    fromJson: dataFilterTargetFromJson,
+  )
+  final enums.DataFilterTarget target;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -28218,9 +28241,6 @@ class DataFilter {
             (identical(other.modelId, modelId) ||
                 const DeepCollectionEquality()
                     .equals(other.modelId, modelId)) &&
-            (identical(other.deviceId, deviceId) ||
-                const DeepCollectionEquality()
-                    .equals(other.deviceId, deviceId)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.label, label) ||
@@ -28238,6 +28258,8 @@ class DataFilter {
             (identical(other.clientIds, clientIds) ||
                 const DeepCollectionEquality()
                     .equals(other.clientIds, clientIds)) &&
+            (identical(other.target, target) ||
+                const DeepCollectionEquality().equals(other.target, target)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -28265,7 +28287,6 @@ class DataFilter {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(modelId) ^
-      const DeepCollectionEquality().hash(deviceId) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(label) ^
       const DeepCollectionEquality().hash(icon) ^
@@ -28273,6 +28294,7 @@ class DataFilter {
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(matchGroups) ^
       const DeepCollectionEquality().hash(clientIds) ^
+      const DeepCollectionEquality().hash(target) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -28286,7 +28308,6 @@ class DataFilter {
 extension $DataFilterExtension on DataFilter {
   DataFilter copyWith(
       {String? modelId,
-      String? deviceId,
       String? name,
       String? label,
       String? icon,
@@ -28294,6 +28315,7 @@ extension $DataFilterExtension on DataFilter {
       List<String>? tags,
       List<FilterMatchGroup>? matchGroups,
       List<String>? clientIds,
+      enums.DataFilterTarget? target,
       String? domainKey,
       String? id,
       String? rtype,
@@ -28303,7 +28325,6 @@ extension $DataFilterExtension on DataFilter {
       String? updatedBy}) {
     return DataFilter(
         modelId: modelId ?? this.modelId,
-        deviceId: deviceId ?? this.deviceId,
         name: name ?? this.name,
         label: label ?? this.label,
         icon: icon ?? this.icon,
@@ -28311,6 +28332,7 @@ extension $DataFilterExtension on DataFilter {
         tags: tags ?? this.tags,
         matchGroups: matchGroups ?? this.matchGroups,
         clientIds: clientIds ?? this.clientIds,
+        target: target ?? this.target,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -28322,7 +28344,6 @@ extension $DataFilterExtension on DataFilter {
 
   DataFilter copyWithWrapped(
       {Wrapped<String?>? modelId,
-      Wrapped<String?>? deviceId,
       Wrapped<String>? name,
       Wrapped<String>? label,
       Wrapped<String?>? icon,
@@ -28330,6 +28351,7 @@ extension $DataFilterExtension on DataFilter {
       Wrapped<List<String>?>? tags,
       Wrapped<List<FilterMatchGroup>>? matchGroups,
       Wrapped<List<String>>? clientIds,
+      Wrapped<enums.DataFilterTarget>? target,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -28339,7 +28361,6 @@ extension $DataFilterExtension on DataFilter {
       Wrapped<String>? updatedBy}) {
     return DataFilter(
         modelId: (modelId != null ? modelId.value : this.modelId),
-        deviceId: (deviceId != null ? deviceId.value : this.deviceId),
         name: (name != null ? name.value : this.name),
         label: (label != null ? label.value : this.label),
         icon: (icon != null ? icon.value : this.icon),
@@ -28349,6 +28370,7 @@ extension $DataFilterExtension on DataFilter {
         matchGroups:
             (matchGroups != null ? matchGroups.value : this.matchGroups),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
+        target: (target != null ? target.value : this.target),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -40676,6 +40698,7 @@ class FieldFilterInfo {
     this.values,
     this.tags,
     required this.clientIds,
+    required this.target,
   });
 
   factory FieldFilterInfo.fromJson(Map<String, dynamic> json) =>
@@ -40718,6 +40741,13 @@ class FieldFilterInfo {
   final List<String>? tags;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
   final List<String> clientIds;
+  @JsonKey(
+    name: 'target',
+    includeIfNull: false,
+    toJson: fieldFilterInfoTargetToJson,
+    fromJson: fieldFilterInfoTargetFromJson,
+  )
+  final enums.FieldFilterInfoTarget target;
   static const fromJsonFactory = _$FieldFilterInfoFromJson;
 
   @override
@@ -40753,7 +40783,9 @@ class FieldFilterInfo {
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.clientIds, clientIds) ||
                 const DeepCollectionEquality()
-                    .equals(other.clientIds, clientIds)));
+                    .equals(other.clientIds, clientIds)) &&
+            (identical(other.target, target) ||
+                const DeepCollectionEquality().equals(other.target, target)));
   }
 
   @override
@@ -40773,6 +40805,7 @@ class FieldFilterInfo {
       const DeepCollectionEquality().hash(values) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(clientIds) ^
+      const DeepCollectionEquality().hash(target) ^
       runtimeType.hashCode;
 }
 
@@ -40789,7 +40822,8 @@ extension $FieldFilterInfoExtension on FieldFilterInfo {
       String? rightValue,
       List<String>? values,
       List<String>? tags,
-      List<String>? clientIds}) {
+      List<String>? clientIds,
+      enums.FieldFilterInfoTarget? target}) {
     return FieldFilterInfo(
         name: name ?? this.name,
         description: description ?? this.description,
@@ -40802,7 +40836,8 @@ extension $FieldFilterInfoExtension on FieldFilterInfo {
         rightValue: rightValue ?? this.rightValue,
         values: values ?? this.values,
         tags: tags ?? this.tags,
-        clientIds: clientIds ?? this.clientIds);
+        clientIds: clientIds ?? this.clientIds,
+        target: target ?? this.target);
   }
 
   FieldFilterInfo copyWithWrapped(
@@ -40817,7 +40852,8 @@ extension $FieldFilterInfoExtension on FieldFilterInfo {
       Wrapped<String?>? rightValue,
       Wrapped<List<String>?>? values,
       Wrapped<List<String>?>? tags,
-      Wrapped<List<String>>? clientIds}) {
+      Wrapped<List<String>>? clientIds,
+      Wrapped<enums.FieldFilterInfoTarget>? target}) {
     return FieldFilterInfo(
         name: (name != null ? name.value : this.name),
         description:
@@ -40831,7 +40867,8 @@ extension $FieldFilterInfoExtension on FieldFilterInfo {
         rightValue: (rightValue != null ? rightValue.value : this.rightValue),
         values: (values != null ? values.value : this.values),
         tags: (tags != null ? tags.value : this.tags),
-        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
+        target: (target != null ? target.value : this.target));
   }
 }
 
@@ -40850,6 +40887,7 @@ class FieldFilter {
     this.values,
     this.tags,
     required this.clientIds,
+    required this.target,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -40899,6 +40937,13 @@ class FieldFilter {
   final List<String>? tags;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
   final List<String> clientIds;
+  @JsonKey(
+    name: 'target',
+    includeIfNull: false,
+    toJson: fieldFilterTargetToJson,
+    fromJson: fieldFilterTargetFromJson,
+  )
+  final enums.FieldFilterTarget target;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -40949,6 +40994,8 @@ class FieldFilter {
             (identical(other.clientIds, clientIds) ||
                 const DeepCollectionEquality()
                     .equals(other.clientIds, clientIds)) &&
+            (identical(other.target, target) ||
+                const DeepCollectionEquality().equals(other.target, target)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -40987,6 +41034,7 @@ class FieldFilter {
       const DeepCollectionEquality().hash(values) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(clientIds) ^
+      const DeepCollectionEquality().hash(target) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -41011,6 +41059,7 @@ extension $FieldFilterExtension on FieldFilter {
       List<String>? values,
       List<String>? tags,
       List<String>? clientIds,
+      enums.FieldFilterTarget? target,
       String? domainKey,
       String? id,
       String? rtype,
@@ -41031,6 +41080,7 @@ extension $FieldFilterExtension on FieldFilter {
         values: values ?? this.values,
         tags: tags ?? this.tags,
         clientIds: clientIds ?? this.clientIds,
+        target: target ?? this.target,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -41053,6 +41103,7 @@ extension $FieldFilterExtension on FieldFilter {
       Wrapped<List<String>?>? values,
       Wrapped<List<String>?>? tags,
       Wrapped<List<String>>? clientIds,
+      Wrapped<enums.FieldFilterTarget>? target,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -41074,6 +41125,7 @@ extension $FieldFilterExtension on FieldFilter {
         values: (values != null ? values.value : this.values),
         tags: (tags != null ? tags.value : this.tags),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
+        target: (target != null ? target.value : this.target),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -48865,6 +48917,149 @@ List<enums.FilterMatchGroupMatchType>?
       .toList();
 }
 
+String? dataFilterInfoTargetNullableToJson(
+    enums.DataFilterInfoTarget? dataFilterInfoTarget) {
+  return dataFilterInfoTarget?.value;
+}
+
+String? dataFilterInfoTargetToJson(
+    enums.DataFilterInfoTarget dataFilterInfoTarget) {
+  return dataFilterInfoTarget.value;
+}
+
+enums.DataFilterInfoTarget dataFilterInfoTargetFromJson(
+  Object? dataFilterInfoTarget, [
+  enums.DataFilterInfoTarget? defaultValue,
+]) {
+  return enums.DataFilterInfoTarget.values
+          .firstWhereOrNull((e) => e.value == dataFilterInfoTarget) ??
+      defaultValue ??
+      enums.DataFilterInfoTarget.swaggerGeneratedUnknown;
+}
+
+enums.DataFilterInfoTarget? dataFilterInfoTargetNullableFromJson(
+  Object? dataFilterInfoTarget, [
+  enums.DataFilterInfoTarget? defaultValue,
+]) {
+  if (dataFilterInfoTarget == null) {
+    return null;
+  }
+  return enums.DataFilterInfoTarget.values
+          .firstWhereOrNull((e) => e.value == dataFilterInfoTarget) ??
+      defaultValue;
+}
+
+String dataFilterInfoTargetExplodedListToJson(
+    List<enums.DataFilterInfoTarget>? dataFilterInfoTarget) {
+  return dataFilterInfoTarget?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> dataFilterInfoTargetListToJson(
+    List<enums.DataFilterInfoTarget>? dataFilterInfoTarget) {
+  if (dataFilterInfoTarget == null) {
+    return [];
+  }
+
+  return dataFilterInfoTarget.map((e) => e.value!).toList();
+}
+
+List<enums.DataFilterInfoTarget> dataFilterInfoTargetListFromJson(
+  List? dataFilterInfoTarget, [
+  List<enums.DataFilterInfoTarget>? defaultValue,
+]) {
+  if (dataFilterInfoTarget == null) {
+    return defaultValue ?? [];
+  }
+
+  return dataFilterInfoTarget
+      .map((e) => dataFilterInfoTargetFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.DataFilterInfoTarget>? dataFilterInfoTargetNullableListFromJson(
+  List? dataFilterInfoTarget, [
+  List<enums.DataFilterInfoTarget>? defaultValue,
+]) {
+  if (dataFilterInfoTarget == null) {
+    return defaultValue;
+  }
+
+  return dataFilterInfoTarget
+      .map((e) => dataFilterInfoTargetFromJson(e.toString()))
+      .toList();
+}
+
+String? dataFilterTargetNullableToJson(
+    enums.DataFilterTarget? dataFilterTarget) {
+  return dataFilterTarget?.value;
+}
+
+String? dataFilterTargetToJson(enums.DataFilterTarget dataFilterTarget) {
+  return dataFilterTarget.value;
+}
+
+enums.DataFilterTarget dataFilterTargetFromJson(
+  Object? dataFilterTarget, [
+  enums.DataFilterTarget? defaultValue,
+]) {
+  return enums.DataFilterTarget.values
+          .firstWhereOrNull((e) => e.value == dataFilterTarget) ??
+      defaultValue ??
+      enums.DataFilterTarget.swaggerGeneratedUnknown;
+}
+
+enums.DataFilterTarget? dataFilterTargetNullableFromJson(
+  Object? dataFilterTarget, [
+  enums.DataFilterTarget? defaultValue,
+]) {
+  if (dataFilterTarget == null) {
+    return null;
+  }
+  return enums.DataFilterTarget.values
+          .firstWhereOrNull((e) => e.value == dataFilterTarget) ??
+      defaultValue;
+}
+
+String dataFilterTargetExplodedListToJson(
+    List<enums.DataFilterTarget>? dataFilterTarget) {
+  return dataFilterTarget?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> dataFilterTargetListToJson(
+    List<enums.DataFilterTarget>? dataFilterTarget) {
+  if (dataFilterTarget == null) {
+    return [];
+  }
+
+  return dataFilterTarget.map((e) => e.value!).toList();
+}
+
+List<enums.DataFilterTarget> dataFilterTargetListFromJson(
+  List? dataFilterTarget, [
+  List<enums.DataFilterTarget>? defaultValue,
+]) {
+  if (dataFilterTarget == null) {
+    return defaultValue ?? [];
+  }
+
+  return dataFilterTarget
+      .map((e) => dataFilterTargetFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.DataFilterTarget>? dataFilterTargetNullableListFromJson(
+  List? dataFilterTarget, [
+  List<enums.DataFilterTarget>? defaultValue,
+]) {
+  if (dataFilterTarget == null) {
+    return defaultValue;
+  }
+
+  return dataFilterTarget
+      .map((e) => dataFilterTargetFromJson(e.toString()))
+      .toList();
+}
+
 String? geoFenceInfoFenceTypeNullableToJson(
     enums.GeoFenceInfoFenceType? geoFenceInfoFenceType) {
   return geoFenceInfoFenceType?.value;
@@ -49581,6 +49776,78 @@ List<enums.FieldFilterInfoCondition>?
       .toList();
 }
 
+String? fieldFilterInfoTargetNullableToJson(
+    enums.FieldFilterInfoTarget? fieldFilterInfoTarget) {
+  return fieldFilterInfoTarget?.value;
+}
+
+String? fieldFilterInfoTargetToJson(
+    enums.FieldFilterInfoTarget fieldFilterInfoTarget) {
+  return fieldFilterInfoTarget.value;
+}
+
+enums.FieldFilterInfoTarget fieldFilterInfoTargetFromJson(
+  Object? fieldFilterInfoTarget, [
+  enums.FieldFilterInfoTarget? defaultValue,
+]) {
+  return enums.FieldFilterInfoTarget.values
+          .firstWhereOrNull((e) => e.value == fieldFilterInfoTarget) ??
+      defaultValue ??
+      enums.FieldFilterInfoTarget.swaggerGeneratedUnknown;
+}
+
+enums.FieldFilterInfoTarget? fieldFilterInfoTargetNullableFromJson(
+  Object? fieldFilterInfoTarget, [
+  enums.FieldFilterInfoTarget? defaultValue,
+]) {
+  if (fieldFilterInfoTarget == null) {
+    return null;
+  }
+  return enums.FieldFilterInfoTarget.values
+          .firstWhereOrNull((e) => e.value == fieldFilterInfoTarget) ??
+      defaultValue;
+}
+
+String fieldFilterInfoTargetExplodedListToJson(
+    List<enums.FieldFilterInfoTarget>? fieldFilterInfoTarget) {
+  return fieldFilterInfoTarget?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> fieldFilterInfoTargetListToJson(
+    List<enums.FieldFilterInfoTarget>? fieldFilterInfoTarget) {
+  if (fieldFilterInfoTarget == null) {
+    return [];
+  }
+
+  return fieldFilterInfoTarget.map((e) => e.value!).toList();
+}
+
+List<enums.FieldFilterInfoTarget> fieldFilterInfoTargetListFromJson(
+  List? fieldFilterInfoTarget, [
+  List<enums.FieldFilterInfoTarget>? defaultValue,
+]) {
+  if (fieldFilterInfoTarget == null) {
+    return defaultValue ?? [];
+  }
+
+  return fieldFilterInfoTarget
+      .map((e) => fieldFilterInfoTargetFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.FieldFilterInfoTarget>? fieldFilterInfoTargetNullableListFromJson(
+  List? fieldFilterInfoTarget, [
+  List<enums.FieldFilterInfoTarget>? defaultValue,
+]) {
+  if (fieldFilterInfoTarget == null) {
+    return defaultValue;
+  }
+
+  return fieldFilterInfoTarget
+      .map((e) => fieldFilterInfoTargetFromJson(e.toString()))
+      .toList();
+}
+
 String? fieldFilterFieldTypeNullableToJson(
     enums.FieldFilterFieldType? fieldFilterFieldType) {
   return fieldFilterFieldType?.value;
@@ -49722,6 +49989,77 @@ List<enums.FieldFilterCondition>? fieldFilterConditionNullableListFromJson(
 
   return fieldFilterCondition
       .map((e) => fieldFilterConditionFromJson(e.toString()))
+      .toList();
+}
+
+String? fieldFilterTargetNullableToJson(
+    enums.FieldFilterTarget? fieldFilterTarget) {
+  return fieldFilterTarget?.value;
+}
+
+String? fieldFilterTargetToJson(enums.FieldFilterTarget fieldFilterTarget) {
+  return fieldFilterTarget.value;
+}
+
+enums.FieldFilterTarget fieldFilterTargetFromJson(
+  Object? fieldFilterTarget, [
+  enums.FieldFilterTarget? defaultValue,
+]) {
+  return enums.FieldFilterTarget.values
+          .firstWhereOrNull((e) => e.value == fieldFilterTarget) ??
+      defaultValue ??
+      enums.FieldFilterTarget.swaggerGeneratedUnknown;
+}
+
+enums.FieldFilterTarget? fieldFilterTargetNullableFromJson(
+  Object? fieldFilterTarget, [
+  enums.FieldFilterTarget? defaultValue,
+]) {
+  if (fieldFilterTarget == null) {
+    return null;
+  }
+  return enums.FieldFilterTarget.values
+          .firstWhereOrNull((e) => e.value == fieldFilterTarget) ??
+      defaultValue;
+}
+
+String fieldFilterTargetExplodedListToJson(
+    List<enums.FieldFilterTarget>? fieldFilterTarget) {
+  return fieldFilterTarget?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> fieldFilterTargetListToJson(
+    List<enums.FieldFilterTarget>? fieldFilterTarget) {
+  if (fieldFilterTarget == null) {
+    return [];
+  }
+
+  return fieldFilterTarget.map((e) => e.value!).toList();
+}
+
+List<enums.FieldFilterTarget> fieldFilterTargetListFromJson(
+  List? fieldFilterTarget, [
+  List<enums.FieldFilterTarget>? defaultValue,
+]) {
+  if (fieldFilterTarget == null) {
+    return defaultValue ?? [];
+  }
+
+  return fieldFilterTarget
+      .map((e) => fieldFilterTargetFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.FieldFilterTarget>? fieldFilterTargetNullableListFromJson(
+  List? fieldFilterTarget, [
+  List<enums.FieldFilterTarget>? defaultValue,
+]) {
+  if (fieldFilterTarget == null) {
+    return defaultValue;
+  }
+
+  return fieldFilterTarget
+      .map((e) => fieldFilterTargetFromJson(e.toString()))
       .toList();
 }
 
