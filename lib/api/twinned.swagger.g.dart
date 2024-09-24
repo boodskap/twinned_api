@@ -9264,6 +9264,7 @@ ReportInfo _$ReportInfoFromJson(Map<String, dynamic> json) => ReportInfo(
               ?.map((e) => e as String)
               .toList() ??
           [],
+      target: reportInfoTargetFromJson(json['target']),
     );
 
 Map<String, dynamic> _$ReportInfoToJson(ReportInfo instance) {
@@ -9291,6 +9292,7 @@ Map<String, dynamic> _$ReportInfoToJson(ReportInfo instance) {
   writeNotNull('tz', instance.tz);
   val['fields'] = instance.fields;
   val['clientIds'] = instance.clientIds;
+  writeNotNull('target', reportInfoTargetToJson(instance.target));
   return val;
 }
 
@@ -9318,6 +9320,7 @@ Report _$ReportFromJson(Map<String, dynamic> json) => Report(
               ?.map((e) => e as String)
               .toList() ??
           [],
+      target: reportTargetFromJson(json['target']),
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -9352,6 +9355,7 @@ Map<String, dynamic> _$ReportToJson(Report instance) {
   writeNotNull('tz', instance.tz);
   val['fields'] = instance.fields;
   val['clientIds'] = instance.clientIds;
+  writeNotNull('target', reportTargetToJson(instance.target));
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;

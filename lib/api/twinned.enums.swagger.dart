@@ -915,6 +915,34 @@ enum AssetGroupTarget {
   const AssetGroupTarget(this.value);
 }
 
+enum ReportInfoTarget {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('USER')
+  user('USER'),
+  @JsonValue('APP')
+  app('APP');
+
+  final String? value;
+
+  const ReportInfoTarget(this.value);
+}
+
+enum ReportTarget {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('USER')
+  user('USER'),
+  @JsonValue('APP')
+  app('APP');
+
+  final String? value;
+
+  const ReportTarget(this.value);
+}
+
 enum FieldFilterInfoFieldType {
   @JsonValue(null)
   swaggerGeneratedUnknown(null),

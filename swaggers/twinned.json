@@ -15062,6 +15062,12 @@
             "type": "string"
           },
           {
+            "in": "header",
+            "name": "myReports",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "in": "body",
             "name": "body",
             "required": true,
@@ -15110,6 +15116,12 @@
             "name": "modelId",
             "required": false,
             "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "myReports",
+            "required": false,
+            "type": "boolean"
           },
           {
             "in": "body",
@@ -22820,7 +22832,8 @@
         "modelId",
         "name",
         "fields",
-        "clientIds"
+        "clientIds",
+        "target"
       ],
       "properties": {
         "modelId": {
@@ -22876,6 +22889,13 @@
           "items": {
             "type": "string"
           }
+        },
+        "target": {
+          "type": "string",
+          "enum": [
+            "USER",
+            "APP"
+          ]
         }
       }
     },

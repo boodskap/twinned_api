@@ -7783,9 +7783,11 @@ abstract class Twinned extends ChopperService {
 
   ///List reports
   ///@param modelId
+  ///@param myReports
   ///@param body
   Future<chopper.Response<ReportArrayRes>> listReports({
     String? modelId,
+    bool? myReports,
     required ListReq? body,
     dynamic apikey,
   }) {
@@ -7794,24 +7796,31 @@ abstract class Twinned extends ChopperService {
         ReportArrayRes, () => ReportArrayRes.fromJsonFactory);
 
     return _listReports(
-        modelId: modelId?.toString(), body: body, apikey: apikey?.toString());
+        modelId: modelId?.toString(),
+        myReports: myReports?.toString(),
+        body: body,
+        apikey: apikey?.toString());
   }
 
   ///List reports
   ///@param modelId
+  ///@param myReports
   ///@param body
   @Post(path: '/Report/list')
   Future<chopper.Response<ReportArrayRes>> _listReports({
     @Header('modelId') String? modelId,
+    @Header('myReports') String? myReports,
     @Body() required ListReq? body,
     @Header('APIKEY') String? apikey,
   });
 
   ///Search reports
   ///@param modelId
+  ///@param myReports
   ///@param body
   Future<chopper.Response<ReportArrayRes>> searchReports({
     String? modelId,
+    bool? myReports,
     required SearchReq? body,
     dynamic apikey,
   }) {
@@ -7819,15 +7828,20 @@ abstract class Twinned extends ChopperService {
         ReportArrayRes, () => ReportArrayRes.fromJsonFactory);
 
     return _searchReports(
-        modelId: modelId?.toString(), body: body, apikey: apikey?.toString());
+        modelId: modelId?.toString(),
+        myReports: myReports?.toString(),
+        body: body,
+        apikey: apikey?.toString());
   }
 
   ///Search reports
   ///@param modelId
+  ///@param myReports
   ///@param body
   @Post(path: '/Report/search')
   Future<chopper.Response<ReportArrayRes>> _searchReports({
     @Header('modelId') String? modelId,
+    @Header('myReports') String? myReports,
     @Body() required SearchReq? body,
     @Header('APIKEY') String? apikey,
   });
@@ -38886,6 +38900,7 @@ class ReportInfo {
     this.tz,
     required this.fields,
     required this.clientIds,
+    required this.target,
   });
 
   factory ReportInfo.fromJson(Map<String, dynamic> json) =>
@@ -38924,6 +38939,13 @@ class ReportInfo {
   final List<String> fields;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
   final List<String> clientIds;
+  @JsonKey(
+    name: 'target',
+    includeIfNull: false,
+    toJson: reportInfoTargetToJson,
+    fromJson: reportInfoTargetFromJson,
+  )
+  final enums.ReportInfoTarget target;
   static const fromJsonFactory = _$ReportInfoFromJson;
 
   @override
@@ -38969,7 +38991,9 @@ class ReportInfo {
                 const DeepCollectionEquality().equals(other.fields, fields)) &&
             (identical(other.clientIds, clientIds) ||
                 const DeepCollectionEquality()
-                    .equals(other.clientIds, clientIds)));
+                    .equals(other.clientIds, clientIds)) &&
+            (identical(other.target, target) ||
+                const DeepCollectionEquality().equals(other.target, target)));
   }
 
   @override
@@ -38992,6 +39016,7 @@ class ReportInfo {
       const DeepCollectionEquality().hash(tz) ^
       const DeepCollectionEquality().hash(fields) ^
       const DeepCollectionEquality().hash(clientIds) ^
+      const DeepCollectionEquality().hash(target) ^
       runtimeType.hashCode;
 }
 
@@ -39011,7 +39036,8 @@ extension $ReportInfoExtension on ReportInfo {
       String? dateFormat,
       String? tz,
       List<String>? fields,
-      List<String>? clientIds}) {
+      List<String>? clientIds,
+      enums.ReportInfoTarget? target}) {
     return ReportInfo(
         modelId: modelId ?? this.modelId,
         name: name ?? this.name,
@@ -39027,7 +39053,8 @@ extension $ReportInfoExtension on ReportInfo {
         dateFormat: dateFormat ?? this.dateFormat,
         tz: tz ?? this.tz,
         fields: fields ?? this.fields,
-        clientIds: clientIds ?? this.clientIds);
+        clientIds: clientIds ?? this.clientIds,
+        target: target ?? this.target);
   }
 
   ReportInfo copyWithWrapped(
@@ -39045,7 +39072,8 @@ extension $ReportInfoExtension on ReportInfo {
       Wrapped<String?>? dateFormat,
       Wrapped<String?>? tz,
       Wrapped<List<String>>? fields,
-      Wrapped<List<String>>? clientIds}) {
+      Wrapped<List<String>>? clientIds,
+      Wrapped<enums.ReportInfoTarget>? target}) {
     return ReportInfo(
         modelId: (modelId != null ? modelId.value : this.modelId),
         name: (name != null ? name.value : this.name),
@@ -39071,7 +39099,8 @@ extension $ReportInfoExtension on ReportInfo {
         dateFormat: (dateFormat != null ? dateFormat.value : this.dateFormat),
         tz: (tz != null ? tz.value : this.tz),
         fields: (fields != null ? fields.value : this.fields),
-        clientIds: (clientIds != null ? clientIds.value : this.clientIds));
+        clientIds: (clientIds != null ? clientIds.value : this.clientIds),
+        target: (target != null ? target.value : this.target));
   }
 }
 
@@ -39093,6 +39122,7 @@ class Report {
     this.tz,
     required this.fields,
     required this.clientIds,
+    required this.target,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -39137,6 +39167,13 @@ class Report {
   final List<String> fields;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
   final List<String> clientIds;
+  @JsonKey(
+    name: 'target',
+    includeIfNull: false,
+    toJson: reportTargetToJson,
+    fromJson: reportTargetFromJson,
+  )
+  final enums.ReportTarget target;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -39197,6 +39234,8 @@ class Report {
             (identical(other.clientIds, clientIds) ||
                 const DeepCollectionEquality()
                     .equals(other.clientIds, clientIds)) &&
+            (identical(other.target, target) ||
+                const DeepCollectionEquality().equals(other.target, target)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -39238,6 +39277,7 @@ class Report {
       const DeepCollectionEquality().hash(tz) ^
       const DeepCollectionEquality().hash(fields) ^
       const DeepCollectionEquality().hash(clientIds) ^
+      const DeepCollectionEquality().hash(target) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -39265,6 +39305,7 @@ extension $ReportExtension on Report {
       String? tz,
       List<String>? fields,
       List<String>? clientIds,
+      enums.ReportTarget? target,
       String? domainKey,
       String? id,
       String? rtype,
@@ -39288,6 +39329,7 @@ extension $ReportExtension on Report {
         tz: tz ?? this.tz,
         fields: fields ?? this.fields,
         clientIds: clientIds ?? this.clientIds,
+        target: target ?? this.target,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -39313,6 +39355,7 @@ extension $ReportExtension on Report {
       Wrapped<String?>? tz,
       Wrapped<List<String>>? fields,
       Wrapped<List<String>>? clientIds,
+      Wrapped<enums.ReportTarget>? target,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -39346,6 +39389,7 @@ extension $ReportExtension on Report {
         tz: (tz != null ? tz.value : this.tz),
         fields: (fields != null ? fields.value : this.fields),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
+        target: (target != null ? target.value : this.target),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -49628,6 +49672,141 @@ List<enums.AssetGroupTarget>? assetGroupTargetNullableListFromJson(
   return assetGroupTarget
       .map((e) => assetGroupTargetFromJson(e.toString()))
       .toList();
+}
+
+String? reportInfoTargetNullableToJson(
+    enums.ReportInfoTarget? reportInfoTarget) {
+  return reportInfoTarget?.value;
+}
+
+String? reportInfoTargetToJson(enums.ReportInfoTarget reportInfoTarget) {
+  return reportInfoTarget.value;
+}
+
+enums.ReportInfoTarget reportInfoTargetFromJson(
+  Object? reportInfoTarget, [
+  enums.ReportInfoTarget? defaultValue,
+]) {
+  return enums.ReportInfoTarget.values
+          .firstWhereOrNull((e) => e.value == reportInfoTarget) ??
+      defaultValue ??
+      enums.ReportInfoTarget.swaggerGeneratedUnknown;
+}
+
+enums.ReportInfoTarget? reportInfoTargetNullableFromJson(
+  Object? reportInfoTarget, [
+  enums.ReportInfoTarget? defaultValue,
+]) {
+  if (reportInfoTarget == null) {
+    return null;
+  }
+  return enums.ReportInfoTarget.values
+          .firstWhereOrNull((e) => e.value == reportInfoTarget) ??
+      defaultValue;
+}
+
+String reportInfoTargetExplodedListToJson(
+    List<enums.ReportInfoTarget>? reportInfoTarget) {
+  return reportInfoTarget?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> reportInfoTargetListToJson(
+    List<enums.ReportInfoTarget>? reportInfoTarget) {
+  if (reportInfoTarget == null) {
+    return [];
+  }
+
+  return reportInfoTarget.map((e) => e.value!).toList();
+}
+
+List<enums.ReportInfoTarget> reportInfoTargetListFromJson(
+  List? reportInfoTarget, [
+  List<enums.ReportInfoTarget>? defaultValue,
+]) {
+  if (reportInfoTarget == null) {
+    return defaultValue ?? [];
+  }
+
+  return reportInfoTarget
+      .map((e) => reportInfoTargetFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.ReportInfoTarget>? reportInfoTargetNullableListFromJson(
+  List? reportInfoTarget, [
+  List<enums.ReportInfoTarget>? defaultValue,
+]) {
+  if (reportInfoTarget == null) {
+    return defaultValue;
+  }
+
+  return reportInfoTarget
+      .map((e) => reportInfoTargetFromJson(e.toString()))
+      .toList();
+}
+
+String? reportTargetNullableToJson(enums.ReportTarget? reportTarget) {
+  return reportTarget?.value;
+}
+
+String? reportTargetToJson(enums.ReportTarget reportTarget) {
+  return reportTarget.value;
+}
+
+enums.ReportTarget reportTargetFromJson(
+  Object? reportTarget, [
+  enums.ReportTarget? defaultValue,
+]) {
+  return enums.ReportTarget.values
+          .firstWhereOrNull((e) => e.value == reportTarget) ??
+      defaultValue ??
+      enums.ReportTarget.swaggerGeneratedUnknown;
+}
+
+enums.ReportTarget? reportTargetNullableFromJson(
+  Object? reportTarget, [
+  enums.ReportTarget? defaultValue,
+]) {
+  if (reportTarget == null) {
+    return null;
+  }
+  return enums.ReportTarget.values
+          .firstWhereOrNull((e) => e.value == reportTarget) ??
+      defaultValue;
+}
+
+String reportTargetExplodedListToJson(List<enums.ReportTarget>? reportTarget) {
+  return reportTarget?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> reportTargetListToJson(List<enums.ReportTarget>? reportTarget) {
+  if (reportTarget == null) {
+    return [];
+  }
+
+  return reportTarget.map((e) => e.value!).toList();
+}
+
+List<enums.ReportTarget> reportTargetListFromJson(
+  List? reportTarget, [
+  List<enums.ReportTarget>? defaultValue,
+]) {
+  if (reportTarget == null) {
+    return defaultValue ?? [];
+  }
+
+  return reportTarget.map((e) => reportTargetFromJson(e.toString())).toList();
+}
+
+List<enums.ReportTarget>? reportTargetNullableListFromJson(
+  List? reportTarget, [
+  List<enums.ReportTarget>? defaultValue,
+]) {
+  if (reportTarget == null) {
+    return defaultValue;
+  }
+
+  return reportTarget.map((e) => reportTargetFromJson(e.toString())).toList();
 }
 
 String? fieldFilterInfoFieldTypeNullableToJson(

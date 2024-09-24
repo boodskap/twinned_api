@@ -6651,12 +6651,14 @@ final class _$Twinned extends Twinned {
   @override
   Future<Response<ReportArrayRes>> _listReports({
     String? modelId,
+    String? myReports,
     required ListReq? body,
     String? apikey,
   }) {
     final Uri $url = Uri.parse('/Report/list');
     final Map<String, String> $headers = {
       if (modelId != null) 'modelId': modelId,
+      if (myReports != null) 'myReports': myReports,
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = body;
@@ -6673,12 +6675,14 @@ final class _$Twinned extends Twinned {
   @override
   Future<Response<ReportArrayRes>> _searchReports({
     String? modelId,
+    String? myReports,
     required SearchReq? body,
     String? apikey,
   }) {
     final Uri $url = Uri.parse('/Report/search');
     final Map<String, String> $headers = {
       if (modelId != null) 'modelId': modelId,
+      if (myReports != null) 'myReports': myReports,
       if (apikey != null) 'APIKEY': apikey,
     };
     final $body = body;
