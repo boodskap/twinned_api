@@ -13313,10 +13313,109 @@ extension $AlarmArrayResExtension on AlarmArrayRes {
 }
 
 @JsonSerializable(explicitToJson: true)
+class CommandParameter {
+  const CommandParameter({
+    required this.name,
+    this.description,
+    required this.parameterType,
+    required this.required,
+    this.defaultValue,
+  });
+
+  factory CommandParameter.fromJson(Map<String, dynamic> json) =>
+      _$CommandParameterFromJson(json);
+
+  static const toJsonFactory = _$CommandParameterToJson;
+  Map<String, dynamic> toJson() => _$CommandParameterToJson(this);
+
+  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
+  final String name;
+  @JsonKey(name: 'description', includeIfNull: false, defaultValue: '')
+  final String? description;
+  @JsonKey(
+    name: 'parameterType',
+    includeIfNull: false,
+    toJson: commandParameterParameterTypeToJson,
+    fromJson: commandParameterParameterTypeFromJson,
+  )
+  final enums.CommandParameterParameterType parameterType;
+  @JsonKey(name: 'required', includeIfNull: false, defaultValue: true)
+  final bool required;
+  @JsonKey(name: 'defaultValue', includeIfNull: false, defaultValue: '')
+  final String? defaultValue;
+  static const fromJsonFactory = _$CommandParameterFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is CommandParameter &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.description, description) ||
+                const DeepCollectionEquality()
+                    .equals(other.description, description)) &&
+            (identical(other.parameterType, parameterType) ||
+                const DeepCollectionEquality()
+                    .equals(other.parameterType, parameterType)) &&
+            (identical(other.required, required) ||
+                const DeepCollectionEquality()
+                    .equals(other.required, required)) &&
+            (identical(other.defaultValue, defaultValue) ||
+                const DeepCollectionEquality()
+                    .equals(other.defaultValue, defaultValue)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(description) ^
+      const DeepCollectionEquality().hash(parameterType) ^
+      const DeepCollectionEquality().hash(required) ^
+      const DeepCollectionEquality().hash(defaultValue) ^
+      runtimeType.hashCode;
+}
+
+extension $CommandParameterExtension on CommandParameter {
+  CommandParameter copyWith(
+      {String? name,
+      String? description,
+      enums.CommandParameterParameterType? parameterType,
+      bool? required,
+      String? defaultValue}) {
+    return CommandParameter(
+        name: name ?? this.name,
+        description: description ?? this.description,
+        parameterType: parameterType ?? this.parameterType,
+        required: required ?? this.required,
+        defaultValue: defaultValue ?? this.defaultValue);
+  }
+
+  CommandParameter copyWithWrapped(
+      {Wrapped<String>? name,
+      Wrapped<String?>? description,
+      Wrapped<enums.CommandParameterParameterType>? parameterType,
+      Wrapped<bool>? required,
+      Wrapped<String?>? defaultValue}) {
+    return CommandParameter(
+        name: (name != null ? name.value : this.name),
+        description:
+            (description != null ? description.value : this.description),
+        parameterType:
+            (parameterType != null ? parameterType.value : this.parameterType),
+        required: (required != null ? required.value : this.required),
+        defaultValue:
+            (defaultValue != null ? defaultValue.value : this.defaultValue));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class ControlCommand {
   const ControlCommand({
     required this.type,
-    this.fixedType,
+    this.commandType,
     this.jsonValue,
     this.textValue,
     this.binaryValue,
@@ -13337,12 +13436,12 @@ class ControlCommand {
   )
   final enums.ControlCommandType type;
   @JsonKey(
-    name: 'fixedType',
+    name: 'commandType',
     includeIfNull: false,
-    toJson: controlCommandFixedTypeNullableToJson,
-    fromJson: controlCommandFixedTypeNullableFromJson,
+    toJson: controlCommandCommandTypeNullableToJson,
+    fromJson: controlCommandCommandTypeNullableFromJson,
   )
-  final enums.ControlCommandFixedType? fixedType;
+  final enums.ControlCommandCommandType? commandType;
   @JsonKey(name: 'jsonValue', includeIfNull: false)
   final Object? jsonValue;
   @JsonKey(name: 'textValue', includeIfNull: false, defaultValue: '')
@@ -13350,8 +13449,10 @@ class ControlCommand {
   @JsonKey(name: 'binaryValue', includeIfNull: false, defaultValue: '')
   final String? binaryValue;
   @JsonKey(
-      name: 'parameters', includeIfNull: false, defaultValue: <Parameter>[])
-  final List<Parameter>? parameters;
+      name: 'parameters',
+      includeIfNull: false,
+      defaultValue: <CommandParameter>[])
+  final List<CommandParameter>? parameters;
   static const fromJsonFactory = _$ControlCommandFromJson;
 
   @override
@@ -13360,9 +13461,9 @@ class ControlCommand {
         (other is ControlCommand &&
             (identical(other.type, type) ||
                 const DeepCollectionEquality().equals(other.type, type)) &&
-            (identical(other.fixedType, fixedType) ||
+            (identical(other.commandType, commandType) ||
                 const DeepCollectionEquality()
-                    .equals(other.fixedType, fixedType)) &&
+                    .equals(other.commandType, commandType)) &&
             (identical(other.jsonValue, jsonValue) ||
                 const DeepCollectionEquality()
                     .equals(other.jsonValue, jsonValue)) &&
@@ -13383,7 +13484,7 @@ class ControlCommand {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(type) ^
-      const DeepCollectionEquality().hash(fixedType) ^
+      const DeepCollectionEquality().hash(commandType) ^
       const DeepCollectionEquality().hash(jsonValue) ^
       const DeepCollectionEquality().hash(textValue) ^
       const DeepCollectionEquality().hash(binaryValue) ^
@@ -13394,14 +13495,14 @@ class ControlCommand {
 extension $ControlCommandExtension on ControlCommand {
   ControlCommand copyWith(
       {enums.ControlCommandType? type,
-      enums.ControlCommandFixedType? fixedType,
+      enums.ControlCommandCommandType? commandType,
       Object? jsonValue,
       String? textValue,
       String? binaryValue,
-      List<Parameter>? parameters}) {
+      List<CommandParameter>? parameters}) {
     return ControlCommand(
         type: type ?? this.type,
-        fixedType: fixedType ?? this.fixedType,
+        commandType: commandType ?? this.commandType,
         jsonValue: jsonValue ?? this.jsonValue,
         textValue: textValue ?? this.textValue,
         binaryValue: binaryValue ?? this.binaryValue,
@@ -13410,14 +13511,15 @@ extension $ControlCommandExtension on ControlCommand {
 
   ControlCommand copyWithWrapped(
       {Wrapped<enums.ControlCommandType>? type,
-      Wrapped<enums.ControlCommandFixedType?>? fixedType,
+      Wrapped<enums.ControlCommandCommandType?>? commandType,
       Wrapped<Object?>? jsonValue,
       Wrapped<String?>? textValue,
       Wrapped<String?>? binaryValue,
-      Wrapped<List<Parameter>?>? parameters}) {
+      Wrapped<List<CommandParameter>?>? parameters}) {
     return ControlCommand(
         type: (type != null ? type.value : this.type),
-        fixedType: (fixedType != null ? fixedType.value : this.fixedType),
+        commandType:
+            (commandType != null ? commandType.value : this.commandType),
         jsonValue: (jsonValue != null ? jsonValue.value : this.jsonValue),
         textValue: (textValue != null ? textValue.value : this.textValue),
         binaryValue:
@@ -13432,10 +13534,13 @@ class ControlInfo {
     required this.name,
     this.description,
     required this.modelId,
-    required this.state,
-    this.stateIcons,
+    required this.command,
+    this.enableIf,
+    this.icon,
+    this.disabledIcon,
+    this.allowUsers,
+    this.visibleIfDisabled,
     this.tags,
-    this.commands,
     this.roles,
     required this.clientIds,
   });
@@ -13452,15 +13557,20 @@ class ControlInfo {
   final String? description;
   @JsonKey(name: 'modelId', includeIfNull: false, defaultValue: '')
   final String modelId;
-  @JsonKey(name: 'state', includeIfNull: false)
-  final int state;
-  @JsonKey(name: 'stateIcons', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? stateIcons;
+  @JsonKey(name: 'command', includeIfNull: false)
+  final ControlCommand command;
+  @JsonKey(name: 'enableIf', includeIfNull: false)
+  final MatchGroup? enableIf;
+  @JsonKey(name: 'icon', includeIfNull: false, defaultValue: '')
+  final String? icon;
+  @JsonKey(name: 'disabledIcon', includeIfNull: false, defaultValue: '')
+  final String? disabledIcon;
+  @JsonKey(name: 'allowUsers', includeIfNull: false)
+  final bool? allowUsers;
+  @JsonKey(name: 'visibleIfDisabled', includeIfNull: false)
+  final bool? visibleIfDisabled;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
-  @JsonKey(
-      name: 'commands', includeIfNull: false, defaultValue: <ControlCommand>[])
-  final List<ControlCommand>? commands;
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
@@ -13479,16 +13589,25 @@ class ControlInfo {
             (identical(other.modelId, modelId) ||
                 const DeepCollectionEquality()
                     .equals(other.modelId, modelId)) &&
-            (identical(other.state, state) ||
-                const DeepCollectionEquality().equals(other.state, state)) &&
-            (identical(other.stateIcons, stateIcons) ||
+            (identical(other.command, command) ||
                 const DeepCollectionEquality()
-                    .equals(other.stateIcons, stateIcons)) &&
+                    .equals(other.command, command)) &&
+            (identical(other.enableIf, enableIf) ||
+                const DeepCollectionEquality()
+                    .equals(other.enableIf, enableIf)) &&
+            (identical(other.icon, icon) ||
+                const DeepCollectionEquality().equals(other.icon, icon)) &&
+            (identical(other.disabledIcon, disabledIcon) ||
+                const DeepCollectionEquality()
+                    .equals(other.disabledIcon, disabledIcon)) &&
+            (identical(other.allowUsers, allowUsers) ||
+                const DeepCollectionEquality()
+                    .equals(other.allowUsers, allowUsers)) &&
+            (identical(other.visibleIfDisabled, visibleIfDisabled) ||
+                const DeepCollectionEquality()
+                    .equals(other.visibleIfDisabled, visibleIfDisabled)) &&
             (identical(other.tags, tags) ||
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
-            (identical(other.commands, commands) ||
-                const DeepCollectionEquality()
-                    .equals(other.commands, commands)) &&
             (identical(other.roles, roles) ||
                 const DeepCollectionEquality().equals(other.roles, roles)) &&
             (identical(other.clientIds, clientIds) ||
@@ -13504,10 +13623,13 @@ class ControlInfo {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(modelId) ^
-      const DeepCollectionEquality().hash(state) ^
-      const DeepCollectionEquality().hash(stateIcons) ^
+      const DeepCollectionEquality().hash(command) ^
+      const DeepCollectionEquality().hash(enableIf) ^
+      const DeepCollectionEquality().hash(icon) ^
+      const DeepCollectionEquality().hash(disabledIcon) ^
+      const DeepCollectionEquality().hash(allowUsers) ^
+      const DeepCollectionEquality().hash(visibleIfDisabled) ^
       const DeepCollectionEquality().hash(tags) ^
-      const DeepCollectionEquality().hash(commands) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(clientIds) ^
       runtimeType.hashCode;
@@ -13518,20 +13640,26 @@ extension $ControlInfoExtension on ControlInfo {
       {String? name,
       String? description,
       String? modelId,
-      int? state,
-      List<String>? stateIcons,
+      ControlCommand? command,
+      MatchGroup? enableIf,
+      String? icon,
+      String? disabledIcon,
+      bool? allowUsers,
+      bool? visibleIfDisabled,
       List<String>? tags,
-      List<ControlCommand>? commands,
       List<String>? roles,
       List<String>? clientIds}) {
     return ControlInfo(
         name: name ?? this.name,
         description: description ?? this.description,
         modelId: modelId ?? this.modelId,
-        state: state ?? this.state,
-        stateIcons: stateIcons ?? this.stateIcons,
+        command: command ?? this.command,
+        enableIf: enableIf ?? this.enableIf,
+        icon: icon ?? this.icon,
+        disabledIcon: disabledIcon ?? this.disabledIcon,
+        allowUsers: allowUsers ?? this.allowUsers,
+        visibleIfDisabled: visibleIfDisabled ?? this.visibleIfDisabled,
         tags: tags ?? this.tags,
-        commands: commands ?? this.commands,
         roles: roles ?? this.roles,
         clientIds: clientIds ?? this.clientIds);
   }
@@ -13540,10 +13668,13 @@ extension $ControlInfoExtension on ControlInfo {
       {Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<String>? modelId,
-      Wrapped<int>? state,
-      Wrapped<List<String>?>? stateIcons,
+      Wrapped<ControlCommand>? command,
+      Wrapped<MatchGroup?>? enableIf,
+      Wrapped<String?>? icon,
+      Wrapped<String?>? disabledIcon,
+      Wrapped<bool?>? allowUsers,
+      Wrapped<bool?>? visibleIfDisabled,
       Wrapped<List<String>?>? tags,
-      Wrapped<List<ControlCommand>?>? commands,
       Wrapped<List<String>?>? roles,
       Wrapped<List<String>>? clientIds}) {
     return ControlInfo(
@@ -13551,12 +13682,61 @@ extension $ControlInfoExtension on ControlInfo {
         description:
             (description != null ? description.value : this.description),
         modelId: (modelId != null ? modelId.value : this.modelId),
-        state: (state != null ? state.value : this.state),
-        stateIcons: (stateIcons != null ? stateIcons.value : this.stateIcons),
+        command: (command != null ? command.value : this.command),
+        enableIf: (enableIf != null ? enableIf.value : this.enableIf),
+        icon: (icon != null ? icon.value : this.icon),
+        disabledIcon:
+            (disabledIcon != null ? disabledIcon.value : this.disabledIcon),
+        allowUsers: (allowUsers != null ? allowUsers.value : this.allowUsers),
+        visibleIfDisabled: (visibleIfDisabled != null
+            ? visibleIfDisabled.value
+            : this.visibleIfDisabled),
         tags: (tags != null ? tags.value : this.tags),
-        commands: (commands != null ? commands.value : this.commands),
         roles: (roles != null ? roles.value : this.roles),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ControlBase {
+  const ControlBase({
+    required this.enabled,
+  });
+
+  factory ControlBase.fromJson(Map<String, dynamic> json) =>
+      _$ControlBaseFromJson(json);
+
+  static const toJsonFactory = _$ControlBaseToJson;
+  Map<String, dynamic> toJson() => _$ControlBaseToJson(this);
+
+  @JsonKey(name: 'enabled', includeIfNull: false)
+  final bool enabled;
+  static const fromJsonFactory = _$ControlBaseFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is ControlBase &&
+            (identical(other.enabled, enabled) ||
+                const DeepCollectionEquality().equals(other.enabled, enabled)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(enabled) ^ runtimeType.hashCode;
+}
+
+extension $ControlBaseExtension on ControlBase {
+  ControlBase copyWith({bool? enabled}) {
+    return ControlBase(enabled: enabled ?? this.enabled);
+  }
+
+  ControlBase copyWithWrapped({Wrapped<bool>? enabled}) {
+    return ControlBase(
+        enabled: (enabled != null ? enabled.value : this.enabled));
   }
 }
 
@@ -13566,12 +13746,16 @@ class Control {
     required this.name,
     this.description,
     required this.modelId,
-    required this.state,
-    this.stateIcons,
+    required this.command,
+    this.enableIf,
+    this.icon,
+    this.disabledIcon,
+    this.allowUsers,
+    this.visibleIfDisabled,
     this.tags,
-    this.commands,
     this.roles,
     required this.clientIds,
+    required this.enabled,
     required this.domainKey,
     required this.id,
     required this.rtype,
@@ -13593,19 +13777,26 @@ class Control {
   final String? description;
   @JsonKey(name: 'modelId', includeIfNull: false, defaultValue: '')
   final String modelId;
-  @JsonKey(name: 'state', includeIfNull: false)
-  final int state;
-  @JsonKey(name: 'stateIcons', includeIfNull: false, defaultValue: <String>[])
-  final List<String>? stateIcons;
+  @JsonKey(name: 'command', includeIfNull: false)
+  final ControlCommand command;
+  @JsonKey(name: 'enableIf', includeIfNull: false)
+  final MatchGroup? enableIf;
+  @JsonKey(name: 'icon', includeIfNull: false, defaultValue: '')
+  final String? icon;
+  @JsonKey(name: 'disabledIcon', includeIfNull: false, defaultValue: '')
+  final String? disabledIcon;
+  @JsonKey(name: 'allowUsers', includeIfNull: false)
+  final bool? allowUsers;
+  @JsonKey(name: 'visibleIfDisabled', includeIfNull: false)
+  final bool? visibleIfDisabled;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
-  @JsonKey(
-      name: 'commands', includeIfNull: false, defaultValue: <ControlCommand>[])
-  final List<ControlCommand>? commands;
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
   final List<String> clientIds;
+  @JsonKey(name: 'enabled', includeIfNull: false)
+  final bool enabled;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
   final String domainKey;
   @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
@@ -13634,21 +13825,33 @@ class Control {
             (identical(other.modelId, modelId) ||
                 const DeepCollectionEquality()
                     .equals(other.modelId, modelId)) &&
-            (identical(other.state, state) ||
-                const DeepCollectionEquality().equals(other.state, state)) &&
-            (identical(other.stateIcons, stateIcons) ||
+            (identical(other.command, command) ||
                 const DeepCollectionEquality()
-                    .equals(other.stateIcons, stateIcons)) &&
+                    .equals(other.command, command)) &&
+            (identical(other.enableIf, enableIf) ||
+                const DeepCollectionEquality()
+                    .equals(other.enableIf, enableIf)) &&
+            (identical(other.icon, icon) ||
+                const DeepCollectionEquality().equals(other.icon, icon)) &&
+            (identical(other.disabledIcon, disabledIcon) ||
+                const DeepCollectionEquality()
+                    .equals(other.disabledIcon, disabledIcon)) &&
+            (identical(other.allowUsers, allowUsers) ||
+                const DeepCollectionEquality()
+                    .equals(other.allowUsers, allowUsers)) &&
+            (identical(other.visibleIfDisabled, visibleIfDisabled) ||
+                const DeepCollectionEquality()
+                    .equals(other.visibleIfDisabled, visibleIfDisabled)) &&
             (identical(other.tags, tags) ||
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
-            (identical(other.commands, commands) ||
-                const DeepCollectionEquality()
-                    .equals(other.commands, commands)) &&
             (identical(other.roles, roles) ||
                 const DeepCollectionEquality().equals(other.roles, roles)) &&
             (identical(other.clientIds, clientIds) ||
                 const DeepCollectionEquality()
                     .equals(other.clientIds, clientIds)) &&
+            (identical(other.enabled, enabled) ||
+                const DeepCollectionEquality()
+                    .equals(other.enabled, enabled)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
@@ -13678,12 +13881,16 @@ class Control {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(modelId) ^
-      const DeepCollectionEquality().hash(state) ^
-      const DeepCollectionEquality().hash(stateIcons) ^
+      const DeepCollectionEquality().hash(command) ^
+      const DeepCollectionEquality().hash(enableIf) ^
+      const DeepCollectionEquality().hash(icon) ^
+      const DeepCollectionEquality().hash(disabledIcon) ^
+      const DeepCollectionEquality().hash(allowUsers) ^
+      const DeepCollectionEquality().hash(visibleIfDisabled) ^
       const DeepCollectionEquality().hash(tags) ^
-      const DeepCollectionEquality().hash(commands) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(clientIds) ^
+      const DeepCollectionEquality().hash(enabled) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(rtype) ^
@@ -13699,12 +13906,16 @@ extension $ControlExtension on Control {
       {String? name,
       String? description,
       String? modelId,
-      int? state,
-      List<String>? stateIcons,
+      ControlCommand? command,
+      MatchGroup? enableIf,
+      String? icon,
+      String? disabledIcon,
+      bool? allowUsers,
+      bool? visibleIfDisabled,
       List<String>? tags,
-      List<ControlCommand>? commands,
       List<String>? roles,
       List<String>? clientIds,
+      bool? enabled,
       String? domainKey,
       String? id,
       String? rtype,
@@ -13716,12 +13927,16 @@ extension $ControlExtension on Control {
         name: name ?? this.name,
         description: description ?? this.description,
         modelId: modelId ?? this.modelId,
-        state: state ?? this.state,
-        stateIcons: stateIcons ?? this.stateIcons,
+        command: command ?? this.command,
+        enableIf: enableIf ?? this.enableIf,
+        icon: icon ?? this.icon,
+        disabledIcon: disabledIcon ?? this.disabledIcon,
+        allowUsers: allowUsers ?? this.allowUsers,
+        visibleIfDisabled: visibleIfDisabled ?? this.visibleIfDisabled,
         tags: tags ?? this.tags,
-        commands: commands ?? this.commands,
         roles: roles ?? this.roles,
         clientIds: clientIds ?? this.clientIds,
+        enabled: enabled ?? this.enabled,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
         rtype: rtype ?? this.rtype,
@@ -13735,12 +13950,16 @@ extension $ControlExtension on Control {
       {Wrapped<String>? name,
       Wrapped<String?>? description,
       Wrapped<String>? modelId,
-      Wrapped<int>? state,
-      Wrapped<List<String>?>? stateIcons,
+      Wrapped<ControlCommand>? command,
+      Wrapped<MatchGroup?>? enableIf,
+      Wrapped<String?>? icon,
+      Wrapped<String?>? disabledIcon,
+      Wrapped<bool?>? allowUsers,
+      Wrapped<bool?>? visibleIfDisabled,
       Wrapped<List<String>?>? tags,
-      Wrapped<List<ControlCommand>?>? commands,
       Wrapped<List<String>?>? roles,
       Wrapped<List<String>>? clientIds,
+      Wrapped<bool>? enabled,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
       Wrapped<String>? rtype,
@@ -13753,12 +13972,19 @@ extension $ControlExtension on Control {
         description:
             (description != null ? description.value : this.description),
         modelId: (modelId != null ? modelId.value : this.modelId),
-        state: (state != null ? state.value : this.state),
-        stateIcons: (stateIcons != null ? stateIcons.value : this.stateIcons),
+        command: (command != null ? command.value : this.command),
+        enableIf: (enableIf != null ? enableIf.value : this.enableIf),
+        icon: (icon != null ? icon.value : this.icon),
+        disabledIcon:
+            (disabledIcon != null ? disabledIcon.value : this.disabledIcon),
+        allowUsers: (allowUsers != null ? allowUsers.value : this.allowUsers),
+        visibleIfDisabled: (visibleIfDisabled != null
+            ? visibleIfDisabled.value
+            : this.visibleIfDisabled),
         tags: (tags != null ? tags.value : this.tags),
-        commands: (commands != null ? commands.value : this.commands),
         roles: (roles != null ? roles.value : this.roles),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
+        enabled: (enabled != null ? enabled.value : this.enabled),
         domainKey: (domainKey != null ? domainKey.value : this.domainKey),
         id: (id != null ? id.value : this.id),
         rtype: (rtype != null ? rtype.value : this.rtype),
@@ -19672,90 +19898,50 @@ extension $EvaluatedDisplayExtension on EvaluatedDisplay {
 }
 
 @JsonSerializable(explicitToJson: true)
-class DeviceControl {
-  const DeviceControl({
+class EvaluatedControl {
+  const EvaluatedControl({
     required this.controlId,
-    this.deviceId,
-    this.hardwareDeviceId,
-    required this.state,
-    required this.stateIcon,
-    this.rtype,
-    this.id,
-    this.name,
-    this.createdStamp,
-    this.createdBy,
-    this.updatedBy,
-    this.updatedStamp,
+    required this.enabled,
+    required this.icon,
+    required this.name,
+    required this.description,
   });
 
-  factory DeviceControl.fromJson(Map<String, dynamic> json) =>
-      _$DeviceControlFromJson(json);
+  factory EvaluatedControl.fromJson(Map<String, dynamic> json) =>
+      _$EvaluatedControlFromJson(json);
 
-  static const toJsonFactory = _$DeviceControlToJson;
-  Map<String, dynamic> toJson() => _$DeviceControlToJson(this);
+  static const toJsonFactory = _$EvaluatedControlToJson;
+  Map<String, dynamic> toJson() => _$EvaluatedControlToJson(this);
 
   @JsonKey(name: 'controlId', includeIfNull: false, defaultValue: '')
   final String controlId;
-  @JsonKey(name: 'deviceId', includeIfNull: false, defaultValue: '')
-  final String? deviceId;
-  @JsonKey(name: 'hardwareDeviceId', includeIfNull: false, defaultValue: '')
-  final String? hardwareDeviceId;
-  @JsonKey(name: 'state', includeIfNull: false)
-  final int state;
-  @JsonKey(name: 'stateIcon', includeIfNull: false, defaultValue: '')
-  final String stateIcon;
-  @JsonKey(name: 'rtype', includeIfNull: false, defaultValue: '')
-  final String? rtype;
-  @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
-  final String? id;
+  @JsonKey(name: 'enabled', includeIfNull: false)
+  final int enabled;
+  @JsonKey(name: 'icon', includeIfNull: false, defaultValue: '')
+  final String icon;
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
-  final String? name;
-  @JsonKey(name: 'createdStamp', includeIfNull: false)
-  final int? createdStamp;
-  @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
-  final String? createdBy;
-  @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
-  final String? updatedBy;
-  @JsonKey(name: 'updatedStamp', includeIfNull: false)
-  final int? updatedStamp;
-  static const fromJsonFactory = _$DeviceControlFromJson;
+  final String name;
+  @JsonKey(name: 'description', includeIfNull: false, defaultValue: '')
+  final String description;
+  static const fromJsonFactory = _$EvaluatedControlFromJson;
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other is DeviceControl &&
+        (other is EvaluatedControl &&
             (identical(other.controlId, controlId) ||
                 const DeepCollectionEquality()
                     .equals(other.controlId, controlId)) &&
-            (identical(other.deviceId, deviceId) ||
+            (identical(other.enabled, enabled) ||
                 const DeepCollectionEquality()
-                    .equals(other.deviceId, deviceId)) &&
-            (identical(other.hardwareDeviceId, hardwareDeviceId) ||
-                const DeepCollectionEquality()
-                    .equals(other.hardwareDeviceId, hardwareDeviceId)) &&
-            (identical(other.state, state) ||
-                const DeepCollectionEquality().equals(other.state, state)) &&
-            (identical(other.stateIcon, stateIcon) ||
-                const DeepCollectionEquality()
-                    .equals(other.stateIcon, stateIcon)) &&
-            (identical(other.rtype, rtype) ||
-                const DeepCollectionEquality().equals(other.rtype, rtype)) &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
+                    .equals(other.enabled, enabled)) &&
+            (identical(other.icon, icon) ||
+                const DeepCollectionEquality().equals(other.icon, icon)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.createdStamp, createdStamp) ||
+            (identical(other.description, description) ||
                 const DeepCollectionEquality()
-                    .equals(other.createdStamp, createdStamp)) &&
-            (identical(other.createdBy, createdBy) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdBy, createdBy)) &&
-            (identical(other.updatedBy, updatedBy) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)));
+                    .equals(other.description, description)));
   }
 
   @override
@@ -19764,79 +19950,41 @@ class DeviceControl {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(controlId) ^
-      const DeepCollectionEquality().hash(deviceId) ^
-      const DeepCollectionEquality().hash(hardwareDeviceId) ^
-      const DeepCollectionEquality().hash(state) ^
-      const DeepCollectionEquality().hash(stateIcon) ^
-      const DeepCollectionEquality().hash(rtype) ^
-      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(enabled) ^
+      const DeepCollectionEquality().hash(icon) ^
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(createdStamp) ^
-      const DeepCollectionEquality().hash(createdBy) ^
-      const DeepCollectionEquality().hash(updatedBy) ^
-      const DeepCollectionEquality().hash(updatedStamp) ^
+      const DeepCollectionEquality().hash(description) ^
       runtimeType.hashCode;
 }
 
-extension $DeviceControlExtension on DeviceControl {
-  DeviceControl copyWith(
+extension $EvaluatedControlExtension on EvaluatedControl {
+  EvaluatedControl copyWith(
       {String? controlId,
-      String? deviceId,
-      String? hardwareDeviceId,
-      int? state,
-      String? stateIcon,
-      String? rtype,
-      String? id,
+      int? enabled,
+      String? icon,
       String? name,
-      int? createdStamp,
-      String? createdBy,
-      String? updatedBy,
-      int? updatedStamp}) {
-    return DeviceControl(
+      String? description}) {
+    return EvaluatedControl(
         controlId: controlId ?? this.controlId,
-        deviceId: deviceId ?? this.deviceId,
-        hardwareDeviceId: hardwareDeviceId ?? this.hardwareDeviceId,
-        state: state ?? this.state,
-        stateIcon: stateIcon ?? this.stateIcon,
-        rtype: rtype ?? this.rtype,
-        id: id ?? this.id,
+        enabled: enabled ?? this.enabled,
+        icon: icon ?? this.icon,
         name: name ?? this.name,
-        createdStamp: createdStamp ?? this.createdStamp,
-        createdBy: createdBy ?? this.createdBy,
-        updatedBy: updatedBy ?? this.updatedBy,
-        updatedStamp: updatedStamp ?? this.updatedStamp);
+        description: description ?? this.description);
   }
 
-  DeviceControl copyWithWrapped(
+  EvaluatedControl copyWithWrapped(
       {Wrapped<String>? controlId,
-      Wrapped<String?>? deviceId,
-      Wrapped<String?>? hardwareDeviceId,
-      Wrapped<int>? state,
-      Wrapped<String>? stateIcon,
-      Wrapped<String?>? rtype,
-      Wrapped<String?>? id,
-      Wrapped<String?>? name,
-      Wrapped<int?>? createdStamp,
-      Wrapped<String?>? createdBy,
-      Wrapped<String?>? updatedBy,
-      Wrapped<int?>? updatedStamp}) {
-    return DeviceControl(
+      Wrapped<int>? enabled,
+      Wrapped<String>? icon,
+      Wrapped<String>? name,
+      Wrapped<String>? description}) {
+    return EvaluatedControl(
         controlId: (controlId != null ? controlId.value : this.controlId),
-        deviceId: (deviceId != null ? deviceId.value : this.deviceId),
-        hardwareDeviceId: (hardwareDeviceId != null
-            ? hardwareDeviceId.value
-            : this.hardwareDeviceId),
-        state: (state != null ? state.value : this.state),
-        stateIcon: (stateIcon != null ? stateIcon.value : this.stateIcon),
-        rtype: (rtype != null ? rtype.value : this.rtype),
-        id: (id != null ? id.value : this.id),
+        enabled: (enabled != null ? enabled.value : this.enabled),
+        icon: (icon != null ? icon.value : this.icon),
         name: (name != null ? name.value : this.name),
-        createdStamp:
-            (createdStamp != null ? createdStamp.value : this.createdStamp),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy),
-        updatedStamp:
-            (updatedStamp != null ? updatedStamp.value : this.updatedStamp));
+        description:
+            (description != null ? description.value : this.description));
   }
 }
 
@@ -20325,8 +20473,10 @@ class DeviceData {
   @JsonKey(name: 'updatedStamp', includeIfNull: false)
   final int updatedStamp;
   @JsonKey(
-      name: 'controls', includeIfNull: false, defaultValue: <DeviceControl>[])
-  final List<DeviceControl>? controls;
+      name: 'controls',
+      includeIfNull: false,
+      defaultValue: <EvaluatedControl>[])
+  final List<EvaluatedControl>? controls;
   @JsonKey(
       name: 'alarms', includeIfNull: false, defaultValue: <EvaluatedAlarm>[])
   final List<EvaluatedAlarm> alarms;
@@ -20550,7 +20700,7 @@ extension $DeviceDataExtension on DeviceData {
       String? createdBy,
       String? updatedBy,
       int? updatedStamp,
-      List<DeviceControl>? controls,
+      List<EvaluatedControl>? controls,
       List<EvaluatedAlarm>? alarms,
       List<EvaluatedDisplay>? displays,
       List<EvaluatedEvent>? events,
@@ -20642,7 +20792,7 @@ extension $DeviceDataExtension on DeviceData {
       Wrapped<String?>? createdBy,
       Wrapped<String?>? updatedBy,
       Wrapped<int>? updatedStamp,
-      Wrapped<List<DeviceControl>?>? controls,
+      Wrapped<List<EvaluatedControl>?>? controls,
       Wrapped<List<EvaluatedAlarm>>? alarms,
       Wrapped<List<EvaluatedDisplay>>? displays,
       Wrapped<List<EvaluatedEvent>>? events,
@@ -46790,6 +46940,81 @@ List<enums.AlarmMatchGroupMatchType>?
       .toList();
 }
 
+String? commandParameterParameterTypeNullableToJson(
+    enums.CommandParameterParameterType? commandParameterParameterType) {
+  return commandParameterParameterType?.value;
+}
+
+String? commandParameterParameterTypeToJson(
+    enums.CommandParameterParameterType commandParameterParameterType) {
+  return commandParameterParameterType.value;
+}
+
+enums.CommandParameterParameterType commandParameterParameterTypeFromJson(
+  Object? commandParameterParameterType, [
+  enums.CommandParameterParameterType? defaultValue,
+]) {
+  return enums.CommandParameterParameterType.values
+          .firstWhereOrNull((e) => e.value == commandParameterParameterType) ??
+      defaultValue ??
+      enums.CommandParameterParameterType.swaggerGeneratedUnknown;
+}
+
+enums.CommandParameterParameterType?
+    commandParameterParameterTypeNullableFromJson(
+  Object? commandParameterParameterType, [
+  enums.CommandParameterParameterType? defaultValue,
+]) {
+  if (commandParameterParameterType == null) {
+    return null;
+  }
+  return enums.CommandParameterParameterType.values
+          .firstWhereOrNull((e) => e.value == commandParameterParameterType) ??
+      defaultValue;
+}
+
+String commandParameterParameterTypeExplodedListToJson(
+    List<enums.CommandParameterParameterType>? commandParameterParameterType) {
+  return commandParameterParameterType?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> commandParameterParameterTypeListToJson(
+    List<enums.CommandParameterParameterType>? commandParameterParameterType) {
+  if (commandParameterParameterType == null) {
+    return [];
+  }
+
+  return commandParameterParameterType.map((e) => e.value!).toList();
+}
+
+List<enums.CommandParameterParameterType>
+    commandParameterParameterTypeListFromJson(
+  List? commandParameterParameterType, [
+  List<enums.CommandParameterParameterType>? defaultValue,
+]) {
+  if (commandParameterParameterType == null) {
+    return defaultValue ?? [];
+  }
+
+  return commandParameterParameterType
+      .map((e) => commandParameterParameterTypeFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.CommandParameterParameterType>?
+    commandParameterParameterTypeNullableListFromJson(
+  List? commandParameterParameterType, [
+  List<enums.CommandParameterParameterType>? defaultValue,
+]) {
+  if (commandParameterParameterType == null) {
+    return defaultValue;
+  }
+
+  return commandParameterParameterType
+      .map((e) => commandParameterParameterTypeFromJson(e.toString()))
+      .toList();
+}
+
 String? controlCommandTypeNullableToJson(
     enums.ControlCommandType? controlCommandType) {
   return controlCommandType?.value;
@@ -46861,76 +47086,76 @@ List<enums.ControlCommandType>? controlCommandTypeNullableListFromJson(
       .toList();
 }
 
-String? controlCommandFixedTypeNullableToJson(
-    enums.ControlCommandFixedType? controlCommandFixedType) {
-  return controlCommandFixedType?.value;
+String? controlCommandCommandTypeNullableToJson(
+    enums.ControlCommandCommandType? controlCommandCommandType) {
+  return controlCommandCommandType?.value;
 }
 
-String? controlCommandFixedTypeToJson(
-    enums.ControlCommandFixedType controlCommandFixedType) {
-  return controlCommandFixedType.value;
+String? controlCommandCommandTypeToJson(
+    enums.ControlCommandCommandType controlCommandCommandType) {
+  return controlCommandCommandType.value;
 }
 
-enums.ControlCommandFixedType controlCommandFixedTypeFromJson(
-  Object? controlCommandFixedType, [
-  enums.ControlCommandFixedType? defaultValue,
+enums.ControlCommandCommandType controlCommandCommandTypeFromJson(
+  Object? controlCommandCommandType, [
+  enums.ControlCommandCommandType? defaultValue,
 ]) {
-  return enums.ControlCommandFixedType.values
-          .firstWhereOrNull((e) => e.value == controlCommandFixedType) ??
+  return enums.ControlCommandCommandType.values
+          .firstWhereOrNull((e) => e.value == controlCommandCommandType) ??
       defaultValue ??
-      enums.ControlCommandFixedType.swaggerGeneratedUnknown;
+      enums.ControlCommandCommandType.swaggerGeneratedUnknown;
 }
 
-enums.ControlCommandFixedType? controlCommandFixedTypeNullableFromJson(
-  Object? controlCommandFixedType, [
-  enums.ControlCommandFixedType? defaultValue,
+enums.ControlCommandCommandType? controlCommandCommandTypeNullableFromJson(
+  Object? controlCommandCommandType, [
+  enums.ControlCommandCommandType? defaultValue,
 ]) {
-  if (controlCommandFixedType == null) {
+  if (controlCommandCommandType == null) {
     return null;
   }
-  return enums.ControlCommandFixedType.values
-          .firstWhereOrNull((e) => e.value == controlCommandFixedType) ??
+  return enums.ControlCommandCommandType.values
+          .firstWhereOrNull((e) => e.value == controlCommandCommandType) ??
       defaultValue;
 }
 
-String controlCommandFixedTypeExplodedListToJson(
-    List<enums.ControlCommandFixedType>? controlCommandFixedType) {
-  return controlCommandFixedType?.map((e) => e.value!).join(',') ?? '';
+String controlCommandCommandTypeExplodedListToJson(
+    List<enums.ControlCommandCommandType>? controlCommandCommandType) {
+  return controlCommandCommandType?.map((e) => e.value!).join(',') ?? '';
 }
 
-List<String> controlCommandFixedTypeListToJson(
-    List<enums.ControlCommandFixedType>? controlCommandFixedType) {
-  if (controlCommandFixedType == null) {
+List<String> controlCommandCommandTypeListToJson(
+    List<enums.ControlCommandCommandType>? controlCommandCommandType) {
+  if (controlCommandCommandType == null) {
     return [];
   }
 
-  return controlCommandFixedType.map((e) => e.value!).toList();
+  return controlCommandCommandType.map((e) => e.value!).toList();
 }
 
-List<enums.ControlCommandFixedType> controlCommandFixedTypeListFromJson(
-  List? controlCommandFixedType, [
-  List<enums.ControlCommandFixedType>? defaultValue,
+List<enums.ControlCommandCommandType> controlCommandCommandTypeListFromJson(
+  List? controlCommandCommandType, [
+  List<enums.ControlCommandCommandType>? defaultValue,
 ]) {
-  if (controlCommandFixedType == null) {
+  if (controlCommandCommandType == null) {
     return defaultValue ?? [];
   }
 
-  return controlCommandFixedType
-      .map((e) => controlCommandFixedTypeFromJson(e.toString()))
+  return controlCommandCommandType
+      .map((e) => controlCommandCommandTypeFromJson(e.toString()))
       .toList();
 }
 
-List<enums.ControlCommandFixedType>?
-    controlCommandFixedTypeNullableListFromJson(
-  List? controlCommandFixedType, [
-  List<enums.ControlCommandFixedType>? defaultValue,
+List<enums.ControlCommandCommandType>?
+    controlCommandCommandTypeNullableListFromJson(
+  List? controlCommandCommandType, [
+  List<enums.ControlCommandCommandType>? defaultValue,
 ]) {
-  if (controlCommandFixedType == null) {
+  if (controlCommandCommandType == null) {
     return defaultValue;
   }
 
-  return controlCommandFixedType
-      .map((e) => controlCommandFixedTypeFromJson(e.toString()))
+  return controlCommandCommandType
+      .map((e) => controlCommandCommandTypeFromJson(e.toString()))
       .toList();
 }
 

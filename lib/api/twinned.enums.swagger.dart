@@ -155,21 +155,39 @@ enum AlarmMatchGroupMatchType {
   const AlarmMatchGroupMatchType(this.value);
 }
 
+enum CommandParameterParameterType {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('YESNO')
+  yesno('YESNO'),
+  @JsonValue('NUMERIC')
+  numeric('NUMERIC'),
+  @JsonValue('FLOATING')
+  floating('FLOATING'),
+  @JsonValue('TEXT')
+  text('TEXT');
+
+  final String? value;
+
+  const CommandParameterParameterType(this.value);
+}
+
 enum ControlCommandType {
   @JsonValue(null)
   swaggerGeneratedUnknown(null),
 
   @JsonValue('FIXED')
   fixed('FIXED'),
-  @JsonValue('PARAMETERS')
-  parameters('PARAMETERS');
+  @JsonValue('DYNAMIC')
+  $dynamic('DYNAMIC');
 
   final String? value;
 
   const ControlCommandType(this.value);
 }
 
-enum ControlCommandFixedType {
+enum ControlCommandCommandType {
   @JsonValue(null)
   swaggerGeneratedUnknown(null),
 
@@ -178,11 +196,13 @@ enum ControlCommandFixedType {
   @JsonValue('TEXT')
   text('TEXT'),
   @JsonValue('BINARY')
-  binary('BINARY');
+  binary('BINARY'),
+  @JsonValue('PARAMETERS')
+  parameters('PARAMETERS');
 
   final String? value;
 
-  const ControlCommandFixedType(this.value);
+  const ControlCommandCommandType(this.value);
 }
 
 enum EventInfoSourceType {

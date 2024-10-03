@@ -4,7 +4,7 @@
     "application/json"
   ],
   "info": {
-    "version": "2.1.0",
+    "version": "2.1.1",
     "title": "IoT Digital Twin API",
     "description": "IoT Digital Twinning API",
     "termsOfService": "https:/boodskap.io/terms-conditions",
@@ -17537,6 +17537,39 @@
         }
       ]
     },
+    "CommandParameter": {
+      "type": "object",
+      "discriminator": "commandParameter",
+      "required": [
+        "name",
+        "parameterType",
+        "required"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "parameterType": {
+          "type": "string",
+          "enum": [
+            "YESNO",
+            "NUMERIC",
+            "FLOATING",
+            "TEXT"
+          ]
+        },
+        "required": {
+          "type": "boolean",
+          "default": true
+        },
+        "defaultValue": {
+          "type": "string"
+        }
+      }
+    },
     "ControlCommand": {
       "type": "object",
       "required": [
@@ -17547,15 +17580,16 @@
           "type": "string",
           "enum": [
             "FIXED",
-            "PARAMETERS"
+            "DYNAMIC"
           ]
         },
-        "fixedType": {
+        "commandType": {
           "type": "string",
           "enum": [
             "JSON",
             "TEXT",
-            "BINARY"
+            "BINARY",
+            "PARAMETERS"
           ]
         },
         "jsonValue": {
@@ -17571,7 +17605,7 @@
         "parameters": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Parameter"
+            "$ref": "#/definitions/CommandParameter"
           }
         }
       }
@@ -17581,8 +17615,7 @@
       "required": [
         "name",
         "modelId",
-        "state",
-        "type",
+        "command",
         "clientIds"
       ],
       "properties": {
@@ -17595,26 +17628,28 @@
         "modelId": {
           "type": "string"
         },
-        "state": {
-          "type": "integer",
-          "default": 0
+        "command": {
+          "$ref": "#/definitions/ControlCommand"
         },
-        "stateIcons": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "enableIf": {
+          "$ref": "#/definitions/MatchGroup"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "disabledIcon": {
+          "type": "string"
+        },
+        "allowUsers": {
+          "type": "boolean"
+        },
+        "visibleIfDisabled": {
+          "type": "boolean"
         },
         "tags": {
           "type": "array",
           "items": {
             "type": "string"
-          }
-        },
-        "commands": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ControlCommand"
           }
         },
         "roles": {
@@ -17631,10 +17666,24 @@
         }
       }
     },
+    "ControlBase": {
+      "type": "object",
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      }
+    },
     "Control": {
       "allOf": [
         {
           "$ref": "#/definitions/ControlInfo"
+        },
+        {
+          "$ref": "#/definitions/ControlBase"
         },
         {
           "$ref": "#/definitions/BaseEntity"
@@ -18912,51 +18961,30 @@
         }
       }
     },
-    "DeviceControl": {
+    "EvaluatedControl": {
       "type": "object",
       "required": [
         "controlId",
-        "state",
-        "stateIcon"
+        "enabled",
+        "icon",
+        "name",
+        "description"
       ],
       "properties": {
         "controlId": {
           "type": "string"
         },
-        "deviceId": {
-          "type": "string"
-        },
-        "hardwareDeviceId": {
-          "type": "string"
-        },
-        "state": {
+        "enabled": {
           "type": "integer"
         },
-        "stateIcon": {
-          "type": "string"
-        },
-        "rtype": {
-          "type": "string"
-        },
-        "id": {
+        "icon": {
           "type": "string"
         },
         "name": {
           "type": "string"
         },
-        "createdStamp": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "createdBy": {
+        "description": {
           "type": "string"
-        },
-        "updatedBy": {
-          "type": "string"
-        },
-        "updatedStamp": {
-          "type": "integer",
-          "format": "int64"
         }
       }
     },
@@ -19163,7 +19191,7 @@
         "controls": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeviceControl"
+            "$ref": "#/definitions/EvaluatedControl"
           }
         },
         "alarms": {

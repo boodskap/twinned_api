@@ -1421,15 +1421,45 @@ Map<String, dynamic> _$AlarmArrayResToJson(AlarmArrayRes instance) {
   return val;
 }
 
+CommandParameter _$CommandParameterFromJson(Map<String, dynamic> json) =>
+    CommandParameter(
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      parameterType:
+          commandParameterParameterTypeFromJson(json['parameterType']),
+      required: json['required'] as bool? ?? true,
+      defaultValue: json['defaultValue'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$CommandParameterToJson(CommandParameter instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('description', instance.description);
+  writeNotNull('parameterType',
+      commandParameterParameterTypeToJson(instance.parameterType));
+  val['required'] = instance.required;
+  writeNotNull('defaultValue', instance.defaultValue);
+  return val;
+}
+
 ControlCommand _$ControlCommandFromJson(Map<String, dynamic> json) =>
     ControlCommand(
       type: controlCommandTypeFromJson(json['type']),
-      fixedType: controlCommandFixedTypeNullableFromJson(json['fixedType']),
+      commandType:
+          controlCommandCommandTypeNullableFromJson(json['commandType']),
       jsonValue: json['jsonValue'],
       textValue: json['textValue'] as String? ?? '',
       binaryValue: json['binaryValue'] as String? ?? '',
       parameters: (json['parameters'] as List<dynamic>?)
-              ?.map((e) => Parameter.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => CommandParameter.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
     );
@@ -1444,8 +1474,8 @@ Map<String, dynamic> _$ControlCommandToJson(ControlCommand instance) {
   }
 
   writeNotNull('type', controlCommandTypeToJson(instance.type));
-  writeNotNull(
-      'fixedType', controlCommandFixedTypeNullableToJson(instance.fixedType));
+  writeNotNull('commandType',
+      controlCommandCommandTypeNullableToJson(instance.commandType));
   writeNotNull('jsonValue', instance.jsonValue);
   writeNotNull('textValue', instance.textValue);
   writeNotNull('binaryValue', instance.binaryValue);
@@ -1458,18 +1488,17 @@ ControlInfo _$ControlInfoFromJson(Map<String, dynamic> json) => ControlInfo(
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
       modelId: json['modelId'] as String? ?? '',
-      state: (json['state'] as num).toInt(),
-      stateIcons: (json['stateIcons'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
+      command: ControlCommand.fromJson(json['command'] as Map<String, dynamic>),
+      enableIf: json['enableIf'] == null
+          ? null
+          : MatchGroup.fromJson(json['enableIf'] as Map<String, dynamic>),
+      icon: json['icon'] as String? ?? '',
+      disabledIcon: json['disabledIcon'] as String? ?? '',
+      allowUsers: json['allowUsers'] as bool?,
+      visibleIfDisabled: json['visibleIfDisabled'] as bool?,
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
-      commands: (json['commands'] as List<dynamic>?)
-              ?.map((e) => ControlCommand.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
       roles:
           (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
@@ -1492,31 +1521,42 @@ Map<String, dynamic> _$ControlInfoToJson(ControlInfo instance) {
 
   writeNotNull('description', instance.description);
   val['modelId'] = instance.modelId;
-  val['state'] = instance.state;
-  writeNotNull('stateIcons', instance.stateIcons);
+  val['command'] = instance.command.toJson();
+  writeNotNull('enableIf', instance.enableIf?.toJson());
+  writeNotNull('icon', instance.icon);
+  writeNotNull('disabledIcon', instance.disabledIcon);
+  writeNotNull('allowUsers', instance.allowUsers);
+  writeNotNull('visibleIfDisabled', instance.visibleIfDisabled);
   writeNotNull('tags', instance.tags);
-  writeNotNull('commands', instance.commands?.map((e) => e.toJson()).toList());
   writeNotNull('roles', instance.roles);
   val['clientIds'] = instance.clientIds;
   return val;
 }
 
+ControlBase _$ControlBaseFromJson(Map<String, dynamic> json) => ControlBase(
+      enabled: json['enabled'] as bool,
+    );
+
+Map<String, dynamic> _$ControlBaseToJson(ControlBase instance) =>
+    <String, dynamic>{
+      'enabled': instance.enabled,
+    };
+
 Control _$ControlFromJson(Map<String, dynamic> json) => Control(
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
       modelId: json['modelId'] as String? ?? '',
-      state: (json['state'] as num).toInt(),
-      stateIcons: (json['stateIcons'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
+      command: ControlCommand.fromJson(json['command'] as Map<String, dynamic>),
+      enableIf: json['enableIf'] == null
+          ? null
+          : MatchGroup.fromJson(json['enableIf'] as Map<String, dynamic>),
+      icon: json['icon'] as String? ?? '',
+      disabledIcon: json['disabledIcon'] as String? ?? '',
+      allowUsers: json['allowUsers'] as bool?,
+      visibleIfDisabled: json['visibleIfDisabled'] as bool?,
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
-      commands: (json['commands'] as List<dynamic>?)
-              ?.map((e) => ControlCommand.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
       roles:
           (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
@@ -1524,6 +1564,7 @@ Control _$ControlFromJson(Map<String, dynamic> json) => Control(
               ?.map((e) => e as String)
               .toList() ??
           [],
+      enabled: json['enabled'] as bool,
       domainKey: json['domainKey'] as String? ?? '',
       id: json['id'] as String? ?? '',
       rtype: json['rtype'] as String? ?? '',
@@ -1546,12 +1587,16 @@ Map<String, dynamic> _$ControlToJson(Control instance) {
 
   writeNotNull('description', instance.description);
   val['modelId'] = instance.modelId;
-  val['state'] = instance.state;
-  writeNotNull('stateIcons', instance.stateIcons);
+  val['command'] = instance.command.toJson();
+  writeNotNull('enableIf', instance.enableIf?.toJson());
+  writeNotNull('icon', instance.icon);
+  writeNotNull('disabledIcon', instance.disabledIcon);
+  writeNotNull('allowUsers', instance.allowUsers);
+  writeNotNull('visibleIfDisabled', instance.visibleIfDisabled);
   writeNotNull('tags', instance.tags);
-  writeNotNull('commands', instance.commands?.map((e) => e.toJson()).toList());
   writeNotNull('roles', instance.roles);
   val['clientIds'] = instance.clientIds;
+  val['enabled'] = instance.enabled;
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
   val['rtype'] = instance.rtype;
@@ -3302,46 +3347,23 @@ Map<String, dynamic> _$EvaluatedDisplayToJson(EvaluatedDisplay instance) {
   return val;
 }
 
-DeviceControl _$DeviceControlFromJson(Map<String, dynamic> json) =>
-    DeviceControl(
+EvaluatedControl _$EvaluatedControlFromJson(Map<String, dynamic> json) =>
+    EvaluatedControl(
       controlId: json['controlId'] as String? ?? '',
-      deviceId: json['deviceId'] as String? ?? '',
-      hardwareDeviceId: json['hardwareDeviceId'] as String? ?? '',
-      state: (json['state'] as num).toInt(),
-      stateIcon: json['stateIcon'] as String? ?? '',
-      rtype: json['rtype'] as String? ?? '',
-      id: json['id'] as String? ?? '',
+      enabled: (json['enabled'] as num).toInt(),
+      icon: json['icon'] as String? ?? '',
       name: json['name'] as String? ?? '',
-      createdStamp: (json['createdStamp'] as num?)?.toInt(),
-      createdBy: json['createdBy'] as String? ?? '',
-      updatedBy: json['updatedBy'] as String? ?? '',
-      updatedStamp: (json['updatedStamp'] as num?)?.toInt(),
+      description: json['description'] as String? ?? '',
     );
 
-Map<String, dynamic> _$DeviceControlToJson(DeviceControl instance) {
-  final val = <String, dynamic>{
-    'controlId': instance.controlId,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('deviceId', instance.deviceId);
-  writeNotNull('hardwareDeviceId', instance.hardwareDeviceId);
-  val['state'] = instance.state;
-  val['stateIcon'] = instance.stateIcon;
-  writeNotNull('rtype', instance.rtype);
-  writeNotNull('id', instance.id);
-  writeNotNull('name', instance.name);
-  writeNotNull('createdStamp', instance.createdStamp);
-  writeNotNull('createdBy', instance.createdBy);
-  writeNotNull('updatedBy', instance.updatedBy);
-  writeNotNull('updatedStamp', instance.updatedStamp);
-  return val;
-}
+Map<String, dynamic> _$EvaluatedControlToJson(EvaluatedControl instance) =>
+    <String, dynamic>{
+      'controlId': instance.controlId,
+      'enabled': instance.enabled,
+      'icon': instance.icon,
+      'name': instance.name,
+      'description': instance.description,
+    };
 
 EvaluatedEvent _$EvaluatedEventFromJson(Map<String, dynamic> json) =>
     EvaluatedEvent(
@@ -3463,7 +3485,7 @@ DeviceData _$DeviceDataFromJson(Map<String, dynamic> json) => DeviceData(
       updatedBy: json['updatedBy'] as String? ?? '',
       updatedStamp: (json['updatedStamp'] as num).toInt(),
       controls: (json['controls'] as List<dynamic>?)
-              ?.map((e) => DeviceControl.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => EvaluatedControl.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
       alarms: (json['alarms'] as List<dynamic>?)
