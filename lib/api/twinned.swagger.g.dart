@@ -1424,6 +1424,7 @@ Map<String, dynamic> _$AlarmArrayResToJson(AlarmArrayRes instance) {
 CommandParameter _$CommandParameterFromJson(Map<String, dynamic> json) =>
     CommandParameter(
       name: json['name'] as String? ?? '',
+      label: json['label'] as String? ?? '',
       description: json['description'] as String? ?? '',
       parameterType:
           commandParameterParameterTypeFromJson(json['parameterType']),
@@ -1434,6 +1435,7 @@ CommandParameter _$CommandParameterFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$CommandParameterToJson(CommandParameter instance) {
   final val = <String, dynamic>{
     'name': instance.name,
+    'label': instance.label,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -1453,8 +1455,7 @@ Map<String, dynamic> _$CommandParameterToJson(CommandParameter instance) {
 ControlCommand _$ControlCommandFromJson(Map<String, dynamic> json) =>
     ControlCommand(
       type: controlCommandTypeFromJson(json['type']),
-      commandType:
-          controlCommandCommandTypeNullableFromJson(json['commandType']),
+      commandType: controlCommandCommandTypeFromJson(json['commandType']),
       jsonValue: json['jsonValue'],
       textValue: json['textValue'] as String? ?? '',
       binaryValue: json['binaryValue'] as String? ?? '',
@@ -1474,13 +1475,86 @@ Map<String, dynamic> _$ControlCommandToJson(ControlCommand instance) {
   }
 
   writeNotNull('type', controlCommandTypeToJson(instance.type));
-  writeNotNull('commandType',
-      controlCommandCommandTypeNullableToJson(instance.commandType));
+  writeNotNull(
+      'commandType', controlCommandCommandTypeToJson(instance.commandType));
   writeNotNull('jsonValue', instance.jsonValue);
   writeNotNull('textValue', instance.textValue);
   writeNotNull('binaryValue', instance.binaryValue);
   writeNotNull(
       'parameters', instance.parameters?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+NameValue _$NameValueFromJson(Map<String, dynamic> json) => NameValue(
+      name: json['name'] as String? ?? '',
+      $value: json['value'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$NameValueToJson(NameValue instance) => <String, dynamic>{
+      'name': instance.name,
+      'value': instance.$value,
+    };
+
+ControlTargetMqtt _$ControlTargetMqttFromJson(Map<String, dynamic> json) =>
+    ControlTargetMqtt(
+      url: json['url'] as String? ?? '',
+      topic: json['topic'] as String? ?? '',
+      clientId: json['clientId'] as String? ?? '',
+      userName: json['userName'] as String? ?? '',
+      password: json['password'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$ControlTargetMqttToJson(ControlTargetMqtt instance) {
+  final val = <String, dynamic>{
+    'url': instance.url,
+    'topic': instance.topic,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('clientId', instance.clientId);
+  writeNotNull('userName', instance.userName);
+  writeNotNull('password', instance.password);
+  return val;
+}
+
+ControlTargetHttp _$ControlTargetHttpFromJson(Map<String, dynamic> json) =>
+    ControlTargetHttp(
+      url: json['url'] as String? ?? '',
+      protocol: controlTargetHttpProtocolFromJson(json['protocol']),
+      headers: (json['headers'] as List<dynamic>?)
+              ?.map((e) => NameValue.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      queryParameters: (json['queryParameters'] as List<dynamic>?)
+              ?.map((e) => NameValue.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      basicAuthUserName: json['basicAuthUserName'] as String? ?? '',
+      basicAuthPassword: json['basicAuthPassword'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$ControlTargetHttpToJson(ControlTargetHttp instance) {
+  final val = <String, dynamic>{
+    'url': instance.url,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('protocol', controlTargetHttpProtocolToJson(instance.protocol));
+  writeNotNull('headers', instance.headers?.map((e) => e.toJson()).toList());
+  writeNotNull('queryParameters',
+      instance.queryParameters?.map((e) => e.toJson()).toList());
+  writeNotNull('basicAuthUserName', instance.basicAuthUserName);
+  writeNotNull('basicAuthPassword', instance.basicAuthPassword);
   return val;
 }
 
@@ -1496,6 +1570,15 @@ ControlInfo _$ControlInfoFromJson(Map<String, dynamic> json) => ControlInfo(
       disabledIcon: json['disabledIcon'] as String? ?? '',
       allowUsers: json['allowUsers'] as bool?,
       visibleIfDisabled: json['visibleIfDisabled'] as bool?,
+      target: controlInfoTargetFromJson(json['target']),
+      targetMqtt: json['targetMqtt'] == null
+          ? null
+          : ControlTargetMqtt.fromJson(
+              json['targetMqtt'] as Map<String, dynamic>),
+      targetHttp: json['targetHttp'] == null
+          ? null
+          : ControlTargetHttp.fromJson(
+              json['targetHttp'] as Map<String, dynamic>),
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
@@ -1527,6 +1610,9 @@ Map<String, dynamic> _$ControlInfoToJson(ControlInfo instance) {
   writeNotNull('disabledIcon', instance.disabledIcon);
   writeNotNull('allowUsers', instance.allowUsers);
   writeNotNull('visibleIfDisabled', instance.visibleIfDisabled);
+  writeNotNull('target', controlInfoTargetToJson(instance.target));
+  writeNotNull('targetMqtt', instance.targetMqtt?.toJson());
+  writeNotNull('targetHttp', instance.targetHttp?.toJson());
   writeNotNull('tags', instance.tags);
   writeNotNull('roles', instance.roles);
   val['clientIds'] = instance.clientIds;
@@ -1554,6 +1640,15 @@ Control _$ControlFromJson(Map<String, dynamic> json) => Control(
       disabledIcon: json['disabledIcon'] as String? ?? '',
       allowUsers: json['allowUsers'] as bool?,
       visibleIfDisabled: json['visibleIfDisabled'] as bool?,
+      target: controlTargetFromJson(json['target']),
+      targetMqtt: json['targetMqtt'] == null
+          ? null
+          : ControlTargetMqtt.fromJson(
+              json['targetMqtt'] as Map<String, dynamic>),
+      targetHttp: json['targetHttp'] == null
+          ? null
+          : ControlTargetHttp.fromJson(
+              json['targetHttp'] as Map<String, dynamic>),
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
@@ -1593,6 +1688,9 @@ Map<String, dynamic> _$ControlToJson(Control instance) {
   writeNotNull('disabledIcon', instance.disabledIcon);
   writeNotNull('allowUsers', instance.allowUsers);
   writeNotNull('visibleIfDisabled', instance.visibleIfDisabled);
+  writeNotNull('target', controlTargetToJson(instance.target));
+  writeNotNull('targetMqtt', instance.targetMqtt?.toJson());
+  writeNotNull('targetHttp', instance.targetHttp?.toJson());
   writeNotNull('tags', instance.tags);
   writeNotNull('roles', instance.roles);
   val['clientIds'] = instance.clientIds;
@@ -7334,6 +7432,14 @@ AssetInfo _$AssetInfoFromJson(Map<String, dynamic> json) => AssetInfo(
               .toList() ??
           [],
       reportedStamp: (json['reportedStamp'] as num?)?.toInt(),
+      email: json['email'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
+      address: json['address'] as String? ?? '',
+      country: json['country'] as String? ?? '',
+      countryCode: json['countryCode'] as String? ?? '',
+      stateProvince: json['stateProvince'] as String? ?? '',
+      city: json['city'] as String? ?? '',
+      zipcode: json['zipcode'] as String? ?? '',
     );
 
 Map<String, dynamic> _$AssetInfoToJson(AssetInfo instance) {
@@ -7360,6 +7466,14 @@ Map<String, dynamic> _$AssetInfoToJson(AssetInfo instance) {
   val['assetModelId'] = instance.assetModelId;
   val['clientIds'] = instance.clientIds;
   writeNotNull('reportedStamp', instance.reportedStamp);
+  writeNotNull('email', instance.email);
+  writeNotNull('phone', instance.phone);
+  writeNotNull('address', instance.address);
+  writeNotNull('country', instance.country);
+  writeNotNull('countryCode', instance.countryCode);
+  writeNotNull('stateProvince', instance.stateProvince);
+  writeNotNull('city', instance.city);
+  writeNotNull('zipcode', instance.zipcode);
   return val;
 }
 
@@ -7416,6 +7530,14 @@ Asset _$AssetFromJson(Map<String, dynamic> json) => Asset(
               .toList() ??
           [],
       reportedStamp: (json['reportedStamp'] as num?)?.toInt(),
+      email: json['email'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
+      address: json['address'] as String? ?? '',
+      country: json['country'] as String? ?? '',
+      countryCode: json['countryCode'] as String? ?? '',
+      stateProvince: json['stateProvince'] as String? ?? '',
+      city: json['city'] as String? ?? '',
+      zipcode: json['zipcode'] as String? ?? '',
       currentLocation: json['currentLocation'] == null
           ? null
           : GeoLocation.fromJson(
@@ -7453,6 +7575,14 @@ Map<String, dynamic> _$AssetToJson(Asset instance) {
   val['assetModelId'] = instance.assetModelId;
   val['clientIds'] = instance.clientIds;
   writeNotNull('reportedStamp', instance.reportedStamp);
+  writeNotNull('email', instance.email);
+  writeNotNull('phone', instance.phone);
+  writeNotNull('address', instance.address);
+  writeNotNull('country', instance.country);
+  writeNotNull('countryCode', instance.countryCode);
+  writeNotNull('stateProvince', instance.stateProvince);
+  writeNotNull('city', instance.city);
+  writeNotNull('zipcode', instance.zipcode);
   writeNotNull('currentLocation', instance.currentLocation?.toJson());
   val['domainKey'] = instance.domainKey;
   val['id'] = instance.id;
@@ -11310,6 +11440,163 @@ Map<String, dynamic> _$UnregisterAccountToJson(UnregisterAccount instance) =>
       'reason': instance.reason,
       'password': instance.password,
     };
+
+CustomSearchReqBase _$CustomSearchReqBaseFromJson(Map<String, dynamic> json) =>
+    CustomSearchReqBase(
+      fields: (json['fields'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      sort: json['sort'],
+    );
+
+Map<String, dynamic> _$CustomSearchReqBaseToJson(CustomSearchReqBase instance) {
+  final val = <String, dynamic>{
+    'fields': instance.fields,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('sort', instance.sort);
+  return val;
+}
+
+CustomSearchReq _$CustomSearchReqFromJson(Map<String, dynamic> json) =>
+    CustomSearchReq(
+      search: json['search'] as String? ?? '',
+      fields: (json['fields'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      sort: json['sort'],
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$CustomSearchReqToJson(CustomSearchReq instance) {
+  final val = <String, dynamic>{
+    'search': instance.search,
+    'fields': instance.fields,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('sort', instance.sort);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  return val;
+}
+
+CustomEntity _$CustomEntityFromJson(Map<String, dynamic> json) => CustomEntity(
+      entity: json['entity'],
+    );
+
+Map<String, dynamic> _$CustomEntityToJson(CustomEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity);
+  return val;
+}
+
+CustomEntityRes _$CustomEntityResFromJson(Map<String, dynamic> json) =>
+    CustomEntityRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'],
+    );
+
+Map<String, dynamic> _$CustomEntityResToJson(CustomEntityRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity);
+  return val;
+}
+
+CustomEntityArray _$CustomEntityArrayFromJson(Map<String, dynamic> json) =>
+    CustomEntityArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => e as Object)
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$CustomEntityArrayToJson(CustomEntityArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values);
+  return val;
+}
+
+CustomEntityArrayRes _$CustomEntityArrayResFromJson(
+        Map<String, dynamic> json) =>
+    CustomEntityArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) => e as Object)
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$CustomEntityArrayResToJson(
+    CustomEntityArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values);
+  return val;
+}
 
 ExportData _$ExportDataFromJson(Map<String, dynamic> json) => ExportData(
       model: DeviceModelInfo.fromJson(json['model'] as Map<String, dynamic>),

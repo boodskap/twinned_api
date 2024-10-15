@@ -205,6 +205,56 @@ enum ControlCommandCommandType {
   const ControlCommandCommandType(this.value);
 }
 
+enum ControlTargetHttpProtocol {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('GET')
+  $get('GET'),
+  @JsonValue('PUT')
+  put('PUT'),
+  @JsonValue('POST')
+  post('POST'),
+  @JsonValue('DELETE')
+  delete('DELETE');
+
+  final String? value;
+
+  const ControlTargetHttpProtocol(this.value);
+}
+
+enum ControlInfoTarget {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('BUILTIN')
+  builtin('BUILTIN'),
+  @JsonValue('MQTT')
+  mqtt('MQTT'),
+  @JsonValue('HTTP')
+  http('HTTP');
+
+  final String? value;
+
+  const ControlInfoTarget(this.value);
+}
+
+enum ControlTarget {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('BUILTIN')
+  builtin('BUILTIN'),
+  @JsonValue('MQTT')
+  mqtt('MQTT'),
+  @JsonValue('HTTP')
+  http('HTTP');
+
+  final String? value;
+
+  const ControlTarget(this.value);
+}
+
 enum EventInfoSourceType {
   @JsonValue(null)
   swaggerGeneratedUnknown(null),

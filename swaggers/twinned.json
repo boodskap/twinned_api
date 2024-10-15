@@ -16506,6 +16506,365 @@
           }
         ]
       }
+    },
+    "/CustomEntity/create/{name}": {
+      "post": {
+        "tags": [
+          "Custom Entity"
+        ],
+        "summary": "Create custom entity",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "createCustomEntity",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CustomEntityRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/CustomEntity/update/{name}/{id}": {
+      "post": {
+        "tags": [
+          "Custom Entity"
+        ],
+        "summary": "Update custom entity",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "updateCustomEntity",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CustomEntityRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/CustomEntity/remove/{name}/{id}": {
+      "delete": {
+        "tags": [
+          "Custom Entity"
+        ],
+        "summary": "Remove custom entity",
+        "consumes": [
+          "text/plain"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "deleteCustomEntity",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CustomEntityRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/CustomEntity/get/{name}/{id}": {
+      "get": {
+        "tags": [
+          "Custom Entity"
+        ],
+        "summary": "Get custom entity",
+        "consumes": [
+          "text/plain"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getCustomEntity",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CustomEntityRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/CustomEntity/search/{name}": {
+      "post": {
+        "tags": [
+          "Custom Entity"
+        ],
+        "summary": "Search custom entities",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "searchCustomEntities",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomSearchReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CustomEntityArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/CustomEntity/eql/{name}": {
+      "post": {
+        "tags": [
+          "Custom Entity"
+        ],
+        "summary": "Search using EQL",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "searchEqlCustomEntities",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "eql",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CustomEntityArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/CustomEntity/query/eql/{name}": {
+      "post": {
+        "tags": [
+          "Custom Entity"
+        ],
+        "summary": "query eql data",
+        "description": "query custom entity",
+        "operationId": "queryEqlCustomEntity",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EqlSearch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CustomEntityArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
     }
   },
   "securityDefinitions": {
@@ -17542,11 +17901,15 @@
       "discriminator": "commandParameter",
       "required": [
         "name",
+        "label",
         "parameterType",
         "required"
       ],
       "properties": {
         "name": {
+          "type": "string"
+        },
+        "label": {
           "type": "string"
         },
         "description": {
@@ -17573,7 +17936,8 @@
     "ControlCommand": {
       "type": "object",
       "required": [
-        "type"
+        "type",
+        "commandType"
       ],
       "properties": {
         "type": {
@@ -17610,12 +17974,94 @@
         }
       }
     },
+    "NameValue": {
+      "type": "object",
+      "discriminator": "nvType",
+      "required": [
+        "name",
+        "value"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "ControlTargetMqtt": {
+      "type": "object",
+      "discriminator": "ctMqtt",
+      "required": [
+        "url",
+        "topic"
+      ],
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "topic": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "ControlTargetHttp": {
+      "type": "object",
+      "discriminator": "ctHttp",
+      "required": [
+        "url",
+        "protocol"
+      ],
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "GET",
+            "PUT",
+            "POST",
+            "DELETE"
+          ]
+        },
+        "headers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NameValue"
+          }
+        },
+        "queryParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NameValue"
+          }
+        },
+        "basicAuthUserName": {
+          "type": "string"
+        },
+        "basicAuthPassword": {
+          "type": "string"
+        }
+      }
+    },
     "ControlInfo": {
       "type": "object",
       "required": [
         "name",
         "modelId",
         "command",
+        "target",
         "clientIds"
       ],
       "properties": {
@@ -17645,6 +18091,20 @@
         },
         "visibleIfDisabled": {
           "type": "boolean"
+        },
+        "target": {
+          "type": "string",
+          "enum": [
+            "BUILTIN",
+            "MQTT",
+            "HTTP"
+          ]
+        },
+        "targetMqtt": {
+          "$ref": "#/definitions/ControlTargetMqtt"
+        },
+        "targetHttp": {
+          "$ref": "#/definitions/ControlTargetHttp"
         },
         "tags": {
           "type": "array",
@@ -21789,6 +22249,30 @@
         "reportedStamp": {
           "type": "integer",
           "format": "int64"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "stateProvince": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "zipcode": {
+          "type": "string"
         }
       }
     },
@@ -24385,6 +24869,87 @@
           "type": "string"
         }
       }
+    },
+    "CustomSearchReqBase": {
+      "type": "object",
+      "required": [
+        "fields"
+      ],
+      "properties": {
+        "fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sort": {
+          "type": "object"
+        }
+      }
+    },
+    "CustomSearchReq": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchReqBase"
+        },
+        {
+          "$ref": "#/definitions/CustomSearchReqBase"
+        },
+        {
+          "$ref": "#/definitions/ListReq"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "CustomEntity": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "type": "object"
+        }
+      }
+    },
+    "CustomEntityRes": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResponse"
+        },
+        {
+          "$ref": "#/definitions/CustomEntity"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "CustomEntityArray": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "CustomEntityArrayRes": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResponse"
+        },
+        {
+          "$ref": "#/definitions/ListRes"
+        },
+        {
+          "$ref": "#/definitions/CustomEntityArray"
+        },
+        {
+          "type": "object"
+        }
+      ]
     },
     "ExportData": {
       "type": "object",

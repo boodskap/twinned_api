@@ -8509,6 +8509,188 @@ abstract class Twinned extends ChopperService {
   @Get(path: '/Client/make/myself')
   Future<chopper.Response<ClientEntityRes>> _makeMyselfAsNewClient(
       {@Header('APIKEY') String? apikey});
+
+  ///Create custom entity
+  ///@param name
+  ///@param id
+  ///@param body
+  Future<chopper.Response<CustomEntityRes>> createCustomEntity({
+    required String? name,
+    String? id,
+    required Object? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        CustomEntityRes, () => CustomEntityRes.fromJsonFactory);
+
+    return _createCustomEntity(
+        name: name, id: id?.toString(), body: body, apikey: apikey?.toString());
+  }
+
+  ///Create custom entity
+  ///@param name
+  ///@param id
+  ///@param body
+  @Post(path: '/CustomEntity/create/{name}')
+  Future<chopper.Response<CustomEntityRes>> _createCustomEntity({
+    @Path('name') required String? name,
+    @Header('id') String? id,
+    @Body() required Object? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///Update custom entity
+  ///@param name
+  ///@param id
+  ///@param body
+  Future<chopper.Response<CustomEntityRes>> updateCustomEntity({
+    required String? name,
+    required String? id,
+    required Object? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        CustomEntityRes, () => CustomEntityRes.fromJsonFactory);
+
+    return _updateCustomEntity(
+        name: name, id: id, body: body, apikey: apikey?.toString());
+  }
+
+  ///Update custom entity
+  ///@param name
+  ///@param id
+  ///@param body
+  @Post(path: '/CustomEntity/update/{name}/{id}')
+  Future<chopper.Response<CustomEntityRes>> _updateCustomEntity({
+    @Path('name') required String? name,
+    @Path('id') required String? id,
+    @Body() required Object? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///Remove custom entity
+  ///@param name
+  ///@param id
+  Future<chopper.Response<CustomEntityRes>> deleteCustomEntity({
+    required String? name,
+    required String? id,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        CustomEntityRes, () => CustomEntityRes.fromJsonFactory);
+
+    return _deleteCustomEntity(name: name, id: id, apikey: apikey?.toString());
+  }
+
+  ///Remove custom entity
+  ///@param name
+  ///@param id
+  @Delete(path: '/CustomEntity/remove/{name}/{id}')
+  Future<chopper.Response<CustomEntityRes>> _deleteCustomEntity({
+    @Path('name') required String? name,
+    @Path('id') required String? id,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///Get custom entity
+  ///@param name
+  ///@param id
+  Future<chopper.Response<CustomEntityRes>> getCustomEntity({
+    required String? name,
+    required String? id,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        CustomEntityRes, () => CustomEntityRes.fromJsonFactory);
+
+    return _getCustomEntity(name: name, id: id, apikey: apikey?.toString());
+  }
+
+  ///Get custom entity
+  ///@param name
+  ///@param id
+  @Get(path: '/CustomEntity/get/{name}/{id}')
+  Future<chopper.Response<CustomEntityRes>> _getCustomEntity({
+    @Path('name') required String? name,
+    @Path('id') required String? id,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///Search custom entities
+  ///@param name
+  ///@param body
+  Future<chopper.Response<CustomEntityArrayRes>> searchCustomEntities({
+    required String? name,
+    required CustomSearchReq? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        CustomEntityArrayRes, () => CustomEntityArrayRes.fromJsonFactory);
+
+    return _searchCustomEntities(
+        name: name, body: body, apikey: apikey?.toString());
+  }
+
+  ///Search custom entities
+  ///@param name
+  ///@param body
+  @Post(path: '/CustomEntity/search/{name}')
+  Future<chopper.Response<CustomEntityArrayRes>> _searchCustomEntities({
+    @Path('name') required String? name,
+    @Body() required CustomSearchReq? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///Search using EQL
+  ///@param name
+  ///@param eql
+  Future<chopper.Response<CustomEntityArrayRes>> searchEqlCustomEntities({
+    required String? name,
+    required Object? eql,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        CustomEntityArrayRes, () => CustomEntityArrayRes.fromJsonFactory);
+
+    return _searchEqlCustomEntities(
+        name: name, eql: eql, apikey: apikey?.toString());
+  }
+
+  ///Search using EQL
+  ///@param name
+  ///@param eql
+  @Post(path: '/CustomEntity/eql/{name}')
+  Future<chopper.Response<CustomEntityArrayRes>> _searchEqlCustomEntities({
+    @Path('name') required String? name,
+    @Body() required Object? eql,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///query eql data
+  ///@param name
+  ///@param body
+  Future<chopper.Response<CustomEntityArrayRes>> queryEqlCustomEntity({
+    required String? name,
+    required EqlSearch? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(EqlSearch, () => EqlSearch.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        CustomEntityArrayRes, () => CustomEntityArrayRes.fromJsonFactory);
+
+    return _queryEqlCustomEntity(
+        name: name, body: body, apikey: apikey?.toString());
+  }
+
+  ///query eql data
+  ///@param name
+  ///@param body
+  @Post(path: '/CustomEntity/query/eql/{name}')
+  Future<chopper.Response<CustomEntityArrayRes>> _queryEqlCustomEntity({
+    @Path('name') required String? name,
+    @Body() required EqlSearch? body,
+    @Header('APIKEY') String? apikey,
+  });
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -13316,6 +13498,7 @@ extension $AlarmArrayResExtension on AlarmArrayRes {
 class CommandParameter {
   const CommandParameter({
     required this.name,
+    required this.label,
     this.description,
     required this.parameterType,
     required this.required,
@@ -13330,6 +13513,8 @@ class CommandParameter {
 
   @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
   final String name;
+  @JsonKey(name: 'label', includeIfNull: false, defaultValue: '')
+  final String label;
   @JsonKey(name: 'description', includeIfNull: false, defaultValue: '')
   final String? description;
   @JsonKey(
@@ -13351,6 +13536,8 @@ class CommandParameter {
         (other is CommandParameter &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.label, label) ||
+                const DeepCollectionEquality().equals(other.label, label)) &&
             (identical(other.description, description) ||
                 const DeepCollectionEquality()
                     .equals(other.description, description)) &&
@@ -13371,6 +13558,7 @@ class CommandParameter {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(label) ^
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(parameterType) ^
       const DeepCollectionEquality().hash(required) ^
@@ -13381,12 +13569,14 @@ class CommandParameter {
 extension $CommandParameterExtension on CommandParameter {
   CommandParameter copyWith(
       {String? name,
+      String? label,
       String? description,
       enums.CommandParameterParameterType? parameterType,
       bool? required,
       String? defaultValue}) {
     return CommandParameter(
         name: name ?? this.name,
+        label: label ?? this.label,
         description: description ?? this.description,
         parameterType: parameterType ?? this.parameterType,
         required: required ?? this.required,
@@ -13395,12 +13585,14 @@ extension $CommandParameterExtension on CommandParameter {
 
   CommandParameter copyWithWrapped(
       {Wrapped<String>? name,
+      Wrapped<String>? label,
       Wrapped<String?>? description,
       Wrapped<enums.CommandParameterParameterType>? parameterType,
       Wrapped<bool>? required,
       Wrapped<String?>? defaultValue}) {
     return CommandParameter(
         name: (name != null ? name.value : this.name),
+        label: (label != null ? label.value : this.label),
         description:
             (description != null ? description.value : this.description),
         parameterType:
@@ -13415,7 +13607,7 @@ extension $CommandParameterExtension on CommandParameter {
 class ControlCommand {
   const ControlCommand({
     required this.type,
-    this.commandType,
+    required this.commandType,
     this.jsonValue,
     this.textValue,
     this.binaryValue,
@@ -13438,10 +13630,10 @@ class ControlCommand {
   @JsonKey(
     name: 'commandType',
     includeIfNull: false,
-    toJson: controlCommandCommandTypeNullableToJson,
-    fromJson: controlCommandCommandTypeNullableFromJson,
+    toJson: controlCommandCommandTypeToJson,
+    fromJson: controlCommandCommandTypeFromJson,
   )
-  final enums.ControlCommandCommandType? commandType;
+  final enums.ControlCommandCommandType commandType;
   @JsonKey(name: 'jsonValue', includeIfNull: false)
   final Object? jsonValue;
   @JsonKey(name: 'textValue', includeIfNull: false, defaultValue: '')
@@ -13511,7 +13703,7 @@ extension $ControlCommandExtension on ControlCommand {
 
   ControlCommand copyWithWrapped(
       {Wrapped<enums.ControlCommandType>? type,
-      Wrapped<enums.ControlCommandCommandType?>? commandType,
+      Wrapped<enums.ControlCommandCommandType>? commandType,
       Wrapped<Object?>? jsonValue,
       Wrapped<String?>? textValue,
       Wrapped<String?>? binaryValue,
@@ -13529,6 +13721,263 @@ extension $ControlCommandExtension on ControlCommand {
 }
 
 @JsonSerializable(explicitToJson: true)
+class NameValue {
+  const NameValue({
+    required this.name,
+    required this.$value,
+  });
+
+  factory NameValue.fromJson(Map<String, dynamic> json) =>
+      _$NameValueFromJson(json);
+
+  static const toJsonFactory = _$NameValueToJson;
+  Map<String, dynamic> toJson() => _$NameValueToJson(this);
+
+  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
+  final String name;
+  @JsonKey(name: 'value', includeIfNull: false, defaultValue: '')
+  final String $value;
+  static const fromJsonFactory = _$NameValueFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is NameValue &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.$value, $value) ||
+                const DeepCollectionEquality().equals(other.$value, $value)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash($value) ^
+      runtimeType.hashCode;
+}
+
+extension $NameValueExtension on NameValue {
+  NameValue copyWith({String? name, String? $value}) {
+    return NameValue(name: name ?? this.name, $value: $value ?? this.$value);
+  }
+
+  NameValue copyWithWrapped({Wrapped<String>? name, Wrapped<String>? $value}) {
+    return NameValue(
+        name: (name != null ? name.value : this.name),
+        $value: ($value != null ? $value.value : this.$value));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ControlTargetMqtt {
+  const ControlTargetMqtt({
+    required this.url,
+    required this.topic,
+    this.clientId,
+    this.userName,
+    this.password,
+  });
+
+  factory ControlTargetMqtt.fromJson(Map<String, dynamic> json) =>
+      _$ControlTargetMqttFromJson(json);
+
+  static const toJsonFactory = _$ControlTargetMqttToJson;
+  Map<String, dynamic> toJson() => _$ControlTargetMqttToJson(this);
+
+  @JsonKey(name: 'url', includeIfNull: false, defaultValue: '')
+  final String url;
+  @JsonKey(name: 'topic', includeIfNull: false, defaultValue: '')
+  final String topic;
+  @JsonKey(name: 'clientId', includeIfNull: false, defaultValue: '')
+  final String? clientId;
+  @JsonKey(name: 'userName', includeIfNull: false, defaultValue: '')
+  final String? userName;
+  @JsonKey(name: 'password', includeIfNull: false, defaultValue: '')
+  final String? password;
+  static const fromJsonFactory = _$ControlTargetMqttFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is ControlTargetMqtt &&
+            (identical(other.url, url) ||
+                const DeepCollectionEquality().equals(other.url, url)) &&
+            (identical(other.topic, topic) ||
+                const DeepCollectionEquality().equals(other.topic, topic)) &&
+            (identical(other.clientId, clientId) ||
+                const DeepCollectionEquality()
+                    .equals(other.clientId, clientId)) &&
+            (identical(other.userName, userName) ||
+                const DeepCollectionEquality()
+                    .equals(other.userName, userName)) &&
+            (identical(other.password, password) ||
+                const DeepCollectionEquality()
+                    .equals(other.password, password)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(url) ^
+      const DeepCollectionEquality().hash(topic) ^
+      const DeepCollectionEquality().hash(clientId) ^
+      const DeepCollectionEquality().hash(userName) ^
+      const DeepCollectionEquality().hash(password) ^
+      runtimeType.hashCode;
+}
+
+extension $ControlTargetMqttExtension on ControlTargetMqtt {
+  ControlTargetMqtt copyWith(
+      {String? url,
+      String? topic,
+      String? clientId,
+      String? userName,
+      String? password}) {
+    return ControlTargetMqtt(
+        url: url ?? this.url,
+        topic: topic ?? this.topic,
+        clientId: clientId ?? this.clientId,
+        userName: userName ?? this.userName,
+        password: password ?? this.password);
+  }
+
+  ControlTargetMqtt copyWithWrapped(
+      {Wrapped<String>? url,
+      Wrapped<String>? topic,
+      Wrapped<String?>? clientId,
+      Wrapped<String?>? userName,
+      Wrapped<String?>? password}) {
+    return ControlTargetMqtt(
+        url: (url != null ? url.value : this.url),
+        topic: (topic != null ? topic.value : this.topic),
+        clientId: (clientId != null ? clientId.value : this.clientId),
+        userName: (userName != null ? userName.value : this.userName),
+        password: (password != null ? password.value : this.password));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class ControlTargetHttp {
+  const ControlTargetHttp({
+    required this.url,
+    required this.protocol,
+    this.headers,
+    this.queryParameters,
+    this.basicAuthUserName,
+    this.basicAuthPassword,
+  });
+
+  factory ControlTargetHttp.fromJson(Map<String, dynamic> json) =>
+      _$ControlTargetHttpFromJson(json);
+
+  static const toJsonFactory = _$ControlTargetHttpToJson;
+  Map<String, dynamic> toJson() => _$ControlTargetHttpToJson(this);
+
+  @JsonKey(name: 'url', includeIfNull: false, defaultValue: '')
+  final String url;
+  @JsonKey(
+    name: 'protocol',
+    includeIfNull: false,
+    toJson: controlTargetHttpProtocolToJson,
+    fromJson: controlTargetHttpProtocolFromJson,
+  )
+  final enums.ControlTargetHttpProtocol protocol;
+  @JsonKey(name: 'headers', includeIfNull: false, defaultValue: <NameValue>[])
+  final List<NameValue>? headers;
+  @JsonKey(
+      name: 'queryParameters',
+      includeIfNull: false,
+      defaultValue: <NameValue>[])
+  final List<NameValue>? queryParameters;
+  @JsonKey(name: 'basicAuthUserName', includeIfNull: false, defaultValue: '')
+  final String? basicAuthUserName;
+  @JsonKey(name: 'basicAuthPassword', includeIfNull: false, defaultValue: '')
+  final String? basicAuthPassword;
+  static const fromJsonFactory = _$ControlTargetHttpFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is ControlTargetHttp &&
+            (identical(other.url, url) ||
+                const DeepCollectionEquality().equals(other.url, url)) &&
+            (identical(other.protocol, protocol) ||
+                const DeepCollectionEquality()
+                    .equals(other.protocol, protocol)) &&
+            (identical(other.headers, headers) ||
+                const DeepCollectionEquality()
+                    .equals(other.headers, headers)) &&
+            (identical(other.queryParameters, queryParameters) ||
+                const DeepCollectionEquality()
+                    .equals(other.queryParameters, queryParameters)) &&
+            (identical(other.basicAuthUserName, basicAuthUserName) ||
+                const DeepCollectionEquality()
+                    .equals(other.basicAuthUserName, basicAuthUserName)) &&
+            (identical(other.basicAuthPassword, basicAuthPassword) ||
+                const DeepCollectionEquality()
+                    .equals(other.basicAuthPassword, basicAuthPassword)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(url) ^
+      const DeepCollectionEquality().hash(protocol) ^
+      const DeepCollectionEquality().hash(headers) ^
+      const DeepCollectionEquality().hash(queryParameters) ^
+      const DeepCollectionEquality().hash(basicAuthUserName) ^
+      const DeepCollectionEquality().hash(basicAuthPassword) ^
+      runtimeType.hashCode;
+}
+
+extension $ControlTargetHttpExtension on ControlTargetHttp {
+  ControlTargetHttp copyWith(
+      {String? url,
+      enums.ControlTargetHttpProtocol? protocol,
+      List<NameValue>? headers,
+      List<NameValue>? queryParameters,
+      String? basicAuthUserName,
+      String? basicAuthPassword}) {
+    return ControlTargetHttp(
+        url: url ?? this.url,
+        protocol: protocol ?? this.protocol,
+        headers: headers ?? this.headers,
+        queryParameters: queryParameters ?? this.queryParameters,
+        basicAuthUserName: basicAuthUserName ?? this.basicAuthUserName,
+        basicAuthPassword: basicAuthPassword ?? this.basicAuthPassword);
+  }
+
+  ControlTargetHttp copyWithWrapped(
+      {Wrapped<String>? url,
+      Wrapped<enums.ControlTargetHttpProtocol>? protocol,
+      Wrapped<List<NameValue>?>? headers,
+      Wrapped<List<NameValue>?>? queryParameters,
+      Wrapped<String?>? basicAuthUserName,
+      Wrapped<String?>? basicAuthPassword}) {
+    return ControlTargetHttp(
+        url: (url != null ? url.value : this.url),
+        protocol: (protocol != null ? protocol.value : this.protocol),
+        headers: (headers != null ? headers.value : this.headers),
+        queryParameters: (queryParameters != null
+            ? queryParameters.value
+            : this.queryParameters),
+        basicAuthUserName: (basicAuthUserName != null
+            ? basicAuthUserName.value
+            : this.basicAuthUserName),
+        basicAuthPassword: (basicAuthPassword != null
+            ? basicAuthPassword.value
+            : this.basicAuthPassword));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class ControlInfo {
   const ControlInfo({
     required this.name,
@@ -13540,6 +13989,9 @@ class ControlInfo {
     this.disabledIcon,
     this.allowUsers,
     this.visibleIfDisabled,
+    required this.target,
+    this.targetMqtt,
+    this.targetHttp,
     this.tags,
     this.roles,
     required this.clientIds,
@@ -13569,6 +14021,17 @@ class ControlInfo {
   final bool? allowUsers;
   @JsonKey(name: 'visibleIfDisabled', includeIfNull: false)
   final bool? visibleIfDisabled;
+  @JsonKey(
+    name: 'target',
+    includeIfNull: false,
+    toJson: controlInfoTargetToJson,
+    fromJson: controlInfoTargetFromJson,
+  )
+  final enums.ControlInfoTarget target;
+  @JsonKey(name: 'targetMqtt', includeIfNull: false)
+  final ControlTargetMqtt? targetMqtt;
+  @JsonKey(name: 'targetHttp', includeIfNull: false)
+  final ControlTargetHttp? targetHttp;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
@@ -13606,6 +14069,14 @@ class ControlInfo {
             (identical(other.visibleIfDisabled, visibleIfDisabled) ||
                 const DeepCollectionEquality()
                     .equals(other.visibleIfDisabled, visibleIfDisabled)) &&
+            (identical(other.target, target) ||
+                const DeepCollectionEquality().equals(other.target, target)) &&
+            (identical(other.targetMqtt, targetMqtt) ||
+                const DeepCollectionEquality()
+                    .equals(other.targetMqtt, targetMqtt)) &&
+            (identical(other.targetHttp, targetHttp) ||
+                const DeepCollectionEquality()
+                    .equals(other.targetHttp, targetHttp)) &&
             (identical(other.tags, tags) ||
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.roles, roles) ||
@@ -13629,6 +14100,9 @@ class ControlInfo {
       const DeepCollectionEquality().hash(disabledIcon) ^
       const DeepCollectionEquality().hash(allowUsers) ^
       const DeepCollectionEquality().hash(visibleIfDisabled) ^
+      const DeepCollectionEquality().hash(target) ^
+      const DeepCollectionEquality().hash(targetMqtt) ^
+      const DeepCollectionEquality().hash(targetHttp) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(clientIds) ^
@@ -13646,6 +14120,9 @@ extension $ControlInfoExtension on ControlInfo {
       String? disabledIcon,
       bool? allowUsers,
       bool? visibleIfDisabled,
+      enums.ControlInfoTarget? target,
+      ControlTargetMqtt? targetMqtt,
+      ControlTargetHttp? targetHttp,
       List<String>? tags,
       List<String>? roles,
       List<String>? clientIds}) {
@@ -13659,6 +14136,9 @@ extension $ControlInfoExtension on ControlInfo {
         disabledIcon: disabledIcon ?? this.disabledIcon,
         allowUsers: allowUsers ?? this.allowUsers,
         visibleIfDisabled: visibleIfDisabled ?? this.visibleIfDisabled,
+        target: target ?? this.target,
+        targetMqtt: targetMqtt ?? this.targetMqtt,
+        targetHttp: targetHttp ?? this.targetHttp,
         tags: tags ?? this.tags,
         roles: roles ?? this.roles,
         clientIds: clientIds ?? this.clientIds);
@@ -13674,6 +14154,9 @@ extension $ControlInfoExtension on ControlInfo {
       Wrapped<String?>? disabledIcon,
       Wrapped<bool?>? allowUsers,
       Wrapped<bool?>? visibleIfDisabled,
+      Wrapped<enums.ControlInfoTarget>? target,
+      Wrapped<ControlTargetMqtt?>? targetMqtt,
+      Wrapped<ControlTargetHttp?>? targetHttp,
       Wrapped<List<String>?>? tags,
       Wrapped<List<String>?>? roles,
       Wrapped<List<String>>? clientIds}) {
@@ -13691,6 +14174,9 @@ extension $ControlInfoExtension on ControlInfo {
         visibleIfDisabled: (visibleIfDisabled != null
             ? visibleIfDisabled.value
             : this.visibleIfDisabled),
+        target: (target != null ? target.value : this.target),
+        targetMqtt: (targetMqtt != null ? targetMqtt.value : this.targetMqtt),
+        targetHttp: (targetHttp != null ? targetHttp.value : this.targetHttp),
         tags: (tags != null ? tags.value : this.tags),
         roles: (roles != null ? roles.value : this.roles),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds));
@@ -13752,6 +14238,9 @@ class Control {
     this.disabledIcon,
     this.allowUsers,
     this.visibleIfDisabled,
+    required this.target,
+    this.targetMqtt,
+    this.targetHttp,
     this.tags,
     this.roles,
     required this.clientIds,
@@ -13789,6 +14278,17 @@ class Control {
   final bool? allowUsers;
   @JsonKey(name: 'visibleIfDisabled', includeIfNull: false)
   final bool? visibleIfDisabled;
+  @JsonKey(
+    name: 'target',
+    includeIfNull: false,
+    toJson: controlTargetToJson,
+    fromJson: controlTargetFromJson,
+  )
+  final enums.ControlTarget target;
+  @JsonKey(name: 'targetMqtt', includeIfNull: false)
+  final ControlTargetMqtt? targetMqtt;
+  @JsonKey(name: 'targetHttp', includeIfNull: false)
+  final ControlTargetHttp? targetHttp;
   @JsonKey(name: 'tags', includeIfNull: false, defaultValue: <String>[])
   final List<String>? tags;
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
@@ -13842,6 +14342,14 @@ class Control {
             (identical(other.visibleIfDisabled, visibleIfDisabled) ||
                 const DeepCollectionEquality()
                     .equals(other.visibleIfDisabled, visibleIfDisabled)) &&
+            (identical(other.target, target) ||
+                const DeepCollectionEquality().equals(other.target, target)) &&
+            (identical(other.targetMqtt, targetMqtt) ||
+                const DeepCollectionEquality()
+                    .equals(other.targetMqtt, targetMqtt)) &&
+            (identical(other.targetHttp, targetHttp) ||
+                const DeepCollectionEquality()
+                    .equals(other.targetHttp, targetHttp)) &&
             (identical(other.tags, tags) ||
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.roles, roles) ||
@@ -13887,6 +14395,9 @@ class Control {
       const DeepCollectionEquality().hash(disabledIcon) ^
       const DeepCollectionEquality().hash(allowUsers) ^
       const DeepCollectionEquality().hash(visibleIfDisabled) ^
+      const DeepCollectionEquality().hash(target) ^
+      const DeepCollectionEquality().hash(targetMqtt) ^
+      const DeepCollectionEquality().hash(targetHttp) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(clientIds) ^
@@ -13912,6 +14423,9 @@ extension $ControlExtension on Control {
       String? disabledIcon,
       bool? allowUsers,
       bool? visibleIfDisabled,
+      enums.ControlTarget? target,
+      ControlTargetMqtt? targetMqtt,
+      ControlTargetHttp? targetHttp,
       List<String>? tags,
       List<String>? roles,
       List<String>? clientIds,
@@ -13933,6 +14447,9 @@ extension $ControlExtension on Control {
         disabledIcon: disabledIcon ?? this.disabledIcon,
         allowUsers: allowUsers ?? this.allowUsers,
         visibleIfDisabled: visibleIfDisabled ?? this.visibleIfDisabled,
+        target: target ?? this.target,
+        targetMqtt: targetMqtt ?? this.targetMqtt,
+        targetHttp: targetHttp ?? this.targetHttp,
         tags: tags ?? this.tags,
         roles: roles ?? this.roles,
         clientIds: clientIds ?? this.clientIds,
@@ -13956,6 +14473,9 @@ extension $ControlExtension on Control {
       Wrapped<String?>? disabledIcon,
       Wrapped<bool?>? allowUsers,
       Wrapped<bool?>? visibleIfDisabled,
+      Wrapped<enums.ControlTarget>? target,
+      Wrapped<ControlTargetMqtt?>? targetMqtt,
+      Wrapped<ControlTargetHttp?>? targetHttp,
       Wrapped<List<String>?>? tags,
       Wrapped<List<String>?>? roles,
       Wrapped<List<String>>? clientIds,
@@ -13981,6 +14501,9 @@ extension $ControlExtension on Control {
         visibleIfDisabled: (visibleIfDisabled != null
             ? visibleIfDisabled.value
             : this.visibleIfDisabled),
+        target: (target != null ? target.value : this.target),
+        targetMqtt: (targetMqtt != null ? targetMqtt.value : this.targetMqtt),
+        targetHttp: (targetHttp != null ? targetHttp.value : this.targetHttp),
         tags: (tags != null ? tags.value : this.tags),
         roles: (roles != null ? roles.value : this.roles),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
@@ -32894,6 +33417,14 @@ class AssetInfo {
     required this.assetModelId,
     required this.clientIds,
     this.reportedStamp,
+    this.email,
+    this.phone,
+    this.address,
+    this.country,
+    this.countryCode,
+    this.stateProvince,
+    this.city,
+    this.zipcode,
   });
 
   factory AssetInfo.fromJson(Map<String, dynamic> json) =>
@@ -32932,6 +33463,22 @@ class AssetInfo {
   final List<String> clientIds;
   @JsonKey(name: 'reportedStamp', includeIfNull: false)
   final int? reportedStamp;
+  @JsonKey(name: 'email', includeIfNull: false, defaultValue: '')
+  final String? email;
+  @JsonKey(name: 'phone', includeIfNull: false, defaultValue: '')
+  final String? phone;
+  @JsonKey(name: 'address', includeIfNull: false, defaultValue: '')
+  final String? address;
+  @JsonKey(name: 'country', includeIfNull: false, defaultValue: '')
+  final String? country;
+  @JsonKey(name: 'countryCode', includeIfNull: false, defaultValue: '')
+  final String? countryCode;
+  @JsonKey(name: 'stateProvince', includeIfNull: false, defaultValue: '')
+  final String? stateProvince;
+  @JsonKey(name: 'city', includeIfNull: false, defaultValue: '')
+  final String? city;
+  @JsonKey(name: 'zipcode', includeIfNull: false, defaultValue: '')
+  final String? zipcode;
   static const fromJsonFactory = _$AssetInfoFromJson;
 
   @override
@@ -32978,7 +33525,27 @@ class AssetInfo {
                     .equals(other.clientIds, clientIds)) &&
             (identical(other.reportedStamp, reportedStamp) ||
                 const DeepCollectionEquality()
-                    .equals(other.reportedStamp, reportedStamp)));
+                    .equals(other.reportedStamp, reportedStamp)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
+            (identical(other.phone, phone) ||
+                const DeepCollectionEquality().equals(other.phone, phone)) &&
+            (identical(other.address, address) ||
+                const DeepCollectionEquality()
+                    .equals(other.address, address)) &&
+            (identical(other.country, country) ||
+                const DeepCollectionEquality()
+                    .equals(other.country, country)) &&
+            (identical(other.countryCode, countryCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryCode, countryCode)) &&
+            (identical(other.stateProvince, stateProvince) ||
+                const DeepCollectionEquality()
+                    .equals(other.stateProvince, stateProvince)) &&
+            (identical(other.city, city) ||
+                const DeepCollectionEquality().equals(other.city, city)) &&
+            (identical(other.zipcode, zipcode) ||
+                const DeepCollectionEquality().equals(other.zipcode, zipcode)));
   }
 
   @override
@@ -33001,6 +33568,14 @@ class AssetInfo {
       const DeepCollectionEquality().hash(assetModelId) ^
       const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(reportedStamp) ^
+      const DeepCollectionEquality().hash(email) ^
+      const DeepCollectionEquality().hash(phone) ^
+      const DeepCollectionEquality().hash(address) ^
+      const DeepCollectionEquality().hash(country) ^
+      const DeepCollectionEquality().hash(countryCode) ^
+      const DeepCollectionEquality().hash(stateProvince) ^
+      const DeepCollectionEquality().hash(city) ^
+      const DeepCollectionEquality().hash(zipcode) ^
       runtimeType.hashCode;
 }
 
@@ -33020,7 +33595,15 @@ extension $AssetInfoExtension on AssetInfo {
       ScreenPosition? position,
       String? assetModelId,
       List<String>? clientIds,
-      int? reportedStamp}) {
+      int? reportedStamp,
+      String? email,
+      String? phone,
+      String? address,
+      String? country,
+      String? countryCode,
+      String? stateProvince,
+      String? city,
+      String? zipcode}) {
     return AssetInfo(
         premiseId: premiseId ?? this.premiseId,
         facilityId: facilityId ?? this.facilityId,
@@ -33036,7 +33619,15 @@ extension $AssetInfoExtension on AssetInfo {
         position: position ?? this.position,
         assetModelId: assetModelId ?? this.assetModelId,
         clientIds: clientIds ?? this.clientIds,
-        reportedStamp: reportedStamp ?? this.reportedStamp);
+        reportedStamp: reportedStamp ?? this.reportedStamp,
+        email: email ?? this.email,
+        phone: phone ?? this.phone,
+        address: address ?? this.address,
+        country: country ?? this.country,
+        countryCode: countryCode ?? this.countryCode,
+        stateProvince: stateProvince ?? this.stateProvince,
+        city: city ?? this.city,
+        zipcode: zipcode ?? this.zipcode);
   }
 
   AssetInfo copyWithWrapped(
@@ -33054,7 +33645,15 @@ extension $AssetInfoExtension on AssetInfo {
       Wrapped<ScreenPosition?>? position,
       Wrapped<String>? assetModelId,
       Wrapped<List<String>>? clientIds,
-      Wrapped<int?>? reportedStamp}) {
+      Wrapped<int?>? reportedStamp,
+      Wrapped<String?>? email,
+      Wrapped<String?>? phone,
+      Wrapped<String?>? address,
+      Wrapped<String?>? country,
+      Wrapped<String?>? countryCode,
+      Wrapped<String?>? stateProvince,
+      Wrapped<String?>? city,
+      Wrapped<String?>? zipcode}) {
     return AssetInfo(
         premiseId: (premiseId != null ? premiseId.value : this.premiseId),
         facilityId: (facilityId != null ? facilityId.value : this.facilityId),
@@ -33074,7 +33673,17 @@ extension $AssetInfoExtension on AssetInfo {
             (assetModelId != null ? assetModelId.value : this.assetModelId),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         reportedStamp:
-            (reportedStamp != null ? reportedStamp.value : this.reportedStamp));
+            (reportedStamp != null ? reportedStamp.value : this.reportedStamp),
+        email: (email != null ? email.value : this.email),
+        phone: (phone != null ? phone.value : this.phone),
+        address: (address != null ? address.value : this.address),
+        country: (country != null ? country.value : this.country),
+        countryCode:
+            (countryCode != null ? countryCode.value : this.countryCode),
+        stateProvince:
+            (stateProvince != null ? stateProvince.value : this.stateProvince),
+        city: (city != null ? city.value : this.city),
+        zipcode: (zipcode != null ? zipcode.value : this.zipcode));
   }
 }
 
@@ -33143,6 +33752,14 @@ class Asset {
     required this.assetModelId,
     required this.clientIds,
     this.reportedStamp,
+    this.email,
+    this.phone,
+    this.address,
+    this.country,
+    this.countryCode,
+    this.stateProvince,
+    this.city,
+    this.zipcode,
     this.currentLocation,
     required this.domainKey,
     required this.id,
@@ -33188,6 +33805,22 @@ class Asset {
   final List<String> clientIds;
   @JsonKey(name: 'reportedStamp', includeIfNull: false)
   final int? reportedStamp;
+  @JsonKey(name: 'email', includeIfNull: false, defaultValue: '')
+  final String? email;
+  @JsonKey(name: 'phone', includeIfNull: false, defaultValue: '')
+  final String? phone;
+  @JsonKey(name: 'address', includeIfNull: false, defaultValue: '')
+  final String? address;
+  @JsonKey(name: 'country', includeIfNull: false, defaultValue: '')
+  final String? country;
+  @JsonKey(name: 'countryCode', includeIfNull: false, defaultValue: '')
+  final String? countryCode;
+  @JsonKey(name: 'stateProvince', includeIfNull: false, defaultValue: '')
+  final String? stateProvince;
+  @JsonKey(name: 'city', includeIfNull: false, defaultValue: '')
+  final String? city;
+  @JsonKey(name: 'zipcode', includeIfNull: false, defaultValue: '')
+  final String? zipcode;
   @JsonKey(name: 'currentLocation', includeIfNull: false)
   final GeoLocation? currentLocation;
   @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
@@ -33251,28 +33884,39 @@ class Asset {
             (identical(other.reportedStamp, reportedStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.reportedStamp, reportedStamp)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
+            (identical(other.phone, phone) ||
+                const DeepCollectionEquality().equals(other.phone, phone)) &&
+            (identical(other.address, address) ||
+                const DeepCollectionEquality()
+                    .equals(other.address, address)) &&
+            (identical(other.country, country) ||
+                const DeepCollectionEquality()
+                    .equals(other.country, country)) &&
+            (identical(other.countryCode, countryCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryCode, countryCode)) &&
+            (identical(other.stateProvince, stateProvince) ||
+                const DeepCollectionEquality()
+                    .equals(other.stateProvince, stateProvince)) &&
+            (identical(other.city, city) ||
+                const DeepCollectionEquality().equals(other.city, city)) &&
+            (identical(other.zipcode, zipcode) ||
+                const DeepCollectionEquality()
+                    .equals(other.zipcode, zipcode)) &&
             (identical(other.currentLocation, currentLocation) ||
                 const DeepCollectionEquality()
                     .equals(other.currentLocation, currentLocation)) &&
             (identical(other.domainKey, domainKey) ||
                 const DeepCollectionEquality()
                     .equals(other.domainKey, domainKey)) &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.rtype, rtype) ||
-                const DeepCollectionEquality().equals(other.rtype, rtype)) &&
-            (identical(other.createdStamp, createdStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdStamp, createdStamp)) &&
-            (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)) &&
-            (identical(other.createdBy, createdBy) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdBy, createdBy)) &&
-            (identical(other.updatedBy, updatedBy) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedBy, updatedBy)));
+            (identical(other.id, id) || const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.rtype, rtype) || const DeepCollectionEquality().equals(other.rtype, rtype)) &&
+            (identical(other.createdStamp, createdStamp) || const DeepCollectionEquality().equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) || const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)) &&
+            (identical(other.createdBy, createdBy) || const DeepCollectionEquality().equals(other.createdBy, createdBy)) &&
+            (identical(other.updatedBy, updatedBy) || const DeepCollectionEquality().equals(other.updatedBy, updatedBy)));
   }
 
   @override
@@ -33295,6 +33939,14 @@ class Asset {
       const DeepCollectionEquality().hash(assetModelId) ^
       const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(reportedStamp) ^
+      const DeepCollectionEquality().hash(email) ^
+      const DeepCollectionEquality().hash(phone) ^
+      const DeepCollectionEquality().hash(address) ^
+      const DeepCollectionEquality().hash(country) ^
+      const DeepCollectionEquality().hash(countryCode) ^
+      const DeepCollectionEquality().hash(stateProvince) ^
+      const DeepCollectionEquality().hash(city) ^
+      const DeepCollectionEquality().hash(zipcode) ^
       const DeepCollectionEquality().hash(currentLocation) ^
       const DeepCollectionEquality().hash(domainKey) ^
       const DeepCollectionEquality().hash(id) ^
@@ -33323,6 +33975,14 @@ extension $AssetExtension on Asset {
       String? assetModelId,
       List<String>? clientIds,
       int? reportedStamp,
+      String? email,
+      String? phone,
+      String? address,
+      String? country,
+      String? countryCode,
+      String? stateProvince,
+      String? city,
+      String? zipcode,
       GeoLocation? currentLocation,
       String? domainKey,
       String? id,
@@ -33347,6 +34007,14 @@ extension $AssetExtension on Asset {
         assetModelId: assetModelId ?? this.assetModelId,
         clientIds: clientIds ?? this.clientIds,
         reportedStamp: reportedStamp ?? this.reportedStamp,
+        email: email ?? this.email,
+        phone: phone ?? this.phone,
+        address: address ?? this.address,
+        country: country ?? this.country,
+        countryCode: countryCode ?? this.countryCode,
+        stateProvince: stateProvince ?? this.stateProvince,
+        city: city ?? this.city,
+        zipcode: zipcode ?? this.zipcode,
         currentLocation: currentLocation ?? this.currentLocation,
         domainKey: domainKey ?? this.domainKey,
         id: id ?? this.id,
@@ -33373,6 +34041,14 @@ extension $AssetExtension on Asset {
       Wrapped<String>? assetModelId,
       Wrapped<List<String>>? clientIds,
       Wrapped<int?>? reportedStamp,
+      Wrapped<String?>? email,
+      Wrapped<String?>? phone,
+      Wrapped<String?>? address,
+      Wrapped<String?>? country,
+      Wrapped<String?>? countryCode,
+      Wrapped<String?>? stateProvince,
+      Wrapped<String?>? city,
+      Wrapped<String?>? zipcode,
       Wrapped<GeoLocation?>? currentLocation,
       Wrapped<String>? domainKey,
       Wrapped<String>? id,
@@ -33401,6 +34077,16 @@ extension $AssetExtension on Asset {
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         reportedStamp:
             (reportedStamp != null ? reportedStamp.value : this.reportedStamp),
+        email: (email != null ? email.value : this.email),
+        phone: (phone != null ? phone.value : this.phone),
+        address: (address != null ? address.value : this.address),
+        country: (country != null ? country.value : this.country),
+        countryCode:
+            (countryCode != null ? countryCode.value : this.countryCode),
+        stateProvince:
+            (stateProvince != null ? stateProvince.value : this.stateProvince),
+        city: (city != null ? city.value : this.city),
+        zipcode: (zipcode != null ? zipcode.value : this.zipcode),
         currentLocation: (currentLocation != null
             ? currentLocation.value
             : this.currentLocation),
@@ -46300,6 +46986,437 @@ extension $UnregisterAccountExtension on UnregisterAccount {
 }
 
 @JsonSerializable(explicitToJson: true)
+class CustomSearchReqBase {
+  const CustomSearchReqBase({
+    required this.fields,
+    this.sort,
+  });
+
+  factory CustomSearchReqBase.fromJson(Map<String, dynamic> json) =>
+      _$CustomSearchReqBaseFromJson(json);
+
+  static const toJsonFactory = _$CustomSearchReqBaseToJson;
+  Map<String, dynamic> toJson() => _$CustomSearchReqBaseToJson(this);
+
+  @JsonKey(name: 'fields', includeIfNull: false, defaultValue: <String>[])
+  final List<String> fields;
+  @JsonKey(name: 'sort', includeIfNull: false)
+  final Object? sort;
+  static const fromJsonFactory = _$CustomSearchReqBaseFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is CustomSearchReqBase &&
+            (identical(other.fields, fields) ||
+                const DeepCollectionEquality().equals(other.fields, fields)) &&
+            (identical(other.sort, sort) ||
+                const DeepCollectionEquality().equals(other.sort, sort)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(fields) ^
+      const DeepCollectionEquality().hash(sort) ^
+      runtimeType.hashCode;
+}
+
+extension $CustomSearchReqBaseExtension on CustomSearchReqBase {
+  CustomSearchReqBase copyWith({List<String>? fields, Object? sort}) {
+    return CustomSearchReqBase(
+        fields: fields ?? this.fields, sort: sort ?? this.sort);
+  }
+
+  CustomSearchReqBase copyWithWrapped(
+      {Wrapped<List<String>>? fields, Wrapped<Object?>? sort}) {
+    return CustomSearchReqBase(
+        fields: (fields != null ? fields.value : this.fields),
+        sort: (sort != null ? sort.value : this.sort));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class CustomSearchReq {
+  const CustomSearchReq({
+    required this.search,
+    required this.fields,
+    this.sort,
+    required this.page,
+    required this.size,
+  });
+
+  factory CustomSearchReq.fromJson(Map<String, dynamic> json) =>
+      _$CustomSearchReqFromJson(json);
+
+  static const toJsonFactory = _$CustomSearchReqToJson;
+  Map<String, dynamic> toJson() => _$CustomSearchReqToJson(this);
+
+  @JsonKey(name: 'search', includeIfNull: false, defaultValue: '')
+  final String search;
+  @JsonKey(name: 'fields', includeIfNull: false, defaultValue: <String>[])
+  final List<String> fields;
+  @JsonKey(name: 'sort', includeIfNull: false)
+  final Object? sort;
+  @JsonKey(name: 'page', includeIfNull: false)
+  final int page;
+  @JsonKey(name: 'size', includeIfNull: false)
+  final int size;
+  static const fromJsonFactory = _$CustomSearchReqFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is CustomSearchReq &&
+            (identical(other.search, search) ||
+                const DeepCollectionEquality().equals(other.search, search)) &&
+            (identical(other.fields, fields) ||
+                const DeepCollectionEquality().equals(other.fields, fields)) &&
+            (identical(other.sort, sort) ||
+                const DeepCollectionEquality().equals(other.sort, sort)) &&
+            (identical(other.page, page) ||
+                const DeepCollectionEquality().equals(other.page, page)) &&
+            (identical(other.size, size) ||
+                const DeepCollectionEquality().equals(other.size, size)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(search) ^
+      const DeepCollectionEquality().hash(fields) ^
+      const DeepCollectionEquality().hash(sort) ^
+      const DeepCollectionEquality().hash(page) ^
+      const DeepCollectionEquality().hash(size) ^
+      runtimeType.hashCode;
+}
+
+extension $CustomSearchReqExtension on CustomSearchReq {
+  CustomSearchReq copyWith(
+      {String? search,
+      List<String>? fields,
+      Object? sort,
+      int? page,
+      int? size}) {
+    return CustomSearchReq(
+        search: search ?? this.search,
+        fields: fields ?? this.fields,
+        sort: sort ?? this.sort,
+        page: page ?? this.page,
+        size: size ?? this.size);
+  }
+
+  CustomSearchReq copyWithWrapped(
+      {Wrapped<String>? search,
+      Wrapped<List<String>>? fields,
+      Wrapped<Object?>? sort,
+      Wrapped<int>? page,
+      Wrapped<int>? size}) {
+    return CustomSearchReq(
+        search: (search != null ? search.value : this.search),
+        fields: (fields != null ? fields.value : this.fields),
+        sort: (sort != null ? sort.value : this.sort),
+        page: (page != null ? page.value : this.page),
+        size: (size != null ? size.value : this.size));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class CustomEntity {
+  const CustomEntity({
+    this.entity,
+  });
+
+  factory CustomEntity.fromJson(Map<String, dynamic> json) =>
+      _$CustomEntityFromJson(json);
+
+  static const toJsonFactory = _$CustomEntityToJson;
+  Map<String, dynamic> toJson() => _$CustomEntityToJson(this);
+
+  @JsonKey(name: 'entity', includeIfNull: false)
+  final Object? entity;
+  static const fromJsonFactory = _$CustomEntityFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is CustomEntity &&
+            (identical(other.entity, entity) ||
+                const DeepCollectionEquality().equals(other.entity, entity)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(entity) ^ runtimeType.hashCode;
+}
+
+extension $CustomEntityExtension on CustomEntity {
+  CustomEntity copyWith({Object? entity}) {
+    return CustomEntity(entity: entity ?? this.entity);
+  }
+
+  CustomEntity copyWithWrapped({Wrapped<Object?>? entity}) {
+    return CustomEntity(entity: (entity != null ? entity.value : this.entity));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class CustomEntityRes {
+  const CustomEntityRes({
+    required this.ok,
+    this.msg,
+    this.trace,
+    this.errorCode,
+    this.entity,
+  });
+
+  factory CustomEntityRes.fromJson(Map<String, dynamic> json) =>
+      _$CustomEntityResFromJson(json);
+
+  static const toJsonFactory = _$CustomEntityResToJson;
+  Map<String, dynamic> toJson() => _$CustomEntityResToJson(this);
+
+  @JsonKey(name: 'ok', includeIfNull: false)
+  final bool ok;
+  @JsonKey(name: 'msg', includeIfNull: false, defaultValue: '')
+  final String? msg;
+  @JsonKey(name: 'trace', includeIfNull: false, defaultValue: '')
+  final String? trace;
+  @JsonKey(name: 'errorCode', includeIfNull: false, defaultValue: '')
+  final String? errorCode;
+  @JsonKey(name: 'entity', includeIfNull: false)
+  final Object? entity;
+  static const fromJsonFactory = _$CustomEntityResFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is CustomEntityRes &&
+            (identical(other.ok, ok) ||
+                const DeepCollectionEquality().equals(other.ok, ok)) &&
+            (identical(other.msg, msg) ||
+                const DeepCollectionEquality().equals(other.msg, msg)) &&
+            (identical(other.trace, trace) ||
+                const DeepCollectionEquality().equals(other.trace, trace)) &&
+            (identical(other.errorCode, errorCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.errorCode, errorCode)) &&
+            (identical(other.entity, entity) ||
+                const DeepCollectionEquality().equals(other.entity, entity)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(ok) ^
+      const DeepCollectionEquality().hash(msg) ^
+      const DeepCollectionEquality().hash(trace) ^
+      const DeepCollectionEquality().hash(errorCode) ^
+      const DeepCollectionEquality().hash(entity) ^
+      runtimeType.hashCode;
+}
+
+extension $CustomEntityResExtension on CustomEntityRes {
+  CustomEntityRes copyWith(
+      {bool? ok,
+      String? msg,
+      String? trace,
+      String? errorCode,
+      Object? entity}) {
+    return CustomEntityRes(
+        ok: ok ?? this.ok,
+        msg: msg ?? this.msg,
+        trace: trace ?? this.trace,
+        errorCode: errorCode ?? this.errorCode,
+        entity: entity ?? this.entity);
+  }
+
+  CustomEntityRes copyWithWrapped(
+      {Wrapped<bool>? ok,
+      Wrapped<String?>? msg,
+      Wrapped<String?>? trace,
+      Wrapped<String?>? errorCode,
+      Wrapped<Object?>? entity}) {
+    return CustomEntityRes(
+        ok: (ok != null ? ok.value : this.ok),
+        msg: (msg != null ? msg.value : this.msg),
+        trace: (trace != null ? trace.value : this.trace),
+        errorCode: (errorCode != null ? errorCode.value : this.errorCode),
+        entity: (entity != null ? entity.value : this.entity));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class CustomEntityArray {
+  const CustomEntityArray({
+    this.values,
+  });
+
+  factory CustomEntityArray.fromJson(Map<String, dynamic> json) =>
+      _$CustomEntityArrayFromJson(json);
+
+  static const toJsonFactory = _$CustomEntityArrayToJson;
+  Map<String, dynamic> toJson() => _$CustomEntityArrayToJson(this);
+
+  @JsonKey(name: 'values', includeIfNull: false, defaultValue: <Object>[])
+  final List<Object>? values;
+  static const fromJsonFactory = _$CustomEntityArrayFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is CustomEntityArray &&
+            (identical(other.values, values) ||
+                const DeepCollectionEquality().equals(other.values, values)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(values) ^ runtimeType.hashCode;
+}
+
+extension $CustomEntityArrayExtension on CustomEntityArray {
+  CustomEntityArray copyWith({List<Object>? values}) {
+    return CustomEntityArray(values: values ?? this.values);
+  }
+
+  CustomEntityArray copyWithWrapped({Wrapped<List<Object>?>? values}) {
+    return CustomEntityArray(
+        values: (values != null ? values.value : this.values));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class CustomEntityArrayRes {
+  const CustomEntityArrayRes({
+    required this.ok,
+    this.msg,
+    this.trace,
+    this.errorCode,
+    required this.page,
+    required this.size,
+    required this.total,
+    this.values,
+  });
+
+  factory CustomEntityArrayRes.fromJson(Map<String, dynamic> json) =>
+      _$CustomEntityArrayResFromJson(json);
+
+  static const toJsonFactory = _$CustomEntityArrayResToJson;
+  Map<String, dynamic> toJson() => _$CustomEntityArrayResToJson(this);
+
+  @JsonKey(name: 'ok', includeIfNull: false)
+  final bool ok;
+  @JsonKey(name: 'msg', includeIfNull: false, defaultValue: '')
+  final String? msg;
+  @JsonKey(name: 'trace', includeIfNull: false, defaultValue: '')
+  final String? trace;
+  @JsonKey(name: 'errorCode', includeIfNull: false, defaultValue: '')
+  final String? errorCode;
+  @JsonKey(name: 'page', includeIfNull: false)
+  final int page;
+  @JsonKey(name: 'size', includeIfNull: false)
+  final int size;
+  @JsonKey(name: 'total', includeIfNull: false)
+  final int total;
+  @JsonKey(name: 'values', includeIfNull: false, defaultValue: <Object>[])
+  final List<Object>? values;
+  static const fromJsonFactory = _$CustomEntityArrayResFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is CustomEntityArrayRes &&
+            (identical(other.ok, ok) ||
+                const DeepCollectionEquality().equals(other.ok, ok)) &&
+            (identical(other.msg, msg) ||
+                const DeepCollectionEquality().equals(other.msg, msg)) &&
+            (identical(other.trace, trace) ||
+                const DeepCollectionEquality().equals(other.trace, trace)) &&
+            (identical(other.errorCode, errorCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.errorCode, errorCode)) &&
+            (identical(other.page, page) ||
+                const DeepCollectionEquality().equals(other.page, page)) &&
+            (identical(other.size, size) ||
+                const DeepCollectionEquality().equals(other.size, size)) &&
+            (identical(other.total, total) ||
+                const DeepCollectionEquality().equals(other.total, total)) &&
+            (identical(other.values, values) ||
+                const DeepCollectionEquality().equals(other.values, values)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(ok) ^
+      const DeepCollectionEquality().hash(msg) ^
+      const DeepCollectionEquality().hash(trace) ^
+      const DeepCollectionEquality().hash(errorCode) ^
+      const DeepCollectionEquality().hash(page) ^
+      const DeepCollectionEquality().hash(size) ^
+      const DeepCollectionEquality().hash(total) ^
+      const DeepCollectionEquality().hash(values) ^
+      runtimeType.hashCode;
+}
+
+extension $CustomEntityArrayResExtension on CustomEntityArrayRes {
+  CustomEntityArrayRes copyWith(
+      {bool? ok,
+      String? msg,
+      String? trace,
+      String? errorCode,
+      int? page,
+      int? size,
+      int? total,
+      List<Object>? values}) {
+    return CustomEntityArrayRes(
+        ok: ok ?? this.ok,
+        msg: msg ?? this.msg,
+        trace: trace ?? this.trace,
+        errorCode: errorCode ?? this.errorCode,
+        page: page ?? this.page,
+        size: size ?? this.size,
+        total: total ?? this.total,
+        values: values ?? this.values);
+  }
+
+  CustomEntityArrayRes copyWithWrapped(
+      {Wrapped<bool>? ok,
+      Wrapped<String?>? msg,
+      Wrapped<String?>? trace,
+      Wrapped<String?>? errorCode,
+      Wrapped<int>? page,
+      Wrapped<int>? size,
+      Wrapped<int>? total,
+      Wrapped<List<Object>?>? values}) {
+    return CustomEntityArrayRes(
+        ok: (ok != null ? ok.value : this.ok),
+        msg: (msg != null ? msg.value : this.msg),
+        trace: (trace != null ? trace.value : this.trace),
+        errorCode: (errorCode != null ? errorCode.value : this.errorCode),
+        page: (page != null ? page.value : this.page),
+        size: (size != null ? size.value : this.size),
+        total: (total != null ? total.value : this.total),
+        values: (values != null ? values.value : this.values));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class ExportData {
   const ExportData({
     required this.model,
@@ -47157,6 +48274,215 @@ List<enums.ControlCommandCommandType>?
   return controlCommandCommandType
       .map((e) => controlCommandCommandTypeFromJson(e.toString()))
       .toList();
+}
+
+String? controlTargetHttpProtocolNullableToJson(
+    enums.ControlTargetHttpProtocol? controlTargetHttpProtocol) {
+  return controlTargetHttpProtocol?.value;
+}
+
+String? controlTargetHttpProtocolToJson(
+    enums.ControlTargetHttpProtocol controlTargetHttpProtocol) {
+  return controlTargetHttpProtocol.value;
+}
+
+enums.ControlTargetHttpProtocol controlTargetHttpProtocolFromJson(
+  Object? controlTargetHttpProtocol, [
+  enums.ControlTargetHttpProtocol? defaultValue,
+]) {
+  return enums.ControlTargetHttpProtocol.values
+          .firstWhereOrNull((e) => e.value == controlTargetHttpProtocol) ??
+      defaultValue ??
+      enums.ControlTargetHttpProtocol.swaggerGeneratedUnknown;
+}
+
+enums.ControlTargetHttpProtocol? controlTargetHttpProtocolNullableFromJson(
+  Object? controlTargetHttpProtocol, [
+  enums.ControlTargetHttpProtocol? defaultValue,
+]) {
+  if (controlTargetHttpProtocol == null) {
+    return null;
+  }
+  return enums.ControlTargetHttpProtocol.values
+          .firstWhereOrNull((e) => e.value == controlTargetHttpProtocol) ??
+      defaultValue;
+}
+
+String controlTargetHttpProtocolExplodedListToJson(
+    List<enums.ControlTargetHttpProtocol>? controlTargetHttpProtocol) {
+  return controlTargetHttpProtocol?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> controlTargetHttpProtocolListToJson(
+    List<enums.ControlTargetHttpProtocol>? controlTargetHttpProtocol) {
+  if (controlTargetHttpProtocol == null) {
+    return [];
+  }
+
+  return controlTargetHttpProtocol.map((e) => e.value!).toList();
+}
+
+List<enums.ControlTargetHttpProtocol> controlTargetHttpProtocolListFromJson(
+  List? controlTargetHttpProtocol, [
+  List<enums.ControlTargetHttpProtocol>? defaultValue,
+]) {
+  if (controlTargetHttpProtocol == null) {
+    return defaultValue ?? [];
+  }
+
+  return controlTargetHttpProtocol
+      .map((e) => controlTargetHttpProtocolFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.ControlTargetHttpProtocol>?
+    controlTargetHttpProtocolNullableListFromJson(
+  List? controlTargetHttpProtocol, [
+  List<enums.ControlTargetHttpProtocol>? defaultValue,
+]) {
+  if (controlTargetHttpProtocol == null) {
+    return defaultValue;
+  }
+
+  return controlTargetHttpProtocol
+      .map((e) => controlTargetHttpProtocolFromJson(e.toString()))
+      .toList();
+}
+
+String? controlInfoTargetNullableToJson(
+    enums.ControlInfoTarget? controlInfoTarget) {
+  return controlInfoTarget?.value;
+}
+
+String? controlInfoTargetToJson(enums.ControlInfoTarget controlInfoTarget) {
+  return controlInfoTarget.value;
+}
+
+enums.ControlInfoTarget controlInfoTargetFromJson(
+  Object? controlInfoTarget, [
+  enums.ControlInfoTarget? defaultValue,
+]) {
+  return enums.ControlInfoTarget.values
+          .firstWhereOrNull((e) => e.value == controlInfoTarget) ??
+      defaultValue ??
+      enums.ControlInfoTarget.swaggerGeneratedUnknown;
+}
+
+enums.ControlInfoTarget? controlInfoTargetNullableFromJson(
+  Object? controlInfoTarget, [
+  enums.ControlInfoTarget? defaultValue,
+]) {
+  if (controlInfoTarget == null) {
+    return null;
+  }
+  return enums.ControlInfoTarget.values
+          .firstWhereOrNull((e) => e.value == controlInfoTarget) ??
+      defaultValue;
+}
+
+String controlInfoTargetExplodedListToJson(
+    List<enums.ControlInfoTarget>? controlInfoTarget) {
+  return controlInfoTarget?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> controlInfoTargetListToJson(
+    List<enums.ControlInfoTarget>? controlInfoTarget) {
+  if (controlInfoTarget == null) {
+    return [];
+  }
+
+  return controlInfoTarget.map((e) => e.value!).toList();
+}
+
+List<enums.ControlInfoTarget> controlInfoTargetListFromJson(
+  List? controlInfoTarget, [
+  List<enums.ControlInfoTarget>? defaultValue,
+]) {
+  if (controlInfoTarget == null) {
+    return defaultValue ?? [];
+  }
+
+  return controlInfoTarget
+      .map((e) => controlInfoTargetFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.ControlInfoTarget>? controlInfoTargetNullableListFromJson(
+  List? controlInfoTarget, [
+  List<enums.ControlInfoTarget>? defaultValue,
+]) {
+  if (controlInfoTarget == null) {
+    return defaultValue;
+  }
+
+  return controlInfoTarget
+      .map((e) => controlInfoTargetFromJson(e.toString()))
+      .toList();
+}
+
+String? controlTargetNullableToJson(enums.ControlTarget? controlTarget) {
+  return controlTarget?.value;
+}
+
+String? controlTargetToJson(enums.ControlTarget controlTarget) {
+  return controlTarget.value;
+}
+
+enums.ControlTarget controlTargetFromJson(
+  Object? controlTarget, [
+  enums.ControlTarget? defaultValue,
+]) {
+  return enums.ControlTarget.values
+          .firstWhereOrNull((e) => e.value == controlTarget) ??
+      defaultValue ??
+      enums.ControlTarget.swaggerGeneratedUnknown;
+}
+
+enums.ControlTarget? controlTargetNullableFromJson(
+  Object? controlTarget, [
+  enums.ControlTarget? defaultValue,
+]) {
+  if (controlTarget == null) {
+    return null;
+  }
+  return enums.ControlTarget.values
+          .firstWhereOrNull((e) => e.value == controlTarget) ??
+      defaultValue;
+}
+
+String controlTargetExplodedListToJson(
+    List<enums.ControlTarget>? controlTarget) {
+  return controlTarget?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> controlTargetListToJson(List<enums.ControlTarget>? controlTarget) {
+  if (controlTarget == null) {
+    return [];
+  }
+
+  return controlTarget.map((e) => e.value!).toList();
+}
+
+List<enums.ControlTarget> controlTargetListFromJson(
+  List? controlTarget, [
+  List<enums.ControlTarget>? defaultValue,
+]) {
+  if (controlTarget == null) {
+    return defaultValue ?? [];
+  }
+
+  return controlTarget.map((e) => controlTargetFromJson(e.toString())).toList();
+}
+
+List<enums.ControlTarget>? controlTargetNullableListFromJson(
+  List? controlTarget, [
+  List<enums.ControlTarget>? defaultValue,
+]) {
+  if (controlTarget == null) {
+    return defaultValue;
+  }
+
+  return controlTarget.map((e) => controlTargetFromJson(e.toString())).toList();
 }
 
 String? eventInfoSourceTypeNullableToJson(

@@ -7304,4 +7304,150 @@ final class _$Twinned extends Twinned {
     );
     return client.send<ClientEntityRes, ClientEntityRes>($request);
   }
+
+  @override
+  Future<Response<CustomEntityRes>> _createCustomEntity({
+    required String? name,
+    String? id,
+    required Object? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/CustomEntity/create/${name}');
+    final Map<String, String> $headers = {
+      if (id != null) 'id': id,
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<CustomEntityRes, CustomEntityRes>($request);
+  }
+
+  @override
+  Future<Response<CustomEntityRes>> _updateCustomEntity({
+    required String? name,
+    required String? id,
+    required Object? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/CustomEntity/update/${name}/${id}');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<CustomEntityRes, CustomEntityRes>($request);
+  }
+
+  @override
+  Future<Response<CustomEntityRes>> _deleteCustomEntity({
+    required String? name,
+    required String? id,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/CustomEntity/remove/${name}/${id}');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'DELETE',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<CustomEntityRes, CustomEntityRes>($request);
+  }
+
+  @override
+  Future<Response<CustomEntityRes>> _getCustomEntity({
+    required String? name,
+    required String? id,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/CustomEntity/get/${name}/${id}');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<CustomEntityRes, CustomEntityRes>($request);
+  }
+
+  @override
+  Future<Response<CustomEntityArrayRes>> _searchCustomEntities({
+    required String? name,
+    required CustomSearchReq? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/CustomEntity/search/${name}');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<CustomEntityArrayRes, CustomEntityArrayRes>($request);
+  }
+
+  @override
+  Future<Response<CustomEntityArrayRes>> _searchEqlCustomEntities({
+    required String? name,
+    required Object? eql,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/CustomEntity/eql/${name}');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = eql;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<CustomEntityArrayRes, CustomEntityArrayRes>($request);
+  }
+
+  @override
+  Future<Response<CustomEntityArrayRes>> _queryEqlCustomEntity({
+    required String? name,
+    required EqlSearch? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/CustomEntity/query/eql/${name}');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client.send<CustomEntityArrayRes, CustomEntityArrayRes>($request);
+  }
 }
