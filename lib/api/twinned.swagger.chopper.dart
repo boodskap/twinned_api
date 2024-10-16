@@ -7306,6 +7306,63 @@ final class _$Twinned extends Twinned {
   }
 
   @override
+  Future<Response<CustomEntityMappingRes>> _upsertCustomEntityMapping({
+    required CustomEntityMappingInfo? body,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/CustomEntity/mapping/set');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      headers: $headers,
+    );
+    return client
+        .send<CustomEntityMappingRes, CustomEntityMappingRes>($request);
+  }
+
+  @override
+  Future<Response<CustomEntityMappingRes>> _getCustomEntityMapping({
+    required String? name,
+    String? apikey,
+  }) {
+    final Uri $url = Uri.parse('/CustomEntity/mapping/get/${name}');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client
+        .send<CustomEntityMappingRes, CustomEntityMappingRes>($request);
+  }
+
+  @override
+  Future<Response<CustomEntityMappingArrayRes>> _listCustomEntityMapping(
+      {String? apikey}) {
+    final Uri $url = Uri.parse('/CustomEntity/mapping/list');
+    final Map<String, String> $headers = {
+      if (apikey != null) 'APIKEY': apikey,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      headers: $headers,
+    );
+    return client.send<CustomEntityMappingArrayRes,
+        CustomEntityMappingArrayRes>($request);
+  }
+
+  @override
   Future<Response<CustomEntityRes>> _createCustomEntity({
     required String? name,
     String? id,

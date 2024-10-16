@@ -43,8 +43,7 @@ abstract class Twinned extends ChopperService {
         client: httpClient,
         authenticator: authenticator,
         errorConverter: errorConverter,
-        baseUrl:
-            baseUrl ?? Uri.parse('http://restdev.boodskap.io/rest/nocode'));
+        baseUrl: baseUrl ?? Uri.parse('http://rest.boodskap.io/rest/nocode'));
     return _$Twinned(newClient);
   }
 
@@ -8509,6 +8508,62 @@ abstract class Twinned extends ChopperService {
   @Get(path: '/Client/make/myself')
   Future<chopper.Response<ClientEntityRes>> _makeMyselfAsNewClient(
       {@Header('APIKEY') String? apikey});
+
+  ///Create update custom entity mapping
+  ///@param body
+  Future<chopper.Response<CustomEntityMappingRes>> upsertCustomEntityMapping({
+    required CustomEntityMappingInfo? body,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        CustomEntityMappingInfo, () => CustomEntityMappingInfo.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        CustomEntityMappingRes, () => CustomEntityMappingRes.fromJsonFactory);
+
+    return _upsertCustomEntityMapping(body: body, apikey: apikey?.toString());
+  }
+
+  ///Create update custom entity mapping
+  ///@param body
+  @Post(path: '/CustomEntity/mapping/set')
+  Future<chopper.Response<CustomEntityMappingRes>> _upsertCustomEntityMapping({
+    @Body() required CustomEntityMappingInfo? body,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///Get custom entity mapping
+  ///@param name
+  Future<chopper.Response<CustomEntityMappingRes>> getCustomEntityMapping({
+    required String? name,
+    dynamic apikey,
+  }) {
+    generatedMapping.putIfAbsent(
+        CustomEntityMappingRes, () => CustomEntityMappingRes.fromJsonFactory);
+
+    return _getCustomEntityMapping(name: name, apikey: apikey?.toString());
+  }
+
+  ///Get custom entity mapping
+  ///@param name
+  @Get(path: '/CustomEntity/mapping/get/{name}')
+  Future<chopper.Response<CustomEntityMappingRes>> _getCustomEntityMapping({
+    @Path('name') required String? name,
+    @Header('APIKEY') String? apikey,
+  });
+
+  ///Get custom entity mapping
+  Future<chopper.Response<CustomEntityMappingArrayRes>> listCustomEntityMapping(
+      {dynamic apikey}) {
+    generatedMapping.putIfAbsent(CustomEntityMappingArrayRes,
+        () => CustomEntityMappingArrayRes.fromJsonFactory);
+
+    return _listCustomEntityMapping(apikey: apikey?.toString());
+  }
+
+  ///Get custom entity mapping
+  @Get(path: '/CustomEntity/mapping/list')
+  Future<chopper.Response<CustomEntityMappingArrayRes>>
+      _listCustomEntityMapping({@Header('APIKEY') String? apikey});
 
   ///Create custom entity
   ///@param name
@@ -47417,6 +47472,604 @@ extension $CustomEntityArrayResExtension on CustomEntityArrayRes {
 }
 
 @JsonSerializable(explicitToJson: true)
+class CustomEntityField {
+  const CustomEntityField({
+    required this.name,
+    this.scalingFactor,
+    this.aliasPath,
+    required this.type,
+  });
+
+  factory CustomEntityField.fromJson(Map<String, dynamic> json) =>
+      _$CustomEntityFieldFromJson(json);
+
+  static const toJsonFactory = _$CustomEntityFieldToJson;
+  Map<String, dynamic> toJson() => _$CustomEntityFieldToJson(this);
+
+  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
+  final String name;
+  @JsonKey(name: 'scalingFactor', includeIfNull: false)
+  final double? scalingFactor;
+  @JsonKey(name: 'aliasPath', includeIfNull: false, defaultValue: '')
+  final String? aliasPath;
+  @JsonKey(
+    name: 'type',
+    includeIfNull: false,
+    toJson: customEntityFieldTypeToJson,
+    fromJson: customEntityFieldTypeFromJson,
+  )
+  final enums.CustomEntityFieldType type;
+  static const fromJsonFactory = _$CustomEntityFieldFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is CustomEntityField &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.scalingFactor, scalingFactor) ||
+                const DeepCollectionEquality()
+                    .equals(other.scalingFactor, scalingFactor)) &&
+            (identical(other.aliasPath, aliasPath) ||
+                const DeepCollectionEquality()
+                    .equals(other.aliasPath, aliasPath)) &&
+            (identical(other.type, type) ||
+                const DeepCollectionEquality().equals(other.type, type)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(scalingFactor) ^
+      const DeepCollectionEquality().hash(aliasPath) ^
+      const DeepCollectionEquality().hash(type) ^
+      runtimeType.hashCode;
+}
+
+extension $CustomEntityFieldExtension on CustomEntityField {
+  CustomEntityField copyWith(
+      {String? name,
+      double? scalingFactor,
+      String? aliasPath,
+      enums.CustomEntityFieldType? type}) {
+    return CustomEntityField(
+        name: name ?? this.name,
+        scalingFactor: scalingFactor ?? this.scalingFactor,
+        aliasPath: aliasPath ?? this.aliasPath,
+        type: type ?? this.type);
+  }
+
+  CustomEntityField copyWithWrapped(
+      {Wrapped<String>? name,
+      Wrapped<double?>? scalingFactor,
+      Wrapped<String?>? aliasPath,
+      Wrapped<enums.CustomEntityFieldType>? type}) {
+    return CustomEntityField(
+        name: (name != null ? name.value : this.name),
+        scalingFactor:
+            (scalingFactor != null ? scalingFactor.value : this.scalingFactor),
+        aliasPath: (aliasPath != null ? aliasPath.value : this.aliasPath),
+        type: (type != null ? type.value : this.type));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class CustomEntityMappingInfo {
+  const CustomEntityMappingInfo({
+    required this.name,
+    required this.relaxed,
+    required this.fields,
+  });
+
+  factory CustomEntityMappingInfo.fromJson(Map<String, dynamic> json) =>
+      _$CustomEntityMappingInfoFromJson(json);
+
+  static const toJsonFactory = _$CustomEntityMappingInfoToJson;
+  Map<String, dynamic> toJson() => _$CustomEntityMappingInfoToJson(this);
+
+  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
+  final String name;
+  @JsonKey(name: 'relaxed', includeIfNull: false)
+  final bool relaxed;
+  @JsonKey(
+      name: 'fields', includeIfNull: false, defaultValue: <CustomEntityField>[])
+  final List<CustomEntityField> fields;
+  static const fromJsonFactory = _$CustomEntityMappingInfoFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is CustomEntityMappingInfo &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.relaxed, relaxed) ||
+                const DeepCollectionEquality()
+                    .equals(other.relaxed, relaxed)) &&
+            (identical(other.fields, fields) ||
+                const DeepCollectionEquality().equals(other.fields, fields)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(relaxed) ^
+      const DeepCollectionEquality().hash(fields) ^
+      runtimeType.hashCode;
+}
+
+extension $CustomEntityMappingInfoExtension on CustomEntityMappingInfo {
+  CustomEntityMappingInfo copyWith(
+      {String? name, bool? relaxed, List<CustomEntityField>? fields}) {
+    return CustomEntityMappingInfo(
+        name: name ?? this.name,
+        relaxed: relaxed ?? this.relaxed,
+        fields: fields ?? this.fields);
+  }
+
+  CustomEntityMappingInfo copyWithWrapped(
+      {Wrapped<String>? name,
+      Wrapped<bool>? relaxed,
+      Wrapped<List<CustomEntityField>>? fields}) {
+    return CustomEntityMappingInfo(
+        name: (name != null ? name.value : this.name),
+        relaxed: (relaxed != null ? relaxed.value : this.relaxed),
+        fields: (fields != null ? fields.value : this.fields));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class CustomEntityMapping {
+  const CustomEntityMapping({
+    required this.name,
+    required this.relaxed,
+    required this.fields,
+    required this.domainKey,
+    required this.id,
+    required this.rtype,
+    required this.createdStamp,
+    required this.updatedStamp,
+    required this.createdBy,
+    required this.updatedBy,
+  });
+
+  factory CustomEntityMapping.fromJson(Map<String, dynamic> json) =>
+      _$CustomEntityMappingFromJson(json);
+
+  static const toJsonFactory = _$CustomEntityMappingToJson;
+  Map<String, dynamic> toJson() => _$CustomEntityMappingToJson(this);
+
+  @JsonKey(name: 'name', includeIfNull: false, defaultValue: '')
+  final String name;
+  @JsonKey(name: 'relaxed', includeIfNull: false)
+  final bool relaxed;
+  @JsonKey(
+      name: 'fields', includeIfNull: false, defaultValue: <CustomEntityField>[])
+  final List<CustomEntityField> fields;
+  @JsonKey(name: 'domainKey', includeIfNull: false, defaultValue: '')
+  final String domainKey;
+  @JsonKey(name: 'id', includeIfNull: false, defaultValue: '')
+  final String id;
+  @JsonKey(name: 'rtype', includeIfNull: false, defaultValue: '')
+  final String rtype;
+  @JsonKey(name: 'createdStamp', includeIfNull: false)
+  final int createdStamp;
+  @JsonKey(name: 'updatedStamp', includeIfNull: false)
+  final int updatedStamp;
+  @JsonKey(name: 'createdBy', includeIfNull: false, defaultValue: '')
+  final String createdBy;
+  @JsonKey(name: 'updatedBy', includeIfNull: false, defaultValue: '')
+  final String updatedBy;
+  static const fromJsonFactory = _$CustomEntityMappingFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is CustomEntityMapping &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.relaxed, relaxed) ||
+                const DeepCollectionEquality()
+                    .equals(other.relaxed, relaxed)) &&
+            (identical(other.fields, fields) ||
+                const DeepCollectionEquality().equals(other.fields, fields)) &&
+            (identical(other.domainKey, domainKey) ||
+                const DeepCollectionEquality()
+                    .equals(other.domainKey, domainKey)) &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.rtype, rtype) ||
+                const DeepCollectionEquality().equals(other.rtype, rtype)) &&
+            (identical(other.createdStamp, createdStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.createdStamp, createdStamp)) &&
+            (identical(other.updatedStamp, updatedStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedStamp, updatedStamp)) &&
+            (identical(other.createdBy, createdBy) ||
+                const DeepCollectionEquality()
+                    .equals(other.createdBy, createdBy)) &&
+            (identical(other.updatedBy, updatedBy) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedBy, updatedBy)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(relaxed) ^
+      const DeepCollectionEquality().hash(fields) ^
+      const DeepCollectionEquality().hash(domainKey) ^
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(rtype) ^
+      const DeepCollectionEquality().hash(createdStamp) ^
+      const DeepCollectionEquality().hash(updatedStamp) ^
+      const DeepCollectionEquality().hash(createdBy) ^
+      const DeepCollectionEquality().hash(updatedBy) ^
+      runtimeType.hashCode;
+}
+
+extension $CustomEntityMappingExtension on CustomEntityMapping {
+  CustomEntityMapping copyWith(
+      {String? name,
+      bool? relaxed,
+      List<CustomEntityField>? fields,
+      String? domainKey,
+      String? id,
+      String? rtype,
+      int? createdStamp,
+      int? updatedStamp,
+      String? createdBy,
+      String? updatedBy}) {
+    return CustomEntityMapping(
+        name: name ?? this.name,
+        relaxed: relaxed ?? this.relaxed,
+        fields: fields ?? this.fields,
+        domainKey: domainKey ?? this.domainKey,
+        id: id ?? this.id,
+        rtype: rtype ?? this.rtype,
+        createdStamp: createdStamp ?? this.createdStamp,
+        updatedStamp: updatedStamp ?? this.updatedStamp,
+        createdBy: createdBy ?? this.createdBy,
+        updatedBy: updatedBy ?? this.updatedBy);
+  }
+
+  CustomEntityMapping copyWithWrapped(
+      {Wrapped<String>? name,
+      Wrapped<bool>? relaxed,
+      Wrapped<List<CustomEntityField>>? fields,
+      Wrapped<String>? domainKey,
+      Wrapped<String>? id,
+      Wrapped<String>? rtype,
+      Wrapped<int>? createdStamp,
+      Wrapped<int>? updatedStamp,
+      Wrapped<String>? createdBy,
+      Wrapped<String>? updatedBy}) {
+    return CustomEntityMapping(
+        name: (name != null ? name.value : this.name),
+        relaxed: (relaxed != null ? relaxed.value : this.relaxed),
+        fields: (fields != null ? fields.value : this.fields),
+        domainKey: (domainKey != null ? domainKey.value : this.domainKey),
+        id: (id != null ? id.value : this.id),
+        rtype: (rtype != null ? rtype.value : this.rtype),
+        createdStamp:
+            (createdStamp != null ? createdStamp.value : this.createdStamp),
+        updatedStamp:
+            (updatedStamp != null ? updatedStamp.value : this.updatedStamp),
+        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+        updatedBy: (updatedBy != null ? updatedBy.value : this.updatedBy));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class CustomEntityMappingEntity {
+  const CustomEntityMappingEntity({
+    this.entity,
+  });
+
+  factory CustomEntityMappingEntity.fromJson(Map<String, dynamic> json) =>
+      _$CustomEntityMappingEntityFromJson(json);
+
+  static const toJsonFactory = _$CustomEntityMappingEntityToJson;
+  Map<String, dynamic> toJson() => _$CustomEntityMappingEntityToJson(this);
+
+  @JsonKey(name: 'entity', includeIfNull: false)
+  final CustomEntityMapping? entity;
+  static const fromJsonFactory = _$CustomEntityMappingEntityFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is CustomEntityMappingEntity &&
+            (identical(other.entity, entity) ||
+                const DeepCollectionEquality().equals(other.entity, entity)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(entity) ^ runtimeType.hashCode;
+}
+
+extension $CustomEntityMappingEntityExtension on CustomEntityMappingEntity {
+  CustomEntityMappingEntity copyWith({CustomEntityMapping? entity}) {
+    return CustomEntityMappingEntity(entity: entity ?? this.entity);
+  }
+
+  CustomEntityMappingEntity copyWithWrapped(
+      {Wrapped<CustomEntityMapping?>? entity}) {
+    return CustomEntityMappingEntity(
+        entity: (entity != null ? entity.value : this.entity));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class CustomEntityMappingRes {
+  const CustomEntityMappingRes({
+    required this.ok,
+    this.msg,
+    this.trace,
+    this.errorCode,
+    this.entity,
+  });
+
+  factory CustomEntityMappingRes.fromJson(Map<String, dynamic> json) =>
+      _$CustomEntityMappingResFromJson(json);
+
+  static const toJsonFactory = _$CustomEntityMappingResToJson;
+  Map<String, dynamic> toJson() => _$CustomEntityMappingResToJson(this);
+
+  @JsonKey(name: 'ok', includeIfNull: false)
+  final bool ok;
+  @JsonKey(name: 'msg', includeIfNull: false, defaultValue: '')
+  final String? msg;
+  @JsonKey(name: 'trace', includeIfNull: false, defaultValue: '')
+  final String? trace;
+  @JsonKey(name: 'errorCode', includeIfNull: false, defaultValue: '')
+  final String? errorCode;
+  @JsonKey(name: 'entity', includeIfNull: false)
+  final CustomEntityMapping? entity;
+  static const fromJsonFactory = _$CustomEntityMappingResFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is CustomEntityMappingRes &&
+            (identical(other.ok, ok) ||
+                const DeepCollectionEquality().equals(other.ok, ok)) &&
+            (identical(other.msg, msg) ||
+                const DeepCollectionEquality().equals(other.msg, msg)) &&
+            (identical(other.trace, trace) ||
+                const DeepCollectionEquality().equals(other.trace, trace)) &&
+            (identical(other.errorCode, errorCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.errorCode, errorCode)) &&
+            (identical(other.entity, entity) ||
+                const DeepCollectionEquality().equals(other.entity, entity)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(ok) ^
+      const DeepCollectionEquality().hash(msg) ^
+      const DeepCollectionEquality().hash(trace) ^
+      const DeepCollectionEquality().hash(errorCode) ^
+      const DeepCollectionEquality().hash(entity) ^
+      runtimeType.hashCode;
+}
+
+extension $CustomEntityMappingResExtension on CustomEntityMappingRes {
+  CustomEntityMappingRes copyWith(
+      {bool? ok,
+      String? msg,
+      String? trace,
+      String? errorCode,
+      CustomEntityMapping? entity}) {
+    return CustomEntityMappingRes(
+        ok: ok ?? this.ok,
+        msg: msg ?? this.msg,
+        trace: trace ?? this.trace,
+        errorCode: errorCode ?? this.errorCode,
+        entity: entity ?? this.entity);
+  }
+
+  CustomEntityMappingRes copyWithWrapped(
+      {Wrapped<bool>? ok,
+      Wrapped<String?>? msg,
+      Wrapped<String?>? trace,
+      Wrapped<String?>? errorCode,
+      Wrapped<CustomEntityMapping?>? entity}) {
+    return CustomEntityMappingRes(
+        ok: (ok != null ? ok.value : this.ok),
+        msg: (msg != null ? msg.value : this.msg),
+        trace: (trace != null ? trace.value : this.trace),
+        errorCode: (errorCode != null ? errorCode.value : this.errorCode),
+        entity: (entity != null ? entity.value : this.entity));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class CustomEntityMappingArray {
+  const CustomEntityMappingArray({
+    this.values,
+  });
+
+  factory CustomEntityMappingArray.fromJson(Map<String, dynamic> json) =>
+      _$CustomEntityMappingArrayFromJson(json);
+
+  static const toJsonFactory = _$CustomEntityMappingArrayToJson;
+  Map<String, dynamic> toJson() => _$CustomEntityMappingArrayToJson(this);
+
+  @JsonKey(
+      name: 'values',
+      includeIfNull: false,
+      defaultValue: <CustomEntityMapping>[])
+  final List<CustomEntityMapping>? values;
+  static const fromJsonFactory = _$CustomEntityMappingArrayFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is CustomEntityMappingArray &&
+            (identical(other.values, values) ||
+                const DeepCollectionEquality().equals(other.values, values)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(values) ^ runtimeType.hashCode;
+}
+
+extension $CustomEntityMappingArrayExtension on CustomEntityMappingArray {
+  CustomEntityMappingArray copyWith({List<CustomEntityMapping>? values}) {
+    return CustomEntityMappingArray(values: values ?? this.values);
+  }
+
+  CustomEntityMappingArray copyWithWrapped(
+      {Wrapped<List<CustomEntityMapping>?>? values}) {
+    return CustomEntityMappingArray(
+        values: (values != null ? values.value : this.values));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class CustomEntityMappingArrayRes {
+  const CustomEntityMappingArrayRes({
+    required this.ok,
+    this.msg,
+    this.trace,
+    this.errorCode,
+    required this.page,
+    required this.size,
+    required this.total,
+    this.values,
+  });
+
+  factory CustomEntityMappingArrayRes.fromJson(Map<String, dynamic> json) =>
+      _$CustomEntityMappingArrayResFromJson(json);
+
+  static const toJsonFactory = _$CustomEntityMappingArrayResToJson;
+  Map<String, dynamic> toJson() => _$CustomEntityMappingArrayResToJson(this);
+
+  @JsonKey(name: 'ok', includeIfNull: false)
+  final bool ok;
+  @JsonKey(name: 'msg', includeIfNull: false, defaultValue: '')
+  final String? msg;
+  @JsonKey(name: 'trace', includeIfNull: false, defaultValue: '')
+  final String? trace;
+  @JsonKey(name: 'errorCode', includeIfNull: false, defaultValue: '')
+  final String? errorCode;
+  @JsonKey(name: 'page', includeIfNull: false)
+  final int page;
+  @JsonKey(name: 'size', includeIfNull: false)
+  final int size;
+  @JsonKey(name: 'total', includeIfNull: false)
+  final int total;
+  @JsonKey(
+      name: 'values',
+      includeIfNull: false,
+      defaultValue: <CustomEntityMapping>[])
+  final List<CustomEntityMapping>? values;
+  static const fromJsonFactory = _$CustomEntityMappingArrayResFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is CustomEntityMappingArrayRes &&
+            (identical(other.ok, ok) ||
+                const DeepCollectionEquality().equals(other.ok, ok)) &&
+            (identical(other.msg, msg) ||
+                const DeepCollectionEquality().equals(other.msg, msg)) &&
+            (identical(other.trace, trace) ||
+                const DeepCollectionEquality().equals(other.trace, trace)) &&
+            (identical(other.errorCode, errorCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.errorCode, errorCode)) &&
+            (identical(other.page, page) ||
+                const DeepCollectionEquality().equals(other.page, page)) &&
+            (identical(other.size, size) ||
+                const DeepCollectionEquality().equals(other.size, size)) &&
+            (identical(other.total, total) ||
+                const DeepCollectionEquality().equals(other.total, total)) &&
+            (identical(other.values, values) ||
+                const DeepCollectionEquality().equals(other.values, values)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(ok) ^
+      const DeepCollectionEquality().hash(msg) ^
+      const DeepCollectionEquality().hash(trace) ^
+      const DeepCollectionEquality().hash(errorCode) ^
+      const DeepCollectionEquality().hash(page) ^
+      const DeepCollectionEquality().hash(size) ^
+      const DeepCollectionEquality().hash(total) ^
+      const DeepCollectionEquality().hash(values) ^
+      runtimeType.hashCode;
+}
+
+extension $CustomEntityMappingArrayResExtension on CustomEntityMappingArrayRes {
+  CustomEntityMappingArrayRes copyWith(
+      {bool? ok,
+      String? msg,
+      String? trace,
+      String? errorCode,
+      int? page,
+      int? size,
+      int? total,
+      List<CustomEntityMapping>? values}) {
+    return CustomEntityMappingArrayRes(
+        ok: ok ?? this.ok,
+        msg: msg ?? this.msg,
+        trace: trace ?? this.trace,
+        errorCode: errorCode ?? this.errorCode,
+        page: page ?? this.page,
+        size: size ?? this.size,
+        total: total ?? this.total,
+        values: values ?? this.values);
+  }
+
+  CustomEntityMappingArrayRes copyWithWrapped(
+      {Wrapped<bool>? ok,
+      Wrapped<String?>? msg,
+      Wrapped<String?>? trace,
+      Wrapped<String?>? errorCode,
+      Wrapped<int>? page,
+      Wrapped<int>? size,
+      Wrapped<int>? total,
+      Wrapped<List<CustomEntityMapping>?>? values}) {
+    return CustomEntityMappingArrayRes(
+        ok: (ok != null ? ok.value : this.ok),
+        msg: (msg != null ? msg.value : this.msg),
+        trace: (trace != null ? trace.value : this.trace),
+        errorCode: (errorCode != null ? errorCode.value : this.errorCode),
+        page: (page != null ? page.value : this.page),
+        size: (size != null ? size.value : this.size),
+        total: (total != null ? total.value : this.total),
+        values: (values != null ? values.value : this.values));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class ExportData {
   const ExportData({
     required this.model,
@@ -51863,6 +52516,78 @@ List<enums.GenericQueryReqProtocol>?
 
   return genericQueryReqProtocol
       .map((e) => genericQueryReqProtocolFromJson(e.toString()))
+      .toList();
+}
+
+String? customEntityFieldTypeNullableToJson(
+    enums.CustomEntityFieldType? customEntityFieldType) {
+  return customEntityFieldType?.value;
+}
+
+String? customEntityFieldTypeToJson(
+    enums.CustomEntityFieldType customEntityFieldType) {
+  return customEntityFieldType.value;
+}
+
+enums.CustomEntityFieldType customEntityFieldTypeFromJson(
+  Object? customEntityFieldType, [
+  enums.CustomEntityFieldType? defaultValue,
+]) {
+  return enums.CustomEntityFieldType.values
+          .firstWhereOrNull((e) => e.value == customEntityFieldType) ??
+      defaultValue ??
+      enums.CustomEntityFieldType.swaggerGeneratedUnknown;
+}
+
+enums.CustomEntityFieldType? customEntityFieldTypeNullableFromJson(
+  Object? customEntityFieldType, [
+  enums.CustomEntityFieldType? defaultValue,
+]) {
+  if (customEntityFieldType == null) {
+    return null;
+  }
+  return enums.CustomEntityFieldType.values
+          .firstWhereOrNull((e) => e.value == customEntityFieldType) ??
+      defaultValue;
+}
+
+String customEntityFieldTypeExplodedListToJson(
+    List<enums.CustomEntityFieldType>? customEntityFieldType) {
+  return customEntityFieldType?.map((e) => e.value!).join(',') ?? '';
+}
+
+List<String> customEntityFieldTypeListToJson(
+    List<enums.CustomEntityFieldType>? customEntityFieldType) {
+  if (customEntityFieldType == null) {
+    return [];
+  }
+
+  return customEntityFieldType.map((e) => e.value!).toList();
+}
+
+List<enums.CustomEntityFieldType> customEntityFieldTypeListFromJson(
+  List? customEntityFieldType, [
+  List<enums.CustomEntityFieldType>? defaultValue,
+]) {
+  if (customEntityFieldType == null) {
+    return defaultValue ?? [];
+  }
+
+  return customEntityFieldType
+      .map((e) => customEntityFieldTypeFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.CustomEntityFieldType>? customEntityFieldTypeNullableListFromJson(
+  List? customEntityFieldType, [
+  List<enums.CustomEntityFieldType>? defaultValue,
+]) {
+  if (customEntityFieldType == null) {
+    return defaultValue;
+  }
+
+  return customEntityFieldType
+      .map((e) => customEntityFieldTypeFromJson(e.toString()))
       .toList();
 }
 

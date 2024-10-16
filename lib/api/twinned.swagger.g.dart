@@ -11598,6 +11598,202 @@ Map<String, dynamic> _$CustomEntityArrayResToJson(
   return val;
 }
 
+CustomEntityField _$CustomEntityFieldFromJson(Map<String, dynamic> json) =>
+    CustomEntityField(
+      name: json['name'] as String? ?? '',
+      scalingFactor: (json['scalingFactor'] as num?)?.toDouble(),
+      aliasPath: json['aliasPath'] as String? ?? '',
+      type: customEntityFieldTypeFromJson(json['type']),
+    );
+
+Map<String, dynamic> _$CustomEntityFieldToJson(CustomEntityField instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('scalingFactor', instance.scalingFactor);
+  writeNotNull('aliasPath', instance.aliasPath);
+  writeNotNull('type', customEntityFieldTypeToJson(instance.type));
+  return val;
+}
+
+CustomEntityMappingInfo _$CustomEntityMappingInfoFromJson(
+        Map<String, dynamic> json) =>
+    CustomEntityMappingInfo(
+      name: json['name'] as String? ?? '',
+      relaxed: json['relaxed'] as bool,
+      fields: (json['fields'] as List<dynamic>?)
+              ?.map(
+                  (e) => CustomEntityField.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$CustomEntityMappingInfoToJson(
+        CustomEntityMappingInfo instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'relaxed': instance.relaxed,
+      'fields': instance.fields.map((e) => e.toJson()).toList(),
+    };
+
+CustomEntityMapping _$CustomEntityMappingFromJson(Map<String, dynamic> json) =>
+    CustomEntityMapping(
+      name: json['name'] as String? ?? '',
+      relaxed: json['relaxed'] as bool,
+      fields: (json['fields'] as List<dynamic>?)
+              ?.map(
+                  (e) => CustomEntityField.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      domainKey: json['domainKey'] as String? ?? '',
+      id: json['id'] as String? ?? '',
+      rtype: json['rtype'] as String? ?? '',
+      createdStamp: (json['createdStamp'] as num).toInt(),
+      updatedStamp: (json['updatedStamp'] as num).toInt(),
+      createdBy: json['createdBy'] as String? ?? '',
+      updatedBy: json['updatedBy'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$CustomEntityMappingToJson(
+        CustomEntityMapping instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'relaxed': instance.relaxed,
+      'fields': instance.fields.map((e) => e.toJson()).toList(),
+      'domainKey': instance.domainKey,
+      'id': instance.id,
+      'rtype': instance.rtype,
+      'createdStamp': instance.createdStamp,
+      'updatedStamp': instance.updatedStamp,
+      'createdBy': instance.createdBy,
+      'updatedBy': instance.updatedBy,
+    };
+
+CustomEntityMappingEntity _$CustomEntityMappingEntityFromJson(
+        Map<String, dynamic> json) =>
+    CustomEntityMappingEntity(
+      entity: json['entity'] == null
+          ? null
+          : CustomEntityMapping.fromJson(
+              json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CustomEntityMappingEntityToJson(
+    CustomEntityMappingEntity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+CustomEntityMappingRes _$CustomEntityMappingResFromJson(
+        Map<String, dynamic> json) =>
+    CustomEntityMappingRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      entity: json['entity'] == null
+          ? null
+          : CustomEntityMapping.fromJson(
+              json['entity'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CustomEntityMappingResToJson(
+    CustomEntityMappingRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  writeNotNull('entity', instance.entity?.toJson());
+  return val;
+}
+
+CustomEntityMappingArray _$CustomEntityMappingArrayFromJson(
+        Map<String, dynamic> json) =>
+    CustomEntityMappingArray(
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) =>
+                  CustomEntityMapping.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$CustomEntityMappingArrayToJson(
+    CustomEntityMappingArray instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+CustomEntityMappingArrayRes _$CustomEntityMappingArrayResFromJson(
+        Map<String, dynamic> json) =>
+    CustomEntityMappingArrayRes(
+      ok: json['ok'] as bool,
+      msg: json['msg'] as String? ?? '',
+      trace: json['trace'] as String? ?? '',
+      errorCode: json['errorCode'] as String? ?? '',
+      page: (json['page'] as num).toInt(),
+      size: (json['size'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
+      values: (json['values'] as List<dynamic>?)
+              ?.map((e) =>
+                  CustomEntityMapping.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$CustomEntityMappingArrayResToJson(
+    CustomEntityMappingArrayRes instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('msg', instance.msg);
+  writeNotNull('trace', instance.trace);
+  writeNotNull('errorCode', instance.errorCode);
+  val['page'] = instance.page;
+  val['size'] = instance.size;
+  val['total'] = instance.total;
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
+  return val;
+}
+
 ExportData _$ExportDataFromJson(Map<String, dynamic> json) => ExportData(
       model: DeviceModelInfo.fromJson(json['model'] as Map<String, dynamic>),
       conditions: (json['conditions'] as List<dynamic>?)

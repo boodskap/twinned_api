@@ -1155,6 +1155,102 @@ enum GenericQueryReqProtocol {
   const GenericQueryReqProtocol(this.value);
 }
 
+enum CustomEntityFieldType {
+  @JsonValue(null)
+  swaggerGeneratedUnknown(null),
+
+  @JsonValue('BINARY')
+  binary('BINARY'),
+  @JsonValue('BOOLEAN')
+  boolean('BOOLEAN'),
+  @JsonValue('KEYWORD')
+  keyword('KEYWORD'),
+  @JsonValue('CONSTANT_KEYWORD')
+  constantKeyword('CONSTANT_KEYWORD'),
+  @JsonValue('WILDCARD')
+  wildcard('WILDCARD'),
+  @JsonValue('DATE')
+  date('DATE'),
+  @JsonValue('DATE_NANOS')
+  dateNanos('DATE_NANOS'),
+  @JsonValue('ALIAS')
+  alias('ALIAS'),
+  @JsonValue('OBJECT')
+  object('OBJECT'),
+  @JsonValue('FLATTENED')
+  flattened('FLATTENED'),
+  @JsonValue('NESTED')
+  nested('NESTED'),
+  @JsonValue('LONG_RANGE')
+  longRange('LONG_RANGE'),
+  @JsonValue('DOUBLE_RANGE')
+  doubleRange('DOUBLE_RANGE'),
+  @JsonValue('DATE_RANGE')
+  dateRange('DATE_RANGE'),
+  @JsonValue('IP_RANGE')
+  ipRange('IP_RANGE'),
+  @JsonValue('IP')
+  ip('IP'),
+  @JsonValue('VERSION')
+  version('VERSION'),
+  @JsonValue('MURMUR3')
+  murmur3('MURMUR3'),
+  @JsonValue('AGGREGATE_METRIC_DOUBLE')
+  aggregateMetricDouble('AGGREGATE_METRIC_DOUBLE'),
+  @JsonValue('HISTOGRAM')
+  histogram('HISTOGRAM'),
+  @JsonValue('TEXT')
+  text('TEXT'),
+  @JsonValue('MATCH_ONLY_TEXT')
+  matchOnlyText('MATCH_ONLY_TEXT'),
+  @JsonValue('COMPLETION')
+  completion('COMPLETION'),
+  @JsonValue('SEARCH_AS_YOU_TYPE')
+  searchAsYouType('SEARCH_AS_YOU_TYPE'),
+  @JsonValue('SEMANTIC_TEXT')
+  semanticText('SEMANTIC_TEXT'),
+  @JsonValue('TOKEN_COUNT')
+  tokenCount('TOKEN_COUNT'),
+  @JsonValue('DENSE_VECTOR')
+  denseVector('DENSE_VECTOR'),
+  @JsonValue('SPARSE_VECTOR')
+  sparseVector('SPARSE_VECTOR'),
+  @JsonValue('RANK_FEATURE')
+  rankFeature('RANK_FEATURE'),
+  @JsonValue('RANK_FEATURES')
+  rankFeatures('RANK_FEATURES'),
+  @JsonValue('GEO_POINT')
+  geoPoint('GEO_POINT'),
+  @JsonValue('GEO_SHAPE')
+  geoShape('GEO_SHAPE'),
+  @JsonValue('POINT')
+  point('POINT'),
+  @JsonValue('SHAPE')
+  shape('SHAPE'),
+  @JsonValue('LONG')
+  long('LONG'),
+  @JsonValue('INTEGER')
+  integer('INTEGER'),
+  @JsonValue('SHORT')
+  short('SHORT'),
+  @JsonValue('BYTE')
+  byte('BYTE'),
+  @JsonValue('DOUBLE')
+  double('DOUBLE'),
+  @JsonValue('FLOAT')
+  float('FLOAT'),
+  @JsonValue('HALF_FLOAT')
+  halfFloat('HALF_FLOAT'),
+  @JsonValue('SCALED_FLOAT')
+  scaledFloat('SCALED_FLOAT'),
+  @JsonValue('UNSIGNED_LONG')
+  unsignedLong('UNSIGNED_LONG');
+
+  final String? value;
+
+  const CustomEntityFieldType(this.value);
+}
+
 enum IoTTwinTagsGetEntityTypeGetEntityType {
   @JsonValue(null)
   swaggerGeneratedUnknown(null),

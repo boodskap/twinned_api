@@ -15,7 +15,7 @@
       "name": "MIT"
     }
   },
-  "host": "restdev.boodskap.io",
+  "host": "rest.boodskap.io",
   "basePath": "/rest/nocode",
   "schemes": [
     "https"
@@ -16507,6 +16507,127 @@
         ]
       }
     },
+    "/CustomEntity/mapping/set": {
+      "post": {
+        "tags": [
+          "Custom Entity"
+        ],
+        "summary": "Create update custom entity mapping",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "upsertCustomEntityMapping",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomEntityMappingInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CustomEntityMappingRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/CustomEntity/mapping/get/{name}": {
+      "get": {
+        "tags": [
+          "Custom Entity"
+        ],
+        "summary": "Get custom entity mapping",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getCustomEntityMapping",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CustomEntityMappingRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/CustomEntity/mapping/list": {
+      "get": {
+        "tags": [
+          "Custom Entity"
+        ],
+        "summary": "Get custom entity mapping",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "listCustomEntityMapping",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/CustomEntityMappingArrayRes"
+            }
+          },
+          "401": {
+            "description": "Authentication error"
+          },
+          "417": {
+            "description": "Platform error"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
     "/CustomEntity/create/{name}": {
       "post": {
         "tags": [
@@ -24945,6 +25066,158 @@
         },
         {
           "$ref": "#/definitions/CustomEntityArray"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "CustomEntityField": {
+      "type": "object",
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "scalingFactor": {
+          "type": "number",
+          "format": "float",
+          "description": "required if type is **scaled_float**"
+        },
+        "aliasPath": {
+          "type": "string",
+          "description": "required if type is **alias**"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "BINARY",
+            "BOOLEAN",
+            "KEYWORD",
+            "CONSTANT_KEYWORD",
+            "WILDCARD",
+            "DATE",
+            "DATE_NANOS",
+            "ALIAS",
+            "OBJECT",
+            "FLATTENED",
+            "NESTED",
+            "LONG_RANGE",
+            "DOUBLE_RANGE",
+            "DATE_RANGE",
+            "IP_RANGE",
+            "IP",
+            "VERSION",
+            "MURMUR3",
+            "AGGREGATE_METRIC_DOUBLE",
+            "HISTOGRAM",
+            "TEXT",
+            "MATCH_ONLY_TEXT",
+            "COMPLETION",
+            "SEARCH_AS_YOU_TYPE",
+            "SEMANTIC_TEXT",
+            "TOKEN_COUNT",
+            "DENSE_VECTOR",
+            "SPARSE_VECTOR",
+            "RANK_FEATURE",
+            "RANK_FEATURES",
+            "GEO_POINT",
+            "GEO_SHAPE",
+            "POINT",
+            "SHAPE",
+            "LONG",
+            "INTEGER",
+            "SHORT",
+            "BYTE",
+            "DOUBLE",
+            "FLOAT",
+            "HALF_FLOAT",
+            "SCALED_FLOAT",
+            "UNSIGNED_LONG"
+          ]
+        }
+      }
+    },
+    "CustomEntityMappingInfo": {
+      "type": "object",
+      "required": [
+        "name",
+        "fields",
+        "relaxed"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "relaxed": {
+          "type": "boolean"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomEntityField"
+          }
+        }
+      }
+    },
+    "CustomEntityMapping": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomEntityMappingInfo"
+        },
+        {
+          "$ref": "#/definitions/BaseEntity"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "CustomEntityMappingEntity": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "$ref": "#/definitions/CustomEntityMapping"
+        }
+      }
+    },
+    "CustomEntityMappingRes": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResponse"
+        },
+        {
+          "$ref": "#/definitions/CustomEntityMappingEntity"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "CustomEntityMappingArray": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomEntityMapping"
+          }
+        }
+      }
+    },
+    "CustomEntityMappingArrayRes": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResponse"
+        },
+        {
+          "$ref": "#/definitions/ListRes"
+        },
+        {
+          "$ref": "#/definitions/CustomEntityMappingArray"
         },
         {
           "type": "object"
