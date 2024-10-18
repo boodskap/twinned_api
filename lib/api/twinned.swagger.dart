@@ -32556,6 +32556,7 @@ class FloorInfo {
     this.assets,
     this.roles,
     this.location,
+    this.fence,
     this.floorLevel,
     this.floorType,
     required this.clientIds,
@@ -32594,6 +32595,8 @@ class FloorInfo {
   final List<String>? roles;
   @JsonKey(name: 'location', includeIfNull: false)
   final GeoLocation? location;
+  @JsonKey(name: 'fence', includeIfNull: false)
+  final GeoLocation? fence;
   @JsonKey(name: 'floorLevel', includeIfNull: false)
   final int? floorLevel;
   @JsonKey(
@@ -32657,6 +32660,8 @@ class FloorInfo {
             (identical(other.location, location) ||
                 const DeepCollectionEquality()
                     .equals(other.location, location)) &&
+            (identical(other.fence, fence) ||
+                const DeepCollectionEquality().equals(other.fence, fence)) &&
             (identical(other.floorLevel, floorLevel) ||
                 const DeepCollectionEquality()
                     .equals(other.floorLevel, floorLevel)) &&
@@ -32705,6 +32710,7 @@ class FloorInfo {
       const DeepCollectionEquality().hash(assets) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(location) ^
+      const DeepCollectionEquality().hash(fence) ^
       const DeepCollectionEquality().hash(floorLevel) ^
       const DeepCollectionEquality().hash(floorType) ^
       const DeepCollectionEquality().hash(clientIds) ^
@@ -32731,6 +32737,7 @@ extension $FloorInfoExtension on FloorInfo {
       List<String>? assets,
       List<String>? roles,
       GeoLocation? location,
+      GeoLocation? fence,
       int? floorLevel,
       enums.FloorInfoFloorType? floorType,
       List<String>? clientIds,
@@ -32753,6 +32760,7 @@ extension $FloorInfoExtension on FloorInfo {
         assets: assets ?? this.assets,
         roles: roles ?? this.roles,
         location: location ?? this.location,
+        fence: fence ?? this.fence,
         floorLevel: floorLevel ?? this.floorLevel,
         floorType: floorType ?? this.floorType,
         clientIds: clientIds ?? this.clientIds,
@@ -32777,6 +32785,7 @@ extension $FloorInfoExtension on FloorInfo {
       Wrapped<List<String>?>? assets,
       Wrapped<List<String>?>? roles,
       Wrapped<GeoLocation?>? location,
+      Wrapped<GeoLocation?>? fence,
       Wrapped<int?>? floorLevel,
       Wrapped<enums.FloorInfoFloorType?>? floorType,
       Wrapped<List<String>>? clientIds,
@@ -32800,6 +32809,7 @@ extension $FloorInfoExtension on FloorInfo {
         assets: (assets != null ? assets.value : this.assets),
         roles: (roles != null ? roles.value : this.roles),
         location: (location != null ? location.value : this.location),
+        fence: (fence != null ? fence.value : this.fence),
         floorLevel: (floorLevel != null ? floorLevel.value : this.floorLevel),
         floorType: (floorType != null ? floorType.value : this.floorType),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
@@ -32830,6 +32840,7 @@ class Floor {
     this.assets,
     this.roles,
     this.location,
+    this.fence,
     this.floorLevel,
     this.floorType,
     required this.clientIds,
@@ -32874,6 +32885,8 @@ class Floor {
   final List<String>? roles;
   @JsonKey(name: 'location', includeIfNull: false)
   final GeoLocation? location;
+  @JsonKey(name: 'fence', includeIfNull: false)
+  final GeoLocation? fence;
   @JsonKey(name: 'floorLevel', includeIfNull: false)
   final int? floorLevel;
   @JsonKey(
@@ -32950,6 +32963,8 @@ class Floor {
             (identical(other.location, location) ||
                 const DeepCollectionEquality()
                     .equals(other.location, location)) &&
+            (identical(other.fence, fence) ||
+                const DeepCollectionEquality().equals(other.fence, fence)) &&
             (identical(other.floorLevel, floorLevel) ||
                 const DeepCollectionEquality()
                     .equals(other.floorLevel, floorLevel)) &&
@@ -32994,8 +33009,7 @@ class Floor {
                 const DeepCollectionEquality()
                     .equals(other.createdStamp, createdStamp)) &&
             (identical(other.updatedStamp, updatedStamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedStamp, updatedStamp)) &&
+                const DeepCollectionEquality().equals(other.updatedStamp, updatedStamp)) &&
             (identical(other.createdBy, createdBy) || const DeepCollectionEquality().equals(other.createdBy, createdBy)) &&
             (identical(other.updatedBy, updatedBy) || const DeepCollectionEquality().equals(other.updatedBy, updatedBy)));
   }
@@ -33014,6 +33028,7 @@ class Floor {
       const DeepCollectionEquality().hash(assets) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(location) ^
+      const DeepCollectionEquality().hash(fence) ^
       const DeepCollectionEquality().hash(floorLevel) ^
       const DeepCollectionEquality().hash(floorType) ^
       const DeepCollectionEquality().hash(clientIds) ^
@@ -33047,6 +33062,7 @@ extension $FloorExtension on Floor {
       List<String>? assets,
       List<String>? roles,
       GeoLocation? location,
+      GeoLocation? fence,
       int? floorLevel,
       enums.FloorFloorType? floorType,
       List<String>? clientIds,
@@ -33076,6 +33092,7 @@ extension $FloorExtension on Floor {
         assets: assets ?? this.assets,
         roles: roles ?? this.roles,
         location: location ?? this.location,
+        fence: fence ?? this.fence,
         floorLevel: floorLevel ?? this.floorLevel,
         floorType: floorType ?? this.floorType,
         clientIds: clientIds ?? this.clientIds,
@@ -33107,6 +33124,7 @@ extension $FloorExtension on Floor {
       Wrapped<List<String>?>? assets,
       Wrapped<List<String>?>? roles,
       Wrapped<GeoLocation?>? location,
+      Wrapped<GeoLocation?>? fence,
       Wrapped<int?>? floorLevel,
       Wrapped<enums.FloorFloorType?>? floorType,
       Wrapped<List<String>>? clientIds,
@@ -33137,6 +33155,7 @@ extension $FloorExtension on Floor {
         assets: (assets != null ? assets.value : this.assets),
         roles: (roles != null ? roles.value : this.roles),
         location: (location != null ? location.value : this.location),
+        fence: (fence != null ? fence.value : this.fence),
         floorLevel: (floorLevel != null ? floorLevel.value : this.floorLevel),
         floorType: (floorType != null ? floorType.value : this.floorType),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
@@ -33468,6 +33487,7 @@ class AssetInfo {
     this.devices,
     this.roles,
     this.location,
+    this.fence,
     this.position,
     required this.assetModelId,
     required this.clientIds,
@@ -33510,6 +33530,8 @@ class AssetInfo {
   final List<String>? roles;
   @JsonKey(name: 'location', includeIfNull: false)
   final GeoLocation? location;
+  @JsonKey(name: 'fence', includeIfNull: false)
+  final GeoLocation? fence;
   @JsonKey(name: 'position', includeIfNull: false)
   final ScreenPosition? position;
   @JsonKey(name: 'assetModelId', includeIfNull: false, defaultValue: '')
@@ -33569,6 +33591,8 @@ class AssetInfo {
             (identical(other.location, location) ||
                 const DeepCollectionEquality()
                     .equals(other.location, location)) &&
+            (identical(other.fence, fence) ||
+                const DeepCollectionEquality().equals(other.fence, fence)) &&
             (identical(other.position, position) ||
                 const DeepCollectionEquality()
                     .equals(other.position, position)) &&
@@ -33619,6 +33643,7 @@ class AssetInfo {
       const DeepCollectionEquality().hash(devices) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(location) ^
+      const DeepCollectionEquality().hash(fence) ^
       const DeepCollectionEquality().hash(position) ^
       const DeepCollectionEquality().hash(assetModelId) ^
       const DeepCollectionEquality().hash(clientIds) ^
@@ -33647,6 +33672,7 @@ extension $AssetInfoExtension on AssetInfo {
       List<String>? devices,
       List<String>? roles,
       GeoLocation? location,
+      GeoLocation? fence,
       ScreenPosition? position,
       String? assetModelId,
       List<String>? clientIds,
@@ -33671,6 +33697,7 @@ extension $AssetInfoExtension on AssetInfo {
         devices: devices ?? this.devices,
         roles: roles ?? this.roles,
         location: location ?? this.location,
+        fence: fence ?? this.fence,
         position: position ?? this.position,
         assetModelId: assetModelId ?? this.assetModelId,
         clientIds: clientIds ?? this.clientIds,
@@ -33697,6 +33724,7 @@ extension $AssetInfoExtension on AssetInfo {
       Wrapped<List<String>?>? devices,
       Wrapped<List<String>?>? roles,
       Wrapped<GeoLocation?>? location,
+      Wrapped<GeoLocation?>? fence,
       Wrapped<ScreenPosition?>? position,
       Wrapped<String>? assetModelId,
       Wrapped<List<String>>? clientIds,
@@ -33723,6 +33751,7 @@ extension $AssetInfoExtension on AssetInfo {
         devices: (devices != null ? devices.value : this.devices),
         roles: (roles != null ? roles.value : this.roles),
         location: (location != null ? location.value : this.location),
+        fence: (fence != null ? fence.value : this.fence),
         position: (position != null ? position.value : this.position),
         assetModelId:
             (assetModelId != null ? assetModelId.value : this.assetModelId),
@@ -33803,6 +33832,7 @@ class Asset {
     this.devices,
     this.roles,
     this.location,
+    this.fence,
     this.position,
     required this.assetModelId,
     required this.clientIds,
@@ -33852,6 +33882,8 @@ class Asset {
   final List<String>? roles;
   @JsonKey(name: 'location', includeIfNull: false)
   final GeoLocation? location;
+  @JsonKey(name: 'fence', includeIfNull: false)
+  final GeoLocation? fence;
   @JsonKey(name: 'position', includeIfNull: false)
   final ScreenPosition? position;
   @JsonKey(name: 'assetModelId', includeIfNull: false, defaultValue: '')
@@ -33927,6 +33959,8 @@ class Asset {
             (identical(other.location, location) ||
                 const DeepCollectionEquality()
                     .equals(other.location, location)) &&
+            (identical(other.fence, fence) ||
+                const DeepCollectionEquality().equals(other.fence, fence)) &&
             (identical(other.position, position) ||
                 const DeepCollectionEquality()
                     .equals(other.position, position)) &&
@@ -33964,8 +33998,7 @@ class Asset {
                 const DeepCollectionEquality()
                     .equals(other.currentLocation, currentLocation)) &&
             (identical(other.domainKey, domainKey) ||
-                const DeepCollectionEquality()
-                    .equals(other.domainKey, domainKey)) &&
+                const DeepCollectionEquality().equals(other.domainKey, domainKey)) &&
             (identical(other.id, id) || const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.rtype, rtype) || const DeepCollectionEquality().equals(other.rtype, rtype)) &&
             (identical(other.createdStamp, createdStamp) || const DeepCollectionEquality().equals(other.createdStamp, createdStamp)) &&
@@ -33990,6 +34023,7 @@ class Asset {
       const DeepCollectionEquality().hash(devices) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(location) ^
+      const DeepCollectionEquality().hash(fence) ^
       const DeepCollectionEquality().hash(position) ^
       const DeepCollectionEquality().hash(assetModelId) ^
       const DeepCollectionEquality().hash(clientIds) ^
@@ -34026,6 +34060,7 @@ extension $AssetExtension on Asset {
       List<String>? devices,
       List<String>? roles,
       GeoLocation? location,
+      GeoLocation? fence,
       ScreenPosition? position,
       String? assetModelId,
       List<String>? clientIds,
@@ -34058,6 +34093,7 @@ extension $AssetExtension on Asset {
         devices: devices ?? this.devices,
         roles: roles ?? this.roles,
         location: location ?? this.location,
+        fence: fence ?? this.fence,
         position: position ?? this.position,
         assetModelId: assetModelId ?? this.assetModelId,
         clientIds: clientIds ?? this.clientIds,
@@ -34092,6 +34128,7 @@ extension $AssetExtension on Asset {
       Wrapped<List<String>?>? devices,
       Wrapped<List<String>?>? roles,
       Wrapped<GeoLocation?>? location,
+      Wrapped<GeoLocation?>? fence,
       Wrapped<ScreenPosition?>? position,
       Wrapped<String>? assetModelId,
       Wrapped<List<String>>? clientIds,
@@ -34126,6 +34163,7 @@ extension $AssetExtension on Asset {
         devices: (devices != null ? devices.value : this.devices),
         roles: (roles != null ? roles.value : this.roles),
         location: (location != null ? location.value : this.location),
+        fence: (fence != null ? fence.value : this.fence),
         position: (position != null ? position.value : this.position),
         assetModelId:
             (assetModelId != null ? assetModelId.value : this.assetModelId),
@@ -34458,6 +34496,7 @@ class FacilityInfo {
     this.images,
     this.roles,
     this.location,
+    this.fence,
     required this.clientIds,
     this.reportedStamp,
     this.email,
@@ -34492,6 +34531,8 @@ class FacilityInfo {
   final List<String>? roles;
   @JsonKey(name: 'location', includeIfNull: false)
   final GeoLocation? location;
+  @JsonKey(name: 'fence', includeIfNull: false)
+  final GeoLocation? fence;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
   final List<String> clientIds;
   @JsonKey(name: 'reportedStamp', includeIfNull: false)
@@ -34538,6 +34579,8 @@ class FacilityInfo {
             (identical(other.location, location) ||
                 const DeepCollectionEquality()
                     .equals(other.location, location)) &&
+            (identical(other.fence, fence) ||
+                const DeepCollectionEquality().equals(other.fence, fence)) &&
             (identical(other.clientIds, clientIds) ||
                 const DeepCollectionEquality()
                     .equals(other.clientIds, clientIds)) &&
@@ -34579,6 +34622,7 @@ class FacilityInfo {
       const DeepCollectionEquality().hash(images) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(location) ^
+      const DeepCollectionEquality().hash(fence) ^
       const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(reportedStamp) ^
       const DeepCollectionEquality().hash(email) ^
@@ -34602,6 +34646,7 @@ extension $FacilityInfoExtension on FacilityInfo {
       List<String>? images,
       List<String>? roles,
       GeoLocation? location,
+      GeoLocation? fence,
       List<String>? clientIds,
       int? reportedStamp,
       String? email,
@@ -34621,6 +34666,7 @@ extension $FacilityInfoExtension on FacilityInfo {
         images: images ?? this.images,
         roles: roles ?? this.roles,
         location: location ?? this.location,
+        fence: fence ?? this.fence,
         clientIds: clientIds ?? this.clientIds,
         reportedStamp: reportedStamp ?? this.reportedStamp,
         email: email ?? this.email,
@@ -34642,6 +34688,7 @@ extension $FacilityInfoExtension on FacilityInfo {
       Wrapped<List<String>?>? images,
       Wrapped<List<String>?>? roles,
       Wrapped<GeoLocation?>? location,
+      Wrapped<GeoLocation?>? fence,
       Wrapped<List<String>>? clientIds,
       Wrapped<int?>? reportedStamp,
       Wrapped<String?>? email,
@@ -34663,6 +34710,7 @@ extension $FacilityInfoExtension on FacilityInfo {
         images: (images != null ? images.value : this.images),
         roles: (roles != null ? roles.value : this.roles),
         location: (location != null ? location.value : this.location),
+        fence: (fence != null ? fence.value : this.fence),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         reportedStamp:
             (reportedStamp != null ? reportedStamp.value : this.reportedStamp),
@@ -34690,6 +34738,7 @@ class Facility {
     this.images,
     this.roles,
     this.location,
+    this.fence,
     required this.clientIds,
     this.reportedStamp,
     this.email,
@@ -34731,6 +34780,8 @@ class Facility {
   final List<String>? roles;
   @JsonKey(name: 'location', includeIfNull: false)
   final GeoLocation? location;
+  @JsonKey(name: 'fence', includeIfNull: false)
+  final GeoLocation? fence;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
   final List<String> clientIds;
   @JsonKey(name: 'reportedStamp', includeIfNull: false)
@@ -34791,6 +34842,8 @@ class Facility {
             (identical(other.location, location) ||
                 const DeepCollectionEquality()
                     .equals(other.location, location)) &&
+            (identical(other.fence, fence) ||
+                const DeepCollectionEquality().equals(other.fence, fence)) &&
             (identical(other.clientIds, clientIds) ||
                 const DeepCollectionEquality()
                     .equals(other.clientIds, clientIds)) &&
@@ -34852,6 +34905,7 @@ class Facility {
       const DeepCollectionEquality().hash(images) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(location) ^
+      const DeepCollectionEquality().hash(fence) ^
       const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(reportedStamp) ^
       const DeepCollectionEquality().hash(email) ^
@@ -34882,6 +34936,7 @@ extension $FacilityExtension on Facility {
       List<String>? images,
       List<String>? roles,
       GeoLocation? location,
+      GeoLocation? fence,
       List<String>? clientIds,
       int? reportedStamp,
       String? email,
@@ -34908,6 +34963,7 @@ extension $FacilityExtension on Facility {
         images: images ?? this.images,
         roles: roles ?? this.roles,
         location: location ?? this.location,
+        fence: fence ?? this.fence,
         clientIds: clientIds ?? this.clientIds,
         reportedStamp: reportedStamp ?? this.reportedStamp,
         email: email ?? this.email,
@@ -34936,6 +34992,7 @@ extension $FacilityExtension on Facility {
       Wrapped<List<String>?>? images,
       Wrapped<List<String>?>? roles,
       Wrapped<GeoLocation?>? location,
+      Wrapped<GeoLocation?>? fence,
       Wrapped<List<String>>? clientIds,
       Wrapped<int?>? reportedStamp,
       Wrapped<String?>? email,
@@ -34964,6 +35021,7 @@ extension $FacilityExtension on Facility {
         images: (images != null ? images.value : this.images),
         roles: (roles != null ? roles.value : this.roles),
         location: (location != null ? location.value : this.location),
+        fence: (fence != null ? fence.value : this.fence),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         reportedStamp:
             (reportedStamp != null ? reportedStamp.value : this.reportedStamp),
@@ -36713,6 +36771,7 @@ class PremiseInfo {
     this.selectedImage,
     this.images,
     this.location,
+    this.fence,
     this.roles,
     required this.clientIds,
     this.reportedStamp,
@@ -36744,6 +36803,8 @@ class PremiseInfo {
   final List<String>? images;
   @JsonKey(name: 'location', includeIfNull: false)
   final GeoLocation? location;
+  @JsonKey(name: 'fence', includeIfNull: false)
+  final GeoLocation? fence;
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
@@ -36787,6 +36848,8 @@ class PremiseInfo {
             (identical(other.location, location) ||
                 const DeepCollectionEquality()
                     .equals(other.location, location)) &&
+            (identical(other.fence, fence) ||
+                const DeepCollectionEquality().equals(other.fence, fence)) &&
             (identical(other.roles, roles) ||
                 const DeepCollectionEquality().equals(other.roles, roles)) &&
             (identical(other.clientIds, clientIds) ||
@@ -36828,6 +36891,7 @@ class PremiseInfo {
       const DeepCollectionEquality().hash(selectedImage) ^
       const DeepCollectionEquality().hash(images) ^
       const DeepCollectionEquality().hash(location) ^
+      const DeepCollectionEquality().hash(fence) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(reportedStamp) ^
@@ -36850,6 +36914,7 @@ extension $PremiseInfoExtension on PremiseInfo {
       int? selectedImage,
       List<String>? images,
       GeoLocation? location,
+      GeoLocation? fence,
       List<String>? roles,
       List<String>? clientIds,
       int? reportedStamp,
@@ -36868,6 +36933,7 @@ extension $PremiseInfoExtension on PremiseInfo {
         selectedImage: selectedImage ?? this.selectedImage,
         images: images ?? this.images,
         location: location ?? this.location,
+        fence: fence ?? this.fence,
         roles: roles ?? this.roles,
         clientIds: clientIds ?? this.clientIds,
         reportedStamp: reportedStamp ?? this.reportedStamp,
@@ -36888,6 +36954,7 @@ extension $PremiseInfoExtension on PremiseInfo {
       Wrapped<int?>? selectedImage,
       Wrapped<List<String>?>? images,
       Wrapped<GeoLocation?>? location,
+      Wrapped<GeoLocation?>? fence,
       Wrapped<List<String>?>? roles,
       Wrapped<List<String>>? clientIds,
       Wrapped<int?>? reportedStamp,
@@ -36908,6 +36975,7 @@ extension $PremiseInfoExtension on PremiseInfo {
             (selectedImage != null ? selectedImage.value : this.selectedImage),
         images: (images != null ? images.value : this.images),
         location: (location != null ? location.value : this.location),
+        fence: (fence != null ? fence.value : this.fence),
         roles: (roles != null ? roles.value : this.roles),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         reportedStamp:
@@ -36934,6 +37002,7 @@ class Premise {
     this.selectedImage,
     this.images,
     this.location,
+    this.fence,
     this.roles,
     required this.clientIds,
     this.reportedStamp,
@@ -36972,6 +37041,8 @@ class Premise {
   final List<String>? images;
   @JsonKey(name: 'location', includeIfNull: false)
   final GeoLocation? location;
+  @JsonKey(name: 'fence', includeIfNull: false)
+  final GeoLocation? fence;
   @JsonKey(name: 'roles', includeIfNull: false, defaultValue: <String>[])
   final List<String>? roles;
   @JsonKey(name: 'clientIds', includeIfNull: false, defaultValue: <String>[])
@@ -37029,6 +37100,8 @@ class Premise {
             (identical(other.location, location) ||
                 const DeepCollectionEquality()
                     .equals(other.location, location)) &&
+            (identical(other.fence, fence) ||
+                const DeepCollectionEquality().equals(other.fence, fence)) &&
             (identical(other.roles, roles) ||
                 const DeepCollectionEquality().equals(other.roles, roles)) &&
             (identical(other.clientIds, clientIds) ||
@@ -37090,6 +37163,7 @@ class Premise {
       const DeepCollectionEquality().hash(selectedImage) ^
       const DeepCollectionEquality().hash(images) ^
       const DeepCollectionEquality().hash(location) ^
+      const DeepCollectionEquality().hash(fence) ^
       const DeepCollectionEquality().hash(roles) ^
       const DeepCollectionEquality().hash(clientIds) ^
       const DeepCollectionEquality().hash(reportedStamp) ^
@@ -37119,6 +37193,7 @@ extension $PremiseExtension on Premise {
       int? selectedImage,
       List<String>? images,
       GeoLocation? location,
+      GeoLocation? fence,
       List<String>? roles,
       List<String>? clientIds,
       int? reportedStamp,
@@ -37144,6 +37219,7 @@ extension $PremiseExtension on Premise {
         selectedImage: selectedImage ?? this.selectedImage,
         images: images ?? this.images,
         location: location ?? this.location,
+        fence: fence ?? this.fence,
         roles: roles ?? this.roles,
         clientIds: clientIds ?? this.clientIds,
         reportedStamp: reportedStamp ?? this.reportedStamp,
@@ -37171,6 +37247,7 @@ extension $PremiseExtension on Premise {
       Wrapped<int?>? selectedImage,
       Wrapped<List<String>?>? images,
       Wrapped<GeoLocation?>? location,
+      Wrapped<GeoLocation?>? fence,
       Wrapped<List<String>?>? roles,
       Wrapped<List<String>>? clientIds,
       Wrapped<int?>? reportedStamp,
@@ -37198,6 +37275,7 @@ extension $PremiseExtension on Premise {
             (selectedImage != null ? selectedImage.value : this.selectedImage),
         images: (images != null ? images.value : this.images),
         location: (location != null ? location.value : this.location),
+        fence: (fence != null ? fence.value : this.fence),
         roles: (roles != null ? roles.value : this.roles),
         clientIds: (clientIds != null ? clientIds.value : this.clientIds),
         reportedStamp:

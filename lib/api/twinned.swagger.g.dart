@@ -7159,6 +7159,9 @@ FloorInfo _$FloorInfoFromJson(Map<String, dynamic> json) => FloorInfo(
       location: json['location'] == null
           ? null
           : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
+      fence: json['fence'] == null
+          ? null
+          : GeoLocation.fromJson(json['fence'] as Map<String, dynamic>),
       floorLevel: (json['floorLevel'] as num?)?.toInt(),
       floorType: FloorInfo.floorInfoFloorTypeFloorTypeNullableFromJson(
           json['floorType']),
@@ -7195,6 +7198,7 @@ Map<String, dynamic> _$FloorInfoToJson(FloorInfo instance) {
   writeNotNull('assets', instance.assets);
   writeNotNull('roles', instance.roles);
   writeNotNull('location', instance.location?.toJson());
+  writeNotNull('fence', instance.fence?.toJson());
   writeNotNull('floorLevel', instance.floorLevel);
   writeNotNull(
       'floorType', floorInfoFloorTypeNullableToJson(instance.floorType));
@@ -7230,6 +7234,9 @@ Floor _$FloorFromJson(Map<String, dynamic> json) => Floor(
       location: json['location'] == null
           ? null
           : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
+      fence: json['fence'] == null
+          ? null
+          : GeoLocation.fromJson(json['fence'] as Map<String, dynamic>),
       floorLevel: (json['floorLevel'] as num?)?.toInt(),
       floorType:
           Floor.floorFloorTypeFloorTypeNullableFromJson(json['floorType']),
@@ -7273,6 +7280,7 @@ Map<String, dynamic> _$FloorToJson(Floor instance) {
   writeNotNull('assets', instance.assets);
   writeNotNull('roles', instance.roles);
   writeNotNull('location', instance.location?.toJson());
+  writeNotNull('fence', instance.fence?.toJson());
   writeNotNull('floorLevel', instance.floorLevel);
   writeNotNull('floorType', floorFloorTypeNullableToJson(instance.floorType));
   val['clientIds'] = instance.clientIds;
@@ -7423,6 +7431,9 @@ AssetInfo _$AssetInfoFromJson(Map<String, dynamic> json) => AssetInfo(
       location: json['location'] == null
           ? null
           : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
+      fence: json['fence'] == null
+          ? null
+          : GeoLocation.fromJson(json['fence'] as Map<String, dynamic>),
       position: json['position'] == null
           ? null
           : ScreenPosition.fromJson(json['position'] as Map<String, dynamic>),
@@ -7462,6 +7473,7 @@ Map<String, dynamic> _$AssetInfoToJson(AssetInfo instance) {
   writeNotNull('devices', instance.devices);
   writeNotNull('roles', instance.roles);
   writeNotNull('location', instance.location?.toJson());
+  writeNotNull('fence', instance.fence?.toJson());
   writeNotNull('position', instance.position?.toJson());
   val['assetModelId'] = instance.assetModelId;
   val['clientIds'] = instance.clientIds;
@@ -7521,6 +7533,9 @@ Asset _$AssetFromJson(Map<String, dynamic> json) => Asset(
       location: json['location'] == null
           ? null
           : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
+      fence: json['fence'] == null
+          ? null
+          : GeoLocation.fromJson(json['fence'] as Map<String, dynamic>),
       position: json['position'] == null
           ? null
           : ScreenPosition.fromJson(json['position'] as Map<String, dynamic>),
@@ -7571,6 +7586,7 @@ Map<String, dynamic> _$AssetToJson(Asset instance) {
   writeNotNull('devices', instance.devices);
   writeNotNull('roles', instance.roles);
   writeNotNull('location', instance.location?.toJson());
+  writeNotNull('fence', instance.fence?.toJson());
   writeNotNull('position', instance.position?.toJson());
   val['assetModelId'] = instance.assetModelId;
   val['clientIds'] = instance.clientIds;
@@ -7716,6 +7732,9 @@ FacilityInfo _$FacilityInfoFromJson(Map<String, dynamic> json) => FacilityInfo(
       location: json['location'] == null
           ? null
           : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
+      fence: json['fence'] == null
+          ? null
+          : GeoLocation.fromJson(json['fence'] as Map<String, dynamic>),
       clientIds: (json['clientIds'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -7749,6 +7768,7 @@ Map<String, dynamic> _$FacilityInfoToJson(FacilityInfo instance) {
   writeNotNull('images', instance.images);
   writeNotNull('roles', instance.roles);
   writeNotNull('location', instance.location?.toJson());
+  writeNotNull('fence', instance.fence?.toJson());
   val['clientIds'] = instance.clientIds;
   writeNotNull('reportedStamp', instance.reportedStamp);
   writeNotNull('email', instance.email);
@@ -7780,6 +7800,9 @@ Facility _$FacilityFromJson(Map<String, dynamic> json) => Facility(
       location: json['location'] == null
           ? null
           : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
+      fence: json['fence'] == null
+          ? null
+          : GeoLocation.fromJson(json['fence'] as Map<String, dynamic>),
       clientIds: (json['clientIds'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -7820,6 +7843,7 @@ Map<String, dynamic> _$FacilityToJson(Facility instance) {
   writeNotNull('images', instance.images);
   writeNotNull('roles', instance.roles);
   writeNotNull('location', instance.location?.toJson());
+  writeNotNull('fence', instance.fence?.toJson());
   val['clientIds'] = instance.clientIds;
   writeNotNull('reportedStamp', instance.reportedStamp);
   writeNotNull('email', instance.email);
@@ -8404,6 +8428,9 @@ PremiseInfo _$PremiseInfoFromJson(Map<String, dynamic> json) => PremiseInfo(
       location: json['location'] == null
           ? null
           : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
+      fence: json['fence'] == null
+          ? null
+          : GeoLocation.fromJson(json['fence'] as Map<String, dynamic>),
       roles:
           (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
@@ -8438,6 +8465,7 @@ Map<String, dynamic> _$PremiseInfoToJson(PremiseInfo instance) {
   writeNotNull('selectedImage', instance.selectedImage);
   writeNotNull('images', instance.images);
   writeNotNull('location', instance.location?.toJson());
+  writeNotNull('fence', instance.fence?.toJson());
   writeNotNull('roles', instance.roles);
   val['clientIds'] = instance.clientIds;
   writeNotNull('reportedStamp', instance.reportedStamp);
@@ -8466,6 +8494,9 @@ Premise _$PremiseFromJson(Map<String, dynamic> json) => Premise(
       location: json['location'] == null
           ? null
           : GeoLocation.fromJson(json['location'] as Map<String, dynamic>),
+      fence: json['fence'] == null
+          ? null
+          : GeoLocation.fromJson(json['fence'] as Map<String, dynamic>),
       roles:
           (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
@@ -8507,6 +8538,7 @@ Map<String, dynamic> _$PremiseToJson(Premise instance) {
   writeNotNull('selectedImage', instance.selectedImage);
   writeNotNull('images', instance.images);
   writeNotNull('location', instance.location?.toJson());
+  writeNotNull('fence', instance.fence?.toJson());
   writeNotNull('roles', instance.roles);
   val['clientIds'] = instance.clientIds;
   writeNotNull('reportedStamp', instance.reportedStamp);

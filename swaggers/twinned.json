@@ -22189,6 +22189,9 @@
         "location": {
           "$ref": "#/definitions/GeoLocation"
         },
+        "fence": {
+          "$ref": "#/definitions/GeoLocation"
+        },
         "floorLevel": {
           "type": "integer",
           "default": 0
@@ -22355,6 +22358,9 @@
         "location": {
           "$ref": "#/definitions/GeoLocation"
         },
+        "fence": {
+          "$ref": "#/definitions/GeoLocation"
+        },
         "position": {
           "$ref": "#/definitions/ScreenPosition"
         },
@@ -22507,6 +22513,9 @@
           }
         },
         "location": {
+          "$ref": "#/definitions/GeoLocation"
+        },
+        "fence": {
           "$ref": "#/definitions/GeoLocation"
         },
         "clientIds": {
@@ -22881,6 +22890,9 @@
           }
         },
         "location": {
+          "$ref": "#/definitions/GeoLocation"
+        },
+        "fence": {
           "$ref": "#/definitions/GeoLocation"
         },
         "roles": {
